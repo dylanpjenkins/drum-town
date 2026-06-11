@@ -1,0 +1,83 @@
+{# Floating-island sidebar — shows only the section the current lesson lives in.
+   Expects:
+     currentSlug    — slug of current lesson
+     currentSection — 'foundations' | 'track' | 'mastery'
+     currentTrack   — track slug (only if currentSection === 'track') #}
+
+<aside class="curriculum-sidebar" aria-label="Curriculum navigation">
+  <div class="curriculum-sidebar__inner">
+
+    <div class="island-header">
+      <a href="/" class="island-back">← All sections</a>
+
+      {% if currentSection == 'foundations' %}
+        <div class="island-title">
+          <span class="island-eyebrow">I · Foundations</span>
+          <span class="island-name">{{ curriculum.foundations.title }}</span>
+        </div>
+      {% elif currentSection == 'track' %}
+        {% set track = curriculum | findTrack(currentTrack) %}
+        <div class="island-title">
+          <span class="island-eyebrow">II · Genre</span>
+          <span class="island-name">{{ track.title }}</span>
+        </div>
+      {% elif currentSection == 'mastery' %}
+        <div class="island-title">
+          <span class="island-eyebrow">III · Other Topics</span>
+          <span class="island-name">{{ curriculum.mastery.title }}</span>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if currentSection == 'foundations' %}
+      {% for sec in curriculum.foundations.sections %}
+        <div class="curr-section">
+          <div class="curr-section__title">{{ sec.title }}</div>
+          <ul class="curr-list">
+            {% for l in sec.lessons %}
+              {% set isCurrent = (l.slug == currentSlug) %}
+              <li class="curr-item {% if isCurrent %}is-current{% endif %} {% if l.status == 'ready' %}is-ready{% else %}is-stub{% endif %}">
+                <a href="/lessons/{{ l.slug }}/" {% if isCurrent %}aria-current="page"{% endif %}>{{ l.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
+    {% elif currentSection == 'track' %}
+      {% set track = curriculum | findTrack(currentTrack) %}
+      {% if track.tagline %}
+        <p class="island-tagline">{{ track.tagline }}</p>
+      {% endif %}
+      {% for lvl in track.levels %}
+        <div class="curr-section">
+          <div class="curr-section__title">{{ lvl.title }}</div>
+          <ul class="curr-list">
+            {% for l in lvl.lessons %}
+              {% set isCurrent = (l.slug == currentSlug) %}
+              <li class="curr-item {% if isCurrent %}is-current{% endif %} {% if l.status == 'ready' %}is-ready{% else %}is-stub{% endif %}">
+                <a href="/lessons/{{ l.slug }}/" {% if isCurrent %}aria-current="page"{% endif %}>{{ l.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
+    {% elif currentSection == 'mastery' %}
+      {% if curriculum.mastery.tagline %}
+        <p class="island-tagline">{{ curriculum.mastery.tagline }}</p>
+      {% endif %}
+      <div class="curr-section">
+        <ul class="curr-list">
+          {% for l in curriculum.mastery.lessons %}
+            {% set isCurrent = (l.slug == currentSlug) %}
+            <li class="curr-item {% if isCurrent %}is-current{% endif %} {% if l.status == 'ready' %}is-ready{% else %}is-stub{% endif %}">
+              <a href="/lessons/{{ l.slug }}/" {% if isCurrent %}aria-current="page"{% endif %}>{{ l.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+  </div>
+</aside>

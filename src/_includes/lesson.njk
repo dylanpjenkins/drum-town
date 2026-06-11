@@ -1,0 +1,53 @@
+---
+layout: base.njk
+---
+
+<div class="container">
+  <header class="lesson-hero">
+    <div class="breadcrumb">
+      <a href="/">Curriculum</a>
+      {%- if genreTitle %} · <a href="/genres/{{ genre }}/">{{ genreTitle }}</a>{% endif %}
+      {%- if levelTitle %} · {{ levelTitle }}{% endif %}
+    </div>
+    <h1>{{ title }}</h1>
+    {%- if tagline %}<p class="lede">{{ tagline }}</p>{% endif %}
+    <div class="lesson-meta">
+      {% if duration %}<span>Duration · <strong>{{ duration }}</strong></span>{% endif %}
+      {% if focus %}<span>Focus · <strong>{{ focus }}</strong></span>{% endif %}
+    </div>
+  </header>
+
+  {% if prerequisites and prerequisites.length %}
+  <div class="prereqs">
+    <span class="prereqs__label">Prerequisites</span>
+    <ul>
+      {% for slug in prerequisites %}
+        {% set p = curriculum | findLesson(slug) %}
+        {% if p %}
+          <li><a href="/lessons/{{ p.slug }}/">{{ p.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <article class="lesson-prose">
+    {{ content | safe }}
+  </article>
+
+  {% if nextLessons and nextLessons.length %}
+  <hr class="section-rule" />
+  <div class="section-label">Where Next</div>
+  <div class="lesson-row">
+    {% for slug in nextLessons %}
+      {% set n = curriculum | findLesson(slug) %}
+      {% if n %}
+        <a href="/lessons/{{ n.slug }}/" class="{{ 'is-ready' if n.status == 'ready' else 'is-stub' }}">
+          <span class="lesson-row__title">{{ n.title }} →</span>
+          <span class="lesson-row__status">{{ n.status }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>

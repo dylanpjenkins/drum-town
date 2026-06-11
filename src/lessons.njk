@@ -1,0 +1,172 @@
+---
+layout: base.njk
+pagination:
+  data: collections.allLessons
+  alias: lesson
+  size: 1
+  resolve: values
+permalink: "lessons/{{ lesson.slug }}/"
+eleventyComputed:
+  title: "{{ lesson.title }}"
+---
+
+{% set content = lessonContent[lesson.slug] %}
+
+<div class="lesson-layout">
+
+{% set currentSlug = lesson.slug %}
+{% set currentSection = lesson.section %}
+{% set currentTrack = lesson.track %}
+{% include "curriculum-sidebar.njk" %}
+
+<div class="container">
+  <header class="lesson-hero">
+    <div class="breadcrumb">
+      <a href="/">Curriculum</a>
+      {% if lesson.section == 'track' %}
+        · <a href="/genres/{{ lesson.track }}/">{{ lesson.trackTitle }}</a>
+        · {{ lesson.levelTitle }}
+      {% elif lesson.section == 'foundations' %}
+        · Foundations
+      {% elif lesson.section == 'mastery' %}
+        · Other Topics
+      {% endif %}
+    </div>
+    <p class="eyebrow">
+      {%- if lesson.section == 'track' -%}
+        Level {{ lesson.level }} · {{ lesson.trackTitle }}
+      {%- elif lesson.section == 'foundations' -%}
+        Foundation
+      {%- elif lesson.section == 'mastery' -%}
+        Other Topics
+      {%- endif %}
+    </p>
+    <h1>{{ lesson.title }}</h1>
+    {% if content and content.tagline %}<p class="lede">{{ content.tagline }}</p>{% endif %}
+    {% if content %}
+      <div class="lesson-meta">
+        {% if content.duration %}<span>Duration · <strong>{{ content.duration }}</strong></span>{% endif %}
+        {% if content.focus %}<span>Focus · <strong>{{ content.focus }}</strong></span>{% endif %}
+      </div>
+    {% endif %}
+  </header>
+
+  {% if content %}
+
+    {% if content.prerequisites and content.prerequisites.length %}
+    <div class="prereqs">
+      <span class="prereqs__label">Prerequisites</span>
+      <ul>
+        {% for slug in content.prerequisites %}
+          {% set p = curriculum | findLesson(slug) %}
+          {% if p %}<li><a href="/lessons/{{ p.slug }}/">{{ p.title }}</a></li>{% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <article class="lesson-prose">
+      {% if content.bodyHtml %}{{ content.bodyHtml | safe }}{% endif %}
+
+      {% if content.exercises %}
+        <div class="section-label">Exercises</div>
+        {% for ex in content.exercises %}
+          {% exercise ex %}
+        {% endfor %}
+      {% endif %}
+    </article>
+
+    {% if content.graduationCriteria and content.graduationCriteria.length %}
+    <div class="grad-criteria">
+      <span class="grad-criteria__label">Move on when</span>
+      <ul>
+        {% for c in content.graduationCriteria %}
+          <li>{{ c | safe }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if content.listening and content.listening.length %}
+    <section class="listening">
+      <header class="listening__head">
+        <span class="listening__eyebrow">Listening</span>
+        <span class="listening__count">{{ content.listening.length }} record{% if content.listening.length != 1 %}s{% endif %}</span>
+      </header>
+      <h3 class="listening__title">Listen for it</h3>
+      {% if content.listeningIntro %}<p class="listening__intro">{{ content.listeningIntro }}</p>{% endif %}
+      <ol class="listening__list">
+        {% for item in content.listening %}
+          <li class="listening__item">
+            <span class="listening__num">{{ loop.index | pad2 }}</span>
+            <div class="listening__body">
+              <p class="listening__head-line">
+                <span class="listening__artist">{{ item.artist }}</span>
+                <span class="listening__dot" aria-hidden="true">·</span>
+                <em class="listening__work">{{ item.work }}</em>
+                {% if item.context %}<span class="listening__context">{{ item.context }}</span>{% endif %}
+              </p>
+              {% if item.note %}<p class="listening__note">{{ item.note }}</p>{% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+    {% endif %}
+
+    {% if content.nextLessons and content.nextLessons.length %}
+    <hr class="section-rule" />
+    <div class="section-label">Where Next</div>
+    <div class="lesson-row">
+      {% for slug in content.nextLessons %}
+        {% set n = curriculum | findLesson(slug) %}
+        {% if n %}
+          <a href="/lessons/{{ n.slug }}/" class="{{ 'is-ready' if n.status == 'ready' else 'is-stub' }}">
+            <span class="lesson-row__title">{{ n.title }} →</span>
+            <span class="lesson-row__status">{{ n.status }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+  {% else %}
+
+    {# Stub view #}
+    <div class="stub-message">
+      <h3>This lesson is scaffolded, not yet written</h3>
+      <p>The curriculum includes this lesson, but the full content — exercises, notation, listening recommendations — hasn't been authored yet.</p>
+      <p style="margin-top: 14px;"><a href="/">← Back to the curriculum</a></p>
+    </div>
+
+  {% endif %}
+
+</div>
+
+</div>{# /.lesson-layout #}
+
+<script>
+  // Auto-scroll the curriculum sidebar so the current lesson is centered.
+  // Operates on the sidebar's internal scroll only — does not move the page.
+  (function () {
+    var sb = document.querySelector('.curriculum-sidebar');
+    if (!sb) return;
+    var cur = sb.querySelector('.curr-item.is-current');
+    if (!cur) return;
+    var sbRect = sb.getBoundingClientRect();
+    var curRect = cur.getBoundingClientRect();
+    var target = sb.scrollTop + (curRect.top - sbRect.top) - (sbRect.height / 2 - curRect.height / 2);
+    sb.scrollTop = Math.max(0, target);
+  })();
+
+  // Record this lesson as the most-recently-visited so the homepage hero
+  // can surface "Up Next" on the user's next visit. progress.js is loaded
+  // with `defer`, so it may not exist yet when this inline script runs.
+  (function () {
+    function track() {
+      if (window.DCProgress) DCProgress.setLastVisited('{{ lesson.slug }}');
+      else document.addEventListener('DOMContentLoaded', track, { once: true });
+    }
+    track();
+  })();
+</script>

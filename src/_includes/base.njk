@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or 'Drum Town' }} — Drum Town</title>
+  <meta name="description" content="{{ description or 'A drum curriculum with notated exercises across genres, from foundational technique to mastery topics.' }}" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="/" class="site-logo">Drum <em>Town</em></a>
+    <nav class="site-nav">
+      <a href="/#foundations">Foundations</a>
+      <a href="/#tracks">Genres</a>
+      <a href="/#mastery">Other Topics</a>
+    </nav>
+  </div>
+</header>
+
+{{ content | safe }}
+
+<footer class="site-footer">
+  Notation rendered with VexFlow at build time
+</footer>
+
+<aside class="metronome" id="site-metronome" aria-label="Metronome">
+  <div class="metronome__beats" id="metronome-beats" aria-hidden="true"></div>
+
+  <div class="metronome__row">
+    <button class="metronome__btn" id="metronome-toggle" type="button" aria-label="Start metronome">
+      <span class="metronome__icon" aria-hidden="true">▶</span>
+    </button>
+    <input type="number" class="metronome__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="Tempo in beats per minute" />
+    <select class="metronome__timesig" id="metronome-timesig" aria-label="Beats per bar">
+      <option value="2">2/4</option>
+      <option value="3">3/4</option>
+      <option value="4" selected>4/4</option>
+      <option value="5">5/4</option>
+      <option value="6">6/8</option>
+      <option value="7">7/8</option>
+    </select>
+  </div>
+
+  <input type="range" class="metronome__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
+
+  <div class="metronome__row metronome__row--vol">
+    <span class="metronome__vol-icon" aria-hidden="true">♪</span>
+    <input type="range" class="metronome__volume" id="metronome-volume" min="0" max="100" step="1" value="60" aria-label="Volume" />
+  </div>
+</aside>
+
+<script src="/assets/js/progress.js" defer></script>
+<script src="/assets/js/player.js" defer></script>
+<script src="/assets/js/metronome.js" defer></script>
+
+</body>
+</html>

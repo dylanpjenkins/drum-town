@@ -1,0 +1,223 @@
+---
+layout: base.njk
+title: Home
+---
+
+<div class="container container--wide">
+
+  {# ======================  HERO  ====================== #}
+  {# Default state renders in HTML so first paint always works. The activation
+     script at the bottom replaces it with the "Up Next" hero if the user has
+     a stored lastVisited slug. #}
+  <section class="curriculum-hero" id="hero-default">
+    <p class="eyebrow">Drum Town</p>
+    <h1>The <em>Curriculum</em></h1>
+    <p class="lede">Foundations is where most of a drummer's playing actually lives — reading, rudiments, time on the kit, technique, coordination, fills, practice habits. Once foundations is solid, seven genre tracks for specialization, plus a section of cross-cutting topics that don't fit any single track. Lessons rendered with real notation. Built to be navigated, not just read.</p>
+    <p class="stat">{{ curriculum | readyCount }} of {{ curriculum | lessonCount }} lessons ready</p>
+    <p class="hero-default__completed" id="hero-completed-msg" hidden>
+      You've reached the end of the ready lessons.
+      <a href="mailto:placeholder@example.com?subject=Lesson%20request">What else do you want to learn? →</a>
+    </p>
+  </section>
+
+  <section class="hero-upnext" id="hero-upnext" hidden>
+    <div class="hero-upnext__main">
+      <p class="hero-upnext__eyebrow">
+        <span class="hero-upnext__eyebrow-lead">Up Next</span>
+        <span class="hero-upnext__dot" aria-hidden="true">·</span>
+        <span data-slot="eyebrow"></span>
+      </p>
+      <h1 class="hero-upnext__title"><span data-slot="title"></span>.</h1>
+      <p class="hero-upnext__tagline" data-slot="tagline"></p>
+      <div class="hero-upnext__actions">
+        <a class="btn btn--primary" data-slot="open" href="#">Open lesson →</a>
+        <a class="btn btn--ghost" data-slot="review" href="#">Review previous lesson</a>
+      </div>
+    </div>
+    <aside class="preview-card" data-slot="preview-card">
+      <header class="preview-card__head">
+        <span class="preview-card__label">Preview</span>
+        <span class="preview-card__pos" data-slot="position"></span>
+      </header>
+      <div class="preview-card__notation" data-slot="notation"></div>
+      <div class="preview-card__caption" data-slot="notation-label"></div>
+      <hr class="preview-card__rule" />
+      <div class="preview-card__rel">
+        <div class="preview-card__rel-item" data-slot="before-wrap" hidden>
+          <span class="preview-card__rel-label">Before this</span>
+          <em class="preview-card__rel-title" data-slot="before"></em>
+        </div>
+        <div class="preview-card__rel-item" data-slot="after-wrap" hidden>
+          <span class="preview-card__rel-label">After this</span>
+          <em class="preview-card__rel-title" data-slot="after"></em>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  {# ======================  UNIFIED CURRICULUM  ======================
+     Foundations sub-sections, then one chapter per genre track, then a
+     final "Other Topics" chapter. Section anchors (#foundations, #tracks,
+     #mastery) live on the first chapter of each group so the site nav
+     keeps working. #}
+
+  {% set foundationsCount = curriculum.foundations.sections.length %}
+  {% set tracksCount = curriculum.tracks.length %}
+
+  {% for sec in curriculum.foundations.sections %}
+    <section class="chapter"{% if loop.first %} id="foundations"{% endif %}>
+      <header class="chapter__head">
+        <h3 class="chapter__title">{{ sec.title }}</h3>
+        <span class="chapter__num">Chapter {{ loop.index }}</span>
+      </header>
+      <ol class="chapter__lessons">
+        {% for lesson in sec.lessons %}
+          <li>
+            <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
+              <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
+              <span class="chapter-lesson__title">{{ lesson.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  {% endfor %}
+
+  {% for track in curriculum.tracks %}
+    <section class="chapter"{% if loop.first %} id="tracks"{% endif %}>
+      <header class="chapter__head">
+        <h3 class="chapter__title">{{ track.title }}</h3>
+        <span class="chapter__num">Chapter {{ foundationsCount + loop.index }}</span>
+      </header>
+      <ol class="chapter__lessons">
+        {% for lesson in track | flatTrackLessons %}
+          <li>
+            <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
+              <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
+              <span class="chapter-lesson__title">{{ lesson.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+  {% endfor %}
+
+  <section class="chapter" id="mastery">
+    <header class="chapter__head">
+      <h3 class="chapter__title">Other Topics</h3>
+      <span class="chapter__num">Chapter {{ foundationsCount + tracksCount + 1 }}</span>
+    </header>
+    <ol class="chapter__lessons">
+      {% for lesson in curriculum.mastery.lessons %}
+        <li>
+          <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
+            <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
+            <span class="chapter-lesson__title">{{ lesson.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+</div>
+
+{# ======================  EMBEDDED DATA + ACTIVATION  ====================== #}
+<script type="application/json" id="lessons-data">{{ lessonsData | inlineJson | safe }}</script>
+
+<script>
+  (function () {
+    function ready(fn) {
+      if (window.DCProgress) { fn(); return; }
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    }
+
+    ready(function () {
+      if (!window.DCProgress) return;
+      var dataEl = document.getElementById('lessons-data');
+      if (!dataEl) return;
+      var data;
+      try { data = JSON.parse(dataEl.textContent); } catch (e) { return; }
+
+      var last = DCProgress.getLastVisited();
+
+      var visited = DCProgress.getVisited();
+      var visitedSet = {};
+      for (var i = 0; i < visited.length; i++) visitedSet[visited[i]] = true;
+      var links = document.querySelectorAll('.chapter-lesson');
+      for (var j = 0; j < links.length; j++) {
+        var href = links[j].getAttribute('href') || '';
+        var m = href.match(/\/lessons\/([^\/]+)\/?$/);
+        if (!m) continue;
+        var slug = m[1];
+        if (visitedSet[slug]) links[j].classList.add('is-visited');
+        if (slug === last) links[j].classList.add('is-last-visited');
+      }
+
+      if (!last) return;
+
+      var order = data.order || [];
+      var idx = order.indexOf(last);
+      if (idx === -1) return;
+
+      if (idx === order.length - 1) {
+        var msg = document.getElementById('hero-completed-msg');
+        if (msg) msg.hidden = false;
+        return;
+      }
+
+      var nextSlug = order[idx + 1];
+      var lesson = (data.bySlug || {})[nextSlug];
+      if (!lesson) return;
+
+      var hero = document.getElementById('hero-upnext');
+      var defaultHero = document.getElementById('hero-default');
+      if (!hero) return;
+
+      function setText(name, value) {
+        var el = hero.querySelector('[data-slot="' + name + '"]');
+        if (el) el.textContent = value || '';
+      }
+
+      setText('eyebrow', lesson.eyebrow);
+      setText('title', lesson.title);
+      setText('tagline', lesson.tagline);
+      setText('position', 'Lesson ' + lesson.lessonNumber + ' / ' + lesson.totalLessons);
+      setText('notation-label', lesson.notationLabel || '');
+
+      var openLink = hero.querySelector('[data-slot="open"]');
+      if (openLink) openLink.setAttribute('href', lesson.url);
+
+      var reviewLink = hero.querySelector('[data-slot="review"]');
+      if (reviewLink) {
+        if (lesson.before) {
+          reviewLink.setAttribute('href', lesson.before.url);
+        } else {
+          reviewLink.hidden = true;
+        }
+      }
+
+      var card = hero.querySelector('[data-slot="preview-card"]');
+      if (lesson.hasPreview) {
+        var notation = hero.querySelector('[data-slot="notation"]');
+        if (notation) notation.innerHTML = lesson.notationSvg || '';
+      } else if (card) {
+        card.hidden = true;
+        hero.classList.add('hero-upnext--no-preview');
+      }
+
+      if (lesson.before) {
+        setText('before', lesson.before.title);
+        var bw = hero.querySelector('[data-slot="before-wrap"]');
+        if (bw) bw.hidden = false;
+      }
+      if (lesson.after) {
+        setText('after', lesson.after.title);
+        var aw = hero.querySelector('[data-slot="after-wrap"]');
+        if (aw) aw.hidden = false;
+      }
+
+      if (defaultHero) defaultHero.hidden = true;
+      hero.hidden = false;
+    });
+  })();
+</script>

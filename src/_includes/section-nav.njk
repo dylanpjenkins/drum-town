@@ -1,0 +1,47 @@
+{# Section-level navigator for genre landing pages. Shows Foundations,
+   all genre tracks, and Mastery — with the current track highlighted.
+   Expects: currentTrack (slug of the track this page belongs to). #}
+
+<aside class="curriculum-sidebar" aria-label="Curriculum sections">
+  <div class="curriculum-sidebar__inner">
+
+    <div class="island-header">
+      <a href="/" class="island-back">← Curriculum home</a>
+      <div class="island-title">
+        <span class="island-eyebrow">Sections</span>
+        <span class="island-name">All paths</span>
+      </div>
+    </div>
+
+    <div class="curr-section">
+      <div class="curr-section__title">Foundations</div>
+      <ul class="curr-list">
+        <li class="curr-item is-ready">
+          <a href="/#foundations">{{ curriculum.foundations.title }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="curr-section">
+      <div class="curr-section__title">Genres</div>
+      <ul class="curr-list">
+        {% for track in curriculum.tracks %}
+          {% set isCurrent = (track.slug == currentTrack) %}
+          <li class="curr-item {% if isCurrent %}is-current{% endif %} is-ready">
+            <a href="/genres/{{ track.slug }}/" {% if isCurrent %}aria-current="page"{% endif %}>{{ track.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="curr-section">
+      <div class="curr-section__title">Other Topics</div>
+      <ul class="curr-list">
+        <li class="curr-item is-ready">
+          <a href="/#mastery">{{ curriculum.mastery.title }}</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</aside>

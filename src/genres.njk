@@ -1,0 +1,45 @@
+---
+layout: base.njk
+pagination:
+  data: curriculum.tracks
+  alias: track
+  size: 1
+permalink: "genres/{{ track.slug }}/"
+eleventyComputed:
+  title: "{{ track.title }}"
+---
+
+<div class="lesson-layout">
+
+{% set currentTrack = track.slug %}
+{% include "section-nav.njk" %}
+
+<div class="container">
+  <header class="genre-hero">
+    <div class="breadcrumb" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px;">
+      <a href="/" style="color: var(--ink-soft);">Curriculum</a> · {{ track.title }}
+    </div>
+    <p class="eyebrow">Genre Path</p>
+    <h1>{{ track.title }} <em>—</em> {{ track.tagline }}</h1>
+    <p class="lede">{{ track.description }}</p>
+  </header>
+
+  {% for level in track.levels %}
+  <section class="level-block">
+    <header class="level-block__header">
+      <h2 class="level-block__title">{{ level.title }}</h2>
+    </header>
+
+    <div class="lesson-row">
+      {% for lesson in level.lessons %}
+        <a href="/lessons/{{ lesson.slug }}/" class="{{ 'is-ready' if lesson.status == 'ready' else 'is-stub' }}">
+          <span class="lesson-row__title">{{ lesson.title }}</span>
+          <span class="lesson-row__status">{{ lesson.status }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</div>
+
+</div>{# /.lesson-layout #}

@@ -1,0 +1,266 @@
+---
+permalink: /dev/review/index.html
+eleventyExcludeFromCollections: true
+---
+{#
+  =====================================================================
+  DEV TOOLING — internal review dashboard (not part of the public site)
+
+  Renders all curriculum lessons as a toggleable grid so you can track
+  which lessons have been reviewed and approved for publishing.
+
+  To remove this dashboard entirely, delete:
+    - this file (and the parent src/dev/ folder)
+    - tools/review-middleware.js
+    - tools/review-status.json (if it exists)
+    - the setBrowserSyncConfig block in .eleventy.js that wires it up
+    - the "tools/review-status.json" line in .gitignore
+
+  Persistence: tools/review-middleware.js is mounted into the Eleventy
+  dev server, so `npm start` serves both the site and the JSON API on
+  the same port. State lives in tools/review-status.json (gitignored).
+  If the API is unreachable (e.g. viewing the built static site), the
+  page falls back to localStorage with a visible warning banner.
+  =====================================================================
+#}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Review Dashboard — internal</title>
+<style>
+  :root { color-scheme: light; }
+  body { font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 24px 32px 60px; background: #f5efe2; color: #1a1714; }
+  h1 { font: 28px/1.2 Georgia, serif; margin: 0 0 4px; font-style: italic; }
+  h1 .rev-tag { font: 11px/1 ui-monospace, 'SF Mono', Menlo, monospace; color: #93764a; font-weight: normal; font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; margin-left: 12px; vertical-align: 4px; }
+  .rev-banner { padding: 8px 14px; border-radius: 6px; margin: 16px 0 20px; font-size: 12px; border: 1px solid; }
+  .rev-banner--ok { background: #e6f0d8; border-color: #8caa50; color: #3d5418; }
+  .rev-banner--err { background: #fbe5d8; border-color: #c97a4a; color: #6b3818; }
+  .rev-banner--info { background: #f2ead4; border-color: #c9b97a; color: #5a4b18; }
+  .rev-stats { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; }
+  .rev-stats__num { font: 32px/1 Georgia, serif; font-style: italic; }
+  .rev-stats__pct { font-family: ui-monospace, 'SF Mono', Menlo, monospace; color: #6b5b3a; font-size: 13px; }
+  .rev-bar { height: 6px; background: #e0d6bd; border-radius: 3px; overflow: hidden; margin: 0 0 24px; }
+  .rev-bar__fill { height: 100%; background: #8caa50; transition: width 200ms ease; }
+  .rev-toolbar { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #d8cdb1; font-size: 12px; }
+  .rev-toolbar label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; color: #4a3f28; }
+  .rev-toolbar input[type=checkbox] { margin: 0; }
+  .rev-toolbar .rev-spacer { flex: 1; }
+  .rev-toolbar .rev-mini { color: #93764a; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+  .rev-chapter { margin: 28px 0; }
+  .rev-chapter__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #d8cdb1; }
+  .rev-chapter__title { font: 20px/1.2 Georgia, serif; font-style: italic; margin: 0; }
+  .rev-chapter__num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px; color: #93764a; letter-spacing: 0.1em; text-transform: uppercase; margin-left: 8px; font-style: normal; }
+  .rev-chapter__count { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px; color: #6b5b3a; }
+  .rev-chapter__count.is-complete { color: #5d7d22; font-weight: bold; }
+  .rev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 6px; }
+  .rev-tile { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid #d8cdb1; border-radius: 5px; cursor: pointer; background: #fffaf0; transition: background 120ms, border-color 120ms; user-select: none; }
+  .rev-tile:hover { border-color: #93764a; }
+  .rev-tile.is-approved { background: #d8e7be; border-color: #8caa50; }
+  .rev-tile.is-approved:hover { border-color: #6b8a30; }
+  .rev-tile__check { width: 14px; height: 14px; border: 1.5px solid #93764a; border-radius: 3px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; line-height: 1; }
+  .rev-tile.is-approved .rev-tile__check { background: #6b8a30; border-color: #6b8a30; }
+  .rev-tile.is-approved .rev-tile__check::before { content: '✓'; }
+  .rev-tile__num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 10px; color: #93764a; flex-shrink: 0; min-width: 16px; }
+  .rev-tile__title { flex: 1; font-size: 13px; line-height: 1.3; }
+  .rev-tile.is-stub .rev-tile__title { color: #93764a; }
+  .rev-tile.is-stub .rev-tile__title::after { content: ' · stub'; font-size: 10px; opacity: 0.7; }
+  .rev-tile__open { font-size: 12px; color: #93764a; text-decoration: none; padding: 0 4px; line-height: 1; flex-shrink: 0; }
+  .rev-tile__open:hover { color: #6b8a30; }
+  body.rev-hide-approved .rev-tile.is-approved { display: none; }
+  body.rev-hide-stubs .rev-tile.is-stub { display: none; }
+</style>
+</head>
+<body>
+
+<h1>Review Dashboard <span class="rev-tag">internal tool</span></h1>
+
+<div id="rev-banner" class="rev-banner rev-banner--info">Connecting to review server…</div>
+
+<div class="rev-stats">
+  <div><span class="rev-stats__num" id="rev-approved">0</span> / <span id="rev-total">0</span> approved</div>
+  <div class="rev-stats__pct" id="rev-pct">0%</div>
+</div>
+<div class="rev-bar"><div class="rev-bar__fill" id="rev-bar-fill" style="width: 0%"></div></div>
+
+<div class="rev-toolbar">
+  <label><input type="checkbox" id="rev-hide-approved"> Hide approved</label>
+  <label><input type="checkbox" id="rev-hide-stubs"> Hide stubs</label>
+  <span class="rev-spacer"></span>
+  <span class="rev-mini">click tile to toggle · ↗ opens lesson</span>
+</div>
+
+{% set foundationsCount = curriculum.foundations.sections.length %}
+{% set tracksCount = curriculum.tracks.length %}
+
+{% macro tile(lesson, idx) %}
+  <div class="rev-tile{% if lesson.status != 'ready' %} is-stub{% endif %}" data-slug="{{ lesson.slug }}">
+    <span class="rev-tile__check"></span>
+    <span class="rev-tile__num">{{ idx | pad2 }}</span>
+    <span class="rev-tile__title">{{ lesson.title }}</span>
+    <a class="rev-tile__open" href="/lessons/{{ lesson.slug }}/" target="_blank" rel="noopener" title="Open lesson in new tab">↗</a>
+  </div>
+{% endmacro %}
+
+{% for sec in curriculum.foundations.sections %}
+  <section class="rev-chapter">
+    <header class="rev-chapter__head">
+      <h2 class="rev-chapter__title">{{ sec.title }}<span class="rev-chapter__num">Chapter {{ loop.index }}</span></h2>
+      <span class="rev-chapter__count" data-count>—</span>
+    </header>
+    <div class="rev-grid">
+      {% for lesson in sec.lessons %}{{ tile(lesson, loop.index) }}{% endfor %}
+    </div>
+  </section>
+{% endfor %}
+
+{% for track in curriculum.tracks %}
+  <section class="rev-chapter">
+    <header class="rev-chapter__head">
+      <h2 class="rev-chapter__title">{{ track.title }}<span class="rev-chapter__num">Chapter {{ foundationsCount + loop.index }}</span></h2>
+      <span class="rev-chapter__count" data-count>—</span>
+    </header>
+    <div class="rev-grid">
+      {% for lesson in track | flatTrackLessons %}{{ tile(lesson, loop.index) }}{% endfor %}
+    </div>
+  </section>
+{% endfor %}
+
+<section class="rev-chapter">
+  <header class="rev-chapter__head">
+    <h2 class="rev-chapter__title">Other Topics<span class="rev-chapter__num">Chapter {{ foundationsCount + tracksCount + 1 }}</span></h2>
+    <span class="rev-chapter__count" data-count>—</span>
+  </header>
+  <div class="rev-grid">
+    {% for lesson in curriculum.mastery.lessons %}{{ tile(lesson, loop.index) }}{% endfor %}
+  </div>
+</section>
+
+<script>
+(function () {
+  var API = '/dev/review/status';
+  var LS_KEY = 'dc_review_status';
+  var SAVE_DEBOUNCE_MS = 250;
+
+  var banner = document.getElementById('rev-banner');
+  var approvedEl = document.getElementById('rev-approved');
+  var totalEl = document.getElementById('rev-total');
+  var pctEl = document.getElementById('rev-pct');
+  var barFill = document.getElementById('rev-bar-fill');
+  var hideApproved = document.getElementById('rev-hide-approved');
+  var hideStubs = document.getElementById('rev-hide-stubs');
+
+  var state = {};      // { slug: true } for approved lessons
+  var mode = 'unknown'; // 'server' | 'local'
+  var saveTimer = null;
+  var pendingSave = false;
+
+  function setBanner(msg, kind) {
+    banner.textContent = msg;
+    banner.className = 'rev-banner rev-banner--' + (kind || 'info');
+  }
+
+  function applyState() {
+    var tiles = document.querySelectorAll('.rev-tile');
+    var approved = 0;
+    for (var i = 0; i < tiles.length; i++) {
+      var on = !!state[tiles[i].dataset.slug];
+      tiles[i].classList.toggle('is-approved', on);
+      if (on) approved++;
+    }
+    var total = tiles.length;
+    approvedEl.textContent = approved;
+    totalEl.textContent = total;
+    var pct = total === 0 ? 0 : Math.round((approved / total) * 100);
+    pctEl.textContent = pct + '%';
+    barFill.style.width = pct + '%';
+
+    var chapters = document.querySelectorAll('.rev-chapter');
+    for (var c = 0; c < chapters.length; c++) {
+      var chTiles = chapters[c].querySelectorAll('.rev-tile');
+      var chApproved = 0;
+      for (var t = 0; t < chTiles.length; t++) if (state[chTiles[t].dataset.slug]) chApproved++;
+      var countEl = chapters[c].querySelector('[data-count]');
+      if (countEl) {
+        countEl.textContent = chApproved + ' / ' + chTiles.length;
+        countEl.classList.toggle('is-complete', chApproved === chTiles.length && chTiles.length > 0);
+      }
+    }
+  }
+
+  function saveLocal() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function loadLocal() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+
+  function scheduleSave() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(doSave, SAVE_DEBOUNCE_MS);
+  }
+
+  async function doSave() {
+    if (mode === 'server') {
+      try {
+        var r = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(state)
+        });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        setBanner('Saved · ' + Object.keys(state).length + ' approved · tools/review-status.json', 'ok');
+      } catch (e) {
+        mode = 'local';
+        saveLocal();
+        setBanner('Save failed (' + e.message + ') — fell back to localStorage. Restart `npm start` and reload.', 'err');
+      }
+    } else {
+      saveLocal();
+      setBanner('Saved to localStorage (API unreachable) · ' + Object.keys(state).length + ' approved', 'info');
+    }
+  }
+
+  function toggle(slug) {
+    if (state[slug]) delete state[slug];
+    else state[slug] = true;
+    applyState();
+    scheduleSave();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.rev-tile__open')) return;
+    var tile = e.target.closest('.rev-tile');
+    if (tile) toggle(tile.dataset.slug);
+  });
+
+  hideApproved.addEventListener('change', function () {
+    document.body.classList.toggle('rev-hide-approved', hideApproved.checked);
+  });
+  hideStubs.addEventListener('change', function () {
+    document.body.classList.toggle('rev-hide-stubs', hideStubs.checked);
+  });
+
+  (async function init() {
+    try {
+      var r = await fetch(API, { method: 'GET' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      state = await r.json() || {};
+      mode = 'server';
+      setBanner('Connected · changes save to tools/review-status.json', 'ok');
+    } catch (e) {
+      mode = 'local';
+      state = loadLocal();
+      setBanner('Dev API unreachable — using localStorage. Run "npm start" (the dashboard runs inside the Eleventy dev server) to persist to disk.', 'err');
+    }
+    applyState();
+  })();
+})();
+</script>
+</body>
+</html>

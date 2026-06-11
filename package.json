@@ -1,0 +1,15 @@
+{
+  "name": "drum-town",
+  "version": "0.1.0",
+  "description": "Drum Town — a drum curriculum site, from absolute beginner to expert, with notated exercises rendered at build time.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "jsdom": "^24.0.0",
+    "vexflow": "^4.2.3"
+  }
+}
