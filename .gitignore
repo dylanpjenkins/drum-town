@@ -7,3 +7,4 @@ tools/lesson-batches/
 
 # Dev tooling — review dashboard state (see tools/review-server.js)
 tools/review-status.json
+.env

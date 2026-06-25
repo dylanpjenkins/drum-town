@@ -11,5 +11,8 @@
     "@11ty/eleventy": "^2.0.1",
     "jsdom": "^24.0.0",
     "vexflow": "^4.2.3"
+  },
+  "dependencies": {
+    "posthog-node": "^5.38.5"
   }
 }
