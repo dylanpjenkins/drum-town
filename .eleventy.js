@@ -5,8 +5,6 @@ const { renderPattern } = require('./tools/notation-renderer');
 // setBrowserSyncConfig block below to remove the dashboard.
 const { reviewMiddleware } = require('./tools/review-middleware');
 
-const { getPostHogClient } = require('./src/posthog');
-
 module.exports = function (eleventyConfig) {
   // Pass-through for static assets
   eleventyConfig.addPassthroughCopy({ 'src/assets': 'assets' });
@@ -154,19 +152,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('flatTrackLessons', track =>
     (track.levels || []).flatMap(lv => lv.lessons || [])
   );
-
-  eleventyConfig.on('eleventy.after', async ({ results }) => {
-    const posthog = getPostHogClient();
-    posthog.capture({
-      distinctId: 'build',
-      event: 'build_completed',
-      properties: {
-        outputCount: results.length,
-        runMode: process.env.ELEVENTY_RUN_MODE || 'unknown',
-      },
-    });
-    await posthog.shutdown();
-  });
 
   // Serialize a value as JSON safe for embedding inside an inline <script> tag.
   // Escapes the `</` sequence so a stray "</script>" in any string can't close
