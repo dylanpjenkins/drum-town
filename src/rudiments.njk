@@ -1,33 +1,25 @@
 ---
 layout: base.njk
-title: Drum Rudiments — Playable Notation
-description: "The essential drum rudiments with playable notation — singles, doubles, paradiddles, flams, and drags, each linked to a full free lesson."
+title: The 40 Essential Drum Rudiments — Playable Notation
+description: "All 40 essential drum rudiments with playable notation — every roll, paradiddle, flam, and drag rendered as real notation you can press play and hear."
 permalink: /rudiments/
 ---
 <div class="container">
   <header class="lesson-hero">
     <p class="eyebrow">Reference</p>
-    <h1>Drum <em>Rudiments</em></h1>
-    <p class="lede">The motor patterns underneath everything you'll ever play. Every rudiment below is rendered as real notation — press play to hear it, then open the full lesson for the build-up, tips, and graduation criteria.</p>
+    <h1>The 40 Essential <em>Rudiments</em></h1>
+    <p class="lede">Every one of the forty standard rudiments — rolls, paradiddles, flams, and drags — rendered as real notation. Press play to hear any of them; where we have a full lesson, it's linked right on the card.</p>
   </header>
 
   <article class="lesson-prose">
-    <p>Rudiments are to drumming what scales are to piano: small, repeatable sticking patterns that turn into fills, grooves, and solos once they're automatic. Work them in order — singles and doubles first, then the paradiddle family, then flams and drags. A practice pad and a metronome are all you need.</p>
+    <p>Rudiments are to drumming what scales are to piano: small, repeatable sticking patterns that turn into fills, grooves, and solos once they're automatic. The Percussive Arts Society standardized forty of them, in the four families below. You don't need all forty at once — start with the single stroke roll, double stroke roll, and single paradiddle, then work outward. A practice pad and a metronome are all you need.</p>
 
-    {% for sec in curriculum.foundations.sections %}
-      {% if sec.slug == 'rudiments' %}
-        {% for lesson in sec.lessons %}
-          {% set lc = lessonContent[lesson.slug] %}
-          <h2 class="section-label">{{ lesson.title }}</h2>
-          {% if lc %}
-            <p>{{ lc.tagline }}</p>
-            {% if lc.exercises and lc.exercises.length %}
-              {% exercise lc.exercises[0] %}
-            {% endif %}
-          {% endif %}
-          <p><a href="/lessons/{{ lesson.slug }}/">Open the full lesson →</a></p>
-        {% endfor %}
-      {% endif %}
+    {% for group in rudiments %}
+      <h2 class="section-label" id="{{ group.slug }}">{{ group.title }}</h2>
+      <p>{{ group.blurb }}</p>
+      {% for r in group.rudiments %}
+        {% exercise r.card %}
+      {% endfor %}
     {% endfor %}
   </article>
 </div>

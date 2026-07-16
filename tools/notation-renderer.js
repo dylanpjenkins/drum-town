@@ -70,6 +70,11 @@ function makeNote(VF, spec, stemDir) {
     }
     note.addModifier(ann, 0);
   }
+  // Tremolo slashes through the stem — roll shorthand. `tremolo: 3` draws
+  // three slashes (the multiple-bounce / buzz roll glyph).
+  if (spec.tremolo) {
+    note.addModifier(new VF.Tremolo(spec.tremolo), 0);
+  }
   // Accent: the ">" symbol above the note. Renders via VexFlow Articulation.
   if (spec.accent) {
     const art = new VF.Articulation('a>');
@@ -123,6 +128,10 @@ function makeNote(VF, spec, stemDir) {
  *   tuplets: [ { voice: 'hands'|'feet', start, length, num_notes, notes_occupied } ],
  *   beamGroups: [[num, denom], ...]
  * }
+ *
+ * beamGroups fractions are measured in ACTUAL played time, after tuplet
+ * scaling — so to beam one beat per group, use [1, 4] even when the beat
+ * holds a triplet or sextuplet ([3, 8] would span 1.5 real beats there).
  *
  * noteSpec = {
  *   keys: ['c/5', ...],          // VexFlow keys

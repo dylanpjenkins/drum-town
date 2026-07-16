@@ -39,6 +39,14 @@ module.exports = function (eleventyConfig) {
     const tipBlock = spec.tip
       ? `<div class="exercise-tip">${spec.tip}</div>`
       : '';
+    // Optional prose + link, used by reference cards (e.g. /rudiments/) that
+    // fold the description and "full lesson" link into the exercise block.
+    const descBlock = spec.description
+      ? `<p class="exercise-desc">${spec.description}</p>`
+      : '';
+    const linkBlock = spec.lessonUrl
+      ? `<p class="exercise-lesson-link"><a href="${spec.lessonUrl}">${spec.lessonLabel || 'Open the full lesson →'}</a></p>`
+      : '';
     let controls = '';
     if (spec.bpm) {
       const audioSpec = {
@@ -69,8 +77,10 @@ module.exports = function (eleventyConfig) {
           </div>
           ${controls}
         </div>
+        ${descBlock}
         <div class="notation">${svg}</div>
         ${tipBlock}
+        ${linkBlock}
       </div>
     `;
   });
