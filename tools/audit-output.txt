@@ -258,11 +258,14 @@ Total: 0
   clave-as-feel#2 hands=8 (2 bars of 4/4)
   clave-as-feel#2 feet=8 (2 bars of 4/4)
   clave-as-feel#3 hands=8 (2 bars of 4/4)
-Total: 256
+  jazz-waltz#3 hands=6 (2 bars of 3/4)
+  jazz-waltz#3 feet=6 (2 bars of 3/4)
+Total: 258
 
 === 6-NOTE-RUDIMENT-LIKE EXERCISES IN 4/4 (should likely be 6/8 or sextuplets) ===
   fusion-six-stroke-roll#0: 12 hand hits in 4/4
-Total: 1
+  fusion-six-stroke-roll#1: 12 hand hits in 4/4
+Total: 2
 
 === GETTING-STARTED LESSONS WITH KIT PATTERNS ===
   the-drum-kit#0: feet=true, hand-voicings=a/5/x2|c/5|g/5/x2|f/5/x2|e/5|d/5|a/4

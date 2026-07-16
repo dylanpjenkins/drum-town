@@ -22674,7 +22674,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "J Dilla", work: "Donuts (2006)", note: "The reference text" },
+      { artist: "J Dilla", work: "Donuts (2006)", note: "Listen for each voice sitting at its own offset — kick on, snare late, hat early — bar after bar." },
       { artist: "J Dilla", work: "The Shining", note: "Posthumous, full songs in the same feel" },
       { artist: "Karriem Riggins", work: "Alone Together", note: "A drummer translating Dilla's wobble back to the kit" }
     ]
@@ -23005,7 +23005,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "DJ Premier", work: "Gang Starr — Moment of Truth", note: "Loop-and-kit interaction at canonical level" },
+      { artist: "DJ Premier", work: "Gang Starr — Moment of Truth", note: "Listen for where the drums lock with the loop and where they deliberately leave it alone." },
       { artist: "Pete Rock", work: "Mecca and the Soul Brother", note: "Sample-driven beats with live touches" },
       { artist: "Madlib", work: "Madvillainy", note: "Producer-side study — what the live drummer is conversing with" }
     ]
@@ -23382,7 +23382,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Solange", work: "A Seat at the Table / When I Get Home", note: "Alternate-meter R&B at canonical level" },
+      { artist: "Solange", work: "A Seat at the Table / When I Get Home", note: "Listen for meters shifting mid-song without ever feeling like a puzzle." },
       { artist: "FKA Twigs", work: "Magdalene", note: "Hybrid live-electronic — kit and producer-side blurred" },
       { artist: "Yussef Dayes", work: "Black Classical Music", note: "Forward-R&B drumming, 2020s" },
       { artist: "Sam Wilkes / Sam Gendel", work: "Music for Saxofone & Bass Guitar", note: "Adjacent — alternate-grid contemporary instrumental music" }
@@ -25164,7 +25164,7 @@ module.exports = {
     ],
     listening: [
       { artist: "George Kollias", work: "Invictus / instructional content", note: "The most-cited technician at this tempo range — clean form at extreme speed." },
-      { artist: "Dirk Verbeuren", work: "Soilwork / Megadeth", note: "Hyper-blast deployed inside song-length compositions, not as a stunt." },
+      { artist: "Dirk Verbeuren", work: "Soilwork / Megadeth", note: "Notice how the hyper-blast enters as an arrangement choice — the song asks for the texture, then releases it." },
       { artist: "Aquiles Priester", work: "Hangar / instructional", note: "Endurance specialist — sustained extreme blasts across full sets." }
     ]
   },
@@ -25710,7 +25710,7 @@ module.exports = {
     listening: [
       { artist: "Meshuggah", work: "Catch Thirtythree", note: "Tomas Haake — a 47-minute single composition built almost entirely on polymeter." },
       { artist: "Animals as Leaders", work: "The Joy of Motion", note: "Matt Garstka — polymetric kick patterns inside compositions with shifting harmony." },
-      { artist: "King Crimson", work: "Discipline", note: "Bill Bruford — \"Frame by Frame\" is the textbook polymeter rock track." }
+      { artist: "King Crimson", work: "Discipline", note: "Bill Bruford — in \"Frame by Frame\", listen for the guitars cycling at different lengths while the drums hold the ground." }
     ]
   },
 
@@ -30702,7 +30702,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Tony Williams", work: "Miles Davis — Nefertiti / Filles de Kilimanjaro", note: "1960s metric modulation as a conversational device, not a stunt." },
+      { artist: "Tony Williams", work: "Miles Davis — Nefertiti / Filles de Kilimanjaro", note: "Listen for the pulse doubling mid-tune while the band strolls across the seam together." },
       { artist: "Vinnie Colaiuta", work: "Frank Zappa — The Black Page", note: "Modulation under written, notated chaos — pristinely executed." },
       { artist: "Larnell Lewis", work: "Snarky Puppy — Lingus (We Like It Here)", note: "Modern modulation where the band rides the pivot together." }
     ]
@@ -30891,8 +30891,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Mark Guiliana", work: "David Bowie — Blackstar", note: "The reference for sparse, programmed-precise playing on an acoustic kit." },
-      { artist: "Nate Smith", work: "Pocket Change", note: "Displacement vocabulary at song length, not as a stunt." },
+      { artist: "Mark Guiliana", work: "David Bowie — Blackstar", note: "Listen for 16ths so even they read as programmed — until a fill reminds you a human is playing." },
+      { artist: "Nate Smith", work: "Pocket Change", note: "Listen for backbeats living off 2 and 4 for whole sections while the bar never stops feeling like 4/4." },
       { artist: "Larnell Lewis", work: "Snarky Puppy — Family Dinner Vol. 2", note: "Modern fusion with the harmonic awareness foregrounded." },
       { artist: "Anika Nilles", work: "Pikalar / solo releases", note: "The 'programmed acoustic' philosophy in concentrated form." }
     ]
@@ -31251,7 +31251,7 @@ module.exports = {
     ],
     listening: [
       { artist: "Jojo Mayer", work: "Nerve — live recordings", note: "The drummer who built the bridge from drum-and-bass to acoustic kit." },
-      { artist: "Daft Punk (programmed)", work: "Discovery", note: "The reference for what 'four-on-the-floor with the human removed' sounds like." },
+      { artist: "Daft Punk (programmed)", work: "Discovery", note: "Four-on-the-floor with the human removed — listen for a kick that never announces itself, only pulses." },
       { artist: "Mark Guiliana", work: "Beat Music — Beat Music", note: "Programmed-feel acoustic playing in a fusion context." },
       { artist: "Anika Nilles", work: "Anika Nilles — Pikalar", note: "The modern player who lives at the intersection." }
     ]
@@ -31420,7 +31420,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Billy Cobham", work: "Mahavishnu Orchestra — Birds of Fire", note: "The reference. Title track and 'One Word' for the polyrhythmic vocabulary." },
+      { artist: "Billy Cobham", work: "Mahavishnu Orchestra — Birds of Fire", note: "Start with the title track and 'One Word' — listen for the triplet kick rolling under straight 16th hands." },
       { artist: "Billy Cobham", work: "Spectrum", note: "Cobham as bandleader — same vocabulary, more space to hear it." },
       { artist: "Lenny White", work: "Return to Forever — Romantic Warrior", note: "Adjacent vocabulary — same era, same intensity, slightly different angle." },
       { artist: "Marco Minnemann", work: "Solo work", note: "Modern players who carry the Cobham torch — fast hands, polyrhythmic feet." }
@@ -32007,7 +32007,7 @@ module.exports = {
     listening: [
       { artist: "Max Roach", work: "We Insist! Freedom Now Suite — All Africa", note: "Solo as composition; motifs developed across an entire piece" },
       { artist: "Tony Williams", work: "Live at the Plugged Nickel — Miles Davis", note: "Trading fours with structural awareness" },
-      { artist: "Peter Erskine", work: "Everything Is Timekeeping (instructional video)", note: "Erskine narrating his own phrasing — the textbook" }
+      { artist: "Peter Erskine", work: "Everything Is Timekeeping (instructional video)", note: "Erskine narrating his own phrasing — hear a solo built from one motif in real time" }
     ]
   },
 
@@ -32161,7 +32161,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Ed Thigpen", work: "The Sound of Brushes", note: "The textbook — figure-8, oval, line, all named and demonstrated" },
+      { artist: "Ed Thigpen", work: "The Sound of Brushes", note: "Figure-8, oval, and line sweeps, each named and demonstrated — hear how the shape changes the hiss" },
       { artist: "Philly Joe Jones", work: "Miles Davis — 'Round About Midnight", note: "Brush mastery on slow ballads — listen to 'Tadd's Delight'" },
       { artist: "Adam Nussbaum", work: "The Brush Project", note: "Modern brush vocabulary; comping and fills demonstrated" }
     ]
