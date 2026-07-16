@@ -82,7 +82,8 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 .site-nav {
   margin-left: auto;
   display: flex;
-  gap: 22px;
+  flex-wrap: wrap;
+  gap: 8px 22px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.18em;
@@ -116,7 +117,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
   margin: 0 0 6px;
 }
 
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; overflow-wrap: break-word; }
 h1 { font-size: 60px; line-height: 1; margin: 0 0 20px; }
 h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
 h2 { font-size: 36px; line-height: 1.1; margin: 36px 0 14px; }
@@ -505,6 +506,15 @@ hr.section-rule {
   align-items: start;
 }
 
+/* Grid items must not size to their content: .container's auto margins
+   disable stretch alignment, and shrink-to-fit sizing bottoms out at
+   min-content — letting wide inner content (notation staves, exercise
+   headers) inflate the column past the viewport. Explicit width restores
+   fill-the-track (max-width still caps it; auto margins then center),
+   and min-width: 0 kills the automatic minimum so inner scroll
+   containers can actually contain. */
+.lesson-layout > * { min-width: 0; width: 100%; }
+
 .curriculum-sidebar {
   position: sticky;
   top: 60px;            /* sit below the sticky site-header */
@@ -645,6 +655,13 @@ hr.section-rule {
   font-size: 16px;
   color: var(--ink-2);
 }
+/* Cap the measure of running text at a readable line length. Notation and
+   exercise blocks stay full-width; only prose is constrained. */
+.lesson-prose p,
+.lesson-prose ul,
+.lesson-prose ol {
+  max-width: 65ch;
+}
 .lesson-prose p { margin: 0 0 14px; }
 .lesson-prose strong { color: var(--ink); font-weight: 600; }
 .lesson-prose em { color: var(--ink-soft); }
@@ -659,9 +676,10 @@ hr.section-rule {
 
 .exercise-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 18px;
+  gap: 10px 18px;
   margin-bottom: 14px;
 }
 
@@ -747,7 +765,14 @@ hr.section-rule {
   margin: 10px 0;
 }
 
-.notation svg { display: block; max-width: 100%; height: auto; }
+.notation svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* Keep notation legible on narrow screens: below this width the staff
+     pans inside the .notation box (overflow-x: auto) instead of shrinking. */
+  min-width: 520px;
+}
 
 .notation svg .playhead {
   stroke: var(--accent);
@@ -766,14 +791,14 @@ hr.section-rule {
 }
 
 .exercise-tip {
-  font-style: italic;
   color: var(--ink-3);
   font-size: 14px;
+  max-width: 65ch;
   margin-top: 10px;
   padding-left: 14px;
   border-left: 2px solid var(--ochre);
 }
-.exercise-tip em { font-style: normal; color: var(--ink); font-weight: 500; }
+.exercise-tip em { font-style: italic; color: var(--ink); font-weight: 500; }
 
 /* =====================  TIPS / CALLOUTS  ===================== */
 .tips, .callout {
@@ -1111,8 +1136,10 @@ hr.section-rule {
 
 /* =====================  RESPONSIVE  ===================== */
 @media (max-width: 960px) {
-  /* Collapse the sidebar to a fixed-height panel above the lesson. */
-  .lesson-layout { grid-template-columns: 1fr; }
+  /* Collapse the sidebar to a fixed-height panel above the lesson.
+     minmax(0, 1fr) — not 1fr — so wide content (exercises, notation)
+     can never inflate the column past the viewport. */
+  .lesson-layout { grid-template-columns: minmax(0, 1fr); }
   .curriculum-sidebar {
     position: relative;
     top: 0;
@@ -1127,9 +1154,26 @@ hr.section-rule {
 @media (max-width: 720px) {
   .container { padding: 36px 20px; }
   .site-header__inner { padding: 14px 20px; flex-wrap: wrap; }
-  .site-nav { gap: 16px; }
+  .site-nav { gap: 8px 16px; }
   .curriculum-hero h1 { font-size: 52px; }
   h1 { font-size: 44px; }
+  .lesson-hero h1 { font-size: 40px; }
+  .genre-hero h1 { font-size: 38px; }
+  .hero-upnext__title { font-size: 46px; }
+  .curriculum-section__header h2 { font-size: 34px; }
+  .chapter__head { flex-wrap: wrap; gap: 4px 16px; }
+  .chapter__title { font-size: 30px; }
+  .level-block__header { flex-wrap: wrap; }
+  .exercise { padding: 18px 16px; }
   .tracks-grid { grid-template-columns: 1fr; }
   .listening { margin-top: 36px; }
+}
+
+@media (max-width: 400px) {
+  .container { padding: 32px 16px; }
+  .curriculum-hero h1 { font-size: 44px; }
+  h1 { font-size: 38px; }
+  .lesson-hero h1 { font-size: 36px; }
+  .hero-upnext__title { font-size: 40px; }
+  .exercise { padding: 16px 12px; }
 }

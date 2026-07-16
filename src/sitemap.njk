@@ -1,0 +1,16 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ site.url }}/</loc></url>
+  <url><loc>{{ site.url }}/rudiments/</loc></url>
+  <url><loc>{{ site.url }}/metronome/</loc></url>
+{%- for track in curriculum.tracks %}
+  <url><loc>{{ site.url }}/genres/{{ track.slug }}/</loc></url>
+{%- endfor %}
+{%- for lesson in collections.allLessons %}
+  <url><loc>{{ site.url }}/lessons/{{ lesson.slug }}/</loc></url>
+{%- endfor %}
+</urlset>

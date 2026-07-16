@@ -20,8 +20,10 @@ module.exports = {
         tagline: "Before you hit a drum",
         lessons: [
           { slug: "the-drum-kit",         title: "The Kit: What's What",   status: "ready" },
+          { slug: "gear-basics",          title: "Sticks, Pads & First Gear", status: "ready" },
           { slug: "setup-posture",        title: "Setup & Posture",        status: "ready" },
           { slug: "stick-grip",           title: "Stick Grip & Strokes",   status: "ready" },
+          { slug: "tuning-basics",        title: "Tuning Your Drums",      status: "ready" },
           { slug: "the-practice-mindset", title: "How to Practice",        status: "ready" }
         ]
       },
@@ -140,7 +142,8 @@ module.exports = {
           { slug: "warm-ups",           title: "Warm-Ups",                     status: "ready" },
           { slug: "metronome-practice", title: "Practicing with a Metronome",  status: "ready" },
           { slug: "slow-practice",      title: "Slow Practice",                status: "ready" },
-          { slug: "recording-yourself", title: "Recording Yourself",           status: "ready" }
+          { slug: "recording-yourself", title: "Recording Yourself",           status: "ready" },
+          { slug: "ear-training",       title: "Training Your Ear",            status: "ready" }
         ]
       },
       {
@@ -209,6 +212,7 @@ module.exports = {
         ]},
         { level: 2, title: "Level 2", lessons: [
           { slug: "jazz-comping-basics",     title: "Comping Basics",            status: "ready" },
+          { slug: "jazz-waltz",              title: "The Jazz Waltz",            status: "ready" },
           { slug: "jazz-trading-fours",      title: "Trading Fours",             status: "ready" },
           { slug: "jazz-bossa-jazz",         title: "Bossa-Influenced Jazz",     status: "ready" },
           { slug: "jazz-up-tempo-intro",     title: "Intro to Up-Tempo Time",    status: "ready" },
@@ -275,8 +279,8 @@ module.exports = {
       icon: "✦",
       levels: [
         { level: 1, title: "Level 1",     lessons: [
-          { slug: "latin-bossa-nova",       title: "Bossa Nova",                status: "ready" },
           { slug: "latin-clave-intro",      title: "Understanding Clave",       status: "ready" },
+          { slug: "latin-bossa-nova",       title: "Bossa Nova",                status: "ready" },
           { slug: "latin-samba-feel",       title: "Samba on the Kit",          status: "ready" },
           { slug: "latin-cha-cha",          title: "Cha-Cha-Cha",               status: "ready" },
           { slug: "latin-mambo-intro",      title: "Mambo — First Steps",       status: "ready" }

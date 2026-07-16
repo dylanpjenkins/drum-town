@@ -6,11 +6,40 @@ pagination:
   size: 1
   resolve: values
 permalink: "lessons/{{ lesson.slug }}/"
+ogType: article
 eleventyComputed:
   title: "{{ lesson.title }}"
+  description: "{% if lessonContent[lesson.slug] %}{{ lessonContent[lesson.slug].tagline }} — a free drum lesson with notation and audio.{% endif %}"
 ---
 
 {% set content = lessonContent[lesson.slug] %}
+
+{% if content %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": {{ lesson.title | inlineJson | safe }},
+  "description": {{ content.tagline | inlineJson | safe }},
+  "learningResourceType": "Lesson",
+  {%- if content.difficulty %}
+  "educationalLevel": {{ content.difficulty | inlineJson | safe }},
+  {%- endif %}
+  {%- if content.duration and (content.duration | isoDuration) %}
+  "timeRequired": "{{ content.duration | isoDuration }}",
+  {%- endif %}
+  {%- if site.url %}
+  "url": "{{ site.url }}{{ page.url }}",
+  {%- endif %}
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Drum Town Drum Curriculum",
+    "description": {{ site.description | inlineJson | safe }},
+    "provider": { "@type": "Organization", "name": "Drum Town"{% if site.url %}, "url": "{{ site.url }}"{% endif %} }
+  }
+}
+</script>
+{% endif %}
 
 <div class="lesson-layout">
 
@@ -69,7 +98,7 @@ eleventyComputed:
       {% if content.bodyHtml %}{{ content.bodyHtml | safe }}{% endif %}
 
       {% if content.exercises %}
-        <div class="section-label">Exercises</div>
+        <h2 class="section-label">Exercises</h2>
         {% for ex in content.exercises %}
           {% exercise ex %}
         {% endfor %}
@@ -116,7 +145,7 @@ eleventyComputed:
 
     {% if content.nextLessons and content.nextLessons.length %}
     <hr class="section-rule" />
-    <div class="section-label">Where Next</div>
+    <h2 class="section-label">Where Next</h2>
     <div class="lesson-row">
       {% for slug in content.nextLessons %}
         {% set n = curriculum | findLesson(slug) %}

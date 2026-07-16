@@ -147,6 +147,13 @@ module.exports = function (eleventyConfig) {
   // Zero-pad an integer to two digits for chapter-lesson labels (01, 02 ... 14).
   eleventyConfig.addFilter('pad2', n => String(n).padStart(2, '0'));
 
+  // "20–25 min" → "PT20M" for schema.org timeRequired. Returns '' when no
+  // leading number is found so templates can omit the property.
+  eleventyConfig.addFilter('isoDuration', d => {
+    const m = /(\d+)/.exec(d || '');
+    return m ? `PT${m[1]}M` : '';
+  });
+
   // Flatten a track's levels into a single ordered lesson array — used on the
   // homepage where each track renders as one chapter rather than per-level.
   eleventyConfig.addFilter('flatTrackLessons', track =>

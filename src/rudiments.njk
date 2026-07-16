@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Drum Rudiments — Playable Notation
+description: "The essential drum rudiments with playable notation — singles, doubles, paradiddles, flams, and drags, each linked to a full free lesson."
+permalink: /rudiments/
+---
+<div class="container">
+  <header class="lesson-hero">
+    <p class="eyebrow">Reference</p>
+    <h1>Drum <em>Rudiments</em></h1>
+    <p class="lede">The motor patterns underneath everything you'll ever play. Every rudiment below is rendered as real notation — press play to hear it, then open the full lesson for the build-up, tips, and graduation criteria.</p>
+  </header>
+
+  <article class="lesson-prose">
+    <p>Rudiments are to drumming what scales are to piano: small, repeatable sticking patterns that turn into fills, grooves, and solos once they're automatic. Work them in order — singles and doubles first, then the paradiddle family, then flams and drags. A practice pad and a metronome are all you need.</p>
+
+    {% for sec in curriculum.foundations.sections %}
+      {% if sec.slug == 'rudiments' %}
+        {% for lesson in sec.lessons %}
+          {% set lc = lessonContent[lesson.slug] %}
+          <h2 class="section-label">{{ lesson.title }}</h2>
+          {% if lc %}
+            <p>{{ lc.tagline }}</p>
+            {% if lc.exercises and lc.exercises.length %}
+              {% exercise lc.exercises[0] %}
+            {% endif %}
+          {% endif %}
+          <p><a href="/lessons/{{ lesson.slug }}/">Open the full lesson →</a></p>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </article>
+</div>

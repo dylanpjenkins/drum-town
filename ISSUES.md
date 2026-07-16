@@ -1,2 +1,2 @@
-1. Need images for the Get Started section
+1. Need images for the Get Started section — the `<figure class="lesson-figure">` blocks (6 in stick-grip, 2 in setup-posture, 1 in the-drum-kit) were removed from `lessonContent.js` because the referenced files under `/assets/img/getting-started/` were never created and shipped as broken images. When real photos exist, restore the figures (see git history for the original markup and alt text).
 2. Not enough instrument .wav files (i.e. need stronger sounds for accents)

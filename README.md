@@ -90,6 +90,7 @@ Note conventions:
 Rests in the `feet` (or any) voice exist purely to position the next note at the correct beat — they are **not drawn** unless you set `visible: true`. The snare in the upper voice already conveys what's happening on those beats; a visible rest glyph would be redundant clutter. Use `visible: true` only when the rest is the *content* of the lesson (teaching silence, space, anticipation).
 
 Optional spec fields:
+- `expectedBeats: 16.5` — declares the true length (in quarter-note units) of a mixed-meter phrase that a single `timeSignature` can't express; `tools/audit-lessons.js` uses it instead of the time signature. Exercises whose voices sum to an exact multiple of the bar are auto-detected as multi-bar patterns and don't need this.
 - `repeatBegin: true` / `repeatEnd: true` — adds repeat barlines (visual only; audio loops indefinitely)
 - `tuplets: [{ voice, start, length, num_notes, notes_occupied }]` — for triplets and other tuplets
 - `beamGroups: [[num, denom], ...]` — controls how 8ths and 16ths beam together
@@ -102,10 +103,14 @@ In `src/_data/curriculum.js`, add a new entry to `tracks[]` with `slug`, `title`
 ## Building for deployment
 
 ```bash
-npm run build
+SITE_URL=https://your-domain.example npm run build
 ```
 
 The `_site/` directory is a fully static site — deploy it to Netlify, Vercel, GitHub Pages, S3, or any static host. There's no server-side runtime requirement and no client-side dependencies for notation rendering.
+
+Set the `SITE_URL` environment variable (no trailing slash) for production builds — it enables canonical URLs, Open Graph URLs and images, absolute `sitemap.xml` entries, and the `robots.txt` sitemap line. Without it those tags are omitted so a local build never ships wrong absolute URLs. Per-lesson meta descriptions come from each lesson's `tagline`, and lesson pages emit schema.org `LearningResource` JSON-LD automatically.
+
+Always deploy from a fresh `npm run build` — the dev server (`npm start`) also writes `_site/` but includes the internal review dashboard under `dev/`, which production builds exclude.
 
 ## Notes on the curriculum design
 

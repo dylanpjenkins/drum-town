@@ -40,6 +40,7 @@ function effectiveTickSum(spec, voice) {
 }
 
 const beatMismatches = [];
+const multiBarPatterns = [];
 const sixNoteIn44 = [];
 const claveMatches = [];
 const gettingStartedKitPatterns = [];
@@ -49,14 +50,23 @@ const GETTING_STARTED = ['the-drum-kit', 'setup-posture', 'stick-grip', 'the-pra
 for (const [slug, lesson] of Object.entries(lc)) {
   for (const [i, ex] of (lesson.exercises || []).entries()) {
     if (!ex.timeSignature) continue;
-    const expected = beatsExpected(ex.timeSignature);
+    // Mixed-meter phrases can declare their true length via `expectedBeats`
+    // (in quarter-note units) since a single timeSignature can't express it.
+    const expected = ex.expectedBeats || beatsExpected(ex.timeSignature);
     const handsTicks = effectiveTickSum(ex, 'hands');
     const feetTicks = effectiveTickSum(ex, 'feet');
-    if (handsTicks !== null && Math.abs(handsTicks - expected) > 0.01 && (ex.hands || []).length) {
-      beatMismatches.push(`${slug}#${i} hands=${handsTicks} expected=${expected} (${ex.timeSignature})`);
-    }
-    if (feetTicks !== null && Math.abs(feetTicks - expected) > 0.01 && (ex.feet || []).length) {
-      beatMismatches.push(`${slug}#${i} feet=${feetTicks} expected=${expected} (${ex.timeSignature})`);
+    // A voice that sums to an exact multiple of the bar length is a
+    // deliberate multi-bar pattern (two-bar phrases, clave, etc.), not a bug.
+    const isMultiBar = ticks =>
+      ticks > expected && Math.abs(ticks / expected - Math.round(ticks / expected)) < 0.01;
+    for (const [voice, ticks] of [['hands', handsTicks], ['feet', feetTicks]]) {
+      if (ticks === null || !(ex[voice] || []).length) continue;
+      if (Math.abs(ticks - expected) <= 0.01) continue;
+      if (isMultiBar(ticks)) {
+        multiBarPatterns.push(`${slug}#${i} ${voice}=${ticks} (${Math.round(ticks / expected)} bars of ${ex.timeSignature})`);
+      } else {
+        beatMismatches.push(`${slug}#${i} ${voice}=${ticks} expected=${expected} (${ex.timeSignature})`);
+      }
     }
     // Six-note rudiment in 4/4 — likely should be 6/8 or sextuplets
     if (ex.timeSignature === '4/4' && /paradiddle-diddle|swiss-army|double-paradiddle|six-stroke/.test(slug)) {
@@ -84,6 +94,10 @@ for (const [slug, lesson] of Object.entries(lc)) {
 console.log('=== BEAT-COUNT MISMATCHES (real bugs) ===');
 beatMismatches.forEach(s => console.log('  ' + s));
 console.log('Total:', beatMismatches.length);
+console.log();
+console.log('=== MULTI-BAR PATTERNS (informational, not bugs) ===');
+multiBarPatterns.forEach(s => console.log('  ' + s));
+console.log('Total:', multiBarPatterns.length);
 console.log();
 console.log('=== 6-NOTE-RUDIMENT-LIKE EXERCISES IN 4/4 (should likely be 6/8 or sextuplets) ===');
 sixNoteIn44.forEach(s => console.log('  ' + s));

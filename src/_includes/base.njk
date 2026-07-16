@@ -3,8 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ title or 'Drum Town' }} — Drum Town</title>
-  <meta name="description" content="{{ description or 'A drum curriculum with notated exercises across genres, from foundational technique to mastery topics.' }}" />
+  <title>{% if title %}{{ title }} — Drum Town{% else %}Drum Town — Free Drum Lessons with Real Notation{% endif %}</title>
+  <meta name="description" content="{{ description or site.description }}" />
+  {%- if site.url %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+  {%- endif %}
+  <meta property="og:site_name" content="Drum Town" />
+  <meta property="og:type" content="{{ ogType or 'website' }}" />
+  <meta property="og:title" content="{% if title %}{{ title }} — Drum Town{% else %}Drum Town — Free Drum Lessons with Real Notation{% endif %}" />
+  <meta property="og:description" content="{{ description or site.description }}" />
+  {%- if site.url %}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}/assets/img/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  {%- else %}
+  <meta name="twitter:card" content="summary" />
+  {%- endif %}
   <link rel="stylesheet" href="/assets/css/style.css" />
   <!-- PostHog analytics -->
   <script>
@@ -25,6 +39,7 @@
       <a href="/#foundations">Foundations</a>
       <a href="/#tracks">Genres</a>
       <a href="/#mastery">Other Topics</a>
+      <a href="/rudiments/">Rudiments</a>
     </nav>
   </div>
 </header>
@@ -32,7 +47,8 @@
 {{ content | safe }}
 
 <footer class="site-footer">
-  Notation rendered with VexFlow at build time
+  <a href="/">Curriculum</a> · <a href="/rudiments/">Rudiments</a> · <a href="/metronome/">Metronome</a> · <a href="https://github.com/dylanpjenkins/drum-town">GitHub</a>
+  <br />Notation rendered with VexFlow at build time
 </footer>
 
 <aside class="metronome" id="site-metronome" aria-label="Metronome">
