@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 16 · BL-022 chunk 1/6 [content] 10 thin lessons expanded with practice-method + failure-mode sections — lessonsThinProse 53→43, lessonsNoSubheadings 68→58
 - 2026-08-04 · iter 15 · BL-015 [ui] all font sizes in rem — user font-size preferences finally respected; css.pxFontSizes 79→0 (pixel-identical at default settings)
 - 2026-08-04 · iter 14 · BL-005 [quality] npm run clean is cross-platform (node fs.rmSync) — verified on PowerShell, idempotent
 - 2026-08-04 · iter 13 · BL-021 [content] gear-basics + tuning-basics get real exercises (pad strokes; strike-and-listen tuning drills) — lessonsZeroExercises 2→0; the homepage's "every lesson is playable" promise is finally true

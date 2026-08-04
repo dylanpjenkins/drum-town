@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 15,
-    "next_dimension": "content",
+    "iteration": 16,
+    "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -305,8 +305,8 @@
       "acceptance": "per chunk of <=10 lessons: expand to style-guide depth (why it matters, how to practice it, common failure modes) with proper h2 subheads; technical accuracy preserved; content.lessonsUnderThreeParagraphs and content.lessonsNoSubheadings fall each chunk",
       "status": "ready",
       "attempts": 0,
-      "chunk": { "done": 0, "total": 6, "size": 10 },
-      "log": []
+      "chunk": { "done": 1, "total": 6, "size": 10 },
+      "log": ["iter 16 · chunk 1/6 · Expanded first-beat-kicks, first-beat-color, counting-eighths, counting-sixteenths, single-stroke-roll, double-stroke-roll, basic-coordination, warm-ups, rock-eighth-grooves, jazz-ride-pattern. Each gained a descriptive h2 seam + practice-method and failure-mode paragraphs grounded in its exercises (recording drills, weak-hand leads, rebound mechanics, swing-ratio ear training). lessonsThinProse 53→43, lessonsNoSubheadings 68→58."]
     },
     {
       "id": "BL-023",

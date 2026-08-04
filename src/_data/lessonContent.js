@@ -195,6 +195,9 @@ module.exports = {
     bodyHtml: `
       <p>The snare on 2 and 4 is non-negotiable — change it and the genre changes. But the bass drum is where rock and pop drummers express themselves. These five variations are the most common kick patterns in popular music, and each is a single small change from the basic backbeat.</p>
       <p>Practice them in order. Each one isolates one new variable, so you can hear what changed. Hi-hat on 8ths and snare on 2 and 4 stay constant throughout — only the kick moves.</p>
+      <h2 class="section-label">Where It Goes Wrong</h2>
+      <p>The classic failure is the kick dragging the hands with it. When the foot plays the "&amp;" of 3, the hi-hat hesitates for a split second, and the whole groove hiccups. If you hear that, slow down and count the 16th grid out loud (<em>1 e &amp; a</em>) so the kick has an exact address instead of a vague "somewhere after 3." The other trap is pulling anticipated kicks toward the nearest beat; recording ten seconds of playing and listening back exposes this instantly.</p>
+      <p>Once all five are stable, shuffle them. Play one bar of each in a random order without stopping. Songs change kick patterns between sections, and the shuffle drill is how you rehearse that move before a song asks for it.</p>
     `,
     exercises: [
       {
@@ -355,6 +358,9 @@ module.exports = {
     bodyHtml: `
       <p>The basic backbeat is the foundation; this lesson is what colors it in. An open hi-hat on the right 8th note, a soft snare just before beat 1 of the next bar, the backbeat moved to beat 3 — these are the gestures that turn a generic groove into a real drum part.</p>
       <p>Layered on top of the previous lesson's kick variations, they're the entire vocabulary of the working pop drummer. The final exercise here combines a color move with a kick variation — that's how musical drumming actually works.</p>
+      <h2 class="section-label">Playing It Musically</h2>
+      <p>Color gestures sit <em>under</em> the backbeat, not on top of it. The open hat should breathe, then close cleanly on beat 1; if it rings into the next bar, you closed late. The snare pickup on the "&amp; of 4" is a whisper, maybe half the volume of the real backbeat, and the most common mistake is rushing it because your ear wants to arrive at beat 1 early. Let the click own beat 1 and place the pickup just behind your intention.</p>
+      <p>Test each gesture inside a song, not just against the click. Put on any mid-tempo pop track, play the plain backbeat for eight bars, then add one color move per chorus. If the gesture makes you lose the tempo, it isn't yours yet; drop back to the exercise loop for another two minutes.</p>
     `,
     exercises: [
       {
@@ -483,6 +489,9 @@ module.exports = {
     bodyHtml: `
       <p>A quarter note is one beat. Cut it in half and you have two <strong>eighth notes</strong>, counted "<em>1 &amp;</em>" — the number on the beat, the ampersand on the upbeat. Eighth notes are the first thing you really subdivide, and they unlock most of the grooves you'll meet in the first year.</p>
       <p>Each exercise below stays on the snare so you can focus entirely on the counting. Say the count out loud — <em>literally</em> out loud. Internal counting comes later; right now your mouth is part of your timing.</p>
+      <h2 class="section-label">How to Practice the Count</h2>
+      <p>Set the metronome to quarter notes and make your voice louder than the drum. The click marks the numbers; your "&amp;" has to land exactly halfway between clicks with no help. When a rest lands on the beat (Ex 4), keep counting through it at full volume. Silence in the hands never means silence in the count.</p>
+      <p>Two failure signs to listen for: the "&amp;" drifting late toward the next number, and the count going quiet exactly when the rhythm gets hard. Both mean the same thing, so slow the tempo until voice and hands agree, then bring it back up one notch at a time.</p>
     `,
     exercises: [
       {
@@ -570,6 +579,9 @@ module.exports = {
     bodyHtml: `
       <p>Cut an eighth in half and you get a <strong>sixteenth note</strong>. The standard count for a beat full of sixteenths is <em>"1 e &amp; a"</em> — one syllable per sixteenth, evenly spaced. The <em>e</em> and the <em>a</em> are the two new pulses that didn't exist when you were just counting eighths.</p>
       <p>Sixteenth notes are where funk, R&amp;B, and most modern drumming live. Even when not every sixteenth is played, the <em>grid</em> is what your time is locked to.</p>
+      <h2 class="section-label">Making the e and a Real</h2>
+      <p>At first the <em>e</em> and <em>a</em> are just sounds your mouth makes; the goal is for each to become a distinct place you can aim a stroke at. A good drill on top of the exercises: play straight 16ths and accent only the <em>e</em> for a bar, then only the <em>a</em>. If the accents wander, the positions aren't real yet — drop to ♩=60 and rebuild.</p>
+      <p>The tell-tale failure is smearing: <em>e-&amp;-a</em> blurring into a fast triple instead of three even positions. Smearing means the tempo is ahead of your counting, never the reverse. Read Ex 4 by counting it, not by memorizing its shape; the ability to place a note on any syllable of "<em>1 e &amp; a</em>" on demand is the whole skill.</p>
     `,
     exercises: [
       {
@@ -676,6 +688,9 @@ module.exports = {
     bodyHtml: `
       <p>The <strong>single stroke roll</strong> is just <em>R L R L R L R L</em> — alternating, evenly spaced. There's nothing easier to describe and almost nothing harder to play <em>perfectly even</em>. Two key ideas: every stroke at the same volume, and your hands at exactly the same height.</p>
       <p>Build speed by adding density (more notes per beat), not by rushing the hands. Quarter → eighth → sixteenth, each at the same tempo. Your hands learn the motion at the slow density, then carry it into the fast one.</p>
+      <h2 class="section-label">The Weak-Hand Problem</h2>
+      <p>Record ten seconds of your 16th-note singles and listen with your eyes closed. Almost everyone hears the same thing: the dominant hand slightly louder, the weak hand slightly lower in stick height, and a faint gallop where evenness should be. The fix is boring and effective — lead with the weak hand for a full practice block, and watch the stick heights in a mirror until they match.</p>
+      <p>Two minutes of truly even singles at ♩=80 beats twenty minutes of fast, lumpy ones. Speed comes from evenness, because an even roll has no hitches for tension to hide in. When the accented exercise feels effortless, that's your cue to raise the tempo, and not before.</p>
     `,
     exercises: [
       {
@@ -760,6 +775,9 @@ module.exports = {
     bodyHtml: `
       <p>The <strong>double stroke roll</strong> is <em>R R L L R R L L</em> — two strokes per hand before switching. The trick: both notes within a hand should be <em>equal</em>, not loud-soft (a "diddle"). Use a controlled rebound rather than two separate full strokes.</p>
       <p>Most beginners can play a clean RR LL slowly, but it falls apart when sped up — the second note of each pair becomes weaker. The exercises below use accents on the first of each pair to expose this weakness, then on every other pair to even it back out.</p>
+      <h2 class="section-label">Rebound, Not Two Throws</h2>
+      <p>Slow doubles are two deliberate wrist strokes; fast doubles are one throw plus a controlled bounce, with the fingers squeezing the second note up to full volume. Practice both mechanics separately: open strokes at ♩=60 where each note is its own decision, then bounce strokes at a pad-friendly tempo where you let the stick fall and catch the rebound. The transition zone between the two feels awkward for everyone, so pass through it patiently instead of avoiding it.</p>
+      <p>Watch for the press: burying the stick into the head chokes the rebound and the second note dies. If your RR sounds like "R-r", loosen the grip until the stick can breathe. On a pillow-soft surface doubles get harder and more honest; a minute a day there pays off fast.</p>
     `,
     exercises: [
       {
@@ -845,6 +863,9 @@ module.exports = {
     bodyHtml: `
       <p>The basic backbeat already has your hands and one foot doing different things. <em>Basic coordination</em> generalizes that — the same hi-hat pattern in your hands, with the kick drum landing on every possible position underneath. Each variation is its own coordination puzzle.</p>
       <p>Order matters. Easy first (kick on every beat), harder later (kick on the offbeats only). Don't skip ahead — the muscle memory you build on the easy ones is what lets you play the hard ones.</p>
+      <h2 class="section-label">When the Foot Breaks the Hands</h2>
+      <p>Watch for the stutter: hands running smoothly until the exact beat the foot enters, then a tiny hesitation. That beat is your practice target. Isolate it by playing just that one beat of the pattern (hand stroke plus kick together), freeze, reset, and repeat ten times before rejoining the full bar. Ten clean repetitions of the hard beat teach more than fifty loops that limp through it.</p>
+      <p>It also helps to sing the kick pattern before playing it: "<em>boom, rest, boom, rest</em>" against the click. A pattern your voice can place, your foot can usually find. If the leg burns on Ex 4, your heel is doing all the work — let the whole leg rock and the pedal rebound help you.</p>
     `,
     exercises: [
       {
@@ -952,6 +973,9 @@ module.exports = {
     bodyHtml: `
       <p>Two minutes of focused warm-ups before a practice session does more for your playing than ten minutes of cold attempts. The exercises below are a quick vocabulary tour: singles, doubles, a sticking switch, paradiddles, triplets, and a density swell. Each one wakes up a different motor pattern.</p>
       <p>Run them in order, all at the same tempo you can play <em>cleanly</em> today — slow if you're tight, faster as the hands loosen. Volume should be even between hands; stick heights should match. If anything sounds rough, drop the BPM and play it twice before moving on.</p>
+      <h2 class="section-label">The Swell as a Daily Thermometer</h2>
+      <p>Exercise 6 doubles as a diagnostic. The density swell climbs from quarters to 16ths and back; the moment the 16ths turn rough is today's clean ceiling, and it moves day to day. Note the tempo where it happened. Practicing at or just below that ceiling builds speed; practicing far above it builds tension and bad habits with equal efficiency.</p>
+      <p>Resist the urge to warm up at performance tempo. Cold hands at full speed recruit the forearms, and forearm tension is the thing a warm-up exists to prevent. Start embarrassingly slow, listen for evenness, and let the tempo rise on its own — most days it takes about two minutes.</p>
     `,
     exercises: [
       {
@@ -1077,6 +1101,9 @@ module.exports = {
     bodyHtml: `
       <p>Rock is mostly the foundational backbeat with attitude. The exercises here are the four or five 8th-note grooves you'll meet in your first hundred rock songs — driving 8ths, anticipated kicks, doubled kick on the downbeat, the open-hat anthem feel. Tempos sit around <em>♩=100</em>, faster than the foundation lessons; the same patterns at this speed feel meaningfully more aggressive.</p>
       <p>If something here feels familiar, it should — these are the foundations lessons re-encountered in their natural habitat. The point isn't <em>new</em> material; the point is recognizing the foundation patterns inside actual rock vocabulary.</p>
+      <h2 class="section-label">Conviction Is a Dynamic</h2>
+      <p>What separates a rock groove from a polite exercise is the dynamic shape: backbeat loud and fearless, hi-hat firm but underneath it, kick solid without flamming against the snare. Tentative playing at ♩=100 sounds worse than confident playing at ♩=88, so pick the tempo where you can commit. A groove played with conviction and a small mistake beats a careful groove every time.</p>
+      <p>Then take these four grooves to real songs. Any classic rock playlist gives you dozens of matches; play along and notice how the drummer leans on the "&amp;" of 3 or opens the hat exactly where you've been practicing it. Watch for tension creep as tempos rise — shoulders up around your ears means back off ten BPM.</p>
     `,
     exercises: [
       {
@@ -1207,6 +1234,9 @@ module.exports = {
     bodyHtml: `
       <p>Where rock has the backbeat, jazz has the <strong>ride pattern</strong>: a four-beat phrase on the ride cymbal that goes "<em>ding · ding-a · ding · ding-a</em>" — quarter, two swung 8ths, quarter, two swung 8ths. The 8ths are <em>swung</em> (the second of each pair plays late, like the third note of a triplet). This is the heartbeat of every jazz groove.</p>
       <p>Build it the same way you'd build any complex coordination skill: top-down. Quarters first. Add the skip-note. Add the hi-hat foot on 2 and 4. Add the bass drum on 1. Each layer is a new limb that has to know its job.</p>
+      <h2 class="section-label">Getting the Swing Right</h2>
+      <p>At medium tempos the skip-note lands like the third note of a triplet: "<em>ding-a</em>" is a triplet with the middle note missing. Two failures sit on either side of it. Play the 8ths straight (50/50) and it stops being jazz; swing them too hard and it turns into a stiff shuffle. The ratio also breathes with tempo — swing tightens toward even 8ths as things get fast — so trust your ear over any formula.</p>
+      <p>The ear is trained by listening, and there's no substitute: put on a classic ride-driven record and play along until your "ding-a" disappears into the drummer's. Keep the skip-note lighter than the quarters; it decorates the pulse, it doesn't compete with it. And check the hi-hat foot — eager left feet love to sneak ahead of 2 and 4.</p>
     `,
     exercises: [
       {
