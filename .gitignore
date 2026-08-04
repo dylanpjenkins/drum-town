@@ -5,5 +5,11 @@ _site/
 *.log
 tools/lesson-batches/
 
+# Secrets — never commit; token is read at build time by src/_data/env.js
+.env
+
+# Quarantine archives (local safety snapshots)
+tools/quarantine/*.zip
+
 # Dev tooling — review dashboard state (see tools/review-server.js)
 tools/review-status.json

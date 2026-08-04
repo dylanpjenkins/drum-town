@@ -1,0 +1,408 @@
+{
+  "meta": {
+    "iteration": 0,
+    "next_dimension": "quality",
+    "dimensions": ["quality", "ui", "content"],
+    "next_id": 32,
+    "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
+  },
+  "items": [
+    {
+      "id": "BL-001",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "Player maps only 4 of 11 drum keys — 2,076 notated hits are silent",
+      "evidence": [
+        "src/assets/js/player.js:15-20 KEY_TO_DRUM has hat/snare/kick/foot only",
+        "Unmapped: f/5/x2 (1025 hits), a/4 (331), e/5/x2 (278), b/5/x2 (200), e/5 (138), d/5 (96), a/5/x2 (8)",
+        "player.js:257 `if (!drum) continue;` silently skips; ride.wav fetched (player.js:145) but wired to no voice"
+      ],
+      "acceptance": "node tools/checks/check-player-keys.js exits 0; every distinct key in lessonContent hands/feet maps to a sounding voice in both kits; ride.wav used for ride keys; Needs-ear entry added",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-002",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "Multi-bar exercises play overlapping copies of themselves; playhead desyncs",
+      "evidence": [
+        "player.js:237 barDurationSecs() derives length from timeSignature alone (one bar); player.js:373 schedules whole spec then advances scheduledUntil by one bar",
+        "154 of 888 exercises span >1 bar (111 two-bar, 30 four-bar, 8 eight-bar, 3 three-bar, 1 twelve-bar); 47 declare bars: N which player never reads",
+        "tools/notation-renderer.js already detects bar count correctly (_detectBarCount) — port that math",
+        "player.js:387 playhead sweeps full SVG width per single barDuration → 2x speed on 2-bar staves"
+      ],
+      "acceptance": "node tools/checks/check-multibar-playback.js exits 0 (shared pure bar-math module used by player + check); loop period equals full spec length; playhead sweeps full pattern in full duration; Needs-ear entry added",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-003",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "Dead-code sweep: previewExercise path, deprecated lesson.njk, 'ready' badges, generalistPath, stale comments",
+      "evidence": [
+        "previewExercise defined on 0/217 lessons → homepage Up-Next preview card can never render (src/index.njk preview-card block, lessonsData.js:68 path, ~9 .preview-card CSS rules)",
+        "src/_includes/lesson.njk deprecated per README",
+        "status:'ready' badge rendered on genre cards / Where-Next while all 217 lessons are ready — pure noise; homepage states '217 of 217 lessons ready'",
+        "curriculum.generalistPath rendered by no template (documented in README) — remove render-side references or leave data with a NOTE, do not build the feature",
+        ".eleventy.js:5 comment says setBrowserSyncConfig but code uses setServerOptions; .gitignore:8 references nonexistent tools/review-server.js"
+      ],
+      "acceptance": "hygiene.deadFeatureRefs metric drops; build green; no template references removed features; README updated where it described them",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-004",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "sitemap.xml emits relative <loc> URLs when SITE_URL unset (spec violation)",
+      "evidence": [
+        "src/sitemap.njk has no {% if site.url %} guard unlike robots.njk; current _site/sitemap.xml contains <loc>/</loc>",
+        "README:111 claims absolute-URL features are omitted without SITE_URL — untrue for sitemap"
+      ],
+      "acceptance": "without SITE_URL no sitemap.xml is emitted (and robots.txt omits the Sitemap line); with SITE_URL set, sitemap has absolute URLs; dom.relativeSitemapLocs → 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-005",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "npm run clean broken on Windows (rm -rf)",
+      "evidence": ["package.json scripts.clean = 'rm -rf _site'"],
+      "acceptance": "clean script uses node fs.rmSync cross-platform; works in PowerShell",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-006",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "audit-lessons.js float noise + missing clave Total line",
+      "evidence": [
+        "tools/audit-output.txt shows hands=11.999999999999998 and 47.99999999999999",
+        "clave section prints no Total: line unlike the other four"
+      ],
+      "acceptance": "tick sums rounded to 4 decimals in output; clave Total printed; tools/audit-output.txt regenerated in same commit; no mismatch-count change",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-007",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Rudiments page is 888 KB of inline SVG in one document",
+      "evidence": ["_site/rudiments/index.html 888 KB; 40 rudiments each with full notation; no lazy loading"],
+      "acceptance": "page weight meaningfully reduced (e.g. per-family sections/pages or deferred rendering) without losing content; build green; info.pageCount change intentional and baselined",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-008",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "2.3 MB of acoustic WAVs prefetched unconditionally on every page load",
+      "evidence": ["player.js preFetchAcoustic() called at module scope; hat_open.wav 932 KB; ride.wav 712 KB; default kit is electronic so most visitors never use them"],
+      "acceptance": "acoustic samples fetch lazily (first acoustic-kit selection or first play with acoustic kit); no fetch on page load with electronic kit; playback still works",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-009",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "No favicon",
+      "evidence": ["base.njk has no favicon link; browsers 404 /favicon.ico"],
+      "acceptance": "inline SVG favicon (data URI or small committed file) linked in base.njk; no external assets",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-031",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "rudiments.js specs are unaudited (audit tools only read lessonContent.js)",
+      "evidence": ["40 rudiments in src/_data/rudiments.js each carry spec + card notation objects; audit-lessons.js requires only lessonContent.js"],
+      "acceptance": "audit-site.js (or a check script) applies the beat-count math to rudiments.js specs; any real mismatches found become new backlog items",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-010",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "No <main> landmark, no skip link, exercise titles are divs (heading semantics)",
+      "evidence": [
+        "0 <main> across 228 pages; content precedes sidebar expectations; no skip-to-content link",
+        ".eleventy.js exercise shortcode emits <div class=\"exercise-title\"> — 888 unnavigable sections",
+        "149/217 lessons inject their own h2 inside bodyHtml at same level as page-section h2s; h3 'Listen for it' floats between h2s"
+      ],
+      "acceptance": "base.njk wraps content in <main id=\"main\">; first focusable element is <a class=\"skip-link\" href=\"#main\">; exercise titles become h3; page templates keep a clean h1>h2>h3 outline; node tools/checks/dom-smoke.js exits 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-011",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "All 888 notation SVGs have no role/aria-label — core content invisible to screen readers",
+      "evidence": ["tools/notation-renderer.js emits no a11y attributes on the SVG root; exercise shortcode has the title available for labeling"],
+      "acceptance": "every rendered notation SVG carries role=\"img\" and a meaningful aria-label (exercise title + meta); dom.svgsMissingAria → 0; dom-smoke SVG assertion passes",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-012",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Focus indicators destroyed: outline:none x4, sliders get no replacement, no :focus-visible anywhere",
+      "evidence": ["style.css:728, 1089, 1099, 1145 set outline:none; the two range sliders (1099) have no replacement focus style"],
+      "acceptance": "visible :focus-visible styles for all interactive elements using existing tokens; css.outlineNone → 0; css.missingFocusVisible → 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-013",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Docked metronome has zero responsive handling — covers ~45% of a phone viewport, no dismiss",
+      "evidence": ["style.css:1001 .metronome fixed bottom-right 168px wide, no media query touches it; overlaps content on 375px screens"],
+      "acceptance": "metronome collapses to a small toggle (or docks compactly) below ~720px with an expand/collapse control, keyboard accessible; desktop unchanged; Needs-eyes entry added",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-014",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Every notation stave forces horizontal scroll on phones (min-width: 520px)",
+      "evidence": ["style.css:774 .notation svg { min-width: 520px } + overflow-x:auto; even 4-note exercises pan on 375px; playhead scrolls out of view"],
+      "acceptance": "short single-bar staves fit a 375px viewport without panning; long staves keep a scroll container; playhead remains visible (container follows or width fits); Needs-eyes entry added",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-015",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "All font sizes in px (84 declarations) — user font-size preference ignored",
+      "evidence": ["style.css html{font-size:16px} + 84 px font-size declarations, 0 rem/em"],
+      "acceptance": "font sizes converted to rem (root uses percentage or none); visual parity spot-checked on 4 page types; css.pxFontSizes → 0; Needs-eyes entry",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-016",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Dark-mode groundwork: notation is a hardcoded white/black island; no prefers-color-scheme",
+      "evidence": [".notation{background:white} style.css:761 not tokenized; VexFlow emits fill=black stroke=black; 0 prefers-color-scheme rules"],
+      "acceptance": "phase 1 only: notation colors routed through tokens (SVG uses currentColor or CSS-overridable fills), .notation background tokenized; site still light-only but dark mode is no longer blocked; css.missingDarkScheme may stay 1 until a later item",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-017",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "No prefers-reduced-motion handling",
+      "evidence": ["@keyframes play-pulse, transitions, metronome dot scaling all unconditional"],
+      "acceptance": "a prefers-reduced-motion block disables/reduces animations; css.missingReducedMotion → 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-018",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Paradiddle lesson factual error: 'Eight 16th notes per bar'",
+      "evidence": ["lessonContent.js paradiddle bodyHtml: 'Eight 16th notes per bar, sticking R L R R · L R L L' — a 4/4 bar of 16ths is sixteen notes (two paradiddles per half bar... the exercise plays 16)"],
+      "acceptance": "sentence corrected to sixteen 16th notes per bar (four paradiddle groups) consistent with the notated exercise; build green",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-019",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Mixed British/American spelling across lessonContent.js (58 British forms)",
+      "evidence": ["practise x49, colour x17, centre x13, internalise x18, plus emphasises/realise/organising/favours vs 122 American forms; style ledger says American"],
+      "acceptance": "fixed-word-list pass converts all British forms to American across lessonContent.js (and rudiments.js if present there); content.britishSpellings → 0; gates green; 3 affected slugs spot-read",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-020",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Author the content style guide (prerequisite for all rewrite/expansion chunks)",
+      "evidence": ["Formulaic single voice: 3,507 em-dashes, 'This is the' x148, 55 bodies open with 'The', identical 2-para shape everywhere; full-rewrite license granted but chunked rewrites need one voice to converge on"],
+      "acceptance": "docs/content-style-guide.md exists covering: voice + register, lesson structure (lede/why/how/practice framing), paragraph + subheading expectations by lesson size, exercise title + meta conventions, listening-section format, em-dash budget, American spelling, focus-chip controlled vocabulary proposal (<=24 values); CLAUDE.md style ledger links to it",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-021",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Two lessons have zero exercises: gear-basics, tuning-basics",
+      "evidence": ["Homepage promises 'Every lesson has real notation you can play'; these two have none"],
+      "acceptance": "each gets appropriate interactive material (e.g. tuning-basics: tension-pattern diagram exercises or listening drills; gear-basics: at minimum a practice-pad exercise) or an honest structural alternative consistent with the style guide; content.lessonsZeroExercises → 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-022",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Thin-content long tail: ~53 lessons with <=2 paragraphs of prose",
+      "evidence": ["bodyHtml floor ~410 chars: fusion-odd-meters, funk-ghost-notes, first-beat-kicks, counting-sixteenths, basic-coordination, single-stroke-roll, counting-eighths, double-stroke-roll, first-beat-color, fusion-six-stroke-roll + ~43 more; 68 lessons have no subheadings"],
+      "acceptance": "per chunk of <=10 lessons: expand to style-guide depth (why it matters, how to practice it, common failure modes) with proper h2 subheads; technical accuracy preserved; content.lessonsUnderThreeParagraphs and content.lessonsNoSubheadings fall each chunk",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": { "done": 0, "total": 6, "size": 10 },
+      "log": []
+    },
+    {
+      "id": "BL-023",
+      "dimension": "content",
+      "priority": 2,
+      "title": "77 of 217 lessons have no listening section",
+      "evidence": ["Nearly every Foundations lesson, all metal-*, most rock-* lack listening; the section is inconsistent-presence, not optional; existing 417 picks skew repetitive (Gadd Aja x6)"],
+      "acceptance": "per chunk of ~13 lessons: add 2-3 genuinely relevant listening picks (artist, work, note) per style guide; picks factually correct and varied (respect BL-029 diversity); content.lessonsMissingListening falls each chunk",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": { "done": 0, "total": 6, "size": 13 },
+      "log": []
+    },
+    {
+      "id": "BL-024",
+      "dimension": "content",
+      "priority": 2,
+      "title": "focus metadata is uncontrolled free text: 144 distinct values across 217 lessons",
+      "evidence": ["Rendered as visible 'Focus · X' chip; casing collisions, order collisions, one-offs like 'Speculative / Hybrid / Frontier'"],
+      "acceptance": "chunk 1: controlled vocabulary (<=24 values) defined in style guide + mapping table for all 217; chunks 2-3: apply mapping across lessonContent.js; meta.focusDistinctValues <= 24 when complete",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": { "done": 0, "total": 3, "size": 1 },
+      "log": []
+    },
+    {
+      "id": "BL-025",
+      "dimension": "content",
+      "priority": 3,
+      "title": "duration metadata: 13 mixed formats",
+      "evidence": ["'20 min' vs '20–25 min' vs hyphen variants; isoDuration filter takes only first number"],
+      "acceptance": "all durations normalized to `NN min` / `NN–NN min` (en dash); meta.durationFormats <= 2",
+      "status": "done",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Closed at bootstrap: audit-site shows only 2 duration shapes ('N min', 'N–N min'), both style-ledger-valid. The 13 'values' were distinct numbers, not formats. No work needed."]
+    },
+    {
+      "id": "BL-026",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Exercise title numbering uses 3+ schemes",
+      "evidence": ["822 use 'N — Title', 10 use '1A — Title', 17 ad-hoc ('Build-Up 1 —', 'Round 1 —', 'Pattern A —', 'Tour of the Kit —'); paradiddle uses 1A while sibling rudiments use plain N"],
+      "acceptance": "single convention documented in style guide (descriptive prefixes may survive as the documented exception) and applied; meta.titleNumberingSchemes <= 2",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-027",
+      "dimension": "content",
+      "priority": 3,
+      "title": "8 exercise metas advertise tempo ranges the player can't honor",
+      "evidence": ["e.g. paradiddle#0 meta '♩ = 70 → 100' with hard-coded bpm:80; metal-tech-death#1 meta says 4/4 → 7/8 but timeSignature renders 7/8 only"],
+      "acceptance": "metas reworded so the stated playback tempo equals bpm (practice-range guidance moves to tip text); meta.tempoRangeMetaMismatches → 0",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-028",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Voice-rewrite pass: break the formulaic single voice (full rewrite license, style-guide-first)",
+      "evidence": ["3,507 em-dashes (avg 4.8/lesson), 'This is the' x148, 'That's the' x70, 55 bodies open with 'The', identical structural shape everywhere"],
+      "acceptance": "REQUIRES BL-020 done. Per chunk of <=10 lessons: rewrite prose to style-guide voice with varied openings and structure fitted to the lesson's actual subject; technical content preserved or improved; em-dash budget respected; gates green; 3 slugs spot-read per chunk",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": { "done": 0, "total": 22, "size": 10 },
+      "log": []
+    },
+    {
+      "id": "BL-029",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Listening picks over-repeat a small canon",
+      "evidence": ["Steve Gadd Aja x6; Weckl Master Plan, Colaiuta Ten Summoner's Tales, Porcaro Rosanna, Tony Williams Four & More, Guiliana Beat Music, ?uestlove Voodoo x4 each"],
+      "acceptance": "no single work cited in more than 3 lessons unless genuinely canonical for each (justify in log); replacements factually correct and stylistically apt; content.duplicateListeningPicks falls",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": []
+    },
+    {
+      "id": "BL-030",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Getting Started needs real photos (figures were stripped)",
+      "evidence": ["ISSUES.md item 1: lesson-figure blocks removed from stick-grip (6), setup-posture (2), the-drum-kit (1) because /assets/img/getting-started/ never existed; CSS class also dropped — restoring needs styles back too"],
+      "acceptance": "BLOCKED: needs Dylan to shoot/source photos. When available: restore figure blocks from git history, recreate .lesson-figure styles, add images with alt text",
+      "status": "blocked-human",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Seeded blocked-human from ISSUES.md item 1 — requires photos only Dylan can provide."]
+    }
+  ]
+}
