@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 11 · BL-004 [quality] sitemap is spec-valid — emitted only when SITE_URL is set (absolute URLs), omitted otherwise; dom.relativeSitemapLocs 227→0
 - 2026-08-04 · iter 10 · discovery — link scan clean (11,749 refs), no TODO/console.log, +3 polish items (BL-032..034); 12 of 26 gated metrics now at zero
 - 2026-08-04 · iter 9 · BL-020 [content] style guide authored (docs/content-style-guide.md) — 24-value focus vocabulary proposed, voice/structure/exercise/listening conventions set; unlocks all rewrite chunks
 - 2026-08-04 · iter 8 · BL-013 [ui] docked metronome is now collapsible — starts collapsed on phones (was covering ~45% of the viewport), choice persisted

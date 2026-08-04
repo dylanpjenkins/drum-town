@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 10,
-    "next_dimension": "quality",
+    "iteration": 11,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -68,10 +68,10 @@
         "README:111 claims absolute-URL features are omitted without SITE_URL — untrue for sitemap"
       ],
       "acceptance": "without SITE_URL no sitemap.xml is emitted (and robots.txt omits the Sitemap line); with SITE_URL set, sitemap has absolute URLs; dom.relativeSitemapLocs → 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 11 · 2026-08-04 · src/sitemap.11tydata.js supplies permalink: site.url ? '/sitemap.xml' : false (frontmatter can't express boolean false); robots.njk already guarded. Verified both ways on clean builds: no SITE_URL → 229 files, no sitemap; SITE_URL set → 230 files, 227 absolute <loc>s. README claim corrected. dom.relativeSitemapLocs 227→0. Side lesson: Eleventy leaves stale outputs in _site — clean builds matter for output-presence checks."]
     },
     {
       "id": "BL-005",

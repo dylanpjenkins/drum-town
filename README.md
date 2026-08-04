@@ -107,7 +107,7 @@ SITE_URL=https://your-domain.example npm run build
 
 The `_site/` directory is a fully static site — deploy it to Netlify, Vercel, GitHub Pages, S3, or any static host. There's no server-side runtime requirement and no client-side dependencies for notation rendering.
 
-Set the `SITE_URL` environment variable (no trailing slash) for production builds — it enables canonical URLs, Open Graph URLs and images, absolute `sitemap.xml` entries, and the `robots.txt` sitemap line. Without it those tags are omitted so a local build never ships wrong absolute URLs. Per-lesson meta descriptions come from each lesson's `tagline`, and lesson pages emit schema.org `LearningResource` JSON-LD automatically.
+Set the `SITE_URL` environment variable (no trailing slash) for production builds — it enables canonical URLs, Open Graph URLs and images, `sitemap.xml` (absolute entries), and the `robots.txt` sitemap line. Without it those tags are omitted and no sitemap.xml is emitted at all, so a local build never ships wrong absolute URLs. Per-lesson meta descriptions come from each lesson's `tagline`, and lesson pages emit schema.org `LearningResource` JSON-LD automatically.
 
 Always deploy from a fresh `npm run build` — the dev server (`npm start`) also writes `_site/` but includes the internal review dashboard under `dev/`, which production builds exclude.
 

@@ -15,7 +15,7 @@
     "dom.headingOrderViolations": 0,
     "dom.pagesMissingMain": 0,
     "dom.pagesMissingSkipLink": 0,
-    "dom.relativeSitemapLocs": 227,
+    "dom.relativeSitemapLocs": 0,
     "dom.svgsMissingAria": 0,
     "hygiene.deadFeatureRefs": 1,
     "info.exerciseCount": 848,
