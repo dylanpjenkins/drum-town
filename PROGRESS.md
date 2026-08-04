@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 10 · discovery — link scan clean (11,749 refs), no TODO/console.log, +3 polish items (BL-032..034); 12 of 26 gated metrics now at zero
 - 2026-08-04 · iter 9 · BL-020 [content] style guide authored (docs/content-style-guide.md) — 24-value focus vocabulary proposed, voice/structure/exercise/listening conventions set; unlocks all rewrite chunks
 - 2026-08-04 · iter 8 · BL-013 [ui] docked metronome is now collapsible — starts collapsed on phones (was covering ~45% of the viewport), choice persisted
 - 2026-08-04 · iter 7 · BL-003 [quality] dead-code sweep — never-rendering preview card removed end-to-end, deprecated lesson.njk deleted, "ready" badge noise gone, hygiene.deadFeatureRefs 4→1 (generalistPath kept as noted data)
@@ -16,6 +17,8 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 - 2026-08-04 · iter 0 · bootstrap — loop scaffolding, audit-site metrics engine + baseline, backlog seeded (31 items), quarantine, .env untracked
 
 ## Blocked on Dylan (the only list you need to read)
+
+- **Design checkpoint 0 is ready to run.** Type `/design-checkpoint` in a session with me present (~5 min): it builds the component previews and syncs them to a "Drum Town UI" project on claude.ai/design — the first DesignSync call needs your permission grant, which unattended ticks can't do.
 
 - **Rotate the PostHog project token.** `.env` is now untracked and the token no longer ships hardcoded in base.njk, but the old value remains in git history. Rotate it in PostHog settings, then update your local `.env`. (SEC, bootstrap)
 - **Getting Started photos** (BL-030 / ISSUES.md #1): stick-grip, setup-posture, the-drum-kit lost their figures because the photos never existed. When you have photos, the loop restores the figure blocks + styles.
@@ -37,5 +40,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 _(none)_
 
 ## Metrics snapshots
+
+**Discovery iter 10 (2026-08-04), after 9 improvement ticks.** Zeroed since bootstrap: player.silentHits 2076→0 · player.unmappedDrumKeys 7→0 · player.multiBarSpecsUnsupported 153→0 · dom.pagesMissingMain 228→0 · dom.pagesMissingSkipLink 228→0 · dom.svgsMissingAria 888→0 · css.outlineNone 4→0 · css.missingFocusVisible 1→0 · content.britishSpellings 119→0. Improved: hygiene.deadFeatureRefs 4→1 · css.pxFontSizes 84→79. **Still open**: lessonsMissingListening 77 · lessonsNoSubheadings 68 · lessonsThinProse 53 · focusDistinctValues 144 · pxFontSizes 79 · relativeSitemapLocs 227 · duplicateListeningPicks 7 · lessonsFewExercises 14 · zeroExercises 2 · tempoRangeMetaMismatches 6 · titleNumberingSchemes 5 · dark-scheme/reduced-motion groundwork. Link scan: 11,749 internal refs, all resolve.
 
 _(pasted by each discovery pass)_

@@ -1,9 +1,9 @@
 {
   "meta": {
-    "iteration": 9,
+    "iteration": 10,
     "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
-    "next_id": 32,
+    "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
   },
   "items": [
@@ -391,6 +391,42 @@
       "attempts": 0,
       "chunk": null,
       "log": []
+    },
+    {
+      "id": "BL-032",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Inline styles bypass the token system (breadcrumb re-implemented inline)",
+      "evidence": ["genres.njk:20-21 re-implements .breadcrumb as a 6-property inline style while the real class exists and is used by lessons.njk; also 404.njk:12 and lessons.njk:168"],
+      "acceptance": "inline style attributes replaced by existing/new classes in style.css; visual parity; no new raw colors outside the token block",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Added by discovery iter 10 (carried from initial exploration, was never seeded)."]
+    },
+    {
+      "id": "BL-033",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Post-sweep leftovers: is-stub ternary in sidebar, unused readyCount filter, parse-time sidebar auto-scroll",
+      "evidence": ["curriculum-sidebar.njk still branches on lesson status (all 217 ready); .eleventy.js readyCount filter no longer used by any template after BL-003; lessons.njk inline script calls getBoundingClientRect at parse time before webfonts settle — mispositioning risk"],
+      "acceptance": "sidebar ternary simplified; readyCount filter removed (grep-verified unused); sidebar auto-scroll deferred to load/rAF; build green; dom-smoke green",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Added by discovery iter 10."]
+    },
+    {
+      "id": "BL-034",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Audio housekeeping: duplicated scheduler machinery, no visibilitychange handling",
+      "evidence": ["player.js and metronome.js copy-paste SCHEDULE_AHEAD/SCHEDULE_INTERVAL_MS/getCtx/localStorage helpers; neither suspends its AudioContext when the tab is hidden"],
+      "acceptance": "shared helpers extracted (pattern-math.js precedent) or duplication consciously documented; visibilitychange suspends/resumes AudioContext without breaking scheduled playback; Needs-ear entry",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Added by discovery iter 10."]
     },
     {
       "id": "BL-030",
