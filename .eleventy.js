@@ -2,7 +2,7 @@
 const { renderPattern } = require('./tools/notation-renderer');
 
 // DEV TOOLING — review dashboard backend. Delete the next line and the
-// setBrowserSyncConfig block below to remove the dashboard.
+// setServerOptions block below to remove the dashboard.
 const { reviewMiddleware } = require('./tools/review-middleware');
 
 module.exports = function (eleventyConfig) {

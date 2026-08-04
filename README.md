@@ -18,7 +18,6 @@ drum-town/
 │   │   └── lessonContent.js  ← rich content for "ready" lessons
 │   ├── _includes/
 │   │   ├── base.njk          ← global layout (header, footer)
-│   │   └── lesson.njk        ← lesson layout (deprecated, see lessons.njk)
 │   ├── assets/
 │   │   └── css/style.css     ← global stylesheet
 │   ├── dev/
@@ -116,7 +115,7 @@ Always deploy from a fresh `npm run build` — the dev server (`npm start`) also
 
 - **Foundations** is small on purpose. The minimum required before specializing in a genre, not an exhaustive method book.
 - **Tracks** each have four levels: Beginner → Intermediate → Advanced → Expert. The progression should feel like clear vocabulary acquisition, not just escalating difficulty.
-- **Generalist Path** is a curated meta-trail across the tracks for breadth-seeking learners. Each waypoint references a lesson that already lives in a track (no duplicate content); the ordering at each level respects prerequisites across genres (e.g., rock 8ths before funk 16ths, basic clave before 6/8 Afro-Cuban). When adding a new track lesson that materially changes the canonical vocabulary at its level, consider whether the path should reference it.
+- **Generalist Path** is a curated meta-trail across the tracks for breadth-seeking learners. *(Currently data-only in `curriculum.js` — no page renders it yet.)* Each waypoint references a lesson that already lives in a track (no duplicate content); the ordering at each level respects prerequisites across genres (e.g., rock 8ths before funk 16ths, basic clave before 6/8 Afro-Cuban). When adding a new track lesson that materially changes the canonical vocabulary at its level, consider whether the path should reference it.
 - **Mastery** topics are the things every advanced drummer eventually arrives at, regardless of what genre they came from.
 - The `prerequisites` field on a lesson should list the *minimum* required knowledge to attempt it. Don't list "nice to have" — only "you'll be lost without."
 

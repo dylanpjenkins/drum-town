@@ -7,6 +7,10 @@
 // lesson that already lives in a track. It does NOT introduce new content —
 // it sequences existing track lessons so a breadth-seeking learner can pick
 // up canonical vocabulary from every genre at each difficulty level.
+//
+// NOTE: generalistPath is DATA ONLY today — no template renders it. It is
+// kept as the designed sequencing for a future /generalist/ page (tracked in
+// tools/backlog.json); do not treat its absence from the site as a bug.
 
 module.exports = {
   foundations: {

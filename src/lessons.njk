@@ -150,9 +150,8 @@ eleventyComputed:
       {% for slug in content.nextLessons %}
         {% set n = curriculum | findLesson(slug) %}
         {% if n %}
-          <a href="/lessons/{{ n.slug }}/" class="{{ 'is-ready' if n.status == 'ready' else 'is-stub' }}">
+          <a href="/lessons/{{ n.slug }}/" class="is-ready">
             <span class="lesson-row__title">{{ n.title }} →</span>
-            <span class="lesson-row__status">{{ n.status }}</span>
           </a>
         {% endif %}
       {% endfor %}

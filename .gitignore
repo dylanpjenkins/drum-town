@@ -11,5 +11,5 @@ tools/lesson-batches/
 # Quarantine archives (local safety snapshots)
 tools/quarantine/*.zip
 
-# Dev tooling — review dashboard state (see tools/review-server.js)
+# Dev tooling — review dashboard state (see tools/review-middleware.js)
 tools/review-status.json

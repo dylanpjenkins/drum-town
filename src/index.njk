@@ -12,7 +12,7 @@ layout: base.njk
     <p class="eyebrow">Drum Town</p>
     <h1>The <em>Curriculum</em></h1>
     <p class="lede">A complete drum curriculum — reading, rudiments, technique, and coordination in Foundations, then seven genre tracks from rock to jazz to hip-hop. Every lesson has real notation you can <em>play</em>: press play on any exercise to hear it, practice against the built-in metronome, and your progress is remembered between visits.</p>
-    <p class="stat">{{ curriculum | readyCount }} of {{ curriculum | lessonCount }} lessons ready</p>
+    <p class="stat">{{ curriculum | lessonCount }} lessons</p>
     <p class="hero-default__completed" id="hero-completed-msg" hidden>
       You've reached the end of the ready lessons.
       <a href="https://github.com/dylanpjenkins/drum-town/issues">What else do you want to learn? →</a>
@@ -33,25 +33,6 @@ layout: base.njk
         <a class="btn btn--ghost" data-slot="review" href="#">Review previous lesson</a>
       </div>
     </div>
-    <aside class="preview-card" data-slot="preview-card">
-      <header class="preview-card__head">
-        <span class="preview-card__label">Preview</span>
-        <span class="preview-card__pos" data-slot="position"></span>
-      </header>
-      <div class="preview-card__notation" data-slot="notation"></div>
-      <div class="preview-card__caption" data-slot="notation-label"></div>
-      <hr class="preview-card__rule" />
-      <div class="preview-card__rel">
-        <div class="preview-card__rel-item" data-slot="before-wrap" hidden>
-          <span class="preview-card__rel-label">Before this</span>
-          <em class="preview-card__rel-title" data-slot="before"></em>
-        </div>
-        <div class="preview-card__rel-item" data-slot="after-wrap" hidden>
-          <span class="preview-card__rel-label">After this</span>
-          <em class="preview-card__rel-title" data-slot="after"></em>
-        </div>
-      </div>
-    </aside>
   </section>
 
   {# ======================  UNIFIED CURRICULUM  ======================
@@ -180,8 +161,6 @@ layout: base.njk
       setText('eyebrow', lesson.eyebrow);
       setText('title', lesson.title);
       setText('tagline', lesson.tagline);
-      setText('position', 'Lesson ' + lesson.lessonNumber + ' / ' + lesson.totalLessons);
-      setText('notation-label', lesson.notationLabel || '');
 
       var openLink = hero.querySelector('[data-slot="open"]');
       if (openLink) openLink.setAttribute('href', lesson.url);
@@ -193,26 +172,6 @@ layout: base.njk
         } else {
           reviewLink.hidden = true;
         }
-      }
-
-      var card = hero.querySelector('[data-slot="preview-card"]');
-      if (lesson.hasPreview) {
-        var notation = hero.querySelector('[data-slot="notation"]');
-        if (notation) notation.innerHTML = lesson.notationSvg || '';
-      } else if (card) {
-        card.hidden = true;
-        hero.classList.add('hero-upnext--no-preview');
-      }
-
-      if (lesson.before) {
-        setText('before', lesson.before.title);
-        var bw = hero.querySelector('[data-slot="before-wrap"]');
-        if (bw) bw.hidden = false;
-      }
-      if (lesson.after) {
-        setText('after', lesson.after.title);
-        var aw = hero.querySelector('[data-slot="after-wrap"]');
-        if (aw) aw.hidden = false;
       }
 
       if (defaultHero) defaultHero.hidden = true;

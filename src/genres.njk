@@ -33,9 +33,8 @@ eleventyComputed:
 
     <div class="lesson-row">
       {% for lesson in level.lessons %}
-        <a href="/lessons/{{ lesson.slug }}/" class="{{ 'is-ready' if lesson.status == 'ready' else 'is-stub' }}">
+        <a href="/lessons/{{ lesson.slug }}/" class="is-ready">
           <span class="lesson-row__title">{{ lesson.title }}</span>
-          <span class="lesson-row__status">{{ lesson.status }}</span>
         </a>
       {% endfor %}
     </div>

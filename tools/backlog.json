@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 6,
-    "next_dimension": "quality",
+    "iteration": 7,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -53,10 +53,10 @@
         ".eleventy.js:5 comment says setBrowserSyncConfig but code uses setServerOptions; .gitignore:8 references nonexistent tools/review-server.js"
       ],
       "acceptance": "hygiene.deadFeatureRefs metric drops; build green; no template references removed features; README updated where it described them",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 7 · 2026-08-04 · Removed: preview-card aside + its JS path (index.njk), preview rendering in lessonsData.js (renderPattern import gone — homepage no longer renders notation at build), 10 dead CSS rule blocks (.preview-card*, --no-preview, .lesson-row__status, .stub-message, .curr-item.is-stub), status badges on genre + Where-Next cards, deprecated _includes/lesson.njk, homepage 'N of N ready' stat → 'N lessons'. Kept: generalistPath data with a DATA-ONLY NOTE (building the page would be a feature — forbidden unprompted); README updated both places; stale setBrowserSyncConfig/.gitignore comments corrected. hygiene.deadFeatureRefs 4→1 (the remaining 1 is the noted generalistPath)."]
     },
     {
       "id": "BL-004",

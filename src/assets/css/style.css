@@ -303,18 +303,10 @@ hr.section-rule {
 .hero-default__completed a { color: var(--accent); }
 
 .hero-upnext {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 48px;
-  align-items: start;
   padding: 32px 0 40px;
   margin-bottom: 48px;
 }
 .hero-upnext[hidden] { display: none; }
-@media (max-width: 880px) {
-  .hero-upnext { grid-template-columns: 1fr; gap: 28px; }
-}
-.hero-upnext--no-preview { grid-template-columns: 1fr; }
 .hero-upnext__main { min-width: 0; }
 .hero-upnext__eyebrow {
   font-family: var(--mono);
@@ -380,67 +372,6 @@ hr.section-rule {
   border-color: var(--rule);
 }
 .btn--ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
-
-/* Preview card on the right side of the Up Next hero. */
-.preview-card {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  padding: 20px 22px 18px;
-}
-.preview-card__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 8px;
-}
-.preview-card__notation {
-  margin: 6px -8px 4px;
-  min-height: 90px;
-  overflow: hidden;
-}
-.preview-card__notation svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-.preview-card__caption {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-top: 2px;
-}
-.preview-card__rule {
-  border: none;
-  border-top: 1px dashed var(--rule);
-  margin: 16px 0 14px;
-}
-.preview-card__rel {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-}
-.preview-card__rel-label {
-  display: block;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 4px;
-}
-.preview-card__rel-title {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 17px;
-  color: var(--ink);
-}
 
 /* =====================  GENRE OVERVIEW  ===================== */
 .genre-hero {
@@ -512,15 +443,6 @@ hr.section-rule {
   font-family: var(--display);
   font-size: 19px;
 }
-.lesson-row__status {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-.lesson-row a.is-ready .lesson-row__status { color: var(--accent); }
-
 /* =====================  LESSON LAYOUT + SIDEBAR  ===================== */
 .lesson-layout {
   display: grid;
@@ -626,7 +548,6 @@ hr.section-rule {
   background: var(--paper-2);
   text-decoration: none;
 }
-.curr-item.is-stub a { color: var(--ink-soft); }
 .curr-item.is-current a {
   background: var(--paper-2);
   color: var(--ink);
@@ -910,14 +831,6 @@ hr.section-rule {
 }
 
 /* =====================  STUB / COMING SOON  ===================== */
-.stub-message {
-  background: var(--paper);
-  border: 1px dashed var(--ochre);
-  padding: 32px;
-  text-align: center;
-  margin: 40px 0;
-}
-.stub-message h3 { color: var(--accent); margin: 0 0 8px; }
 
 /* =====================  LISTENING / FOOTER  ===================== */
 .listening {
