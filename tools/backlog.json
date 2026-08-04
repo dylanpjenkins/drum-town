@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 13,
-    "next_dimension": "quality",
+    "iteration": 14,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -80,10 +80,10 @@
       "title": "npm run clean broken on Windows (rm -rf)",
       "evidence": ["package.json scripts.clean = 'rm -rf _site'"],
       "acceptance": "clean script uses node fs.rmSync cross-platform; works in PowerShell",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 14 · 2026-08-04 · package.json clean → node fs.rmSync({recursive,force}). Verified in PowerShell: removes _site, idempotent when already absent. CLAUDE.md Windows note updated."]
     },
     {
       "id": "BL-006",

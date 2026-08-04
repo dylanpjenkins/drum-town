@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 14 · BL-005 [quality] npm run clean is cross-platform (node fs.rmSync) — verified on PowerShell, idempotent
 - 2026-08-04 · iter 13 · BL-021 [content] gear-basics + tuning-basics get real exercises (pad strokes; strike-and-listen tuning drills) — lessonsZeroExercises 2→0; the homepage's "every lesson is playable" promise is finally true
 - 2026-08-04 · iter 12 · BL-014 [ui] notation fits phones — single-bar staves size to content (427/888 no longer force horizontal pan), playhead auto-follows scrolling staves
 - 2026-08-04 · iter 11 · BL-004 [quality] sitemap is spec-valid — emitted only when SITE_URL is set (absolute URLs), omitted otherwise; dom.relativeSitemapLocs 227→0

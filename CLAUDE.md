@@ -13,7 +13,7 @@ node tools/audit-site.js --write-baseline   # regenerate tools/audit-site-baseli
 node tools/checks/<x>.js      # per-item assertion scripts, exit 0/1
 ```
 
-Windows: `npm run clean` is `rm -rf` and fails in PowerShell — use `Remove-Item -Recurse -Force _site` until BL-005 fixes it. Prefer `node -e` for data introspection. PowerShell 5.1 mangles embedded double quotes when passing arguments to native exes: keep `"` out of `git commit -m` here-strings (or use `git commit -F <file>`).
+Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` for data introspection — but write multi-line snippets to a scratchpad file; PowerShell mangles quotes in long inline scripts. PowerShell 5.1 mangles embedded double quotes when passing arguments to native exes: keep `"` out of `git commit -m` here-strings (or use `git commit -F <file>`).
 
 ## Source-of-truth rules
 
