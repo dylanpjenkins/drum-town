@@ -33177,7 +33177,44 @@ module.exports = {
 
       <h2 class="section-label">What You Don't Need Yet</h2>
       <p>A double pedal, a second crash, a china, a cowbell mount, in-ear monitors, a drum rug with your name on it. All real gear with real uses — none of it teaches you a paradiddle. When a lesson in this curriculum needs a piece of equipment, the lesson says so.</p>
-    `
+    `,
+    exercises: [
+      {
+        title: "1 — First Strokes on the Pad",
+        meta: "4/4 · quarter notes · ♩ = 70",
+        bpm: 70,
+        timeSignature: "4/4",
+        repeatBegin: true,
+        repeatEnd: true,
+        hands: [
+          { keys: ['c/5'], duration: 'q', sticking: 'R' },
+          { keys: ['c/5'], duration: 'q', sticking: 'L' },
+          { keys: ['c/5'], duration: 'q', sticking: 'R' },
+          { keys: ['c/5'], duration: 'q', sticking: 'L' }
+        ],
+        tip: "Your new sticks' first test drive. Alternate hands, one relaxed full stroke per click, and let the stick rebound off the pad instead of pressing into it. If the pair feels wildly different in each hand, roll both sticks on a flat surface and check for warps."
+      },
+      {
+        title: "2 — Even Eighths, Both Hands",
+        meta: "4/4 · 8th notes · ♩ = 70",
+        bpm: 70,
+        timeSignature: "4/4",
+        repeatBegin: true,
+        repeatEnd: true,
+        hands: [
+          { keys: ['c/5'], duration: '8', sticking: 'R' },
+          { keys: ['c/5'], duration: '8', sticking: 'L' },
+          { keys: ['c/5'], duration: '8', sticking: 'R' },
+          { keys: ['c/5'], duration: '8', sticking: 'L' },
+          { keys: ['c/5'], duration: '8', sticking: 'R' },
+          { keys: ['c/5'], duration: '8', sticking: 'L' },
+          { keys: ['c/5'], duration: '8', sticking: 'R' },
+          { keys: ['c/5'], duration: '8', sticking: 'L' }
+        ],
+        beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
+        tip: "Close your eyes and listen: does the left hand match the right in volume and tone? That evenness check is the first real ear-training on the instrument. Do it with your hearing protection in — build the habit before you're behind a loud kit."
+      }
+    ]
   },
 
   // ============================================================
@@ -33219,7 +33256,39 @@ module.exports = {
 
       <h2 class="section-label">When to Change Heads</h2>
       <p>Batter heads: when they're visibly dented, or roughly once a year for a practiced-on kit. Resonant heads: every few years. Old heads don't just sound worse — they tune worse, which makes learning this skill harder than it needs to be.</p>
-    `
+    `,
+    exercises: [
+      {
+        title: "1 — Strike and Listen",
+        meta: "4/4 · quarter notes · ♩ = 60",
+        bpm: 60,
+        timeSignature: "4/4",
+        repeatBegin: true,
+        repeatEnd: true,
+        hands: [
+          { keys: ['c/5'], duration: 'q' },
+          { rest: true, duration: 'q' },
+          { rest: true, duration: 'q' },
+          { rest: true, duration: 'q' }
+        ],
+        tip: "Use the playback as your pacing clock at the drum. One full stroke in the center on beat 1, then listen through the rest of the bar: is the decay one clean pitch, or a warble that drifts? A warble means uneven tension somewhere. Damp the head with your palm before the next hit so each strike starts fresh."
+      },
+      {
+        title: "2 — Lug-by-Lug Pitch Check",
+        meta: "4/4 · quarter notes · ♩ = 66",
+        bpm: 66,
+        timeSignature: "4/4",
+        repeatBegin: true,
+        repeatEnd: true,
+        hands: [
+          { keys: ['c/5'], duration: 'q' },
+          { rest: true, duration: 'q' },
+          { keys: ['c/5'], duration: 'q' },
+          { rest: true, duration: 'q' }
+        ],
+        tip: "Tap about an inch in from one tension rod on beat 1, then from the rod directly across the drum on beat 3 (the star pattern from the method above). Matching pitches at both spots means the head is even between them. Work pair by pair around the drum; when one spot sounds higher or lower than the rest, that's the rod to adjust."
+      }
+    ]
   },
 
   // ============================================================
