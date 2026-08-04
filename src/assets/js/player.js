@@ -12,11 +12,20 @@
 // fades the master gain to 0 (click-free) and tears down the session.
 
 (() => {
+  // Staff-position → voice map. Covers every key used by lessonContent.js
+  // (tools/checks/check-player-keys.js enforces full coverage).
   const KEY_TO_DRUM = {
-    'g/5/x2': 'hat',
+    'g/5/x2': 'hat',      // closed hi-hat (top space, x head)
     'c/5':    'snare',
     'f/4':    'kick',
-    'd/4/x2': 'foot'
+    'd/4/x2': 'foot',     // hi-hat pedal
+    'f/5/x2': 'ride',     // ride bow (top line, x head)
+    'e/5/x2': 'bell',     // cowbell / ride bell (Latin bell patterns)
+    'a/5/x2': 'crash',
+    'b/5/x2': 'china',
+    'e/5':    'tomHigh',
+    'd/5':    'tomMid',
+    'a/4':    'tomFloor'
   };
 
   const KIT_STORAGE_KEY = 'dc_kit';
@@ -133,6 +142,95 @@
     noise.start(t); noise.stop(t + 0.45);
   }
 
+  // Ride bow — short bright noise ping plus a high square partial so the
+  // attack reads as stick-on-metal rather than a hat.
+  function rideElectronic(c, t, out) {
+    const noise = c.createBufferSource();
+    noise.buffer = getNoiseBuffer(c);
+    const f = c.createBiquadFilter();
+    f.type = 'highpass';
+    f.frequency.value = 6000;
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.2, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+    noise.connect(f).connect(g).connect(out);
+    noise.start(t); noise.stop(t + 0.4);
+
+    const o = c.createOscillator();
+    const og = c.createGain();
+    o.type = 'square';
+    o.frequency.value = 4200;
+    og.gain.setValueAtTime(0.0001, t);
+    og.gain.exponentialRampToValueAtTime(0.06, t + 0.002);
+    og.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    o.connect(og).connect(out);
+    o.start(t); o.stop(t + 0.14);
+  }
+
+  // Bell (cowbell / ride bell) — two detuned square partials, fast decay.
+  function bellElectronic(c, t, out) {
+    [[835, 0.22], [1370, 0.12]].forEach(([freq, amp]) => {
+      const o = c.createOscillator();
+      const g = c.createGain();
+      o.type = 'square';
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(amp, t + 0.002);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+      o.connect(g).connect(out);
+      o.start(t); o.stop(t + 0.25);
+    });
+  }
+
+  function crashElectronic(c, t, out) {
+    const noise = c.createBufferSource();
+    noise.buffer = getNoiseBuffer(c);
+    const f = c.createBiquadFilter();
+    f.type = 'highpass';
+    f.frequency.value = 4000;
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.35, t + 0.003);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 1.1);
+    noise.connect(f).connect(g).connect(out);
+    noise.start(t); noise.stop(t + 1.2);
+  }
+
+  // China — trashier and shorter than the crash: bandpassed noise with a
+  // fast, aggressive attack.
+  function chinaElectronic(c, t, out) {
+    const noise = c.createBufferSource();
+    noise.buffer = getNoiseBuffer(c);
+    const f = c.createBiquadFilter();
+    f.type = 'bandpass';
+    f.frequency.value = 3200;
+    f.Q.value = 0.6;
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.42, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+    noise.connect(f).connect(g).connect(out);
+    noise.start(t); noise.stop(t + 0.6);
+  }
+
+  // Toms — same pitch-sweep recipe as the kick, tuned per drum.
+  function tomElectronic(c, t, out, startHz, endHz, decay) {
+    const o = c.createOscillator();
+    const g = c.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(startHz, t);
+    o.frequency.exponentialRampToValueAtTime(endHz, t + decay * 0.7);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.8, t + 0.005);
+    g.gain.exponentialRampToValueAtTime(0.001, t + decay);
+    o.connect(g).connect(out);
+    o.start(t); o.stop(t + decay + 0.05);
+  }
+  function tomHighElectronic(c, t, out)  { tomElectronic(c, t, out, 320, 200, 0.25); }
+  function tomMidElectronic(c, t, out)   { tomElectronic(c, t, out, 240, 150, 0.28); }
+  function tomFloorElectronic(c, t, out) { tomElectronic(c, t, out, 170, 100, 0.35); }
+
   // ============================================================
   // KIT: ACOUSTIC — sample-based playback
   // ============================================================
@@ -180,11 +278,12 @@
     return acousticDecodePromise;
   }
 
-  function playAcousticSample(name, c, t, out, gainScale) {
+  function playAcousticSample(name, c, t, out, gainScale, rate) {
     const buf = acousticBuffers[name];
     if (!buf) return;
     const src = c.createBufferSource();
     src.buffer = buf;
+    if (rate != null && rate !== 1) src.playbackRate.value = rate;
     if (gainScale != null && gainScale !== 1) {
       const g = c.createGain();
       g.gain.value = gainScale;
@@ -201,6 +300,17 @@
   function openHatAcoustic(c, t, out) { playAcousticSample('openHat', c, t, out); }
   // No dedicated foot sample yet — fall back to a quieter closed hat.
   function footAcoustic(c, t, out)    { playAcousticSample('hat',     c, t, out, 0.55); }
+  function rideAcoustic(c, t, out)    { playAcousticSample('ride',    c, t, out); }
+  // No bell/crash/china samples yet (see ISSUES.md #2) — approximate from
+  // what we have: pitched-up ride reads as a bell strike, and the open-hat
+  // wash stands in for crash/china at shifted playback rates.
+  function bellAcoustic(c, t, out)    { playAcousticSample('ride',    c, t, out, 1.1, 1.4); }
+  function crashAcoustic(c, t, out)   { playAcousticSample('openHat', c, t, out, 1.15, 0.85); }
+  function chinaAcoustic(c, t, out)   { playAcousticSample('openHat', c, t, out, 1.2, 1.15); }
+  // No tom samples either — use the synthesized toms in the acoustic kit.
+  function tomHighAcoustic(c, t, out)  { tomHighElectronic(c, t, out); }
+  function tomMidAcoustic(c, t, out)   { tomMidElectronic(c, t, out); }
+  function tomFloorAcoustic(c, t, out) { tomFloorElectronic(c, t, out); }
 
   preFetchAcoustic();
 
@@ -209,11 +319,17 @@
   const KITS = {
     electronic: {
       kick: kickElectronic, snare: snareElectronic, hat: hatElectronic,
-      openHat: openHatElectronic, foot: footElectronic
+      openHat: openHatElectronic, foot: footElectronic,
+      ride: rideElectronic, bell: bellElectronic,
+      crash: crashElectronic, china: chinaElectronic,
+      tomHigh: tomHighElectronic, tomMid: tomMidElectronic, tomFloor: tomFloorElectronic
     },
     acoustic: {
       kick: kickAcoustic, snare: snareAcoustic, hat: hatAcoustic,
-      openHat: openHatAcoustic, foot: footAcoustic
+      openHat: openHatAcoustic, foot: footAcoustic,
+      ride: rideAcoustic, bell: bellAcoustic,
+      crash: crashAcoustic, china: chinaAcoustic,
+      tomHigh: tomHighAcoustic, tomMid: tomMidAcoustic, tomFloor: tomFloorAcoustic
     }
   };
 

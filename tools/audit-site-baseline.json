@@ -30,7 +30,7 @@
     "meta.tempoRangeMetaMismatches": 6,
     "meta.titleNumberingSchemes": 5,
     "player.multiBarSpecsUnsupported": 153,
-    "player.silentHits": 2076,
-    "player.unmappedDrumKeys": 7
+    "player.silentHits": 0,
+    "player.unmappedDrumKeys": 0
   }
 }

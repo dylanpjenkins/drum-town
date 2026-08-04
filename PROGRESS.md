@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 1 · BL-001 [quality] all 11 drum keys now sound — player.silentHits 2076→0, unmappedDrumKeys 7→0; ride.wav finally wired
 - 2026-08-04 · iter 0 · bootstrap — loop scaffolding, audit-site metrics engine + baseline, backlog seeded (31 items), quarantine, .env untracked
 
 ## Blocked on Dylan (the only list you need to read)
@@ -17,7 +18,7 @@ _(none yet)_
 
 ## Needs ear (audio changes awaiting a listen)
 
-_(none yet)_
+- **BL-001 new drum voices** (iter 1): play `the-drum-kit` "Tour of the Kit" (all voices in one exercise), a `latin-cha-cha` bell pattern, a `metal-headbang` china groove, and `basic-fills` toms. Judge: ride vs hat distinction, bell character, crash/china wash, tom pitch spread. Acoustic-kit crash/china/bell are approximations from existing samples (real WAVs would help — ISSUES.md #2).
 
 ## Parked
 

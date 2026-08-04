@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 0,
-    "next_dimension": "quality",
+    "iteration": 1,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -18,10 +18,10 @@
         "player.js:257 `if (!drum) continue;` silently skips; ride.wav fetched (player.js:145) but wired to no voice"
       ],
       "acceptance": "node tools/checks/check-player-keys.js exits 0; every distinct key in lessonContent hands/feet maps to a sounding voice in both kits; ride.wav used for ride keys; Needs-ear entry added",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 1 · 2026-08-04 · Mapped all 7 missing keys (ride/bell/crash/china/tomHigh/tomMid/tomFloor) with new synthesized electronic voices; acoustic kit uses ride.wav (finally wired), pitched ride for bell, rate-shifted open-hat for crash/china, synth toms (no samples exist — ISSUES.md #2). player.silentHits 2076→0, player.unmappedDrumKeys 7→0. check-player-keys green."]
     },
     {
       "id": "BL-002",
