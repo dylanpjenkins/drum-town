@@ -33,7 +33,7 @@ module.exports = {
       <p>The single paradiddle is a four-note sticking pattern: <strong>R L R R</strong> (or its mirror, <strong>L R L L</strong>). It combines a single stroke and a double stroke into one phrase. Once you can play it cleanly, you can move accents around inside it, alternate hands across the kit, and use it as the foundation for hundreds of fills.</p>
       <p>Why it's so useful: the pattern naturally alternates which hand starts each grouping, so over four reps both hands lead twice. That balance is the whole point.</p>
       <h2 class="section-label">The Pattern</h2>
-      <p>Eight 16th notes per bar, sticking <em>R L R R · L R L L</em> — that's two paradiddles, one starting with each hand. Loop it.</p>
+      <p>Sixteen 16th notes per bar, sticking <em>R L R R · L R L L</em> played twice through — four paradiddles, alternating which hand leads each group. Loop it.</p>
     `,
     exercises: [
       {

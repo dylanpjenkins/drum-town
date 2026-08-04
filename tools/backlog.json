@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 2,
-    "next_dimension": "content",
+    "iteration": 3,
+    "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -255,10 +255,10 @@
       "title": "Paradiddle lesson factual error: 'Eight 16th notes per bar'",
       "evidence": ["lessonContent.js paradiddle bodyHtml: 'Eight 16th notes per bar, sticking R L R R · L R L L' — a 4/4 bar of 16ths is sixteen notes (two paradiddles per half bar... the exercise plays 16)"],
       "acceptance": "sentence corrected to sixteen 16th notes per bar (four paradiddle groups) consistent with the notated exercise; build green",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 3 · 2026-08-04 · 'Eight 16th notes per bar' → 'Sixteen 16th notes per bar … played twice through — four paradiddles, alternating which hand leads.' Now consistent with the notated 16-note exercise and its tip text. Em-dash budget respected."]
     },
     {
       "id": "BL-019",
