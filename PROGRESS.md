@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 5 · BL-012 [ui] keyboard focus restored — global :focus-visible ring, all 4 outline:none suppressions removed (sliders had no indicator at all)
 - 2026-08-04 · iter 4 · BL-002 [quality] multi-bar playback fixed via shared PatternMath — 153 exercises no longer overlap themselves; dotted-note timing (83 notes) fixed as a bonus; playhead syncs
 - 2026-08-04 · iter 3 · BL-018 [content] paradiddle factual fix — "eight 16ths per bar" corrected to sixteen (four groups), matching the notation
 - 2026-08-04 · iter 2 · BL-010+BL-011 [ui] main landmark, skip link, exercise h3s, all 888 SVGs labeled — dom.pagesMissingMain 228→0, dom.svgsMissingAria 888→0

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 4,
-    "next_dimension": "ui",
+    "iteration": 5,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -183,10 +183,10 @@
       "title": "Focus indicators destroyed: outline:none x4, sliders get no replacement, no :focus-visible anywhere",
       "evidence": ["style.css:728, 1089, 1099, 1145 set outline:none; the two range sliders (1099) have no replacement focus style"],
       "acceptance": "visible :focus-visible styles for all interactive elements using existing tokens; css.outlineNone → 0; css.missingFocusVisible → 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 5 · 2026-08-04 · Global :focus-visible ring (2px accent, 2px offset); removed all four outline:none suppressions (selects/bpm keep their border tint on :focus; sliders finally get a visible ring). No outline:none anywhere — modern browsers keep pointer focus quiet natively. css.outlineNone 4→0, css.missingFocusVisible 1→0."]
     },
     {
       "id": "BL-013",
