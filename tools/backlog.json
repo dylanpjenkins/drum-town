@@ -3,7 +3,7 @@
     "iteration": 23,
     "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
-    "next_id": 38,
+    "next_id": 47,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
   },
   "items": [
@@ -442,7 +442,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": null,
-      "log": ["Found by the new visual-verification subflow (iter 23), present since before the loop started."]
+      "log": ["Found by the new visual-verification subflow (iter 23), present since before the loop started.", "Critic (iter 23): worse than first noted — header loses the RUDIMENTS nav item, hero h1 clips, effective layout ~440-470px at 390 viewport; ALL page types affected (home has no notation, so notation widths are not the culprit). Also flagged: rule out headless-Edge measurement artifact by probing the live DOM (scrollWidth vs innerWidth) before trusting any fix."]
     },
     {
       "id": "BL-036",
@@ -454,7 +454,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": null,
-      "log": ["Found by visual verification (iter 23)."]
+      "log": ["Found by visual verification (iter 23).", "Critic: the iter-8 collapse cannot fix this — it only defaults collapsed under 720px; at >=720 the widget starts expanded, position:fixed with no bottom page padding and no content avoidance. Needs a real reservation/avoidance strategy."]
     },
     {
       "id": "BL-037",
@@ -467,6 +467,114 @@
       "attempts": 0,
       "chunk": null,
       "log": ["Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first."]
+    },
+    {
+      "id": "BL-038",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "Playhead auto-follow reverts user scrolling every frame (interaction regression from iter 12)",
+      "evidence": ["Critic iter 23: the rAF tick clamps box.scrollLeft whenever the playhead exits a 36px margin — while playing, any manual pan of an overflowing stave is reverted within one frame; no pointerdown/wheel grace period, hard snap, px math ignores .notation padding"],
+      "acceptance": "user scroll wins: suspend auto-follow for ~2s after pointerdown/wheel/touchstart on the container (or until the playhead naturally re-enters view); smooth follow instead of hard snap; account for container padding; verify by screenshot + code review of the interaction path",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23) — a regression the author-agent shipped as an improvement."]
+    },
+    {
+      "id": "BL-039",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "Audio voice honesty: acoustic crash/china/open-hat are one sample at three speeds; bell and electronic ride unconvincing",
+      "evidence": ["Critic iter 23: crash=openHat.wav@0.85x, china=openHat@1.15x, openHat=openHat — three voices, one sample; bell=ride.wav@1.4x lacks a bell fundamental (Latin bell-vs-ride lessons lose their contrast); real crash rings 2-3s vs ~0.5s here; 1.1-1.2 gains on stacked downbeats risk clipping; electronic ride = 6kHz noise + 4.2kHz square, no 300-800Hz bow ping"],
+      "acceptance": "either synthesize genuinely distinct voices (documented recipes), fall back to the electronic voices for missing acoustic samples (honest contrast), or visibly mark those voices unsupported in the acoustic kit; no gain stacking above 1.0 without a limiter rationale; Needs-ear entry with specific lessons; ISSUES.md #2 (real samples) remains the true fix",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-040",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Notation legibility floor regressed for dense staves; width constants are unjustified magic",
+      "evidence": ["Critic iter 23: old blanket floor 520px; new floor = 55% of natural width = 418px for a dense 760-unit 16th stave — ~20% below the old legibility minimum with ~6px sticking letters; constants 140/52/380/620/0.55 unmeasured; inline style=min-width bypasses the token system (overlaps BL-032)"],
+      "acceptance": "density-aware floor (minimum px per notated event, e.g. >=24px per 16th cell) replaces the flat 55%; constants documented with the measurement that justifies them; min-width moved to a CSS var or data attribute; verify with 390px screenshots of the densest stave (16x16ths) read for legibility",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-041",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Rudiments page lacks navigation; content-visibility placeholder error misaligns anchor jumps",
+      "evidence": ["Critic iter 23: ids exist only on 4 family h2s; no TOC, no per-rudiment anchors, no back-to-top; contain-intrinsic-size 340px vs real 320-660px card heights accumulates offset across ~25 cards on fresh-load #drag-rudiments jumps"],
+      "acceptance": "per-rudiment ids + a compact TOC (40 links or 4 families) + back-to-top; anchor jumps land accurately (scroll-margin-top for sticky header; per-card intrinsic-size from build-time heights or accept-and-measure); verify by screenshotting a fresh-load anchor jump",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-042",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Heading-order audit samples only 10 pages — misses ~58 h1→h3 skips the h3 conversion created",
+      "evidence": ["Critic iter 23: lessons with no bodyHtml h2 (currently 58) jump h1→h3 at every exercise since iter 2; dom.headingOrderViolations samples the first 10 alphabetical lesson pages, which happen to have h2s, and reports 0"],
+      "acceptance": "audit-site heading check covers all lesson pages (new key, e.g. dom.headingSkipsAll, so the gate treats it as informational on first run, then ratchets); the count then burns down as BL-022 chunks add h2s; sequence so the metric lands before the remaining chunks",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23) — the a11y win of iter 2 carried an outline defect the sampled metric never saw."]
+    },
+    {
+      "id": "BL-043",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Metronome collapse rough edges: no resize handling, hidden stop while ticking, slider affordance",
+      "evidence": ["Critic iter 23: matchMedia read once at load (rotate/resize never re-evaluates); collapsing while the metronome is running hides the stop control behind an unlabeled note glyph; volume/tempo sliders rely on a lone ♪ glyph visually"],
+      "acceptance": "resize/orientation re-evaluation (only when the user hasn't chosen explicitly); collapsed button shows play-state (e.g. pulsing dot or ■ glyph when running) and its aria-label says so; slider rows gain visible text labels at expanded width",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-044",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Chapter-list em-dash separators orphan at line wraps",
+      "evidence": ["Critic iter 23: .chapter__lessons li::after dash separators dangle at the end of wrapped lines (visible after Tuning Your Drums on desktop, nearly every row at 390px) — separator-as-pseudo-element is wrap-hostile"],
+      "acceptance": "separators never orphan: swap to a gap-based/border treatment or place the separator inside the following item; verify via home screenshots at 1280 and 390",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-045",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Homepage lacks a primary action; lesson pages stack four near-identical section labels",
+      "evidence": ["Critic iter 23: hero offers a stat and no CTA — first-time users face a wall of identical pills; lesson pages show breadcrumb FOUNDATIONS + kicker FOUNDATION + sidebar I·FOUNDATIONS + sidebar Foundations in one quadrant"],
+      "acceptance": "hero gains one primary CTA (e.g. Start with Lesson 1 → first Getting Started lesson; Continue → for returning visitors via existing progress.js state); lesson-page label redundancy reduced to two mentions max; verify via screenshots",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23)."]
+    },
+    {
+      "id": "BL-046",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Style-compliance sweep over the loop's own additions + listening format standardization",
+      "evidence": ["Critic iter 23: the style guide was violated by content written the day it became binding — em-dash pair (fixed iter 23), whole-skill echo (fixed), paradiddle banned opener + whole-point verbatim (fixed); still open: listening work strings use four formats in one commit (Artist — Song / bare Song / Work (live) / Song (Album)); Back in Black consumed twice in the first 31 picks; ♩=N vs ♩ = N spacing inconsistent between new prose and guide"],
+      "acceptance": "listening work format defined in docs/content-style-guide.md and applied to all 448+ entries; Back in Black usage justified or one instance swapped; a compliance check (script or checklist) runs over any tick that adds prose; ♩ spacing decision made once and normalized mechanically",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from adversarial critique (iter 23); the four factual errors and three in-prose violations were fixed the same tick."]
     },
     {
       "id": "BL-030",

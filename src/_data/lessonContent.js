@@ -20,7 +20,7 @@ module.exports = {
   'paradiddle': {
     tagline: "The most useful sticking pattern ever invented",
     listening: [
-      { artist: "Steve Gadd", work: "Paul Simon — 50 Ways to Leave Your Lover", note: "The most famous paradiddle groove ever recorded — the whole intro is paradiddle sticking split between hi-hat and snare. Count RLRR LRLL along with it." },
+      { artist: "Steve Gadd", work: "Paul Simon — 50 Ways to Leave Your Lover", note: "The most famous paradiddle-based groove on record: displaced and inverted paradiddle stickings woven between hi-hat, snare, and kick. Textbook RLRR LRLL won't line up note-for-note; listen for the paradiddle texture instead." },
       { artist: "David Garibaldi", work: "Tower of Power — What Is Hip?", note: "Paradiddle-family stickings scattered between hat and snare at speed. Listen for how the accents, not the sticking, are what you actually hear." }
     ],
     duration: "15–20 min",
@@ -34,8 +34,8 @@ module.exports = {
       'No weak fourth note in the LL doubles'
     ],
     bodyHtml: `
-      <p>The single paradiddle is a four-note sticking pattern: <strong>R L R R</strong> (or its mirror, <strong>L R L L</strong>). It combines a single stroke and a double stroke into one phrase. Once you can play it cleanly, you can move accents around inside it, alternate hands across the kit, and use it as the foundation for hundreds of fills.</p>
-      <p>Why it's so useful: the pattern naturally alternates which hand starts each grouping, so over four reps both hands lead twice. That balance is the whole point.</p>
+      <p>Four notes: <strong>R L R R</strong>, then its mirror, <strong>L R L L</strong>. The single paradiddle folds a single stroke and a double stroke into one phrase. Once you can play it cleanly, you can move accents around inside it, alternate hands across the kit, and use it as the foundation for hundreds of fills.</p>
+      <p>Why it's so useful: the pattern naturally alternates which hand starts each grouping, so over four reps both hands lead twice. That built-in balance is why drummers never stop reaching for it.</p>
       <h2 class="section-label">The Pattern</h2>
       <p>Sixteen 16th notes per bar, sticking <em>R L R R · L R L L</em> played twice through — four paradiddles, alternating which hand leads each group. Loop it.</p>
     `,
@@ -65,7 +65,7 @@ module.exports = {
   'first-beat': {
     tagline: "Where rock, pop, and most popular music begins",
     listening: [
-      { artist: "Al Jackson Jr.", work: "Booker T. & the M.G.'s — Green Onions", note: "The basic backbeat played with total discipline for three minutes. Nothing extra — and nothing missing." },
+      { artist: "Leon Ndugu Chancler", work: "Michael Jackson — Billie Jean", note: "Quarter-note kick, snare on 2 and 4, straight 8th hats: the exact skeleton of this lesson under one of the most-heard grooves ever, held with total discipline." },
       { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "Maybe the most committed backbeat on record. Listen to how hard the snare on 2 and 4 lands and how steady the hat stays around it." },
       { artist: "Charlie Watts", work: "The Rolling Stones — Honky Tonk Women", note: "The same skeleton with human swagger. Notice the hat lifting for the snare hits — feel over machinery." }
     ],
@@ -193,7 +193,7 @@ module.exports = {
     tagline: "Move the bass drum, change the song",
     listening: [
       { artist: "John Bonham", work: "Led Zeppelin — When the Levee Breaks", note: "The kick placement IS the song. Map where each kick lands against the 16th grid — none of them are accidents." },
-      { artist: "Roger Taylor", work: "Queen — Another One Bites the Dust", note: "A kick pattern so identifiable you can name the song from it alone. Same hat, same snare — the kick carries the identity." },
+      { artist: "Roger Taylor", work: "Queen — Another One Bites the Dust", note: "A spare disco-rock kick locked under the bassline that owns the song. Listen for how little the kick plays, and how much that restraint gives the groove." },
       { artist: "Dave Grohl", work: "Foo Fighters — Everlong", note: "Anticipated kicks driving straight into the backbeat at speed. Hear how the '&' placements push the song forward." }
     ],
     duration: "20 min",
@@ -608,7 +608,7 @@ module.exports = {
       <p>Sixteenth notes are where funk, R&amp;B, and most modern drumming live. Even when not every sixteenth is played, the <em>grid</em> is what your time is locked to.</p>
       <h2 class="section-label">Making the e and a Real</h2>
       <p>At first the <em>e</em> and <em>a</em> are just sounds your mouth makes; the goal is for each to become a distinct place you can aim a stroke at. A good drill on top of the exercises: play straight 16ths and accent only the <em>e</em> for a bar, then only the <em>a</em>. If the accents wander, the positions aren't real yet — drop to ♩=60 and rebuild.</p>
-      <p>The tell-tale failure is smearing: <em>e-&amp;-a</em> blurring into a fast triple instead of three even positions. Smearing means the tempo is ahead of your counting, never the reverse. Read Ex 4 by counting it, not by memorizing its shape; the ability to place a note on any syllable of "<em>1 e &amp; a</em>" on demand is the whole skill.</p>
+      <p>The tell-tale failure is smearing: <em>e-&amp;-a</em> blurring into a fast triple instead of three even positions. Smearing means the tempo is ahead of your counting, never the reverse. Read Ex 4 by counting it, not by memorizing its shape; placing a note on any syllable of "<em>1 e &amp; a</em>" on demand is the skill this lesson exists to build.</p>
     `,
     exercises: [
       {
@@ -795,7 +795,7 @@ module.exports = {
     tagline: "Two strokes per hand — the gateway to the buzz roll",
     listening: [
       { artist: "Philly Joe Jones", work: "Miles Davis — Milestones", note: "Diddle-rich snare vocabulary inside swing comping. The doubles are so even you'll mistake them for singles until you slow the record down." },
-      { artist: "Neil Peart", work: "Rush — Tom Sawyer", note: "The fills lean on doubles and ruffs to move around the kit. Listen for pairs of notes per hand feeding the toms." }
+      { artist: "Neil Peart", work: "Rush — Tom Sawyer", note: "Listen for the drag and ruff ornaments tucked into the tom fills — double-stroke-family pairs hiding inside bigger phrases, not stand-alone rolls." }
     ],
     duration: "20 min",
     difficulty: "Beginner",
@@ -1288,7 +1288,7 @@ module.exports = {
       <p>Where rock has the backbeat, jazz has the <strong>ride pattern</strong>: a four-beat phrase on the ride cymbal that goes "<em>ding · ding-a · ding · ding-a</em>" — quarter, two swung 8ths, quarter, two swung 8ths. The 8ths are <em>swung</em> (the second of each pair plays late, like the third note of a triplet). This is the heartbeat of every jazz groove.</p>
       <p>Build it the same way you'd build any complex coordination skill: top-down. Quarters first. Add the skip-note. Add the hi-hat foot on 2 and 4. Add the bass drum on 1. Each layer is a new limb that has to know its job.</p>
       <h2 class="section-label">Getting the Swing Right</h2>
-      <p>At medium tempos the skip-note lands like the third note of a triplet: "<em>ding-a</em>" is a triplet with the middle note missing. Two failures sit on either side of it. Play the 8ths straight (50/50) and it stops being jazz; swing them too hard and it turns into a stiff shuffle. The ratio also breathes with tempo — swing tightens toward even 8ths as things get fast — so trust your ear over any formula.</p>
+      <p>At medium tempos the skip-note lands like the third note of a triplet: "<em>ding-a</em>" is a triplet with the middle note missing. Two failures sit on either side of it. Play the 8ths straight (50/50) and it stops being jazz; swing them too hard and it turns into a stiff shuffle. The ratio also breathes with tempo: swing tightens toward even 8ths as things get fast, so trust your ear over any formula.</p>
       <p>The ear is trained by listening, and there's no substitute: put on a classic ride-driven record and play along until your "ding-a" disappears into the drummer's. Keep the skip-note lighter than the quarters; it decorates the pulse, it doesn't compete with it. And check the hi-hat foot — eager left feet love to sneak ahead of 2 and 4.</p>
     `,
     exercises: [

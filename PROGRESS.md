@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 23b · adversarial critique integrated — 4 factual listening errors fixed same-tick (50 Ways sticking claim, AOBTD kick claim, Tom Sawyer doubles claim, Green Onions swapped for Billie Jean), 3 style-guide violations in my own prose fixed (incl. the paradiddle banned opener), 9 new items filed (BL-038..046: playhead scroll-fight P1, audio voice honesty, density-aware notation floor, heading-audit sampling gap, and more); 16 of 31 new listening picks verified correct
 - 2026-08-04 · iter 23 · loop upgrade [Dylan's feedback] — visual verification (headless-Edge screenshots, read + judged) and an adversarial critic subagent are now protocol steps 6b/6c; first visual pass found 3 real issues no gate saw: mobile horizontal clipping (BL-035, P1), metronome overlapping content at 1280px (BL-036), sidebar-above-lesson on mobile (BL-037)
 - 2026-08-04 · iter 22 · BL-017 [ui] prefers-reduced-motion respected — animations collapse, metronome dots stop pulsing (color still marks the beat); css.missingReducedMotion 1→0
 - 2026-08-04 · iter 21 · BL-007 [quality] rudiments page render cost fixed via content-visibility — off-screen cards skip layout/paint; scrollbar stays stable
