@@ -28,6 +28,8 @@ Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` fo
 2. `node tools/audit-lessons.js` — the BEAT-COUNT MISMATCHES section must be identical-or-smaller vs `tools/audit-output.txt`.
 3. `node tools/audit-site.js --gate` exits 0 (no metric regresses vs baseline; `integrity.*` keys must not change at all).
 4. Item-specific `tools/checks/*.js` named in the backlog item's acceptance.
+5. **Visual verification** for anything that changes rendered output: headless-Edge screenshots at 1280 + 390, actually read and judged (protocol step 6b in `.claude/commands/improve.md`).
+6. **Adversarial critique** for anything that changes site output or content: a fresh-context read-only critic subagent with a refute-first mandate (protocol step 6c). BLOCKING findings stop the commit.
 
 ## FORBIDDEN — hard rules for the improvement loop
 

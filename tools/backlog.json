@@ -1,9 +1,9 @@
 {
   "meta": {
-    "iteration": 22,
-    "next_dimension": "content",
+    "iteration": 23,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
-    "next_id": 35,
+    "next_id": 38,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
   },
   "items": [
@@ -427,6 +427,46 @@
       "attempts": 0,
       "chunk": null,
       "log": ["Added by discovery iter 10."]
+    },
+    {
+      "id": "BL-035",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "Mobile pages overflow horizontally — text clips off-screen at 390px",
+      "evidence": [
+        "Visual verification iter 23: home-mobile.png and lesson-mobile.png both show prose, taglines, nav, and lesson chips clipped mid-word at the right viewport edge (effective layout ~520px wide in a 390px viewport)",
+        "Every structural gate passed while this was broken — screenshot-only finding",
+        "Reproduce: headless Edge --window-size=390,1200 on / and /lessons/first-beat/"
+      ],
+      "acceptance": "diagnose the overflowing element (width-sweep screenshots or computed-style probe), fix so no page scrolls horizontally at 390px; verify with 390px screenshots of home, a lesson, rudiments, metronome, a genre page — read and confirm no clipping; dom-smoke green",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Found by the new visual-verification subflow (iter 23), present since before the loop started."]
+    },
+    {
+      "id": "BL-036",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Docked metronome overlaps lesson content at ~1280px",
+      "evidence": ["lesson-desktop.png iter 23: the widget sits over the listening section's text on /lessons/paradiddle/ at 1280x1600 — fixed overlay, content flows underneath with no reserved space"],
+      "acceptance": "content never sits illegibly under the widget at common widths (reserve right padding on the content column when viewport < container+widget, or auto-collapse the widget when overlapping main content); verify via 1280px screenshots",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Found by visual verification (iter 23)."]
+    },
+    {
+      "id": "BL-037",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Mobile lesson pages: full curriculum sidebar renders above the lesson content",
+      "evidence": ["lesson-mobile.png iter 23: reader must scroll past the entire sidebar nav to reach the lesson title on every lesson page under 960px"],
+      "acceptance": "on small screens the sidebar collapses to a disclosure ('All lessons ▸') or moves below the lesson; lesson title visible within the first viewport; verify via 390px screenshot",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first."]
     },
     {
       "id": "BL-030",

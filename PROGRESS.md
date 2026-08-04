@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 23 · loop upgrade [Dylan's feedback] — visual verification (headless-Edge screenshots, read + judged) and an adversarial critic subagent are now protocol steps 6b/6c; first visual pass found 3 real issues no gate saw: mobile horizontal clipping (BL-035, P1), metronome overlapping content at 1280px (BL-036), sidebar-above-lesson on mobile (BL-037)
 - 2026-08-04 · iter 22 · BL-017 [ui] prefers-reduced-motion respected — animations collapse, metronome dots stop pulsing (color still marks the beat); css.missingReducedMotion 1→0
 - 2026-08-04 · iter 21 · BL-007 [quality] rudiments page render cost fixed via content-visibility — off-screen cards skip layout/paint; scrollbar stays stable
 - 2026-08-04 · iter 20 · discovery #2 — link scan clean, no new issues, nothing parked in 19 ticks; all remaining metrics map to ready backlog items
@@ -35,7 +36,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 - **Rotate the PostHog project token.** `.env` is now untracked and the token no longer ships hardcoded in base.njk, but the old value remains in git history. Rotate it in PostHog settings, then update your local `.env`. (SEC, bootstrap)
 - **Getting Started photos** (BL-030 / ISSUES.md #1): stick-grip, setup-posture, the-drum-kit lost their figures because the photos never existed. When you have photos, the loop restores the figure blocks + styles.
 
-## Needs eyes (visual changes awaiting a 5-minute human glance)
+## Needs eyes (now mostly self-served: since iter 23 the loop screenshots and reads its own changes — entries below remain only where human taste matters)
 
 - **BL-015 rem type** (iter 15): at default browser settings every size is mathematically identical to before. Worth one check: bump your browser's default font size (Settings → Appearance) — the whole site should now scale with it.
 - **BL-014 notation widths** (iter 12): HIGH VALUE GLANCE — single-bar staves now size to their note count, so sparse exercises (e.g. first-beat Build-Up 1, the quarter-note hat bars) render narrower and fit phones. Check 2-3 lessons on desktop (staves shouldn't look oddly short) and one on a phone/narrow window (short exercises shouldn't pan; playing a long stave should auto-scroll the playhead into view).
