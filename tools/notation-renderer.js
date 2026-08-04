@@ -353,6 +353,13 @@ function renderPattern(spec) {
     }
     svg.removeAttribute('width');
     svg.removeAttribute('height');
+    // Route all ink through currentColor so the page's CSS owns notation
+    // color (tokenized in .notation) instead of hardcoded black — the
+    // prerequisite for any dark theme.
+    svg.setAttribute('fill', 'currentColor');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.querySelectorAll('[fill="black"]').forEach(el => el.setAttribute('fill', 'currentColor'));
+    svg.querySelectorAll('[stroke="black"]').forEach(el => el.setAttribute('stroke', 'currentColor'));
     const out = svg.outerHTML;
     container.remove();
     return out;

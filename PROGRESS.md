@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 18 · BL-016 [ui] dark-mode groundwork — notation ink routed through currentColor + tokens; the white/black island is no longer hardcoded
 - 2026-08-04 · iter 17 · BL-006 [quality] legacy audit output cleaned — float noise rounded, clave Total added, baseline regenerated
 - 2026-08-04 · iter 16 · BL-022 chunk 1/6 [content] 10 thin lessons expanded with practice-method + failure-mode sections — lessonsThinProse 53→43, lessonsNoSubheadings 68→58
 - 2026-08-04 · iter 15 · BL-015 [ui] all font sizes in rem — user font-size preferences finally respected; css.pxFontSizes 79→0 (pixel-identical at default settings)

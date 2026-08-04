@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 17,
-    "next_dimension": "ui",
+    "iteration": 18,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -231,10 +231,10 @@
       "title": "Dark-mode groundwork: notation is a hardcoded white/black island; no prefers-color-scheme",
       "evidence": [".notation{background:white} style.css:761 not tokenized; VexFlow emits fill=black stroke=black; 0 prefers-color-scheme rules"],
       "acceptance": "phase 1 only: notation colors routed through tokens (SVG uses currentColor or CSS-overridable fills), .notation background tokenized; site still light-only but dark mode is no longer blocked; css.missingDarkScheme may stay 1 until a later item",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 18 · 2026-08-04 · Renderer routes all SVG ink through currentColor (root fill/stroke + any per-element blacks); .notation gets --notation-bg/--notation-ink tokens (ink now the site's warm near-black #1d1814 instead of pure #000 — matches the manuscript palette). 0 black attrs remain in built pages. A dark theme now only needs a prefers-color-scheme token block (future item). Needs-eyes: notation ink slightly warmer."]
     },
     {
       "id": "BL-017",

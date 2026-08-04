@@ -21,6 +21,12 @@
   --gold:      #d4a854;
   --shadow:    rgba(29, 24, 20, 0.08);
 
+  /* Notation staves keep a manuscript-white ground distinct from the page
+     cream; ink is routed through currentColor in the SVGs so a future dark
+     theme only needs to change these two tokens. */
+  --notation-bg:  #ffffff;
+  --notation-ink: #1d1814;
+
   --display: 'Cormorant Garamond', Georgia, serif;
   --body:    'Lora', Georgia, serif;
   --mono:    'JetBrains Mono', 'Courier New', monospace;
@@ -701,7 +707,8 @@ hr.section-rule {
 }
 
 .notation {
-  background: white;
+  background: var(--notation-bg);
+  color: var(--notation-ink);
   border: 1px solid var(--rule-soft);
   padding: 6px;
   overflow-x: auto;
