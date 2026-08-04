@@ -63,24 +63,10 @@ add('player.unmappedDrumKeys', unmapped.length, unmapped.map(k => `${k} (${keyUs
 add('player.silentHits', unmapped.reduce((s, k) => s + keyUsage.get(k), 0));
 
 // --- player: multi-bar support --------------------------------------------
-// Tick math ported from tools/audit-lessons.js so both tools agree.
-function ticksOf(note) {
-  const base = { w: 4, h: 2, q: 1, 8: 0.5, 16: 0.25, 32: 0.125 }[note.duration];
-  if (base === undefined) return null;
-  return note.dot ? base * 1.5 : base;
-}
-function voiceTicks(ex, voice) {
-  const arr = ex[voice] || [];
-  let sum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    const tk = ticksOf(arr[i]);
-    if (tk === null) return null;
-    const tup = (ex.tuplets || []).find(t => t.voice === voice && i >= t.start && i < t.start + t.length);
-    sum += tup ? tk * (tup.notes_occupied / tup.num_notes) : tk;
-  }
-  return sum;
-}
-const playerHandlesMultiBar = /spec\.bars|barCount|barsInSpec|patternBars/.test(playerSrc);
+// Tick math comes from the shared module the player itself uses.
+const PatternMath = require(path.join(ROOT, 'src/assets/js/pattern-math.js'));
+const voiceTicks = (ex, voice) => PatternMath.voiceTicks(ex, voice);
+const playerHandlesMultiBar = /PatternMath\.patternDurationSecs/.test(playerSrc);
 const multiBar = [];
 for (const [slug, lesson] of lessons) {
   (lesson.exercises || []).forEach((ex, i) => {

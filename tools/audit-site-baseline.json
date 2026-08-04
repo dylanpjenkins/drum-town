@@ -29,7 +29,7 @@
     "meta.focusDistinctValues": 144,
     "meta.tempoRangeMetaMismatches": 6,
     "meta.titleNumberingSchemes": 5,
-    "player.multiBarSpecsUnsupported": 153,
+    "player.multiBarSpecsUnsupported": 0,
     "player.silentHits": 0,
     "player.unmappedDrumKeys": 0
   }

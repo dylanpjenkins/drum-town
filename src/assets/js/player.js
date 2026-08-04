@@ -340,33 +340,17 @@
   }
 
   // ---- Spec timing helpers ----
+  // All note/pattern math lives in PatternMath (pattern-math.js, loaded before
+  // this file) so the player, audit, and checks can never disagree. Dotted
+  // notes and tuplets are handled there; multi-bar specs report their full
+  // length via patternDurationSecs.
 
-  function durationToSecs(d, bpm) {
-    const denom = parseInt(d, 10);
-    if (!denom) {
-      const map = { w: 1, h: 2, q: 4, e: 8, s: 16 };
-      return (4 / (map[d] || 4)) * (60 / bpm);
-    }
-    return (4 / denom) * (60 / bpm);
-  }
-
-  function barDurationSecs(spec) {
-    const [num, den] = (spec.timeSignature || '4/4').split('/').map(Number);
-    const bpm = spec.bpm || 80;
-    return num * (4 / den) * (60 / bpm);
-  }
-
-  function scheduleVoice(notes, c, kit, out, startAt, bpm, tupletsForVoice) {
-    const scale = new Array(notes.length).fill(1);
-    (tupletsForVoice || []).forEach(t => {
-      const factor = t.notes_occupied / t.num_notes;
-      for (let i = t.start; i < t.start + t.length && i < notes.length; i++) {
-        scale[i] = factor;
-      }
-    });
+  function scheduleVoice(notes, c, kit, out, startAt, bpm, spec, voiceName) {
+    const scale = PatternMath.tupletScales(spec, voiceName, notes.length);
     let t = startAt;
     notes.forEach((note, i) => {
-      const dur = durationToSecs(note.duration, bpm) * scale[i];
+      const ticks = PatternMath.durationTicks(note);
+      const dur = (ticks === null ? 1 : ticks) * scale[i] * (60 / bpm);
       if (!note.rest) {
         for (const key of (note.keys || [])) {
           let drum = KEY_TO_DRUM[key];
@@ -382,13 +366,10 @@
     return t;
   }
 
-  function scheduleBar(spec, c, kit, out, startAt) {
+  function schedulePattern(spec, c, kit, out, startAt) {
     const bpm = spec.bpm || 80;
-    const tuplets = spec.tuplets || [];
-    const handsTuplets = tuplets.filter(t => t.voice === 'hands');
-    const feetTuplets  = tuplets.filter(t => t.voice === 'feet');
-    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, handsTuplets);
-    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, feetTuplets);
+    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, spec, 'hands');
+    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, spec, 'feet');
   }
 
   // ---- Playhead ----
@@ -461,7 +442,7 @@
     this.svg = svg;
     this.bounds = bounds;
     this.line = line;
-    this.barDuration = barDurationSecs(spec);
+    this.patternDuration = PatternMath.patternDurationSecs(spec);
     this.gain = c.createGain();
     this.gain.gain.value = 1;
     this.gain.connect(c.destination);
@@ -485,8 +466,8 @@
     if (this.stopped) return;
     const horizon = this.c.currentTime + SCHEDULE_AHEAD;
     while (this.scheduledUntil < horizon) {
-      scheduleBar(this.spec, this.c, this.kit, this.gain, this.scheduledUntil);
-      this.scheduledUntil += this.barDuration;
+      schedulePattern(this.spec, this.c, this.kit, this.gain, this.scheduledUntil);
+      this.scheduledUntil += this.patternDuration;
     }
   };
 
@@ -500,7 +481,7 @@
         return;
       }
       const elapsed = Math.max(0, session.c.currentTime - session.audioStart);
-      const progress = (elapsed % session.barDuration) / session.barDuration;
+      const progress = (elapsed % session.patternDuration) / session.patternDuration;
       const x = session.bounds.startX + progress * span;
       session.line.setAttribute('x1', x);
       session.line.setAttribute('x2', x);

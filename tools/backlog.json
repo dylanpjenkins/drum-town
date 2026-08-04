@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 3,
-    "next_dimension": "quality",
+    "iteration": 4,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -35,10 +35,10 @@
         "player.js:387 playhead sweeps full SVG width per single barDuration → 2x speed on 2-bar staves"
       ],
       "acceptance": "node tools/checks/check-multibar-playback.js exits 0 (shared pure bar-math module used by player + check); loop period equals full spec length; playhead sweeps full pattern in full duration; Needs-ear entry added",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 4 · 2026-08-04 · New src/assets/js/pattern-math.js (UMD: browser global + Node require) holds all timing math; player schedules the full pattern and advances by patternDurationSecs (was: whole spec every single bar — overlap). Playhead sweeps full pattern length. BONUS: durationToSecs ignored dotted notes (83 in content) — PatternMath.durationTicks handles dot + tuplets, fixing latent timing drift. audit-site now requires the same module (math single-sourced; audit-lessons untouched by policy). player.multiBarSpecsUnsupported 153→0."]
     },
     {
       "id": "BL-003",
