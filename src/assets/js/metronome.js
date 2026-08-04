@@ -216,6 +216,33 @@
     });
   };
 
+  // ---- Collapse / expand ----
+  // Collapsed by default on small screens (the widget otherwise covers a
+  // large share of a phone viewport); an explicit user choice is remembered.
+
+  const collapseBtn = document.getElementById('metronome-collapse');
+  const COLLAPSED_KEY = 'dc_metro_collapsed';
+
+  function applyCollapsed(collapsed) {
+    root.classList.toggle('is-collapsed', collapsed);
+    if (!collapseBtn) return;
+    collapseBtn.setAttribute('aria-expanded', String(!collapsed));
+    collapseBtn.setAttribute('aria-label', collapsed ? 'Expand metronome' : 'Collapse metronome');
+    collapseBtn.textContent = collapsed ? '♩' : '−';
+  }
+
+  if (collapseBtn) {
+    let stored = null;
+    try { stored = localStorage.getItem(COLLAPSED_KEY); } catch (e) {}
+    const smallScreen = window.matchMedia && window.matchMedia('(max-width: 720px)').matches;
+    applyCollapsed(stored === null ? smallScreen : stored === '1');
+    collapseBtn.addEventListener('click', () => {
+      const next = !root.classList.contains('is-collapsed');
+      applyCollapsed(next);
+      try { localStorage.setItem(COLLAPSED_KEY, next ? '1' : '0'); } catch (e) {}
+    });
+  }
+
   // ---- Toggle ----
 
   let session = null;

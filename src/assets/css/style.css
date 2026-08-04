@@ -950,6 +950,43 @@ hr.section-rule {
   font-family: var(--mono);
 }
 
+.metronome__collapse {
+  align-self: flex-end;
+  margin: -6px -8px -10px 0; /* tuck into the corner without adding height */
+  background: transparent;
+  border: none;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+.metronome__collapse:hover { color: var(--accent); }
+
+/* Collapsed: the whole widget shrinks to one round expand button. Default
+   state on small screens; the user's explicit choice is remembered. */
+.metronome.is-collapsed {
+  width: auto;
+  padding: 0;
+}
+.metronome.is-collapsed > :not(.metronome__collapse) { display: none; }
+.metronome.is-collapsed .metronome__collapse {
+  align-self: auto;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .metronome { bottom: 12px; right: 12px; max-width: calc(100vw - 24px); }
+}
+
 .metronome__beats {
   display: flex;
   gap: 8px;

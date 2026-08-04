@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 8 · BL-013 [ui] docked metronome is now collapsible — starts collapsed on phones (was covering ~45% of the viewport), choice persisted
 - 2026-08-04 · iter 7 · BL-003 [quality] dead-code sweep — never-rendering preview card removed end-to-end, deprecated lesson.njk deleted, "ready" badge noise gone, hygiene.deadFeatureRefs 4→1 (generalistPath kept as noted data)
 - 2026-08-04 · iter 6 · BL-019 [content] American spelling normalized — 119 British forms replaced across all 217 lessons, content.britishSpellings 119→0
 - 2026-08-04 · iter 5 · BL-012 [ui] keyboard focus restored — global :focus-visible ring, all 4 outline:none suppressions removed (sliders had no indicator at all)
@@ -20,6 +21,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Needs eyes (visual changes awaiting a 5-minute human glance)
 
+- **BL-013 metronome collapse** (iter 8): on desktop, a small − appears in the widget corner — clicking collapses it to a round ♩ button; on a phone (or narrow window <720px) it starts collapsed. Expand, play, collapse while playing — audio should keep running.
 - **BL-003 homepage hero + genre cards** (iter 7): after visiting any lesson, the homepage "Up Next" hero should render single-column (the empty preview pane is gone); genre pages and Where-Next cards no longer show the word "ready" under every title; hero stat reads "217 lessons".
 
 - **BL-010 exercise titles div→h3** (iter 2): open any lesson — exercise titles should look identical (the class controls type/margin; only line-height tightened 1.65→1.2 on multi-line titles). Tab from the address bar: a rust "Skip to content" chip should appear top-left and jump to content.
