@@ -621,6 +621,12 @@ hr.section-rule {
   border: 1px solid var(--rule);
   padding: 22px 24px;
   margin: 16px 0 22px;
+  /* Off-screen exercise cards skip layout and paint entirely — the
+     /rudiments/ page renders 40 notation SVGs in one document and this is
+     what keeps it fast. The intrinsic-size hint stabilizes the scrollbar;
+     `auto` remembers the real size once a card has been on screen. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
 }
 
 .exercise-header {

@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 21 · BL-007 [quality] rudiments page render cost fixed via content-visibility — off-screen cards skip layout/paint; scrollbar stays stable
 - 2026-08-04 · iter 20 · discovery #2 — link scan clean, no new issues, nothing parked in 19 ticks; all remaining metrics map to ready backlog items
 - 2026-08-04 · iter 19 · BL-023 chunk 1/6 [content] 31 listening picks added across 13 lessons (Foundations + track intros) — lessonsMissingListening 77→64
 - 2026-08-04 · iter 18 · BL-016 [ui] dark-mode groundwork — notation ink routed through currentColor + tokens; the white/black island is no longer hardcoded

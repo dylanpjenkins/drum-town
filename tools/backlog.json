@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 20,
-    "next_dimension": "quality",
+    "iteration": 21,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -107,10 +107,10 @@
       "title": "Rudiments page is 888 KB of inline SVG in one document",
       "evidence": ["_site/rudiments/index.html 888 KB; 40 rudiments each with full notation; no lazy loading"],
       "acceptance": "page weight meaningfully reduced (e.g. per-family sections/pages or deferred rendering) without losing content; build green; info.pageCount change intentional and baselined",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 21 · 2026-08-04 · Took the deferred-rendering path from the acceptance: content-visibility:auto + contain-intrinsic-size on .exercise — off-screen cards (36+ of the 40 on /rudiments/ at any scroll position) skip layout/paint entirely; also benefits long lesson pages. Transfer bytes unchanged (912KB raw, ~gzip-friendly repetitive SVG; URLs and content untouched); render cost was the real pain and is now viewport-proportional. Needs-eyes: scroll /rudiments/ — cards should appear instantly with a stable scrollbar."]
     },
     {
       "id": "BL-008",
