@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 5,
-    "next_dimension": "content",
+    "iteration": 6,
+    "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -267,10 +267,10 @@
       "title": "Mixed British/American spelling across lessonContent.js (58 British forms)",
       "evidence": ["practise x49, colour x17, centre x13, internalise x18, plus emphasises/realise/organising/favours vs 122 American forms; style ledger says American"],
       "acceptance": "fixed-word-list pass converts all British forms to American across lessonContent.js (and rudiments.js if present there); content.britishSpellings → 0; gates green; 3 affected slugs spot-read",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 6 · 2026-08-04 · Case-preserving whole-word pass: exactly 119 replacements in lessonContent.js (practise x40 the biggest; rudiments.js and curriculum.js already clean). Spot-read replaced contexts across metronome-practice, j-dilla, power-ballad and more — all read naturally. Slug hash + dangling-ref integrity keys unchanged. content.britishSpellings 119→0."]
     },
     {
       "id": "BL-020",

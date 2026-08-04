@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 6 · BL-019 [content] American spelling normalized — 119 British forms replaced across all 217 lessons, content.britishSpellings 119→0
 - 2026-08-04 · iter 5 · BL-012 [ui] keyboard focus restored — global :focus-visible ring, all 4 outline:none suppressions removed (sliders had no indicator at all)
 - 2026-08-04 · iter 4 · BL-002 [quality] multi-bar playback fixed via shared PatternMath — 153 exercises no longer overlap themselves; dotted-note timing (83 notes) fixed as a bonus; playhead syncs
 - 2026-08-04 · iter 3 · BL-018 [content] paradiddle factual fix — "eight 16ths per bar" corrected to sixteen (four groups), matching the notation

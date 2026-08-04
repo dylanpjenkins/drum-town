@@ -1957,7 +1957,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Before you play a single note, it helps to know what you\'re looking at. The "5-piece kit" is the industry standard — five drums, three cymbals — and almost every recording you\'ve ever heard rides on some version of this layout. Once you can name the pieces and understand what each one does in a song, every lesson after this gets easier.</p>
-      <p>The kit divides into three families: <strong>drums</strong> (snare, bass, toms), <strong>cymbals</strong> (hi-hat, ride, crash), and <strong>pedals</strong> (the bass drum pedal under your right foot, the hi-hat pedal under your left). Drums are written as filled dots on the stave; cymbals are written as <em>x</em> noteheads. That visual distinction is the first thing to internalise.</p>
+      <p>The kit divides into three families: <strong>drums</strong> (snare, bass, toms), <strong>cymbals</strong> (hi-hat, ride, crash), and <strong>pedals</strong> (the bass drum pedal under your right foot, the hi-hat pedal under your left). Drums are written as filled dots on the stave; cymbals are written as <em>x</em> noteheads. That visual distinction is the first thing to internalize.</p>
 
       <h2 class="section-label">The Five Drums</h2>
       <p><strong>Snare drum</strong> — 14 inches across, sitting between your knees. The wires stretched under the bottom head are what give the snare its sharp, cracking sound. This is the loudest, most expressive drum on the kit and it carries the <em>backbeat</em> — the snap on counts 2 and 4 that defines almost every popular style.</p>
@@ -2033,7 +2033,7 @@ module.exports = {
       <p>With your feet on the pedals and the throne at the right height, position the rest of the kit around your sitting position:</p>
       <ul>
         <li><strong>Snare</strong> — directly in front of you, between your thighs. Surface roughly flat (a slight tilt toward you is fine; a steep tilt away is not). The rim of the snare should be at about belt-buckle height — high enough that your sticks come down to it, not up at it.</li>
-        <li><strong>Bass drum pedal</strong> — under the ball of your right foot. The pedal beater should already be roughly aligned with the centre of the bass drum head; if you have to drag the pedal to the side, move the whole drum.</li>
+        <li><strong>Bass drum pedal</strong> — under the ball of your right foot. The pedal beater should already be roughly aligned with the center of the bass drum head; if you have to drag the pedal to the side, move the whole drum.</li>
         <li><strong>Hi-hat pedal</strong> — under the ball of your left foot, mirror image of the bass drum pedal. Your two feet should be roughly shoulder-width apart, knees pointing forward, not splayed out.</li>
         <li><strong>Hi-hat cymbals</strong> — high enough that your right stick can reach them comfortably <em>without lifting your shoulder</em>. A common mistake is setting the hi-hat too high; it forces a shoulder hike on every 8th note.</li>
         <li><strong>Ride and crash</strong> — within easy reach without leaning. If you\'re leaning right to play the ride, slide it closer.</li>
@@ -2112,7 +2112,7 @@ module.exports = {
         <li><strong>Up stroke</strong> — start low, end high. A soft note that lifts the stick into position for the next accent.</li>
       </ul>
 
-      <p><strong>Step 5 — Try a full stroke.</strong> Lift one stick to a high starting position (tip about level with the top of your head). Let it drop with gravity into the centre of the snare and let the rebound carry it back up to the same starting height. The wrist initiates; the fingers catch. Don\'t throw the stick into the drum — let it fall.</p>
+      <p><strong>Step 5 — Try a full stroke.</strong> Lift one stick to a high starting position (tip about level with the top of your head). Let it drop with gravity into the center of the snare and let the rebound carry it back up to the same starting height. The wrist initiates; the fingers catch. Don\'t throw the stick into the drum — let it fall.</p>
 
       <p><strong>Step 6 — Try a tap stroke.</strong> Now hold the stick a couple of inches above the snare and play a small, soft stroke from there — start low, end low. Notice the dramatic volume difference between this and the full stroke. Stick height equals volume: high stick = loud note, low stick = quiet note. You\'ll come back to all four stroke types in the dynamics and accent lessons later; for now, just feel the contrast.</p>
 
@@ -2153,7 +2153,7 @@ module.exports = {
           { keys: ['c/5'], duration: '8', sticking: 'L' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Twice as many notes per bar — same alternating sticking. Listen for <em>volume balance</em> between hands: every R should sound exactly like every L. If your weak hand is quieter, slow down and raise its starting height to match the strong hand. The whole reason to practise singles is to make both hands equal."
+        tip: "Twice as many notes per bar — same alternating sticking. Listen for <em>volume balance</em> between hands: every R should sound exactly like every L. If your weak hand is quieter, slow down and raise its starting height to match the strong hand. The whole reason to practice singles is to make both hands equal."
       },
       {
         title: "3 — Loud R, Soft L (Accent / Tap Demo)",
@@ -2190,8 +2190,8 @@ module.exports = {
     nextLessons: ['single-stroke-roll', 'counting-eighths'],
     graduationCriteria: [
       'Can sit with one new pattern for two unbroken minutes (no stopping, no resetting tempo) before deciding to move on',
-      'Practises with a metronome on every exercise that has a ♩= marking',
-      'Can describe in plain language the difference between practising and playing'
+      'Practices with a metronome on every exercise that has a ♩= marking',
+      'Can describe in plain language the difference between practicing and playing'
     ],
     bodyHtml: `
       <p>The single biggest difference between drummers who improve and drummers who plateau is not talent or hours-per-week — it\'s <em>how</em> they spend those hours. You can sit at the kit for ten years and barely improve, or sit at it for two and become genuinely good. The variable is method.</p>
@@ -2202,7 +2202,7 @@ module.exports = {
       <p>If you\'re working on a new groove and it isn\'t locking in, isolate the problem. Drop the bass drum and play just the hi-hat and snare. If that\'s still rough, drop the snare and play just the hi-hat. Add layers back one at a time. You can\'t fix three things at once — your conscious attention can only hold one new variable. The exercises in <em>Your First Beat</em> follow this principle exactly: build the groove from one limb to four, one layer at a time.</p>
 
       <h2 class="section-label">The Metronome Is Not Optional</h2>
-      <p>The metronome is the single most important practice tool you own. It\'s not a punishment; it\'s a mirror. It tells you the truth about your time. When you play without one, you don\'t notice that you\'re speeding up in the second half of every phrase, or dragging through the fills, or rushing into the choruses — but a listener will. Your job as a drummer is to be the timekeeper. Practise like one.</p>
+      <p>The metronome is the single most important practice tool you own. It\'s not a punishment; it\'s a mirror. It tells you the truth about your time. When you play without one, you don\'t notice that you\'re speeding up in the second half of every phrase, or dragging through the fills, or rushing into the choruses — but a listener will. Your job as a drummer is to be the timekeeper. Practice like one.</p>
       <p>A common objection: "the metronome makes me feel stiff." That feeling fades within a few weeks of consistent use, and what replaces it is genuine internal time — you start <em>hearing</em> the click in your head when it isn\'t there. That\'s the goal.</p>
 
       <h2 class="section-label">The Two-Minute Rule</h2>
@@ -2210,7 +2210,7 @@ module.exports = {
 
       <h2 class="section-label">Repetition Isn\'t Practice — Attention Is</h2>
       <p>Sitting at the kit playing the same beat for an hour while watching TV is not practice. It\'s repetition, and it teaches your body whatever bad habit it happens to be doing. Practice is repetition <em>with attention</em>: each rep, you\'re listening for one specific thing. Is the kick lined up with the click? Is the snare landing exactly on 2? Are the hi-hat 8ths even? You can only listen for one thing at a time, but rotating through these checks is what turns reps into improvement.</p>
-      <p>A useful test: at the end of a 5-minute block, can you describe in one sentence what you were paying attention to? If yes, you were practising. If no, you were just playing — which is fine, but don\'t confuse the two.</p>
+      <p>A useful test: at the end of a 5-minute block, can you describe in one sentence what you were paying attention to? If yes, you were practicing. If no, you were just playing — which is fine, but don\'t confuse the two.</p>
 
       <h2 class="section-label">A Practice Block, In Practice</h2>
       <p>Pick one exercise. Set the metronome 10 BPM below the marked tempo. Play for two minutes without stopping, listening for one specific thing (timing, evenness, dynamics — pick one). At the end, decide: was that clean? If yes, raise the metronome by 5 BPM and do another two-minute block. If no, drop it 5 BPM. Repeat for 10–15 minutes. That\'s a real practice session — and it\'ll do more for you than an hour of unfocused playing.</p>
@@ -6788,7 +6788,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The reference. Snare hits are <strong>center hits</strong> — stick tip to the middle of the head, full rebound. Round and full. Memorise this sound; the next four exercises change <em>only the voicing</em>, so any change you hear is the voicing, not the rhythm."
+        tip: "The reference. Snare hits are <strong>center hits</strong> — stick tip to the middle of the head, full rebound. Round and full. Memorize this sound; the next four exercises change <em>only the voicing</em>, so any change you hear is the voicing, not the rhythm."
       },
       {
         title: "2 — Same Backbeat, Rim-Shot Voicing",
@@ -7067,16 +7067,16 @@ module.exports = {
       'China voicing (Ex 4) feels musical, not random — the trashy hit is a sentence break'
     ],
     bodyHtml: `
-      <p>"The cymbal" is rarely just one sound. A ride cymbal alone has three completely different voices depending on where the stick lands; a crash cymbal has two; a china or splash is its own colour entirely. The drummer who knows the geography of their cymbals has an enormous expressive range.</p>
+      <p>"The cymbal" is rarely just one sound. A ride cymbal alone has three completely different voices depending on where the stick lands; a crash cymbal has two; a china or splash is its own color entirely. The drummer who knows the geography of their cymbals has an enormous expressive range.</p>
       <h2 class="section-label">The Geography of a Ride</h2>
       <p><strong>Bow.</strong> The wide flat area between the bell and the edge. The default ride sound: clear stick definition, a steady "ping," some wash underneath. Most jazz and fusion ride lives here.</p>
-      <p><strong>Bell.</strong> The raised dome at the centre. Cuts through everything — high, brassy, almost like a cowbell. Used as an accent inside a ride pattern (Latin, gospel, fusion) or as the ride voice itself in mambos and certain rock songs (Phil Collins, "In the Air Tonight" verse hi-hat-bell motif).</p>
+      <p><strong>Bell.</strong> The raised dome at the center. Cuts through everything — high, brassy, almost like a cowbell. Used as an accent inside a ride pattern (Latin, gospel, fusion) or as the ride voice itself in mambos and certain rock songs (Phil Collins, "In the Air Tonight" verse hi-hat-bell motif).</p>
       <p><strong>Edge / "crash zone."</strong> The outer rim of the cymbal. Strike it with the shoulder of the stick and the ride momentarily becomes a crash — fast attack, lots of wash. Useful when you want to crash without leaving the ride.</p>
       <h2 class="section-label">The Other Cymbals</h2>
       <p><strong>Crash.</strong> Designed for one purpose: short, loud, broad burst on a downbeat or song-section change. Strike with the shoulder of the stick at the edge, never the tip on the bow. A hesitant crash is a wrong crash — commit fully or don't hit it.</p>
       <p><strong>Splash.</strong> A small crash. Faster attack, faster decay, smaller. Used as a percussive accent <em>inside</em> a phrase, where a full crash would be too much.</p>
       <p><strong>China.</strong> A trashy, dirty crash. Used as a sentence break — at the end of a fill, on a rare loud accent, or in metal as a stand-in for the regular ride. Always musical, never random.</p>
-      <p>John Riley (in <em>The Art of Bop Drumming</em>) is explicit about this: bop ride patterns are not just rhythms, they are <em>colour choices</em>. The same pattern played at the bow vs. the bell tells the band two different stories.</p>
+      <p>John Riley (in <em>The Art of Bop Drumming</em>) is explicit about this: bop ride patterns are not just rhythms, they are <em>color choices</em>. The same pattern played at the bow vs. the bell tells the band two different stories.</p>
     `,
     exercises: [
       {
@@ -7125,7 +7125,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8]],
-        tip: "The accents (<em>&gt;</em>) on beats 1 and 3 mean <strong>strike the bell</strong>, not just play those notes louder. Hit the centre dome with the shoulder of the stick. Brassy <em>tang</em> on the accents, smooth <em>ping</em> on the unaccented bow notes. Common in mambo, songo, and gospel ride patterns. Even though the renderer shows accents, your ear tells the band they're bell hits."
+        tip: "The accents (<em>&gt;</em>) on beats 1 and 3 mean <strong>strike the bell</strong>, not just play those notes louder. Hit the center dome with the shoulder of the stick. Brassy <em>tang</em> on the accents, smooth <em>ping</em> on the unaccented bow notes. Common in mambo, songo, and gospel ride patterns. Even though the renderer shows accents, your ear tells the band they're bell hits."
       },
       {
         title: "3 — Crash Placement on Beat 1",
@@ -7831,9 +7831,9 @@ module.exports = {
       'You can tell, by ear, whether you are in bar 1 or bar 2 of the phrase at any point in the loop'
     ],
     bodyHtml: `
-      <p>Up to this point, every groove you\'ve practised has been a <strong>one-bar loop</strong> — a single measure repeated forever. That\'s how grooves are taught, but it\'s rarely how music actually works. Real songs breathe in <em>two-bar phrases</em>: the first bar states the groove, and the second bar answers it with a small variation — an extra snare, a different kick figure, an open hi-hat. Same heartbeat, slightly different breath.</p>
+      <p>Up to this point, every groove you\'ve practiced has been a <strong>one-bar loop</strong> — a single measure repeated forever. That\'s how grooves are taught, but it\'s rarely how music actually works. Real songs breathe in <em>two-bar phrases</em>: the first bar states the groove, and the second bar answers it with a small variation — an extra snare, a different kick figure, an open hi-hat. Same heartbeat, slightly different breath.</p>
       <p>The variation is almost always at the <em>end</em> of the second bar, because that\'s where the phrase resolves before looping back to bar 1. A snare pickup on the <em>&amp; of 4</em>, a doubled kick before the next downbeat, an open-hat sigh — these are the gestures that turn a metronomic loop into a phrase you can hum. The exercises here are the smallest possible two-bar patterns: bar 1 is the basic backbeat you already own; bar 2 is one tiny modification.</p>
-      <p>Practise these by counting bars out loud as you play them — <em>"one"</em> on beat 1 of the first bar, <em>"two"</em> on beat 1 of the second. If you lose track of which bar you\'re in, the variation has stopped functioning as a phrase ending and started functioning as just another loop.</p>
+      <p>Practice these by counting bars out loud as you play them — <em>"one"</em> on beat 1 of the first bar, <em>"two"</em> on beat 1 of the second. If you lose track of which bar you\'re in, the variation has stopped functioning as a phrase ending and started functioning as just another loop.</p>
     `,
     exercises: [
       {
@@ -8216,7 +8216,7 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
         beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
-        tip: "All three layers together: shuffled hat, kick on 1 and 3, snare on 2 and 4 (with the shuffle lilt). This is the <em>shuffle feel</em>. From here you\'re a small step from the rock shuffle (heavier kick, ride pattern), the country shuffle (brushes on the snare), and the medium swing (ride bell on 2 and 4 instead of snare). Loop it for ten minutes; the feel takes longer to internalise than the notes."
+        tip: "All three layers together: shuffled hat, kick on 1 and 3, snare on 2 and 4 (with the shuffle lilt). This is the <em>shuffle feel</em>. From here you\'re a small step from the rock shuffle (heavier kick, ride pattern), the country shuffle (brushes on the snare), and the medium swing (ride bell on 2 and 4 instead of snare). Loop it for ten minutes; the feel takes longer to internalize than the notes."
       }
     ]
   },
@@ -8713,7 +8713,7 @@ module.exports = {
       <p><strong>Brushes</strong> are wire-bristle implements you use instead of sticks for quiet jazz, especially ballads and accompaniment behind a vocalist or solo instrument. They produce two completely different sounds depending on what you do with them: a <em>tap</em>, where you strike the head like a stick, and a <em>sweep</em>, where you drag the bristles across the head in a circular motion to create a continuous <em>shhh</em>.</p>
       <p>Conventional drum notation can't really capture brush playing. The sweep has no attack to notate; it's a continuous sound. The tap can be notated, but without the sweep underneath it the notation is misleading. The exercises below notate the LEFT-HAND tap pattern only; the right-hand sweep is described in prose in each tip and you should imagine the sweep continuing through every bar.</p>
       <h2 class="section-label">The Two Hands Do Different Things</h2>
-      <p>This is the central thing to internalise about brushes: the right hand and the left hand are doing fundamentally different actions. The right hand <em>sweeps</em> in a slow circular pattern on the snare head, never lifting, producing a constant low <em>shhh</em>. The left hand <em>taps</em>, just like it would with a stick, marking the time on top of the sweep. Both hands on the same drum, doing different jobs simultaneously.</p>
+      <p>This is the central thing to internalize about brushes: the right hand and the left hand are doing fundamentally different actions. The right hand <em>sweeps</em> in a slow circular pattern on the snare head, never lifting, producing a constant low <em>shhh</em>. The left hand <em>taps</em>, just like it would with a stick, marking the time on top of the sweep. Both hands on the same drum, doing different jobs simultaneously.</p>
       <h2 class="section-label">The Sweep, in Words</h2>
       <p>Hold the brush in your right hand the way you'd hold a stick — but don't lift it off the head. Move your hand in a flat circle on the snare, the bristles dragging across the surface. The circle should take one full bar (four beats) to complete. Counterclockwise is the most common direction for the right hand. The contact pressure is light — you're <em>brushing</em>, not scrubbing. Practice the sweep alone for two minutes before doing anything else; it should sound like a soft, even cymbal wash that never stops.</p>
       <p>(There are many variations on the sweep — figure-eight patterns, sweeps that move toward and away from you, sweeps that change direction with the form — but they all build on this basic circular sweep. Master the circle first.)</p>
@@ -8850,7 +8850,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Right-hand sweep continues throughout (described, not notated). Left-hand taps and the hat-foot land together on beats 2 and 4. At <em>♩=65</em> there's a long stretch between every event; resist the urge to fill it. The sweep IS the filler. Loop for three full minutes — slow tempos require time-on to internalise."
+        tip: "Right-hand sweep continues throughout (described, not notated). Left-hand taps and the hat-foot land together on beats 2 and 4. At <em>♩=65</em> there's a long stretch between every event; resist the urge to fill it. The sweep IS the filler. Loop for three full minutes — slow tempos require time-on to internalize."
       },
       {
         title: "2 — Add a Pickup Tap on the &amp; of 4",
@@ -9243,7 +9243,7 @@ module.exports = {
       <p><strong>Trading fours</strong> is a jazz performance convention: after the head and the main solos, the band takes turns soloing in four-bar increments. The horn plays four bars, the drummer plays four bars, the horn plays four, the drummer plays four. (You also get "trading eights" and "trading twos" — the duration changes, the principle doesn't.) It's a jazz-specific structural game built into the form.</p>
       <p>Why four bars? Because the standard jazz form (the 32-bar AABA standard, the 12-bar blues) is built out of four-bar phrases, and trading fours respects that phrasing. Each four-bar trade is one phrase of the form. The soloing drummer is filling in for the horn during one of the form's natural phrases, then handing it back.</p>
       <h2 class="section-label">The Practice Format</h2>
-      <p>You can't really practise trading fours alone with a metronome — there's no horn to trade with. The practical workaround used in this lesson is the <em>solo-bar template</em>: comp for three bars, solo for one bar, comp for three bars, solo for one bar. The single solo bar is a stand-in for the band's four-bar phrase, scaled down for solo practice. Once that's automatic, you scale up — comp for four bars, then solo for four bars (Exercise 2).</p>
+      <p>You can't really practice trading fours alone with a metronome — there's no horn to trade with. The practical workaround used in this lesson is the <em>solo-bar template</em>: comp for three bars, solo for one bar, comp for three bars, solo for one bar. The single solo bar is a stand-in for the band's four-bar phrase, scaled down for solo practice. Once that's automatic, you scale up — comp for four bars, then solo for four bars (Exercise 2).</p>
       <h2 class="section-label">Motivic Development</h2>
       <p>The hardest thing about a four-bar solo is making it sound like a phrase, not a random fill. The traditional solution is <em>motivic development</em>: pick a small rhythmic idea (a "motive"), play it in bar 1, vary it slightly in bar 2, vary it again in bar 3, resolve it in bar 4. The idea is recognisable across all four bars because all four bars are versions of the same shape. Exercise 3 demonstrates this with a single 16th-note triplet motive.</p>
     `,
@@ -9732,7 +9732,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "At <em>♩=250</em> the ride keeps quarters through beats 1, 2, and 3, and adds one swung skip on beat 4 — a small lift back to the top of the bar. (Some drummers put it on beat 2 instead; both work.) The skip is a colour here, not a constant."
+        tip: "At <em>♩=250</em> the ride keeps quarters through beats 1, 2, and 3, and adds one swung skip on beat 4 — a small lift back to the top of the bar. (Some drummers put it on beat 2 instead; both work.) The skip is a color here, not a constant."
       },
       {
         title: "3 — Up-Tempo Time with No Kick",
@@ -9818,7 +9818,7 @@ module.exports = {
       <p>Broken time is what most modern jazz drummers do most of the time. Brian Blade, Bill Stewart, Eric Harland, Marcus Gilmore — when they're not doing something more elaborate, they're playing broken time. It's the contemporary default, the way medium swing was the default in 1960. If you understand it, you understand modern jazz drumming; if you can't do it, your playing will sound dated regardless of how clean your technique is.</p>
       <h2 class="section-label">The Logic of Implication</h2>
       <p>If the ride pattern is the explicit statement of jazz time, broken time is what happens when you start removing parts of that statement. Pull out the quarter on beat 2 — but the hat-foot still hits beat 2, so the listener still feels beat 2. Pull out the quarter on beat 3 — same logic. Now your ride is only playing the skip-notes (the swung 8ths), and the time is still completely intact because the bass and the hat-foot are holding it.</p>
-      <p>This is harder than it sounds, because removing notes from a memorised pattern goes against years of muscle memory. The exercises below build the skill incrementally: first remove one note, then two, then everything but the skip-notes. The hat-foot on 2 and 4 stays constant the entire time — it's the anchor that makes the implication possible.</p>
+      <p>This is harder than it sounds, because removing notes from a memorized pattern goes against years of muscle memory. The exercises below build the skill incrementally: first remove one note, then two, then everything but the skip-notes. The hat-foot on 2 and 4 stays constant the entire time — it's the anchor that makes the implication possible.</p>
     `,
     exercises: [
       {
@@ -11470,7 +11470,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Elvin Jones did not play swing; he played <em>triplets</em>. Where the standard ride pattern is "quarter, two swung 8ths, quarter, two swung 8ths" — six events per bar with two of them swung — Elvin's ride pattern was twelve evenly-spaced 8th-note triplets, with the snare and kick adding hits on selected triplet partials. The result is a continuous rolling wave: no clear "beat" division, just constant motion.</p>
-      <p>The 3-against-2 implications are everywhere. Twelve triplets per bar of 4/4 means three triplets per beat; clap on every other triplet and you get six hits per bar — which is also two hits per beat. The triplet feel <em>contains</em> a 3:2 polyrhythm at every level. Internalising this is half the battle.</p>
+      <p>The 3-against-2 implications are everywhere. Twelve triplets per bar of 4/4 means three triplets per beat; clap on every other triplet and you get six hits per bar — which is also two hits per beat. The triplet feel <em>contains</em> a 3:2 polyrhythm at every level. Internalizing this is half the battle.</p>
       <h2 class="section-label">The Layers</h2>
       <ul class="bulleted">
         <li><strong>Triplet ride</strong> — twelve hits per bar, all on the ride, all evenly-spaced.</li>
@@ -12382,7 +12382,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Same texture as Exercise 4 with the clave reversed. The feet do not change — that's the point. Quarters are quarters. The hand must know which side it's on and not be pulled around by the foot. Practise this for a minute, then immediately switch back to Exercise 4 (3-2) without stopping. Switching directions cleanly is the goal: the feet keep going, only the hand direction flips."
+        tip: "Same texture as Exercise 4 with the clave reversed. The feet do not change — that's the point. Quarters are quarters. The hand must know which side it's on and not be pulled around by the foot. Practice this for a minute, then immediately switch back to Exercise 4 (3-2) without stopping. Switching directions cleanly is the goal: the feet keep going, only the hand direction flips."
       }
     ],
     listening: [
@@ -12413,7 +12413,7 @@ module.exports = {
       'Cross-stick samba accents (telecoteco) lock to the foot pattern at ♩=92'
     ],
     bodyHtml: `
-      <p>Samba is Brazil's national rhythm — the sound of Carnaval, of street parades, of the bateria (the giant samba percussion ensemble that drives a samba school down the avenue). On the drum set, samba is mostly a <em>feet</em> rhythm. The two feet do almost all the work; the hands fill in colour on top.</p>
+      <p>Samba is Brazil's national rhythm — the sound of Carnaval, of street parades, of the bateria (the giant samba percussion ensemble that drives a samba school down the avenue). On the drum set, samba is mostly a <em>feet</em> rhythm. The two feet do almost all the work; the hands fill in color on top.</p>
       <p>The two foot voices come from two of the bateria's biggest drums: the <strong>surdo</strong>, the deep bass drum that marks the downbeat, and the <strong>tamborim/agogô</strong>, the higher percussion that accents off-beats. On the kit we translate them: kick on every beat 1 (sometimes 1 and 3), hi-hat foot on every "&" — the "<em>and</em>" between every quarter. That two-feet ostinato is samba's heartbeat.</p>
 
       <h2 class="section-label">The Surdo + Hi-Hat Ostinato</h2>
@@ -13491,7 +13491,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Cáscara is the timbale player's secret weapon. Spanish for "shell," cáscara refers both to the <em>place</em> the rhythm is played (the metal shell, or <em>paila</em>, of the timbale, struck with the side of the stick) and to the <em>pattern</em> itself — a syncopated 8th-note figure that complements clave and contrasts with the bell. In a traditional Cuban band, the timbale player switches between bell, cáscara, and abanico (a snare-roll cue) over the course of a tune; cáscara is the verse pattern, bell is the chorus pattern.</p>
-      <p>On the drum kit, cáscara doesn't have a literal home — there's no timbale shell. So we voice it on whatever resonant metal-or-wood surface we have: the <strong>floor-tom rim</strong> (most common), the <strong>bell of the ride</strong> (when louder), or the <strong>shoulder of the closed hi-hat</strong> (the quietest option). The pattern stays the same; only the colour changes.</p>
+      <p>On the drum kit, cáscara doesn't have a literal home — there's no timbale shell. So we voice it on whatever resonant metal-or-wood surface we have: the <strong>floor-tom rim</strong> (most common), the <strong>bell of the ride</strong> (when louder), or the <strong>shoulder of the closed hi-hat</strong> (the quietest option). The pattern stays the same; only the color changes.</p>
 
       <h2 class="section-label">The Pattern (Two Bars)</h2>
       <p>Cáscara in 3-2 clave direction, played as 8th notes across two bars. Hits on: <em>1, &-of-1, &-of-2, &-of-3, 4 / 1, 2, &-of-2, &-of-3, 4, &-of-4</em>. Some authors notate it slightly differently — there are several common phrasings — but the rhythmic shape is consistent. The pattern <strong>has more notes than clave</strong> (cáscara is a flowing 8th-note pattern; clave is sparse), so cáscara can <em>contain</em> clave inside it.</p>
@@ -13556,7 +13556,7 @@ module.exports = {
           { keys: ['e/5/x2'], duration: '8' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8], [2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Same pattern, voiced on the bell of the ride (the high <em>x</em> notehead in the e/5 position). The bell rings out — the same rhythm sounds twice as loud as the floor-tom rim version. This is the <em>chorus</em> voicing of cáscara, used when the band lifts. Do not change the pattern, only the colour."
+        tip: "Same pattern, voiced on the bell of the ride (the high <em>x</em> notehead in the e/5 position). The bell rings out — the same rhythm sounds twice as loud as the floor-tom rim version. This is the <em>chorus</em> voicing of cáscara, used when the band lifts. Do not change the pattern, only the color."
       },
       {
         title: "3 — Cáscara + Clave Foot (Son 3-2)",
@@ -13991,7 +13991,7 @@ module.exports = {
   // LATIN · Bembé Bell Pattern (Level 3)
   // ============================================================
   'latin-bembe': {
-    tagline: "Yoruba ceremonial 6/8 — the bell as the centre of gravity",
+    tagline: "Yoruba ceremonial 6/8 — the bell as the center of gravity",
     duration: "25 min",
     difficulty: "Advanced",
     focus: "6/8 Folkloric / Independence",
@@ -14008,7 +14008,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Bembé is a 6/8 folkloric rhythm with deep Yoruba ceremonial roots — used in Cuba for celebrations and rituals tied to specific orishas (deities). It's older than the kit drumming we usually study; on the kit we're representing an ensemble of bell, shekere, and conga voices through three or four limbs. The bell pattern at the heart of bembé is a close cousin of the standard 6/8 pattern from the previous lesson, with subtle variations in stroke placement and accent.</p>
-      <p>The shekere — a beaded gourd shaken in a swooping figure — provides the secondary rhythmic layer: a steady, breath-like accompaniment that underpins the bell. On the kit we translate it to <strong>closed hi-hat</strong> playing every 8th note, with subtle accents marking the dotted-quarter pulse. Add the clave foot and a sparse kick and you have a full bembé feel: the bell as the centre, the shekere as the pulse-keeper, the foot as the ground.</p>
+      <p>The shekere — a beaded gourd shaken in a swooping figure — provides the secondary rhythmic layer: a steady, breath-like accompaniment that underpins the bell. On the kit we translate it to <strong>closed hi-hat</strong> playing every 8th note, with subtle accents marking the dotted-quarter pulse. Add the clave foot and a sparse kick and you have a full bembé feel: the bell as the center, the shekere as the pulse-keeper, the foot as the ground.</p>
     `,
     exercises: [
       {
@@ -14466,12 +14466,12 @@ module.exports = {
       'Each voice is identifiable by sound alone — a listener can tell which percussion role the kit is currently covering'
     ],
     bodyHtml: `
-      <p>In a real Cuban folkloric ensemble there are five or more players: clave, palitos (sticks on a wooden block), tres congas (quinto, segundo/tres-golpes, tumbadora), and one or more singers. As a kit drummer you are sometimes asked to <em>be</em> that ensemble — alone, on one drum set, in a song that needs the rumba colour without the rumba personnel.</p>
+      <p>In a real Cuban folkloric ensemble there are five or more players: clave, palitos (sticks on a wooden block), tres congas (quinto, segundo/tres-golpes, tumbadora), and one or more singers. As a kit drummer you are sometimes asked to <em>be</em> that ensemble — alone, on one drum set, in a song that needs the rumba color without the rumba personnel.</p>
       <p>The job is orchestration. Choose which folkloric voice each part of the kit will represent, respect the original timbres (bright/sharp = high voice, low/round = low voice), and keep the clave audible through everything you play. The cross-stick is your palitos. The bell of the ride is your cata. The high tom is your quinto, the floor tom your tumbadora. The hi-hat foot is your clave when you have nothing else to give it.</p>
 
       <h2 class="section-label">Voice Mapping (this lesson)</h2>
       <ul>
-        <li><strong>Cross-stick (c/5)</strong> — palitos / clave-side colour</li>
+        <li><strong>Cross-stick (c/5)</strong> — palitos / clave-side color</li>
         <li><strong>Bell of ride (e/5/x2)</strong> — cata or guataca (high iron)</li>
         <li><strong>Hi tom (e/5)</strong> — quinto (high conga, soloing voice)</li>
         <li><strong>Floor tom (a/4)</strong> — tumbadora (low conga, anchor)</li>
@@ -14480,7 +14480,7 @@ module.exports = {
       </ul>
 
       <h2 class="section-label">Two Pulses, One Body</h2>
-      <p>Folkloric rumba lives between 4/4 and 6/8 — a guaguanco verse can drop into a bembe-coloured 6/8 montuno on the next bar and the bell pattern survives the change. Exercise 1 makes that transition explicit. Exercises 2 and 3 simulate the full ensemble — first in 4/4, then in 6/8. Exercise 4 is the working drummer's reality: a single bar of "one-kit guaguanco" you can drop into a song.</p>
+      <p>Folkloric rumba lives between 4/4 and 6/8 — a guaguanco verse can drop into a bembe-colored 6/8 montuno on the next bar and the bell pattern survives the change. Exercise 1 makes that transition explicit. Exercises 2 and 3 simulate the full ensemble — first in 4/4, then in 6/8. Exercise 4 is the working drummer's reality: a single bar of "one-kit guaguanco" you can drop into a song.</p>
 
       <h2 class="section-label">A Note On Respect</h2>
       <p>Folkloric rumba is secular party music — there is no sacred barrier — but it carries hundreds of years of Afro-Cuban culture. Listen to Los Munequitos de Matanzas, Yoruba Andabo, and Clave y Guaguanco. Imitate before you arrange.</p>
@@ -14512,7 +14512,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Bar of 4/4 guaguanco simulation — bell on 8ths, cross-stick voicing the rumba clave hits, kick on the bombo (1, &-of-2) and on 4. Once it loops, mentally <em>regroup the same 8ths into two groups of three</em> and the pattern starts to lean toward 6/8. In a band setting you would now switch to the next exercise on a cue. Practise the mental flip — same hand, different feel."
+        tip: "Bar of 4/4 guaguanco simulation — bell on 8ths, cross-stick voicing the rumba clave hits, kick on the bombo (1, &-of-2) and on 4. Once it loops, mentally <em>regroup the same 8ths into two groups of three</em> and the pattern starts to lean toward 6/8. In a band setting you would now switch to the next exercise on a cue. Practice the mental flip — same hand, different feel."
       },
       {
         title: "2 — Folkloric Rumba Simulation (Palitos + Quinto + Tumbadora)",
@@ -14562,7 +14562,7 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          // Two bars of 6/8 — bell pattern on bell of ride, with quinto/tumba colour
+          // Two bars of 6/8 — bell pattern on bell of ride, with quinto/tumba color
           { keys: ['e/5/x2'], duration: '8' },
           { keys: ['e/5/x2', 'a/4'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
@@ -14869,7 +14869,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "<strong>Itotele on the kit = mid tom (d/5) for the cha head + snare (c/5, played as a soft tap or cross-stick) for the enu.</strong> The itotele plays in conversation with the iya — when the iya asks, the itotele answers. Practise this voice alone first, until the call-and-response feel is clear in your hands. The rhythmic shape is more syncopated than the okonkolo because the itotele is a <em>responder</em>, not a timekeeper."
+        tip: "<strong>Itotele on the kit = mid tom (d/5) for the cha head + snare (c/5, played as a soft tap or cross-stick) for the enu.</strong> The itotele plays in conversation with the iya — when the iya asks, the itotele answers. Practice this voice alone first, until the call-and-response feel is clear in your hands. The rhythmic shape is more syncopated than the okonkolo because the itotele is a <em>responder</em>, not a timekeeper."
       },
       {
         title: "3 — Iya Voice (Floor Tom)",
@@ -14924,7 +14924,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q', dot: true }
         ],
         beamGroups: [[3, 8], [3, 8]],
-        tip: "Hi tom = okonkolo, mid tom = itotele, floor tom = iya, kick = the dance pulse. The interlock is the whole point — each drum's hits land in spaces the others leave open — so practise hands only until the weave is audible, then add the kick."
+        tip: "Hi tom = okonkolo, mid tom = itotele, floor tom = iya, kick = the dance pulse. The interlock is the whole point — each drum's hits land in spaces the others leave open — so practice hands only until the weave is audible, then add the kick."
       }
     ]
   },
@@ -15000,7 +15000,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q', dot: true }
         ],
         beamGroups: [[3, 8], [3, 8]],
-        tip: "Two supporting drums on the kit — <strong>low tom = the larger iyesa drum, high tom = the smaller answer</strong>. They interlock: each drum's hits land where the other rests. The kick stays steady on the dotted-quarter pulse. Practise alone, no bell, until the interlock is even. The challenge here is the <em>silence</em> between the hits — leave it open, do not fill it."
+        tip: "Two supporting drums on the kit — <strong>low tom = the larger iyesa drum, high tom = the smaller answer</strong>. They interlock: each drum's hits land where the other rests. The kick stays steady on the dotted-quarter pulse. Practice alone, no bell, until the interlock is even. The challenge here is the <em>silence</em> between the hits — leave it open, do not fill it."
       },
       {
         title: "3 — Full Iyesa Pattern (Bell + Supporting Drums + Kick)",
@@ -15060,7 +15060,7 @@ module.exports = {
       </ul>
 
       <h2 class="section-label">What This Lesson Will Do</h2>
-      <p>It will show you three representative phrase shapes from the broader 6/8 / 12/8 Yoruba ceremonial family, voiced on a single kit, so that you can recognise them when you hear them, study them as architecture, and arrive at a teacher's door already speaking some of the language.</p>
+      <p>It will show you three representative phrase shapes from the broader 6/8 / 12/8 Yoruba ceremonial family, voiced on a single kit, so that you can recognize them when you hear them, study them as architecture, and arrive at a teacher's door already speaking some of the language.</p>
     `,
     exercises: [
       {
@@ -15359,7 +15359,7 @@ module.exports = {
     bodyHtml: `
       <p><strong>Linear playing</strong> means that <em>no two limbs ever strike at the same time</em>. Every note is its own event. Where a normal groove stacks the kick under the hi-hat or the snare against a cymbal, a linear pattern lays its notes out in single file: hand, hand, foot, hand, foot, hand. The result is a busy, conversational texture that fits naturally inside fusion, gospel, and modern pop — and it's the basis of the way Steve Smith, Dave Weckl, Vinnie Colaiuta, and Brian Blade build their vocabulary.</p>
       <p>Linear playing forces independence in the strictest possible way. There's no "leaning" — each limb has to drop in cleanly, exactly between the other limbs' notes. You can't fake it by hitting two things at once and hoping the room hears it. That's why linear practice transfers so powerfully to every other style; it cleans up the timing of every limb you have.</p>
-      <h2 class="section-label">How To Practise</h2>
+      <h2 class="section-label">How To Practice</h2>
       <p>Slow first. Linear patterns reward precision more than tempo. If you can play a line at ♩=70 with no overlaps, you can play it at ♩=120 with three weeks of practice. If you can play it at ♩=120 with overlaps, you'll never play it cleanly. The temptation to push tempo is the enemy.</p>
     `,
     exercises: [
@@ -15535,7 +15535,7 @@ module.exports = {
           { rest: true, duration: '8' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "A genuine linear groove. <strong>No two voices ever sound together</strong> — every 16th has exactly one voice. The accents on beats 2 and 4 (snare) plus the kick spread across the bar produce a backbeat <em>feel</em> even though, technically, you never stack a kick under a snare. That's the fusion magic: groove from sequence, not from coincidence. Practise it at half speed first; rush this and the lines blur."
+        tip: "A genuine linear groove. <strong>No two voices ever sound together</strong> — every 16th has exactly one voice. The accents on beats 2 and 4 (snare) plus the kick spread across the bar produce a backbeat <em>feel</em> even though, technically, you never stack a kick under a snare. That's the fusion magic: groove from sequence, not from coincidence. Practice it at half speed first; rush this and the lines blur."
       }
     ],
     listening: [
@@ -15559,10 +15559,10 @@ module.exports = {
       'Rock backbeat with subtly-pushed 8th notes (slight late-feel on the &) holds at ♩=88 for 16 bars',
       'A 2-bar transition from rock backbeat to jazz ride pattern preserves the pulse — beat 1 of bar 2 lines up with beat 1 of bar 1',
       'Comping snare figures land between the backbeats without disrupting the 2-and-4 feel',
-      'A "Steely Dan" bar (rock backbeat + comping snare + occasional ride colour) loops naturally at ♩=92'
+      'A "Steely Dan" bar (rock backbeat + comping snare + occasional ride color) loops naturally at ♩=92'
     ],
     bodyHtml: `
-      <p>Jazz-rock crossover is the territory where two languages share an idiom. The drummers behind Steely Dan, Donald Fagen's solo records, the early-period Toto records, and the Snarky Puppy / Vulfpeck side of modern fusion all live in this zone. The hands aren't playing pure rock 8ths — they're playing rock 8ths that have been listening to jazz for ten years. The backbeat is firm; the 8ths are slightly relaxed (almost-but-not-quite swung); the ride pattern shows up for a bar at the bridge to add colour; and the snare comments between the backbeats with the kind of figures a jazz drummer would call "comping".</p>
+      <p>Jazz-rock crossover is the territory where two languages share an idiom. The drummers behind Steely Dan, Donald Fagen's solo records, the early-period Toto records, and the Snarky Puppy / Vulfpeck side of modern fusion all live in this zone. The hands aren't playing pure rock 8ths — they're playing rock 8ths that have been listening to jazz for ten years. The backbeat is firm; the 8ths are slightly relaxed (almost-but-not-quite swung); the ride pattern shows up for a bar at the bridge to add color; and the snare comments between the backbeats with the kind of figures a jazz drummer would call "comping".</p>
       <p>This is what people mean by <em>feel</em>. The notation looks like a basic 8th-note rock groove, but a Steely Dan record sounds nothing like a basic 8th-note rock groove because the drummer has been informed by Elvin Jones, Tony Williams, and Bernard Purdie before he ever played a backbeat.</p>
       <h2 class="section-label">The Push</h2>
       <p>The defining trick is what New York studio drummers call "the push": the &-of-each-beat is played a hair late, almost-but-not-quite triplet-y. It's not full swing — that would sound like a shuffle. It's a slight delay that creates lift. Aim for somewhere between a 50/50 division and a 60/40 division; the more pop the song is, the closer to 50/50; the more jazz-leaning, the closer to 60/40.</p>
@@ -15671,7 +15671,7 @@ module.exports = {
           { rest: true, duration: 'q', dot: true }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The canonical \"Steely Dan\" bar. Backbeat on 2 and 4. A comping snare on the &-of-2 (lifts into beat 3). A comping snare on the &-of-3 (anticipates the next backbeat). Kick on 1 plus a syncopated &-of-2 push. Push the 8ths slightly late. The whole bar should feel <em>casual</em> — like the drummer is half-asleep but hitting everything dead-centre. That's the Steely Dan trick: looseness up top, ironclad pulse underneath."
+        tip: "The canonical \"Steely Dan\" bar. Backbeat on 2 and 4. A comping snare on the &-of-2 (lifts into beat 3). A comping snare on the &-of-3 (anticipates the next backbeat). Kick on 1 plus a syncopated &-of-2 push. Push the 8ths slightly late. The whole bar should feel <em>casual</em> — like the drummer is half-asleep but hitting everything dead-center. That's the Steely Dan trick: looseness up top, ironclad pulse underneath."
       }
     ],
     listening: [
@@ -15706,7 +15706,7 @@ module.exports = {
         <li><strong>RLRK</strong> — four-note: classic 16th-note cell. Lines up with the bar.</li>
         <li><strong>RKLRKL</strong> — six-note: lives over the bar like a hemiola.</li>
       </ul>
-      <p>Each is short enough to internalise quickly; chained, they cover most of what working fusion drummers play.</p>
+      <p>Each is short enough to internalize quickly; chained, they cover most of what working fusion drummers play.</p>
       <h2 class="section-label">A Word On Notation</h2>
       <p>In the exercises below, "K" is rendered as a kick in the <em>feet</em> voice. Sticking annotations on the hands voice show R/L only. The renderer doesn't show foot strokes inline with hand strokes, but on the staff they appear in the right time-position because the rests in the hands voice are placeholders.</p>
     `,
@@ -15956,7 +15956,7 @@ module.exports = {
       <p>The most useful kind of displacement is <em>backbeat displacement</em>: instead of the snare on beats 2 and 4, the snare lands on the &-of-1 and &-of-3 (an 8th-note displacement) or on the e-of-1 and e-of-3 (a 16th-note displacement). The bar still <em>feels</em> like it has a backbeat — the groove still has weight on the second and fourth quarter — but the snare is no longer where you expect it.</p>
       <p>Chris "Daddy" Dave, Mark Guiliana, and the entire generation of drummers descended from drum-and-bass production live in this language. Used sparingly, it adds spice. Used heavily, it's an entire style.</p>
       <h2 class="section-label">Why It's Hard</h2>
-      <p>Your body wants the snare on 2 and 4 because every other groove you've ever played has reinforced that habit. Displacement requires you to <em>defeat the muscle memory</em> at the same time as you maintain the rest of the groove. Practise slowly, and don't move on until the displaced bar feels as steady as the standard one.</p>
+      <p>Your body wants the snare on 2 and 4 because every other groove you've ever played has reinforced that habit. Displacement requires you to <em>defeat the muscle memory</em> at the same time as you maintain the rest of the groove. Practice slowly, and don't move on until the displaced bar feels as steady as the standard one.</p>
     `,
     exercises: [
       {
@@ -16100,7 +16100,7 @@ module.exports = {
     ],
     listening: [
       { artist: "Chris \"Daddy\" Dave", work: "D'Angelo — Black Messiah", note: "The displaced-backbeat bible. Every track." },
-      { artist: "Mark Guiliana", work: "Mehliana — Taming The Dragon", note: "Sixteenth-note displacement at the centre of the language." },
+      { artist: "Mark Guiliana", work: "Mehliana — Taming The Dragon", note: "Sixteenth-note displacement at the center of the language." },
       { artist: "J Dilla", work: "Donuts", note: "Programmed, but the same idea — drunk-feeling backbeat displacement." }
     ]
   },
@@ -16354,7 +16354,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Cross-stick on every <em>&</em> makes the snare the time-keeper; foot-hat holds 2 and 4, kick 1 and 3, and the ride drops in only on 1 and 3 as colour. Keep the cross-stick soft — <strong>the moment it gets loud enough to feel like a backbeat, it stops being a pulse</strong>."
+        tip: "Cross-stick on every <em>&</em> makes the snare the time-keeper; foot-hat holds 2 and 4, kick 1 and 3, and the ride drops in only on 1 and 3 as color. Keep the cross-stick soft — <strong>the moment it gets loud enough to feel like a backbeat, it stops being a pulse</strong>."
       },
       {
         title: "3 — Implied Pulse Only",
@@ -16638,7 +16638,7 @@ module.exports = {
       <p>This lesson is about getting that placement under conscious control. Most drummers default to one of the three places (at / behind / ahead) and never realize there are alternatives. Once you can hear the difference and produce all three on demand, you have a powerful expressive tool — and you can adapt to whatever the music in front of you needs.</p>
       <h2 class="section-label">A Word on "Behind the Beat"</h2>
       <p>Behind the beat does <em>not</em> mean slowing down. It means every note arrives a few milliseconds after the click, but the <em>tempo</em> stays exactly the same. If the click is at 90 bpm, every beat is still 666 ms apart — your hits just consistently land 10 or 20 ms later than the click within that 666 ms window. The drummers in the references for this lesson — Stubblefield, Starks, Purdie at low tempos — built careers on that placement. It feels heavy, deliberate, deeply rooted. It does not feel late.</p>
-      <h2 class="section-label">How to Practise It</h2>
+      <h2 class="section-label">How to Practice It</h2>
       <p>You need a click — a metronome with a clear tone, ideally one that ticks loudly enough to hear over your kit. Play the same one-bar groove at three different placements. Don't change the kick or snare pattern; only change <em>when</em> you play it relative to the click. Then record yourself and listen back. Recording is non-negotiable for this lesson — you cannot reliably hear your own placement in real time.</p>
       <p>Pro tip: most drummers find &quot;at the click&quot; the hardest of the three at first. The click and your snare on 2 should sound like one thing, not two adjacent things. If you hear two distinct clicks, you're either ahead or behind by enough to be a problem.</p>
     `,
@@ -17019,7 +17019,7 @@ module.exports = {
       <p>If James Brown's band gave the world tight, sparse, on-the-grid funk, The Meters gave the world the opposite: <strong>loose, broken, swinging funk</strong> rooted in the New Orleans second-line tradition. The drummer was Joseph &quot;Zigaboo&quot; Modeliste, and the most distinctive feature of his playing — the thing that immediately marks a groove as &quot;Zigaboo-style&quot; — is what he does with the snare.</p>
       <p>Most funk drummers play a backbeat on 2 <em>and</em> 4. Zigaboo often doesn't. He plays the snare on <strong>4 only</strong>, fills the space between with ghost notes and rim hits, and lets the kick and hi-hat carry the rest. The result is a backbeat that feels delayed, a bar that breathes differently, a groove that swings without swinging in the jazz sense. It's also the rhythmic DNA of New Orleans drumming going back a century — second-line parade-drum patterns, Bo Diddley's variant of the same idea, and a thousand records out of New Orleans share this skeleton.</p>
       <h2 class="section-label">What Makes It &quot;Second-Line&quot;</h2>
-      <p>Second-line refers to the parade tradition where a brass band leads (the first line) and a crowd of dancers follows, drums in tow. The drumming style is loose, syncopated, and emphasises the &quot;and&quot;-of-2 and the &quot;and&quot;-of-4 as much as the downbeats themselves. When that approach gets translated to a drum kit, you get this lesson — broken backbeats, kicks on unexpected 16ths, and ghost notes everywhere.</p>
+      <p>Second-line refers to the parade tradition where a brass band leads (the first line) and a crowd of dancers follows, drums in tow. The drumming style is loose, syncopated, and emphasizes the &quot;and&quot;-of-2 and the &quot;and&quot;-of-4 as much as the downbeats themselves. When that approach gets translated to a drum kit, you get this lesson — broken backbeats, kicks on unexpected 16ths, and ghost notes everywhere.</p>
     `,
     exercises: [
       {
@@ -17164,9 +17164,9 @@ module.exports = {
     ],
     bodyHtml: `
       <p>James Brown's band redefined what a rhythm section was for. Where most popular music up to that point treated rhythm as accompaniment, Brown's band treated rhythm as the <em>whole</em> arrangement — every instrument, vocals included, became a percussion part contributing to a single interlocking pulse. The drummers in that band — primarily Clyde Stubblefield and John &quot;Jabo&quot; Starks, with several others passing through — developed a vocabulary that's still the lingua franca of funk drumming sixty years later.</p>
-      <p>The defining principle of JB drumming: <strong>everything is on the One</strong>. Brown himself would shout it on stage. The downbeat of every bar is the gravitational centre, and every other note — kick, snare, ghost, fill — orbits it. A JB groove that has lost its sense of the One isn't a JB groove anymore.</p>
+      <p>The defining principle of JB drumming: <strong>everything is on the One</strong>. Brown himself would shout it on stage. The downbeat of every bar is the gravitational center, and every other note — kick, snare, ghost, fill — orbits it. A JB groove that has lost its sense of the One isn't a JB groove anymore.</p>
       <h2 class="section-label">Stubblefield vs Starks</h2>
-      <p>Clyde and Jabo are often discussed together but they had different feels. Clyde played busy, ghost-note-dense, 16th-heavy patterns — closer to what we built in <em>funk-clyde-stubblefield</em>. Jabo played sparser, more &quot;upright&quot; grooves with cleaner lines and bigger pocket. Both work. Many recordings are debated among drummers as to which one is on the kit. For practising, alternate between dense (Clyde) and sparse (Jabo) versions of the same skeleton; this gets both feels under your hands.</p>
+      <p>Clyde and Jabo are often discussed together but they had different feels. Clyde played busy, ghost-note-dense, 16th-heavy patterns — closer to what we built in <em>funk-clyde-stubblefield</em>. Jabo played sparser, more &quot;upright&quot; grooves with cleaner lines and bigger pocket. Both work. Many recordings are debated among drummers as to which one is on the kit. For practicing, alternate between dense (Clyde) and sparse (Jabo) versions of the same skeleton; this gets both feels under your hands.</p>
       <h2 class="section-label">Locking with the Band</h2>
       <p>JB grooves don't exist in isolation. A signature feature is the <em>ensemble hit</em> — a horn or guitar stab on a specific 16th that the drummer either reinforces (with a kick or snare) or leaves bare (so the band hits it together while the drummer continues the underlying groove). The exercises below include a pattern where a hypothetical horn hit lands on a specific 16th — your job is to keep the underlying groove going while &quot;hearing&quot; the hit as if the band were there.</p>
     `,
@@ -17615,7 +17615,7 @@ module.exports = {
       <h2 class="section-label">A New-Orleans-via-Bo-Diddley Note</h2>
       <p>The pattern most often called &quot;Bo Diddley beat&quot; — a tresillo-shaped figure (1, the <em>&amp;</em> of 2, the &quot;a&quot; of 3, beat 4-or-thereabouts, beat 4-and-a-bit) — predates Bo Diddley and predates rock. It comes out of the same Afro-Caribbean rhythmic grammar that gives us son clave, the New Orleans second line, and the funk we're studying here. Zigaboo's playing draws on this lineage; many Meters records use a kick figure that's essentially a tresillo with funk dressing. (See <em>Goines/Ameen — Afro-Cuban Grooves for Bass and Drums</em> for the deep-dive on the cross-pollination.)</p>
       <h2 class="section-label">Practice Approach</h2>
-      <p>Don't try to play these grooves &quot;tight&quot; in the Stubblefield sense. Zigaboo's pocket is loose. Notes are placed where they feel right, not on the metronomic grid. Practise with a metronome anyway — but let your ear lead, and let the click be a guide rather than a tyrant. If a snare on 4 wants to be a hair late, let it be a hair late.</p>
+      <p>Don't try to play these grooves &quot;tight&quot; in the Stubblefield sense. Zigaboo's pocket is loose. Notes are placed where they feel right, not on the metronomic grid. Practice with a metronome anyway — but let your ear lead, and let the click be a guide rather than a tyrant. If a snare on 4 wants to be a hair late, let it be a hair late.</p>
     `,
     exercises: [
       {
@@ -17828,7 +17828,7 @@ module.exports = {
           { rest: true, duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16], [4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Two bars of Meters-style pocket. Bar 1 emphasises the broken feel; bar 2 has slightly more density — extra ghosts in the back half of the bar pushing into bar 1 of the repeat. The snare lands on slightly different 16ths in the two bars, which keeps the listener's ear engaged across the phrase. Aim for a relaxed, slightly-behind feel; this groove should feel like it's strolling, not running."
+        tip: "Two bars of Meters-style pocket. Bar 1 emphasizes the broken feel; bar 2 has slightly more density — extra ghosts in the back half of the bar pushing into bar 1 of the repeat. The snare lands on slightly different 16ths in the two bars, which keeps the listener's ear engaged across the phrase. Aim for a relaxed, slightly-behind feel; this groove should feel like it's strolling, not running."
       }
     ]
   },
@@ -18291,7 +18291,7 @@ module.exports = {
       <p>In a marching band the bass drummer carries the dotted-quarter walking pulse — sometimes called "tipitina" pulse after Professor Longhair's piano figure. On the kit you hear a kick on <em>1</em>, on <em>the &amp; of 2</em>, on <em>3</em>, and often on <em>the &amp; of 4</em> — leaning forward into the next bar. That syncopation is the parade bass drum, transcribed for the foot.</p>
 
       <h2 class="section-label">The Snare's Job</h2>
-      <p>The snare drummer in a parade plays <strong>press rolls</strong> — short buzz strokes pressed into the head — and <strong>rim accents</strong> on the strong beats. On the kit, that becomes ghost-note 16ths between accented backbeats, often coloured with a buzz or a flam. The snare doesn't simply mark 2 and 4; it <em>weaves</em> between them.</p>
+      <p>The snare drummer in a parade plays <strong>press rolls</strong> — short buzz strokes pressed into the head — and <strong>rim accents</strong> on the strong beats. On the kit, that becomes ghost-note 16ths between accented backbeats, often colored with a buzz or a flam. The snare doesn't simply mark 2 and 4; it <em>weaves</em> between them.</p>
 
       <h2 class="section-label">Why It Matters</h2>
       <p>Almost every funk groove that came after — Memphis, Detroit, Bay Area — descended from this parade vocabulary. The Meters' "Cissy Strut" is a New Orleans groove on a rock kit. James Brown's "Funky Drummer" inherits the kick-on-the-and. Even the modern displaced backbeat (the next lesson) starts with the seed Zigaboo planted: <em>the kick is allowed to walk, the snare is allowed to talk back</em>.</p>
@@ -18489,7 +18489,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The home position. Snare on 2 and 4, kick on 1 and 3, hat on 8ths. Loop this for one full minute before moving to Ex 2 — your body needs to know where the backbeat normally lives so it can recognise the displacement when it happens. <strong>Sing 1-2-3-4 out loud</strong> and place the snare on the count words 2 and 4. This is your reference."
+        tip: "The home position. Snare on 2 and 4, kick on 1 and 3, hat on 8ths. Loop this for one full minute before moving to Ex 2 — your body needs to know where the backbeat normally lives so it can recognize the displacement when it happens. <strong>Sing 1-2-3-4 out loud</strong> and place the snare on the count words 2 and 4. This is your reference."
       },
       {
         title: "2 — Snare on the & of 2 and the & of 4",
@@ -18625,7 +18625,7 @@ module.exports = {
       <p>Kick figures vary, but the canonical placement is on count 1 and on the third triplet of count 2 (the <em>"a"</em> of 2 in shuffle-talk). That single anticipation pulls the snare on count 3 out of you — you hear the kick land just before, and the loud snare answers it.</p>
 
       <h2 class="section-label">A Note on Tempo</h2>
-      <p>The Purdie shuffle wants to live around ♩=80. Slower and the ghost notes lose definition; faster and they collapse into a buzz. Practise at 80, then drop to 70 to dig deeper, then push to 90 to test the time.</p>
+      <p>The Purdie shuffle wants to live around ♩=80. Slower and the ghost notes lose definition; faster and they collapse into a buzz. Practice at 80, then drop to 70 to dig deeper, then push to 90 to test the time.</p>
     `,
     exercises: [
       {
@@ -18825,7 +18825,7 @@ module.exports = {
       <p>Linear funk forces the drummer to <em>hear</em> every note independently. There's no leaning on stacked-up density to disguise weak placement. If the kick is late, you hear it; if the hat drops in volume, you hear it. The tradeoff for that exposure is that when it lands, every note feels precisely placed — like a sequenced beat played by a human.</p>
 
       <h2 class="section-label">A Word on Speed</h2>
-      <p>Tower of Power tempos sit around ♩=100. Below that the linear logic feels too sparse; above that the ghost-note 16ths blur. Practise at 80, perform at 100.</p>
+      <p>Tower of Power tempos sit around ♩=100. Below that the linear logic feels too sparse; above that the ghost-note 16ths blur. Practice at 80, perform at 100.</p>
     `,
     exercises: [
       {
@@ -18928,7 +18928,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "For the rim shot: tip of the stick on the centre of the head, shoulder on the rim, both at once — a woody <em>crack</em> with real cut. Aim for a 6:1 or 8:1 volume ratio between that accent and the ghost 16ths around it."
+        tip: "For the rim shot: tip of the stick on the center of the head, shoulder on the rim, both at once — a woody <em>crack</em> with real cut. Aim for a 6:1 or 8:1 volume ratio between that accent and the ghost 16ths around it."
       },
       {
         title: "4 — Two-Bar Garibaldi Pattern",
@@ -19073,7 +19073,7 @@ module.exports = {
           { keys: ['f/4'], duration: '8' },
           { rest: true, duration: 'q' }
         ],
-        tip: "One kick moves off 3 onto the <em>&amp; of 3</em> — with quarter hats around it, that single note owns the second half of the bar. Place it dead-centre between the hats on 3 and 4 (on the 8th click, if your metronome does 8ths). Pure Steve Jordan."
+        tip: "One kick moves off 3 onto the <em>&amp; of 3</em> — with quarter hats around it, that single note owns the second half of the bar. Place it dead-center between the hats on 3 and 4 (on the 8th click, if your metronome does 8ths). Pure Steve Jordan."
       },
       {
         title: "3 — Sparse Ghost Notes",
@@ -19299,7 +19299,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "?uestlove + Pino Palladino", work: "D'Angelo — Voodoo (entire album)", note: "Listen many times before practising — how far behind the click can a snare live and still lock? You cannot study what you have not internalised." },
+      { artist: "?uestlove + Pino Palladino", work: "D'Angelo — Voodoo (entire album)", note: "Listen many times before practicing — how far behind the click can a snare live and still lock? You cannot study what you have not internalized." },
       { artist: "?uestlove", work: "D'Angelo — Untitled (How Does It Feel)", note: "The single clearest example of the late drag — slow tempo makes it audible." },
       { artist: "James Gadson", work: "Bill Withers — Use Me", note: "An earlier ancestor — Gadson dragging hard, decades before Voodoo." }
     ]
@@ -19335,7 +19335,7 @@ module.exports = {
       <p>Many neo-soul drummers — Chris Dave most famously — push their ghost notes <em>slightly off the 16th grid</em>. Not on the &, not on the e — somewhere between, perhaps four or five 16th-grid positions per bar that all live a few milliseconds early or late. The result is a groove that feels human and slippery — like the drummer is sliding around inside a rigid metronomic frame.</p>
 
       <h2 class="section-label">Four-Bar Phrasing</h2>
-      <p>Modern neo-soul is rarely a one-bar pattern. The phrase typically extends four bars — small variations every bar, a release on bar 4. Practise the four-bar version (Ex 4) as a single phrase, not four iterations of the same bar.</p>
+      <p>Modern neo-soul is rarely a one-bar pattern. The phrase typically extends four bars — small variations every bar, a release on bar 4. Practice the four-bar version (Ex 4) as a single phrase, not four iterations of the same bar.</p>
     `,
     exercises: [
       {
@@ -19585,7 +19585,7 @@ module.exports = {
       <p>It's not just the loud snare that drags. The ghost notes drag too — and crucially, they drag <em>more</em> as the bar progresses. The first ghost in the bar might be on time; the last ghost in the bar might be a 32nd late. The whole bar leans backward as it unfolds.</p>
 
       <h2 class="section-label">Bar-By-Bar Variation</h2>
-      <p>?uestlove's recordings show subtle variation from one bar to the next — bar 1 sits in one micro-position, bar 2 in another. The variation is rarely conscious; it emerges from listening to the band and adjusting in real time. Practising it consciously, in the form of bar-1-here, bar-2-there alternations, builds the awareness for it to happen unconsciously later.</p>
+      <p>?uestlove's recordings show subtle variation from one bar to the next — bar 1 sits in one micro-position, bar 2 in another. The variation is rarely conscious; it emerges from listening to the band and adjusting in real time. Practicing it consciously, in the form of bar-1-here, bar-2-there alternations, builds the awareness for it to happen unconsciously later.</p>
 
     `,
     exercises: [
@@ -19755,7 +19755,7 @@ module.exports = {
     listening: [
       { artist: "?uestlove", work: "The Roots — Things Fall Apart", note: "The first full-length showcase of the deep-pocket vocabulary." },
       { artist: "?uestlove", work: "D'Angelo — Voodoo", note: "The album that made the late pocket a stylistic option for everyone after." },
-      { artist: "?uestlove", work: "The Roots — How I Got Over", note: "Mature continuation — the placement is so internalised it never wavers." }
+      { artist: "?uestlove", work: "The Roots — How I Got Over", note: "Mature continuation — the placement is so internalized it never wavers." }
     ]
   },
 
@@ -21867,7 +21867,7 @@ module.exports = {
       </ul>
 
       <h2 class="section-label">Practice Tool</h2>
-      <p>Use a metronome that plays only on beats 2 and 4. Practise the snare exactly with that click first. Then practise the snare deliberately ahead of it, and deliberately behind it. The ear has to <em>hear</em> the displacement before the body can produce it on demand.</p>
+      <p>Use a metronome that plays only on beats 2 and 4. Practice the snare exactly with that click first. Then practice the snare deliberately ahead of it, and deliberately behind it. The ear has to <em>hear</em> the displacement before the body can produce it on demand.</p>
     `,
     exercises: [
       {
@@ -21920,7 +21920,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Same notes as exercise 1, but <strong>play the snare a hair before the click</strong> on every backbeat. Hat stays exactly on the click. Kick stays exactly on the click. Only the snare moves. The groove will feel <em>urgent</em> — leaning forward, slightly anxious. The hard part is <strong>consistency</strong>: every backbeat has to be early by the same amount. Practise with a 2-and-4 click and watch your snare-clack arrive just before each click."
+        tip: "Same notes as exercise 1, but <strong>play the snare a hair before the click</strong> on every backbeat. Hat stays exactly on the click. Kick stays exactly on the click. Only the snare moves. The groove will feel <em>urgent</em> — leaning forward, slightly anxious. The hard part is <strong>consistency</strong>: every backbeat has to be early by the same amount. Practice with a 2-and-4 click and watch your snare-clack arrive just before each click."
       },
       {
         title: "3 — Snare Consistently 30ms Late (Dragged)",
@@ -21973,7 +21973,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The canonical Dilla drunken feel. <strong>Kick is slightly early</strong>, <strong>snare is slightly late</strong>, hat is on the click. The two displacements are in <em>opposite directions</em> — that is what creates the wobble. The feet pattern adds an &-of-1 kick to give the kick line shape. Listen to a Dilla beat once before practising; the wobble is unmistakable. Once it locks, the bar feels like it is breathing."
+        tip: "The canonical Dilla drunken feel. <strong>Kick is slightly early</strong>, <strong>snare is slightly late</strong>, hat is on the click. The two displacements are in <em>opposite directions</em> — that is what creates the wobble. The feet pattern adds an &-of-1 kick to give the kick line shape. Listen to a Dilla beat once before practicing; the wobble is unmistakable. Once it locks, the bar feels like it is breathing."
       }
     ],
     listening: [
@@ -22042,7 +22042,7 @@ module.exports = {
           { keys: ['f/4'], duration: '8' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "808 kick pattern voiced on the bass drum only. Notes on 1, &-of-2, &-of-3 (anticipation), 4. <strong>The snare is on 3</strong> — the half-time backbeat. This sparse syncopated kick line is the shape; in exercise 2 we'll add the floor tom as the 808-sub layer. Practise this until the kick pattern is locked. The kick must <em>not</em> drift toward 1-and-3 on autopilot — every 808 hit lands deliberately."
+        tip: "808 kick pattern voiced on the bass drum only. Notes on 1, &-of-2, &-of-3 (anticipation), 4. <strong>The snare is on 3</strong> — the half-time backbeat. This sparse syncopated kick line is the shape; in exercise 2 we'll add the floor tom as the 808-sub layer. Practice this until the kick pattern is locked. The kick must <em>not</em> drift toward 1-and-3 on autopilot — every 808 hit lands deliberately."
       },
       {
         title: "2 — Floor-Tom-as-808 Sub Layer",
@@ -22283,7 +22283,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Half-time stomp groove in the Drumhedz lineage. Sparse kick (1 and the &-of-3 only). Snare scattered across the 16ths in a broken-line pattern, with the accented backbeat dropped on beat 3 (dragged hard, well behind the click). Hat plays a busy 16th line that <em>also</em> drops out for individual snare hits — a linear-ish texture where some 16ths only have snare, some only have hat. Practise at ♩=60 and bring it up."
+        tip: "Half-time stomp groove in the Drumhedz lineage. Sparse kick (1 and the &-of-3 only). Snare scattered across the 16ths in a broken-line pattern, with the accented backbeat dropped on beat 3 (dragged hard, well behind the click). Hat plays a busy 16th line that <em>also</em> drops out for individual snare hits — a linear-ish texture where some 16ths only have snare, some only have hat. Practice at ♩=60 and bring it up."
       },
       {
         title: "4 — Four-Bar Dave-Style Pattern",
@@ -22351,7 +22351,7 @@ module.exports = {
       <p>The result is a drum approach that sounds like the song is wearing the drums, not the other way around. Pocket is foundational. Restraint is foundational. The fills are short and song-aware — never a drummer showing off, always a drummer making space.</p>
 
       <h2 class="section-label">The Singer-Drummer Test</h2>
-      <p>The exercises in this lesson are built for the test described in the graduation criteria: <strong>can you sing while playing them?</strong> If you cannot, the groove is not yet locked. A pattern that requires your full attention to play is not yet ready to be a backing for a vocal. Practise each exercise to the point where you can hum the melody of an unrelated song over the top of it without losing the pocket.</p>
+      <p>The exercises in this lesson are built for the test described in the graduation criteria: <strong>can you sing while playing them?</strong> If you cannot, the groove is not yet locked. A pattern that requires your full attention to play is not yet ready to be a backing for a vocal. Practice each exercise to the point where you can hum the melody of an unrelated song over the top of it without losing the pocket.</p>
 
       <h2 class="section-label">Vocal-Aware Kick Placement</h2>
       <p>Listen to a .Paak track and notice that the kick frequently lands on a stressed syllable in his line. The kick is reinforcing the lyrical accent. When he scats or improvises, the kick can move; the kick is part of his voice. As a drummer-only player you do not have a voice, but you can <em>imply</em> one — sing a phrase in your head and let the kick line follow that phrase's stresses. The result is a groove that already feels like a song.</p>
@@ -22393,7 +22393,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Basic .Paak-style pocket. Hat 16ths, snare on 2 and 4 (dragged a hair), kick on 1, &-of-2, 4. Once it is locked, <strong>start humming a melody on top</strong> — any melody, even just a single sustained note. The drumming has to keep going while you do. If your hands tense up the moment you start to hum, the groove is not internalised. Loop until you can do both for 30 seconds without effort."
+        tip: "Basic .Paak-style pocket. Hat 16ths, snare on 2 and 4 (dragged a hair), kick on 1, &-of-2, 4. Once it is locked, <strong>start humming a melody on top</strong> — any melody, even just a single sustained note. The drumming has to keep going while you do. If your hands tense up the moment you start to hum, the groove is not internalized. Loop until you can do both for 30 seconds without effort."
       },
       {
         title: "2 — Vocal-Aware Kick Placement",
@@ -22544,7 +22544,7 @@ module.exports = {
       <p>Pick a click. The kick sits on it. The snare sits 30 milliseconds after it. The hi-hat sits 30 milliseconds before it. You now have three different time-feels happening at once: kick is on, snare drags, hat pushes. The challenge is consistency — once you choose the offsets, every bar has to honour them.</p>
 
       <h2 class="section-label">Donuts-Era Feel</h2>
-      <p>The Donuts album (released the same week Dilla died, 2006) is the source text. It is full of beats where the wobble is severe, the loop is short, the timbres are dense and warm. Listen to it once before practising the exercises below — the ear has to know what it is aiming for.</p>
+      <p>The Donuts album (released the same week Dilla died, 2006) is the source text. It is full of beats where the wobble is severe, the loop is short, the timbres are dense and warm. Listen to it once before practicing the exercises below — the ear has to know what it is aiming for.</p>
     `,
     exercises: [
       {
@@ -22843,7 +22843,7 @@ module.exports = {
           { keys: ['f/4', 'a/4'], duration: '8' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16, 32, 32, 32, 32, 32, 32, 32, 32]],
-        tip: "Working modern production bar. Hat 16ths through, then a 32nd-roll on beat 4 (eight even 32nds, sticking R-L alternating). Snare on 3. Kick on 1, &-of-2, &-of-3, &-of-4 — and the &-of-3 and &-of-4 kicks have a floor-tom-808 doubled in (kick + floor tom together = trap sub voice). <strong>The 32nd hat-roll on beat 4 is the producer signature</strong>: it is the gesture that says 'section change next bar'. Practise the roll alone first."
+        tip: "Working modern production bar. Hat 16ths through, then a 32nd-roll on beat 4 (eight even 32nds, sticking R-L alternating). Snare on 3. Kick on 1, &-of-2, &-of-3, &-of-4 — and the &-of-3 and &-of-4 kicks have a floor-tom-808 doubled in (kick + floor tom together = trap sub voice). <strong>The 32nd hat-roll on beat 4 is the producer signature</strong>: it is the gesture that says 'section change next bar'. Practice the roll alone first."
       }
     ],
     listening: [
@@ -22871,7 +22871,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>When a hip-hop track is built around a sample, there is already a drum kit on the recording — the original break, looped. The live drummer's job is not to replace it; it is to <em>conversate</em> with it. This is one of the most under-taught skills in hip-hop drumming and one of the most important. A great sample-aware drummer makes the track sound bigger; a poor one trips over the loop and makes everything muddy.</p>
-      <p>The notation in this lesson cannot show you a sample (the renderer cannot play one back). Instead, each exercise describes an <em>implied sample loop</em> in the tip and asks you to play the kit part as if that loop existed. Practise the exercises while imagining the sample, or — better — find a 4-bar break loop on your phone, play it on a speaker, and play the exercise on top.</p>
+      <p>The notation in this lesson cannot show you a sample (the renderer cannot play one back). Instead, each exercise describes an <em>implied sample loop</em> in the tip and asks you to play the kit part as if that loop existed. Practice the exercises while imagining the sample, or — better — find a 4-bar break loop on your phone, play it on a speaker, and play the exercise on top.</p>
 
       <h2 class="section-label">Four Modes</h2>
       <ul>
@@ -23029,13 +23029,13 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Louis Cole drums like a drum machine that has decided it wants to be a person. Every note is placed where the math says — no swing, no drag, no push, no human wobble. But the dynamic range is enormous, the placements are inventive in a way no machine would think of, and the gestures are unmistakably alive. The result is a kind of drumming that nobody else does, and that everyone who hears it tries to copy.</p>
-      <p>The lessons of Cole's drumming are about <em>control</em>. Most kit drummers, when they play fast, lose dynamics. Cole keeps them. Most kit drummers, when they place a snare on a weird 16th, give it away by tensing up. Cole doesn't. The hands and feet do exactly what they are told and nothing else. It looks impossible until you realise it is the result of obsessive practice and absolute economy of motion.</p>
+      <p>The lessons of Cole's drumming are about <em>control</em>. Most kit drummers, when they play fast, lose dynamics. Cole keeps them. Most kit drummers, when they place a snare on a weird 16th, give it away by tensing up. Cole doesn't. The hands and feet do exactly what they are told and nothing else. It looks impossible until you realize it is the result of obsessive practice and absolute economy of motion.</p>
 
       <h2 class="section-label">Mechanical Precision</h2>
-      <p>Cole's hat 16ths are the same volume from start to finish. Cole's snare backbeats are the same volume from bar one to bar twenty. Cole's kicks are the same volume regardless of where in the bar they land. This is hard to do. Practise with a click and a metronome that exposes velocity — if your phone has a drum-app metronome that flashes when you play softer than the click, use it. The goal is invisibility of the human player.</p>
+      <p>Cole's hat 16ths are the same volume from start to finish. Cole's snare backbeats are the same volume from bar one to bar twenty. Cole's kicks are the same volume regardless of where in the bar they land. This is hard to do. Practice with a click and a metronome that exposes velocity — if your phone has a drum-app metronome that flashes when you play softer than the click, use it. The goal is invisibility of the human player.</p>
 
       <h2 class="section-label">Sudden Dynamic Drops</h2>
-      <p>Cole loves a section that suddenly drops to a whisper. Same notes, same pattern, but everything is quieter — sometimes by a factor of ten. The drop is instant, not a fade. This is a producer's trick translated to a kit, and it requires an actual one-bar mental switch from the player. Practise it as a coin flip: bar one full volume, bar two ghost volume, bar three full, bar four ghost.</p>
+      <p>Cole loves a section that suddenly drops to a whisper. Same notes, same pattern, but everything is quieter — sometimes by a factor of ten. The drop is instant, not a fade. This is a producer's trick translated to a kit, and it requires an actual one-bar mental switch from the player. Practice it as a coin flip: bar one full volume, bar two ghost volume, bar three full, bar four ghost.</p>
 
       <h2 class="section-label">Cross-Meter Snare</h2>
       <p>The snare does not have to live on 2-and-4. Cole will sometimes place a sustained snare line on, say, every <em>fifth</em> 16th — a snare on the 1, then on the &-of-2, then on the &-of-3, then on the 4, then on the &-of-1 of the next bar. This forms a 5-against-16 pattern that resolves only every four bars. Sustaining that without resolving back to 2-and-4 is the test.</p>
@@ -24808,7 +24808,7 @@ module.exports = {
       <p>It is a stick trick first and a musical device second, but in extreme metal it has become a permanent fixture. A drummer who can run a gravity roll on the snare while the other hand plays cymbal blasts and the foot plays 16th kicks effectively triples the note density of a normal blast beat. That's the appeal — and that's why it lives in this curriculum next to the extreme-metal vocabulary.</p>
       <h2 class="section-label">Stick Mechanics</h2>
       <ul class="bulleted">
-        <li>Set the snare flat (or with a very slight away-tilt). The stick lies across the rim with the bead over the centre of the head.</li>
+        <li>Set the snare flat (or with a very slight away-tilt). The stick lies across the rim with the bead over the center of the head.</li>
         <li>Pinch <em>lightly</em> at the balance point. Too tight and the stick won't bounce; too loose and you lose control of the rim contact.</li>
         <li>Rock the wrist — not the arm. The motion is small, fast, and from the wrist down. The forearm is mostly still.</li>
         <li>Down stroke = tip on the head. Up stroke = shoulder of the stick rebounds off the rim. One full wrist cycle = two notes.</li>
@@ -24946,7 +24946,7 @@ module.exports = {
       <p>This style is most associated with brutal death metal and grindcore, and it sits in the vocabulary alongside the alternating blast and the gravity roll. The technique is straightforward; the discipline is in the alignment. The non-dominant foot has to match the dominant hand's volume <em>and</em> its placement, sub-millisecond. There is nowhere for sloppiness to hide.</p>
       <h2 class="section-label">Build Order</h2>
       <ul class="bulleted">
-        <li>Practise hand and foot together at quarter notes first. Walk up to 8ths only when every quarter is a single attack, not a flam.</li>
+        <li>Practice hand and foot together at quarter notes first. Walk up to 8ths only when every quarter is a single attack, not a flam.</li>
         <li>Then 16ths at moderate tempo (♩=120-140). The hand pattern is still a normal single-stroke roll — alternating sticking <em>R L R L</em> — but every note is doubled by a kick.</li>
         <li>The faster you go, the more the kick wants to drift behind the snare. Record yourself; the recording will show the gap.</li>
         <li>The "moving" version (alternating bars of snare-only and kick-only 16ths) trains the limbs to hold their own grid without the partner.</li>
@@ -25183,14 +25183,14 @@ module.exports = {
       'Kick pattern grouped in 5 against a 4/4 hand pattern resolves on bar boundaries every 5 bars',
       '7-grouped kick against 4/4 hand pattern at ♩=110 holds for one full cycle (7 bars) without losing 1',
       'Snare on 2 and 4 stays absolutely steady while the kick groups in odd lengths underneath',
-      'Four-bar djent phrase memorised and reproducible from a verbal cue ("3-3-2 kick group, then 2-2-3-3, then 5-3, then 4")'
+      'Four-bar djent phrase memorized and reproducible from a verbal cue ("3-3-2 kick group, then 2-2-3-3, then 5-3, then 4")'
     ],
     bodyHtml: `
       <p>"Djent" is the post-2005 evolution of progressive metal whose most influential ancestor is Meshuggah's mid-1990s work. The harmonic content lives on extended-range guitars; the rhythmic content lives in the drums. The trick is the <em>tension between two grids</em>: the snare and the listener's foot stay locked to a square 4/4, while the kick (and the guitar riff it doubles) groups itself in fives, sevens, or other lengths that don't divide evenly into the bar. Every few bars the two grids converge on a downbeat, and the riff "resolves." Then it begins again.</p>
       <p>Mechanically this is just a polyrhythm — a different number-pulse on the kick than on the hands — but as a stylistic device it has its own vocabulary. A 5-grouped kick over 4/4 takes 5 bars to come back to bar 1; a 7-grouped kick takes 7. Inside those long phrases, the song hangs in a kind of suspended animation, never quite resolving until the cycle closes.</p>
       <h2 class="section-label">Build Order</h2>
       <ul class="bulleted">
-        <li>Internalise 5-over-4 first — a 5-note kick group repeated until it lands on 1 again. Count <em>"1-2-3-4-5"</em> on the kick while the hands count <em>"1-2-3-4"</em>.</li>
+        <li>Internalize 5-over-4 first — a 5-note kick group repeated until it lands on 1 again. Count <em>"1-2-3-4-5"</em> on the kick while the hands count <em>"1-2-3-4"</em>.</li>
         <li>7-over-4 next — same idea, longer cycle (7 bars).</li>
         <li>The Meshuggah-style groove uses <em>asymmetric subgroupings</em> (3+3+2, 2+2+3+3, etc.) inside the larger cycle. The kick still resolves on the downbeat, but the internal accents move.</li>
         <li>The 4-bar phrase is the destination — multiple subgroupings stacked into a single phrase that resolves at the end.</li>
@@ -25240,7 +25240,7 @@ module.exports = {
           { rest: true,    duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Hands play a normal backbeat — snare on 2 and 4. Kick plays groups of <em>five 16ths followed by three rests</em>, repeating. Across <em>five</em> 4/4 bars the kick groups will visually shift across the beats and finally land on beat 1 again. This single bar shows the first kick cycle. Memorise the <em>kick fingering</em>: 1, &amp;, e-of-2, 3, &amp;-of-3."
+        tip: "Hands play a normal backbeat — snare on 2 and 4. Kick plays groups of <em>five 16ths followed by three rests</em>, repeating. Across <em>five</em> 4/4 bars the kick groups will visually shift across the beats and finally land on beat 1 again. This single bar shows the first kick cycle. Memorize the <em>kick fingering</em>: 1, &amp;, e-of-2, 3, &amp;-of-3."
       },
       {
         title: "2 — 7-Over-4 Kick Pattern",
@@ -25316,7 +25316,7 @@ module.exports = {
           { keys: ['f/4'], duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Hand on china for the open, ringing texture. The kick subgroups go <em>3-3-2-4</em> across the bar — five distinct phrases that add to 16. This is the canonical Meshuggah-style figure: square hands, asymmetric kick. The riff guitar would line up exactly with the kick. Practise the kick alone first; only add the hands when the foot pattern is automatic."
+        tip: "Hand on china for the open, ringing texture. The kick subgroups go <em>3-3-2-4</em> across the bar — five distinct phrases that add to 16. This is the canonical Meshuggah-style figure: square hands, asymmetric kick. The riff guitar would line up exactly with the kick. Practice the kick alone first; only add the hands when the foot pattern is automatic."
       },
       {
         title: "4 — Four-Bar Djent Phrase",
@@ -25379,7 +25379,7 @@ module.exports = {
       '5/4 tech-death blast holds for 8 bars at ♩=180 with the snare and kick locked across the asymmetric meter',
       'Metric modulation between 4/4 and 7/8 — 8th note remains constant — survives the transition without a count-loss',
       'Jazz-inspired kick fill with snare comping reads cleanly at ♩=160',
-      'Cynic-style passage memorised: ride bell at the modal pulse, snare comping in odd points, kick filling between'
+      'Cynic-style passage memorized: ride bell at the modal pulse, snare comping in odd points, kick filling between'
     ],
     bodyHtml: `
       <p>Technical death metal is what death metal became when its players started studying jazz, fusion, and twentieth-century classical. The genre's defining records were made by drummers — Sean Reinert with Cynic and Death, Gene Hoglan, Pete Sandoval — who could play a 240-BPM blast and a Tony Williams comping pattern in the same set, often in the same song. The drumming vocabulary is extreme-metal infrastructure with jazz vocabulary running on top: blasts in 5 and 7, metric modulation, jazz-inspired kick conversation under riffs that change time signature every four bars.</p>
@@ -25449,7 +25449,7 @@ module.exports = {
           { keys: ['f/4'], duration: '8' }
         ],
         beamGroups: [[2, 8], [2, 8], [3, 8]],
-        tip: "This bar is the <em>7/8 destination</em> after the modulation. Practise it like this: play 2 bars of 4/4 (♩=160) with snare on 2 and 4, then on the bar boundary switch to this 7/8 pattern. The 8th-note speed is the same in both — only the bar length changes. The new quarter is faster (♩≈183) because three 8ths now group as the long beat. Feel it 2+2+3."
+        tip: "This bar is the <em>7/8 destination</em> after the modulation. Practice it like this: play 2 bars of 4/4 (♩=160) with snare on 2 and 4, then on the bar boundary switch to this 7/8 pattern. The 8th-note speed is the same in both — only the bar length changes. The new quarter is faster (♩≈183) because three 8ths now group as the long beat. Feel it 2+2+3."
       },
       {
         title: "3 — Jazz-Inspired Kick Fill (Tech-Death Context)",
@@ -25553,7 +25553,7 @@ module.exports = {
       <h2 class="section-label">Practice Strategy</h2>
       <ul class="bulleted">
         <li>Each polymeter must be <em>felt</em>, not counted. If you're counting "1-2-3-4-5" on every kick rep you'll lose the 4 in the hands within two cycles. Instead: count the hands; let the kick feel like a metric ostinato that "comes back" every few bars.</li>
-        <li>Practise each polymeter as a <em>cycle</em>: start at bar 1, play through the entire resolution period, and stop. Don't loop incomplete cycles — that's how you wire in confusion.</li>
+        <li>Practice each polymeter as a <em>cycle</em>: start at bar 1, play through the entire resolution period, and stop. Don't loop incomplete cycles — that's how you wire in confusion.</li>
         <li>Record yourself. The downbeat alignment at the end of the cycle is the audit. If kick 1 doesn't land with hand 1 at the resolution, the polymeter has gone wrong somewhere.</li>
       </ul>
       <h2 class="section-label">Listening</h2>
@@ -25875,7 +25875,7 @@ module.exports = {
       'Phrase changing meter every bar (4/4 → 7/8 → 5/4 → 6/8) holds together for 4 reps',
       '"Stutter" 16th feel — constant 16ths with shifting accents — survives 8 bars without the accent grid collapsing',
       'Dillinger-style asymmetric pattern reproducible from a verbal cue',
-      '4-bar mathcore phrase memorised; the player can stop anywhere in the phrase and pick up at the next downbeat'
+      '4-bar mathcore phrase memorized; the player can stop anywhere in the phrase and pick up at the next downbeat'
     ],
     bodyHtml: `
       <p>Mathcore is what happened when post-1995 hardcore bands started reading Captain Beefheart and Stravinsky scores. The defining records — by Dillinger Escape Plan, Botch, Converge — abandon the assumption that a song should sit in one meter. The drummer's job becomes negotiation: holding the band's pulse together while the time signature changes every bar, the riff is built on dissonant intervals that refuse to resolve, and the tempo lurches between sections without warning.</p>
@@ -25958,7 +25958,7 @@ module.exports = {
         ],
         feet: Array.from({ length: 16 }, () => ({ keys: ['f/4'], duration: '16' })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Constant 16ths on the snare and kick. The accents on the snare move: 1 (3), 4 (3), 7 (4), 11 (5), 16. Each accent group is a different length — 3, 3, 4, 5 — and the listener feels the meter rearranging itself even though the underlying note count doesn't change. This is the <em>stutter</em> feel. Practise the accent sticking first; only add the constant unaccented notes once the accents are locked."
+        tip: "Constant 16ths on the snare and kick. The accents on the snare move: 1 (3), 4 (3), 7 (4), 11 (5), 16. Each accent group is a different length — 3, 3, 4, 5 — and the listener feels the meter rearranging itself even though the underlying note count doesn't change. This is the <em>stutter</em> feel. Practice the accent sticking first; only add the constant unaccented notes once the accents are locked."
       },
       {
         title: "3 — Dillinger-Style Pattern",
@@ -26004,7 +26004,7 @@ module.exports = {
           { keys: ['f/4'], duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Snare hand alternates with china hits; kick has a near-random syncopated figure that's actually meticulously composed. The pattern reads as chaos but every note is in a fixed place. Internalise the kick first — it's the spine. The hand pattern is built around the kick, not the other way around. Slow this to ♩=80 to learn it; only bring it up to tempo when every note is automatic."
+        tip: "Snare hand alternates with china hits; kick has a near-random syncopated figure that's actually meticulously composed. The pattern reads as chaos but every note is in a fixed place. Internalize the kick first — it's the spine. The hand pattern is built around the kick, not the other way around. Slow this to ♩=80 to learn it; only bring it up to tempo when every note is automatic."
       },
       {
         title: "4 — Four-Bar Mathcore Phrase",
@@ -26050,7 +26050,7 @@ module.exports = {
           { keys: ['f/4'], duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Bar 4 of the phrase — the resolution on a unison china-plus-snare downbeat. The kick groupings tighten across the bar (3, then 2-2, then 4, then 4), so it feels like acceleration at constant tempo. Memorise this bar first; bars 1-3 exist to point at it."
+        tip: "Bar 4 of the phrase — the resolution on a unison china-plus-snare downbeat. The kick groupings tighten across the bar (3, then 2-2, then 4, then 4), so it feels like acceleration at constant tempo. Memorize this bar first; bars 1-3 exist to point at it."
       }
     ],
     listening: [
@@ -26075,7 +26075,7 @@ module.exports = {
       '32nd-note hand burst over a 16th-kick metal foundation reads cleanly at ♩=110',
       'Tony-Royster-style triplet stickings on snare and toms hold over a polymetric kick',
       '"Chops"-driven 16th pattern with tom moves around the kit retains the metal-context kick gallop',
-      '4-bar fusion-of-fusion phrase memorised — gospel-chops fills resolve back into metal grooves on bar 5'
+      '4-bar fusion-of-fusion phrase memorized — gospel-chops fills resolve back into metal grooves on bar 5'
     ],
     bodyHtml: `
       <p>Gospel chops is the term for the high-velocity, virtuosic hand vocabulary that emerged from American gospel and R&amp;B drumming in the 1990s and 2000s — Tony Royster Jr, Aaron Spears, Chris Coleman, Eric Moore. The hands run 32nds and burst-stickings around the snare and toms while the feet hold a relatively conventional pulse. The technique was historically separated from metal by genre boundaries — but those boundaries have collapsed. Modern players apply gospel-chops hands over metal foot grids and the result is its own thing: a hybrid with the rhythmic foundation of extreme metal and the hand vocabulary of gospel session work.</p>
@@ -26844,7 +26844,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "All sixteen strokes on the hat, strict R L R L, kick on 1 and 3. Notice the geography: every right lands on a downbeat or an <em>&amp;</em>, every left on an <em>e</em> or <em>a</em>. Internalise that map now and the sticking is automatic when the snare returns."
+        tip: "All sixteen strokes on the hat, strict R L R L, kick on 1 and 3. Notice the geography: every right lands on a downbeat or an <em>&amp;</em>, every left on an <em>e</em> or <em>a</em>. Internalize that map now and the sticking is automatic when the snare returns."
       },
       {
         title: "3 — One-Handed 16th Hat (Right Hand Only) + Backbeat",
@@ -27769,7 +27769,7 @@ module.exports = {
     listening: [
       { artist: "Led Zeppelin", work: "Houses of the Holy", note: "John Bonham's half-time chorus moves are the template — stadium-scale without speeding up." },
       { artist: "Tool", work: "Ænima", note: "Danny Carey moves between full-time and half-time as a structural device, not a feel change." },
-      { artist: "Foo Fighters", work: "The Colour and the Shape", note: "Taylor Hawkins uses the half-time chorus as standard arena-rock vocabulary." }
+      { artist: "Foo Fighters", work: "The Color and the Shape", note: "Taylor Hawkins uses the half-time chorus as standard arena-rock vocabulary." }
     ]
   },
 
@@ -27952,7 +27952,7 @@ module.exports = {
         <li><strong>RKRL</strong> — right snare, kick, right snare, left snare. Kick anticipates.</li>
         <li><strong>KLRL</strong> — kick first, then three hand notes.</li>
       </ul>
-      <p>Memorise three or four cells and you can build any linear fill by chaining them.</p>
+      <p>Memorize three or four cells and you can build any linear fill by chaining them.</p>
     `,
     exercises: [
       {
@@ -27995,7 +27995,7 @@ module.exports = {
           { rest: true, duration: '16', visible: true }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Repeat the cell <em>RLRK</em> four times — one cell per beat for four beats. The hands play three 16ths, the kick plays the fourth. <em>No two limbs ever overlap</em>. Internalise this one cell first; everything else in linear fills builds on it."
+        tip: "Repeat the cell <em>RLRK</em> four times — one cell per beat for four beats. The hands play three 16ths, the kick plays the fourth. <em>No two limbs ever overlap</em>. Internalize this one cell first; everything else in linear fills builds on it."
       },
       {
         title: "2 — 4-Beat Linear Fill (Mixed Cells)",
@@ -28651,7 +28651,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8], [4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Bar 2 is a 16th-note fill that walks <em>twice</em> around the kit: snare-snare → hi-hi → mid-mid → floor-floor (beats 1-2), then hi-mid-floor-floor (beat 3), then snare-hi-mid-floor (beat 4). Three different orchestrations of \"down the kit\" in one bar. This is the Peart approach: the fill is <em>composed</em>, not improvised. Memorise it as a phrase."
+        tip: "Bar 2 is a 16th-note fill that walks <em>twice</em> around the kit: snare-snare → hi-hi → mid-mid → floor-floor (beats 1-2), then hi-mid-floor-floor (beat 3), then snare-hi-mid-floor (beat 4). Three different orchestrations of \"down the kit\" in one bar. This is the Peart approach: the fill is <em>composed</em>, not improvised. Memorize it as a phrase."
       },
       {
         title: "4 — Carl Palmer Hand-Foot Combination",
@@ -28724,7 +28724,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Rock in odd meters isn't fusion in odd meters. The phrasing has to remain <em>recognisable</em> — there's still a backbeat, still a riff, still a chorus. The drummer's job is to let an asymmetric meter feel like a groove rather than a math exercise. Pink Floyd's "Money" is in 7/4 but it never sounds like an experiment; Tool's "Schism" cycles through multiple odd meters and still feels like a song.</p>
-      <p>The technique is the same as it is in fusion odd meters: feel the meter as <em>groupings</em>, not as a count. 5/4 = 3+2. 7/8 = 2+2+3. 9/8 = 2+2+2+3. 13/8 = 4+4+3+2 or 3+3+3+2+2 depending on the band. Once the grouping is internalised, the meter stops being odd and starts being shaped.</p>
+      <p>The technique is the same as it is in fusion odd meters: feel the meter as <em>groupings</em>, not as a count. 5/4 = 3+2. 7/8 = 2+2+3. 9/8 = 2+2+2+3. 13/8 = 4+4+3+2 or 3+3+3+2+2 depending on the band. Once the grouping is internalized, the meter stops being odd and starts being shaped.</p>
       <h2 class="section-label">Metric Modulation</h2>
       <p>The fourth exercise introduces <strong>metric modulation</strong> — a tempo-mathematical shift where a subdivision in one meter becomes the new beat in another. The 8ths of a 4/4 bar at ♩=100 become the quarter notes of a new section at ♩=200. Done well, it sounds like the band has changed gears smoothly. Done badly, it sounds like a car crash. We'll do a simple version: 4/4 to 5/4 with the quarter note staying constant.</p>
     `,
@@ -29755,7 +29755,7 @@ module.exports = {
       'Quarter-note triplet melody in the hands holds against a steady 4-pulse in the feet for at least eight bars at ♩=80'
     ],
     bodyHtml: `
-      <p>Fusion-era soloing — Vinnie Colaiuta with Sting, Dave Weckl with Chick Corea, Steve Smith with Vital Information — sounds nothing like a 1950s bebop solo and nothing like a rock drum break. It's a third thing. The vocabulary is <strong>linear</strong>, it favours <strong>polyrhythmic groupings</strong> (5s and 7s laid over a 4-pulse), and it relies on <strong>motivic development</strong> — picking a small idea and turning it over the way a saxophonist would.</p>
+      <p>Fusion-era soloing — Vinnie Colaiuta with Sting, Dave Weckl with Chick Corea, Steve Smith with Vital Information — sounds nothing like a 1950s bebop solo and nothing like a rock drum break. It's a third thing. The vocabulary is <strong>linear</strong>, it favors <strong>polyrhythmic groupings</strong> (5s and 7s laid over a 4-pulse), and it relies on <strong>motivic development</strong> — picking a small idea and turning it over the way a saxophonist would.</p>
       <p>This lesson is a starter kit for that voice. We'll write a four-bar linear phrase that moves from snare to toms to kick the way a horn player would walk a line up and down a scale. Then we'll take a single one-bar cell and develop it — the same shape on different drums, displaced by an 8th, expanded by a 16th — so a single idea fills four bars. We'll lay quarter-note triplets across a 4-pulse to make the bar feel like it's stretching. And we'll catalogue four short licks that you can grab and re-use the way a jazz player grabs a II-V-I.</p>
 
       <h2 class="section-label">What "linear" means in solos</h2>
@@ -30586,7 +30586,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "1 — Practising the Pivot (4 bars old feel, 4 bars modulated)",
+        title: "1 — Practicing the Pivot (4 bars old feel, 4 bars modulated)",
         meta: "4/4 · ♩ = 80 (notation shows the pivot bar)",
         bpm: 80,
         timeSignature: "4/4",
@@ -30660,7 +30660,7 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
         beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
-        tip: "Twelve triplet 8ths, accent every third stroke — those accents are quarter-note <em>triplets</em>, not the old quarters. Declare them the new quarter and you're at ♩=180. Practise with the click at ♩=120: let your accents float against it, then mentally drop the click and let the accents become the pulse."
+        tip: "Twelve triplet 8ths, accent every third stroke — those accents are quarter-note <em>triplets</em>, not the old quarters. Declare them the new quarter and you're at ♩=180. Practice with the click at ♩=120: let your accents float against it, then mentally drop the click and let the accents become the pulse."
       },
       {
         title: "4 — Full Modulation Pattern (4 bars @ 120 → triplet pivot → 4 bars @ 180)",
@@ -31018,7 +31018,7 @@ module.exports = {
           { keys: ['f/4'], duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "<strong>Bar of 5/4 (3+2):</strong> three beats of standard groove, two beats of linear fill. <em>Linear</em> means no two voices land on the same 16th — every note is alone. Beats 4-5 here: snare twice, kick, hi-tom, mid-tom, kick, floor-tom, kick. Played as written, the eight 16ths roll around the kit like a single thread. <strong>Practise it slowly enough to hear that no two notes overlap</strong> — that's the entire point of linear vocabulary."
+        tip: "<strong>Bar of 5/4 (3+2):</strong> three beats of standard groove, two beats of linear fill. <em>Linear</em> means no two voices land on the same 16th — every note is alone. Beats 4-5 here: snare twice, kick, hi-tom, mid-tom, kick, floor-tom, kick. Played as written, the eight 16ths roll around the kit like a single thread. <strong>Practice it slowly enough to hear that no two notes overlap</strong> — that's the entire point of linear vocabulary."
       },
       {
         title: "3 — Modulation Between Two Odd Meters (5/4 → 7/8)",
@@ -31111,11 +31111,11 @@ module.exports = {
     ],
     bodyHtml: `
       <p><strong>Electronic fusion</strong> is the genre that emerges when an acoustic-kit drummer plays as if the kit were a Roland TR-808 or an Ableton drum rack. The repertoire: Daft Punk and dance music, drum-and-bass, post-Aphex IDM, the entire sound-world that lived in software for 25 years before drummers like Jojo Mayer, Mark Guiliana, Larnell Lewis, and Anika Nilles started covering it on real kits.</p>
-      <p>The technical demands are the inverse of jazz. Where jazz prizes the <em>variation</em> in every stroke (every ride hit different, every snare ghost a different colour), electronic fusion prizes the <em>elimination</em> of variation. The hi-hat 16ths must be identical to each other. The kick must land precisely on the grid every time. The snare must be the same dynamic on every backbeat. The drummer is competing with a sequencer, and the sequencer never has a bad day.</p>
+      <p>The technical demands are the inverse of jazz. Where jazz prizes the <em>variation</em> in every stroke (every ride hit different, every snare ghost a different color), electronic fusion prizes the <em>elimination</em> of variation. The hi-hat 16ths must be identical to each other. The kick must land precisely on the grid every time. The snare must be the same dynamic on every backbeat. The drummer is competing with a sequencer, and the sequencer never has a bad day.</p>
       <p>Beyond technique, there's a vocabulary issue: the patterns themselves come from electronic music. The four-on-the-floor of house and disco. The half-time backbeat of trip-hop. The "amen break" rolls of drum-and-bass. The sparse, sub-808-driven trap beat. The drummer needs to know these patterns the way a jazz drummer knows a swing feel.</p>
 
       <h2 class="section-label">Why It's Hard</h2>
-      <p>Years of practice on an acoustic kit have trained your hands to <em>articulate</em> — to give each stroke its own personality. That training is now working against you. The fix is to practise to a click and listen for any deviation. If you hear yourself, you're being too human.</p>
+      <p>Years of practice on an acoustic kit have trained your hands to <em>articulate</em> — to give each stroke its own personality. That training is now working against you. The fix is to practice to a click and listen for any deviation. If you hear yourself, you're being too human.</p>
     `,
     exercises: [
       {
@@ -31218,7 +31218,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Drum-and-bass-flavoured displacement at ♩=140 — first snare on the <strong>e-of-2</strong>, second snare on beat 4 (so one displaced, one not). The kick pattern (1, &-of-2, 4) is a classic D'n'B half-step. <em>At ♩=140 the body wants to default to 2-and-4</em>: the displacement tries to collapse home. Practise to a metronome on every 16th — when the click on the e-of-2 arrives, that is when your snare lands. No earlier, no later."
+        tip: "Drum-and-bass-flavoured displacement at ♩=140 — first snare on the <strong>e-of-2</strong>, second snare on beat 4 (so one displaced, one not). The kick pattern (1, &-of-2, 4) is a classic D'n'B half-step. <em>At ♩=140 the body wants to default to 2-and-4</em>: the displacement tries to collapse home. Practice to a metronome on every 16th — when the click on the e-of-2 arrives, that is when your snare lands. No earlier, no later."
       },
       {
         title: "4 — Daft Punk / Four-on-the-Floor Dance Pattern",
@@ -31279,7 +31279,7 @@ module.exports = {
 
       <h2 class="section-label">The Five Cobham Things</h2>
       <ul class="bulleted">
-        <li><strong>Open-handed playing.</strong> Cobham was a left-handed player who played a right-handed setup, which forced him to lead the hi-hat with his left while the right held the backbeat. The result: total freedom on the snare-side hand. Practise leading the hat with your weak hand for one of these exercises.</li>
+        <li><strong>Open-handed playing.</strong> Cobham was a left-handed player who played a right-handed setup, which forced him to lead the hi-hat with his left while the right held the backbeat. The result: total freedom on the snare-side hand. Practice leading the hat with your weak hand for one of these exercises.</li>
         <li><strong>Fast double-handed 16ths.</strong> Both hands on the snare, alternating R-L, at extreme speed. The rest of the kit drops in between.</li>
         <li><strong>Polyrhythmic kick.</strong> 8th-note triplets in the kick under 16ths in the hands — 4-against-3 in real time.</li>
         <li><strong>Long melodic fills.</strong> Fills are not bursts; they are sentences, often eight bars long, that build like a saxophone solo.</li>
@@ -31440,7 +31440,7 @@ module.exports = {
     tagline: "Two pulses, one body — the foundational polyrhythm, owned",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Polyrhythm / Internalisation",
+    focus: "Polyrhythm / Internalization",
     prerequisites: ['fusion-polyrhythms'],
     nextLessons: ['polyrhythms-5-4'],
     graduationCriteria: [
@@ -31463,7 +31463,7 @@ module.exports = {
       </ul>
 
       <h2 class="section-label">Switching Foreground</h2>
-      <p>The deeper skill — and the one that separates a drummer who has practised 3:2 from one who has <em>internalised</em> it — is being able to switch which pulse you\'re hearing as primary <strong>without changing what your hands are doing</strong>. The 3-pulse and 2-pulse are both there; your attention picks one. This is the same skill that lets a Cuban drummer hear the 3-side of a 3-2 clave as the strong side, and a North Indian musician hear the same rhythm grouped completely differently. The hands play one thing; the mind hears another.</p>
+      <p>The deeper skill — and the one that separates a drummer who has practiced 3:2 from one who has <em>internalized</em> it — is being able to switch which pulse you\'re hearing as primary <strong>without changing what your hands are doing</strong>. The 3-pulse and 2-pulse are both there; your attention picks one. This is the same skill that lets a Cuban drummer hear the 3-side of a 3-2 clave as the strong side, and a North Indian musician hear the same rhythm grouped completely differently. The hands play one thing; the mind hears another.</p>
 
       <h2 class="section-label">Across the Kit</h2>
       <p>The final exercise breaks 3:2 across the kit — the 3-pulse on the high tom, the 2-pulse on the floor tom, the kick filling in the underlying six. This is the entry point to <em>polyrhythmic orchestration</em>: distributing the layers of a polyrhythm across multiple voices so a listener can <em>see</em> them in stereo. It\'s the sound of Tony Williams, Jack DeJohnette, and any modern jazz drummer working in odd subdivisions.</p>
@@ -31502,7 +31502,7 @@ module.exports = {
           { voice: 'hands', start: 0, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 3, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        tip: "Snare plays the 3-pulse (quarter-note triplets across two beats, twice per bar). Kick plays a 2-pulse on beats 1 and 3. <strong>They line up only on beat 1.</strong> Practise this with a metronome on quarter notes (the kick), <em>not</em> on the triplets. The 3-pulse must float over a click that is reading the 2-pulse — that is the whole skill."
+        tip: "Snare plays the 3-pulse (quarter-note triplets across two beats, twice per bar). Kick plays a 2-pulse on beats 1 and 3. <strong>They line up only on beat 1.</strong> Practice this with a metronome on quarter notes (the kick), <em>not</em> on the triplets. The 3-pulse must float over a click that is reading the 2-pulse — that is the whole skill."
       },
       {
         title: "3 — Switching Foreground",
@@ -31556,7 +31556,7 @@ module.exports = {
           { voice: 'hands', start: 0, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 3, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        tip: "<strong>Orchestration:</strong> 3-pulse on the <em>high tom</em>, 2-pulse on the <em>floor tom</em> (notated on the floor-tom line, but played with your feet so the orchestration is left/right hands free for melodic decoration above). The high-tom pitch + floor-tom pitch separation lets a listener hear both pulses in stereo, the way Tony Williams or Jack DeJohnette would phrase it. Once this locks, try the inverse: 2-pulse high, 3-pulse low. Same polyrhythm, different colour."
+        tip: "<strong>Orchestration:</strong> 3-pulse on the <em>high tom</em>, 2-pulse on the <em>floor tom</em> (notated on the floor-tom line, but played with your feet so the orchestration is left/right hands free for melodic decoration above). The high-tom pitch + floor-tom pitch separation lets a listener hear both pulses in stereo, the way Tony Williams or Jack DeJohnette would phrase it. Once this locks, try the inverse: 2-pulse high, 3-pulse low. Same polyrhythm, different color."
       }
     ],
     listening: [
@@ -31585,14 +31585,14 @@ module.exports = {
       <p>Five over four is the next polyrhythm up the ladder, and it\'s a serious step up. Where 3:2 has a folksy, sing-able quality (<em>"hot-cup-of-tea"</em>, <em>"pass-the-but-ter"</em>), 5:4 has a slippery, almost queasy character. Five doesn\'t fold into four cleanly. The two pulses meet only every twentieth subdivision and feel as if they\'re drifting against each other in slow motion.</p>
       <p>That\'s also what makes it so useful. A 5:4 phrase placed inside a 4/4 bar is one of the strongest tension devices a drummer has — the listener feels the bar stretch and resolve. Vinnie Colaiuta builds entire solos around it; modern fusion fills lean on it constantly.</p>
 
-      <h2 class="section-label">The Maths You Have to Internalise</h2>
+      <h2 class="section-label">The Maths You Have to Internalize</h2>
       <p>Five even notes in the span of four. The underlying grid is twenty even subdivisions per bar (five 16th-quintuplets per quarter, times four quarters). The 5-pulse hits one every four of those (positions 1, 5, 9, 13, 17). The 4-pulse hits one every five (positions 1, 6, 11, 16). Both are on position 1 of the bar; they don\'t meet again inside a single bar.</p>
       <p>You don\'t need to count to twenty — you\'d explode. You need to feel the 5-grouping and the 4-grouping as two independent breathing rates. Use a syllable: "<em>uni-ver-si-ty</em>" or "<em>hippopotamus</em>" both fit five even syllables across the time of four claps. Loop it, then remove the words.</p>
 
       <h2 class="section-label">From the Body to the Kit</h2>
       <ul class="bulleted">
         <li>Clap-and-tap first. 5-clap over 4-tap. Then invert.</li>
-        <li>Move to the kit with snare = 5 and kick = 4. Practise with the metronome reading the 4 (quarter notes), <em>not</em> the 5.</li>
+        <li>Move to the kit with snare = 5 and kick = 4. Practice with the metronome reading the 4 (quarter notes), <em>not</em> the 5.</li>
         <li>Roll it as a groove. Then deploy it as a one-bar fill inside a 4/4 phrase.</li>
       </ul>
 
@@ -31880,7 +31880,7 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Most drum "solos" are actually licks-in-a-row: an unconnected sequence of one-bar ideas pulled from the practice room and dumped onto the audience. A real solo has <em>architecture</em> — it states an idea, develops it, contrasts it, and resolves it. That\'s the difference between a player who is <em>improvising</em> and a player who is <em>reciting</em>.</p>
-      <p>This lesson installs the four building blocks: motivic development (state, repeat, vary, transform), orchestration (using the high, mid, and low voices of the kit as separate colours), the four-bar phrase as the basic unit of jazz solo construction, and call-and-response as a way of giving a solo a shape a listener can follow.</p>
+      <p>This lesson installs the four building blocks: motivic development (state, repeat, vary, transform), orchestration (using the high, mid, and low voices of the kit as separate colors), the four-bar phrase as the basic unit of jazz solo construction, and call-and-response as a way of giving a solo a shape a listener can follow.</p>
 
       <h2 class="section-label">Motivic Development — The Four Verbs</h2>
       <ul class="bulleted">
@@ -31894,10 +31894,10 @@ module.exports = {
       <p>The kit is a small orchestra. Treat the high voicing (cymbals, hi-tom) as the "soprano" register, the mid voicing (snare, mid-tom) as the "alto," and the low voicing (floor tom, kick) as the "bass." A solo that uses only one register sounds monochromatic. A solo that moves through all three has shape. Listen to Max Roach: every solo has clearly-defined voicings — he\'ll spend eight bars on a snare-only motif, then move it to the toms, then drop into the bass register for a transition.</p>
 
       <h2 class="section-label">The Four-Bar Phrase</h2>
-      <p>In bebop, the fundamental unit of trade is the four-bar phrase. "Trading fours" means the soloist and drummer alternate four-bar phrases for a chorus. Internalising the four-bar phrase as a unit — <em>statement · response · departure · landing</em> — is the single most useful skill for soloing inside a jazz form. A drum solo that respects four-bar phrasing always feels structured, even when the content is wild.</p>
+      <p>In bebop, the fundamental unit of trade is the four-bar phrase. "Trading fours" means the soloist and drummer alternate four-bar phrases for a chorus. Internalizing the four-bar phrase as a unit — <em>statement · response · departure · landing</em> — is the single most useful skill for soloing inside a jazz form. A drum solo that respects four-bar phrasing always feels structured, even when the content is wild.</p>
 
       <h2 class="section-label">Call and Response</h2>
-      <p>Treat your own solo as a conversation: one limb (or one voicing) <em>asks</em>, another <em>answers</em>. Snare asks; tom answers. Two bars of cymbals; two bars of drums. This is the oldest organising principle in African and African-American music, and it\'s the easiest way to give a solo audible shape the moment you start playing.</p>
+      <p>Treat your own solo as a conversation: one limb (or one voicing) <em>asks</em>, another <em>answers</em>. Snare asks; tom answers. Two bars of cymbals; two bars of drums. This is the oldest organizing principle in African and African-American music, and it\'s the easiest way to give a solo audible shape the moment you start playing.</p>
     `,
     exercises: [
       {
@@ -31979,7 +31979,7 @@ module.exports = {
         tip: "One 2-bar cell of the eight: the snare asks with four straight 8ths; the toms answer with the same rhythm. Build the rest — call, response, call with a new rhythm, response matching it. The audience should hear <em>two characters</em> talking, not one drummer filling."
       },
       {
-        title: "4 — Ride-and-Snare Contrast as Solo Colour",
+        title: "4 — Ride-and-Snare Contrast as Solo Color",
         meta: "4/4 · ♩ = 110 · two-voice solo phrase",
         bpm: 110,
         timeSignature: "4/4",
@@ -32001,7 +32001,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Two beats of ride — quarter, two 8ths — then four accented snare 8ths: high voice, then mid voice, and the contrast itself <em>is</em> the solo. Once the bar sits, scale it up: four bars ride-led, four snare-led, four on toms, four returning. Sixteen bars, three colours."
+        tip: "Two beats of ride — quarter, two 8ths — then four accented snare 8ths: high voice, then mid voice, and the contrast itself <em>is</em> the solo. Once the bar sits, scale it up: four bars ride-led, four snare-led, four on toms, four returning. Sixteen bars, three colors."
       }
     ],
     listening: [
@@ -32071,7 +32071,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The eight notated 8ths are a stand-in: what you actually play is a smooth figure-8 with both brushes, hands crossing at the centre of every beat, while the hi-hat foot on 2 and 4 keeps the time articulate. Run it a full minute — any audible gap in the hiss fails."
+        tip: "The eight notated 8ths are a stand-in: what you actually play is a smooth figure-8 with both brushes, hands crossing at the center of every beat, while the hi-hat foot on 2 and 4 keeps the time articulate. Run it a full minute — any audible gap in the hiss fails."
       },
       {
         title: "2 — Right-Sweep + Left-Tap on Every '&'",
@@ -32311,7 +32311,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: '8' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "The inverse of Exercise 3: snare (2 and 3.5) and kick (1 and 3) are the fixed melody; the ride 8ths and the hi-hat foot's system line — <em>foot, foot, rest, foot, foot, rest, foot, foot</em> — are the free voices. One fixed figure, dozens of system lines to read under it: this is what you practise for years."
+        tip: "The inverse of Exercise 3: snare (2 and 3.5) and kick (1 and 3) are the fixed melody; the ride 8ths and the hi-hat foot's system line — <em>foot, foot, rest, foot, foot, rest, foot, foot</em> — are the free voices. One fixed figure, dozens of system lines to read under it: this is what you practice for years."
       }
     ],
     listening: [
