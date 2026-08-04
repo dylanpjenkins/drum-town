@@ -1,0 +1,36 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>mobile viewport harness</title>
+<!--
+  Headless Edge/Chrome on Windows enforces a minimum window width (~492px),
+  so `-window-size=390` silently renders at 492 and crops the PNG — every
+  sub-500px "mobile screenshot" taken that way is a lie (learned the hard way
+  in improvement-loop iteration 24). This harness gives pages a TRUE narrow
+  viewport: iframes lay out at their own width, so media queries evaluate
+  against the iframe, not the window.
+
+  Usage (dev server must be running on :8080):
+    msedge --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1
+      --user-data-dir=<tmp> --timeout=20000 --window-size=560,2400
+      --screenshot=<out.png> "file:///<repo>/tools/mobile-viewport-harness.html?w=390&pages=/,/lessons/first-beat/"
+
+  Query params: w (default 390), h per frame (default 1100),
+  pages = comma-separated site paths (default /).
+-->
+<body style="margin:0;background:#333;color:#fff;font:12px monospace">
+<script>
+  const q = new URLSearchParams(location.search);
+  const w = parseInt(q.get('w') || '390', 10);
+  const h = parseInt(q.get('h') || '1100', 10);
+  const pages = (q.get('pages') || '/').split(',');
+  for (const p of pages) {
+    const label = document.createElement('div');
+    label.style.padding = '2px 6px';
+    label.textContent = w + 'px viewport — ' + p;
+    document.body.appendChild(label);
+    const f = document.createElement('iframe');
+    f.src = 'http://localhost:8080' + p;
+    f.style.cssText = 'width:' + w + 'px;height:' + h + 'px;border:0;display:block;background:#fff';
+    document.body.appendChild(f);
+  }
+</script>

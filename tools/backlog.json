@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 23,
-    "next_dimension": "ui",
+    "iteration": 24,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 47,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -439,10 +439,10 @@
         "Reproduce: headless Edge --window-size=390,1200 on / and /lessons/first-beat/"
       ],
       "acceptance": "diagnose the overflowing element (width-sweep screenshots or computed-style probe), fix so no page scrolls horizontally at 390px; verify with 390px screenshots of home, a lesson, rudiments, metronome, a genre page — read and confirm no clipping; dom-smoke green",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": ["Found by the new visual-verification subflow (iter 23), present since before the loop started.", "Critic (iter 23): worse than first noted — header loses the RUDIMENTS nav item, hero h1 clips, effective layout ~440-470px at 390 viewport; ALL page types affected (home has no notation, so notation widths are not the culprit). Also flagged: rule out headless-Edge measurement artifact by probing the live DOM (scrollWidth vs innerWidth) before trusting any fix."]
+      "log": ["Found by the new visual-verification subflow (iter 23), present since before the loop started.", "Critic (iter 23): worse than first noted — header loses the RUDIMENTS nav item, hero h1 clips, effective layout ~440-470px at 390 viewport; ALL page types affected (home has no notation, so notation widths are not the culprit). Also flagged: rule out headless-Edge measurement artifact by probing the live DOM (scrollWidth vs innerWidth) before trusting any fix.", "iter 24 · RESOLVED AS MEASUREMENT ARTIFACT — the critic's caveat was exactly right. A self-reporting data:URL probe showed --window-size=390 renders at innerWidth=492 (Windows headless floor) and crops the PNG to 390: every mobile shot was the left 79% of a healthy 492px layout. A true 390px viewport (iframe harness) shows home + lesson render cleanly: nav wraps, hero fits, prose wraps, no horizontal overflow. Deliverable: tools/mobile-viewport-harness.html committed + protocol 6b documents the floor. The site was never broken; the instrument was."]
     },
     {
       "id": "BL-036",
@@ -466,7 +466,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": null,
-      "log": ["Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first."]
+      "log": ["Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first.", "iter 24 · CONFIRMED at a true 390px viewport (iframe harness): the sidebar panel eats the first screen and opens mid-list at The Dragadiddle before the lesson title appears."]
     },
     {
       "id": "BL-038",
