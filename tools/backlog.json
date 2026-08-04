@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 21,
-    "next_dimension": "ui",
+    "iteration": 22,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -243,10 +243,10 @@
       "title": "No prefers-reduced-motion handling",
       "evidence": ["@keyframes play-pulse, transitions, metronome dot scaling all unconditional"],
       "acceptance": "a prefers-reduced-motion block disables/reduces animations; css.missingReducedMotion → 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 22 · 2026-08-04 · Standard universal reduced-motion block (animation/transition durations → 0.01ms, scroll-behavior auto; the file's first and only justified !important) plus metronome beat dots keep their color change but lose the scale pulse. Covers play-pulse keyframes and all 7 transition rules, present and future. css.missingReducedMotion 1→0."]
     },
     {
       "id": "BL-018",

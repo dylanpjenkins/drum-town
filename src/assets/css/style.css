@@ -55,6 +55,21 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
   outline-offset: 2px;
 }
 
+/* Reduced motion: collapse all animation/transition to imperceptible and
+   stop the metronome dots pulsing (their color change carries the beat
+   information without the scale pop). The !important is the point of this
+   block — it must beat every rule, including future ones. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .metronome__beat.is-active,
+  .metronome__beat.is-downbeat-active { transform: none; }
+}
+
 .container {
   max-width: 920px;
   margin: 0 auto;
