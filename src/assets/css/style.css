@@ -97,6 +97,21 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 
 .site-nav a:hover, .site-nav a.active { color: var(--accent); }
 
+/* Skip link — offscreen until keyboard focus lands on it */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 20;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 10px 18px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+.skip-link:focus { left: 8px; }
+
 /* =====================  TYPE / HEADINGS  ===================== */
 .tag {
   font-family: var(--mono);

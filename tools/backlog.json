@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 1,
-    "next_dimension": "ui",
+    "iteration": 2,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -159,10 +159,10 @@
         "149/217 lessons inject their own h2 inside bodyHtml at same level as page-section h2s; h3 'Listen for it' floats between h2s"
       ],
       "acceptance": "base.njk wraps content in <main id=\"main\">; first focusable element is <a class=\"skip-link\" href=\"#main\">; exercise titles become h3; page templates keep a clean h1>h2>h3 outline; node tools/checks/dom-smoke.js exits 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 2 · 2026-08-04 · base.njk: skip link (offscreen-until-focus, token colors) + <main id=main> around content; .eleventy.js exercise shortcode: exercise-title div→h3 (class already controls type + margin, visual parity). Done together with BL-011 — dom-smoke gates both. dom.pagesMissingMain 228→0, dom.pagesMissingSkipLink 228→0. Note: gate caught my skip-link font-size in px (84→85) — converted to rem; the ratchet works."]
     },
     {
       "id": "BL-011",
@@ -171,10 +171,10 @@
       "title": "All 888 notation SVGs have no role/aria-label — core content invisible to screen readers",
       "evidence": ["tools/notation-renderer.js emits no a11y attributes on the SVG root; exercise shortcode has the title available for labeling"],
       "acceptance": "every rendered notation SVG carries role=\"img\" and a meaningful aria-label (exercise title + meta); dom.svgsMissingAria → 0; dom-smoke SVG assertion passes",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 2 · 2026-08-04 · exercise shortcode injects role=img + aria-label ('Drum notation: <title> — <meta>', tags stripped, entities preserved) onto every rendered SVG root — covers all 888 (both call sites: lessons.njk, rudiments.njk). dom.svgsMissingAria 888→0. Done together with BL-010."]
     },
     {
       "id": "BL-012",

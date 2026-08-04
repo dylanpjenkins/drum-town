@@ -33,9 +33,18 @@ module.exports = function (eleventyConfig) {
   function escapeAttr(s) {
     return s.replace(/&/g, '&amp;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
   }
+  // Attribute text for human-readable labels: strip tags, keep existing HTML
+  // entities intact (titles already contain e.g. &amp;), escape only quotes.
+  function labelText(s) {
+    return String(s).replace(/<[^>]*>/g, '').replace(/"/g, '&quot;');
+  }
   eleventyConfig.addShortcode('exercise', function (ex) {
     const spec = typeof ex === 'string' ? JSON.parse(ex) : ex;
-    const svg = renderPattern(spec);
+    const ariaLabel = labelText(
+      'Drum notation' + (spec.title ? ': ' + spec.title : '') + (spec.meta ? ' — ' + spec.meta : '')
+    );
+    const svg = renderPattern(spec)
+      .replace('<svg ', `<svg role="img" aria-label="${ariaLabel}" `);
     const tipBlock = spec.tip
       ? `<div class="exercise-tip">${spec.tip}</div>`
       : '';
@@ -72,7 +81,7 @@ module.exports = function (eleventyConfig) {
       <div class="exercise">
         <div class="exercise-header">
           <div class="exercise-header__text">
-            <div class="exercise-title">${spec.title || 'Exercise'}</div>
+            <h3 class="exercise-title">${spec.title || 'Exercise'}</h3>
             ${spec.meta ? `<div class="exercise-meta">${spec.meta}</div>` : ''}
           </div>
           ${controls}
