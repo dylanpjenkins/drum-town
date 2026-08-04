@@ -39,6 +39,10 @@ function effectiveTickSum(spec, voice) {
   return sum;
 }
 
+// Round tick sums for display — tuplet math accumulates float noise
+// (11.999999999999998) that would otherwise leak into the report.
+const r4 = v => Math.round(v * 10000) / 10000;
+
 const beatMismatches = [];
 const multiBarPatterns = [];
 const sixNoteIn44 = [];
@@ -63,9 +67,9 @@ for (const [slug, lesson] of Object.entries(lc)) {
       if (ticks === null || !(ex[voice] || []).length) continue;
       if (Math.abs(ticks - expected) <= 0.01) continue;
       if (isMultiBar(ticks)) {
-        multiBarPatterns.push(`${slug}#${i} ${voice}=${ticks} (${Math.round(ticks / expected)} bars of ${ex.timeSignature})`);
+        multiBarPatterns.push(`${slug}#${i} ${voice}=${r4(ticks)} (${Math.round(ticks / expected)} bars of ${ex.timeSignature})`);
       } else {
-        beatMismatches.push(`${slug}#${i} ${voice}=${ticks} expected=${expected} (${ex.timeSignature})`);
+        beatMismatches.push(`${slug}#${i} ${voice}=${r4(ticks)} expected=${r4(expected)} (${ex.timeSignature})`);
       }
     }
     // Six-note rudiment in 4/4 — likely should be 6/8 or sextuplets
@@ -109,3 +113,4 @@ console.log('Total:', gettingStartedKitPatterns.length);
 console.log();
 console.log('=== CLAVE-LESSON SLUGS (visual review) ===');
 claveMatches.forEach(s => console.log('  ' + s));
+console.log('Total:', claveMatches.length);

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 16,
-    "next_dimension": "quality",
+    "iteration": 17,
+    "next_dimension": "ui",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -95,10 +95,10 @@
         "clave section prints no Total: line unlike the other four"
       ],
       "acceptance": "tick sums rounded to 4 decimals in output; clave Total printed; tools/audit-output.txt regenerated in same commit; no mismatch-count change",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 17 · 2026-08-04 · r4() rounding on displayed tick sums (11.999999999999998 → 12, 47.99… → 48); clave section gets its Total line like the other four. Baseline audit-output.txt regenerated in-commit; BEAT-COUNT MISMATCHES still 0."]
     },
     {
       "id": "BL-007",

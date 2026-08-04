@@ -1,4 +1,4 @@
-=== BEAT-COUNT MISMATCHES (real bugs) ===
+﻿=== BEAT-COUNT MISMATCHES (real bugs) ===
 Total: 0
 
 === MULTI-BAR PATTERNS (informational, not bugs) ===
@@ -106,13 +106,13 @@ Total: 0
   jazz-tony-williams#3 feet=16 (4 bars of 4/4)
   jazz-modern-jazz#0 hands=16 (4 bars of 4/4)
   jazz-modern-jazz#0 feet=16 (4 bars of 4/4)
-  jazz-modern-jazz#1 hands=11.999999999999998 (3 bars of 4/4)
+  jazz-modern-jazz#1 hands=12 (3 bars of 4/4)
   jazz-modern-jazz#1 feet=12 (3 bars of 4/4)
   jazz-modern-jazz#2 hands=8 (2 bars of 4/4)
   jazz-modern-jazz#2 feet=8 (2 bars of 4/4)
-  jazz-modern-jazz#3 hands=16.000000000000004 (4 bars of 4/4)
+  jazz-modern-jazz#3 hands=16 (4 bars of 4/4)
   jazz-modern-jazz#3 feet=16 (4 bars of 4/4)
-  jazz-modern-jazz#4 hands=47.99999999999999 (12 bars of 4/4)
+  jazz-modern-jazz#4 hands=48 (12 bars of 4/4)
   jazz-modern-jazz#4 feet=48 (12 bars of 4/4)
   latin-clave-intro#0 hands=8 (2 bars of 4/4)
   latin-clave-intro#1 hands=8 (2 bars of 4/4)
@@ -276,3 +276,4 @@ Total: 1
   latin-clave-intro
   fusion-clave-fusion
   clave-as-feel
+Total: 4
