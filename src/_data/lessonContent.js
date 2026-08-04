@@ -19,6 +19,10 @@ module.exports = {
   // ============================================================
   'paradiddle': {
     tagline: "The most useful sticking pattern ever invented",
+    listening: [
+      { artist: "Steve Gadd", work: "Paul Simon — 50 Ways to Leave Your Lover", note: "The most famous paradiddle groove ever recorded — the whole intro is paradiddle sticking split between hi-hat and snare. Count RLRR LRLL along with it." },
+      { artist: "David Garibaldi", work: "Tower of Power — What Is Hip?", note: "Paradiddle-family stickings scattered between hat and snare at speed. Listen for how the accents, not the sticking, are what you actually hear." }
+    ],
     duration: "15–20 min",
     difficulty: "Beginner",
     focus: "Rudiment / Sticking",
@@ -60,6 +64,11 @@ module.exports = {
   // ============================================================
   'first-beat': {
     tagline: "Where rock, pop, and most popular music begins",
+    listening: [
+      { artist: "Al Jackson Jr.", work: "Booker T. & the M.G.'s — Green Onions", note: "The basic backbeat played with total discipline for three minutes. Nothing extra — and nothing missing." },
+      { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "Maybe the most committed backbeat on record. Listen to how hard the snare on 2 and 4 lands and how steady the hat stays around it." },
+      { artist: "Charlie Watts", work: "The Rolling Stones — Honky Tonk Women", note: "The same skeleton with human swagger. Notice the hat lifting for the snare hits — feel over machinery." }
+    ],
     duration: "15 min",
     difficulty: "Beginner",
     focus: "Coordination",
@@ -182,6 +191,11 @@ module.exports = {
   // ============================================================
   'first-beat-kicks': {
     tagline: "Move the bass drum, change the song",
+    listening: [
+      { artist: "John Bonham", work: "Led Zeppelin — When the Levee Breaks", note: "The kick placement IS the song. Map where each kick lands against the 16th grid — none of them are accidents." },
+      { artist: "Roger Taylor", work: "Queen — Another One Bites the Dust", note: "A kick pattern so identifiable you can name the song from it alone. Same hat, same snare — the kick carries the identity." },
+      { artist: "Dave Grohl", work: "Foo Fighters — Everlong", note: "Anticipated kicks driving straight into the backbeat at speed. Hear how the '&' placements push the song forward." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Coordination / Variation",
@@ -345,6 +359,11 @@ module.exports = {
   // ============================================================
   'first-beat-color': {
     tagline: "Tiny gestures that turn a beat into a drum part",
+    listening: [
+      { artist: "Dave Grohl", work: "Nirvana — Smells Like Teen Spirit", note: "Open-hat color as an event: the verse groove breathes on the opens, then the chorus slams them shut." },
+      { artist: "John Bonham", work: "Led Zeppelin — Fool in the Rain", note: "The half-time feel with the snare on 3, plus ghost-note color everywhere. Feel how long each bar seems." },
+      { artist: "Homer Steinweiss", work: "Amy Winehouse — Rehab", note: "Pickups and fills that serve the song completely. Every color gesture lands quieter than the backbeat it decorates." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Articulation / Feel",
@@ -476,6 +495,10 @@ module.exports = {
   // ============================================================
   'counting-eighths': {
     tagline: "The first subdivision past the beat",
+    listening: [
+      { artist: "Tommy Ramone", work: "Ramones — Blitzkrieg Bop", note: "Relentless eighth notes for two minutes. Count '1 & 2 &' out loud along with the hat — this is the subdivision with a leather jacket on." },
+      { artist: "Meg White", work: "The White Stripes — Seven Nation Army", note: "Quarters and eighths, nothing else, holding up an arena anthem. Simplicity at full commitment." }
+    ],
     duration: "15 min",
     difficulty: "Beginner",
     focus: "Reading / Counting",
@@ -566,6 +589,10 @@ module.exports = {
   // ============================================================
   'counting-sixteenths': {
     tagline: "Four pulses inside every beat",
+    listening: [
+      { artist: "Stevie Wonder", work: "Superstition", note: "Stevie himself on drums. The hi-hat rides the 16th grid and the kick and snare pick syllables out of it — try naming the count of each kick." },
+      { artist: "Bernard Purdie", work: "Aretha Franklin — Rock Steady", note: "A masterclass in which 16ths to play and which to leave out. The grid is always there even when the hands rest." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Reading / Counting",
@@ -675,6 +702,10 @@ module.exports = {
   // ============================================================
   'single-stroke-roll': {
     tagline: "Alternating hands — the most fundamental motion in drumming",
+    listening: [
+      { artist: "Buddy Rich", work: "West Side Story Medley (live)", note: "Single-stroke velocity as a musical language. You don't need his speed — listen for how even the stream stays at any speed." },
+      { artist: "John Bonham", work: "Led Zeppelin — Moby Dick", note: "The solo is built largely from singles moved around the kit. Notice how the accents make phrases out of an unbroken stream." }
+    ],
     duration: "15 min",
     difficulty: "Beginner",
     focus: "Rudiment / Sticking",
@@ -762,6 +793,10 @@ module.exports = {
   // ============================================================
   'double-stroke-roll': {
     tagline: "Two strokes per hand — the gateway to the buzz roll",
+    listening: [
+      { artist: "Philly Joe Jones", work: "Miles Davis — Milestones", note: "Diddle-rich snare vocabulary inside swing comping. The doubles are so even you'll mistake them for singles until you slow the record down." },
+      { artist: "Neil Peart", work: "Rush — Tom Sawyer", note: "The fills lean on doubles and ruffs to move around the kit. Listen for pairs of notes per hand feeding the toms." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Rudiment / Sticking",
@@ -850,6 +885,10 @@ module.exports = {
   // ============================================================
   'basic-coordination': {
     tagline: "Hands and feet, doing different things at once",
+    listening: [
+      { artist: "Joey Kramer", work: "Aerosmith — Walk This Way", note: "Syncopated kick under steady hands — exactly this lesson's Ex 5 problem solved at tempo. The foot floats; the hands never flinch." },
+      { artist: "John Bonham", work: "Led Zeppelin — Immigrant Song", note: "Driving hands with the kick working underneath in 16th figures. Coordination as aggression." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Coordination / Independence",
@@ -960,6 +999,10 @@ module.exports = {
   // ============================================================
   'warm-ups': {
     tagline: "Two minutes that loosen the hands before everything else",
+    listening: [
+      { artist: "Max Roach", work: "The Drum Also Waltzes", note: "A solo built from the same vocabulary you just warmed up: singles, doubles, accents, space. Sticking patterns as actual music." },
+      { artist: "Art Blakey", work: "The Drum Thunder Suite (Moanin')", note: "Hand vocabulary orchestrated across the kit at full intensity. This is where the pad work eventually goes." }
+    ],
     duration: "5–10 min",
     difficulty: "Beginner",
     focus: "Routine / Maintenance",
@@ -1088,6 +1131,11 @@ module.exports = {
   // ============================================================
   'rock-eighth-grooves': {
     tagline: "Canonical rock vocabulary on top of the basic backbeat",
+    listening: [
+      { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "The reference for driving 8ths with conviction. Nothing moves that doesn't have to, and the tempo never breathes." },
+      { artist: "Bruce Gary", work: "The Knack — My Sharona", note: "Driving 8ths plus a syncopated kick figure — two of this lesson's exercises living in one hit song." },
+      { artist: "Tré Cool", work: "Green Day — Basket Case", note: "Relentless 8th-note energy at punk tempo. Listen for how the open hat marks the sections." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Vocabulary / Genre",
@@ -1221,6 +1269,11 @@ module.exports = {
   // ============================================================
   'jazz-ride-pattern': {
     tagline: "The four-beat phrase that defines jazz time",
+    listening: [
+      { artist: "Jimmy Cobb", work: "Miles Davis — So What (Kind of Blue)", note: "The medium-swing ride pattern, possibly the most listened-to in history. Focus only on the cymbal for one full listen." },
+      { artist: "Art Blakey", work: "Cannonball Adderley — Somethin' Else", note: "Ride time with more push. Compare his skip-note weight to Cobb's — same pattern, different personality." },
+      { artist: "Ed Thigpen", work: "Oscar Peterson Trio — Night Train", note: "Swing time at its most polished. The hi-hat on 2 and 4 is quiet, constant, and completely load-bearing." }
+    ],
     duration: "20 min",
     difficulty: "Beginner",
     focus: "Vocabulary / Genre",
@@ -1439,6 +1492,10 @@ module.exports = {
   // ============================================================
   'metal-double-bass-basics': {
     tagline: "When one foot isn't enough",
+    listening: [
+      { artist: "Lars Ulrich", work: "Metallica — One", note: "The canonical double-bass entrance: the machine-gun section near the end. Listen to how the feet lock to the guitars, not just the click." },
+      { artist: "Dave Lombardo", work: "Slayer — Angel of Death", note: "Double-bass endurance and evenness at extreme tempo. The feet are a single instrument, not two alternating ones." }
+    ],
     duration: "25 min",
     difficulty: "Beginner",
     focus: "Foot Technique / Genre",

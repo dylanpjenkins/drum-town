@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 18,
-    "next_dimension": "content",
+    "iteration": 19,
+    "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -317,8 +317,8 @@
       "acceptance": "per chunk of ~13 lessons: add 2-3 genuinely relevant listening picks (artist, work, note) per style guide; picks factually correct and varied (respect BL-029 diversity); content.lessonsMissingListening falls each chunk",
       "status": "ready",
       "attempts": 0,
-      "chunk": { "done": 0, "total": 6, "size": 13 },
-      "log": []
+      "chunk": { "done": 1, "total": 6, "size": 13 },
+      "log": ["iter 19 · chunk 1/6 · 31 picks across paradiddle, first-beat, first-beat-kicks, first-beat-color, counting-eighths, counting-sixteenths, single-stroke-roll, double-stroke-roll, basic-coordination, warm-ups, rock-eighth-grooves, jazz-ride-pattern, metal-double-bass-basics. Canonical, verifiable recordings (Gadd/50 Ways, Cobb/So What, Rudd/Back in Black x2 ≤ cap, Bonham spread across 4 distinct works); notes say what to listen for. lessonsMissingListening 77→64, duplicateListeningPicks unchanged at 7."]
     },
     {
       "id": "BL-024",
