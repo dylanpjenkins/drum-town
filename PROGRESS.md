@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 20 · discovery #2 — link scan clean, no new issues, nothing parked in 19 ticks; all remaining metrics map to ready backlog items
 - 2026-08-04 · iter 19 · BL-023 chunk 1/6 [content] 31 listening picks added across 13 lessons (Foundations + track intros) — lessonsMissingListening 77→64
 - 2026-08-04 · iter 18 · BL-016 [ui] dark-mode groundwork — notation ink routed through currentColor + tokens; the white/black island is no longer hardcoded
 - 2026-08-04 · iter 17 · BL-006 [quality] legacy audit output cleaned — float noise rounded, clave Total added, baseline regenerated
@@ -51,6 +52,8 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 _(none)_
 
 ## Metrics snapshots
+
+**Discovery iter 20 (2026-08-04), after 18 improvement ticks.** Newly zeroed since iter 10: relativeSitemapLocs 227→0 · lessonsZeroExercises 2→0 · pxFontSizes 79→0. Falling: lessonsThinProse 53→43 · lessonsNoSubheadings 68→58 · lessonsMissingListening 77→64 (+31 picks, now 448 entries). **Still open** (all mapped to ready items): focusDistinctValues 144 (BL-024) · thin/subheads/listening long tails (BL-022/023 chunks) · tempoRangeMetaMismatches 6 (BL-027) · titleNumberingSchemes 5 (BL-026) · duplicatePicks 7 (BL-029) · fewExercises 14 (some intentional — setup/mindset lessons; revisit the floor when BL-022 completes) · dark-scheme + reduced-motion (BL-017 + future theme item) · deadFeatureRefs 1 (noted generalistPath, by design). Link scan clean twice running; zero parked items in 19 ticks.
 
 **Discovery iter 10 (2026-08-04), after 9 improvement ticks.** Zeroed since bootstrap: player.silentHits 2076→0 · player.unmappedDrumKeys 7→0 · player.multiBarSpecsUnsupported 153→0 · dom.pagesMissingMain 228→0 · dom.pagesMissingSkipLink 228→0 · dom.svgsMissingAria 888→0 · css.outlineNone 4→0 · css.missingFocusVisible 1→0 · content.britishSpellings 119→0. Improved: hygiene.deadFeatureRefs 4→1 · css.pxFontSizes 84→79. **Still open**: lessonsMissingListening 77 · lessonsNoSubheadings 68 · lessonsThinProse 53 · focusDistinctValues 144 · pxFontSizes 79 · relativeSitemapLocs 227 · duplicateListeningPicks 7 · lessonsFewExercises 14 · zeroExercises 2 · tempoRangeMetaMismatches 6 · titleNumberingSchemes 5 · dark-scheme/reduced-motion groundwork. Link scan: 11,749 internal refs, all resolve.
 
