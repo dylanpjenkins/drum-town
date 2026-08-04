@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 8,
-    "next_dimension": "content",
+    "iteration": 9,
+    "next_dimension": "quality",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 32,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -279,10 +279,10 @@
       "title": "Author the content style guide (prerequisite for all rewrite/expansion chunks)",
       "evidence": ["Formulaic single voice: 3,507 em-dashes, 'This is the' x148, 55 bodies open with 'The', identical 2-para shape everywhere; full-rewrite license granted but chunked rewrites need one voice to converge on"],
       "acceptance": "docs/content-style-guide.md exists covering: voice + register, lesson structure (lede/why/how/practice framing), paragraph + subheading expectations by lesson size, exercise title + meta conventions, listening-section format, em-dash budget, American spelling, focus-chip controlled vocabulary proposal (<=24 values); CLAUDE.md style ledger links to it",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 9 · 2026-08-04 · docs/content-style-guide.md written, grounded in the corpus audit (144 focus values dumped and clustered into a 24-value controlled set with legacy-mapping guidance; banned tics from the measured counts: 'The' openers x55, 'This is the' x148, em-dash budget 1/para). Covers voice, size-tiered structure, exercise title/meta conventions (feeds BL-026/BL-027), listening format + diversity rule (BL-023/BL-029), graduation criteria. CLAUDE.md ledger now points to it as binding. Unlocks BL-022/BL-024/BL-028 chunks."]
     },
     {
       "id": "BL-021",

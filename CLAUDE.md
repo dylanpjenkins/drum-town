@@ -42,6 +42,7 @@ Windows: `npm run clean` is `rm -rf` and fails in PowerShell — use `Remove-Ite
 
 ## Style ledger (append-only; consult before content/UI edits)
 
+- Content prose, exercises, listening, focus vocabulary: **`docs/content-style-guide.md` is the binding reference** for every lessonContent.js edit.
 - Spelling: **American** (practice, color, center, internalize).
 - Duration metadata format: `NN–NN min` (en dash) or `NN min`.
 - Heading hierarchy: h1 = page title; h2 = page sections (incl. bodyHtml subheads); h3 = exercise titles and sub-subsections.

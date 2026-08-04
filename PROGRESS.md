@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 9 · BL-020 [content] style guide authored (docs/content-style-guide.md) — 24-value focus vocabulary proposed, voice/structure/exercise/listening conventions set; unlocks all rewrite chunks
 - 2026-08-04 · iter 8 · BL-013 [ui] docked metronome is now collapsible — starts collapsed on phones (was covering ~45% of the viewport), choice persisted
 - 2026-08-04 · iter 7 · BL-003 [quality] dead-code sweep — never-rendering preview card removed end-to-end, deprecated lesson.njk deleted, "ready" badge noise gone, hygiene.deadFeatureRefs 4→1 (generalistPath kept as noted data)
 - 2026-08-04 · iter 6 · BL-019 [content] American spelling normalized — 119 British forms replaced across all 217 lessons, content.britishSpellings 119→0
