@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 12 · BL-014 [ui] notation fits phones — single-bar staves size to content (427/888 no longer force horizontal pan), playhead auto-follows scrolling staves
 - 2026-08-04 · iter 11 · BL-004 [quality] sitemap is spec-valid — emitted only when SITE_URL is set (absolute URLs), omitted otherwise; dom.relativeSitemapLocs 227→0
 - 2026-08-04 · iter 10 · discovery — link scan clean (11,749 refs), no TODO/console.log, +3 polish items (BL-032..034); 12 of 26 gated metrics now at zero
 - 2026-08-04 · iter 9 · BL-020 [content] style guide authored (docs/content-style-guide.md) — 24-value focus vocabulary proposed, voice/structure/exercise/listening conventions set; unlocks all rewrite chunks
@@ -26,6 +27,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Needs eyes (visual changes awaiting a 5-minute human glance)
 
+- **BL-014 notation widths** (iter 12): HIGH VALUE GLANCE — single-bar staves now size to their note count, so sparse exercises (e.g. first-beat Build-Up 1, the quarter-note hat bars) render narrower and fit phones. Check 2-3 lessons on desktop (staves shouldn't look oddly short) and one on a phone/narrow window (short exercises shouldn't pan; playing a long stave should auto-scroll the playhead into view).
 - **BL-013 metronome collapse** (iter 8): on desktop, a small − appears in the widget corner — clicking collapses it to a round ♩ button; on a phone (or narrow window <720px) it starts collapsed. Expand, play, collapse while playing — audio should keep running.
 - **BL-003 homepage hero + genre cards** (iter 7): after visiting any lesson, the homepage "Up Next" hero should render single-column (the empty preview pane is gone); genre pages and Where-Next cards no longer show the word "ready" under every title; hero stat reads "217 lessons".
 

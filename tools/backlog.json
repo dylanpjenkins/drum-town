@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 11,
-    "next_dimension": "ui",
+    "iteration": 12,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -207,10 +207,10 @@
       "title": "Every notation stave forces horizontal scroll on phones (min-width: 520px)",
       "evidence": ["style.css:774 .notation svg { min-width: 520px } + overflow-x:auto; even 4-note exercises pan on 375px; playhead scrolls out of view"],
       "acceptance": "short single-bar staves fit a 375px viewport without panning; long staves keep a scroll container; playhead remains visible (container follows or width fits); Needs-eyes entry added",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 12 · 2026-08-04 · Three-part fix: (1) notation-renderer sizes single-bar staves to content (clamp 380..760 by note count; explicit spec.width wins) — the old fixed 760 made even 4-hit bars pan; (2) exercise shortcode replaces the blanket CSS min-width:520px with a per-SVG floor (55% of natural width, only when natural >620); (3) player playhead auto-follows inside overflowing containers (viewBox→px conversion, 36px margin). Result: 427/888 staves fit with no pan (was 1), the rest scroll with proportional floors 363-770px. 0 render failures; audit-lessons diff 0."]
     },
     {
       "id": "BL-015",

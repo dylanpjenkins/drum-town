@@ -43,8 +43,17 @@ module.exports = function (eleventyConfig) {
     const ariaLabel = labelText(
       'Drum notation' + (spec.title ? ': ' + spec.title : '') + (spec.meta ? ' — ' + spec.meta : '')
     );
-    const svg = renderPattern(spec)
-      .replace('<svg ', `<svg role="img" aria-label="${ariaLabel}" `);
+    const rendered = renderPattern(spec);
+    // Scale-aware width floor: staves wider than ~620 viewBox units keep a
+    // horizontal-scroll floor at 55% natural size so notes stay legible on
+    // phones; narrower staves simply fit their container (no forced pan).
+    const vb = /viewBox="0 0 ([\d.]+)/.exec(rendered);
+    const natW = vb ? parseFloat(vb[1]) : 0;
+    const minW = natW > 620 ? Math.round(natW * 0.55) : 0;
+    const svg = rendered.replace(
+      '<svg ',
+      `<svg role="img" aria-label="${ariaLabel}" ${minW ? `style="min-width:${minW}px" ` : ''}`
+    );
     const tipBlock = spec.tip
       ? `<div class="exercise-tip">${spec.tip}</div>`
       : '';

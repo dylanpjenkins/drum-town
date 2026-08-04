@@ -712,9 +712,9 @@ hr.section-rule {
   display: block;
   max-width: 100%;
   height: auto;
-  /* Keep notation legible on narrow screens: below this width the staff
-     pans inside the .notation box (overflow-x: auto) instead of shrinking. */
-  min-width: 520px;
+  /* Wide staves carry a per-SVG min-width inline (set at build time from
+     their viewBox width) so they pan inside .notation instead of shrinking
+     illegibly; short staves simply fit their container. */
 }
 
 .notation svg .playhead {

@@ -440,6 +440,7 @@
     this.spec = spec;
     this.btn = btn;
     this.svg = svg;
+    this.container = svg ? svg.closest('.notation') : null;
     this.bounds = bounds;
     this.line = line;
     this.patternDuration = PatternMath.patternDurationSecs(spec);
@@ -485,6 +486,18 @@
       const x = session.bounds.startX + progress * span;
       session.line.setAttribute('x1', x);
       session.line.setAttribute('x2', x);
+      // On staves that overflow their container, keep the playhead in view.
+      // x is in viewBox units — convert to CSS px before comparing.
+      const box = session.container;
+      if (box && box.scrollWidth > box.clientWidth + 1) {
+        const vb = session.svg.viewBox && session.svg.viewBox.baseVal;
+        const scale = (vb && vb.width) ? session.svg.clientWidth / vb.width : 1;
+        const px = x * scale;
+        const margin = 36;
+        if (px < box.scrollLeft + margin || px > box.scrollLeft + box.clientWidth - margin) {
+          box.scrollLeft = Math.max(0, px - margin);
+        }
+      }
       session.rafId = requestAnimationFrame(tick);
     };
     session.rafId = requestAnimationFrame(tick);

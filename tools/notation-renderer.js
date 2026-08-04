@@ -217,10 +217,15 @@ function renderPattern(spec) {
   document.body.appendChild(container);
 
   const barCount = _detectBarCount(spec);
-  const baseWidth = spec.width || 760;
   const height = spec.height || 130;
-  // Multi-bar layouts widen proportionally, but we cap so single-bar exercises
-  // don't shrink and the layout doesn't go off-screen for very long phrases.
+  // Single-bar staves size to their content — a four-hit bar doesn't need the
+  // width of a dense 16th-note bar, and narrower staves fit phones without
+  // panning. Explicit spec.width always wins; 760 is the historical ceiling.
+  const maxVoiceNotes = Math.max((spec.hands || []).length, (spec.feet || []).length, 1);
+  const contentWidth = Math.min(760, Math.max(380, 140 + maxVoiceNotes * 52));
+  const baseWidth = spec.width || (barCount > 1 ? 760 : contentWidth);
+  // Multi-bar layouts widen proportionally, but we cap so bars stay readable
+  // and the layout doesn't go off-screen for very long phrases.
   const width = barCount > 1 ? Math.min(1400, Math.max(baseWidth, baseWidth + (barCount - 1) * 240)) : baseWidth;
 
   try {
