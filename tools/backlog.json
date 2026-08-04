@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 14,
-    "next_dimension": "ui",
+    "iteration": 15,
+    "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
     "next_id": 35,
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
@@ -219,10 +219,10 @@
       "title": "All font sizes in px (84 declarations) — user font-size preference ignored",
       "evidence": ["style.css html{font-size:16px} + 84 px font-size declarations, 0 rem/em"],
       "acceptance": "font sizes converted to rem (root uses percentage or none); visual parity spot-checked on 4 page types; css.pxFontSizes → 0; Needs-eyes entry",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 15 · 2026-08-04 · All 79 font-size declarations converted px→rem (base 16; every value is a half/whole px so the rem values are exact — no drift at default settings); html/body at 1rem so browser font-size preferences now cascade site-wide. css.pxFontSizes 79→0."]
     },
     {
       "id": "BL-016",

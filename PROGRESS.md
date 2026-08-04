@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-04 · iter 15 · BL-015 [ui] all font sizes in rem — user font-size preferences finally respected; css.pxFontSizes 79→0 (pixel-identical at default settings)
 - 2026-08-04 · iter 14 · BL-005 [quality] npm run clean is cross-platform (node fs.rmSync) — verified on PowerShell, idempotent
 - 2026-08-04 · iter 13 · BL-021 [content] gear-basics + tuning-basics get real exercises (pad strokes; strike-and-listen tuning drills) — lessonsZeroExercises 2→0; the homepage's "every lesson is playable" promise is finally true
 - 2026-08-04 · iter 12 · BL-014 [ui] notation fits phones — single-bar staves size to content (427/888 no longer force horizontal pan), playhead auto-follows scrolling staves
@@ -29,6 +30,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Needs eyes (visual changes awaiting a 5-minute human glance)
 
+- **BL-015 rem type** (iter 15): at default browser settings every size is mathematically identical to before. Worth one check: bump your browser's default font size (Settings → Appearance) — the whole site should now scale with it.
 - **BL-014 notation widths** (iter 12): HIGH VALUE GLANCE — single-bar staves now size to their note count, so sparse exercises (e.g. first-beat Build-Up 1, the quarter-note hat bars) render narrower and fit phones. Check 2-3 lessons on desktop (staves shouldn't look oddly short) and one on a phone/narrow window (short exercises shouldn't pan; playing a long stave should auto-scroll the playhead into view).
 - **BL-013 metronome collapse** (iter 8): on desktop, a small − appears in the widget corner — clicking collapses it to a round ♩ button; on a phone (or narrow window <720px) it starts collapsed. Expand, play, collapse while playing — audio should keep running.
 - **BL-003 homepage hero + genre cards** (iter 7): after visiting any lesson, the homepage "Up Next" hero should render single-column (the empty preview pane is gone); genre pages and Where-Next cards no longer show the word "ready" under every title; hero stat reads "217 lessons".

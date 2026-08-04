@@ -34,7 +34,7 @@ html, body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--body);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -77,7 +77,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 
 .site-logo {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.01em;
@@ -92,7 +92,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
   flex-wrap: wrap;
   gap: 8px 22px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
@@ -122,7 +122,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 /* =====================  TYPE / HEADINGS  ===================== */
 .tag {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -131,7 +131,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -140,22 +140,22 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 }
 
 h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; overflow-wrap: break-word; }
-h1 { font-size: 60px; line-height: 1; margin: 0 0 20px; }
+h1 { font-size: 3.75rem; line-height: 1; margin: 0 0 20px; }
 h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
-h2 { font-size: 36px; line-height: 1.1; margin: 36px 0 14px; }
-h3 { font-size: 24px; line-height: 1.2; margin: 24px 0 10px; }
-h4 { font-size: 18px; line-height: 1.3; margin: 18px 0 6px; font-weight: 600; }
+h2 { font-size: 2.25rem; line-height: 1.1; margin: 36px 0 14px; }
+h3 { font-size: 1.5rem; line-height: 1.2; margin: 24px 0 10px; }
+h4 { font-size: 1.125rem; line-height: 1.3; margin: 18px 0 6px; font-weight: 600; }
 
 p { margin: 0 0 14px; }
 
 .lede {
-  font-size: 17px;
+  font-size: 1.0625rem;
   color: var(--ink-3);
   max-width: 600px;
   margin: 0 0 18px;
 }
 
-ul.bulleted { padding-left: 20px; margin: 12px 0; font-size: 15.5px; }
+ul.bulleted { padding-left: 20px; margin: 12px 0; font-size: 0.96875rem; }
 ul.bulleted li { margin-bottom: 8px; }
 
 hr.section-rule {
@@ -169,11 +169,11 @@ hr.section-rule {
   text-align: center;
   padding: 40px 0 30px;
 }
-.curriculum-hero h1 { font-size: 80px; }
+.curriculum-hero h1 { font-size: 5rem; }
 .curriculum-hero .lede { margin: 0 auto 18px; }
 .curriculum-hero .stat {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.2em;
   color: var(--ink-soft);
   text-transform: uppercase;
@@ -191,7 +191,7 @@ hr.section-rule {
 }
 .curriculum-section__header--left .lede { margin-left: 0; margin-right: 0; }
 .curriculum-section__header h2 {
-  font-size: 44px;
+  font-size: 2.75rem;
   margin: 6px 0 8px;
 }
 .curriculum-section__header h2 em {
@@ -218,7 +218,7 @@ hr.section-rule {
 }
 .chapter__title {
   font-family: var(--display);
-  font-size: 36px;
+  font-size: 2.25rem;
   font-weight: 500;
   font-style: italic;
   letter-spacing: -0.01em;
@@ -227,7 +227,7 @@ hr.section-rule {
 }
 .chapter__num {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -269,13 +269,13 @@ hr.section-rule {
 .chapter-lesson:hover { border-color: var(--accent); }
 .chapter-lesson__num {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.12em;
   color: var(--ink-soft);
 }
 .chapter-lesson__title {
   font-family: var(--display);
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-style: italic;
 }
 .chapter-lesson:hover { text-decoration: none; }
@@ -296,7 +296,7 @@ hr.section-rule {
    curriculum-hero on the homepage. */
 .hero-default__completed {
   font-family: var(--body);
-  font-size: 14.5px;
+  font-size: 0.90625rem;
   color: var(--ink-soft);
   margin-top: 18px;
 }
@@ -310,7 +310,7 @@ hr.section-rule {
 .hero-upnext__main { min-width: 0; }
 .hero-upnext__eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -321,7 +321,7 @@ hr.section-rule {
 .hero-upnext__title {
   font-family: var(--display);
   font-style: italic;
-  font-size: 72px;
+  font-size: 4.5rem;
   line-height: 1;
   margin: 0 0 18px;
   color: var(--accent);
@@ -329,7 +329,7 @@ hr.section-rule {
 }
 .hero-upnext__tagline {
   font-family: var(--body);
-  font-size: 17px;
+  font-size: 1.0625rem;
   color: var(--ink-3);
   max-width: 540px;
   margin: 0 0 24px;
@@ -347,7 +347,7 @@ hr.section-rule {
   gap: 6px;
   padding: 11px 20px;
   font-family: var(--display);
-  font-size: 16px;
+  font-size: 1rem;
   font-style: italic;
   letter-spacing: 0.01em;
   border: 1px solid transparent;
@@ -379,7 +379,7 @@ hr.section-rule {
   padding-bottom: 32px;
   margin-bottom: 40px;
 }
-.genre-hero h1 { font-size: 64px; }
+.genre-hero h1 { font-size: 4rem; }
 
 .level-block {
   margin-bottom: 48px;
@@ -396,7 +396,7 @@ hr.section-rule {
 }
 .level-block__num {
   font-family: var(--display);
-  font-size: 44px;
+  font-size: 2.75rem;
   font-style: italic;
   color: var(--accent);
   font-weight: 500;
@@ -404,13 +404,13 @@ hr.section-rule {
 }
 .level-block__title {
   font-family: var(--display);
-  font-size: 30px;
+  font-size: 1.875rem;
   margin: 0;
   font-weight: 500;
 }
 .level-block__tag {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -441,7 +441,7 @@ hr.section-rule {
 }
 .lesson-row__title {
   font-family: var(--display);
-  font-size: 19px;
+  font-size: 1.1875rem;
 }
 /* =====================  LESSON LAYOUT + SIDEBAR  ===================== */
 .lesson-layout {
@@ -484,7 +484,7 @@ hr.section-rule {
 .island-back {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -495,14 +495,14 @@ hr.section-rule {
 .island-title { display: flex; flex-direction: column; gap: 2px; }
 .island-eyebrow {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
 }
 .island-name {
   font-family: var(--display);
-  font-size: 26px;
+  font-size: 1.625rem;
   font-weight: 500;
   color: var(--ink);
   letter-spacing: -0.01em;
@@ -512,7 +512,7 @@ hr.section-rule {
   font-family: var(--display);
   font-style: italic;
   color: var(--ink-soft);
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: -6px 0 14px;
 }
 
@@ -521,7 +521,7 @@ hr.section-rule {
 
 .curr-section__title {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 0.59375rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -536,7 +536,7 @@ hr.section-rule {
   display: block;
   padding: 4px 10px 4px 12px;
   font-family: var(--display);
-  font-size: 14.5px;
+  font-size: 0.90625rem;
   line-height: 1.3;
   color: var(--ink-3);
   text-decoration: none;
@@ -561,10 +561,10 @@ hr.section-rule {
   padding-bottom: 28px;
   margin-bottom: 36px;
 }
-.lesson-hero h1 { font-size: 52px; margin-bottom: 12px; }
+.lesson-hero h1 { font-size: 3.25rem; margin-bottom: 12px; }
 .lesson-hero .breadcrumb {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -577,7 +577,7 @@ hr.section-rule {
   display: flex;
   gap: 24px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.06em;
   color: var(--ink-soft);
   flex-wrap: wrap;
@@ -586,7 +586,7 @@ hr.section-rule {
 
 .section-label {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -595,7 +595,7 @@ hr.section-rule {
 }
 
 .lesson-prose {
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--ink-2);
 }
 /* Cap the measure of running text at a readable line length. Notation and
@@ -630,14 +630,14 @@ hr.section-rule {
 
 .exercise-title {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 500;
   margin: 0 0 4px;
 }
 
 .exercise-meta {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.06em;
   color: var(--accent);
 }
@@ -656,7 +656,7 @@ hr.section-rule {
   border: 1px solid var(--rule);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 0 26px 0 10px;
@@ -678,7 +678,7 @@ hr.section-rule {
   color: var(--bg);
   border: none;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 9px 14px 9px 12px;
@@ -692,7 +692,7 @@ hr.section-rule {
 .play-btn.is-loading { background: var(--ink-soft); cursor: wait; }
 .play-btn.is-loading .play-btn__icon { animation: play-pulse 0.5s ease-in-out infinite; }
 .play-btn.is-playing { background: var(--accent); }
-.play-btn__icon { font-size: 13px; line-height: 1; color: var(--gold); }
+.play-btn__icon { font-size: 0.8125rem; line-height: 1; color: var(--gold); }
 .play-btn__label { line-height: 1; }
 
 @keyframes play-pulse {
@@ -730,12 +730,12 @@ hr.section-rule {
   padding: 18px;
   color: var(--accent);
   font-style: italic;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .exercise-tip {
   color: var(--ink-3);
-  font-size: 14px;
+  font-size: 0.875rem;
   max-width: 65ch;
   margin-top: 10px;
   padding-left: 14px;
@@ -747,14 +747,14 @@ hr.section-rule {
    the exercise block itself. */
 .exercise-desc {
   color: var(--ink-2);
-  font-size: 14.5px;
+  font-size: 0.90625rem;
   max-width: 65ch;
   margin: -4px 0 12px;
 }
 .exercise-lesson-link {
   margin: 12px 0 0;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -765,7 +765,7 @@ hr.section-rule {
   padding: 14px 18px;
   border-left: 3px solid var(--accent);
   margin: 14px 0;
-  font-size: 14.5px;
+  font-size: 0.90625rem;
   color: var(--ink-2);
 }
 .tips strong, .callout strong { color: var(--accent); font-weight: 600; }
@@ -776,11 +776,11 @@ hr.section-rule {
   border: 1px solid var(--rule);
   padding: 14px 18px;
   margin: 18px 0 28px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .prereqs__label {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 0.59375rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -791,7 +791,7 @@ hr.section-rule {
 .prereqs li a {
   background: var(--paper-2);
   padding: 4px 10px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   border: 1px solid var(--rule);
   display: inline-block;
 }
@@ -803,11 +803,11 @@ hr.section-rule {
   border: 1px solid var(--rule);
   padding: 14px 18px 16px;
   margin: 32px 0 0;
-  font-size: 14.5px;
+  font-size: 0.90625rem;
 }
 .grad-criteria__label {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 0.59375rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -841,7 +841,7 @@ hr.section-rule {
   justify-content: space-between;
   align-items: baseline;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 0.65625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   padding-bottom: 8px;
@@ -853,7 +853,7 @@ hr.section-rule {
 .listening__title {
   font-family: var(--display);
   font-style: italic;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -862,7 +862,7 @@ hr.section-rule {
 .listening__intro {
   font-family: var(--display);
   font-style: italic;
-  font-size: 16px;
+  font-size: 1rem;
   color: var(--ink-soft);
   margin: 0 0 22px;
   max-width: 640px;
@@ -882,7 +882,7 @@ hr.section-rule {
 .listening__item:last-child { border-bottom: 1px solid var(--rule-soft); }
 .listening__num {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.18em;
   color: var(--ink-soft);
   padding-top: 5px;
@@ -891,32 +891,32 @@ hr.section-rule {
 .listening__head-line {
   margin: 0 0 4px;
   color: var(--ink);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.4;
 }
 .listening__artist {
   color: var(--accent);
   font-family: var(--display);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
 }
 .listening__dot { margin: 0 6px; color: var(--ink-soft); }
 .listening__work {
   font-family: var(--display);
   font-style: italic;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 .listening__context {
   margin-left: 10px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 0.625rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 .listening__note {
   margin: 0;
-  font-size: 14.5px;
+  font-size: 0.90625rem;
   color: var(--ink-3);
   line-height: 1.55;
 }
@@ -926,7 +926,7 @@ hr.section-rule {
   padding: 32px 36px;
   border-top: 1px solid var(--rule);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   color: var(--ink-soft);
   text-align: center;
@@ -1035,7 +1035,7 @@ hr.section-rule {
 .metronome__btn:hover { background: var(--accent); }
 .metronome__btn.is-playing { background: var(--accent); }
 .metronome__icon {
-  font-size: 11px;
+  font-size: 0.6875rem;
   line-height: 1;
   color: var(--gold);
 }
@@ -1047,7 +1047,7 @@ hr.section-rule {
   border: 1px solid var(--rule);
   border-radius: 3px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 4px 4px;
   text-align: center;
   color: var(--ink);
@@ -1100,7 +1100,7 @@ hr.section-rule {
   border: 1px solid var(--rule);
   border-radius: 3px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 0.6875rem;
   padding: 4px 16px 4px 6px;
   color: var(--ink);
   cursor: pointer;
@@ -1116,7 +1116,7 @@ hr.section-rule {
 .metronome__timesig:focus { border-color: var(--accent); }
 
 .metronome__vol-icon {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: var(--ink-soft);
   flex-shrink: 0;
 }
@@ -1142,14 +1142,14 @@ hr.section-rule {
   .container { padding: 36px 20px; }
   .site-header__inner { padding: 14px 20px; flex-wrap: wrap; }
   .site-nav { gap: 8px 16px; }
-  .curriculum-hero h1 { font-size: 52px; }
-  h1 { font-size: 44px; }
-  .lesson-hero h1 { font-size: 40px; }
-  .genre-hero h1 { font-size: 38px; }
-  .hero-upnext__title { font-size: 46px; }
-  .curriculum-section__header h2 { font-size: 34px; }
+  .curriculum-hero h1 { font-size: 3.25rem; }
+  h1 { font-size: 2.75rem; }
+  .lesson-hero h1 { font-size: 2.5rem; }
+  .genre-hero h1 { font-size: 2.375rem; }
+  .hero-upnext__title { font-size: 2.875rem; }
+  .curriculum-section__header h2 { font-size: 2.125rem; }
   .chapter__head { flex-wrap: wrap; gap: 4px 16px; }
-  .chapter__title { font-size: 30px; }
+  .chapter__title { font-size: 1.875rem; }
   .level-block__header { flex-wrap: wrap; }
   .exercise { padding: 18px 16px; }
   .tracks-grid { grid-template-columns: 1fr; }
@@ -1158,9 +1158,9 @@ hr.section-rule {
 
 @media (max-width: 400px) {
   .container { padding: 32px 16px; }
-  .curriculum-hero h1 { font-size: 44px; }
-  h1 { font-size: 38px; }
-  .lesson-hero h1 { font-size: 36px; }
-  .hero-upnext__title { font-size: 40px; }
+  .curriculum-hero h1 { font-size: 2.75rem; }
+  h1 { font-size: 2.375rem; }
+  .lesson-hero h1 { font-size: 2.25rem; }
+  .hero-upnext__title { font-size: 2.5rem; }
   .exercise { padding: 16px 12px; }
 }
