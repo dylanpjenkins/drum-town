@@ -217,6 +217,9 @@ a:focus-visible { border-radius: 2px; }
   text-decoration: none;
   padding: 7px 12px;
   border-radius: var(--r-pill);
+  /* "Other Topics" must never break across two lines — a wrapped nav link
+     doubles the header height and drags --header-h with it. */
+  white-space: nowrap;
 }
 
 .site-nav a:hover { color: var(--accent); background: var(--paper-2); text-decoration: none; }
@@ -272,10 +275,18 @@ a:focus-visible { border-radius: 2px; }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-@media (max-width: 720px) {
+/* The nav collapses at 860px, not 720px: five links plus the logo and two
+   icon buttons run out of room around 800px, where "Other Topics" used to
+   wrap and take the header to two lines. The rest of the mobile layout keeps
+   its own 720px breakpoint — different components, different limits. */
+@media (max-width: 860px) {
   .site-header { position: sticky; }
   .site-header__inner { padding: 0 20px; gap: 8px; }
   .nav-toggle { display: inline-flex; }
+  /* .site-nav leaves the flex row when it becomes a panel, taking its
+     margin-left:auto with it — the trailing buttons must hold the right
+     edge themselves. */
+  .theme-toggle { margin-left: auto; }
   /* The nav becomes a full-width disclosure panel under the header bar. */
   .site-nav {
     position: absolute;
