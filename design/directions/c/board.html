@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction C — The Woodshed · drum.town rebrand</title>
+<style>
+/* ============================================================
+   DIRECTION C — "THE WOODSHED"  ·  quiet craft studio
+   drum.town rebrand direction board. Self-contained.
+   Fonts: Newsreader (prose/display) · IBM Plex Sans (UI) · IBM Plex Mono (ledger)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* ------- direction tokens ------- */
+:root{
+  /* light — "the room, morning" */
+  --bg:#f3f1ec; --paper:#fbfaf7; --paper-2:#eae7df;
+  --ink:#232620; --ink-soft:#55584f;
+  --rule:#d8d4c8; --hairline:#e4e1d7;
+  --moss:#345c45;        /* accent as text · 6.7:1 on bg */
+  --moss-fill:#39624a;   /* accent as fill · paper text 6.7:1 */
+  --walnut:#6b4a32;      /* secondary · 7.0:1 on bg */
+  --brass:#a5802f;       /* decorative hardware */
+  --brass-text:#7d601f;  /* brass as text · 5.2:1 on bg */
+  --shadow:0 1px 2px rgba(35,38,32,.05), 0 8px 24px rgba(35,38,32,.06);
+  --focus:#345c45;
+  /* dark — "after hours" */
+  --d-bg:#171a17; --d-paper:#20241f; --d-paper-2:#2a2f28;
+  --d-ink:#e9e7de; --d-ink-soft:#a9ada0; --d-rule:#363c34;
+  --d-moss:#8fc7a4; --d-brass:#d3b169; --d-ink-on-moss:#12140f;
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+  --r:6px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#e9e6de;color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+img,svg{max-width:100%}
+
+/* ------- board chrome ------- */
+.board{max-width:1220px;margin:0 auto;padding:48px 28px}
+.board-head{border:1px solid var(--rule);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow);padding:36px 40px;margin-bottom:56px}
+.board-head .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text)}
+.board-head h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.05;margin:12px 0 12px;letter-spacing:-.005em}
+.board-head h1 em{font-style:italic;color:var(--moss)}
+.board-head p{max-width:70ch;margin:0;color:var(--ink-soft);font-size:14.5px}
+.spec{margin:0 0 72px}
+.spec-label{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+.spec-label .num{font-family:var(--mono);font-size:12px;color:var(--brass-text);letter-spacing:.18em}
+.spec-label h2{font-family:var(--serif);font-weight:500;font-size:27px;margin:0}
+.spec-sub{font-size:14px;color:var(--ink-soft);margin:0 0 20px;max-width:76ch}
+.frame{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);background:var(--bg)}
+.frame-bar{display:flex;gap:6px;align-items:center;padding:9px 14px;background:var(--paper-2);border-bottom:1px solid var(--rule)}
+.frame-bar i{width:9px;height:9px;border-radius:50%;background:var(--rule);display:block}
+.frame-bar span{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-left:8px;letter-spacing:.06em}
+.caption{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.05em;margin:10px 2px 0}
+.note{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--rule);border-left:3px solid var(--walnut);border-radius:var(--r);background:var(--paper);padding:12px 16px;margin:14px 0 0;font-size:13.5px;color:var(--ink-soft);max-width:900px}
+.note b{color:var(--walnut);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;padding-top:2px}
+.cols{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start}
+@media(max-width:1020px){.cols{grid-template-columns:1fr}}
+
+/* ============================================================
+   THE DESIGN
+   ============================================================ */
+
+/* ------- site header ------- */
+.sh{background:var(--bg);border-bottom:1px solid var(--rule)}
+.sh-in{max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;gap:26px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+.logo .lug{width:11px;height:11px;border-radius:50%;border:2.5px solid var(--brass);flex:none}
+.logo .wm{font-family:var(--serif);font-size:22px;font-weight:500}
+.logo .wm em{font-style:italic;color:var(--moss)}
+.nav{margin-left:auto;display:flex;gap:24px;font-size:13.5px;font-weight:500}
+.nav a{color:var(--ink-soft);text-decoration:none;padding:3px 0;border-bottom:1.5px solid transparent}
+.nav a:hover{color:var(--ink);border-bottom-color:var(--rule)}
+.nav a.on{color:var(--moss);border-bottom-color:var(--moss)}
+.nav a.demo-focus{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+/* clock tab (collapsed metronome) — clipped to the right edge */
+.clocktab{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-right:none;border-radius:var(--r) 0 0 var(--r);padding:9px 12px;box-shadow:var(--shadow);cursor:pointer}
+.clocktab .pulse{width:8px;height:8px;border-radius:50%;background:var(--moss-fill);flex:none}
+.clocktab b{font-weight:600}
+
+/* ------- hero ------- */
+.hero{max-width:1180px;margin:0 auto;padding:80px 32px 56px;position:relative;background-image:linear-gradient(var(--hairline) 1px,transparent 1px),linear-gradient(90deg,var(--hairline) 1px,transparent 1px);background-size:28px 28px;background-position:center top}
+.hero-in{max-width:640px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text);margin:0 0 20px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:58px;line-height:1.04;letter-spacing:-.01em;margin:0 0 20px}
+.hero h1 em{font-style:italic;color:var(--moss)}
+.hero .dek{font-family:var(--serif);font-size:20px;line-height:1.6;color:var(--ink-soft);margin:0 0 30px}
+.hero .dek b{color:var(--ink);font-weight:600}
+.cta-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:600;font-size:15px;text-decoration:none;border-radius:var(--r);padding:14px 24px;border:1.5px solid transparent}
+.btn-moss{background:var(--moss-fill);color:var(--paper)}
+.btn-moss:hover{background:#2e5340}
+.link-cta{font-weight:600;font-size:15px;color:var(--moss);text-decoration:none;border-bottom:1.5px solid rgba(52,92,69,.35)}
+.link-cta:hover{border-bottom-color:var(--moss)}
+.honesty{font-size:13px;color:var(--ink-soft);margin:0}
+.honesty i{font-style:normal;color:var(--brass-text)}
+
+/* ------- chapter treatment: the ledger ------- */
+.chapter{max-width:1180px;margin:0 auto;padding:8px 32px 72px}
+.ledger{max-width:760px}
+.lg-head{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:6px}
+.lg-head .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text)}
+.lg-head h2{font-family:var(--serif);font-weight:500;font-size:32px;margin:0}
+.lg-head .count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+.lg-sub{font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:16px;margin:10px 0 18px}
+.lg{list-style:none;margin:0;padding:0}
+.lg li{border-bottom:1px solid var(--hairline)}
+.lg a{display:flex;align-items:baseline;gap:14px;padding:13px 6px;text-decoration:none;color:var(--ink)}
+.lg a:hover{background:var(--paper)}
+.lg .n{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);width:24px;flex:none}
+.lg .t{font-family:var(--serif);font-size:18.5px;font-weight:500}
+.lg .lead{flex:1;border-bottom:1.5px dotted var(--rule);transform:translateY(-4px);min-width:40px}
+.lg .min{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);flex:none}
+.lg .mark{flex:none;font-family:var(--mono);font-size:11px;width:70px;text-align:right}
+.lg .mark.done{color:var(--brass-text)}
+.lg .mark.here{color:var(--moss);font-weight:600}
+.lg li.here-row a{background:var(--paper);box-shadow:inset 3px 0 0 var(--moss-fill)}
+.lg li.here-row .t{color:var(--moss)}
+
+/* ------- lesson fragment ------- */
+.lesson{max-width:820px;margin:0 auto;padding:44px 32px 56px}
+.crumb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 22px}
+.crumb a{color:var(--brass-text);text-decoration:none}
+.crumb .sep{margin:0 8px;color:var(--rule)}
+.lesson h1{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.06;letter-spacing:-.008em;margin:0 0 8px}
+.lesson .dek{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink-soft);margin:0 0 18px}
+.meta-line{font-family:var(--mono);font-size:12px;color:var(--ink-soft);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 2px;margin:0 0 12px;letter-spacing:.03em}
+.meta-line b{color:var(--ink);font-weight:600}
+.meta-line .div{margin:0 12px;color:var(--rule)}
+.prereq{font-size:13.5px;color:var(--ink-soft);margin:0 0 34px}
+.prereq a{color:var(--moss);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(52,92,69,.3)}
+/* exercise card = index card */
+.ex{background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--brass);border-radius:var(--r);box-shadow:var(--shadow)}
+.ex-h{display:flex;align-items:center;gap:16px;padding:16px 20px 14px;flex-wrap:wrap}
+.ex-h .badge{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--brass-text);border:1px solid var(--rule);border-radius:var(--r);padding:5px 9px}
+.ex-h .tt{font-family:var(--serif);font-weight:500;font-size:19px}
+.ex-h .meta{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.04em}
+.ex-h .ctl{margin-left:auto;display:flex;gap:10px;align-items:center}
+.sel{font-family:var(--mono);font-size:11px;border:1px solid var(--rule);background:var(--bg);border-radius:var(--r);padding:8px 13px;color:var(--ink-soft)}
+.play{display:inline-flex;align-items:center;gap:8px;background:var(--moss-fill);color:var(--paper);border:none;border-radius:var(--r);font-family:var(--sans);font-weight:600;font-size:13px;padding:9px 18px;cursor:pointer}
+.play:hover{background:#2e5340}
+.stave-wrap{margin:6px 20px 16px;background:#fff;border:1px solid var(--hairline);border-radius:var(--r);padding:18px 14px}
+.stave{display:block;width:100%;height:auto;color:var(--ink)}
+.sv-line{stroke:currentColor;stroke-width:1;opacity:.75}
+.sv-ink{fill:currentColor}
+.sv-acc{fill:var(--walnut)}
+.sv-stick{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
+.sv-stick .hit{fill:var(--walnut);font-weight:600}
+.ex-cap{padding:0 20px 16px;font-size:13.5px;color:var(--ink-soft)}
+.ex-cap b{color:var(--ink)}
+.moveon{margin:0 20px 20px;border-top:1px dashed var(--rule);padding:14px 2px 2px}
+.moveon .k{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text);margin:0 0 10px}
+.moveon ul{margin:0;padding:0;list-style:none;font-size:13.5px}
+.moveon li{padding:4px 0 4px 26px;position:relative}
+.moveon li::before{content:"";position:absolute;left:2px;top:8px;width:11px;height:11px;border:1.5px solid var(--moss);border-radius:2px}
+.moveon li.done::before{background:var(--moss-fill)}
+.moveon li.done::after{content:"✓";position:absolute;left:4px;top:1px;color:var(--paper);font-size:10px}
+
+/* mobile mock */
+.mob{width:390px;flex:none;border:1px solid var(--rule);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--bg);position:relative}
+.mob .sh-in{padding:13px 16px;gap:12px}
+.mob .nav{display:none}
+.mob-map{margin:0;border-bottom:1px solid var(--rule);background:var(--paper);padding:11px 16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500}
+.mob-map .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-text)}
+.mob-map .car{margin-left:auto;color:var(--ink-soft)}
+.mob .lesson{padding:24px 16px 28px}
+.mob .lesson h1{font-size:32px}
+.mob .meta-line{font-size:10.5px}
+.mob .ex-h .ctl{margin-left:0;width:100%}
+.mob .stave-wrap{margin:4px 14px 14px;padding:12px 8px}
+.mob .clocktab{position:absolute;right:0;bottom:64px}
+
+/* ------- footer: the colophon ------- */
+.sf{background:var(--bg);border-top:1px solid var(--rule)}
+.sf-in{max-width:1180px;margin:0 auto;padding:44px 32px 20px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px}
+@media(max-width:820px){.sf-in{grid-template-columns:1fr}}
+.sf .lug{width:13px;height:13px;border-radius:50%;border:3px solid var(--brass);display:block;margin-bottom:14px}
+.sf .motto{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--ink);margin:0 0 10px}
+.sf .fine{font-size:13px;color:var(--ink-soft);max-width:46ch;margin:0}
+.sf h4{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text);margin:6px 0 12px}
+.sf ul{list-style:none;margin:0;padding:0;font-size:14px}
+.sf li{margin:0 0 8px}
+.sf a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+.sf a:hover{color:var(--moss);border-bottom-color:var(--moss)}
+.sf-base{border-top:1px solid var(--hairline);margin-top:26px}
+.sf-base p{max-width:1180px;margin:0 auto;padding:14px 32px;font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);letter-spacing:.05em}
+
+/* ------- metronome: the practice clock ------- */
+.met-demo{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.met-card{width:300px;background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--brass);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px 18px}
+.met-card .mh{display:flex;align-items:center;margin-bottom:12px}
+.met-card .mh .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-text)}
+.met-card .mh button{margin-left:auto;border:none;background:none;font-size:14px;color:var(--ink-soft);cursor:pointer}
+.beats{display:flex;gap:9px;justify-content:center;margin:0 0 14px}
+.beats i{width:10px;height:10px;border-radius:50%;background:var(--rule);display:block}
+.beats i.hit{background:var(--moss-fill)}
+.mrow{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.mgo{width:42px;height:42px;border-radius:50%;background:var(--moss-fill);color:var(--paper);border:none;display:grid;place-items:center;font-size:13px;cursor:pointer;flex:none}
+.mbpm{font-family:var(--mono);font-size:22px;font-weight:600;border:1px solid var(--rule);border-radius:var(--r);background:var(--bg);width:82px;text-align:center;padding:6px 0;color:var(--ink)}
+.mbpm small{font-size:9px;display:block;letter-spacing:.16em;color:var(--ink-soft);font-weight:400}
+.msig{font-family:var(--mono);font-size:12.5px;border:1px solid var(--rule);border-radius:var(--r);background:var(--bg);padding:11px 12px;color:var(--ink)}
+.mslider{position:relative;height:4px;border-radius:2px;background:var(--paper-2);margin:4px 2px 14px}
+.mslider .fill{position:absolute;inset:0 auto 0 0;width:34%;background:var(--moss-fill);border-radius:2px}
+.mslider .th{position:absolute;top:50%;left:34%;width:15px;height:15px;border-radius:50%;background:var(--paper);border:2px solid var(--moss-fill);transform:translate(-50%,-50%)}
+.mvol{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:12.5px}
+.mvol .mslider{flex:1;margin:0}
+.mvol .mslider .fill{width:60%}
+.mvol .mslider .th{left:60%}
+/* geometry schematic */
+.schem{display:flex;gap:20px;flex-wrap:wrap}
+.schem .pg{width:250px;border:1px solid var(--rule);border-radius:var(--r);background:var(--paper);position:relative;padding:10px;height:180px}
+.schem .pg .hd{height:14px;border-radius:3px;background:var(--paper-2);margin-bottom:8px}
+.schem .pg .col{position:absolute;left:24px;top:34px;bottom:12px;width:120px}
+.schem .pg .col .ln{height:8px;border-radius:3px;background:var(--paper-2);margin:7px 0}
+.schem .pg .col .ln.w60{width:60%}
+.schem .pg .col .stv{height:30px;border-radius:3px;background:#fff;border:1px solid var(--hairline)}
+.schem .pg .gutter{position:absolute;right:0;top:34px;bottom:0;width:86px;background:repeating-linear-gradient(-45deg,transparent 0 7px,rgba(165,128,47,.14) 7px 14px);border-left:1px dashed var(--brass)}
+.schem .pg .clk{position:absolute;right:8px;bottom:10px;width:64px;height:52px;border-radius:5px;background:var(--paper);border:1.5px solid var(--moss-fill);box-shadow:var(--shadow)}
+.schem .pg .float{position:absolute;right:8px;bottom:8px;width:88px;height:60px;border-radius:5px;background:var(--moss-fill);opacity:.9}
+.schem .pg .float.bad{outline:2px dashed var(--walnut);outline-offset:3px}
+.schem .pg .tab{position:absolute;right:0;bottom:30px;width:34px;height:24px;border-radius:5px 0 0 5px;background:var(--paper);border:1.5px solid var(--moss-fill);border-right:none}
+.schem .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-top:8px;max-width:250px;letter-spacing:.03em}
+.schem .bad-x{position:absolute;left:38%;top:46%;font-size:20px;color:var(--walnut);font-weight:700}
+
+/* ------- token sheet ------- */
+.tokens{display:grid;gap:26px}
+.tk{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);padding:26px 28px}
+.tk h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text);margin:0 0 18px}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sw{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.sw .c{height:56px}
+.sw .m{padding:9px 11px;font-family:var(--mono);font-size:10px;line-height:1.55;letter-spacing:.03em;color:var(--ink-soft);background:var(--paper)}
+.sw .m b{display:block;color:var(--ink);font-size:10.5px}
+.ratio{display:inline-block;font-family:var(--mono);font-size:9.5px;border-radius:999px;padding:1px 7px;margin-top:4px;background:rgba(52,92,69,.12);color:var(--moss)}
+.tk.dark{background:var(--d-bg);border-color:var(--d-rule)}
+.tk.dark h3{color:var(--d-brass)}
+.tk.dark .sw{border-color:var(--d-rule)}
+.tk.dark .sw .m{background:var(--d-paper);color:var(--d-ink-soft)}
+.tk.dark .sw .m b{color:var(--d-ink)}
+.tk.dark .ratio{background:rgba(143,199,164,.15);color:var(--d-moss)}
+.type-row{display:flex;align-items:baseline;gap:22px;border-bottom:1px dashed var(--hairline);padding:13px 0}
+.type-row:last-child{border-bottom:none}
+.type-row .spec-t{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);width:230px;flex:none;letter-spacing:.04em}
+.sp-scale{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.sp{text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-soft)}
+.sp i{display:block;background:var(--moss-fill);border-radius:2px;margin:0 auto 6px}
+.focus-demo{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.demo-focus{outline:2px solid var(--focus);outline-offset:2px}
+.tk.dark .demo-focus{outline-color:var(--d-moss)}
+.inp{font-family:var(--mono);font-size:13px;border:1px solid var(--rule);border-radius:var(--r);background:var(--bg);padding:9px 13px;color:var(--ink)}
+/* dark mini-mock */
+.dark-mini{background:var(--d-bg);border-radius:var(--r);padding:32px;color:var(--d-ink)}
+.dark-mini .eyebrow{color:var(--d-brass)}
+.dark-mini h1{font-family:var(--serif);font-weight:500;font-size:36px;line-height:1.08;margin:0 0 12px}
+.dark-mini h1 em{font-style:italic;color:var(--d-moss)}
+.dark-mini p{color:var(--d-ink-soft);font-family:var(--serif);font-size:16px;max-width:54ch;margin:0 0 20px}
+.dark-mini .btn-moss{background:var(--d-moss);color:var(--d-ink-on-moss)}
+.dark-mini .link-cta{color:var(--d-moss);border-bottom-color:rgba(143,199,164,.4)}
+.dark-mini .meta-line{border-color:var(--d-rule);color:var(--d-ink-soft)}
+.dark-mini .meta-line b{color:var(--d-ink)}
+.dark-mini .stave-wrap{background:#fdfcf8;border-color:var(--d-rule);margin:16px 0 0}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- =================== BOARD HEAD =================== -->
+  <header class="board-head">
+    <p class="k">drum.town rebrand · direction board C · designer exploration — not implementation</p>
+    <h1>The <em>Woodshed</em></h1>
+    <p>Quiet craft studio. "Woodshedding" is what drummers call real practice — this direction is the town's shared practice room with the door open: stone, felt, walnut, brass hardware, graph paper. Newsreader for prose, IBM Plex for the workshop labels, hairline rules, ledger tables with dotted leaders. Light-first with an "after hours" dark theme. One CSS file, Eleventy, zero client dependencies.</p>
+  </header>
+
+  <!-- =================== 01 HOMEPAGE =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">01</span><h2>Homepage — hero, primary action, one chapter</h2></div>
+    <p class="spec-sub">A calm welcome over graph paper, one clear way in, and the chapter list as a practice-journal ledger — dotted leaders instead of dashes, so nothing orphans at a wrap.</p>
+
+    <div class="frame">
+      <div class="frame-bar"><i></i><i></i><i></i><span>drum.town — desktop 1280</span></div>
+
+      <div class="sh"><div class="sh-in">
+        <a class="logo" href="#"><span class="lug"></span><span class="wm">drum<em>.town</em></span></a>
+        <nav class="nav">
+          <a class="on" href="#">Foundations</a><a href="#">Genres</a><a href="#">Other Topics</a><a href="#">Rudiments</a><a href="#">Metronome</a>
+        </nav>
+      </div></div>
+
+      <div class="hero">
+        <div class="hero-in">
+          <p class="eyebrow">drum.town · a practice room with the door open</p>
+          <h1>A quiet place<br>to get <em>loud.</em></h1>
+          <p class="dek">A complete drum curriculum laid out like a practice journal: <b>217 lessons</b> of real, playable notation, <b>852 exercises</b>, <b>40 rudiments</b> — and a patient clock. Everyone in town works from the same book.</p>
+          <div class="cta-row">
+            <a class="btn btn-moss" href="#">Start the first lesson</a>
+            <a class="link-cta" href="#">Pick up where you left off ↩</a>
+          </div>
+          <p class="honesty"><i>Your seat is saved</i> — progress lives in your browser. No account, nothing to join.</p>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="ledger">
+          <div class="lg-head">
+            <span class="kicker">The book · chapter 1 of 12</span>
+            <h2>Getting Started</h2>
+            <span class="count">6 lessons · 2 done</span>
+          </div>
+          <p class="lg-sub">Everything you need before your first beat — the kit, the sticks, the seat, the habit.</p>
+          <ul class="lg">
+            <li><a href="#"><span class="n">01</span><span class="t">The Kit: What's What</span><span class="lead"></span><span class="min">12 min</span><span class="mark done">✓ done</span></a></li>
+            <li><a href="#"><span class="n">02</span><span class="t">Sticks, Pads &amp; First Gear</span><span class="lead"></span><span class="min">10 min</span><span class="mark done">✓ done</span></a></li>
+            <li class="here-row"><a href="#"><span class="n">03</span><span class="t">Setup &amp; Posture</span><span class="lead"></span><span class="min">15 min</span><span class="mark here">● here</span></a></li>
+            <li><a href="#"><span class="n">04</span><span class="t">Stick Grip &amp; Strokes</span><span class="lead"></span><span class="min">20 min</span><span class="mark"></span></a></li>
+            <li><a href="#"><span class="n">05</span><span class="t">Tuning Your Drums</span><span class="lead"></span><span class="min">15 min</span><span class="mark"></span></a></li>
+            <li><a href="#"><span class="n">06</span><span class="t">How to Practice</span><span class="lead"></span><span class="min">12 min</span><span class="mark"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><b>solves BL-045</b><span>One clear primary action ("Start the first lesson") and the returning path as a quieter companion link, wired to existing localStorage — shown only when there is somewhere to return to. The welcome is warm without inventing a crowd.</span></div>
+    <div class="note"><b>solves BL-044</b><span>The dash separators are replaced by a ledger: each lesson is a full-width row with a dotted leader line (a flex spacer, not typed dots), duration, and state. Rows can't orphan — there is nothing between them to strand.</span></div>
+  </section>
+
+  <!-- =================== 02 LESSON PAGE =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">02</span><h2>Lesson page — title block, meta, exercise card</h2></div>
+    <p class="spec-sub">One breadcrumb, one ruled meta line, and the exercise as an index card with brass hardware. The stave sits on true white inside the card — the brightest object on the page in both themes.</p>
+
+    <div class="cols">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>drum.town/lessons/single-paradiddle — desktop</span></div>
+        <div class="lesson">
+          <p class="crumb"><a href="#">Foundations</a><span class="sep">·</span><a href="#">Rudiments</a><span class="sep">·</span>Lesson 03 of 16</p>
+          <h1>The Single Paradiddle</h1>
+          <p class="dek">The most useful sticking pattern ever invented.</p>
+          <p class="meta-line"><b>15–20 min</b><span class="div">·</span>Focus <b>Rudiment &amp; sticking</b><span class="div">·</span>Tempo <b>♩ 70 → 100</b></p>
+          <p class="prereq">Check these first: <a href="#">The Single Stroke Roll</a> · <a href="#">The Double Stroke Roll</a></p>
+
+          <div class="ex">
+            <div class="ex-h">
+              <span class="badge">EX 1A</span>
+              <div>
+                <div class="tt">Single Paradiddle on Snare</div>
+                <div class="meta">4/4 · 16th notes · ♩ 70 → 100</div>
+              </div>
+              <div class="ctl">
+                <span class="sel">Electronic ▾</span>
+                <button class="play" type="button">▶ Play</button>
+              </div>
+            </div>
+            <div class="stave-wrap">
+              <svg class="stave" viewBox="0 0 716 104" role="img" aria-label="One bar of sixteenth notes, sticking R L R R L R L L, accents on each count">
+                <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+                <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+                <circle class="sv-ink" cx="31" cy="43" r="2"/><circle class="sv-ink" cx="31" cy="53" r="2"/>
+                <rect class="sv-ink" x="40" y="38" width="3.6" height="20"/><rect class="sv-ink" x="47" y="38" width="3.6" height="20"/>
+                <text class="sv-ink" x="68" y="46" font-size="16.5" font-weight="700" text-anchor="middle" font-family="Georgia,serif">4</text>
+                <text class="sv-ink" x="68" y="66" font-size="16.5" font-weight="700" text-anchor="middle" font-family="Georgia,serif">4</text>
+                <defs><g id="nC"><ellipse cx="0" cy="0" rx="5.6" ry="4.1" transform="rotate(-18)"/><rect x="4.6" y="-34" width="1.7" height="33.5"/></g></defs>
+                <g class="sv-ink">
+                  <use href="#nC" x="100" y="48"/><use href="#nC" x="134" y="48"/><use href="#nC" x="168" y="48"/><use href="#nC" x="202" y="48"/>
+                  <use href="#nC" x="248" y="48"/><use href="#nC" x="282" y="48"/><use href="#nC" x="316" y="48"/><use href="#nC" x="350" y="48"/>
+                  <use href="#nC" x="396" y="48"/><use href="#nC" x="430" y="48"/><use href="#nC" x="464" y="48"/><use href="#nC" x="498" y="48"/>
+                  <use href="#nC" x="544" y="48"/><use href="#nC" x="578" y="48"/><use href="#nC" x="612" y="48"/><use href="#nC" x="646" y="48"/>
+                  <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="400.6" y="14" width="103.7" height="3"/><rect x="400.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="548.6" y="14" width="103.7" height="3"/><rect x="548.6" y="20.4" width="103.7" height="3"/>
+                </g>
+                <g class="sv-acc" font-size="13" font-weight="700" text-anchor="middle" font-family="Georgia,serif">
+                  <text x="100" y="10">&gt;</text><text x="248" y="10">&gt;</text><text x="396" y="10">&gt;</text><text x="544" y="10">&gt;</text>
+                </g>
+                <circle class="sv-ink" cx="674" cy="43" r="2"/><circle class="sv-ink" cx="674" cy="53" r="2"/>
+                <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+                <g class="sv-stick" text-anchor="middle">
+                  <text class="hit" x="100" y="92">R</text><text x="134" y="92">L</text><text x="168" y="92">R</text><text x="202" y="92">R</text>
+                  <text class="hit" x="248" y="92">L</text><text x="282" y="92">R</text><text x="316" y="92">L</text><text x="350" y="92">L</text>
+                  <text class="hit" x="396" y="92">R</text><text x="430" y="92">L</text><text x="464" y="92">R</text><text x="498" y="92">R</text>
+                  <text class="hit" x="544" y="92">L</text><text x="578" y="92">R</text><text x="612" y="92">L</text><text x="646" y="92">L</text>
+                </g>
+              </svg>
+            </div>
+            <p class="ex-cap">Sticking: <b>R L R R · L R L L</b>. The accents fall on counts 1, 2, 3, 4 — the start of each group. Let those be slightly louder than the rest.</p>
+            <div class="moveon">
+              <p class="k">Move on when</p>
+              <ul>
+                <li class="done">RLRR LRLL × 2 at ♩=80 for 2 minutes without sticking errors</li>
+                <li>Accents on 1, 2, 3, 4 are clearly louder than the rest</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mob">
+          <div class="frame-bar"><i></i><i></i><i></i><span>true 390px</span></div>
+          <div class="sh"><div class="sh-in">
+            <a class="logo" href="#"><span class="lug"></span><span class="wm">drum<em>.town</em></span></a>
+          </div></div>
+          <div class="mob-map">
+            <span class="k">Lesson map</span> Chapter 3 · Rudiments <span class="car">▾</span>
+          </div>
+          <div class="lesson">
+            <p class="crumb" style="margin-bottom:14px"><a href="#">Foundations</a><span class="sep">·</span>03 of 16</p>
+            <h1>The Single Paradiddle</h1>
+            <p class="dek" style="font-size:16px">The most useful sticking pattern ever invented.</p>
+            <p class="meta-line"><b>15–20 min</b><span class="div">·</span><b>Rudiment &amp; sticking</b></p>
+            <div class="ex" style="margin-top:14px">
+              <div class="ex-h">
+                <span class="badge">EX 1A</span>
+                <div><div class="tt" style="font-size:16px">Paradiddle on Snare</div><div class="meta">4/4 · 16ths</div></div>
+                <div class="ctl"><span class="sel">Electronic ▾</span><button class="play" type="button">▶ Play</button></div>
+              </div>
+              <div class="stave-wrap">
+                <svg class="stave" viewBox="0 0 716 104" aria-hidden="true">
+                  <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+                  <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+                  <g class="sv-ink">
+                    <use href="#nC" x="100" y="48"/><use href="#nC" x="134" y="48"/><use href="#nC" x="168" y="48"/><use href="#nC" x="202" y="48"/>
+                    <use href="#nC" x="248" y="48"/><use href="#nC" x="282" y="48"/><use href="#nC" x="316" y="48"/><use href="#nC" x="350" y="48"/>
+                    <use href="#nC" x="396" y="48"/><use href="#nC" x="430" y="48"/><use href="#nC" x="464" y="48"/><use href="#nC" x="498" y="48"/>
+                    <use href="#nC" x="544" y="48"/><use href="#nC" x="578" y="48"/><use href="#nC" x="612" y="48"/><use href="#nC" x="646" y="48"/>
+                    <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="400.6" y="14" width="103.7" height="3"/><rect x="400.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="548.6" y="14" width="103.7" height="3"/><rect x="548.6" y="20.4" width="103.7" height="3"/>
+                  </g>
+                  <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button class="clocktab" type="button" aria-label="Open the practice clock"><span class="pulse"></span><b>80</b>♩</button>
+        </div>
+        <p class="caption">true 390px — sidebar folds into a one-line "Lesson map" disclosure; the practice clock rests as a bookmark tab on the right edge.</p>
+        <div class="note"><b>solves BL-037</b><span>The chapter sidebar becomes a collapsed disclosure under the header on small screens. The first screen belongs to the lesson title and the first card.</span></div>
+        <div class="note"><b>label pile-up</b><span>The four stacked corner labels merge into one breadcrumb and one ruled meta line — the journal's date-line, not a pile of tags.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== 03 HEADER + FOOTER =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">03</span><h2>Chrome — header nav &amp; footer</h2></div>
+    <p class="spec-sub">A hairline masthead with a brass lug for a mark. The footer is a colophon — what this room is, in the tone of a well-kept book.</p>
+
+    <div class="frame">
+      <div class="frame-bar"><i></i><i></i><i></i><span>header — active · hover · default · keyboard focus</span></div>
+      <div class="sh"><div class="sh-in">
+        <a class="logo" href="#"><span class="lug"></span><span class="wm">drum<em>.town</em></span></a>
+        <nav class="nav">
+          <a class="on" href="#">Foundations</a>
+          <a href="#" style="color:var(--ink);border-bottom-color:var(--rule)">Genres</a>
+          <a href="#">Other Topics</a>
+          <a class="demo-focus" href="#">Rudiments</a>
+          <a href="#">Metronome</a>
+        </nav>
+      </div></div>
+
+      <div class="sf">
+        <div class="sf-in">
+          <div>
+            <span class="lug"></span>
+            <p class="motto">Practice alone, together.</p>
+            <p class="fine">drum.town is a free practice room for anyone learning the drums. No accounts, no ads — your progress is kept in your own browser, like a pencil mark only you can see.</p>
+          </div>
+          <div>
+            <h4>The Book</h4>
+            <ul><li><a href="#">Foundations</a></li><li><a href="#">Genre tracks</a></li><li><a href="#">Other topics</a></li><li><a href="#">Lesson one</a></li></ul>
+          </div>
+          <div>
+            <h4>The Bench</h4>
+            <ul><li><a href="#">The 40 rudiments</a></li><li><a href="#">The practice clock</a></li><li><a href="#">GitHub</a></li></ul>
+          </div>
+        </div>
+        <div class="sf-base"><p>drum.town · 217 lessons · 852 playable exercises · 40 rudiments · notation rendered with VexFlow at build time · set in Newsreader &amp; IBM Plex · built on Eleventy</p></div>
+      </div>
+    </div>
+    <div class="note"><b>a11y</b><span>Focus ring: 2px moss, 2px offset (mint in dark) — live on "Rudiments" above. Skip link, landmarks, heading order, labeled SVGs, and reduced-motion support carry over untouched.</span></div>
+  </section>
+
+  <!-- =================== 04 METRONOME =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">04</span><h2>The Practice Clock — docked metronome</h2></div>
+    <p class="spec-sub">The clock keeps its corner, but the room is rearranged so the corner is genuinely empty: at ≥1200px the lesson column caps at 720px and sits left of a reserved gutter the clock lives in; below 1200px it rests as a bookmark tab clipped to the right edge; and the page always keeps a bottom reserve equal to the clock's height, so the last stave scrolls clear of it.</p>
+
+    <div class="met-demo">
+      <div>
+        <div class="met-card">
+          <div class="mh"><span class="k">Practice clock</span><button aria-label="Collapse">−</button></div>
+          <div class="beats"><i class="hit"></i><i></i><i></i><i></i></div>
+          <div class="mrow">
+            <button class="mgo" type="button" aria-label="Start">▶</button>
+            <div class="mbpm">80<small>BPM</small></div>
+            <span class="msig">4/4 ▾</span>
+          </div>
+          <div class="mslider"><span class="fill"></span><span class="th"></span></div>
+          <div class="mvol">♪<div class="mslider"><span class="fill"></span><span class="th"></span></div></div>
+        </div>
+        <p class="caption">expanded — 300px card in the reserved gutter (or over the bottom reserve on narrow screens)</p>
+      </div>
+      <div>
+        <button class="clocktab" type="button" style="transform:scale(1.4);transform-origin:top left;margin:8px 0 34px 8px"><span class="pulse"></span><b>80</b>♩</button>
+        <p class="caption" style="margin-top:26px">collapsed — a bookmark tab clipped to the right edge.<br>The pulse dot carries the beat by color when running.<br>(shown at 140% for detail)</p>
+      </div>
+      <div class="schem">
+        <div>
+          <div class="pg">
+            <div class="hd"></div>
+            <div class="col">
+              <div class="ln"></div><div class="ln w60"></div>
+              <div class="stv"></div>
+              <div class="ln w60"></div>
+            </div>
+            <div class="float bad" style="right:64px"></div>
+            <span class="bad-x">✕</span>
+          </div>
+          <p class="cap">today — content runs full-width, so the floating clock lands on it at ~1280px (BL-036)</p>
+        </div>
+        <div>
+          <div class="pg">
+            <div class="hd"></div>
+            <div class="col">
+              <div class="ln"></div><div class="ln w60"></div>
+              <div class="stv"></div>
+              <div class="ln w60"></div>
+            </div>
+            <div class="gutter"></div>
+            <div class="clk"></div>
+          </div>
+          <p class="cap">≥1200px — the column caps at 720px; the hatched gutter is the clock's reserved seat</p>
+        </div>
+        <div>
+          <div class="pg">
+            <div class="hd"></div>
+            <div class="col" style="width:calc(100% - 48px)">
+              <div class="ln"></div><div class="ln w60"></div>
+              <div class="stv"></div>
+              <div class="ln w60"></div>
+            </div>
+            <div class="tab"></div>
+          </div>
+          <p class="cap">&lt;1200px — collapsed by default to the bookmark tab; body keeps a bottom reserve for the expanded card</p>
+        </div>
+      </div>
+    </div>
+    <div class="note"><b>solves BL-036</b><span>Geometry, not luck: the clock's column is reserved by the layout at desktop widths, and on narrow screens the default state is the zero-footprint tab plus a fixed bottom reserve. Uses the existing metronome.js collapse state; the default-collapsed breakpoint is one condition in that same script.</span></div>
+  </section>
+
+  <!-- =================== 05 TOKEN SHEET =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">05</span><h2>Token sheet — color, type, space, focus</h2></div>
+    <p class="spec-sub">Same :root slot names as today; values move from manuscript to workshop. Notation stays currentColor over its own --notation-bg. Ratios are WCAG 2.x, computed.</p>
+
+    <div class="tokens">
+      <div class="tk">
+        <h3>Light — "the room, morning" · body text 13.6:1 on page, 14.7:1 on cards</h3>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#f3f1ec"></div><div class="m"><b>--bg · #f3f1ec</b>stone — page ground</div></div>
+          <div class="sw"><div class="c" style="background:#fbfaf7"></div><div class="m"><b>--paper · #fbfaf7</b>cards, ledger rows</div></div>
+          <div class="sw"><div class="c" style="background:#eae7df"></div><div class="m"><b>--paper-2 · #eae7df</b>wells</div></div>
+          <div class="sw"><div class="c" style="background:#232620"></div><div class="m"><b>--ink · #232620</b>body text<span class="ratio">13.6:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#55584f"></div><div class="m"><b>--ink-soft · #55584f</b>secondary<span class="ratio">6.4:1 · AA+</span></div></div>
+          <div class="sw"><div class="c" style="background:#345c45"></div><div class="m"><b>--moss · #345c45</b>accent as text/links/focus<span class="ratio">6.7:1 · AA+</span></div></div>
+          <div class="sw"><div class="c" style="background:#39624a"></div><div class="m"><b>--moss-fill · #39624a</b>buttons — paper text<span class="ratio">6.7:1 · AA+</span></div></div>
+          <div class="sw"><div class="c" style="background:#6b4a32"></div><div class="m"><b>--walnut · #6b4a32</b>accents in notation, notes<span class="ratio">7.0:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#a5802f"></div><div class="m"><b>--brass · #a5802f</b>hardware — rules &amp; marks</div></div>
+          <div class="sw"><div class="c" style="background:#7d601f"></div><div class="m"><b>--brass-text · #7d601f</b>brass as text<span class="ratio">5.2:1 · AA</span></div></div>
+          <div class="sw"><div class="c" style="background:#d8d4c8"></div><div class="m"><b>--rule · #d8d4c8</b>borders; hairline #e4e1d7</div></div>
+        </div>
+      </div>
+
+      <div class="tk dark">
+        <h3>Dark — "after hours" · body text 14.2:1</h3>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#171a17"></div><div class="m"><b>--bg · #171a17</b>felt green-black</div></div>
+          <div class="sw"><div class="c" style="background:#20241f"></div><div class="m"><b>--paper · #20241f</b>cards</div></div>
+          <div class="sw"><div class="c" style="background:#2a2f28"></div><div class="m"><b>--paper-2 · #2a2f28</b>wells</div></div>
+          <div class="sw"><div class="c" style="background:#e9e7de"></div><div class="m"><b>--ink · #e9e7de</b>body text<span class="ratio">14.2:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#a9ada0"></div><div class="m"><b>--ink-soft · #a9ada0</b>secondary<span class="ratio">7.7:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#8fc7a4"></div><div class="m"><b>--moss · #8fc7a4</b>accent — text &amp; fills (ink text on fills)<span class="ratio">9.1:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#d3b169"></div><div class="m"><b>--brass · #d3b169</b>hardware, marks<span class="ratio">8.6:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#363c34"></div><div class="m"><b>--rule · #363c34</b>borders</div></div>
+          <div class="sw"><div class="c" style="background:#fdfcf8"></div><div class="m"><b>--notation-bg · #fdfcf8</b>staves stay paper-white after hours</div></div>
+        </div>
+      </div>
+
+      <div class="tk">
+        <h3>Type scale — Newsreader / IBM Plex Sans / IBM Plex Mono</h3>
+        <div class="type-row"><span class="spec-t">display-1 · Newsreader 500 · 58px / 3.625rem · lh 1.04</span><span style="font-family:var(--serif);font-weight:500;font-size:58px;line-height:1.04;letter-spacing:-.01em">A quiet place to get <em style="color:var(--moss)">loud.</em></span></div>
+        <div class="type-row"><span class="spec-t">display-2 · Newsreader 500 · 44px / 2.75rem</span><span style="font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.06">The Single Paradiddle</span></div>
+        <div class="type-row"><span class="spec-t">h2 · Newsreader 500 · 32px / 2rem</span><span style="font-family:var(--serif);font-weight:500;font-size:32px">Getting Started</span></div>
+        <div class="type-row"><span class="spec-t">h3 / dek · Newsreader italic 500 · 19px / 1.1875rem</span><span style="font-family:var(--serif);font-style:italic;font-weight:500;font-size:19px;color:var(--ink-soft)">The most useful sticking pattern ever invented.</span></div>
+        <div class="type-row"><span class="spec-t">prose · Newsreader 400 · 18px / 1.125rem · lh 1.75</span><span style="font-family:var(--serif);font-size:18px;line-height:1.75">The single paradiddle is a four-note sticking pattern: R L R R, or its mirror, L R L L.</span></div>
+        <div class="type-row"><span class="spec-t">ui · Plex Sans 500 · 15px / .9375rem</span><span style="font-weight:500;font-size:15px">Start the first lesson</span></div>
+        <div class="type-row"><span class="spec-t">ledger · Plex Mono 500 · 12px / .75rem · track .03em</span><span style="font-family:var(--mono);font-size:12px;color:var(--ink-soft)">15–20 min · Focus: Rudiment &amp; sticking · ♩ 70 → 100</span></div>
+        <div class="type-row"><span class="spec-t">label · Plex Mono 500 · 10.5px / .656rem · track .2em · caps</span><span style="font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-text)">The book · chapter 1 of 12</span></div>
+      </div>
+
+      <div class="tk">
+        <h3>Spacing · radius · focus</h3>
+        <div class="sp-scale" style="margin-bottom:26px">
+          <div class="sp"><i style="width:4px;height:4px"></i>4</div>
+          <div class="sp"><i style="width:8px;height:8px"></i>8</div>
+          <div class="sp"><i style="width:12px;height:12px"></i>12</div>
+          <div class="sp"><i style="width:16px;height:16px"></i>16</div>
+          <div class="sp"><i style="width:24px;height:24px"></i>24</div>
+          <div class="sp"><i style="width:32px;height:32px"></i>32</div>
+          <div class="sp"><i style="width:48px;height:48px"></i>48</div>
+          <div class="sp"><i style="width:64px;height:64px"></i>64</div>
+        </div>
+        <div class="focus-demo">
+          <button class="btn btn-moss demo-focus" type="button" style="padding:10px 18px;font-size:14px">Start the first lesson</button>
+          <a href="#" class="demo-focus" style="color:var(--moss);font-weight:600;border-radius:2px">A focused link</a>
+          <input class="inp demo-focus" value="80" size="4" aria-label="BPM demo">
+          <span class="caption" style="margin:0">:focus-visible → 2px moss ring, 2px offset (mint #8fc7a4 in dark) · one radius: 6px — everything else is a hairline · reduced-motion: the clock's pulse becomes a color change only</span>
+        </div>
+      </div>
+
+      <div class="tk dark">
+        <h3>Dark theme in situ — "after hours"</h3>
+        <div class="dark-mini">
+          <p class="eyebrow">drum.town · after hours</p>
+          <h1>The room stays open<br><em>all night.</em></h1>
+          <p>Late practice is half of drumming. After hours keeps the same hairlines and brass on felt green-black, and the staves stay paper-white — the score is always the brightest thing in the room.</p>
+          <div class="cta-row" style="margin-bottom:18px">
+            <a class="btn btn-moss" href="#" style="font-size:14px;padding:11px 20px">Start the first lesson</a>
+            <a class="link-cta" href="#">Pick up where you left off ↩</a>
+          </div>
+          <p class="meta-line"><b>15–20 min</b><span class="div">·</span>Focus <b>Rudiment &amp; sticking</b><span class="div">·</span>Tempo <b>♩ 70 → 100</b></p>
+          <div class="stave-wrap">
+            <svg class="stave" viewBox="0 0 716 104" aria-hidden="true" style="color:#232620">
+              <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+              <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+              <g class="sv-ink">
+                <use href="#nC" x="100" y="48"/><use href="#nC" x="134" y="48"/><use href="#nC" x="168" y="48"/><use href="#nC" x="202" y="48"/>
+                <use href="#nC" x="248" y="48"/><use href="#nC" x="282" y="48"/><use href="#nC" x="316" y="48"/><use href="#nC" x="350" y="48"/>
+                <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+              </g>
+              <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="caption" style="text-align:center;margin-top:-20px">Direction C — The Woodshed · drum.town rebrand exploration · one CSS file, Eleventy, zero client dependencies</p>
+</div>
+</body>
+</html>

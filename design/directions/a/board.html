@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction A — The Square · drum.town rebrand</title>
+<style>
+/* ============================================================
+   DIRECTION A — "THE SQUARE"  ·  warm civic modern
+   drum.town rebrand direction board. Self-contained.
+   Fonts: Fraunces (display) · Public Sans (body/UI) · IBM Plex Mono (meta)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Public+Sans:ital,wght@0,300..800;1,300..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* ------- direction tokens (what style.css :root would become) ------- */
+:root{
+  /* light — "morning in the square" */
+  --bg:#f7f2e9; --paper:#fffcf5; --paper-2:#efe6d3;
+  --ink:#262019; --ink-soft:#5c5346;
+  --rule:#ddd2bd; --rule-soft:#e9e0cd;
+  --brick:#9a3a27;        /* accent as text  · 6.3:1 on bg */
+  --brick-fill:#a03b28;   /* accent as fill  · paper text 6.5:1 */
+  --green:#2f6b4f;        /* park green      · 5.6:1 on bg */
+  --brass:#c99a3c;        /* decorative only */
+  --shadow:0 2px 6px rgba(38,32,25,.07), 0 12px 32px rgba(38,32,25,.07);
+  --focus:#9a3a27;
+  /* dark — "evening in the square" */
+  --d-bg:#211a14; --d-paper:#2b231b; --d-paper-2:#352b21;
+  --d-ink:#f2e9dc; --d-ink-soft:#c4b6a3; --d-rule:#4a3e30;
+  --d-terra:#e07b5c; --d-amber:#e3a34d; --d-green:#8ec7a6;
+  --display:'Fraunces',Georgia,serif;
+  --body:'Public Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','Courier New',monospace;
+  --r-s:8px; --r-m:12px; --r-l:16px; --r-pill:999px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#e7e0d2;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+img,svg{max-width:100%}
+
+/* ------- board chrome (not part of the design; frames it) ------- */
+.board{max-width:1220px;margin:0 auto;padding:48px 28px}
+.board-head{border:1px solid var(--rule);border-radius:var(--r-l);background:var(--paper);box-shadow:var(--shadow);padding:36px 40px;margin-bottom:56px}
+.board-head .k{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brick)}
+.board-head h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1.05;margin:10px 0 12px;letter-spacing:-.01em}
+.board-head h1 em{font-style:italic;color:var(--brick)}
+.board-head p{max-width:66ch;margin:0;color:var(--ink-soft);font-size:15px}
+.spec{margin:0 0 72px}
+.spec-label{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+.spec-label .num{font-family:var(--mono);font-size:12px;color:var(--brick);letter-spacing:.18em}
+.spec-label h2{font-family:var(--display);font-weight:600;font-size:27px;margin:0;letter-spacing:-.01em}
+.spec-sub{font-size:14px;color:var(--ink-soft);margin:0 0 20px;max-width:74ch}
+.frame{border:1px solid var(--rule);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--shadow);background:var(--bg)}
+.frame-bar{display:flex;gap:6px;align-items:center;padding:9px 14px;background:var(--paper-2);border-bottom:1px solid var(--rule)}
+.frame-bar i{width:9px;height:9px;border-radius:50%;background:var(--rule);display:block}
+.frame-bar span{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-left:8px;letter-spacing:.06em}
+.caption{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.05em;margin:10px 2px 0}
+.note{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--rule);border-left:3px solid var(--green);border-radius:var(--r-s);background:var(--paper);padding:12px 16px;margin:14px 0 0;font-size:13.5px;color:var(--ink-soft);max-width:900px}
+.note b{color:var(--green);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;padding-top:2px}
+.cols{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:start}
+@media(max-width:1020px){.cols{grid-template-columns:1fr}}
+
+/* ============================================================
+   THE DESIGN ITSELF
+   ============================================================ */
+
+/* ------- site header: the skyline ------- */
+.sh{background:var(--bg);border-bottom:1px solid var(--rule)}
+.sh-in{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:26px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo .seal{width:30px;height:30px;flex:none}
+.logo .wm{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.01em}
+.logo .wm em{font-style:italic;color:var(--brick)}
+.nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.nav a{font-family:var(--body);font-weight:600;font-size:13.5px;color:var(--ink-soft);text-decoration:none;padding:7px 12px;border-radius:var(--r-pill)}
+.nav a:hover{color:var(--brick);background:var(--paper-2)}
+.nav a.on{color:var(--paper);background:var(--brick-fill)}
+.nav a.demo-focus{outline:2px solid var(--focus);outline-offset:2px}
+/* the clock-tower pill (metronome, collapsed state, lives in the header) */
+.clock{display:flex;align-items:center;gap:8px;border:1.5px solid var(--rule);background:var(--paper);border-radius:var(--r-pill);padding:6px 13px 6px 8px;font-family:var(--mono);font-size:12.5px;color:var(--ink);cursor:pointer}
+.clock .go{width:22px;height:22px;border-radius:50%;background:var(--brick-fill);color:var(--paper);display:grid;place-items:center;font-size:9px;flex:none}
+.clock b{font-weight:600}
+.clock small{color:var(--ink-soft);font-size:11px}
+.clock:hover{border-color:var(--brick)}
+
+/* ------- hero ------- */
+.hero{max-width:1200px;margin:0 auto;padding:76px 32px 60px;display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brick);margin:0 0 18px}
+.hero h1{font-family:var(--display);font-weight:640;font-variation-settings:'opsz' 100;font-size:64px;line-height:1.02;letter-spacing:-.015em;margin:0 0 20px}
+.hero h1 em{font-style:italic;color:var(--brick)}
+.hero .dek{font-size:18px;line-height:1.65;color:var(--ink-soft);max-width:56ch;margin:0 0 30px}
+.hero .dek b{color:var(--ink);font-weight:600}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:700;font-size:15.5px;text-decoration:none;border-radius:var(--r-pill);padding:15px 26px;border:1.5px solid transparent}
+.btn-brick{background:var(--brick-fill);color:var(--paper)}
+.btn-brick:hover{background:#8d341f}
+.btn-ghost{background:transparent;color:var(--green);border-color:var(--green)}
+.btn-ghost:hover{background:rgba(47,107,79,.08)}
+.btn .arrow{font-weight:400}
+.honesty{font-size:13px;color:var(--ink-soft);margin:0}
+.honesty b{color:var(--green);font-weight:600}
+/* hero side: the town seal card */
+.seal-card{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-l);box-shadow:var(--shadow);padding:30px;text-align:center}
+.seal-card .big-seal{width:150px;height:150px;margin:0 auto 16px}
+.seal-card .cnt{display:flex;justify-content:center;gap:26px}
+.seal-card .cnt div{font-family:var(--mono)}
+.seal-card .cnt b{display:block;font-size:21px;color:var(--ink);font-weight:600}
+.seal-card .cnt span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* ------- chapter treatment: stops on the map ------- */
+.chapter{max-width:1200px;margin:0 auto;padding:0 32px 72px}
+.ch-head{display:flex;align-items:baseline;gap:18px;border-top:1px solid var(--rule);padding-top:26px;margin-bottom:6px}
+.ch-head .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brick)}
+.ch-head h2{font-family:var(--display);font-weight:600;font-size:34px;letter-spacing:-.01em;margin:0}
+.ch-head .count{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.12em}
+.ch-sub{color:var(--ink-soft);font-size:15px;margin:0 0 22px}
+.stops{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;list-style:none;margin:0;padding:0}
+.stop{display:flex;align-items:center;gap:12px;background:var(--paper);border:1.5px solid var(--rule);border-radius:var(--r-m);padding:13px 16px;text-decoration:none;color:var(--ink)}
+.stop:hover{border-color:var(--brick)}
+.stop .n{font-family:var(--mono);font-size:11px;color:var(--ink-soft);width:20px;flex:none}
+.stop .t{font-weight:600;font-size:14.5px;line-height:1.3}
+.stop .st{margin-left:auto;flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.stop.done{border-color:rgba(47,107,79,.5)}
+.stop.done .st{background:var(--green);color:var(--paper)}
+.stop.done .n{color:var(--green)}
+.stop.here{background:var(--brick-fill);border-color:var(--brick-fill);color:var(--paper)}
+.stop.here .n,.stop.here .t{color:var(--paper)}
+.stop.here .st{background:var(--paper);color:var(--brick)}
+.legend{display:flex;gap:22px;margin-top:14px;font-size:12.5px;color:var(--ink-soft);font-family:var(--mono)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:7px}
+.legend .l1 i{background:var(--green)}
+.legend .l2 i{background:var(--brick-fill)}
+.legend .l3 i{border:1.5px solid var(--rule);background:var(--paper)}
+
+/* ------- lesson page fragment ------- */
+.lesson{max-width:860px;margin:0 auto;padding:44px 32px 56px}
+.crumb{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 20px}
+.crumb a{color:var(--brick);text-decoration:none}
+.crumb .sep{margin:0 8px;color:var(--rule)}
+.lesson h1{font-family:var(--display);font-weight:620;font-size:46px;line-height:1.05;letter-spacing:-.012em;margin:0 0 10px}
+.lesson .dek{font-size:18px;color:var(--ink-soft);margin:0 0 22px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-pill);padding:7px 14px;font-size:13px;font-weight:600;color:var(--ink)}
+.chip i{font-style:normal;color:var(--brick);font-family:var(--mono);font-size:11px}
+.chip.green i{color:var(--green)}
+.prereq{font-size:13.5px;color:var(--ink-soft);margin:0 0 34px}
+.prereq a{color:var(--green);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(47,107,79,.35)}
+.prereq .tick{color:var(--green);font-family:var(--mono)}
+/* exercise card */
+.ex{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-l);box-shadow:var(--shadow);overflow:hidden}
+.ex-h{display:flex;align-items:center;gap:16px;padding:18px 22px;border-bottom:1px solid var(--rule-soft);flex-wrap:wrap}
+.ex-h .badge{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--paper-2);border-radius:var(--r-s);padding:5px 9px;color:var(--brick)}
+.ex-h .tt{font-weight:700;font-size:16.5px}
+.ex-h .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);letter-spacing:.04em}
+.ex-h .ctl{margin-left:auto;display:flex;gap:10px;align-items:center}
+.sel{font-family:var(--mono);font-size:11.5px;border:1.5px solid var(--rule);background:var(--bg);border-radius:var(--r-pill);padding:8px 14px;color:var(--ink-soft)}
+.play{display:inline-flex;align-items:center;gap:9px;background:var(--brick-fill);color:var(--paper);border:none;border-radius:var(--r-pill);font-family:var(--body);font-weight:700;font-size:13.5px;padding:10px 20px;cursor:pointer}
+.play:hover{background:#8d341f}
+.stave-wrap{margin:22px;background:#fff;border:1px solid var(--rule-soft);border-radius:var(--r-s);padding:20px 16px}
+.stave{display:block;width:100%;height:auto;color:var(--ink)}
+.sv-line{stroke:currentColor;stroke-width:1;opacity:.75}
+.sv-ink{fill:currentColor}
+.sv-acc{fill:var(--brick)}
+.sv-stick{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
+.sv-stick .hit{fill:var(--brick);font-weight:600}
+.ex-cap{padding:0 22px 18px;font-size:14px;color:var(--ink-soft)}
+.ex-cap b{color:var(--ink)}
+.moveon{margin:0 22px 22px;background:var(--bg);border:1px solid var(--rule-soft);border-radius:var(--r-m);padding:16px 20px}
+.moveon .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin:0 0 10px}
+.moveon ul{margin:0;padding:0;list-style:none;font-size:14px}
+.moveon li{padding:4px 0 4px 26px;position:relative}
+.moveon li::before{content:"✓";position:absolute;left:2px;color:var(--green);font-weight:700}
+
+/* mobile lesson mock (390) */
+.mob{width:390px;flex:none;border:1px solid var(--rule);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:var(--bg)}
+.mob .sh-in{padding:12px 16px;gap:12px}
+.mob .nav{display:none}
+.mob-map{margin:14px 16px 0;border:1.5px solid var(--rule);background:var(--paper);border-radius:var(--r-m);padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600}
+.mob-map .k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick)}
+.mob-map .car{margin-left:auto;color:var(--ink-soft)}
+.mob .lesson{padding:22px 16px 26px}
+.mob .lesson h1{font-size:32px}
+.mob .chips{gap:8px}
+.mob .stave-wrap{margin:14px;padding:12px 8px}
+.mob .ex-h{padding:14px 14px}
+.mob .ex-h .ctl{margin-left:0;width:100%}
+
+/* ------- footer ------- */
+.sf{background:var(--paper-2);border-top:1px solid var(--rule)}
+.sf-in{max-width:1200px;margin:0 auto;padding:44px 32px 34px;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:32px}
+@media(max-width:820px){.sf-in{grid-template-columns:1fr 1fr}}
+.sf .seal{width:44px;height:44px;margin-bottom:12px}
+.sf .motto{font-family:var(--display);font-style:italic;font-size:18px;color:var(--ink);margin:0 0 8px}
+.sf .fine{font-size:12.5px;color:var(--ink-soft);margin:0}
+.sf h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brick);margin:4px 0 12px}
+.sf ul{list-style:none;margin:0;padding:0;font-size:14px}
+.sf li{margin:0 0 8px}
+.sf a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent}
+.sf a:hover{color:var(--brick);border-bottom-color:var(--brick)}
+.sf-base{border-top:1px solid var(--rule);margin-top:8px}
+.sf-base p{max-width:1200px;margin:0 auto;padding:16px 32px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.06em}
+
+/* ------- metronome: the clock tower ------- */
+.met-demo{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.met-panel{width:330px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-l);box-shadow:var(--shadow);padding:18px 20px 20px}
+.met-panel .mh{display:flex;align-items:center;margin-bottom:14px}
+.met-panel .mh .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brick)}
+.met-panel .mh button{margin-left:auto;border:none;background:none;font-size:15px;color:var(--ink-soft);cursor:pointer}
+.beats{display:flex;gap:10px;justify-content:center;margin:2px 0 16px}
+.beats i{width:12px;height:12px;border-radius:50%;background:var(--rule);display:block}
+.beats i.hit{background:var(--brick-fill);box-shadow:0 0 0 4px rgba(160,59,40,.18)}
+.mrow{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.mgo{width:46px;height:46px;border-radius:50%;background:var(--brick-fill);color:var(--paper);border:none;display:grid;place-items:center;font-size:15px;cursor:pointer;flex:none}
+.mbpm{font-family:var(--mono);font-size:24px;font-weight:600;border:1.5px solid var(--rule);border-radius:var(--r-s);background:var(--bg);width:88px;text-align:center;padding:7px 0;color:var(--ink)}
+.mbpm small{font-size:10px;display:block;letter-spacing:.16em;color:var(--ink-soft);font-weight:400}
+.msig{font-family:var(--mono);font-size:13px;border:1.5px solid var(--rule);border-radius:var(--r-s);background:var(--bg);padding:12px 14px;color:var(--ink)}
+.mslider{position:relative;height:6px;border-radius:3px;background:var(--paper-2);margin:6px 2px 16px}
+.mslider .fill{position:absolute;inset:0 auto 0 0;width:34%;background:var(--brick-fill);border-radius:3px}
+.mslider .th{position:absolute;top:50%;left:34%;width:18px;height:18px;border-radius:50%;background:var(--paper);border:2.5px solid var(--brick-fill);transform:translate(-50%,-50%)}
+.mvol{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:13px}
+.mvol .mslider{flex:1;margin:0}
+.mvol .mslider .fill{width:60%}
+.mvol .mslider .th{left:60%}
+
+/* overlap schematic */
+.schem{display:flex;gap:20px;flex-wrap:wrap}
+.schem .pg{width:230px;border:1.5px solid var(--rule);border-radius:var(--r-s);background:var(--paper);position:relative;padding:10px;height:172px}
+.schem .pg .hd{height:16px;border-radius:4px;background:var(--paper-2);margin-bottom:8px;position:relative}
+.schem .pg .hd .pill{position:absolute;right:4px;top:3px;width:34px;height:10px;border-radius:5px;background:var(--brick-fill)}
+.schem .pg .ln{height:8px;border-radius:3px;background:var(--rule-soft);margin:7px 0}
+.schem .pg .ln.w60{width:60%}
+.schem .pg .stv{height:34px;border-radius:3px;background:#fff;border:1px solid var(--rule)}
+.schem .pg .float{position:absolute;right:8px;bottom:8px;width:88px;height:62px;border-radius:6px;background:var(--brick-fill);opacity:.85}
+.schem .pg .float.bad{outline:2px dashed var(--brick);outline-offset:3px}
+.schem .pg .pop{position:absolute;right:8px;top:30px;width:96px;height:70px;border-radius:6px;background:var(--paper);border:1.5px solid var(--brick-fill);box-shadow:var(--shadow)}
+.schem .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);margin-top:8px;max-width:230px;letter-spacing:.03em}
+.schem .bad-x{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);font-size:20px;color:var(--brick);font-weight:700}
+
+/* ------- token sheet ------- */
+.tokens{display:grid;gap:26px}
+.tk{background:var(--paper);border:1px solid var(--rule);border-radius:var(--r-l);box-shadow:var(--shadow);padding:26px 28px}
+.tk h3{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brick);margin:0 0 18px}
+.pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.sw{border:1px solid var(--rule);border-radius:var(--r-m);overflow:hidden}
+.sw .c{height:56px}
+.sw .m{padding:9px 11px;font-family:var(--mono);font-size:10px;line-height:1.55;letter-spacing:.03em;color:var(--ink-soft);background:var(--paper)}
+.sw .m b{display:block;color:var(--ink);font-size:10.5px}
+.tk.dark{background:var(--d-bg);border-color:var(--d-rule)}
+.tk.dark h3{color:var(--d-amber)}
+.tk.dark .sw{border-color:var(--d-rule)}
+.tk.dark .sw .m{background:var(--d-paper);color:var(--d-ink-soft)}
+.tk.dark .sw .m b{color:var(--d-ink)}
+.ratio{display:inline-block;font-family:var(--mono);font-size:9.5px;border-radius:var(--r-pill);padding:1px 7px;margin-top:4px;background:rgba(47,107,79,.14);color:var(--green)}
+.tk.dark .ratio{background:rgba(142,199,166,.16);color:var(--d-green)}
+.type-row{display:flex;align-items:baseline;gap:22px;border-bottom:1px dashed var(--rule-soft);padding:13px 0}
+.type-row:last-child{border-bottom:none}
+.type-row .spec-t{font-family:var(--mono);font-size:10.5px;color:var(--ink-soft);width:220px;flex:none;letter-spacing:.04em}
+.sp-scale{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.sp{text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-soft)}
+.sp i{display:block;background:var(--brick-fill);opacity:.85;border-radius:3px;margin:0 auto 6px}
+.focus-demo{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.demo-focus{outline:2px solid var(--focus);outline-offset:2px}
+.tk.dark .demo-focus{outline-color:var(--d-amber)}
+.inp{font-family:var(--mono);font-size:13px;border:1.5px solid var(--rule);border-radius:var(--r-s);background:var(--bg);padding:10px 14px;color:var(--ink)}
+/* dark mini-mock */
+.dark-mini{background:var(--d-bg);border-radius:var(--r-m);padding:34px 34px 30px;color:var(--d-ink)}
+.dark-mini .eyebrow{color:var(--d-amber)}
+.dark-mini h1{font-family:var(--display);font-weight:620;font-size:38px;line-height:1.05;letter-spacing:-.012em;margin:0 0 12px}
+.dark-mini h1 em{font-style:italic;color:var(--d-terra)}
+.dark-mini p{color:var(--d-ink-soft);font-size:15px;max-width:52ch;margin:0 0 20px}
+.dark-mini .btn-brick{background:var(--d-amber);color:var(--d-bg)}
+.dark-mini .btn-ghost{color:var(--d-green);border-color:var(--d-green)}
+.dark-mini .chip{background:var(--d-paper);border-color:var(--d-rule);color:var(--d-ink)}
+.dark-mini .chip i{color:var(--d-amber)}
+.dark-mini .stave-wrap{background:#fffdf7;border-color:var(--d-rule);margin:0}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- =================== BOARD HEAD =================== -->
+  <header class="board-head">
+    <p class="k">drum.town rebrand · direction board A · designer exploration — not implementation</p>
+    <h1>The <em>Square</em></h1>
+    <p>Warm civic modern. drum.town as an actual town square: wayfinding chips instead of dashes, a clock tower instead of a floating widget, a seal instead of a manuscript. Fraunces + Public Sans + IBM Plex Mono. Light-first with a full "evening in the square" dark theme. Everything below ships as one hand-written CSS file on Eleventy.</p>
+  </header>
+
+  <!-- =================== 01 HOMEPAGE =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">01</span><h2>Homepage — hero, primary action, one chapter</h2></div>
+    <p class="spec-sub">A first-time visitor gets walked in the front gate; a returning neighbor is recognized. The chapter list becomes "stops on the map" — a chip grid with zero separators, so nothing orphans at a wrap.</p>
+
+    <div class="frame">
+      <div class="frame-bar"><i></i><i></i><i></i><span>drum.town — desktop 1280</span></div>
+
+      <!-- site header -->
+      <div class="sh">
+        <div class="sh-in">
+          <a class="logo" href="#">
+            <svg class="seal" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#9a3a27" stroke-width="2.5"/><circle cx="17" cy="17" r="8.5" fill="none" stroke="#9a3a27" stroke-width="2"/><circle cx="17" cy="4.5" r="1.7" fill="#c99a3c"/><circle cx="29.5" cy="17" r="1.7" fill="#c99a3c"/><circle cx="17" cy="29.5" r="1.7" fill="#c99a3c"/><circle cx="4.5" cy="17" r="1.7" fill="#c99a3c"/></svg>
+            <span class="wm">drum<em>.town</em></span>
+          </a>
+          <nav class="nav">
+            <a class="on" href="#">The Map</a><a href="#">Genres</a><a href="#">Other Topics</a><a href="#">Rudiments</a>
+          </nav>
+          <button class="clock" type="button" aria-label="Open the metronome"><span class="go">▶</span><b>80</b><small>· 4/4</small></button>
+        </div>
+      </div>
+
+      <!-- hero -->
+      <div class="hero">
+        <div>
+          <p class="eyebrow">drum.town · a free town for learning the drums</p>
+          <h1>Welcome to <em>Drum&nbsp;Town.</em></h1>
+          <p class="dek">A complete curriculum you can walk: <b>217 lessons</b> with real notation you can press play on, <b>852 exercises</b>, <b>40 rudiments</b> — and the whole town practices to the same clock.</p>
+          <div class="cta-row">
+            <a class="btn btn-brick" href="#">Start here — your first lesson <span class="arrow">→</span></a>
+            <a class="btn btn-ghost" href="#">Continue where you left off</a>
+          </div>
+          <p class="honesty"><b>The town remembers.</b> Your progress lives in your browser — no account, no sign-up, nothing to join.</p>
+        </div>
+        <div class="seal-card">
+          <svg class="big-seal" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#9a3a27" stroke-width="1.8"/><circle cx="17" cy="17" r="8.5" fill="none" stroke="#9a3a27" stroke-width="1.4"/><circle cx="17" cy="4.5" r="1.5" fill="#c99a3c"/><circle cx="29.5" cy="17" r="1.5" fill="#c99a3c"/><circle cx="17" cy="29.5" r="1.5" fill="#c99a3c"/><circle cx="4.5" cy="17" r="1.5" fill="#c99a3c"/><circle cx="17" cy="17" r="2.4" fill="#2f6b4f"/></svg>
+          <div class="cnt">
+            <div><b>217</b><span>lessons</span></div>
+            <div><b>852</b><span>exercises</span></div>
+            <div><b>40</b><span>rudiments</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- chapter treatment -->
+      <div class="chapter">
+        <div class="ch-head">
+          <span class="kicker">The map · chapter 1 of 12</span>
+          <h2>Getting Started</h2>
+          <span class="count">6 stops</span>
+        </div>
+        <p class="ch-sub">Everything you need before your first beat — the kit, the sticks, the seat, the habit.</p>
+        <ul class="stops">
+          <li><a class="stop done" href="#"><span class="n">01</span><span class="t">The Kit: What's What</span><span class="st">✓</span></a></li>
+          <li><a class="stop done" href="#"><span class="n">02</span><span class="t">Sticks, Pads &amp; First Gear</span><span class="st">✓</span></a></li>
+          <li><a class="stop here" href="#"><span class="n">03</span><span class="t">Setup &amp; Posture</span><span class="st">●</span></a></li>
+          <li><a class="stop" href="#"><span class="n">04</span><span class="t">Stick Grip &amp; Strokes</span></a></li>
+          <li><a class="stop" href="#"><span class="n">05</span><span class="t">Tuning Your Drums</span></a></li>
+          <li><a class="stop" href="#"><span class="n">06</span><span class="t">How to Practice</span></a></li>
+        </ul>
+        <div class="legend">
+          <span class="l1"><i></i>streets you've walked</span>
+          <span class="l2"><i></i>you are here</span>
+          <span class="l3"><i></i>still to visit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note"><b>solves BL-045</b><span>The hero has one unmistakable primary action ("Start here") plus the returning-visitor path ("Continue where you left off", wired to the existing localStorage progress — shown only when progress exists). Honest copy: the town "remembers" via the browser, and says so.</span></div>
+    <div class="note"><b>solves BL-044</b><span>Chapter lessons are chips in a CSS grid — there are no dash separators to orphan at line wraps, at any width. Visited / current states reuse the existing is-visited / is-last-visited hooks as civic language: walked streets, "you are here."</span></div>
+  </section>
+
+  <!-- =================== 02 LESSON PAGE =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">02</span><h2>Lesson page — title block, meta, exercise card</h2></div>
+    <p class="spec-sub">One breadcrumb + one chip row replaces today's four stacked mono labels in the same quadrant. The stave stays the hero object: manuscript-white card, notation in currentColor.</p>
+
+    <div class="cols">
+      <div class="frame">
+        <div class="frame-bar"><i></i><i></i><i></i><span>drum.town/lessons/single-paradiddle — desktop</span></div>
+        <div class="lesson">
+          <p class="crumb"><a href="#">The Map</a><span class="sep">/</span><a href="#">Foundations</a><span class="sep">/</span>Rudiments · Lesson 03</p>
+          <h1>The Single Paradiddle</h1>
+          <p class="dek">The most useful sticking pattern ever invented.</p>
+          <div class="chips">
+            <span class="chip"><i>⏱</i>15–20 min</span>
+            <span class="chip"><i>◎</i>Rudiment &amp; sticking</span>
+            <span class="chip green"><i>♩</i>Practice at 70 → 100 BPM</span>
+          </div>
+          <p class="prereq"><span class="tick">✓</span> Walk these first: <a href="#">The Single Stroke Roll</a> · <a href="#">The Double Stroke Roll</a></p>
+
+          <div class="ex">
+            <div class="ex-h">
+              <span class="badge">1A</span>
+              <div>
+                <div class="tt">Single Paradiddle on Snare</div>
+                <div class="meta">4/4 · 16th notes · ♩ 70 → 100</div>
+              </div>
+              <div class="ctl">
+                <span class="sel">Electronic ▾</span>
+                <button class="play" type="button">▶ Play</button>
+              </div>
+            </div>
+            <div class="stave-wrap">
+              <svg class="stave" viewBox="0 0 716 104" role="img" aria-label="One bar of sixteenth notes, sticking R L R R L R L L, accents on each count">
+                <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+                <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+                <circle class="sv-ink" cx="31" cy="43" r="2"/><circle class="sv-ink" cx="31" cy="53" r="2"/>
+                <rect class="sv-ink" x="40" y="38" width="3.6" height="20"/><rect class="sv-ink" x="47" y="38" width="3.6" height="20"/>
+                <text class="sv-ink" x="68" y="46" font-size="16.5" font-weight="700" text-anchor="middle" font-family="Georgia,serif">4</text>
+                <text class="sv-ink" x="68" y="66" font-size="16.5" font-weight="700" text-anchor="middle" font-family="Georgia,serif">4</text>
+                <defs><g id="nA"><ellipse cx="0" cy="0" rx="5.6" ry="4.1" transform="rotate(-18)"/><rect x="4.6" y="-34" width="1.7" height="33.5"/></g></defs>
+                <g class="sv-ink">
+                  <use href="#nA" x="100" y="48"/><use href="#nA" x="134" y="48"/><use href="#nA" x="168" y="48"/><use href="#nA" x="202" y="48"/>
+                  <use href="#nA" x="248" y="48"/><use href="#nA" x="282" y="48"/><use href="#nA" x="316" y="48"/><use href="#nA" x="350" y="48"/>
+                  <use href="#nA" x="396" y="48"/><use href="#nA" x="430" y="48"/><use href="#nA" x="464" y="48"/><use href="#nA" x="498" y="48"/>
+                  <use href="#nA" x="544" y="48"/><use href="#nA" x="578" y="48"/><use href="#nA" x="612" y="48"/><use href="#nA" x="646" y="48"/>
+                  <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="400.6" y="14" width="103.7" height="3"/><rect x="400.6" y="20.4" width="103.7" height="3"/>
+                  <rect x="548.6" y="14" width="103.7" height="3"/><rect x="548.6" y="20.4" width="103.7" height="3"/>
+                </g>
+                <g class="sv-acc" font-size="13" font-weight="700" text-anchor="middle" font-family="Georgia,serif">
+                  <text x="100" y="10">&gt;</text><text x="248" y="10">&gt;</text><text x="396" y="10">&gt;</text><text x="544" y="10">&gt;</text>
+                </g>
+                <circle class="sv-ink" cx="674" cy="43" r="2"/><circle class="sv-ink" cx="674" cy="53" r="2"/>
+                <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+                <g class="sv-stick" text-anchor="middle">
+                  <text class="hit" x="100" y="92">R</text><text x="134" y="92">L</text><text x="168" y="92">R</text><text x="202" y="92">R</text>
+                  <text class="hit" x="248" y="92">L</text><text x="282" y="92">R</text><text x="316" y="92">L</text><text x="350" y="92">L</text>
+                  <text class="hit" x="396" y="92">R</text><text x="430" y="92">L</text><text x="464" y="92">R</text><text x="498" y="92">R</text>
+                  <text class="hit" x="544" y="92">L</text><text x="578" y="92">R</text><text x="612" y="92">L</text><text x="646" y="92">L</text>
+                </g>
+              </svg>
+            </div>
+            <p class="ex-cap">Sticking: <b>R L R R · L R L L</b>. The accents fall on counts 1, 2, 3, 4 — the start of each paradiddle group. Let those be slightly louder than the rest.</p>
+            <div class="moveon">
+              <p class="k">Move on when</p>
+              <ul>
+                <li>RLRR LRLL × 2 at ♩=80 for 2 minutes without sticking errors</li>
+                <li>Accents on 1, 2, 3, 4 are clearly louder than the rest</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mob">
+          <div class="frame-bar"><i></i><i></i><i></i><span>true 390px</span></div>
+          <div class="sh"><div class="sh-in">
+            <a class="logo" href="#"><svg class="seal" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#9a3a27" stroke-width="2.5"/><circle cx="17" cy="17" r="8.5" fill="none" stroke="#9a3a27" stroke-width="2"/></svg><span class="wm">drum<em>.town</em></span></a>
+            <button class="clock" style="margin-left:auto" type="button"><span class="go">▶</span><b>80</b></button>
+          </div></div>
+          <div class="mob-map">
+            <span class="k">Lesson map</span> Chapter 3 · Rudiments <span class="car">▾</span>
+          </div>
+          <div class="lesson">
+            <p class="crumb"><a href="#">Foundations</a><span class="sep">/</span>Lesson 03</p>
+            <h1>The Single Paradiddle</h1>
+            <p class="dek" style="font-size:15.5px">The most useful sticking pattern ever invented.</p>
+            <div class="chips">
+              <span class="chip"><i>⏱</i>15–20 min</span>
+              <span class="chip"><i>◎</i>Rudiment &amp; sticking</span>
+            </div>
+            <div class="ex">
+              <div class="ex-h">
+                <span class="badge">1A</span>
+                <div><div class="tt" style="font-size:15px">Single Paradiddle on Snare</div><div class="meta">4/4 · 16ths · ♩ 70 → 100</div></div>
+                <div class="ctl"><span class="sel">Electronic ▾</span><button class="play" type="button">▶ Play</button></div>
+              </div>
+              <div class="stave-wrap">
+                <svg class="stave" viewBox="0 0 716 104" aria-hidden="true">
+                  <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+                  <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+                  <g class="sv-ink">
+                    <use href="#nA" x="100" y="48"/><use href="#nA" x="134" y="48"/><use href="#nA" x="168" y="48"/><use href="#nA" x="202" y="48"/>
+                    <use href="#nA" x="248" y="48"/><use href="#nA" x="282" y="48"/><use href="#nA" x="316" y="48"/><use href="#nA" x="350" y="48"/>
+                    <use href="#nA" x="396" y="48"/><use href="#nA" x="430" y="48"/><use href="#nA" x="464" y="48"/><use href="#nA" x="498" y="48"/>
+                    <use href="#nA" x="544" y="48"/><use href="#nA" x="578" y="48"/><use href="#nA" x="612" y="48"/><use href="#nA" x="646" y="48"/>
+                    <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="400.6" y="14" width="103.7" height="3"/><rect x="400.6" y="20.4" width="103.7" height="3"/>
+                    <rect x="548.6" y="14" width="103.7" height="3"/><rect x="548.6" y="20.4" width="103.7" height="3"/>
+                  </g>
+                  <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="caption">true 390px — the sidebar becomes a one-line "Lesson map" disclosure under the header; lesson content starts on screen one.</p>
+        <div class="note"><b>solves BL-037</b><span>The chapter sidebar collapses to a single disclosure bar on small screens (closed by default), so the title and first exercise — not 40 nav links — own the first screen.</span></div>
+        <div class="note"><b>label pile-up</b><span>"CURRICULUM · FOUNDATIONS / FOUNDATION / eyebrow / meta" collapses into one breadcrumb line and one chip row. Every label earns its place or leaves.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================== 03 HEADER + FOOTER =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">03</span><h2>Chrome — header nav &amp; footer</h2></div>
+    <p class="spec-sub">The header carries the seal, the map, and the clock tower. The footer is the town notice board: what this place is, and what it will never ask of you.</p>
+
+    <div class="frame">
+      <div class="frame-bar"><i></i><i></i><i></i><span>header — default · hover · active · keyboard focus</span></div>
+      <div class="sh"><div class="sh-in">
+        <a class="logo" href="#"><svg class="seal" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#9a3a27" stroke-width="2.5"/><circle cx="17" cy="17" r="8.5" fill="none" stroke="#9a3a27" stroke-width="2"/><circle cx="17" cy="4.5" r="1.7" fill="#c99a3c"/><circle cx="29.5" cy="17" r="1.7" fill="#c99a3c"/><circle cx="17" cy="29.5" r="1.7" fill="#c99a3c"/><circle cx="4.5" cy="17" r="1.7" fill="#c99a3c"/></svg><span class="wm">drum<em>.town</em></span></a>
+        <nav class="nav">
+          <a class="on" href="#">The Map</a>
+          <a href="#" style="color:var(--brick);background:var(--paper-2)">Genres</a>
+          <a href="#">Other Topics</a>
+          <a class="demo-focus" href="#">Rudiments</a>
+        </nav>
+        <button class="clock" type="button"><span class="go">▶</span><b>80</b><small>· 4/4</small></button>
+      </div></div>
+
+      <div class="sf">
+        <div class="sf-in">
+          <div>
+            <svg class="seal" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#9a3a27" stroke-width="2"/><circle cx="17" cy="17" r="8.5" fill="none" stroke="#9a3a27" stroke-width="1.6"/><circle cx="17" cy="17" r="2.4" fill="#2f6b4f"/></svg>
+            <p class="motto">The door's open. Bring sticks.</p>
+            <p class="fine">A free town for learning the drums. No accounts, no ads, no tracking of you around the internet — your progress lives in your own browser.</p>
+          </div>
+          <div>
+            <h4>The Map</h4>
+            <ul><li><a href="#">Foundations</a></li><li><a href="#">Genre tracks</a></li><li><a href="#">Other topics</a></li></ul>
+          </div>
+          <div>
+            <h4>Reference</h4>
+            <ul><li><a href="#">The 40 rudiments</a></li><li><a href="#">The metronome</a></li></ul>
+          </div>
+          <div>
+            <h4>The Town</h4>
+            <ul><li><a href="#">GitHub</a></li><li><a href="#">Start at lesson one</a></li></ul>
+          </div>
+        </div>
+        <div class="sf-base"><p>drum.town · 217 lessons · 852 playable exercises · 40 rudiments · notation rendered with VexFlow at build time · built on Eleventy</p></div>
+      </div>
+    </div>
+    <div class="note"><b>a11y</b><span>Skip link, landmark structure, and :focus-visible rings carry over untouched — the focus treatment (2px brick ring, 2px offset) is shown live on "Rudiments" above and in the token sheet.</span></div>
+  </section>
+
+  <!-- =================== 04 METRONOME =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">04</span><h2>The Clock Tower — docked metronome</h2></div>
+    <p class="spec-sub">The town keeps one clock, and it sits on the skyline — in the sticky header — not in the street. Collapsed, it is a pill that occupies zero content space. Expanded, it is a user-invoked popover under the header edge, dismissed by Esc, scrim tap, or the − control. It can never stand on top of a stave.</p>
+
+    <div class="met-demo">
+      <div>
+        <div class="met-panel">
+          <div class="mh"><span class="k">The clock tower</span><button aria-label="Collapse">−</button></div>
+          <div class="beats"><i class="hit"></i><i></i><i></i><i></i></div>
+          <div class="mrow">
+            <button class="mgo" type="button" aria-label="Start">▶</button>
+            <div class="mbpm">80<small>BPM</small></div>
+            <span class="msig">4/4 ▾</span>
+          </div>
+          <div class="mslider"><span class="fill"></span><span class="th"></span></div>
+          <div class="mvol">♪<div class="mslider"><span class="fill"></span><span class="th"></span></div></div>
+        </div>
+        <p class="caption">expanded — popover anchored below the header pill, 330px, right-aligned</p>
+      </div>
+      <div>
+        <button class="clock" type="button" style="transform:scale(1.35);transform-origin:top left;margin:6px 0 26px 6px"><span class="go">▶</span><b>80</b><small>· 4/4</small></button>
+        <p class="caption" style="margin-top:20px">collapsed — the header pill. Beat pulse shows in the ▶ dot while running.<br>(shown at 135% for detail)</p>
+      </div>
+      <div class="schem">
+        <div>
+          <div class="pg">
+            <div class="hd"></div>
+            <div class="ln"></div><div class="ln w60"></div>
+            <div class="stv"></div>
+            <div class="ln w60"></div>
+            <div class="float bad"></div>
+            <span class="bad-x">✕</span>
+          </div>
+          <p class="cap">today — floating card overlaps lesson content at ~1280px (BL-036)</p>
+        </div>
+        <div>
+          <div class="pg">
+            <div class="hd"><span class="pill"></span></div>
+            <div class="pop"></div>
+            <div class="ln"></div><div class="ln w60"></div>
+            <div class="stv"></div>
+            <div class="ln w60"></div>
+          </div>
+          <p class="cap">this direction — clock lives in the header; popover is transient &amp; dismissible; content never reserved, never covered</p>
+        </div>
+      </div>
+    </div>
+    <div class="note"><b>solves BL-036</b><span>Overlap is removed structurally, not tuned per-breakpoint: the collapsed state is inside the header flow at every width (including 390px, where it sits beside the logo), and the expanded state is a popover the drummer summons and dismisses. Existing metronome.js state toggling is reused; this is a CSS re-housing, not a rebuild.</span></div>
+  </section>
+
+  <!-- =================== 05 TOKEN SHEET =================== -->
+  <section class="spec">
+    <div class="spec-label"><span class="num">05</span><h2>Token sheet — color, type, space, focus</h2></div>
+    <p class="spec-sub">Extends the existing :root token system (bg / paper / ink / rule / accent slots stay; values change, notation tokens stay routed through currentColor). Ratios are WCAG 2.x, computed, not eyeballed.</p>
+
+    <div class="tokens">
+      <div class="tk">
+        <h3>Light — "morning in the square" · body text 14.5:1 on page, 15.7:1 on cards</h3>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#f7f2e9"></div><div class="m"><b>--bg · #f7f2e9</b>plaster — page ground</div></div>
+          <div class="sw"><div class="c" style="background:#fffcf5"></div><div class="m"><b>--paper · #fffcf5</b>cards, panels</div></div>
+          <div class="sw"><div class="c" style="background:#efe6d3"></div><div class="m"><b>--paper-2 · #efe6d3</b>wells, footer</div></div>
+          <div class="sw"><div class="c" style="background:#262019"></div><div class="m"><b>--ink · #262019</b>body text<span class="ratio">14.5:1 on bg · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#5c5346"></div><div class="m"><b>--ink-soft · #5c5346</b>secondary text<span class="ratio">6.8:1 · AA+</span></div></div>
+          <div class="sw"><div class="c" style="background:#9a3a27"></div><div class="m"><b>--brick · #9a3a27</b>accent as text/link<span class="ratio">6.3:1 · AA</span></div></div>
+          <div class="sw"><div class="c" style="background:#a03b28"></div><div class="m"><b>--brick-fill · #a03b28</b>buttons — paper text<span class="ratio">6.5:1 · AA</span></div></div>
+          <div class="sw"><div class="c" style="background:#2f6b4f"></div><div class="m"><b>--green · #2f6b4f</b>progress, park green<span class="ratio">5.6:1 · AA</span></div></div>
+          <div class="sw"><div class="c" style="background:#c99a3c"></div><div class="m"><b>--brass · #c99a3c</b>decorative only — never text</div></div>
+          <div class="sw"><div class="c" style="background:#ddd2bd"></div><div class="m"><b>--rule · #ddd2bd</b>borders, hairlines</div></div>
+        </div>
+      </div>
+
+      <div class="tk dark">
+        <h3>Dark — "evening in the square" · body text 14.3:1</h3>
+        <div class="pal">
+          <div class="sw"><div class="c" style="background:#211a14"></div><div class="m"><b>--bg · #211a14</b>warm umber ground</div></div>
+          <div class="sw"><div class="c" style="background:#2b231b"></div><div class="m"><b>--paper · #2b231b</b>cards, panels</div></div>
+          <div class="sw"><div class="c" style="background:#352b21"></div><div class="m"><b>--paper-2 · #352b21</b>wells</div></div>
+          <div class="sw"><div class="c" style="background:#f2e9dc"></div><div class="m"><b>--ink · #f2e9dc</b>body text<span class="ratio">14.3:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#c4b6a3"></div><div class="m"><b>--ink-soft · #c4b6a3</b>secondary<span class="ratio">8.6:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#e07b5c"></div><div class="m"><b>--terra · #e07b5c</b>accent as text<span class="ratio">5.9:1 · AA</span></div></div>
+          <div class="sw"><div class="c" style="background:#e3a34d"></div><div class="m"><b>--amber · #e3a34d</b>lamplight — CTAs, focus<span class="ratio">7.9:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#8ec7a6"></div><div class="m"><b>--green · #8ec7a6</b>progress<span class="ratio">8.9:1 · AAA</span></div></div>
+          <div class="sw"><div class="c" style="background:#4a3e30"></div><div class="m"><b>--rule · #4a3e30</b>borders</div></div>
+          <div class="sw"><div class="c" style="background:#fffdf7"></div><div class="m"><b>--notation-bg · #fffdf7</b>staves stay manuscript-lit in the dark theme</div></div>
+        </div>
+      </div>
+
+      <div class="tk">
+        <h3>Type scale — Fraunces / Public Sans / IBM Plex Mono</h3>
+        <div class="type-row"><span class="spec-t">display-1 · Fraunces 640 · 64px / 4rem · lh 1.02</span><span style="font-family:var(--display);font-weight:640;font-size:64px;line-height:1.02;letter-spacing:-.015em">Welcome to Drum Town.</span></div>
+        <div class="type-row"><span class="spec-t">display-2 · Fraunces 620 · 46px / 2.875rem</span><span style="font-family:var(--display);font-weight:620;font-size:46px;line-height:1.05">The Single Paradiddle</span></div>
+        <div class="type-row"><span class="spec-t">h2 · Fraunces 600 · 34px / 2.125rem</span><span style="font-family:var(--display);font-weight:600;font-size:34px">Getting Started</span></div>
+        <div class="type-row"><span class="spec-t">h3 · Public Sans 700 · 20px / 1.25rem</span><span style="font-weight:700;font-size:20px">Move on when</span></div>
+        <div class="type-row"><span class="spec-t">body · Public Sans 400 · 17px / 1.0625rem · lh 1.65</span><span style="font-size:17px;line-height:1.65">The single paradiddle is a four-note sticking pattern: R L R R, or its mirror.</span></div>
+        <div class="type-row"><span class="spec-t">small · Public Sans 400 · 14px / .875rem</span><span style="font-size:14px;color:var(--ink-soft)">Your progress lives in your browser — no account needed.</span></div>
+        <div class="type-row"><span class="spec-t">meta · Plex Mono 500 · 12px / .75rem · track .14em</span><span style="font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick)">The map · chapter 1 of 12</span></div>
+      </div>
+
+      <div class="tk">
+        <h3>Spacing · radius · focus</h3>
+        <div class="sp-scale" style="margin-bottom:26px">
+          <div class="sp"><i style="width:4px;height:4px"></i>4</div>
+          <div class="sp"><i style="width:8px;height:8px"></i>8</div>
+          <div class="sp"><i style="width:12px;height:12px"></i>12</div>
+          <div class="sp"><i style="width:16px;height:16px"></i>16</div>
+          <div class="sp"><i style="width:24px;height:24px"></i>24</div>
+          <div class="sp"><i style="width:32px;height:32px"></i>32</div>
+          <div class="sp"><i style="width:48px;height:48px"></i>48</div>
+          <div class="sp"><i style="width:64px;height:64px"></i>64</div>
+          <div class="sp"><i style="width:96px;height:96px"></i>96</div>
+        </div>
+        <div class="focus-demo">
+          <button class="btn btn-brick demo-focus" type="button" style="padding:11px 20px;font-size:14px">Start here</button>
+          <a href="#" class="demo-focus" style="color:var(--brick);font-weight:600">A focused link</a>
+          <input class="inp demo-focus" value="80" size="4" aria-label="BPM demo">
+          <span class="caption" style="margin:0">:focus-visible → 2px var(--brick) ring, 2px offset (amber in dark) · radius: 8 / 12 / 16 / pill · reduced-motion kills the beat-pulse scale, color still carries the beat</span>
+        </div>
+      </div>
+
+      <div class="tk dark">
+        <h3>Dark theme in situ</h3>
+        <div class="dark-mini">
+          <p class="eyebrow">drum.town · evening in the square</p>
+          <h1>The town keeps <em>one clock.</em></h1>
+          <p>Dark is a first-class theme, not an inversion: umber ground, lamplight amber actions, park-green progress. Notation staves keep their manuscript-lit ground so the score always reads like a score.</p>
+          <div class="cta-row" style="margin-bottom:22px">
+            <a class="btn btn-brick" href="#" style="font-size:14px;padding:12px 22px">Start here — your first lesson →</a>
+            <a class="btn btn-ghost" href="#" style="font-size:14px;padding:12px 22px">Continue where you left off</a>
+          </div>
+          <div class="chips" style="margin-bottom:18px">
+            <span class="chip"><i>⏱</i>15–20 min</span>
+            <span class="chip"><i>◎</i>Rudiment &amp; sticking</span>
+          </div>
+          <div class="stave-wrap">
+            <svg class="stave" viewBox="0 0 716 104" aria-hidden="true" style="color:#262019">
+              <path class="sv-line" fill="none" d="M16 28H700M16 38H700M16 48H700M16 58H700M16 68H700"/>
+              <rect class="sv-ink" x="16" y="28" width="4.5" height="40"/><rect class="sv-ink" x="23.5" y="28" width="1.6" height="40"/>
+              <g class="sv-ink">
+                <use href="#nA" x="100" y="48"/><use href="#nA" x="134" y="48"/><use href="#nA" x="168" y="48"/><use href="#nA" x="202" y="48"/>
+                <use href="#nA" x="248" y="48"/><use href="#nA" x="282" y="48"/><use href="#nA" x="316" y="48"/><use href="#nA" x="350" y="48"/>
+                <rect x="104.6" y="14" width="103.7" height="3"/><rect x="104.6" y="20.4" width="103.7" height="3"/>
+                <rect x="252.6" y="14" width="103.7" height="3"/><rect x="252.6" y="20.4" width="103.7" height="3"/>
+              </g>
+              <rect class="sv-ink" x="688" y="28" width="1.6" height="40"/><rect class="sv-ink" x="693.5" y="28" width="4.5" height="40"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="caption" style="text-align:center;margin-top:-20px">Direction A — The Square · drum.town rebrand exploration · one CSS file, Eleventy, zero client dependencies</p>
+</div>
+</body>
+</html>
