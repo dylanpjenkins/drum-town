@@ -142,8 +142,9 @@
     noise.start(t); noise.stop(t + 0.45);
   }
 
-  // Ride bow — short bright noise ping plus a high square partial so the
-  // attack reads as stick-on-metal rather than a hat.
+  // Ride bow — bright noise wash plus two partials: a high square for the
+  // stick attack and a low triangle "ping" fundamental (the 300–800Hz body a
+  // real ride has and a hat doesn't).
   function rideElectronic(c, t, out) {
     const noise = c.createBufferSource();
     noise.buffer = getNoiseBuffer(c);
@@ -166,6 +167,16 @@
     og.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
     o.connect(og).connect(out);
     o.start(t); o.stop(t + 0.14);
+
+    const ping = c.createOscillator();
+    const pg = c.createGain();
+    ping.type = 'triangle';
+    ping.frequency.value = 410;
+    pg.gain.setValueAtTime(0.0001, t);
+    pg.gain.exponentialRampToValueAtTime(0.1, t + 0.003);
+    pg.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    ping.connect(pg).connect(out);
+    ping.start(t); ping.stop(t + 0.32);
   }
 
   // Bell (cowbell / ride bell) — two detuned square partials, fast decay.
@@ -278,12 +289,11 @@
     return acousticDecodePromise;
   }
 
-  function playAcousticSample(name, c, t, out, gainScale, rate) {
+  function playAcousticSample(name, c, t, out, gainScale) {
     const buf = acousticBuffers[name];
     if (!buf) return;
     const src = c.createBufferSource();
     src.buffer = buf;
-    if (rate != null && rate !== 1) src.playbackRate.value = rate;
     if (gainScale != null && gainScale !== 1) {
       const g = c.createGain();
       g.gain.value = gainScale;
@@ -298,16 +308,17 @@
   function snareAcoustic(c, t, out)   { playAcousticSample('snare',   c, t, out); }
   function hatAcoustic(c, t, out)     { playAcousticSample('hat',     c, t, out); }
   function openHatAcoustic(c, t, out) { playAcousticSample('openHat', c, t, out); }
-  // No dedicated foot sample yet — fall back to a quieter closed hat.
+  // No dedicated foot sample yet — a quieter closed hat is honestly what a
+  // pedaled hat sounds like, so this one substitution stays.
   function footAcoustic(c, t, out)    { playAcousticSample('hat',     c, t, out, 0.55); }
   function rideAcoustic(c, t, out)    { playAcousticSample('ride',    c, t, out); }
-  // No bell/crash/china samples yet (see ISSUES.md #2) — approximate from
-  // what we have: pitched-up ride reads as a bell strike, and the open-hat
-  // wash stands in for crash/china at shifted playback rates.
-  function bellAcoustic(c, t, out)    { playAcousticSample('ride',    c, t, out, 1.1, 1.4); }
-  function crashAcoustic(c, t, out)   { playAcousticSample('openHat', c, t, out, 1.15, 0.85); }
-  function chinaAcoustic(c, t, out)   { playAcousticSample('openHat', c, t, out, 1.2, 1.15); }
-  // No tom samples either — use the synthesized toms in the acoustic kit.
+  // No bell/crash/china/tom samples exist (ISSUES.md #2). Rate-shifted
+  // copies of other cymbals mis-teach the exact contrasts the lessons
+  // exist to teach, so the acoustic kit uses the clearly-synthesized
+  // voices for these until real samples arrive.
+  function bellAcoustic(c, t, out)     { bellElectronic(c, t, out); }
+  function crashAcoustic(c, t, out)    { crashElectronic(c, t, out); }
+  function chinaAcoustic(c, t, out)    { chinaElectronic(c, t, out); }
   function tomHighAcoustic(c, t, out)  { tomHighElectronic(c, t, out); }
   function tomMidAcoustic(c, t, out)   { tomMidElectronic(c, t, out); }
   function tomFloorAcoustic(c, t, out) { tomFloorElectronic(c, t, out); }

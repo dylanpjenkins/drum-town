@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 27,
-    "next_dimension": "quality",
+    "iteration": 28,
+    "next_dimension": "ui",
     "dimensions": ["ui", "quality", "ui", "content"],
     "next_id": 58,
     "epic": {
@@ -626,10 +626,10 @@
       "title": "Audio voice honesty: acoustic crash/china/open-hat are one sample at three speeds; bell and electronic ride unconvincing",
       "evidence": ["Critic iter 23: crash=openHat.wav@0.85x, china=openHat@1.15x, openHat=openHat — three voices, one sample; bell=ride.wav@1.4x lacks a bell fundamental (Latin bell-vs-ride lessons lose their contrast); real crash rings 2-3s vs ~0.5s here; 1.1-1.2 gains on stacked downbeats risk clipping; electronic ride = 6kHz noise + 4.2kHz square, no 300-800Hz bow ping"],
       "acceptance": "either synthesize genuinely distinct voices (documented recipes), fall back to the electronic voices for missing acoustic samples (honest contrast), or visibly mark those voices unsupported in the acoustic kit; no gain stacking above 1.0 without a limiter rationale; Needs-ear entry with specific lessons; ISSUES.md #2 (real samples) remains the true fix",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": ["Filed from adversarial critique (iter 23)."]
+      "log": ["Filed from adversarial critique (iter 23).", "iter 28 · Took the honest-contrast option (the critique's own prescription): acoustic bell/crash/china/toms now use the clearly-synthesized electronic voices instead of rate-shifted copies of other cymbals; >1.0 gain hacks and the playbackRate parameter removed; foot=quiet-hat kept (that IS what a pedaled hat sounds like, commented). Electronic ride gains a 410Hz triangle ping fundamental per the critique (a hat has no 300-800Hz body; a ride does). Real samples remain ISSUES.md #2 / blocked-human. Needs-ear: latin-cha-cha bell vs ride contrast, cymbal-voicings, a crash downbeat in rock-basic-fills, jazz-ride-pattern ride tone."]
     },
     {
       "id": "BL-040",

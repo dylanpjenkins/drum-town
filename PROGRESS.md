@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-05 · iter 28 · BL-039 [quality] acoustic kit stops faking cymbals — missing voices use honestly-synthesized recipes (no more one-sample-three-speeds); electronic ride gains its missing ping fundamental
 - 2026-08-05 · iter 27 · BL-038 [ui] playhead follow now yields to the user — scroll-event ownership model (reviewer rejected my first timer-based fix as DEGRADED; shipped its better architecture: follow resumes when the playhead re-enters your window, works for scrollbar drags in every browser). Loop heartbeat switched to background-sleeper notifications after in-session timers failed twice.
 - 2026-08-05 · iter 26 · SPEC COMPLETE — design/system.md (16 slots kept + 8 new, dual themes computed AA+, 113KB measured font plan) + design/packages.md (10 build packages, each one tick, site coherent after every deploy). Backlog loaded (BL-048..057); epic phase → build; ui cadence doubled. The rebrand starts shipping to drum.town next ticks.
 - 2026-08-05 · iter 25b · DIRECTION DECIDED — "The Square" (A) wins 4-judge panel + orchestrator, amended with B's transport-dock metronome and C's ledger chapters; B unanimously last (stage ≠ town). All 42 contrast claims verified honest; every board dodged mobile nav + mobile notation legibility — now mandatory spec contract. See design/DECISION.md. DYLAN: veto window open — say the word to override.
@@ -54,6 +55,8 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 - **BL-010 exercise titles div→h3** (iter 2): open any lesson — exercise titles should look identical (the class controls type/margin; only line-height tightened 1.65→1.2 on multi-line titles). Tab from the address bar: a rust "Skip to content" chip should appear top-left and jump to content.
 
 ## Needs ear (audio changes awaiting a listen)
+
+- **BL-039 honest acoustic voices** (iter 28): in the acoustic kit, play `latin-cha-cha` ex 1 (bell should now sound like a bell, clearly synthetic, NOT a sped-up ride), `cymbal-voicings` (ride vs crash vs china all distinct), and `jazz-ride-pattern` in the electronic kit (ride now has a low ping body under the shimmer).
 
 - **BL-002 multi-bar looping** (iter 4): play `flam` ex 1 or `latin-clave-intro` (2-bar patterns) — the pattern should loop cleanly end-to-end with no doubling/echo, and the playhead should cross the whole stave exactly once per loop. Also `jazz-ballad` (dotted rhythms) should sit correctly against the count.
 - **BL-001 new drum voices** (iter 1): play `the-drum-kit` "Tour of the Kit" (all voices in one exercise), a `latin-cha-cha` bell pattern, a `metal-headbang` china groove, and `basic-fills` toms. Judge: ride vs hat distinction, bell character, crash/china wash, tom pitch spread. Acoustic-kit crash/china/bell are approximations from existing samples (real WAVs would help — ISSUES.md #2).
