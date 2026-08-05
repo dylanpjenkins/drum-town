@@ -1,35 +1,51 @@
 /* =========================================================
    Drum Town — Global Stylesheet
-   Aesthetic: ECM-jazz manuscript. Cream + ink + rust.
+   Aesthetic: warm civic modern — "The Square". Plaster and
+   brick in daylight; Fraunces speaks, Public Sans works,
+   IBM Plex Mono measures. Fonts load via <link> in base.njk.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
 :root {
-  --bg:        #f4ebd9;
-  --paper:     #faf3e3;
-  --paper-2:   #ede2c8;
-  --ink:       #1d1814;
-  --ink-2:     #2d251c;
-  --ink-3:     #4a4138;
-  --ink-soft:  #6b5d4d;
-  --rule:      #c9b893;
-  --rule-soft: #d8cdb8;
-  --accent:    #8b3a2c;     /* rust */
-  --accent-2:  #a0432f;
-  --ochre:     #b8943f;
-  --gold:      #d4a854;
-  --shadow:    rgba(29, 24, 20, 0.08);
+  --bg:        #f7f2e9;   /* plaster — page ground */
+  --paper:     #fffcf5;   /* cards, panels, ledger hover */
+  --paper-2:   #efe6d3;   /* wells, footer, code-ish surfaces */
+  --ink:       #262019;   /* headings, primary text */
+  --ink-2:     #322a20;   /* running prose */
+  --ink-3:     #4c4335;   /* ledes, tertiary prose */
+  --ink-soft:  #5c5346;   /* secondary/meta text */
+  --rule:      #ddd2bd;   /* borders */
+  --rule-soft: #e9e0cd;   /* hairlines */
+  --accent:    #9a3a27;   /* brick — links, primary fills, focus */
+  --accent-2:  #8d341f;   /* brick pressed/hover (darker) */
+  --accent-ink:#fffcf5;   /* text on brick */
+  --green:     #2f6b4f;   /* park green — progress/visited */
+  --green-tint: rgba(47,107,79,.10);
+  --ochre:     #b8943f;   /* decorative brass — borders/marks only, never text */
+  --gold:      #c99a3c;   /* decorative brass (seal dots) — never text */
+  --shadow:    rgba(38,32,25,.08);
+  --elev-1:    0 1px 3px var(--shadow);
+  --elev-2:    0 2px 6px var(--shadow), 0 12px 32px var(--shadow);
 
   /* Notation staves keep a manuscript-white ground distinct from the page
-     cream; ink is routed through currentColor in the SVGs so a future dark
-     theme only needs to change these two tokens. */
+     plaster; ink is routed through currentColor in the SVGs, and anything
+     drawn inside .notation uses the --notation-* slots only, so the staves
+     stay manuscript-lit when a dark theme lands. */
   --notation-bg:  #ffffff;
-  --notation-ink: #1d1814;
+  --notation-ink: #262019;
+  --notation-accent: #9a3a27;
 
-  --display: 'Cormorant Garamond', Georgia, serif;
-  --body:    'Lora', Georgia, serif;
-  --mono:    'JetBrains Mono', 'Courier New', monospace;
+  --focus-ring: var(--accent);
+  --header-h: 60px;        /* sticky-header height; wired to consumers when the header package lands */
+  --transport-h: 64px;     /* open dock height; 100px at ≤720px (media re-declaration with the dock) */
+
+  --display: 'Fraunces', Georgia, serif;
+  --body:    'Public Sans', system-ui, -apple-system, sans-serif;
+  --mono:    'IBM Plex Mono', 'Courier New', monospace;
+
+  --r-s: 8px;              /* inputs, chips-in-cards, notation frame */
+  --r-m: 12px;             /* cards inside cards, sidebar items */
+  --r-l: 16px;             /* exercise card, panels */
+  --r-pill: 999px;         /* buttons, chips, nav links, clock pill */
 }
 
 * { box-sizing: border-box; }
@@ -51,9 +67,12 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 /* Keyboard focus is always visible; pointer focus stays quiet because
    browsers only match :focus-visible for keyboard-driven focus. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+/* The ring hugs text on inline links; pill-radius elements curve it automatically. */
+a:focus-visible { border-radius: 2px; }
 
 /* Reduced motion: collapse all animation/transition to imperceptible and
    stop the metronome dots pulsing (their color change carries the beat
@@ -98,8 +117,8 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 
 .site-logo {
   font-family: var(--display);
-  font-size: 1.375rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -112,10 +131,10 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
   display: flex;
   flex-wrap: wrap;
   gap: 8px 22px;
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--body);
+  font-size: 0.84375rem;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 .site-nav a {
@@ -132,7 +151,7 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
   top: 8px;
   z-index: 20;
   background: var(--accent);
-  color: var(--paper);
+  color: var(--accent-ink);
   padding: 10px 18px;
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -143,8 +162,8 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 /* =====================  TYPE / HEADINGS  ===================== */
 .tag {
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   display: inline-block;
@@ -152,25 +171,26 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 500;
   margin: 0 0 6px;
 }
 
-h1, h2, h3, h4 { font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; overflow-wrap: break-word; }
-h1 { font-size: 3.75rem; line-height: 1; margin: 0 0 20px; }
-h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
-h2 { font-size: 2.25rem; line-height: 1.1; margin: 36px 0 14px; }
-h3 { font-size: 1.5rem; line-height: 1.2; margin: 24px 0 10px; }
-h4 { font-size: 1.125rem; line-height: 1.3; margin: 18px 0 6px; font-weight: 600; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.01em; overflow-wrap: break-word; }
+h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); line-height: 1.06; letter-spacing: -0.012em; margin: 0 0 20px; }
+h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+h2 { font-size: 2.125rem; line-height: 1.12; margin: 36px 0 14px; }
+h3 { font-family: var(--body); font-size: 1.25rem; font-weight: 700; line-height: 1.25; letter-spacing: 0; margin: 24px 0 10px; }
+h4 { font-family: var(--body); font-size: 1.0625rem; font-weight: 700; line-height: 1.3; letter-spacing: 0; margin: 18px 0 6px; }
 
 p { margin: 0 0 14px; }
 
 .lede {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
   color: var(--ink-3);
   max-width: 600px;
   margin: 0 0 18px;
@@ -190,12 +210,12 @@ hr.section-rule {
   text-align: center;
   padding: 40px 0 30px;
 }
-.curriculum-hero h1 { font-size: 5rem; }
+.curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); line-height: 1.05; letter-spacing: -0.015em; }
 .curriculum-hero .lede { margin: 0 auto 18px; }
 .curriculum-hero .stat {
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   color: var(--ink-soft);
   text-transform: uppercase;
 }
@@ -212,7 +232,7 @@ hr.section-rule {
 }
 .curriculum-section__header--left .lede { margin-left: 0; margin-right: 0; }
 .curriculum-section__header h2 {
-  font-size: 2.75rem;
+  font-size: 2.125rem;
   margin: 6px 0 8px;
 }
 .curriculum-section__header h2 em {
@@ -239,8 +259,8 @@ hr.section-rule {
 }
 .chapter__title {
   font-family: var(--display);
-  font-size: 2.25rem;
-  font-weight: 500;
+  font-size: 2.125rem;
+  font-weight: 600;
   font-style: italic;
   letter-spacing: -0.01em;
   margin: 0;
@@ -248,8 +268,9 @@ hr.section-rule {
 }
 .chapter__num {
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   white-space: nowrap;
@@ -284,32 +305,33 @@ hr.section-rule {
   text-decoration: none;
   color: var(--ink);
   border: 1px solid var(--rule);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   padding: 6px 14px;
 }
 .chapter-lesson:hover { border-color: var(--accent); }
 .chapter-lesson__num {
   font-family: var(--mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.12em;
   color: var(--ink-soft);
 }
 .chapter-lesson__title {
   font-family: var(--display);
   font-size: 1.0625rem;
+  font-weight: 600;
   font-style: italic;
 }
 .chapter-lesson:hover { text-decoration: none; }
 .chapter-lesson:hover .chapter-lesson__title { color: var(--accent); }
 
-.chapter-lesson.is-visited { border-color: var(--ochre); }
-.chapter-lesson.is-visited .chapter-lesson__num { color: var(--ochre); }
-.chapter-lesson.is-visited .chapter-lesson__title { color: var(--ochre); }
+.chapter-lesson.is-visited { border-color: var(--green); }
+.chapter-lesson.is-visited .chapter-lesson__num { color: var(--green); }
+.chapter-lesson.is-visited .chapter-lesson__title { color: var(--green); }
 
 .chapter-lesson.is-last-visited { border-color: var(--accent); background: var(--accent); }
 .chapter-lesson.is-last-visited .chapter-lesson__num,
-.chapter-lesson.is-last-visited .chapter-lesson__title { color: var(--paper); }
-.chapter-lesson.is-last-visited:hover .chapter-lesson__title { color: var(--paper); }
+.chapter-lesson.is-last-visited .chapter-lesson__title { color: var(--accent-ink); }
+.chapter-lesson.is-last-visited:hover .chapter-lesson__title { color: var(--accent-ink); }
 
 /* Mastery: horizontal rail of cross-cutting topics */
 /* Hero — "Up Next" state: shown when localStorage holds a lastVisited slug
@@ -331,8 +353,8 @@ hr.section-rule {
 .hero-upnext__main { min-width: 0; }
 .hero-upnext__eyebrow {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 18px;
@@ -342,15 +364,15 @@ hr.section-rule {
 .hero-upnext__title {
   font-family: var(--display);
   font-style: italic;
-  font-size: 4.5rem;
-  line-height: 1;
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem);
+  line-height: 1.05;
   margin: 0 0 18px;
   color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 .hero-upnext__tagline {
   font-family: var(--body);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   color: var(--ink-3);
   max-width: 540px;
   margin: 0 0 24px;
@@ -365,13 +387,15 @@ hr.section-rule {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 11px 20px;
-  font-family: var(--display);
-  font-size: 1rem;
-  font-style: italic;
+  gap: 8px;
+  padding: 12px 22px;
+  min-height: 44px;
+  font-family: var(--body);
+  font-size: 0.9375rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
   border: 1px solid transparent;
+  border-radius: var(--r-pill);
   cursor: pointer;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
@@ -379,20 +403,56 @@ hr.section-rule {
 .btn:hover { text-decoration: none; }
 .btn--primary {
   background: var(--accent);
-  color: var(--paper);
+  color: var(--accent-ink);
   border-color: var(--accent);
 }
 .btn--primary:hover {
   background: var(--accent-2);
   border-color: var(--accent-2);
-  color: var(--paper);
+  color: var(--accent-ink);
 }
 .btn--ghost {
   background: transparent;
-  color: var(--ink);
-  border-color: var(--rule);
+  color: var(--green);
+  border: 1.5px solid var(--green);
 }
-.btn--ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+.btn--ghost:hover { background: var(--green-tint); border-color: var(--green); color: var(--green); }
+
+/* Chips — base rules parked here; markup adopts .chip when the lesson
+   title block package lands. Long free-text values wrap inside the chip. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  padding: 6px 12px;
+  font-family: var(--body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.chip i {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.6875rem;
+  color: var(--accent);
+}
+
+/* Screen-reader-only utility — visually hidden, still announced. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* =====================  GENRE OVERVIEW  ===================== */
 .genre-hero {
@@ -400,7 +460,7 @@ hr.section-rule {
   padding-bottom: 32px;
   margin-bottom: 40px;
 }
-.genre-hero h1 { font-size: 4rem; }
+.genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
 
 .level-block {
   margin-bottom: 48px;
@@ -420,19 +480,19 @@ hr.section-rule {
   font-size: 2.75rem;
   font-style: italic;
   color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
 }
 .level-block__title {
   font-family: var(--display);
-  font-size: 1.875rem;
+  font-size: 2.125rem;
   margin: 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 .level-block__tag {
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
   margin-left: auto;
@@ -451,6 +511,7 @@ hr.section-rule {
   padding: 14px 18px;
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: var(--r-m);
   text-decoration: none;
   color: var(--ink);
   transition: transform 0.1s ease, border-color 0.15s ease;
@@ -463,6 +524,7 @@ hr.section-rule {
 .lesson-row__title {
   font-family: var(--display);
   font-size: 1.1875rem;
+  font-weight: 600;
 }
 /* =====================  LESSON LAYOUT + SIDEBAR  ===================== */
 .lesson-layout {
@@ -505,8 +567,8 @@ hr.section-rule {
 .island-back {
   display: inline-block;
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
   text-decoration: none;
@@ -516,15 +578,16 @@ hr.section-rule {
 .island-title { display: flex; flex-direction: column; gap: 2px; }
 .island-eyebrow {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
 .island-name {
   font-family: var(--display);
   font-size: 1.625rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.01em;
   line-height: 1.05;
@@ -532,6 +595,7 @@ hr.section-rule {
 .island-tagline {
   font-family: var(--display);
   font-style: italic;
+  font-weight: 600;
   color: var(--ink-soft);
   font-size: 0.875rem;
   margin: -6px 0 14px;
@@ -542,8 +606,8 @@ hr.section-rule {
 
 .curr-section__title {
   font-family: var(--mono);
-  font-size: 0.59375rem;
-  letter-spacing: 0.22em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 0 0 5px;
@@ -555,13 +619,14 @@ hr.section-rule {
 
 .curr-item a {
   display: block;
-  padding: 4px 10px 4px 12px;
-  font-family: var(--display);
-  font-size: 0.90625rem;
+  padding: 6px 10px;
+  font-family: var(--body);
+  font-size: 0.875rem;
   line-height: 1.3;
   color: var(--ink-3);
   text-decoration: none;
   border-left: 2px solid transparent;
+  border-radius: var(--r-s);
   transition: color 0.12s ease, background 0.12s ease, border-color 0.12s ease;
 }
 .curr-item a:hover {
@@ -573,7 +638,7 @@ hr.section-rule {
   background: var(--paper-2);
   color: var(--ink);
   border-left-color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* =====================  LESSON PAGE  ===================== */
@@ -582,11 +647,12 @@ hr.section-rule {
   padding-bottom: 28px;
   margin-bottom: 36px;
 }
-.lesson-hero h1 { font-size: 3.25rem; margin-bottom: 12px; }
+.lesson-hero h1 { margin-bottom: 12px; }
 .lesson-hero .breadcrumb {
   font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
   margin-bottom: 12px;
@@ -599,7 +665,7 @@ hr.section-rule {
   gap: 24px;
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--ink-soft);
   flex-wrap: wrap;
 }
@@ -607,8 +673,8 @@ hr.section-rule {
 
 .section-label {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin: 28px 0 8px;
@@ -616,7 +682,8 @@ hr.section-rule {
 }
 
 .lesson-prose {
-  font-size: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   color: var(--ink-2);
 }
 /* Cap the measure of running text at a readable line length. Notation and
@@ -626,7 +693,7 @@ hr.section-rule {
 .lesson-prose ol {
   max-width: 65ch;
 }
-.lesson-prose p { margin: 0 0 14px; }
+.lesson-prose p { margin: 0 0 1em; }
 .lesson-prose strong { color: var(--ink); font-weight: 600; }
 .lesson-prose em { color: var(--ink-soft); }
 
@@ -634,6 +701,8 @@ hr.section-rule {
 .exercise {
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: var(--r-l);
+  box-shadow: var(--elev-1);
   padding: 22px 24px;
   margin: 16px 0 22px;
   /* Off-screen exercise cards skip layout and paint entirely — the
@@ -656,16 +725,16 @@ hr.section-rule {
 .exercise-header__text { min-width: 0; }
 
 .exercise-title {
-  font-family: var(--display);
-  font-size: 1.375rem;
-  font-weight: 500;
+  font-family: var(--body);
+  font-size: 1.25rem;
+  font-weight: 700;
   margin: 0 0 4px;
 }
 
 .exercise-meta {
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.06em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
   color: var(--accent);
 }
 
@@ -681,10 +750,11 @@ hr.section-rule {
   -webkit-appearance: none;
   background: transparent;
   border: 1px solid var(--rule);
+  border-radius: var(--r-s);
   color: var(--ink);
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.16em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0 26px 0 10px;
   cursor: pointer;
@@ -706,9 +776,10 @@ hr.section-rule {
   border: none;
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 9px 14px 9px 12px;
+  border-radius: var(--r-pill);
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.12s ease, transform 0.08s ease;
@@ -731,7 +802,8 @@ hr.section-rule {
   background: var(--notation-bg);
   color: var(--notation-ink);
   border: 1px solid var(--rule-soft);
-  padding: 6px;
+  border-radius: var(--r-s);
+  padding: 8px;
   overflow-x: auto;
   margin: 10px 0;
 }
@@ -746,7 +818,7 @@ hr.section-rule {
 }
 
 .notation svg .playhead {
-  stroke: var(--accent);
+  stroke: var(--notation-accent);
   stroke-width: 1.8;
   pointer-events: none;
   opacity: 0;
@@ -769,7 +841,7 @@ hr.section-rule {
   padding-left: 14px;
   border-left: 2px solid var(--ochre);
 }
-.exercise-tip em { font-style: italic; color: var(--ink); font-weight: 500; }
+.exercise-tip em { font-style: italic; color: var(--ink); font-weight: 400; }
 
 /* Reference cards (/rudiments/) fold a description and a lesson link into
    the exercise block itself. */
@@ -783,7 +855,7 @@ hr.section-rule {
   margin: 12px 0 0;
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -802,14 +874,16 @@ hr.section-rule {
 .prereqs {
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: var(--r-m);
   padding: 14px 18px;
   margin: 18px 0 28px;
   font-size: 0.875rem;
 }
 .prereqs__label {
   font-family: var(--mono);
-  font-size: 0.59375rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 6px;
@@ -823,20 +897,22 @@ hr.section-rule {
   border: 1px solid var(--rule);
   display: inline-block;
 }
-.prereqs li a:hover { background: var(--accent); color: var(--paper); border-color: var(--accent); text-decoration: none; }
+.prereqs li a:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); text-decoration: none; }
 
 /* =====================  GRADUATION CRITERIA  ===================== */
 .grad-criteria {
   background: var(--paper);
   border: 1px solid var(--rule);
+  border-radius: var(--r-m);
   padding: 14px 18px 16px;
   margin: 32px 0 0;
   font-size: 0.90625rem;
 }
 .grad-criteria__label {
   font-family: var(--mono);
-  font-size: 0.59375rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 8px;
@@ -869,8 +945,8 @@ hr.section-rule {
   justify-content: space-between;
   align-items: baseline;
   font-family: var(--mono);
-  font-size: 0.65625rem;
-  letter-spacing: 0.22em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule-soft);
@@ -881,14 +957,14 @@ hr.section-rule {
 .listening__title {
   font-family: var(--display);
   font-style: italic;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.75rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0 0 6px;
 }
 .listening__intro {
-  font-family: var(--display);
+  font-family: var(--body);
   font-style: italic;
   font-size: 1rem;
   color: var(--ink-soft);
@@ -910,8 +986,8 @@ hr.section-rule {
 .listening__item:last-child { border-bottom: 1px solid var(--rule-soft); }
 .listening__num {
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.18em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   color: var(--ink-soft);
   padding-top: 5px;
 }
@@ -923,22 +999,24 @@ hr.section-rule {
   line-height: 1.4;
 }
 .listening__artist {
-  color: var(--accent);
-  font-family: var(--display);
-  font-size: 1.125rem;
-  font-weight: 500;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 700;
 }
 .listening__dot { margin: 0 6px; color: var(--ink-soft); }
 .listening__work {
   font-family: var(--display);
   font-style: italic;
-  font-size: 1.125rem;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--ink-2);
 }
 .listening__context {
   margin-left: 10px;
   font-family: var(--mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
@@ -955,7 +1033,7 @@ hr.section-rule {
   border-top: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--ink-soft);
   text-align: center;
 }
@@ -969,8 +1047,8 @@ hr.section-rule {
   width: 168px;
   background: var(--paper);
   border: 1px solid var(--rule);
-  border-radius: 8px;
-  box-shadow: 0 6px 22px var(--shadow);
+  border-radius: var(--r-s);
+  box-shadow: var(--elev-2);
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
@@ -1073,7 +1151,7 @@ hr.section-rule {
   min-width: 0;
   background: transparent;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: var(--r-s);
   font-family: var(--mono);
   font-size: 0.75rem;
   padding: 4px 4px;
@@ -1126,7 +1204,7 @@ hr.section-rule {
 .metronome__timesig {
   background: transparent;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: var(--r-s);
   font-family: var(--mono);
   font-size: 0.6875rem;
   padding: 4px 16px 4px 6px;
@@ -1170,14 +1248,17 @@ hr.section-rule {
   .container { padding: 36px 20px; }
   .site-header__inner { padding: 14px 20px; flex-wrap: wrap; }
   .site-nav { gap: 8px 16px; }
-  .curriculum-hero h1 { font-size: 3.25rem; }
-  h1 { font-size: 2.75rem; }
-  .lesson-hero h1 { font-size: 2.5rem; }
-  .genre-hero h1 { font-size: 2.375rem; }
-  .hero-upnext__title { font-size: 2.875rem; }
-  .curriculum-section__header h2 { font-size: 2.125rem; }
+  h2 { font-size: 1.75rem; }
+  /* The display steps are viewport-clamped; these h1 overrides restate the
+     same clamps (kept so the selector inventory survives the repaint). */
+  .curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
+  h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
+  .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
+  .genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
+  .hero-upnext__title { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
+  .curriculum-section__header h2 { font-size: 1.75rem; }
   .chapter__head { flex-wrap: wrap; gap: 4px 16px; }
-  .chapter__title { font-size: 1.875rem; }
+  .chapter__title { font-size: 1.75rem; }
   .level-block__header { flex-wrap: wrap; }
   .exercise { padding: 18px 16px; }
   .tracks-grid { grid-template-columns: 1fr; }
@@ -1186,9 +1267,9 @@ hr.section-rule {
 
 @media (max-width: 400px) {
   .container { padding: 32px 16px; }
-  .curriculum-hero h1 { font-size: 2.75rem; }
-  h1 { font-size: 2.375rem; }
-  .lesson-hero h1 { font-size: 2.25rem; }
-  .hero-upnext__title { font-size: 2.5rem; }
+  .curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
+  h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
+  .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
+  .hero-upnext__title { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   .exercise { padding: 16px 12px; }
 }
