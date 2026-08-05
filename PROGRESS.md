@@ -4,6 +4,7 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 ## Iteration log
 
+- 2026-08-05 · iter 25 · PIVOT [Dylan] — communal-rebrand epic opened: full modern rebrand around the drum.town town-square identity (design language only, no backend). Loop protocol v2: Designer → Builder → adversarial Reviewer → persona panel, visual verification on every output tick. Discovery: pushes to main already deploy to drum.town (Netlify git integration) — all prior fixes are live; netlify.toml now pins SITE_URL so production regains its sitemap; GitHub Actions CI added (build + audit gate on every push)
 - 2026-08-04 · iter 24 · BL-035 [ui] resolved as measurement artifact — Windows headless Edge floors at ~492px and crops, so all "mobile clipping" was a cropped healthy layout; true-390 iframe harness committed (tools/mobile-viewport-harness.html), protocol updated; the mobile site renders cleanly (BL-037 sidebar + BL-044 dashes confirmed real)
 - 2026-08-04 · iter 23b · adversarial critique integrated — 4 factual listening errors fixed same-tick (50 Ways sticking claim, AOBTD kick claim, Tom Sawyer doubles claim, Green Onions swapped for Billie Jean), 3 style-guide violations in my own prose fixed (incl. the paradiddle banned opener), 9 new items filed (BL-038..046: playhead scroll-fight P1, audio voice honesty, density-aware notation floor, heading-audit sampling gap, and more); 16 of 31 new listening picks verified correct
 - 2026-08-04 · iter 23 · loop upgrade [Dylan's feedback] — visual verification (headless-Edge screenshots, read + judged) and an adversarial critic subagent are now protocol steps 6b/6c; first visual pass found 3 real issues no gate saw: mobile horizontal clipping (BL-035, P1), metronome overlapping content at 1280px (BL-036), sidebar-above-lesson on mobile (BL-037)
@@ -32,6 +33,8 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 - 2026-08-04 · iter 0 · bootstrap — loop scaffolding, audit-site metrics engine + baseline, backlog seeded (31 items), quarantine, .env untracked
 
 ## Blocked on Dylan (the only list you need to read)
+
+- **Rebrand veto window.** Direction boards land in `design/directions/` with a decision in `design/DECISION.md` (also logged here). The loop proceeds with the reviewer+persona winner unless you object — a one-line reply redirects it.
 
 - **Design checkpoint 0 is ready to run.** Type `/design-checkpoint` in a session with me present (~5 min): it builds the component previews and syncs them to a "Drum Town UI" project on claude.ai/design — the first DesignSync call needs your permission grant, which unattended ticks can't do.
 

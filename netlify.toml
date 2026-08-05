@@ -1,0 +1,10 @@
+# Netlify build configuration. The repo is linked to the drum.town Netlify
+# site (git integration): every push to main builds and deploys with these
+# settings. SITE_URL here guarantees production gets absolute URLs and a
+# sitemap (builds without it intentionally omit sitemap.xml).
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  SITE_URL = "https://drum.town"

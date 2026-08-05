@@ -36,7 +36,7 @@ Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` fo
 - NEVER run `tools/quarantine/*` or anything matching `merge-lesson-batches` / `patch-lessons`; NEVER treat `tools/lesson-batches/` as content truth.
 - NEVER semantically rewrite more than 10 lessons of `lessonContent.js` in one iteration. Mechanical fixed-word-list regex passes may be file-wide but require all gates plus spot-reading 3 affected slugs afterward.
 - NEVER print, rotate, move, or edit the PostHog token value; NEVER touch `.env`. Token rotation is Dylan's task (flagged in PROGRESS.md).
-- NEVER `git push --force`; NEVER deploy or publish anywhere.
+- NEVER `git push --force`. Deploys are owned by Netlify's git integration: **every push to main goes live on drum.town** — never bypass the gates before a push, and never deploy by hand.
 - NEVER `npm install` or add dependencies; NEVER use `npx`.
 - NEVER edit `.claude/settings.json`; NEVER edit CLAUDE.md guardrail sections (appending to the Style ledger below is allowed).
 - NEVER `git clean`; NEVER end an iteration with a dirty tree — exactly one atomic commit per completed item, or full restore + parked bookkeeping.
@@ -54,6 +54,11 @@ Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` fo
 
 ## Loop pointers
 
-- PUSH_POLICY: push-main
+- PUSH_POLICY: push-main (**= deploy**: Netlify builds drum.town from main via git integration; netlify.toml pins SITE_URL)
 - Backlog (machine state): `tools/backlog.json` · Protocol: `.claude/commands/improve.md` · Human log: `PROGRESS.md`
+- Roles: orchestrator + Designer / Builder / Reviewer / Persona-panel subagents (defined in the protocol). Active epic: `meta.epic` in the backlog; design artifacts in `design/`.
 - Design checkpoints: `.claude/commands/design-checkpoint.md` → `design-sync/` previews → claude.ai/design project "Drum Town UI"; owner feedback lands in `design-sync/FEEDBACK.md`.
+
+## Summary instructions
+
+When summarizing this conversation, always preserve: the improvement loop is ACTIVE and resumes via `/loop /improve` with all state on disk (`tools/backlog.json` = items + `meta.epic` phase, `PROGRESS.md` = human log, `design/` = brief/boards/spec); pushes to main deploy to drum.town; the FORBIDDEN list and Style ledger in this file are binding; the current epic, its phase, and any in-flight subagent roles (Designer/Builder/Reviewer/personas) and their pending outputs.

@@ -1,9 +1,16 @@
 {
   "meta": {
-    "iteration": 24,
+    "iteration": 25,
     "next_dimension": "content",
     "dimensions": ["quality", "ui", "content"],
-    "next_id": 47,
+    "next_id": 48,
+    "epic": {
+      "name": "communal-rebrand",
+      "phase": "directions",
+      "started": "2026-08-05",
+      "brief": "design/brief.md",
+      "note": "Dylan's direction 2026-08-05: full rebrand, modern + communal (design language only, no backend features); designer/builder/reviewer/persona pipeline; pushes to main deploy to drum.town via Netlify git integration."
+    },
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
   },
   "items": [
@@ -467,6 +474,18 @@
       "attempts": 0,
       "chunk": null,
       "log": ["Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first.", "iter 24 · CONFIRMED at a true 390px viewport (iframe harness): the sidebar panel eats the first screen and opens mid-list at The Dragadiddle before the lesson title appears."]
+    },
+    {
+      "id": "BL-047",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "EPIC communal-rebrand: direction boards → decision → system spec → build packages",
+      "evidence": ["Dylan 2026-08-05: complete upgrade to a modern site with a communal drum.town identity; full rebrand license; strongest direction wins per reviewer + persona panel; design language only (no backend)"],
+      "acceptance": "phase directions: 2-3 boards in design/directions/ + screenshots read + reviewer/persona scoring + design/DECISION.md; phase spec: design/system.md + ordered build packages appended to this backlog; phase build: packages flow through normal ticks; epic closes with a persona milestone review of the deployed result",
+      "status": "in_progress",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["iter 25 · epic opened; Designer agent dispatched for direction boards. BL-036/037/044/045 are inputs to the brief and expected to resolve via epic packages."]
     },
     {
       "id": "BL-038",

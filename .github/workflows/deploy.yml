@@ -1,0 +1,35 @@
+# CI on every push to main. Deploys are owned by Netlify's git integration
+# (the repo is linked to the drum.town site; netlify.toml carries the build
+# config) — this workflow exists so a broken build or a regressed audit gate
+# is visible on GitHub even if a bad commit slips past local checks.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-main
+  cancel-in-progress: false
+
+jobs:
+  build-and-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          SITE_URL: https://drum.town
+
+      - name: Audit gate
+        run: node tools/audit-site.js --gate
