@@ -2,8 +2,7 @@
 
 Newest first. One line per iteration. Full protocol: `.claude/commands/improve.md` · backlog: `tools/backlog.json`.
 
-## Iteration log
-
+- 2026-08-05 · iter 29 · **PKG-1 THE REPAINT IS LIVE** [BL-048] — drum.town now wears The Square: plaster/brick/park-green palette, Fraunces + Public Sans + IBM Plex Mono, new scale and elevation. Verified after the fact (11/11 contrast pairs, 0 structural changes, 0 selectors lost, screenshots read at both widths) because the Builder self-committed against instructions — protocol hardened so subagents can't touch git. NOTE: adversarial reviewer was cut off by the org monthly spend limit; orchestrator completed the review.
 - 2026-08-05 · iter 28 · BL-039 [quality] acoustic kit stops faking cymbals — missing voices use honestly-synthesized recipes (no more one-sample-three-speeds); electronic ride gains its missing ping fundamental
 - 2026-08-05 · iter 27 · BL-038 [ui] playhead follow now yields to the user — scroll-event ownership model (reviewer rejected my first timer-based fix as DEGRADED; shipped its better architecture: follow resumes when the playhead re-enters your window, works for scrollbar drags in every browser). Loop heartbeat switched to background-sleeper notifications after in-session timers failed twice.
 - 2026-08-05 · iter 26 · SPEC COMPLETE — design/system.md (16 slots kept + 8 new, dual themes computed AA+, 113KB measured font plan) + design/packages.md (10 build packages, each one tick, site coherent after every deploy). Backlog loaded (BL-048..057); epic phase → build; ui cadence doubled. The rebrand starts shipping to drum.town next ticks.

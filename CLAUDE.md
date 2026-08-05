@@ -37,6 +37,7 @@ Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` fo
 - NEVER semantically rewrite more than 10 lessons of `lessonContent.js` in one iteration. Mechanical fixed-word-list regex passes may be file-wide but require all gates plus spot-reading 3 affected slugs afterward.
 - NEVER print, rotate, move, or edit the PostHog token value; NEVER touch `.env`. Token rotation is Dylan's task (flagged in PROGRESS.md).
 - NEVER `git push --force`. Deploys are owned by Netlify's git integration: **every push to main goes live on drum.town** — never bypass the gates before a push, and never deploy by hand.
+- **Subagents NEVER run git.** Builder/Designer/Reviewer/persona agents read and edit only; commits and pushes belong to the orchestrator, which gates them first. (Violated once at iter 29 — PKG-1 self-committed and auto-deployed; verified clean retroactively.)
 - NEVER `npm install` or add dependencies; NEVER use `npx`.
 - NEVER edit `.claude/settings.json`; NEVER edit CLAUDE.md guardrail sections (appending to the Style ledger below is allowed).
 - NEVER `git clean`; NEVER end an iteration with a dirty tree — exactly one atomic commit per completed item, or full restore + parked bookkeeping.

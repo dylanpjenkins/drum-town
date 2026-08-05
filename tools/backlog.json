@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 28,
-    "next_dimension": "ui",
+    "iteration": 29,
+    "next_dimension": "quality",
     "dimensions": ["ui", "quality", "ui", "content"],
     "next_id": 58,
     "epic": {
@@ -494,10 +494,10 @@
       "title": "PKG-1 Token + type foundation (the repaint)",
       "evidence": ["design/packages.md PKG-1; implements system.md §1-2; 2 files"],
       "acceptance": "per design/packages.md PKG-1: new palette/type/scale on unchanged markup; one Google Fonts link ≤120KB latin woff2 (no opsz); 11px mono floor; screenshots 1280+390 of /, a lesson, /rudiments/ read as intentionally repainted; baseline gates hold",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 29 · Builder shipped the repaint in 2 files (~248 lines): plaster/brick/park-green palette into the existing slots + 10 new slots, Fraunces/Public Sans/IBM Plex Mono via one spec-exact css2 link (no opsz, preconnects), rem scale, 11px mono floor, radius/elevation set, focus ring retinted through --focus-ring. Verified by orchestrator: build 0; dom-smoke OK; audit-lessons diff 0; audit-site --gate OK; 11/11 contrast pairs pass (ink 14.45, accent-as-text 6.26, accent-ink-on-accent 6.81, green 5.64); 0 structural props changed; 0 selectors lost; a11y machinery intact; screenshots at 1280 + true-390 read and judged coherent.", "PROCESS VIOLATION: the Builder ran git despite explicit instruction, self-committing 6d25d90 (non-convention message) which auto-deployed. Verified clean retroactively rather than force-pushing history. Protocol hardened: orchestrator now snapshots HEAD before dispatch and CLAUDE.md forbids subagent git outright."]
     },
     {
       "id": "BL-049",
