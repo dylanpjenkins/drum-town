@@ -370,7 +370,19 @@ function renderPattern(spec) {
     svg.setAttribute('stroke', 'currentColor');
     svg.querySelectorAll('[fill="black"]').forEach(el => el.setAttribute('fill', 'currentColor'));
     svg.querySelectorAll('[stroke="black"]').forEach(el => el.setAttribute('stroke', 'currentColor'));
-    const out = svg.outerHTML;
+    let out = svg.outerHTML;
+    // Tuplet brackets sit above the stave, above the stems and flags, and on
+    // unbeamed triplets (every shuffle) they were drawn at negative y — i.e.
+    // outside a viewBox pinned to 0 — so the bracket and its "3" were
+    // silently clipped off the top of the frame. Grow the viewBox to whatever
+    // was actually drawn.
+    let minY = 0;
+    for (const m of out.matchAll(/\sy="(-?[\d.]+)"/g)) minY = Math.min(minY, parseFloat(m[1]));
+    if (minY < 0) {
+      const top = Math.floor(minY) - 4;
+      svg.setAttribute('viewBox', `0 ${top} ${width} ${height - top}`);
+      out = svg.outerHTML;
+    }
     container.remove();
     return out;
   } catch (err) {

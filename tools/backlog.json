@@ -614,10 +614,10 @@
       "title": "Shuffle staves render without their triplet brackets",
       "evidence": ["Visual proof render iter 30: the-shuffle#0 shows 8 flagged 8ths with no '3' brackets, though the spec carries 3:2 tuplets per beat", "Predates this tick (the old renderer beamed across beats and also showed no brackets) — surfaced by rendering the staves in isolation"],
       "acceptance": "shuffle/swing staves show a triplet bracket (or beamed '3') per beat so the notation states the rhythm it teaches; investigate whether VF.Tuplet brackets are suppressed when the group is unbeamed; ALSO retry beam_middle_only (beaming over the internal rest is the nicer engraving) now that grouping time is correct — it currently renders degenerate (flags suppressed, beam undrawn)",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": ["Found by rendering repaired staves in isolation (iter 30). The shuffle is a Foundations lesson — its notation should state the triplet explicitly."]
+      "log": ["Found by rendering repaired staves in isolation (iter 30). The shuffle is a Foundations lesson — its notation should state the triplet explicitly.", "iter 31 · Root cause was NOT beaming: the brackets were being drawn, at negative y, outside a viewBox pinned to '0 0 w h', and clipped away. Unbeamed tuplets put their bracket above stems AND flags, which overflows the frame; beamed ones sit lower and survived, which is why only shuffles looked wrong. The renderer now measures the drawn content and grows the viewBox upward (17 of 852 exercises affected, worst -45px). .eleventy.js's min-width regex updated to read the width from a viewBox with a non-zero origin. Verified by rendering shuffle/triplet-feel/rock-shuffle staves at 2x: every beat now shows its bracket and 3. beam_middle_only retried and rejected — it suppresses flags for a beam it never draws."]
     },
     {
       "id": "BL-058",

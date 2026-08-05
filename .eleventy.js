@@ -47,7 +47,9 @@ module.exports = function (eleventyConfig) {
     // Scale-aware width floor: staves wider than ~620 viewBox units keep a
     // horizontal-scroll floor at 55% natural size so notes stay legible on
     // phones; narrower staves simply fit their container (no forced pan).
-    const vb = /viewBox="0 0 ([\d.]+)/.exec(rendered);
+    // viewBox may have a non-zero origin (staves whose tuplet brackets sit
+    // above the stave grow the box upward) — read the width, not position 3.
+    const vb = /viewBox="[-\d.]+ [-\d.]+ ([\d.]+)/.exec(rendered);
     const natW = vb ? parseFloat(vb[1]) : 0;
     const minW = natW > 620 ? Math.round(natW * 0.55) : 0;
     const svg = rendered.replace(
