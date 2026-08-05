@@ -13,7 +13,7 @@ node tools/audit-site.js --write-baseline   # regenerate tools/audit-site-baseli
 node tools/checks/<x>.js      # per-item assertion scripts, exit 0/1
 ```
 
-Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` for data introspection — but write multi-line snippets to a scratchpad file; PowerShell mangles quotes in long inline scripts. PowerShell 5.1 mangles embedded double quotes when passing arguments to native exes: keep `"` out of `git commit -m` here-strings (or use `git commit -F <file>`).
+Windows: `npm run clean` is cross-platform (node fs.rmSync). Prefer `node -e` for data introspection — but write multi-line snippets to a scratchpad file; PowerShell mangles quotes in long inline scripts. **Never edit repo files with `Get-Content | … | Set-Content`**: PS 5.1 reads as CP1252 and writes UTF-8, double-encoding every em dash and ♩ in the file (hit at iter 30 on style.css). Use the Edit/Write tools, or node with explicit `'utf8'`. PowerShell 5.1 mangles embedded double quotes when passing arguments to native exes: keep `"` out of `git commit -m` here-strings (or use `git commit -F <file>`).
 
 ## Source-of-truth rules
 

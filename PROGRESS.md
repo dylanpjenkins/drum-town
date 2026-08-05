@@ -2,6 +2,8 @@
 
 Newest first. One line per iteration. Full protocol: `.claude/commands/improve.md` · backlog: `tools/backlog.json`.
 
+- 2026-08-05 · iter 30b · **83 WRONG BEAMS FIXED ACROSS THE CURRICULUM** [Dylan spotted one; it was a whole class] — "Compare Straight to Triplet" beamed 4+2 instead of 3+3. Root cause: `beamGroups` are REAL played time, so `[3,8]` inside triplets means 1.5 beats, not 3 notes. Fixed 34 exercises (every shuffle lesson, all Elvin Jones, Purdie half-time, six-stroke, Moeller, metric modulation) + a renderer bug where rests were stripped before beaming, making the grouping clock skip their duration. New gate `check-beam-groups.js` (negative-tested) makes this class un-reintroducible. audit-lessons never saw any of it — the durations summed correctly; only the picture lied.
+- 2026-08-05 · iter 30 · **DARK MODE + REAL MOBILE NAV LIVE** [BL-049 + BL-050] — hourly cadence, two packages per tick. Header rebuilt (seal + drum.town wordmark, Metronome link finally reachable, hamburger disclosure at ≤720px), full dark theme with a persisting sun/moon toggle and no flash. Panel caught what I couldn't: Sam (a11y) found two BLOCKING keyboard bugs — opening the menu sent focus away from it, and following a link dumped focus to `<body>` — both fixed and now guarded by a new gate (`check-nav-a11y.js`, negative-tested). Maya (beginner) found the dark menu rows blurred into "one grey block" (fixed) and that no nav word says "Lessons" (filed BL-058). Also: dark notation ground softened from #fffdf7 to #f0e9db ("a flashbang at night", still 13.1:1).
 - 2026-08-05 · iter 29 · **PKG-1 THE REPAINT IS LIVE** [BL-048] — drum.town now wears The Square: plaster/brick/park-green palette, Fraunces + Public Sans + IBM Plex Mono, new scale and elevation. Verified after the fact (11/11 contrast pairs, 0 structural changes, 0 selectors lost, screenshots read at both widths) because the Builder self-committed against instructions — protocol hardened so subagents can't touch git. NOTE: adversarial reviewer was cut off by the org monthly spend limit; orchestrator completed the review.
 - 2026-08-05 · iter 28 · BL-039 [quality] acoustic kit stops faking cymbals — missing voices use honestly-synthesized recipes (no more one-sample-three-speeds); electronic ride gains its missing ping fundamental
 - 2026-08-05 · iter 27 · BL-038 [ui] playhead follow now yields to the user — scroll-event ownership model (reviewer rejected my first timer-based fix as DEGRADED; shipped its better architecture: follow resumes when the playhead re-enters your window, works for scrollbar drags in every browser). Loop heartbeat switched to background-sleeper notifications after in-session timers failed twice.
@@ -43,6 +45,10 @@ Newest first. One line per iteration. Full protocol: `.claude/commands/improve.m
 
 - **Rotate the PostHog project token.** `.env` is now untracked and the token no longer ships hardcoded in base.njk, but the old value remains in git history. Rotate it in PostHog settings, then update your local `.env`. (SEC, bootstrap)
 - **Getting Started photos** (BL-030 / ISSUES.md #1): stick-grip, setup-posture, the-drum-kit lost their figures because the photos never existed. When you have photos, the loop restores the figure blocks + styles.
+
+## Try this now (iter 30)
+
+Open drum.town on your phone and tap the ☰ — that menu never existed before. Then hit the sun/moon in the header: full dark theme, remembered between visits, and it follows your OS if you never touch it. Both were built and judged this tick.
 
 ## Needs eyes (now mostly self-served: since iter 23 the loop screenshots and reads its own changes — entries below remain only where human taste matters)
 

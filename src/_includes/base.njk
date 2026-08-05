@@ -19,6 +19,9 @@
   {%- else %}
   <meta name="twitter:card" content="summary" />
   {%- endif %}
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f2e9" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#211a14" />
+  <script>try{var t=localStorage.getItem('dc_theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,600&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" />
@@ -41,13 +44,42 @@
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="/" class="site-logo">Drum <em>Town</em></a>
-    <nav class="site-nav">
-      <a href="/#foundations">Foundations</a>
-      <a href="/#tracks">Genres</a>
-      <a href="/#mastery">Other Topics</a>
-      <a href="/rudiments/">Rudiments</a>
+    <a href="/" class="site-logo">
+      <svg class="site-logo__seal" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+        <circle cx="17" cy="17" r="15.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <circle cx="17" cy="17" r="8" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <circle cx="17" cy="4.5" r="1.9" /><circle cx="29.5" cy="17" r="1.9" />
+        <circle cx="17" cy="29.5" r="1.9" /><circle cx="4.5" cy="17" r="1.9" />
+      </svg>
+      <span class="site-logo__wm">drum<em>.town</em></span>
+    </a>
+    {#- Current-section highlight. Lesson pages pass navSection (foundations |
+        track | mastery); everything else is derived from the URL. -#}
+    {%- set sec = navSection or (
+          'track' if '/genres/' in page.url else (
+          'rudiments' if '/rudiments/' in page.url else (
+          'metronome' if '/metronome/' in page.url else ''))) %}
+    <nav class="site-nav" id="site-nav" aria-label="Site">
+      <a href="/#foundations"{% if sec == 'foundations' %} class="active" aria-current="true"{% endif %}>Foundations</a>
+      <a href="/#tracks"{% if sec == 'track' %} class="active" aria-current="true"{% endif %}>Genres</a>
+      <a href="/#mastery"{% if sec == 'mastery' %} class="active" aria-current="true"{% endif %}>Other Topics</a>
+      <a href="/rudiments/"{% if sec == 'rudiments' %} class="active" aria-current="page"{% endif %}>Rudiments</a>
+      <a href="/metronome/"{% if sec == 'metronome' %} class="active" aria-current="page"{% endif %}>Metronome</a>
     </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+      <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M12 2.4v2.6M12 19v2.6M2.4 12h2.6M19 12h2.6M5.2 5.2l1.9 1.9M16.9 16.9l1.9 1.9M18.8 5.2l-1.9 1.9M7.1 16.9l-1.9 1.9" />
+        </g>
+      </svg>
+      <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
   </div>
 </header>
 
@@ -87,6 +119,7 @@
   </div>
 </aside>
 
+<script src="/assets/js/chrome.js" defer></script>
 <script src="/assets/js/progress.js" defer></script>
 <script src="/assets/js/pattern-math.js" defer></script>
 <script src="/assets/js/player.js" defer></script>

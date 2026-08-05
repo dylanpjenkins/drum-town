@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 29,
-    "next_dimension": "quality",
+    "iteration": 30,
+    "next_dimension": "ui",
     "dimensions": ["ui", "quality", "ui", "content"],
     "next_id": 58,
     "epic": {
@@ -506,10 +506,10 @@
       "title": "PKG-2 Header chrome + real mobile nav",
       "evidence": ["design/packages.md PKG-2; system.md §3; adds Metronome link + hamburger disclosure + chrome.js"],
       "acceptance": "per design/packages.md PKG-2: seal wordmark, 5 links, ≤720px disclosure with ≥44px rows, Esc/focus-return, scroll-margin under sticky header; screenshots incl. true-390 open/closed",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 30 · Shipped with PKG-3 (same surface, so the header is built once). Seal + drum.town wordmark, pill nav with the previously-unreachable /metronome/ added, ≤720px disclosure panel (48px rows, ✕ morph), --header-h now measured live by chrome.js (it feeds the sidebar offset and every anchor's scroll-margin; the hardcoded 60px was wrong whenever the header row wrapped at high zoom). Verified at true-390 in both themes with a same-origin harness that performs a REAL click (a file:// harness silently fails cross-origin)."]
     },
     {
       "id": "BL-050",
@@ -518,10 +518,10 @@
       "title": "PKG-3 Theme toggle + dark theme",
       "evidence": ["design/packages.md PKG-3; system.md §1.1 dark re-declaration + pre-paint script + persistence"],
       "acceptance": "per design/packages.md PKG-3: [data-theme=dark] block, prefers-color-scheme default, toggle with localStorage + system-follow, theme-color metas, no-flash pre-paint; both-theme screenshots from here on; css.missingDarkScheme → 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 30 · Dark theme as a re-declaration of the same slots in the spec's two fenced blocks (system default + explicit override), pre-paint script above the stylesheet, theme-color metas, sun/moon toggle persisting to dc_theme and otherwise following the OS. New gate tools/checks/check-dark-tokens.js fails the build if the two blocks drift or the pre-paint script slips below the stylesheet. css.missingDarkScheme 1→0.", "Persona-driven corrections in-tick: mobile row dividers --rule-soft→--rule (invisible in dark — 'one grey block'), dark notation ground #fffdf7→#f0e9db (a11y persona: 'a flashbang at night'; still 13.1:1 against the ink), aria-pressed dropped from the toggle (contradicted its action label; NVDA announced 'pressed' on a fresh system-dark visit)."]
     },
     {
       "id": "BL-051",
@@ -606,6 +606,47 @@
       "attempts": 0,
       "chunk": null,
       "log": []
+    },
+    {
+      "id": "BL-060",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Shuffle staves render without their triplet brackets",
+      "evidence": ["Visual proof render iter 30: the-shuffle#0 shows 8 flagged 8ths with no '3' brackets, though the spec carries 3:2 tuplets per beat", "Predates this tick (the old renderer beamed across beats and also showed no brackets) — surfaced by rendering the staves in isolation"],
+      "acceptance": "shuffle/swing staves show a triplet bracket (or beamed '3') per beat so the notation states the rhythm it teaches; investigate whether VF.Tuplet brackets are suppressed when the group is unbeamed; ALSO retry beam_middle_only (beaming over the internal rest is the nicer engraving) now that grouping time is correct — it currently renders degenerate (flags suppressed, beam undrawn)",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Found by rendering repaired staves in isolation (iter 30). The shuffle is a Foundations lesson — its notation should state the triplet explicitly."]
+    },
+    {
+      "id": "BL-058",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "Nav vocabulary fails beginners: no word 'Lessons', 'Other Topics' is a junk drawer, order implies difficulty",
+      "evidence": [
+        "Maya (beginner persona, iter 30) on the new mobile nav: 'There's no word Lessons anywhere I can tap… I have to guess the hamburger is where lessons live'",
+        "'Other Topics' — 'a junk drawer. It tells me nothing and I'd never tap it'",
+        "'Rudiments… listed below Genres makes it feel advanced' — nav order implies a difficulty sequence it doesn't have",
+        "system.md §10 (vocabulary leash) already governs chrome copy — this is its first real test"
+      ],
+      "acceptance": "nav names read plainly to a first-timer (a 'Lessons'/'Start' affordance exists; 'Other Topics' renamed to something concrete); order does not imply false difficulty; re-run the Maya persona on the revised nav and get an improved findability answer",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from persona panel (iter 30). Deliberately NOT fixed inside PKG-2/3 — renaming chrome copy touches every page's IA and deserves its own reviewed tick against the §10 vocabulary leash."]
+    },
+    {
+      "id": "BL-059",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Seal mark reads as a vinyl record, not a drum",
+      "evidence": ["Maya (iter 30): 'a record or a vinyl label first. Second guess, a drum seen from directly above… it isn't shouting drums at me'"],
+      "acceptance": "seal reads as percussion at 28px (e.g. lugs/tension rods around the rim rather than concentric rings, or a stick figure) without becoming fussy; verify by asking a fresh persona what it depicts, unprompted",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed from persona panel (iter 30)."]
     },
     {
       "id": "BL-038",

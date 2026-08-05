@@ -1100,7 +1100,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Sticking: <em>R L R · L R L · R L R · L R L</em> — three notes per beat, lead hand alternating each group. Triplet feel wakes up separately from straight 8ths; this gets it under your hands before you need it inside a groove."
       },
       {
@@ -1813,7 +1813,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Two reps of <em>RLLRRL</em> per bar — four triplet groups total. <em>Sticking:</em> R L L R R L · R L L R R L. Accents on positions 1 and 4 only."
       },
       {
@@ -1843,7 +1843,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "The kit application: accents move to the toms (high tom on 1, floor tom on 4) while the taps stay home on the snare. Keep the wrists low for taps — only the accent arm travels. The kick quarters anchor the pulse so the phrase reads as a fill over time, not a free-fall."
       }
     ]
@@ -2705,7 +2705,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Three evenly-spaced strokes per beat. Count <em>1-trip-let 2-trip-let 3-trip-let 4-trip-let</em>. Same metronome as Ex 1 and Ex 2 — only the subdivision changes. Switching between Ex 2 and Ex 3 on the same click is the whole skill."
       },
       {
@@ -2735,7 +2735,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "First partial and third partial of each triplet — middle one rests. Count <em>1-(trip)-let 2-(trip)-let 3-(trip)-let 4-(trip)-let</em>, hitting only on the <em>1</em> and the <em>let</em>. That's the swing 8th: a long-short pair derived from a triplet. This is how a ride cymbal swings."
       },
       {
@@ -2761,7 +2761,7 @@ module.exports = {
           { voice: 'hands', start: 4, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 7, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[2, 8], [2, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Beats 1 and 2 are straight 8ths (<em>1 &amp; 2 &amp;</em>). Beats 3 and 4 are 8th triplets (<em>3-trip-let 4-trip-let</em>). Same bar, two feels. Switching mid-bar without the click drifting is the test — your inner pulse stays put while your hands change density."
       }
     ]
@@ -2835,7 +2835,7 @@ module.exports = {
           { voice: 'hands', start: 4, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 7, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[2, 8], [2, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Two beats of straight 8ths, then two beats of 8th triplets. Counts: <em>1 &amp; 2 &amp; 3-trip-let 4-trip-let</em>. The danger zone is the <em>3</em> — it has to land squarely on the click after the bar's gear shift, not early or late."
       },
       {
@@ -2865,7 +2865,7 @@ module.exports = {
           { voice: 'hands', start: 0, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 3, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [4, 16], [4, 16]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "8th triplets on beats 1–2 (<em>1-trip-let 2-trip-let</em>), 16ths on beats 3–4 (<em>3 e &amp; a 4 e &amp; a</em>). This is the toughest gear shift in the set — the brain wants to drag the 16ths to the slower triplet feel. Count out loud through the change."
       },
       {
@@ -7579,7 +7579,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Right hand only, 8th-note triplets. Each triplet is one Moeller cycle: <em>WHIP - tap - up</em>. Accent on note 1 (the whip), note 2 is the rebound tap, note 3 is the soft tap on the way back up. The <em>circular</em> motion of the forearm produces all three notes. If you feel three separate efforts, slow down to ♩=60 — the cycle should feel like one breath."
       },
       {
@@ -7617,7 +7617,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Sticking RLR · LRL · RLR · LRL — the lead hand of each triplet alternates. Each lead-hand stroke is a Moeller whip-cycle (accent on the lead, the next two notes flow out of the rebound and lift). At ♩=80 it should feel <em>easier</em> than the Stone version of the same idea, because the whip carries the next two notes for free. That's Moeller's whole gift to drumming."
       }
     ],
@@ -8190,7 +8190,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Each beat is an 8th-note triplet with the middle note missing — <em>BOOM (rest) tuh</em>. Say <em>'spang-a-lang'</em> across the bar; that\'s the shuffle. Lock the long note to the metronome click, and let the short note arrive a third of a beat before the next click."
       },
       {
@@ -8226,7 +8226,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Bass drum lands with the long note on beats <em>1</em> and <em>3</em>. The kick anchors the downbeats while the hi-hat keeps shuffling on top. Listen for whether the hat\'s long note actually lines up with the kick — if your ear tells you they\'re smearing, slow the tempo by 5 bpm."
       },
       {
@@ -8266,7 +8266,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Snare on <em>2</em> and <em>4</em>, but <em>shuffled</em> — it lands with the long note of the triplet, not on the count itself in straight time. Functionally identical to a backbeat; the lilt comes from the gap between snare and the next hi-hat note."
       },
       {
@@ -8302,7 +8302,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "All three layers together: shuffled hat, kick on 1 and 3, snare on 2 and 4 (with the shuffle lilt). This is the <em>shuffle feel</em>. From here you\'re a small step from the rock shuffle (heavier kick, ride pattern), the country shuffle (brushes on the snare), and the medium swing (ride bell on 2 and 4 instead of snare). Loop it for ten minutes; the feel takes longer to internalize than the notes."
       }
     ]
@@ -10746,7 +10746,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Twelve even ride triplets per bar, kick on every beat, hat-foot doubling 2 and 4. The device: let each kick land <em>slightly late</em> — between the first and second triplet partial — so it weaves through the ride instead of sitting under it. Nothing should articulate a clean beat division."
       },
       {
@@ -11343,7 +11343,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Variation A: a continuous 8th-note-triplet ride — twelve hits per bar — instead of the skip pattern. The hi-hat foot still marks 2 and 4. This is one of Tony Williams' most-used variations on uptempo tunes (and was directly inherited from Elvin Jones)."
       },
       {
@@ -11600,7 +11600,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Twelve evenly-spaced ride hits per bar. No skip-pattern; no swung 8ths. Continuous triplets. The hi-hat foot still marks 2 and 4. Stay here until your hand is comfortable with the unbroken triplet flow — usually that's longer than you think."
       },
       {
@@ -11640,7 +11640,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "The snare lands on the <em>second triplet partial</em> of beats 2 and 4 — not on the beat itself, but on the middle of the triplet. This is the position that creates the rolling feel: the snare is <em>inside</em> the triplet, not on top of it. Hi-hat foot still marks 2 and 4."
       },
       {
@@ -11676,7 +11676,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Kick on every beat, both feet landing together on 2 and 4. Feel each kick as the first partial of its triplet group, with a <em>felt-but-not-played</em> second kick on the third partial — once that's internal, the stroke can drift toward it without losing place. Feathered, never stomped."
       },
       {
@@ -11716,7 +11716,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Ride keeps the twelve triplets; the snare contours through three inside-the-triplet spots — second partial of beat 2, third of beat 3, second of beat 4. Let the kick melt into the wash rather than tick under it. One rolling wave, <em>Crescent</em> in essence."
       },
       {
@@ -11758,7 +11758,7 @@ module.exports = {
           { voice: 'feet', start: 0, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'feet', start: 3, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Quarter-note triplets in the kick — six evenly-spaced strokes against the bar's four beats. The triplet ride masks that 6-pulse; the kick exposes it. The hat-foot is omitted so you can hear the 3-against-2 clearly; put it back once you can feel both pulses at once."
       }
     ],
@@ -15299,7 +15299,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Pure triplet hat on every beat — three even hi-hat notes per beat. The snare lands <em>only on beat 3</em>; that's the half-time backbeat. Kick on beat 1 anchors the bar. Count out loud as <em>'1-trip-let, 2-trip-let, <strong>3</strong>-trip-let, 4-trip-let'</em> — beat 3 is the one that gets a snare. Everything else this lesson does is built on top of this skeleton."
       },
       {
@@ -15339,7 +15339,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Snare now plays the 2nd and 3rd triplet partial of every beat as a <em>ghost note</em> — barely audible, finger-stroke quiet. Only the snare on beat 3 stays loud (marked with the accent). Volume ratio target: backbeat is at least <strong>4×</strong> louder than the ghosts. The shuffle texture starts to emerge — listen for the sustained whispering bed of triplets under one big crack on beat 3."
       },
       {
@@ -15378,7 +15378,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Notation caveat: the two kicks before beat 3 are written as straight 8ths in the <em>feet</em> voice for legibility. In the actual triplet grid they land on the third partial of beat 2 and the downbeat of beat 3. Aim them there, not at the notated positions."
       },
       {
@@ -15416,7 +15416,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "One bar of \"Babylon Sisters\". Get the volume hierarchy right before you push the tempo: loud snare on 3, then kick, then ghost notes, with the triplet hat in the background. The classic failure is ghost notes creeping up in volume — keep them whispered and the groove breathes."
       }
     ],
@@ -15845,7 +15845,7 @@ module.exports = {
           { voice: 'feet', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'feet', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "The cell is <em>R hand → L hand → Kick</em> — repeated four times across four beats of 8th-note triplets. Three voices, three positions, no overlap. This is the <strong>fusion triplet fill</strong> in its purest form. Once it loops, move the L hand around the toms — hi tom, mid tom, floor tom — and the same cell becomes a melodic fill."
       },
       {
@@ -15893,7 +15893,7 @@ module.exports = {
           { voice: 'feet', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'feet', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Same three voices, different order: <strong>R hand → Kick → L hand</strong>. Putting the kick in the middle of the cell entirely changes the feel — it sounds heavier, more grounded. Compare side-by-side with exercise 1 by playing each for 4 bars. The musical implication: <em>where you put the foot in the cell determines whether the line floats or lands</em>."
       },
       {
@@ -23354,7 +23354,7 @@ module.exports = {
           { voice: 'hands', start: 10, length: 5, num_notes: 5, notes_occupied: 4 },
           { voice: 'hands', start: 15, length: 5, num_notes: 5, notes_occupied: 4 }
         ],
-        beamGroups: [[5, 16], [5, 16], [5, 16], [5, 16]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Five even hat notes per beat. The snares sit on the bar's 6th and 16th quintuplet positions — almost 2 and 4, but not — with kick on 1 and 3. Learn the hat alone, counting <em>'1-2-3-4-5'</em> aloud per beat; the bar should feel stretched, not swung."
       },
       {
@@ -27213,7 +27213,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Standard shuffle backbeat at rock weight — same pattern as the foundations <em>the-shuffle</em> Ex 4, but hit harder and at a slightly higher tempo. Snare on 2 and 4 lands with the long note of the triplet (the first triplet partial). The hi-hat plays the long-short shuffle pattern on every beat. Lock the long note of the hat to the click and let the short notes arrive late."
       },
       {
@@ -27253,7 +27253,7 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'feet', start: 0, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Kick on beat 1 <em>and</em> on the third triplet partial of beat 1 (the same place the hi-hat plays its short shuffle note). Then a single kick on beat 3. The doubled kick at the top of the bar gives the shuffle its rocky weight — kick lining up with the shuffle's short note creates a lopsided forward push. Same trick as the rock backbeat's doubled kick on 1, but inside the triplet grid."
       },
       {
@@ -27293,7 +27293,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "The extra snare stacks with the hat's short note on beat 2 — backbeat first, then a much softer ghost on the third triplet. That lopsided <em>BAP-tap</em> is the whole signature. Beat 4 stays clean, one snare only; the asymmetry between 2 and 4 is why it grooves."
       },
       {
@@ -27337,7 +27337,7 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'feet', start: 0, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Heavy backbeat, Texas ghosts on the third triplet of 2 and 4, kick doubled at the top of the bar. The thing to listen for: the kick's third-triplet hit landing exactly with the hat's short note — that alignment is what makes the shuffle drive instead of lurch."
       }
     ]
@@ -30746,7 +30746,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "Twelve triplet 8ths, accent every third stroke — those accents are quarter-note <em>triplets</em>, not the old quarters. Declare them the new quarter and you're at ♩=180. Practice with the click at ♩=120: let your accents float against it, then mentally drop the click and let the accents become the pulse."
       },
       {
@@ -30784,7 +30784,7 @@ module.exports = {
           { voice: 'hands', start: 6, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        beamGroups: [[3, 8], [3, 8], [3, 8], [3, 8]],
+        beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
         tip: "The notation is the pivot bar only. Run the full shape: four bars of straight backbeat with the click at ♩=120, this bar once with the accents projecting the new tempo, then a backbeat where those accents are the quarter (click jumps to 180). Eventually do it clickless — your inner clock carries the ratio."
       }
     ],

@@ -8,6 +8,7 @@ pagination:
 permalink: "lessons/{{ lesson.slug }}/"
 ogType: article
 eleventyComputed:
+  navSection: "{{ lesson.section }}"
   title: "{{ lesson.title }}"
   description: "{% if lessonContent[lesson.slug] %}{{ lessonContent[lesson.slug].tagline }} — a free drum lesson with notation and audio.{% endif %}"
 ---

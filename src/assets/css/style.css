@@ -48,7 +48,71 @@
   --r-pill: 999px;         /* buttons, chips, nav links, clock pill */
 }
 
+/* Dark theme — "evening in the square". Same slots re-declared, never a
+   parallel token set. Shipped twice: once as the system default (unless the
+   visitor has explicitly chosen light) and once as the explicit override so a
+   stored choice always wins. The two fenced bodies must stay byte-identical —
+   tools/checks/check-dark-tokens.js enforces it. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+/* DARK-TOKENS-BEGIN */
+    --bg:        #211a14;
+    --paper:     #2b231b;
+    --paper-2:   #352b21;
+    --ink:       #f2e9dc;
+    --ink-2:     #e6dbc9;
+    --ink-3:     #d3c5ae;
+    --ink-soft:  #c4b6a3;
+    --rule:      #4a3e30;
+    --rule-soft: #3a3024;
+    --accent:    #e07b5c;
+    --accent-2:  #e8916f;
+    --accent-ink:#211a14;
+    --green:     #8ec7a6;
+    --green-tint: rgba(142,199,166,.14);
+    --ochre:     #c9a35c;
+    --gold:      #e3a34d;
+    --shadow:    rgba(0,0,0,.40);
+    --notation-bg:  #f0e9db;
+    --notation-ink: #262019;
+    --notation-accent: #9a3a27;
+    --focus-ring: var(--accent);
+    color-scheme: dark;
+/* DARK-TOKENS-END */
+  }
+}
+:root[data-theme="dark"] {
+/* DARK-TOKENS-BEGIN */
+    --bg:        #211a14;
+    --paper:     #2b231b;
+    --paper-2:   #352b21;
+    --ink:       #f2e9dc;
+    --ink-2:     #e6dbc9;
+    --ink-3:     #d3c5ae;
+    --ink-soft:  #c4b6a3;
+    --rule:      #4a3e30;
+    --rule-soft: #3a3024;
+    --accent:    #e07b5c;
+    --accent-2:  #e8916f;
+    --accent-ink:#211a14;
+    --green:     #8ec7a6;
+    --green-tint: rgba(142,199,166,.14);
+    --ochre:     #c9a35c;
+    --gold:      #e3a34d;
+    --shadow:    rgba(0,0,0,.40);
+    --notation-bg:  #f0e9db;
+    --notation-ink: #262019;
+    --notation-accent: #9a3a27;
+    --focus-ring: var(--accent);
+    color-scheme: dark;
+/* DARK-TOKENS-END */
+}
+
 * { box-sizing: border-box; }
+
+/* Sticky-header offset so in-page anchors (/#tracks, rudiment families)
+   never land under the header. */
+[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 
 html, body {
   margin: 0;
@@ -109,13 +173,17 @@ a:focus-visible { border-radius: 2px; }
 .site-header__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 36px;
+  padding: 0 36px;
+  min-height: var(--header-h);
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--display);
   font-size: 1.25rem;
   font-weight: 600;
@@ -123,14 +191,21 @@ a:focus-visible { border-radius: 2px; }
   letter-spacing: -0.01em;
   text-decoration: none;
 }
-
-.site-logo em { color: var(--accent); font-style: italic; }
+.site-logo:hover { text-decoration: none; }
+.site-logo__seal {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--accent);
+  fill: var(--gold);
+}
+.site-logo__wm em { color: var(--accent); font-style: italic; }
 
 .site-nav {
   margin-left: auto;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 22px;
+  align-items: center;
+  gap: 2px;
   font-family: var(--body);
   font-size: 0.84375rem;
   font-weight: 600;
@@ -140,9 +215,96 @@ a:focus-visible { border-radius: 2px; }
 .site-nav a {
   color: var(--ink-soft);
   text-decoration: none;
+  padding: 7px 12px;
+  border-radius: var(--r-pill);
 }
 
-.site-nav a:hover, .site-nav a.active { color: var(--accent); }
+.site-nav a:hover { color: var(--accent); background: var(--paper-2); text-decoration: none; }
+.site-nav a.active { color: var(--accent-ink); background: var(--accent); }
+
+/* Icon buttons in the header row (theme toggle, menu). */
+.theme-toggle,
+.nav-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0;
+}
+.theme-toggle { width: 40px; height: 40px; }
+.theme-toggle:hover { color: var(--accent); background: var(--paper-2); }
+.theme-toggle svg { width: 20px; height: 20px; }
+/* Sun in light, moon in dark — the icon shows the CURRENT theme. */
+.theme-toggle__moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle__sun { display: none; }
+  :root:not([data-theme="light"]) .theme-toggle__moon { display: block; }
+}
+:root[data-theme="dark"] .theme-toggle__sun { display: none; }
+:root[data-theme="dark"] .theme-toggle__moon { display: block; }
+:root[data-theme="light"] .theme-toggle__sun { display: block; }
+:root[data-theme="light"] .theme-toggle__moon { display: none; }
+
+/* Hamburger — hidden until the nav collapses. */
+.nav-toggle { width: 44px; height: 44px; display: none; }
+.nav-toggle:hover { color: var(--accent); background: var(--paper-2); }
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.nav-toggle__bars { position: relative; }
+.nav-toggle__bars::before,
+.nav-toggle__bars::after { content: ''; position: absolute; left: 0; }
+.nav-toggle__bars::before { top: -6px; }
+.nav-toggle__bars::after { top: 6px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .site-header { position: sticky; }
+  .site-header__inner { padding: 0 20px; gap: 8px; }
+  .nav-toggle { display: inline-flex; }
+  /* The nav becomes a full-width disclosure panel under the header bar. */
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: var(--elev-2);
+    font-size: 1rem;
+  }
+  .nav-open .site-nav { display: flex; }
+  .site-nav a {
+    padding: 13px 20px;
+    border-radius: 0;
+    /* --rule, not --rule-soft: in the dark theme the soft hairline all but
+       disappears against --paper and the five rows read as one grey block
+       (persona finding, iter 30). Row separation is load-bearing here. */
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+  }
+  .site-nav a:last-child { border-bottom: none; }
+  .site-nav a.active { color: var(--accent-ink); }
+}
 
 /* Skip link — offscreen until keyboard focus lands on it */
 .skip-link {
@@ -544,7 +706,7 @@ hr.section-rule {
 
 .curriculum-sidebar {
   position: sticky;
-  top: 60px;            /* sit below the sticky site-header */
+  top: var(--header-h); /* sit below the sticky site-header */
   height: calc(100vh - 60px);
   overflow-y: auto;
   border-right: 1px solid var(--rule);
@@ -1246,8 +1408,11 @@ hr.section-rule {
 
 @media (max-width: 720px) {
   .container { padding: 36px 20px; }
-  .site-header__inner { padding: 14px 20px; flex-wrap: wrap; }
-  .site-nav { gap: 8px 16px; }
+  /* NOTE: .site-header__inner padding / .site-nav gap are owned by the header
+     block near the top of this file. Re-declaring them here (as this block
+     used to) silently overrode it at equal specificity — the header measured
+     73px instead of --header-h, and the nav panel's rows inherited an 8px gap
+     that detached every divider from its row. */
   h2 { font-size: 1.75rem; }
   /* The display steps are viewport-clamped; these h1 overrides restate the
      same clamps (kept so the selector inventory survives the repaint). */

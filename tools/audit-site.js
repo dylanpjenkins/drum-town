@@ -247,7 +247,11 @@ if (!args.has('--source-only')) {
       const rel = path.relative(SITE, f).replace(/\\/g, '/');
       if (!/<main[\s>]/.test(html)) missingMain.push(rel);
       if (!html.includes('class="skip-link"')) missingSkip.push(rel);
-      svgNoAria += (html.match(/<svg(?![^>]*\brole=)[^>]*>/g) || []).length;
+      // An SVG is accessible either as a labeled image (role="img" + label,
+      // asserted per-page by tools/checks/dom-smoke.js) or as explicitly
+      // decorative (aria-hidden="true"), which is the correct treatment for
+      // icons — and which must NOT carry role="img". Count neither-of-those.
+      svgNoAria += (html.match(/<svg(?![^>]*\b(?:role=|aria-hidden="true"))[^>]*>/g) || []).length;
     }
     add('dom.pagesMissingMain', missingMain.length, missingMain);
     add('dom.pagesMissingSkipLink', missingSkip.length, missingSkip);

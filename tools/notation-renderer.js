@@ -320,13 +320,23 @@ function renderPattern(spec) {
       formatter.format(voices, Math.max(80, stave.getNoteEndX() - stave.getNoteStartX() - 10));
 
       voiceSpecs.forEach(({ voice, stemDir }) => {
-        const beamable = voice.getTickables().filter(n => !n.isRest());
-        if (beamable.length) {
-          const opts = { stem_direction: stemDir };
+        // Pass the FULL tickable list, rests included. Filtering rests out
+        // first made the grouping clock skip their duration, so in any
+        // pattern with rests — every shuffle, where the middle triplet is
+        // silent — beams ran past the beat and joined two different tuplets.
+        // beam_rests:false — a rest ends the beamed run, so the shuffle's
+        // note-rest-note beat renders as two flagged 8ths (valid engraving)
+        // rather than a beam running into the next beat's triplet.
+        // (beam_middle_only, which would beam OVER the internal rest, was
+        // tried and produces degenerate output here: VexFlow suppresses the
+        // flags for a beam it then fails to draw. See BL-060.)
+        const tickables = voice.getTickables();
+        if (tickables.some(n => !n.isRest())) {
+          const opts = { stem_direction: stemDir, beam_rests: false };
           if (spec.beamGroups) {
             opts.groups = spec.beamGroups.map(g => new VF.Fraction(g[0], g[1]));
           }
-          VF.Beam.generateBeams(beamable, opts).forEach(bm => allBeams.push(bm));
+          VF.Beam.generateBeams(tickables, opts).forEach(bm => allBeams.push(bm));
         }
       });
 
