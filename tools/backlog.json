@@ -6,7 +6,7 @@
     "next_id": 48,
     "epic": {
       "name": "communal-rebrand",
-      "phase": "directions",
+      "phase": "spec",
       "started": "2026-08-05",
       "brief": "design/brief.md",
       "note": "Dylan's direction 2026-08-05: full rebrand, modern + communal (design language only, no backend features); designer/builder/reviewer/persona pipeline; pushes to main deploy to drum.town via Netlify git integration."
@@ -485,7 +485,7 @@
       "status": "in_progress",
       "attempts": 0,
       "chunk": null,
-      "log": ["iter 25 · epic opened; Designer agent dispatched for direction boards. BL-036/037/044/045 are inputs to the brief and expected to resolve via epic packages."]
+      "log": ["iter 25 · epic opened; Designer agent dispatched for direction boards. BL-036/037/044/045 are inputs to the brief and expected to resolve via epic packages.", "iter 25 · directions phase complete: 3 boards produced, screenshotted, judged by adversarial Reviewer + 3 personas + orchestrator. WINNER: A (The Square), amended — B's transport dock for the practice state, C's ledger for chapters, headline promotion, plus the shared violations all boards dodged (mobile nav, honest mobile notation, theme toggle, real prose components, token-slot continuity, font restraint). Full record: design/DECISION.md. Phase → spec."]
     },
     {
       "id": "BL-038",
