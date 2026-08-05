@@ -25,7 +25,7 @@ module.exports = {
     ],
     duration: "15–20 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['single-stroke-roll', 'double-stroke-roll'],
     nextLessons: ['first-beat', 'basic-coordination'],
     graduationCriteria: [
@@ -198,7 +198,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Coordination / Variation",
+    focus: "Coordination",
     prerequisites: ['first-beat'],
     nextLessons: ['first-beat-color'],
     graduationCriteria: [
@@ -366,7 +366,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Articulation / Feel",
+    focus: "Articulation",
     prerequisites: ['first-beat-kicks'],
     nextLessons: ['basic-coordination', 'rock-eighth-grooves'],
     graduationCriteria: [
@@ -501,7 +501,7 @@ module.exports = {
     ],
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Reading / Counting",
+    focus: "Counting",
     prerequisites: ['reading-101'],
     nextLessons: ['counting-sixteenths'],
     graduationCriteria: [
@@ -595,7 +595,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Reading / Counting",
+    focus: "Counting",
     prerequisites: ['counting-eighths'],
     nextLessons: ['triplet-feel', 'counting-subdivision'],
     graduationCriteria: [
@@ -708,7 +708,7 @@ module.exports = {
     ],
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['stick-grip', 'counting-eighths'],
     nextLessons: ['double-stroke-roll', 'paradiddle'],
     graduationCriteria: [
@@ -799,7 +799,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['single-stroke-roll'],
     nextLessons: ['paradiddle', 'double-paradiddle'],
     graduationCriteria: [
@@ -891,7 +891,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Coordination / Independence",
+    focus: "Independence",
     prerequisites: ['first-beat-color'],
     nextLessons: ['three-limb-patterns', 'rock-eighth-grooves'],
     graduationCriteria: [
@@ -1005,7 +1005,7 @@ module.exports = {
     ],
     duration: "5–10 min",
     difficulty: "Beginner",
-    focus: "Routine / Maintenance",
+    focus: "Practice Method",
     prerequisites: ['single-stroke-roll', 'double-stroke-roll', 'paradiddle'],
     nextLessons: ['metronome-practice', 'slow-practice'],
     graduationCriteria: [
@@ -1138,7 +1138,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['first-beat-color', 'basic-coordination'],
     nextLessons: ['rock-quarter-hat', 'rock-basic-fills'],
     graduationCriteria: [
@@ -1276,7 +1276,7 @@ module.exports = {
     ],
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['basic-coordination'],
     nextLessons: ['jazz-comping-foot', 'jazz-waltz', 'jazz-comping-basics'],
     graduationCriteria: [
@@ -1380,7 +1380,7 @@ module.exports = {
     tagline: "Brazil's quietest groove, structured like a song",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['basic-coordination', 'latin-clave-intro'],
     nextLessons: ['latin-samba-feel'],
     listening: [
@@ -1498,7 +1498,7 @@ module.exports = {
     ],
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Foot Technique / Genre",
+    focus: "Foot Technique",
     prerequisites: ['first-beat-color', 'basic-coordination'],
     nextLessons: ['metal-power-grooves', 'metal-quarter-bass'],
     graduationCriteria: [
@@ -1583,7 +1583,7 @@ module.exports = {
     tagline: "The 90s drum-machine groove, played live",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre / Time-Feel",
+    focus: "Time & Feel",
     prerequisites: ['first-beat-kicks', 'basic-coordination'],
     nextLessons: ['hiphop-pocket-time', 'hiphop-classic'],
     graduationCriteria: [
@@ -1780,7 +1780,7 @@ module.exports = {
     tagline: "The most-used fill phrase in fusion",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Rudiment",
+    focus: "Rudiments",
     prerequisites: ['paradiddle', 'fusion-coordination-foundation'],
     nextLessons: ['fusion-odd-meters', 'fusion-linear-vocab'],
     graduationCriteria: [
@@ -1856,7 +1856,7 @@ module.exports = {
     tagline: "5/4 and 7/8 — the gateway into asymmetric time",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Time / Meter",
+    focus: "Time & Feel",
     prerequisites: ['fusion-coordination-foundation', 'counting-subdivision'],
     nextLessons: ['fusion-polyrhythms', 'odd-meters-9-8'],
     graduationCriteria: [
@@ -1936,7 +1936,7 @@ module.exports = {
     tagline: "Two pulses, one body",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Polyrhythm",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-odd-meters', 'triplet-feel'],
     nextLessons: ['fusion-metric-modulation', 'polyrhythms-5-4'],
     graduationCriteria: [
@@ -1974,7 +1974,7 @@ module.exports = {
     tagline: "The micro-dynamics that make funk feel like funk",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Dynamics / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['first-beat', 'paradiddle'],
     nextLessons: ['funk-sixteenth-feel', 'funk-james-brown'],
     graduationCriteria: [
@@ -2034,7 +2034,7 @@ module.exports = {
     tagline: "Names, sizes, and what every piece is for",
     duration: "10–15 min",
     difficulty: "Beginner",
-    focus: "Anatomy",
+    focus: "Getting Started",
     prerequisites: [],
     nextLessons: ['gear-basics', 'setup-posture', 'stick-grip'],
     graduationCriteria: [
@@ -2100,7 +2100,7 @@ module.exports = {
     tagline: "How to sit so the kit plays you back",
     duration: "10 min",
     difficulty: "Beginner",
-    focus: "Setup",
+    focus: "Getting Started",
     prerequisites: ['the-drum-kit'],
     nextLessons: ['stick-grip'],
     graduationCriteria: [
@@ -2165,7 +2165,7 @@ module.exports = {
     tagline: "Hold the stick so it works for you, not against you",
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Technique / Hands",
+    focus: "Hand Technique",
     prerequisites: ['setup-posture'],
     nextLessons: ['tuning-basics', 'the-practice-mindset', 'single-stroke-roll'],
     graduationCriteria: [
@@ -2272,7 +2272,7 @@ module.exports = {
     tagline: "Why repetition isn\'t practice, and what to do instead",
     duration: "10 min",
     difficulty: "Beginner",
-    focus: "Mindset / Practice Method",
+    focus: "Practice Method",
     prerequisites: [],
     nextLessons: ['single-stroke-roll', 'counting-eighths'],
     graduationCriteria: [
@@ -2651,7 +2651,7 @@ module.exports = {
     tagline: "Three pulses inside one beat — and the swing 8th",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Reading / Counting",
+    focus: "Counting",
     prerequisites: ['counting-eighths'],
     nextLessons: ['counting-subdivision', 'the-shuffle'],
     graduationCriteria: [
@@ -2774,7 +2774,7 @@ module.exports = {
     tagline: "Switching gears mid-bar — 8ths, 16ths, triplets",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Reading / Counting",
+    focus: "Counting",
     prerequisites: ['counting-sixteenths', 'triplet-feel'],
     nextLessons: ['reading-syncopation', 'reading-dotted-rhythms'],
     graduationCriteria: [
@@ -3152,7 +3152,7 @@ module.exports = {
     tagline: "Six-note paradiddle in 6/8 — four singles, then a double",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['paradiddle'],
     nextLessons: ['paradiddle-diddle', 'inverted-paradiddle'],
     graduationCriteria: [
@@ -3285,7 +3285,7 @@ module.exports = {
     tagline: "A grace note tucked just before the main note",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['single-stroke-roll', 'double-stroke-roll'],
     nextLessons: ['flam-tap', 'flam-accent', 'drag'],
     graduationCriteria: [
@@ -3421,7 +3421,7 @@ module.exports = {
     tagline: "Two grace notes into a main note — the controlled ruff",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['flam', 'double-stroke-roll'],
     nextLessons: ['dragadiddle'],
     graduationCriteria: [
@@ -3557,7 +3557,7 @@ module.exports = {
     tagline: "Move the accent — same notes, brand new feel",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Accent",
+    focus: "Rudiments",
     prerequisites: ['single-stroke-roll'],
     nextLessons: ['accent-tap'],
     graduationCriteria: [
@@ -3662,7 +3662,7 @@ module.exports = {
     tagline: "RLLRRL — six-note roll in 6/8",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['double-stroke-roll', 'paradiddle'],
     nextLessons: ['fusion-six-stroke-roll'],
     graduationCriteria: [
@@ -3796,7 +3796,7 @@ module.exports = {
     tagline: "Flam plus a tap — the workhorse hybrid",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Hybrid",
+    focus: "Rudiments",
     prerequisites: ['flam', 'double-stroke-roll'],
     nextLessons: ['flam-accent', 'swiss-army-triplet'],
     graduationCriteria: [
@@ -3951,7 +3951,7 @@ module.exports = {
     tagline: "A flam on the downbeat of every triplet",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Hybrid",
+    focus: "Rudiments",
     prerequisites: ['flam', 'triplet-feel'],
     nextLessons: ['swiss-army-triplet'],
     graduationCriteria: [
@@ -4083,7 +4083,7 @@ module.exports = {
     tagline: "Doubles in the middle, singles on the outside",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['paradiddle'],
     nextLessons: ['paradiddle-diddle'],
     graduationCriteria: [
@@ -4172,7 +4172,7 @@ module.exports = {
     tagline: "Paradiddle plus an extra double — six notes in 6/8",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Sticking",
+    focus: "Rudiments",
     prerequisites: ['paradiddle', 'double-paradiddle'],
     nextLessons: ['dragadiddle'],
     graduationCriteria: [
@@ -4305,7 +4305,7 @@ module.exports = {
     tagline: "Flam, R, L — pipe-band hybrid in 6/8",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Rudiment / Hybrid",
+    focus: "Rudiments",
     prerequisites: ['flam-accent'],
     nextLessons: ['dragadiddle'],
     graduationCriteria: [
@@ -4439,7 +4439,7 @@ module.exports = {
     tagline: "Drag plus paradiddle — the capstone hybrid",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Rudiment / Hybrid",
+    focus: "Rudiments",
     prerequisites: ['drag', 'paradiddle'],
     nextLessons: [],
     graduationCriteria: [
@@ -5036,7 +5036,7 @@ module.exports = {
     tagline: "Sing one part to free the limbs to play another",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Independence / Practice Method",
+    focus: "Practice Method",
     prerequisites: ['basic-coordination'],
     nextLessons: ['independence-chester-system', 'independence-chapin-method'],
     graduationCriteria: [
@@ -5165,7 +5165,7 @@ module.exports = {
     tagline: "Drill one snare position until it's automatic",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Independence / Method",
+    focus: "Independence",
     prerequisites: ['jazz-ride-pattern', 'four-way-foundation'],
     nextLessons: ['jazz-comping-basics', 'independence-melodic-snare'],
     graduationCriteria: [
@@ -5317,7 +5317,7 @@ module.exports = {
     tagline: "Sing one melody, play one reading exercise — combine",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Independence / Method",
+    focus: "Independence",
     prerequisites: ['counting-subdivision', 'basic-coordination', 'independence-singing'],
     nextLessons: ['reading-complex-charts', 'four-way-independence'],
     graduationCriteria: [
@@ -5445,7 +5445,7 @@ module.exports = {
     tagline: "When the feet hold steady, the snare can sing",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Independence / Comping",
+    focus: "Independence",
     prerequisites: ['independence-chapin-method', 'accented-singles'],
     nextLessons: ['jazz-comping-vocab', 'soloing-improvisation'],
     graduationCriteria: [
@@ -5612,7 +5612,7 @@ module.exports = {
     tagline: "Move clave to the foot, free the hands for everything else",
     duration: "25–30 min",
     difficulty: "Advanced",
-    focus: "Independence / Latin",
+    focus: "Independence",
     prerequisites: ['basic-coordination', 'latin-clave-intro'],
     nextLessons: ['latin-songo', 'latin-rumba'],
     graduationCriteria: [
@@ -5809,7 +5809,7 @@ module.exports = {
     tagline: "What happens when the groove pauses for breath",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Fills / Transitions",
+    focus: "Fills",
     prerequisites: ['first-beat', 'two-bar-phrasing'],
     nextLessons: ['pickup-fills', 'fills-around-kit', 'rock-basic-fills'],
     graduationCriteria: [
@@ -5932,7 +5932,7 @@ module.exports = {
     tagline: "The short gesture that lands you on beat 1",
     duration: "15–20 min",
     difficulty: "Beginner",
-    focus: "Fills / Transitions",
+    focus: "Fills",
     prerequisites: ['basic-fills'],
     nextLessons: ['fills-around-kit'],
     graduationCriteria: [
@@ -6098,7 +6098,7 @@ module.exports = {
     tagline: "Orchestration: how a fill moves through the drums",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Fills / Orchestration",
+    focus: "Fills",
     prerequisites: ['basic-fills'],
     nextLessons: ['rock-linear-fills'],
     graduationCriteria: [
@@ -6261,7 +6261,7 @@ module.exports = {
     tagline: "Three click placements, three different mindsets",
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Practice / Time",
+    focus: "Practice Method",
     prerequisites: ['counting-eighths'],
     nextLessons: ['slow-practice'],
     graduationCriteria: [
@@ -6401,7 +6401,7 @@ module.exports = {
     tagline: "If it isn't bored, it isn't slow",
     duration: "10–15 min",
     difficulty: "Beginner",
-    focus: "Practice / Mindset",
+    focus: "Practice Method",
     prerequisites: ['the-practice-mindset'],
     nextLessons: ['recording-yourself'],
     graduationCriteria: [
@@ -6489,7 +6489,7 @@ module.exports = {
     tagline: "The mirror you cannot lie to",
     duration: "15 min",
     difficulty: "Intermediate",
-    focus: "Practice / Self-assessment",
+    focus: "Practice Method",
     prerequisites: ['first-beat'],
     nextLessons: ['ear-training', 'practice-systems'],
     graduationCriteria: [
@@ -6556,7 +6556,7 @@ module.exports = {
     tagline: "The drummer hears form, not just bars",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Form / Application",
+    focus: "Phrasing & Form",
     prerequisites: ['first-beat-color', 'basic-fills'],
     nextLessons: ['two-minute-loops'],
     graduationCriteria: [
@@ -6721,7 +6721,7 @@ module.exports = {
     tagline: "Holding one groove for two minutes — harder than it sounds",
     duration: "10–15 min",
     difficulty: "Beginner",
-    focus: "Time / Discipline",
+    focus: "Practice Method",
     prerequisites: ['first-beat'],
     nextLessons: ['rock-eighth-grooves'],
     graduationCriteria: [
@@ -6828,7 +6828,7 @@ module.exports = {
     tagline: "One drum, six different voices",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Articulation / Color",
+    focus: "Articulation",
     prerequisites: ['first-beat-color'],
     nextLessons: ['ghost-notes-found', 'accent-tap'],
     graduationCriteria: [
@@ -6993,7 +6993,7 @@ module.exports = {
     tagline: "Five different sounds from two cymbals",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Articulation / Color",
+    focus: "Articulation",
     prerequisites: ['first-beat'],
     nextLessons: ['rock-open-hats'],
     graduationCriteria: [
@@ -7144,7 +7144,7 @@ module.exports = {
     tagline: "Where on the cymbal you hit changes everything",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Articulation / Color",
+    focus: "Articulation",
     prerequisites: ['first-beat'],
     nextLessons: ['jazz-ride-pattern', 'brushes-mastery'],
     graduationCriteria: [
@@ -7300,7 +7300,7 @@ module.exports = {
     tagline: "An audible whisper — built from finger control",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Dynamics / Technique",
+    focus: "Dynamics",
     prerequisites: ['first-beat-color', 'single-stroke-roll'],
     nextLessons: ['funk-ghost-notes', 'snare-voicings'],
     graduationCriteria: [
@@ -7413,7 +7413,7 @@ module.exports = {
     tagline: "Two heights, one motion — the basis of every accent",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Technique / Dynamics",
+    focus: "Dynamics",
     prerequisites: ['single-stroke-roll', 'accented-singles'],
     nextLessons: ['moeller-stroke'],
     graduationCriteria: [
@@ -7526,7 +7526,7 @@ module.exports = {
     tagline: "Whip, tap, lift — one motion that plays loud-soft-loud effortlessly",
     duration: "20–25 min",
     difficulty: "Intermediate",
-    focus: "Technique",
+    focus: "Hand Technique",
     prerequisites: ['accent-tap'],
     nextLessons: ['finger-control'],
     graduationCriteria: [
@@ -7634,7 +7634,7 @@ module.exports = {
     tagline: "The rear three fingers as the engine of soft, fast notes",
     duration: "20–25 min",
     difficulty: "Advanced",
-    focus: "Technique",
+    focus: "Hand Technique",
     prerequisites: ['moeller-stroke'],
     nextLessons: ['brushes-mastery'],
     graduationCriteria: [
@@ -7909,7 +7909,7 @@ module.exports = {
     tagline: "When the second bar answers the first",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Phrasing / Form",
+    focus: "Phrasing & Form",
     prerequisites: ['first-beat-color'],
     nextLessons: ['basic-fills', 'the-shuffle'],
     graduationCriteria: [
@@ -8143,7 +8143,7 @@ module.exports = {
     tagline: "Swing eighths over a rock backbeat",
     duration: "20–25 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['triplet-feel', 'first-beat'],
     nextLessons: ['rock-shuffle-rock', 'jazz-medium-swing'],
     graduationCriteria: [
@@ -8397,7 +8397,7 @@ module.exports = {
     tagline: "The pulse you don't hear and can't live without",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Foot Technique / Coordination",
+    focus: "Foot Technique",
     prerequisites: ['first-beat'],
     nextLessons: ['jazz-comping-foot', 'basic-coordination'],
     graduationCriteria: [
@@ -8670,7 +8670,7 @@ module.exports = {
     tagline: "The chick on 2 and 4 — jazz's non-negotiable pulse",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Coordination / Time-Feel",
+    focus: "Coordination",
     prerequisites: ['jazz-ride-pattern'],
     nextLessons: ['jazz-comping-basics', 'jazz-medium-swing'],
     graduationCriteria: [
@@ -8787,7 +8787,7 @@ module.exports = {
     tagline: "The right hand sweeps, the left hand taps",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Technique / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['stick-grip', 'jazz-ride-pattern'],
     nextLessons: ['jazz-ballad', 'brushes-mastery'],
     graduationCriteria: [
@@ -8902,7 +8902,7 @@ module.exports = {
     tagline: "Brushes at 65 BPM — the long, breathing pulse",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['jazz-brushes-intro'],
     nextLessons: ['jazz-medium-swing', 'brushes-mastery'],
     graduationCriteria: [
@@ -9046,7 +9046,7 @@ module.exports = {
     tagline: "Ride + foot + feathered kick + one snare hit per bar",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['jazz-ride-pattern', 'jazz-comping-foot'],
     nextLessons: ['jazz-comping-basics'],
     graduationCriteria: [
@@ -9162,7 +9162,7 @@ module.exports = {
     tagline: "The snare's eight most common positions, one per bar",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Independence / Vocabulary",
+    focus: "Independence",
     prerequisites: ['jazz-medium-swing', 'independence-chapin-method'],
     nextLessons: ['jazz-comping-vocab', 'jazz-trading-fours'],
     graduationCriteria: [
@@ -9318,7 +9318,7 @@ module.exports = {
     tagline: "Three bars of comping, one bar of solo — repeat",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Form / Soloing",
+    focus: "Soloing & Improvisation",
     prerequisites: ['jazz-comping-basics', 'basic-fills'],
     nextLessons: ['jazz-up-tempo-intro', 'soloing-improvisation'],
     graduationCriteria: [
@@ -9597,7 +9597,7 @@ module.exports = {
     tagline: "Jazz tunes that swing as a bossa — Wave, Desafinado, etc.",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Genre Hybrid / Vocabulary",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-bossa-nova', 'jazz-ride-pattern'],
     nextLessons: ['jazz-comping-vocab'],
     graduationCriteria: [
@@ -9763,7 +9763,7 @@ module.exports = {
     tagline: "At 250 BPM, less is faster",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['jazz-medium-swing'],
     nextLessons: ['jazz-up-tempo'],
     graduationCriteria: [
@@ -9892,7 +9892,7 @@ module.exports = {
     tagline: "The ride pattern fragments — the pulse is implied",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['jazz-comping-basics'],
     nextLessons: ['jazz-broken-time'],
     graduationCriteria: [
@@ -10036,7 +10036,7 @@ module.exports = {
     tagline: "The Philly Joe / Max Roach / Kenny Clarke language",
     duration: "25–30 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['jazz-comping-basics'],
     nextLessons: ['jazz-comping-vocab', 'jazz-modal-comping'],
     graduationCriteria: [
@@ -10193,7 +10193,7 @@ module.exports = {
     tagline: "Sustained 220–280 BPM swing",
     duration: "25–30 min",
     difficulty: "Advanced",
-    focus: "Time / Endurance",
+    focus: "Speed & Endurance",
     prerequisites: ['jazz-up-tempo-intro'],
     nextLessons: ['jazz-modern-jazz', 'jazz-tony-williams'],
     graduationCriteria: [
@@ -10336,7 +10336,7 @@ module.exports = {
     tagline: "The full vocabulary, not just a fragmented ride",
     duration: "25–30 min",
     difficulty: "Advanced",
-    focus: "Time / Phrasing",
+    focus: "Phrasing & Form",
     prerequisites: ['jazz-broken-time-intro'],
     nextLessons: ['jazz-post-bop', 'jazz-modern-jazz'],
     graduationCriteria: [
@@ -10606,7 +10606,7 @@ module.exports = {
     tagline: "Comping when the chord doesn't change",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['jazz-bop-vocabulary'],
     nextLessons: ['jazz-elvin-jones'],
     graduationCriteria: [
@@ -10866,7 +10866,7 @@ module.exports = {
     tagline: "From single figures to snare melody",
     duration: "25–30 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Melodic Snare",
+    focus: "Independence",
     prerequisites: ['jazz-comping-basics'],
     nextLessons: ['independence-melodic-snare', 'soloing-improvisation'],
     graduationCriteria: [
@@ -11103,7 +11103,7 @@ module.exports = {
     tagline: "Pulse-optional playing — texture, density, color",
     duration: "25–30 min",
     difficulty: "Expert",
-    focus: "Texture / Improvisation",
+    focus: "Soloing & Improvisation",
     prerequisites: ['jazz-broken-time', 'jazz-modal-comping'],
     nextLessons: ['solo-drumming'],
     graduationCriteria: [
@@ -11290,7 +11290,7 @@ module.exports = {
     tagline: "The conversational language between Tony and Brian Blade",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Independence / Vocabulary",
+    focus: "Independence",
     prerequisites: ['jazz-comping-vocab', 'independence-melodic-snare'],
     nextLessons: ['jazz-modern-jazz'],
     graduationCriteria: [
@@ -11546,7 +11546,7 @@ module.exports = {
     tagline: "The rolling 8th-note triplet feel",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Triplet Independence / Vocabulary",
+    focus: "Independence",
     prerequisites: ['jazz-modal-comping', 'fusion-polyrhythms'],
     nextLessons: ['jazz-tony-williams', 'polyrhythms-3-2'],
     graduationCriteria: [
@@ -11776,7 +11776,7 @@ module.exports = {
     tagline: "Quarter-note ride, hi-hat as second ride, intensity through space",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time / Vocabulary",
+    focus: "Time & Feel",
     prerequisites: ['jazz-up-tempo', 'jazz-broken-time'],
     nextLessons: ['jazz-modern-jazz', 'fusion-tony-williams-fusion'],
     graduationCriteria: [
@@ -11980,7 +11980,7 @@ module.exports = {
     tagline: "Capstone — flexible swing, broken-time, melodic-snare",
     duration: "35 min",
     difficulty: "Expert",
-    focus: "Capstone / Vocabulary",
+    focus: "Phrasing & Form",
     prerequisites: ['jazz-post-bop', 'jazz-bop-vocabulary'],
     nextLessons: ['solo-drumming', 'soloing-improvisation'],
     graduationCriteria: [
@@ -12313,7 +12313,7 @@ module.exports = {
     tagline: "The two-bar pulse that everything in Latin is built on",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Pulse",
+    focus: "Time & Feel",
     prerequisites: ['counting-eighths'],
     nextLessons: ['latin-bossa-nova', 'latin-cha-cha', 'latin-mambo-intro', 'independence-clave-foot'],
     graduationCriteria: [
@@ -12486,7 +12486,7 @@ module.exports = {
     tagline: "Brazil's main street rhythm, played with two feet and one hand",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre / Coordination",
+    focus: "Coordination",
     prerequisites: ['counting-sixteenths', 'first-beat'],
     nextLessons: ['latin-cha-cha'],
     listening: [
@@ -12686,7 +12686,7 @@ module.exports = {
     tagline: "The easiest Latin rhythm to integrate with a rock backbeat",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-clave-intro'],
     nextLessons: ['latin-mambo-intro'],
     listening: [
@@ -12797,7 +12797,7 @@ module.exports = {
     tagline: "The bell pattern that drives every salsa tune",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-clave-intro'],
     nextLessons: ['latin-songo', 'latin-cascara'],
     listening: [
@@ -12952,7 +12952,7 @@ module.exports = {
     tagline: "Cuba's 1970s bridge between folkloric tradition and modern fusion",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre / Coordination",
+    focus: "Coordination",
     prerequisites: ['latin-mambo-intro', 'latin-clave-intro'],
     nextLessons: ['latin-mozambique', 'fusion-clave-fusion'],
     listening: [
@@ -13157,7 +13157,7 @@ module.exports = {
     tagline: "Steve Gadd's Latin contribution — the funkiest Cuban hybrid",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-clave-intro'],
     nextLessons: ['latin-cascara', 'fusion-clave-fusion'],
     listening: [
@@ -13297,7 +13297,7 @@ module.exports = {
     tagline: "Dominican Republic's fast boom-chick with tambora on the toms",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['counting-eighths'],
     nextLessons: ['latin-cumbia'],
     listening: [
@@ -13437,7 +13437,7 @@ module.exports = {
     tagline: "Colombia's slower cousin to merengue — accent on the &-of-2",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['counting-eighths'],
     nextLessons: ['latin-merengue'],
     listening: [
@@ -13563,7 +13563,7 @@ module.exports = {
     tagline: "The timbale player's shell pattern, translated to the kit",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Coordination",
+    focus: "Coordination",
     prerequisites: ['latin-mambo-intro', 'latin-clave-intro'],
     nextLessons: ['latin-rumba', 'latin-songo'],
     listening: [
@@ -13751,7 +13751,7 @@ module.exports = {
     tagline: "Cuba's folkloric heartbeat — clave, cáscara, and the cross-stick",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Clave / Genre / Cross-Stick",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-clave-intro', 'latin-cascara'],
     nextLessons: ['latin-guaguanco', 'latin-6-8-afro-cuban'],
     listening: [
@@ -13926,7 +13926,7 @@ module.exports = {
     tagline: "Two pulses inside one bar — the African 6/8 framework",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Meter / Pulse / Bell Pattern",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-clave-intro', 'triplet-feel'],
     nextLessons: ['latin-bembe', 'polyrhythms-3-2'],
     listening: [
@@ -14081,7 +14081,7 @@ module.exports = {
     tagline: "Yoruba ceremonial 6/8 — the bell as the center of gravity",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "6/8 Folkloric / Independence",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-6-8-afro-cuban'],
     nextLessons: ['latin-yoruba', 'latin-comparsa'],
     listening: [
@@ -14224,7 +14224,7 @@ module.exports = {
     tagline: "Translating three congas to one kit",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Folkloric Translation / Voicing",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-rumba'],
     nextLessons: ['latin-folkloric', 'latin-modern-hybrid'],
     listening: [
@@ -14403,7 +14403,7 @@ module.exports = {
     tagline: "Cuban Carnaval — march drums, festival heat",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "March Feel / Conga Line / Festive Pulse",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-6-8-afro-cuban'],
     nextLessons: ['latin-folkloric'],
     listening: [
@@ -14539,7 +14539,7 @@ module.exports = {
     tagline: "Playing a whole percussion ensemble on one drum kit",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Orchestration / Genre",
+    focus: "Fills",
     prerequisites: ['latin-rumba', 'latin-6-8-afro-cuban', 'latin-guaguanco'],
     nextLessons: ['latin-modern-hybrid', 'latin-bata-rhythms'],
     listening: [
@@ -14707,7 +14707,7 @@ module.exports = {
     tagline: "Where Antonio Sanchez and El Negro live — clave inside fusion",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Coordination / Genre / Independence",
+    focus: "Independence",
     prerequisites: ['latin-songo', 'latin-mozambique'],
     nextLessons: ['fusion-modern-fusion'],
     listening: [
@@ -14875,7 +14875,7 @@ module.exports = {
     tagline: "Sacred Yoruba drum tradition, surveyed respectfully on a single kit",
     duration: "25 min",
     difficulty: "Expert",
-    focus: "Cultural Survey / Vocabulary",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-bembe', 'latin-folkloric'],
     nextLessons: ['latin-iyesa', 'latin-yoruba'],
     listening: [
@@ -15023,7 +15023,7 @@ module.exports = {
     tagline: "A Yoruba-derived 6/8 cousin of bembe, with its own bell and its own pulse",
     duration: "20 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Cultural Survey",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-bata-rhythms'],
     nextLessons: ['latin-yoruba', 'latin-folkloric'],
     listening: [
@@ -15122,7 +15122,7 @@ module.exports = {
     tagline: "A respectful survey of the family that gave rise to bembe, iyesa, and bata",
     duration: "25 min",
     difficulty: "Expert",
-    focus: "Cultural Survey / Vocabulary",
+    focus: "Genre Vocabulary",
     prerequisites: ['latin-bata-rhythms', 'latin-iyesa'],
     nextLessons: ['solo-drumming'],
     listening: [
@@ -15240,7 +15240,7 @@ module.exports = {
     tagline: "The Purdie shuffle — triplets, ghosts, and a half-time backbeat",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Groove / Triplet Feel / Ghost Notes",
+    focus: "Pocket & Groove",
     prerequisites: ['paradiddle', 'ghost-notes-found'],
     nextLessons: ['fusion-linear-basics', 'funk-purdie-shuffle'],
     graduationCriteria: [
@@ -15434,7 +15434,7 @@ module.exports = {
     tagline: "One limb at a time — the foundation of fusion vocabulary",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Coordination / Linear Playing",
+    focus: "Linear Playing",
     prerequisites: ['paradiddle', 'basic-coordination'],
     nextLessons: ['fusion-linear-vocab'],
     graduationCriteria: [
@@ -15639,7 +15639,7 @@ module.exports = {
     tagline: "Where rock backbeat meets jazz ride — the Steely Dan zone",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Genre / Time-Feel",
+    focus: "Time & Feel",
     prerequisites: ['jazz-ride-pattern', 'rock-eighth-grooves'],
     nextLessons: ['fusion-broken-time'],
     graduationCriteria: [
@@ -15775,7 +15775,7 @@ module.exports = {
     tagline: "Three-, four-, and six-note linear cells — the building blocks",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Coordination",
+    focus: "Coordination",
     prerequisites: ['fusion-linear-basics'],
     nextLessons: ['fusion-displacement', 'fusion-sixteenth'],
     graduationCriteria: [
@@ -16029,7 +16029,7 @@ module.exports = {
     tagline: "Move the backbeat — the same groove, somewhere unexpected",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Coordination / Time-Feel",
+    focus: "Coordination",
     prerequisites: ['fusion-coordination-foundation', 'ghost-notes-found'],
     nextLessons: ['fusion-sixteenth', 'fusion-superimposition'],
     graduationCriteria: [
@@ -16199,7 +16199,7 @@ module.exports = {
     tagline: "The 16th-note hi-hat carpet — fusion's most-played texture",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Groove / Coordination / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['counting-sixteenths', 'fusion-coordination-foundation'],
     nextLessons: ['fusion-displacement', 'fusion-clave-fusion'],
     graduationCriteria: [
@@ -16371,7 +16371,7 @@ module.exports = {
     tagline: "The ride fragments, the kick takes time — Tony Williams' fusion vocabulary",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Time-Feel / Vocabulary / Independence",
+    focus: "Independence",
     prerequisites: ['fusion-coordination-foundation', 'jazz-broken-time-intro'],
     nextLessons: ['fusion-soloing', 'fusion-superimposition'],
     graduationCriteria: [
@@ -16518,7 +16518,7 @@ module.exports = {
     tagline: "The 16th-note pulse that turns a beat into funk",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Density",
+    focus: "Time & Feel",
     prerequisites: ['counting-sixteenths', 'funk-ghost-notes'],
     nextLessons: ['funk-pocket-drumming', 'funk-clyde-stubblefield'],
     graduationCriteria: [
@@ -16712,7 +16712,7 @@ module.exports = {
     tagline: "Where the time sits — at, behind, and in front of the click",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-sixteenth-feel', 'funk-ghost-notes'],
     nextLessons: ['funk-clyde-stubblefield'],
     graduationCriteria: [
@@ -16844,7 +16844,7 @@ module.exports = {
     tagline: "The Funky Drummer feel — ghost notes, kick syncopation, hat-open punctuation",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-pocket-drumming'],
     nextLessons: ['funk-james-brown', 'funk-the-meters-intro'],
     graduationCriteria: [
@@ -17094,7 +17094,7 @@ module.exports = {
     tagline: "Zigaboo's broken-snare second-line approach — first taste",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / New Orleans",
+    focus: "Genre Vocabulary",
     prerequisites: ['funk-sixteenth-feel'],
     nextLessons: ['funk-the-meters', 'funk-new-orleans'],
     graduationCriteria: [
@@ -17241,7 +17241,7 @@ module.exports = {
     tagline: "Clyde + Jabo — the JB language: the One, sparse precision, ensemble locking",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Ensemble Awareness",
+    focus: "Listening & Analysis",
     prerequisites: ['funk-clyde-stubblefield'],
     nextLessons: ['funk-purdie-intro', 'funk-ghost-displacement'],
     graduationCriteria: [
@@ -17478,7 +17478,7 @@ module.exports = {
     tagline: "No two limbs at once — the Garibaldi/Tower of Power approach",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Coordination / Linear",
+    focus: "Linear Playing",
     prerequisites: ['funk-sixteenth-feel', 'fusion-linear-basics'],
     nextLessons: ['funk-the-meters', 'funk-displacement'],
     graduationCriteria: [
@@ -17689,7 +17689,7 @@ module.exports = {
     tagline: "Deeper Zigaboo — broken backbeat, rolling 16ths, kick-bass conversation",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / New Orleans",
+    focus: "Genre Vocabulary",
     prerequisites: ['funk-the-meters-intro', 'funk-pocket-drumming'],
     nextLessons: ['funk-new-orleans', 'funk-displacement'],
     graduationCriteria: [
@@ -17927,7 +17927,7 @@ module.exports = {
     tagline: "Ghost-noted density and the half-time shuffle preview",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Studio Feel",
+    focus: "Studio & Sound",
     prerequisites: ['funk-james-brown'],
     nextLessons: ['funk-purdie-shuffle'],
     graduationCriteria: [
@@ -18159,7 +18159,7 @@ module.exports = {
     tagline: "Moving the ghost notes off their default positions for new feels",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Ghost-Note Variation",
+    focus: "Articulation",
     prerequisites: ['funk-ghost-notes', 'funk-clyde-stubblefield'],
     nextLessons: ['funk-purdie-shuffle', 'funk-displacement'],
     graduationCriteria: [
@@ -18361,7 +18361,7 @@ module.exports = {
     tagline: "The parade march that became American funk",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Genre / Vocabulary / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-the-meters', 'latin-clave-intro'],
     nextLessons: ['funk-displacement', 'latin-modern-hybrid'],
     graduationCriteria: [
@@ -18525,7 +18525,7 @@ module.exports = {
     tagline: "Move the backbeat. Watch the whole groove transform.",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Coordination / Phrasing",
+    focus: "Phrasing & Form",
     prerequisites: ['funk-ghost-displacement', 'fusion-displacement'],
     nextLessons: ['funk-d-angelo', 'funk-purdie-shuffle'],
     graduationCriteria: [
@@ -18689,7 +18689,7 @@ module.exports = {
     tagline: "Half-time shuffle plus ghost notes — every triplet partial audible",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Triplet feel / Ghost notes / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-purdie-intro', 'fusion-half-time-shuffle'],
     nextLessons: ['funk-d-angelo'],
     graduationCriteria: [
@@ -18891,7 +18891,7 @@ module.exports = {
     tagline: "Linear 16ths, open hats, rim-shot backbeat — the Oakland sound",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Linear technique / Hat orchestration",
+    focus: "Linear Playing",
     prerequisites: ['funk-linear-funk'],
     nextLessons: ['funk-quarter-pulse'],
     graduationCriteria: [
@@ -19094,7 +19094,7 @@ module.exports = {
     tagline: "The opposite of busy 16ths — funk built on space",
     duration: "20 min",
     difficulty: "Advanced",
-    focus: "Pocket / Restraint",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-pocket-drumming'],
     nextLessons: ['funk-modern-neo-soul'],
     graduationCriteria: [
@@ -19225,7 +19225,7 @@ module.exports = {
     tagline: "The deliberately late pocket — drum and bass playing 'wrong' on purpose",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time-feel / Micro-timing / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-purdie-shuffle', 'funk-displacement'],
     nextLessons: ['funk-modern-neo-soul', 'funk-questlove'],
     graduationCriteria: [
@@ -19399,7 +19399,7 @@ module.exports = {
     tagline: "Drum-machine precision meeting human swing",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Genre / Programming aesthetic / Pocket",
+    focus: "Studio & Sound",
     prerequisites: ['funk-d-angelo'],
     nextLessons: ['funk-modern-r-and-b', 'hiphop-neo-soul'],
     graduationCriteria: [
@@ -19653,7 +19653,7 @@ module.exports = {
     tagline: "The Roots / Voodoo lineage — extreme behind-the-beat as identity",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time-feel / Genre / Pocket",
+    focus: "Pocket & Groove",
     prerequisites: ['funk-d-angelo', 'funk-modern-neo-soul'],
     nextLessons: ['hiphop-questlove'],
     graduationCriteria: [
@@ -19853,7 +19853,7 @@ module.exports = {
     tagline: "Polyrhythmic ghost notes inside a backbeat — Vinnie's funk vocabulary",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Polyrhythm / Coordination / Genre",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['funk-james-brown', 'fusion-displacement'],
     nextLessons: ['funk-modern-r-and-b'],
     graduationCriteria: [
@@ -20050,7 +20050,7 @@ module.exports = {
     tagline: "2020s production vocabulary — 808s, hat rolls, programmed-feel snare",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Genre / Production aesthetic / Vocabulary",
+    focus: "Studio & Sound",
     prerequisites: ['funk-modern-neo-soul'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -20262,7 +20262,7 @@ module.exports = {
     tagline: "Playing in, on, and behind the click — the same notes, three different feels",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Time-Feel",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-boom-bap', 'funk-pocket-drumming'],
     nextLessons: ['hiphop-classic'],
     graduationCriteria: [
@@ -20385,7 +20385,7 @@ module.exports = {
     tagline: "The 90s golden-era vocabulary — boom on 1, bap on 2 and 4, kick on the & of 3",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-boom-bap', 'hiphop-pocket-time'],
     nextLessons: ['hiphop-r-and-b-basic'],
     graduationCriteria: [
@@ -20583,7 +20583,7 @@ module.exports = {
     tagline: "Slower than hip-hop, smoother, with cross-stick and the swing-16th feel",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-eighth-grooves'],
     nextLessons: ['hiphop-quiet-storm', 'hiphop-neo-soul'],
     graduationCriteria: [
@@ -20740,7 +20740,7 @@ module.exports = {
     tagline: "Late-night R&B — slow, ultra-clean, brush- or rod-driven",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-r-and-b-basic'],
     nextLessons: ['hiphop-neo-soul'],
     graduationCriteria: [
@@ -20843,7 +20843,7 @@ module.exports = {
     tagline: "Translating trap drum vocabulary onto an acoustic kit",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['counting-sixteenths', 'hiphop-classic'],
     nextLessons: ['hiphop-808-translation'],
     graduationCriteria: [
@@ -21013,7 +21013,7 @@ module.exports = {
     tagline: "Behind-the-beat pocket, ghost notes, brush-soft snare — the D'Angelo lineage",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-r-and-b-basic', 'hiphop-pocket-time'],
     nextLessons: ['hiphop-questlove', 'funk-d-angelo'],
     graduationCriteria: [
@@ -21209,7 +21209,7 @@ module.exports = {
     tagline: "2010s+ R&B — sparse, sub-bass-aware, trap-influenced, atmospheric",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-r-and-b-basic', 'funk-modern-r-and-b'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -21343,7 +21343,7 @@ module.exports = {
     tagline: "The Outkast / UGK tradition — slower, sparse hat, heavy 808-style kick",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-classic'],
     nextLessons: ['hiphop-trap'],
     graduationCriteria: [
@@ -21501,7 +21501,7 @@ module.exports = {
     tagline: "The Roots pocket — drum-machine-inspired, deeply behind, ghost-note rich",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Style Study",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-neo-soul'],
     nextLessons: ['hiphop-chris-dave', 'funk-questlove'],
     graduationCriteria: [
@@ -21745,7 +21745,7 @@ module.exports = {
     tagline: "Translating a programmed beat to an acoustic kit",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Translation / Time-Feel",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-trap', 'hiphop-neo-soul'],
     nextLessons: ['hiphop-808-translation', 'hiphop-modern-production'],
     graduationCriteria: [
@@ -21930,7 +21930,7 @@ module.exports = {
     tagline: "The deliberately-wrong placement that makes the beat feel right",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Time-Feel / Displacement",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-studio-translation', 'fusion-displacement'],
     nextLessons: ['hiphop-j-dilla'],
     graduationCriteria: [
@@ -22077,7 +22077,7 @@ module.exports = {
     tagline: "Trap 808 sub-bass kicks on an acoustic kit",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Trap / Translation",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-trap'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -22252,7 +22252,7 @@ module.exports = {
     tagline: "Behind-the-beat, broken-snare, almost-falling-apart-but-never",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Time-Feel / Vocabulary / Genre",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-questlove', 'fusion-displacement'],
     nextLessons: ['hiphop-anderson-paak'],
     graduationCriteria: [
@@ -22424,7 +22424,7 @@ module.exports = {
     tagline: "The singer-drummer pocket — neo-soul, hip-hop, funk, all at once",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Pocket / Genre / Song-Awareness",
+    focus: "Listening & Analysis",
     prerequisites: ['hiphop-chris-dave'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -22611,7 +22611,7 @@ module.exports = {
     tagline: "Conflicting micro-displacements — the math that sounds drunk",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time-Feel / Displacement / Producer Mind",
+    focus: "Time & Feel",
     prerequisites: ['hiphop-displacement', 'hiphop-questlove'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -22774,7 +22774,7 @@ module.exports = {
     tagline: "2020s producer-drumming — sparse, sub-heavy, hat-roll-driven",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Trap / Modern",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-trap', 'hiphop-808-translation'],
     nextLessons: ['hiphop-future-r-and-b'],
     graduationCriteria: [
@@ -22947,7 +22947,7 @@ module.exports = {
     tagline: "Locking with a sample loop — knowing when to play less",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Ensemble Awareness / Pocket / Restraint",
+    focus: "Listening & Analysis",
     prerequisites: ['hiphop-classic', 'the-shuffle'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -23105,7 +23105,7 @@ module.exports = {
     tagline: "The drum machine in a human body — hyper-precise, hyper-clean",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Precision / Electronic Sensibility",
+    focus: "Studio & Sound",
     prerequisites: ['fusion-modern-fusion', 'hiphop-modern-r-and-b'],
     nextLessons: ['hiphop-future-r-and-b'],
     graduationCriteria: [
@@ -23287,7 +23287,7 @@ module.exports = {
     tagline: "The leading edge — alternate grids, hybrid live-electronic, and what comes next",
     duration: "35 min",
     difficulty: "Expert",
-    focus: "Speculative / Hybrid / Frontier",
+    focus: "Genre Vocabulary",
     prerequisites: ['hiphop-modern-production', 'hiphop-louis-cole'],
     nextLessons: [],
     graduationCriteria: [
@@ -23486,7 +23486,7 @@ module.exports = {
     tagline: "Heavy, slow, and loud — metal's power-groove vocabulary",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-eighth-grooves', 'first-beat-color'],
     nextLessons: ['metal-headbang', 'metal-quarter-bass'],
     graduationCriteria: [
@@ -23597,7 +23597,7 @@ module.exports = {
     tagline: "Eighth-note kick, eighth-note china, perpetual forward drive",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-power-grooves'],
     nextLessons: ['metal-quarter-bass', 'metal-thrash'],
     graduationCriteria: [
@@ -23933,7 +23933,7 @@ module.exports = {
     tagline: "Hands and feet alternating at maximum speed — extreme metal's signature",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Foot Technique / Coordination",
+    focus: "Foot Technique",
     prerequisites: ['metal-eighth-bass', 'single-stroke-roll'],
     nextLessons: ['metal-d-beat', 'metal-extreme'],
     graduationCriteria: [
@@ -24130,7 +24130,7 @@ module.exports = {
     tagline: "Odd meters, polyrhythmic kicks, metric modulation — Tool / Meshuggah / DT",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Coordination",
+    focus: "Coordination",
     prerequisites: ['fusion-odd-meters', 'metal-double-bass-basics'],
     nextLessons: ['metal-djent', 'metal-groove-metal'],
     graduationCriteria: [
@@ -24325,7 +24325,7 @@ module.exports = {
     tagline: "Discharge-style: fast 8th kicks, snare on 2/4, the crust-punk foundation",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-eighth-bass'],
     nextLessons: ['metal-thrash', 'metal-extreme'],
     graduationCriteria: [
@@ -24441,7 +24441,7 @@ module.exports = {
     tagline: "Lombardo / Ulrich vocabulary — fast 8th double bass, ride bell, backbeat",
     duration: "30 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-eighth-bass', 'metal-d-beat'],
     nextLessons: ['metal-extreme', 'metal-groove-metal'],
     graduationCriteria: [
@@ -24579,7 +24579,7 @@ module.exports = {
     tagline: "Heavy syncopation, double bass on the off-beats — Pantera, Lamb of God, Sepultura",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-power-grooves'],
     nextLessons: ['metal-djent'],
     graduationCriteria: [
@@ -24738,7 +24738,7 @@ module.exports = {
     tagline: "Death, black, grindcore — the language of speed",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Genre / Vocabulary / Speed",
+    focus: "Speed & Endurance",
     prerequisites: ['metal-blast-beats', 'metal-thrash'],
     nextLessons: ['metal-gravity-rolls', 'metal-bomb-blasts'],
     graduationCriteria: [
@@ -24881,7 +24881,7 @@ module.exports = {
     tagline: "One hand, two surfaces, four notes per beat",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Hand Technique / Speed",
+    focus: "Speed & Endurance",
     prerequisites: ['metal-blast-beats', 'double-stroke-roll'],
     nextLessons: ['metal-bomb-blasts', 'metal-hyperblasts'],
     graduationCriteria: [
@@ -25019,7 +25019,7 @@ module.exports = {
     tagline: "Snare and kick on the same 16th — twice the impact",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Foot Technique / Vocabulary",
+    focus: "Foot Technique",
     prerequisites: ['metal-extreme'],
     nextLessons: ['metal-hyperblasts'],
     graduationCriteria: [
@@ -25131,7 +25131,7 @@ module.exports = {
     tagline: "280 BPM and beyond — the upper limit of human drumming",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Endurance / Extreme Speed",
+    focus: "Speed & Endurance",
     prerequisites: ['metal-bomb-blasts', 'metal-gravity-rolls'],
     nextLessons: ['metal-tech-death'],
     graduationCriteria: [
@@ -25263,7 +25263,7 @@ module.exports = {
     tagline: "Polyrhythmic kick over a square backbeat — the Meshuggah inheritance",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Polyrhythm / Genre / Coordination",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['metal-prog-metal', 'fusion-polyrhythms'],
     nextLessons: ['metal-polymeters', 'metal-mathcore'],
     graduationCriteria: [
@@ -25459,7 +25459,7 @@ module.exports = {
     tagline: "Death-metal speed meets jazz harmony and shifting meters",
     duration: "30–35 min",
     difficulty: "Expert",
-    focus: "Genre / Meter / Vocabulary",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-extreme', 'metal-djent'],
     nextLessons: ['metal-mathcore'],
     graduationCriteria: [
@@ -25625,7 +25625,7 @@ module.exports = {
     tagline: "Different limbs in different meters at the same time",
     duration: "35 min",
     difficulty: "Expert",
-    focus: "Polymeter / Independence",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['metal-djent', 'fusion-superimposition'],
     nextLessons: ['metal-metric-modulation'],
     graduationCriteria: [
@@ -25808,7 +25808,7 @@ module.exports = {
     tagline: "Changing meter mid-song without losing the listener",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Meter / Modulation",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-metric-modulation', 'metal-prog-metal'],
     nextLessons: ['metal-mathcore'],
     graduationCriteria: [
@@ -25955,7 +25955,7 @@ module.exports = {
     tagline: "Controlled chaos — meter changes every bar, dissonant phrasing, no rest",
     duration: "35 min",
     difficulty: "Expert",
-    focus: "Meter / Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['metal-tech-death', 'metal-polymeters'],
     nextLessons: ['metal-gospel-chops'],
     graduationCriteria: [
@@ -26155,7 +26155,7 @@ module.exports = {
     tagline: "When Tony Royster Jr's hand bursts meet Meshuggah's foot grid",
     duration: "30–35 min",
     difficulty: "Expert",
-    focus: "Hand Speed / Vocabulary Fusion",
+    focus: "Speed & Endurance",
     prerequisites: ['metal-tech-death', 'metal-djent'],
     nextLessons: [],
     graduationCriteria: [
@@ -26345,7 +26345,7 @@ module.exports = {
     tagline: "Rock's most economical groove — one hat hit per beat",
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['first-beat'],
     nextLessons: ['rock-eighth-grooves'],
     graduationCriteria: [
@@ -26433,7 +26433,7 @@ module.exports = {
     tagline: "The quiet cousin of the backbeat — rim-clicks instead of full snare",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Articulation / Dynamics",
+    focus: "Dynamics",
     prerequisites: ['first-beat-color'],
     nextLessons: ['rock-power-ballad'],
     graduationCriteria: [
@@ -26567,7 +26567,7 @@ module.exports = {
     tagline: "The four or five fills that every rock drummer plays in their first year",
     duration: "25 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Fills",
+    focus: "Fills",
     prerequisites: ['rock-eighth-grooves', 'basic-fills'],
     nextLessons: ['rock-tom-grooves', 'rock-linear-fills'],
     graduationCriteria: [
@@ -26763,7 +26763,7 @@ module.exports = {
     tagline: "Kick on every beat — the engine of disco, dance-pop, and country two-step",
     duration: "15 min",
     difficulty: "Beginner",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['first-beat'],
     nextLessons: ['rock-power-ballad', 'hiphop-r-and-b-basic'],
     graduationCriteria: [
@@ -26860,7 +26860,7 @@ module.exports = {
     tagline: "Pop session work — 16ths on the hat under a rock backbeat",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Hand Technique",
+    focus: "Hand Technique",
     prerequisites: ['counting-sixteenths', 'rock-eighth-grooves'],
     nextLessons: ['rock-open-hats', 'funk-sixteenth-feel'],
     graduationCriteria: [
@@ -27018,7 +27018,7 @@ module.exports = {
     tagline: "Open the hat on the &amp; — syncopated accent at the heart of rock",
     duration: "20 min",
     difficulty: "Intermediate",
-    focus: "Articulation / Syncopation",
+    focus: "Articulation",
     prerequisites: ['rock-eighth-grooves', 'hi-hat-articulation'],
     nextLessons: ['rock-half-time'],
     graduationCriteria: [
@@ -27162,7 +27162,7 @@ module.exports = {
     tagline: "The shuffle feel applied to a heavier rock backbeat",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Time-Feel / Genre",
+    focus: "Time & Feel",
     prerequisites: ['the-shuffle', 'rock-eighth-grooves'],
     nextLessons: ['rock-train-beat'],
     graduationCriteria: [
@@ -27350,7 +27350,7 @@ module.exports = {
     tagline: "Slow build, big chorus — the dynamic engine of '80s arena rock",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Dynamics / Form",
+    focus: "Phrasing & Form",
     prerequisites: ['rock-cross-stick'],
     nextLessons: ['rock-stadium-anthem'],
     graduationCriteria: [
@@ -27525,7 +27525,7 @@ module.exports = {
     tagline: "When the toms — not the snare — carry the groove",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Vocabulary / Voicing",
+    focus: "Articulation",
     prerequisites: ['first-beat-color'],
     nextLessons: ['rock-stadium-anthem', 'rock-linear-fills'],
     graduationCriteria: [
@@ -27690,7 +27690,7 @@ module.exports = {
     tagline: "Snare on 3 — when a 4-bar phrase feels like 2",
     duration: "20–25 min",
     difficulty: "Advanced",
-    focus: "Time / Feel",
+    focus: "Time & Feel",
     prerequisites: ['rock-eighth-grooves', 'two-bar-phrasing'],
     nextLessons: ['rock-double-time', 'fusion-half-time-shuffle'],
     graduationCriteria: [
@@ -27867,7 +27867,7 @@ module.exports = {
     tagline: "The chugging-locomotive feel of country and rockabilly",
     duration: "20 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-shuffle-rock'],
     nextLessons: ['rock-stadium-anthem'],
     graduationCriteria: [
@@ -28019,7 +28019,7 @@ module.exports = {
     tagline: "Fills built from never-overlapping cells — the Vinnie / Gadd influence",
     duration: "25 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Fills",
+    focus: "Fills",
     prerequisites: ['rock-basic-fills', 'fusion-linear-basics'],
     nextLessons: ['rock-prog'],
     graduationCriteria: [
@@ -28249,7 +28249,7 @@ module.exports = {
     tagline: "Snare on every off-beat — when the band shifts up a gear",
     duration: "20–25 min",
     difficulty: "Advanced",
-    focus: "Time / Feel",
+    focus: "Time & Feel",
     prerequisites: ['rock-half-time'],
     nextLessons: ['rock-prog'],
     graduationCriteria: [
@@ -28424,7 +28424,7 @@ module.exports = {
     tagline: "Big toms, crash on every 1, less-is-more arena drumming",
     duration: "20 min",
     difficulty: "Advanced",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-power-ballad'],
     nextLessons: ['rock-prog'],
     graduationCriteria: [
@@ -28610,7 +28610,7 @@ module.exports = {
     tagline: "Bonham, Bruford, Peart — the kit as orchestra",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Genre",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-half-time', 'fusion-odd-meters'],
     nextLessons: ['rock-odd-meter', 'fusion-prog-fusion'],
     graduationCriteria: [
@@ -28800,7 +28800,7 @@ module.exports = {
     tagline: "5/4, 7/8, 9/8, 13/8 — when rock leaves 4/4 behind",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time / Meter",
+    focus: "Time & Feel",
     prerequisites: ['fusion-odd-meters', 'rock-prog'],
     nextLessons: ['metal-prog-metal'],
     graduationCriteria: [
@@ -28947,7 +28947,7 @@ module.exports = {
     tagline: "Rock that borrows from funk, jazz, and Latin",
     duration: "25–30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Crossover",
+    focus: "Genre Vocabulary",
     prerequisites: ['rock-half-time', 'funk-displacement'],
     nextLessons: ['fusion-modern-fusion'],
     graduationCriteria: [
@@ -29157,7 +29157,7 @@ module.exports = {
     tagline: "Tight 16ths, click discipline, and knowing when to subtract",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Production / Studio Craft",
+    focus: "Studio & Sound",
     prerequisites: ['recording-yourself'],
     nextLessons: ['practice-systems', 'transcription-method'],
     graduationCriteria: [
@@ -29404,7 +29404,7 @@ module.exports = {
     tagline: "Verse pp, chorus mf, bridge ff — drumming the arrangement",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Dynamics / Musicianship",
+    focus: "Dynamics",
     prerequisites: ['dynamic-spectrum'],
     nextLessons: ['practice-systems'],
     graduationCriteria: [
@@ -29828,7 +29828,7 @@ module.exports = {
     tagline: "Linear lines, motivic cells, and triplet groupings around the kit",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Soloing / Vocabulary / Linear",
+    focus: "Linear Playing",
     prerequisites: ['jazz-comping-vocab', 'fusion-linear-vocab'],
     nextLessons: ['jazz-modern-jazz', 'soloing-improvisation'],
     listening: [
@@ -30050,7 +30050,7 @@ module.exports = {
     tagline: "Imply a different meter on top of the bar without changing the bar",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Polyrhythm / Phrasing / Illusion",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-polyrhythms', 'counting-subdivision'],
     nextLessons: ['fusion-metric-modulation'],
     graduationCriteria: [
@@ -30215,7 +30215,7 @@ module.exports = {
     tagline: "Clave under fusion vocabulary — the Goines/Ameen sound",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Genre Hybrid / Clave / Linear",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-clave-intro', 'fusion-coordination-foundation', 'latin-songo'],
     nextLessons: ['latin-modern-hybrid', 'fusion-modern-fusion'],
     graduationCriteria: [
@@ -30488,7 +30488,7 @@ module.exports = {
     tagline: "Heavy backbeat, jazz-derived ride, bell accents — the Lifetime voice",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Style / Ride Cymbal / Aggressive Comping",
+    focus: "Independence",
     prerequisites: ['jazz-tony-williams', 'fusion-broken-time'],
     nextLessons: ['fusion-mahavishnu', 'fusion-prog-fusion'],
     graduationCriteria: [
@@ -30647,7 +30647,7 @@ module.exports = {
     tagline: "Same note, new tempo — pivoting between two pulses",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time / Modulation / Polyrhythm",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-superimposition', 'fusion-odd-meters'],
     nextLessons: ['polyrhythms-3-2', 'polyrhythms-5-4'],
     graduationCriteria: [
@@ -30802,7 +30802,7 @@ module.exports = {
     tagline: "Sparse, off-kilter, programmed-precise — the post-2010 fusion language",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Groove / Genre",
+    focus: "Pocket & Groove",
     prerequisites: ['fusion-clave-fusion', 'fusion-broken-time'],
     nextLessons: ['fusion-electronic-fusion', 'latin-modern-hybrid'],
     graduationCriteria: [
@@ -30992,7 +30992,7 @@ module.exports = {
     tagline: "Odd meters, double bass, and jazz-influenced solo lines at song speed",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Double Bass / Odd Meter",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-odd-meters', 'fusion-tony-williams-fusion'],
     nextLessons: ['metal-prog-metal', 'fusion-mahavishnu'],
     graduationCriteria: [
@@ -31187,7 +31187,7 @@ module.exports = {
     tagline: "Acoustic kit, drum-machine soul — playing electronic music as a human",
     duration: "25 min",
     difficulty: "Expert",
-    focus: "Groove / Pocket / Genre",
+    focus: "Pocket & Groove",
     prerequisites: ['fusion-modern-fusion'],
     nextLessons: ['hiphop-modern-production'],
     graduationCriteria: [
@@ -31351,7 +31351,7 @@ module.exports = {
     tagline: "Fast 16th hands, rolling triplet kick, polyrhythmic everything",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Vocabulary / Speed / Polyrhythm",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-prog-fusion', 'jazz-elvin-jones'],
     nextLessons: ['jazz-modern-jazz'],
     graduationCriteria: [
@@ -31527,7 +31527,7 @@ module.exports = {
     tagline: "Two pulses, one body — the foundational polyrhythm, owned",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Polyrhythm / Internalization",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['fusion-polyrhythms'],
     nextLessons: ['polyrhythms-5-4'],
     graduationCriteria: [
@@ -31660,7 +31660,7 @@ module.exports = {
     tagline: "Five evenly-spaced notes inside the time of four",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Polyrhythm / Subdivision",
+    focus: "Odd Meters & Polyrhythm",
     prerequisites: ['polyrhythms-3-2', 'fusion-polyrhythms'],
     nextLessons: ['odd-meters-9-8'],
     graduationCriteria: [
@@ -31780,7 +31780,7 @@ module.exports = {
     tagline: "9, 11, 13 — the meters past the comfort zone",
     duration: "30 min",
     difficulty: "Expert",
-    focus: "Time / Meter",
+    focus: "Time & Feel",
     prerequisites: ['fusion-odd-meters'],
     nextLessons: ['fusion-prog-fusion'],
     graduationCriteria: [
@@ -31957,7 +31957,7 @@ module.exports = {
     tagline: "From licks to phrases — the architecture of a drum solo",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Improvisation / Phrasing",
+    focus: "Soloing & Improvisation",
     prerequisites: ['jazz-comping-vocab', 'fusion-soloing'],
     nextLessons: ['solo-drumming', 'transcription-method'],
     graduationCriteria: [
@@ -32105,7 +32105,7 @@ module.exports = {
     tagline: "Sweep, comp, fill — the full brush vocabulary",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Technique / Brushes",
+    focus: "Hand Technique",
     prerequisites: ['jazz-brushes-intro', 'jazz-ballad'],
     nextLessons: ['solo-drumming'],
     graduationCriteria: [
@@ -32261,7 +32261,7 @@ module.exports = {
     tagline: "The summit — four limbs, four independent voices",
     duration: "35 min",
     difficulty: "Expert",
-    focus: "Coordination / Independence",
+    focus: "Independence",
     prerequisites: ['independence-chapin-method', 'independence-chester-system', 'independence-clave-foot'],
     nextLessons: ['solo-drumming'],
     graduationCriteria: [
@@ -32419,7 +32419,7 @@ module.exports = {
     tagline: "From slash bars and section repeats to a 16-bar song form",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Reading / Chart Literacy",
+    focus: "Reading",
     prerequisites: ['reading-syncopation', 'counting-subdivision', 'jazz-comping-basics'],
     nextLessons: ['practice-systems'],
     graduationCriteria: [
@@ -32565,7 +32565,7 @@ module.exports = {
     tagline: "The drum kit as instrument, not as showcase",
     duration: "40 min",
     difficulty: "Expert",
-    focus: "Solo / Composition",
+    focus: "Soloing & Improvisation",
     prerequisites: ['soloing-improvisation', 'fusion-soloing', 'jazz-modern-jazz'],
     nextLessons: [],
     graduationCriteria: [
@@ -32704,7 +32704,7 @@ module.exports = {
     tagline: "How vocabulary actually enters your hands",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Reading / Vocabulary",
+    focus: "Reading",
     prerequisites: ['reading-syncopation'],
     nextLessons: ['practice-systems'],
     graduationCriteria: [
@@ -32823,7 +32823,7 @@ module.exports = {
     tagline: "How an hour at the kit becomes an hour you can hear",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Practice / Meta",
+    focus: "Practice Method",
     prerequisites: ['the-practice-mindset', 'slow-practice'],
     nextLessons: [],
     graduationCriteria: [
@@ -32927,7 +32927,7 @@ module.exports = {
     tagline: "Drumming as listening, response, and restraint",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Listening / Dynamics",
+    focus: "Listening & Analysis",
     prerequisites: ['jazz-comping-basics', 'two-minute-loops'],
     nextLessons: ['jazz-trading-fours'],
     graduationCriteria: [
@@ -33059,7 +33059,7 @@ module.exports = {
     tagline: "The hidden two-bar pulse inside Bo Diddley, blues, and rock",
     duration: "30 min",
     difficulty: "Advanced",
-    focus: "Clave / Genre / Listening",
+    focus: "Clave & Bell Patterns",
     prerequisites: ['latin-clave-intro', 'jazz-ride-pattern'],
     nextLessons: ['latin-modern-hybrid'],
     graduationCriteria: [
@@ -33237,7 +33237,7 @@ module.exports = {
     tagline: "What to buy, what to skip, and how to protect your ears",
     duration: "10 min",
     difficulty: "Beginner",
-    focus: "Equipment",
+    focus: "Getting Started",
     prerequisites: [],
     nextLessons: ['setup-posture', 'stick-grip'],
     graduationCriteria: [
@@ -33311,7 +33311,7 @@ module.exports = {
     tagline: "Why your kit sounds bad and how to fix it in twenty minutes",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Sound / Maintenance",
+    focus: "Studio & Sound",
     prerequisites: ['the-drum-kit'],
     nextLessons: ['the-practice-mindset', 'snare-voicings'],
     graduationCriteria: [
@@ -33385,7 +33385,7 @@ module.exports = {
     tagline: "Hearing subdivisions, feels, and phrases before you can name them",
     duration: "20 min",
     difficulty: "Beginner",
-    focus: "Listening / Analysis",
+    focus: "Listening & Analysis",
     prerequisites: ['counting-eighths', 'counting-sixteenths'],
     nextLessons: ['playing-to-a-song', 'transcription-method'],
     graduationCriteria: [
@@ -33483,7 +33483,7 @@ module.exports = {
     tagline: "Swing in three — the other meter every jazz drummer plays",
     duration: "25 min",
     difficulty: "Intermediate",
-    focus: "Time / Meter / Vocabulary",
+    focus: "Time & Feel",
     prerequisites: ['jazz-ride-pattern', 'reading-time-signatures'],
     nextLessons: ['jazz-comping-basics', 'jazz-trading-fours'],
     graduationCriteria: [

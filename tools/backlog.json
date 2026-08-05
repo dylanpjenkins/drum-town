@@ -334,10 +334,10 @@
       "title": "focus metadata is uncontrolled free text: 144 distinct values across 217 lessons",
       "evidence": ["Rendered as visible 'Focus · X' chip; casing collisions, order collisions, one-offs like 'Speculative / Hybrid / Frontier'"],
       "acceptance": "chunk 1: controlled vocabulary (<=24 values) defined in style guide + mapping table for all 217; chunks 2-3: apply mapping across lessonContent.js; meta.focusDistinctValues <= 24 when complete",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
-      "chunk": { "done": 0, "total": 3, "size": 1 },
-      "log": []
+      "chunk": { "done": 3, "total": 3, "size": 1 },
+      "log": ["iter 33 · Done in one pass rather than three chunks: an ordered keyword ruleset mapped all 144 legacy values to the 24-value vocabulary, and the proposal was reviewed target-by-target before applying. 220 focus strings rewritten across 217 lessons; meta.focusDistinctValues 144→23 (Sticking unused — per the style guide, 'Rudiment / Sticking' lessons default to Rudiments). Review caught one ordering bug pre-apply: Counting came out EMPTY because 'Reading / Counting' matched the Reading rule first, though all four wearers (counting-eighths, counting-sixteenths, counting-subdivision, triplet-feel) are counting lessons — Counting now precedes Reading while Polyrhythm still precedes both, so 'Polyrhythm / Subdivision' stays in Odd Meters. Verified against the built HTML on all 217 pages, not just the source. New gate check-focus-vocab.js."]
     },
     {
       "id": "BL-025",
