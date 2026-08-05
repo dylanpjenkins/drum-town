@@ -42,7 +42,7 @@ module.exports = {
     exercises: [
       {
         title: "1A — Single Paradiddle on Snare",
-        meta: "4/4 · 16th notes · ♩ = 70 → 100",
+        meta: "4/4 · 16th notes · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -54,7 +54,7 @@ module.exports = {
           accent: (i % 4 === 0)
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Sticking: <em>R L R R · L R L L · R L R R · L R L L</em>. The accents (the <em>&gt;</em> marks above the staff) naturally fall on counts 1, 2, 3, 4 — the start of each paradiddle group. Let those notes be slightly louder than the rest."
+        tip: "Sticking: <em>R L R R · L R L L · R L R R · L R L L</em>. The accents (the <em>&gt;</em> marks above the staff) naturally fall on counts 1, 2, 3, 4 — the start of each paradiddle group. Let those notes be slightly louder than the rest. Playback sits at ♩=80; work it from ♩=70 up to ♩=100 once it is clean."
       }
     ]
   },
@@ -1744,7 +1744,7 @@ module.exports = {
     exercises: [
       {
         title: "1A — Jazz Comping with Snare on 'and of 4'",
-        meta: "4/4 · swing 8ths · ♩ = 80 → 100",
+        meta: "4/4 · swing 8ths · ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -1763,7 +1763,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "The snare on 'and of 4' is the natural pickup into beat 1 of the next bar. It's the entry point for jazz comping — once this is solid you can start placing the snare on different parts of the bar."
+        tip: "The snare on 'and of 4' is the natural pickup into beat 1 of the next bar. It's the entry point for jazz comping — once this is solid you can start placing the snare on different parts of the bar. Playback sits at ♩=90; work it from ♩=80 up to ♩=100 once it is clean."
       }
     ],
     listening: [
@@ -1796,7 +1796,7 @@ module.exports = {
     exercises: [
       {
         title: "2A — Six-Stroke on Snare (8th-note triplets)",
-        meta: "4/4 · 8th triplets · ♩ = 70 → 90",
+        meta: "4/4 · 8th triplets · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -1814,11 +1814,11 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
         beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
-        tip: "Two reps of <em>RLLRRL</em> per bar — four triplet groups total. <em>Sticking:</em> R L L R R L · R L L R R L. Accents on positions 1 and 4 only."
+        tip: "Two reps of <em>RLLRRL</em> per bar — four triplet groups total. <em>Sticking:</em> R L L R R L · R L L R R L. Accents on positions 1 and 4 only. Playback sits at ♩=80; work it from ♩=70 up to ♩=90 once it is clean."
       },
       {
         title: "2B — Six-Stroke Around the Kit",
-        meta: "4/4 · 8th triplets · ♩ = 70 → 90",
+        meta: "4/4 · 8th triplets · ♩ = 76",
         bpm: 76,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -1844,7 +1844,7 @@ module.exports = {
           { voice: 'hands', start: 9, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
         beamGroups: [[1, 4], [1, 4], [1, 4], [1, 4]],
-        tip: "The kit application: accents move to the toms (high tom on 1, floor tom on 4) while the taps stay home on the snare. Keep the wrists low for taps — only the accent arm travels. The kick quarters anchor the pulse so the phrase reads as a fill over time, not a free-fall."
+        tip: "The kit application: accents move to the toms (high tom on 1, floor tom on 4) while the taps stay home on the snare. Keep the wrists low for taps — only the accent arm travels. The kick quarters anchor the pulse so the phrase reads as a fill over time, not a free-fall. Playback sits at ♩=76; work it from ♩=70 up to ♩=90 once it is clean."
       }
     ]
   },
@@ -1951,7 +1951,7 @@ module.exports = {
     exercises: [
       {
         title: "4A — Quarter-Triplet Polyrhythm Groove",
-        meta: "4/4 · ♩ = 70 → 85",
+        meta: "4/4 · ♩ = 75",
         bpm: 75,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -1962,7 +1962,7 @@ module.exports = {
           { voice: 'hands', start: 0, length: 3, num_notes: 3, notes_occupied: 2 },
           { voice: 'hands', start: 3, length: 3, num_notes: 3, notes_occupied: 2 }
         ],
-        tip: "Snare plays the 3-pulse, bass drum holds the 4-pulse. They only line up on beat 1. <em>Feel the 3, count the 4.</em> Mantra: say <em>'hot — cup — of — tea'</em> with the 4-pulse, while feeling 3 evenly-spaced taps."
+        tip: "Snare plays the 3-pulse, bass drum holds the 4-pulse. They only line up on beat 1. <em>Feel the 3, count the 4.</em> Mantra: say <em>'hot — cup — of — tea'</em> with the 4-pulse, while feeling 3 evenly-spaced taps. Playback sits at ♩=75; work it from ♩=70 up to ♩=85 once it is clean."
       }
     ]
   },
@@ -4100,7 +4100,7 @@ module.exports = {
     exercises: [
       {
         title: "1 — Inverted Paradiddle on Snare",
-        meta: "4/4 · 16ths · ♩ = 70 → 90",
+        meta: "4/4 · 16ths · ♩ = 70",
         bpm: 70,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -4112,7 +4112,7 @@ module.exports = {
           accent: (i % 4 === 0)
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Sticking: <em>R L L R · L R R L</em>, twice per bar. Accent on the lead-hand single of each group (counts 1, 2, 3, 4). The double sits in positions 2-3 of each four — the inverse of the standard paradiddle, which has its double in 3-4."
+        tip: "Sticking: <em>R L L R · L R R L</em>, twice per bar. Accent on the lead-hand single of each group (counts 1, 2, 3, 4). The double sits in positions 2-3 of each four — the inverse of the standard paradiddle, which has its double in 3-4. Playback sits at ♩=70; work it from ♩=70 up to ♩=90 once it is clean."
       },
       {
         title: "2 — Side-by-Side: Standard vs Inverted",
@@ -15383,7 +15383,7 @@ module.exports = {
       },
       {
         title: "4 — Full Purdie-Style Half-Time Shuffle",
-        meta: "4/4 · 8th triplets · ♩ = 80 → 88",
+        meta: "4/4 · 8th triplets · ♩ = 84",
         bpm: 84,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -24197,7 +24197,7 @@ module.exports = {
       },
       {
         title: "3 — Metric Modulation (4/4 → 4/4 with 8th = Quarter)",
-        meta: "4/4 → 4/4 · 8th becomes new quarter (♩ = 90 → ♩ = 180)",
+        meta: "4/4 → 4/4 · 8th becomes new quarter (♩ = 90 → ♩ = 180) · notated at ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -29860,7 +29860,7 @@ module.exports = {
     exercises: [
       {
         title: "1 — Four-Bar Linear Solo Phrase",
-        meta: "4/4 · 16ths · ♩ = 90 → 105",
+        meta: "4/4 · 16ths · ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
         repeatBegin: true,

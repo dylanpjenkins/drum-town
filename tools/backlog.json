@@ -370,10 +370,10 @@
       "title": "8 exercise metas advertise tempo ranges the player can't honor",
       "evidence": ["e.g. paradiddle#0 meta '♩ = 70 → 100' with hard-coded bpm:80; metal-tech-death#1 meta says 4/4 → 7/8 but timeSignature renders 7/8 only"],
       "acceptance": "metas reworded so the stated playback tempo equals bpm (practice-range guidance moves to tip text); meta.tempoRangeMetaMismatches → 0",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 32 · 8 practice ranges moved out of meta into the tip ('Playback sits at ♩=X; work it from ♩=A up to ♩=B once it is clean'), two more than the audit had counted. metal-prog-metal#2 gained an explicit '· notated at ♩ = 90' so its modulation meta says which end playback uses. New gate check-exercise-meta.js: the meta's promised tempo must equal bpm, where an explicit 'notated at ♩ = N' clause wins over last-number-wins — that distinction is what lets a real modulation meta pass while a practice range fails. Meter check only applies when the meta claims a single meter (journey prose like '4/4 → 7/8' or 'implied 7/8' is legitimate narration, verified against 5 real examples)."]
     },
     {
       "id": "BL-028",
@@ -606,6 +606,23 @@
       "attempts": 0,
       "chunk": null,
       "log": []
+    },
+    {
+      "id": "BL-061",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Four exercises whose meta narrates more meters than the notation actually shows",
+      "evidence": [
+        "latin-folkloric#0 'Guaguanco to Bembe Transition (4/4 -> 6/8)' — meta '4/4 then 6/8' but the spec renders only 4/4, so the promised transition is never notated",
+        "metal-mathcore#0 — meta '4/4 → 7/8 → 5/4 → 6/8' while the title admits it is the '(4/4 portion)'",
+        "rock-odd-meter#3 'Metric Modulation: 4/4 → 5/4' — meta '4/4 + 5/4', spec 4/4 only",
+        "fusion-prog-fusion#2 — meta describes a 5/4 bar with implied 7/8 grouping (legitimate prose; listed for review alongside the others)"
+      ],
+      "acceptance": "for each: either notate the second meter (multi-bar spec, which the renderer already supports) or reword the meta and title so the exercise does not promise a transition it never shows; re-run check-exercise-meta",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Surfaced by the new check-exercise-meta gate (iter 32). Deliberately NOT auto-fixed: choosing between 'notate the transition' and 'stop claiming it' is an authoring decision per exercise."]
     },
     {
       "id": "BL-060",

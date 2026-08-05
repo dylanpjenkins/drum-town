@@ -376,11 +376,20 @@ function renderPattern(spec) {
     // outside a viewBox pinned to 0 — so the bracket and its "3" were
     // silently clipped off the top of the frame. Grow the viewBox to whatever
     // was actually drawn.
+    // Feet tuplets bracket BELOW the stave and clip the same way, so bound
+    // the frame in both directions.
     let minY = 0;
-    for (const m of out.matchAll(/\sy="(-?[\d.]+)"/g)) minY = Math.min(minY, parseFloat(m[1]));
-    if (minY < 0) {
-      const top = Math.floor(minY) - 4;
-      svg.setAttribute('viewBox', `0 ${top} ${width} ${height - top}`);
+    let maxY = height;
+    for (const m of out.matchAll(/\sy="(-?[\d.]+)"/g)) {
+      minY = Math.min(minY, parseFloat(m[1]));
+    }
+    for (const m of out.matchAll(/\sy="(-?[\d.]+)"[^>]*?height="([\d.]+)"/g)) {
+      maxY = Math.max(maxY, parseFloat(m[1]) + parseFloat(m[2]));
+    }
+    const top = minY < 0 ? Math.floor(minY) - 4 : 0;
+    const bottom = maxY > height ? Math.ceil(maxY) + 4 : height;
+    if (top !== 0 || bottom !== height) {
+      svg.setAttribute('viewBox', `0 ${top} ${width} ${bottom - top}`);
       out = svg.outerHTML;
     }
     container.remove();
