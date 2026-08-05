@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 26,
-    "next_dimension": "ui",
+    "iteration": 27,
+    "next_dimension": "quality",
     "dimensions": ["ui", "quality", "ui", "content"],
     "next_id": 58,
     "epic": {
@@ -614,10 +614,10 @@
       "title": "Playhead auto-follow reverts user scrolling every frame (interaction regression from iter 12)",
       "evidence": ["Critic iter 23: the rAF tick clamps box.scrollLeft whenever the playhead exits a 36px margin — while playing, any manual pan of an overflowing stave is reverted within one frame; no pointerdown/wheel grace period, hard snap, px math ignores .notation padding"],
       "acceptance": "user scroll wins: suspend auto-follow for ~2s after pointerdown/wheel/touchstart on the container (or until the playhead naturally re-enters view); smooth follow instead of hard snap; account for container padding; verify by screenshot + code review of the interaction path",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": ["Filed from adversarial critique (iter 23) — a regression the author-agent shipped as an improvement."]
+      "log": ["Filed from adversarial critique (iter 23) — a regression the author-agent shipped as an improvement.", "iter 27 · First attempt (input-event suspension + 2.5s timer) reviewed DEGRADED: misses Firefox scrollbar drags, resumes mid-gesture, yanks back mid-read. Rewrote per the reviewer's architecture in-tick: scroll listener + programmatic-write guard marks the view user-owned; follow resumes only when the playhead re-enters the user's window naturally (acceptance's 'or until' branch — no magic timer); padding hoisted; start() hardened against stopped sessions; listeners cleaned in stop(). All checks green."]
     },
     {
       "id": "BL-039",

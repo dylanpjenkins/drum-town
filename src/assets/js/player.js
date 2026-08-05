@@ -452,14 +452,33 @@
     this.rafId = null;
     this.stopped = false;
     this.audioStart = 0;
+    // Playhead auto-follow yields to the user. Any scroll we didn't write
+    // ourselves marks the view as user-owned; follow resumes only when the
+    // playhead walks back into the user's chosen window on its own. The
+    // scroll event (not input events) is the signal, so scrollbar drags and
+    // keyboard scrolling count in every browser.
+    this.userScrolled = false;
+    this._progScroll = false;
+    this._onScroll = null;
+    this.padLeft = 0;
   }
 
   PlaybackSession.prototype.start = function () {
+    if (this.stopped) return;
     const lookahead = 0.06;
     this.audioStart = this.c.currentTime + lookahead;
     this.scheduledUntil = this.audioStart;
     this.scheduleAhead();
     this.timer = setInterval(() => this.scheduleAhead(), SCHEDULE_INTERVAL_MS);
+    if (this.container) {
+      const session = this;
+      this.padLeft = parseFloat(getComputedStyle(this.container).paddingLeft) || 0;
+      this._onScroll = () => {
+        if (session._progScroll) { session._progScroll = false; return; }
+        session.userScrolled = true;
+      };
+      this.container.addEventListener('scroll', this._onScroll, { passive: true });
+    }
     if (this.line && this.bounds) this.startPlayhead();
   };
 
@@ -486,15 +505,22 @@
       const x = session.bounds.startX + progress * span;
       session.line.setAttribute('x1', x);
       session.line.setAttribute('x2', x);
-      // On staves that overflow their container, keep the playhead in view.
-      // x is in viewBox units — convert to CSS px before comparing.
+      // On staves that overflow their container, keep the playhead in view —
+      // unless the user owns the view (they scrolled): then follow stays off
+      // until the playhead re-enters their window naturally. x is in viewBox
+      // units — convert to CSS px including the container's left padding,
+      // which scrollLeft coordinates run through.
       const box = session.container;
       if (box && box.scrollWidth > box.clientWidth + 1) {
         const vb = session.svg.viewBox && session.svg.viewBox.baseVal;
         const scale = (vb && vb.width) ? session.svg.clientWidth / vb.width : 1;
-        const px = x * scale;
+        const px = session.padLeft + x * scale;
         const margin = 36;
-        if (px < box.scrollLeft + margin || px > box.scrollLeft + box.clientWidth - margin) {
+        const inView = px >= box.scrollLeft + margin && px <= box.scrollLeft + box.clientWidth - margin;
+        if (session.userScrolled) {
+          if (inView) session.userScrolled = false;
+        } else if (!inView) {
+          session._progScroll = true;
           box.scrollLeft = Math.max(0, px - margin);
         }
       }
@@ -508,6 +534,10 @@
     this.stopped = true;
     if (this.timer) { clearInterval(this.timer); this.timer = null; }
     if (this.rafId) { cancelAnimationFrame(this.rafId); this.rafId = null; }
+    if (this.container && this._onScroll) {
+      this.container.removeEventListener('scroll', this._onScroll);
+      this._onScroll = null;
+    }
 
     // Click-free fade on master gain. After it lands at 0, anything still
     // scheduled in the future is effectively muted; we disconnect a tick
