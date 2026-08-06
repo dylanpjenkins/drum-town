@@ -77,6 +77,20 @@
         <path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a7 7 0 0 0 11.1 11.1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
       </svg>
     </button>
+    {#- Collapsed state of the transport dock (system.md §3/§7). Live BPM and
+        time signature are written here by metronome.js; the dot pulses with
+        the beat so a running metronome is never hidden. -#}
+    <button class="clock-pill" id="metronome-pill" type="button" aria-expanded="false" aria-controls="site-metronome">
+      <span class="clock-pill__dot" aria-hidden="true">▶</span>
+      <b class="clock-pill__bpm" aria-hidden="true">80</b><small class="clock-pill__sig" aria-hidden="true">· 4/4</small>
+      {#- The whole accessible name lives in this one span rather than being
+          concatenated from the visible parts: nothing separates <b> from the
+          span in the rendered markup, so a composed name would run together as
+          "80beats per minute". metronome.js rewrites the tempo and the running
+          word here; open/closed is carried by aria-expanded, not by this text.
+          The static wording below is the no-JS fallback. -#}
+      <span class="sr-only" id="metronome-pill-state">Metronome, 80 beats per minute, stopped</span>
+    </button>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
       <span class="nav-toggle__bars" aria-hidden="true"></span>
     </button>
@@ -92,16 +106,20 @@
   <br />Notation rendered with VexFlow at build time
 </footer>
 
-<aside class="metronome" id="site-metronome" aria-label="Metronome">
-  <button class="metronome__collapse" id="metronome-collapse" type="button" aria-expanded="true" aria-label="Collapse metronome">−</button>
-  <div class="metronome__beats" id="metronome-beats" aria-hidden="true"></div>
-
-  <div class="metronome__row">
-    <button class="metronome__btn" id="metronome-toggle" type="button" aria-label="Start metronome">
-      <span class="metronome__icon" aria-hidden="true">▶</span>
+{#- Transport dock (system.md §7). Ships collapsed so no dock flashes open
+    before metronome.js runs; the header clock pill expands it. Control IDs are
+    unchanged from the old floating card — metronome.js keeps its wiring. -#}
+<aside class="transport is-collapsed" id="site-metronome" aria-label="Metronome">
+  <div class="transport__row">
+    <button class="transport__go" id="metronome-toggle" type="button" aria-label="Start metronome">
+      <span class="transport__icon" aria-hidden="true">▶</span>
     </button>
-    <input type="number" class="metronome__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="Tempo in beats per minute" />
-    <select class="metronome__timesig" id="metronome-timesig" aria-label="Beats per bar">
+    <label class="transport__bpm-wrap">
+      <input type="number" class="transport__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="Tempo in beats per minute" />
+      <span class="transport__bpm-label" aria-hidden="true">BPM</span>
+    </label>
+    <input type="range" class="transport__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
+    <select class="transport__timesig" id="metronome-timesig" aria-label="Beats per bar">
       <option value="2">2/4</option>
       <option value="3">3/4</option>
       <option value="4" selected>4/4</option>
@@ -109,13 +127,12 @@
       <option value="6">6/8</option>
       <option value="7">7/8</option>
     </select>
-  </div>
-
-  <input type="range" class="metronome__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
-
-  <div class="metronome__row metronome__row--vol">
-    <span class="metronome__vol-icon" aria-hidden="true">♪</span>
-    <input type="range" class="metronome__volume" id="metronome-volume" min="0" max="100" step="1" value="60" aria-label="Volume" />
+    <div class="transport__beats" id="metronome-beats" aria-hidden="true"></div>
+    <span class="transport__vol">
+      <span class="transport__vol-icon" aria-hidden="true">♪</span>
+      <input type="range" class="transport__volume" id="metronome-volume" min="0" max="100" step="1" value="60" aria-label="Volume" />
+    </span>
+    <button class="transport__collapse" id="metronome-collapse" type="button" aria-expanded="true" aria-label="Collapse metronome">▾</button>
   </div>
 </aside>
 

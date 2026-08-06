@@ -76,7 +76,7 @@ composed shadows are the new `--elev-*` slots.
   --notation-accent: #9a3a27;
   --focus-ring: var(--accent);
   --header-h: 60px;        /* measure after PKG-2 lands; token is the source of truth */
-  --transport-h: 64px;     /* open dock height; 100px at ≤720px (media re-declaration) */
+  --transport-h: 64px;     /* open dock height (65px rendered); 128px at ≤720px */
 }
 ```
 
@@ -776,7 +776,7 @@ html.transport-open body { padding-bottom: calc(var(--transport-h) + 12px); }
   active beat `--gold`; **downbeat active `--accent` — B's red dot,
   mandatory**; +`transform: scale(1.35)` pulse that reduced-motion strips,
   color still carries the beat), volume (♪ + 96px slider), collapse chevron.
-- **≤720px open state**: two rows (`--transport-h: 100px` via media
+- **≤720px open state**: two rows (`--transport-h: 128px` via media
   re-declaration): row 1 = go · BPM · beat dots · collapse; row 2 = slider
   (flex 1) · timesig · volume. Grid template areas; 12px 16px padding; every
   control ≥44px target. At 390px nothing wraps further (verified in

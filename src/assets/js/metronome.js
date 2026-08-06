@@ -1,14 +1,19 @@
 // src/assets/js/metronome.js
-// Persistent floating metronome.
+// Persistent metronome: a bottom transport dock plus the header clock pill
+// that is its collapsed state.
 //
-// Controls:
+// Controls (all in the dock):
 //   • Play/stop button
 //   • BPM number input + tempo slider (synced)
 //   • Time signature dropdown (numerator drives the accent pattern)
 //   • Volume slider (scales the click gain)
 //   • Beat-dot row that lights up the current beat in the bar
 //
-// Persisted in localStorage: bpm, time signature, volume.
+// The pill mirrors the live BPM, the time signature and the running beat, so
+// collapsing the dock hides the controls but never the state — the metronome
+// keeps ticking and stopping it is one tap away.
+//
+// Persisted in localStorage: bpm, time signature, volume, collapsed state.
 // Each page navigation reloads the page, so the playing state resets.
 
 (() => {
@@ -21,7 +26,25 @@
   const tsSelect    = document.getElementById('metronome-timesig');
   const volSlider   = document.getElementById('metronome-volume');
   const beatsBox    = document.getElementById('metronome-beats');
-  const icon        = btn.querySelector('.metronome__icon');
+  const icon        = btn.querySelector('.transport__icon');
+
+  // The pill lives in the header, not in this aside — every lookup is guarded
+  // so a page that ever ships the dock without it still works.
+  const pill        = document.getElementById('metronome-pill');
+  const pillDot     = pill ? pill.querySelector('.clock-pill__dot') : null;
+  const pillBpm     = pill ? pill.querySelector('.clock-pill__bpm') : null;
+  const pillSig     = pill ? pill.querySelector('.clock-pill__sig') : null;
+  const pillState   = document.getElementById('metronome-pill-state');
+
+  // The pill's glyph, tempo and time signature are all aria-hidden, so this one
+  // span IS the button's accessible name. Rebuilt whenever the tempo changes or
+  // a session starts or stops; the ■ glyph alone would tell a screen-reader user
+  // nothing about whether the click is currently running.
+  let pillRunning = false;
+  function syncPillLabel() {
+    if (!pillState) return;
+    pillState.textContent = 'Metronome, ' + bpm + ' beats per minute, ' + (pillRunning ? 'playing' : 'stopped');
+  }
 
   const BPM_KEY = 'dc_metro_bpm';
   const TS_KEY  = 'dc_metro_ts';
@@ -50,11 +73,13 @@
   slider.value    = initialBpm;
   tsSelect.value  = String(initialTs);
   volSlider.value = initialVol;
+  if (pillBpm) pillBpm.textContent = String(initialBpm);
 
   // ---- State ----
   let bpm = initialBpm;
   let beatsPerBar = initialTs;
   let volume = initialVol / 100;     // 0..1
+  syncPillLabel();                   // the stored tempo, not the markup's 80
 
   function clampBpm(v) {
     if (!Number.isFinite(v)) return DEFAULT_BPM;
@@ -70,24 +95,45 @@
     beatDots = [];
     for (let i = 0; i < beatsPerBar; i++) {
       const dot = document.createElement('span');
-      dot.className = 'metronome__beat';
+      dot.className = 'transport__beat';
       beatsBox.appendChild(dot);
       beatDots.push(dot);
     }
   }
   renderBeats();
 
+  function clearPulse(el) {
+    if (!el) return;
+    el.classList.remove('is-active');
+    el.classList.remove('is-downbeat-active');
+  }
+
+  // The pill pulses alongside the dock's dots, so the beat stays visible while
+  // the dock is collapsed. The dot at `index` may be gone if the user shrank
+  // the time signature between scheduling and firing — the pill still fires.
   function flashBeat(index) {
-    const dot = beatDots[index];
-    if (!dot) return;
     const downbeat = (index === 0);
-    dot.classList.add('is-active');
-    if (downbeat) dot.classList.add('is-downbeat-active');
+    const dot = beatDots[index];
+    [dot, pillDot].forEach(el => {
+      if (!el) return;
+      el.classList.add('is-active');
+      if (downbeat) el.classList.add('is-downbeat-active');
+    });
     setTimeout(() => {
-      dot.classList.remove('is-active');
-      dot.classList.remove('is-downbeat-active');
+      clearPulse(dot);
+      clearPulse(pillDot);
     }, 90);
   }
+
+  // Time signature readout on the pill: the option's own label, so the pill
+  // always says what the select says (4/4, 6/8, …) rather than a second,
+  // drifting mapping of numerator to denominator.
+  function syncPillSig() {
+    if (!pillSig) return;
+    const opt = tsSelect.options[tsSelect.selectedIndex];
+    pillSig.textContent = '· ' + (opt ? opt.textContent.trim() : beatsPerBar + '/4');
+  }
+  syncPillSig();
 
   // ---- Input wiring ----
 
@@ -95,6 +141,8 @@
     bpm = clampBpm(v);
     if (source !== 'input')  bpmInput.value = bpm;
     if (source !== 'slider') slider.value   = bpm;
+    if (pillBpm) pillBpm.textContent = String(bpm);
+    syncPillLabel();
     writeInt(BPM_KEY, bpm);
     if (session) session.bpm = bpm;
   }
@@ -107,6 +155,7 @@
     beatsPerBar = v;
     writeInt(TS_KEY, v);
     renderBeats();
+    syncPillSig();
     if (session) session.beatsPerBar = v;
   });
 
@@ -210,42 +259,68 @@
     this.stopped = true;
     if (this.timer) { clearInterval(this.timer); this.timer = null; }
     if (this.rafId) { cancelAnimationFrame(this.rafId); this.rafId = null; }
-    beatDots.forEach(d => {
-      d.classList.remove('is-active');
-      d.classList.remove('is-downbeat-active');
-    });
+    beatDots.forEach(clearPulse);
+    clearPulse(pillDot);
   };
 
   // ---- Collapse / expand ----
-  // Collapsed by default on small screens (the widget otherwise covers a
-  // large share of a phone viewport); an explicit user choice is remembered.
+  // Collapsed by default at every width: the pill is always in the header, so
+  // the dock is one tap away and never occupies a page it was not asked for.
+  // An explicit user choice is remembered in dc_metro_collapsed.
 
   const collapseBtn = document.getElementById('metronome-collapse');
   const COLLAPSED_KEY = 'dc_metro_collapsed';
 
   function applyCollapsed(collapsed) {
     root.classList.toggle('is-collapsed', collapsed);
-    if (!collapseBtn) return;
-    collapseBtn.setAttribute('aria-expanded', String(!collapsed));
-    collapseBtn.setAttribute('aria-label', collapsed ? 'Expand metronome' : 'Collapse metronome');
-    collapseBtn.textContent = collapsed ? '♩' : '−';
+    // The body's bottom reserve lives on <html>, so content always scrolls
+    // clear of the dock instead of hiding under it.
+    document.documentElement.classList.toggle('transport-open', !collapsed);
+    if (pill) pill.setAttribute('aria-expanded', String(!collapsed));
+    if (collapseBtn) collapseBtn.setAttribute('aria-expanded', String(!collapsed));
   }
 
-  if (collapseBtn) {
-    let stored = null;
-    try { stored = localStorage.getItem(COLLAPSED_KEY); } catch (e) {}
-    const smallScreen = window.matchMedia && window.matchMedia('(max-width: 720px)').matches;
-    applyCollapsed(stored === null ? smallScreen : stored === '1');
-    collapseBtn.addEventListener('click', () => {
-      const next = !root.classList.contains('is-collapsed');
-      applyCollapsed(next);
-      try { localStorage.setItem(COLLAPSED_KEY, next ? '1' : '0'); } catch (e) {}
-    });
+  // Focus follows the disclosure: opening lands on the play button, closing
+  // returns to the pill that now represents the dock.
+  function setCollapsed(collapsed, focusEl) {
+    applyCollapsed(collapsed);
+    try { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); } catch (e) {}
+    if (focusEl) focusEl.focus();
   }
+
+  let storedCollapsed = null;
+  try { storedCollapsed = localStorage.getItem(COLLAPSED_KEY); } catch (e) {}
+  applyCollapsed(storedCollapsed === null ? true : storedCollapsed === '1');
+
+  // A real toggle, not a one-way expander. The pill carries aria-expanded, so
+  // pressing it while the dock is already open has to close it — otherwise the
+  // control lies about its own state and the press silently throws focus to the
+  // far end of the document. Closing keeps focus on the pill; opening moves it
+  // to the play button, which is where the next action is.
+  if (pill) pill.addEventListener('click', () => {
+    const collapsed = root.classList.contains('is-collapsed');
+    setCollapsed(!collapsed, collapsed ? btn : pill);
+  });
+  if (collapseBtn) collapseBtn.addEventListener('click', () => setCollapsed(true, pill));
+  root.addEventListener('keydown', e => {
+    if (e.key === 'Escape') setCollapsed(true, pill);
+  });
 
   // ---- Toggle ----
 
   let session = null;
+
+  // Running state shows on both faces of the instrument: ■ on the go button
+  // and on the pill's dot, which also drops to a neutral disc so the brass
+  // offbeats and the brick downbeat read as color changes against it.
+  function setPillRunning(running) {
+    pillRunning = running;
+    syncPillLabel();
+    if (!pillDot) return;
+    pillDot.classList.toggle('is-running', running);
+    pillDot.textContent = running ? '■' : '▶';
+    if (!running) clearPulse(pillDot);
+  }
 
   btn.addEventListener('click', () => {
     if (session) {
@@ -254,6 +329,7 @@
       btn.classList.remove('is-playing');
       icon.textContent = '▶';
       btn.setAttribute('aria-label', 'Start metronome');
+      setPillRunning(false);
       return;
     }
     const c = getCtx();
@@ -263,5 +339,6 @@
     btn.classList.add('is-playing');
     icon.textContent = '■';
     btn.setAttribute('aria-label', 'Stop metronome');
+    setPillRunning(true);
   });
 })();

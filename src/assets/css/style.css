@@ -36,7 +36,7 @@
 
   --focus-ring: var(--accent);
   --header-h: 60px;        /* sticky-header height; wired to consumers when the header package lands */
-  --transport-h: 64px;     /* open dock height; 100px at ≤720px (media re-declaration with the dock) */
+  --transport-h: 64px;     /* open dock height (65px rendered, +1px border-top); 128px at ≤720px */
 
   --display: 'Fraunces', Georgia, serif;
   --body:    'Public Sans', system-ui, -apple-system, sans-serif;
@@ -139,9 +139,10 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 a:focus-visible { border-radius: 2px; }
 
 /* Reduced motion: collapse all animation/transition to imperceptible and
-   stop the metronome dots pulsing (their color change carries the beat
-   information without the scale pop). The !important is the point of this
-   block — it must beat every rule, including future ones. */
+   stop the beat indicators pulsing (their color change carries the beat
+   information without the scale pop) — both the dock's dots and the header
+   pill's dot. The !important is the point of this block — it must beat every
+   rule, including future ones. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -149,8 +150,13 @@ a:focus-visible { border-radius: 2px; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .metronome__beat.is-active,
-  .metronome__beat.is-downbeat-active { transform: none; }
+  .transport__beat.is-active,
+  .transport__beat.is-downbeat-active,
+  .clock-pill__dot.is-active,
+  .clock-pill__dot.is-downbeat-active { transform: none !important; }
+  /* !important is load-bearing: these selectors have the same specificity as the
+     .is-active rules further down the sheet, so source order would otherwise hand
+     the pulse back. Colour still carries the beat. */
 }
 
 .container {
@@ -167,7 +173,9 @@ a:focus-visible { border-radius: 2px; }
   background: var(--bg);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 60;   /* above the dock's 50: the mobile nav panel is absolutely
+                     positioned INSIDE this header, and at z-index 10 the dock
+                     painted over its lower rows in landscape and took their taps */
 }
 
 .site-header__inner {
@@ -253,6 +261,72 @@ a:focus-visible { border-radius: 2px; }
 :root[data-theme="light"] .theme-toggle__sun { display: block; }
 :root[data-theme="light"] .theme-toggle__moon { display: none; }
 
+/* Clock pill — the collapsed state of the transport dock (system.md §3/§7).
+   Always present, at every width; it never shrinks or wraps, so the header row
+   keeps its shape while the BPM readout changes width. */
+.clock-pill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-pill);
+  padding: 6px 12px 6px 8px;
+  font-family: var(--mono);
+  font-size: 0.78125rem;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.clock-pill:hover { border-color: var(--accent); }
+.clock-pill__dot {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5625rem;
+  line-height: 1;
+  transition: background 60ms ease, transform 60ms ease;
+}
+/* While a session runs the disc rests on a neutral ink so each beat reads as a
+   color change: --gold on the offbeats, --accent on the downbeat (§7). A brick
+   disc pulsing brick would hide the downbeat, which is the one beat that must
+   never be lost. */
+.clock-pill__dot.is-running { background: var(--ink-soft); }
+.clock-pill__dot.is-active { background: var(--gold); transform: scale(1.2); }
+.clock-pill__dot.is-downbeat-active { background: var(--accent); transform: scale(1.2); }
+.clock-pill__bpm { font-weight: 500; }
+.clock-pill__sig { font-size: 0.78125rem; color: var(--ink-soft); }
+/* §3's padding alone makes the pill 34px tall. That is fine under a mouse, but
+   once the nav collapses the pill is the ONLY way to reach the metronome, and
+   every other touch control on the site holds a 44px floor. Grow the box, not
+   the type. */
+@media (max-width: 860px) {
+  .clock-pill { min-height: 44px; }
+}
+@media (max-width: 480px) {
+  .clock-pill__sig { display: none; }
+}
+/* Below ~340px the header row — logo, theme toggle, pill, hamburger — is wider
+   than the viewport, and every item in it is flex-shrink: 0. The result was a
+   sideways scroll on all 228 pages and, at 280px, a hamburger entirely off the
+   right edge. 320px is the normative reflow width of WCAG 2.1 SC 1.4.10 and is
+   also what 400% zoom gives on a 1280px desktop, so this is not a fringe case.
+   The wordmark is the only slack: the seal alone carries the brand down here,
+   and the pill keeps its 44px target. Cut at 360 rather than 340 so a stored
+   three-digit tempo, which widens the pill, still fits. */
+@media (max-width: 360px) {
+  .site-logo__wm { display: none; }
+  .site-header__inner { padding: 0 12px; gap: 6px; }
+}
+
 /* Hamburger — hidden until the nav collapses. */
 .nav-toggle { width: 44px; height: 44px; display: none; }
 .nav-toggle:hover { color: var(--accent); background: var(--paper-2); }
@@ -293,6 +367,11 @@ a:focus-visible { border-radius: 2px; }
     top: 100%;
     left: 0;
     right: 0;
+    /* A five-row panel is taller than a phone in landscape. Scroll it rather
+       than letting the rows run off the bottom of the screen. */
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
     margin-left: 0;
     display: none;
     flex-direction: column;
@@ -322,7 +401,7 @@ a:focus-visible { border-radius: 2px; }
   position: absolute;
   left: -999px;
   top: 8px;
-  z-index: 20;
+  z-index: 70;   /* above the lifted header, or the skip link's focus ring hides behind it */
   background: var(--accent);
   color: var(--accent-ink);
   padding: 10px 18px;
@@ -718,7 +797,7 @@ hr.section-rule {
 .curriculum-sidebar {
   position: sticky;
   top: var(--header-h); /* sit below the sticky site-header */
-  height: calc(100vh - 60px);
+  height: calc(100vh - var(--header-h));
   overflow-y: auto;
   border-right: 1px solid var(--rule);
   background: var(--paper);
@@ -1211,193 +1290,270 @@ hr.section-rule {
   text-align: center;
 }
 
-/* =====================  METRONOME (persistent)  ===================== */
-.metronome {
+/* =====================  TRANSPORT DOCK  =====================
+   system.md §7. Two states, one instrument: collapsed = the header clock pill
+   (zero content footprint), expanded = a full-width bottom dock whose height
+   the body reserves as bottom padding. Content and dock can never share
+   pixels — that is what kills the old floating card's overlap (BL-036). */
+html.transport-open body { padding-bottom: calc(var(--transport-h) + 12px); }
+/* Body padding only moves things in NORMAL FLOW. The curriculum sidebar is
+   sticky and sized to the viewport, so the reserve above slides straight past
+   it and 65px of its scrollport — including the last entry, at max scroll,
+   unrecoverably — sat under the dock on every long lesson page. Shorten the box
+   instead of padding it: padding would leave the scrollbar and the hit area
+   still running underneath. Only bites above 960px; below that the sidebar is
+   relative with a 240px cap and the body reserve does reach it. */
+html.transport-open .curriculum-sidebar {
+  height: calc(100vh - var(--header-h) - var(--transport-h) - 12px);
+}
+/* Tab-into-view parks a newly focused element at the nearest viewport edge and
+   knows nothing about a fixed overlay. */
+html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
+
+.transport {
   position: fixed;
-  bottom: 18px;
-  right: 18px;
+  inset: auto 0 0 0;
   z-index: 50;
-  width: 168px;
   background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-s);
-  box-shadow: var(--elev-2);
-  padding: 12px 14px;
+  border-top: 1px solid var(--rule);
+  box-shadow: 0 -6px 22px var(--shadow);
+  font-family: var(--mono);
+}
+.transport.is-collapsed { display: none; }
+
+/* One 64px row, centered on the same 1200px measure and 36px gutters as the
+   header, so dock and header share a spine. */
+.transport__row {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: var(--transport-h);
+  padding: 0 36px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-family: var(--mono);
+  align-items: center;
+  gap: 14px;
 }
 
-.metronome__collapse {
-  align-self: flex-end;
-  margin: -6px -8px -10px 0; /* tuck into the corner without adding height */
-  background: transparent;
-  border: none;
-  color: var(--ink-soft);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  line-height: 1;
-  padding: 2px 6px;
-  cursor: pointer;
-}
-.metronome__collapse:hover { color: var(--accent); }
-
-/* Collapsed: the whole widget shrinks to one round expand button. Default
-   state on small screens; the user's explicit choice is remembered. */
-.metronome.is-collapsed {
-  width: auto;
-  padding: 0;
-}
-.metronome.is-collapsed > :not(.metronome__collapse) { display: none; }
-.metronome.is-collapsed .metronome__collapse {
-  align-self: auto;
-  margin: 0;
+.transport__go {
   width: 44px;
   height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-  color: var(--accent);
-}
-
-@media (max-width: 720px) {
-  .metronome { bottom: 12px; right: 12px; max-width: calc(100vw - 24px); }
-}
-
-.metronome__beats {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  align-items: center;
-  min-height: 10px;
-}
-.metronome__beat {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--rule);
-  transition: background 60ms ease, transform 60ms ease;
-}
-.metronome__beat.is-active {
-  background: var(--accent);
-  transform: scale(1.5);
-}
-.metronome__beat.is-downbeat-active {
-  background: var(--gold);
-  transform: scale(1.7);
-}
-
-.metronome__row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.metronome__row--vol { gap: 8px; }
-
-.metronome__btn {
-  background: var(--ink);
-  color: var(--bg);
+  flex-shrink: 0;
   border: none;
-  width: 28px;
-  height: 28px;
   border-radius: 50%;
-  cursor: pointer;
-  display: flex;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+  cursor: pointer;
   transition: background 0.12s ease;
-  flex-shrink: 0;
 }
-.metronome__btn:hover { background: var(--accent); }
-.metronome__btn.is-playing { background: var(--accent); }
-.metronome__icon {
-  font-size: 0.6875rem;
+.transport__go:hover,
+.transport__go.is-playing { background: var(--accent-2); }
+.transport__icon {
+  font-size: 0.875rem;
   line-height: 1;
-  color: var(--gold);
+  color: inherit;
 }
 
-.metronome__bpm {
-  flex: 1;
-  min-width: 0;
-  background: transparent;
+.transport__bpm-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.transport__bpm {
+  width: 72px;
+  height: 44px;
+  background: var(--bg);
   border: 1px solid var(--rule);
   border-radius: var(--r-s);
   font-family: var(--mono);
-  font-size: 0.75rem;
-  padding: 4px 4px;
+  font-size: 1.125rem;
   text-align: center;
   color: var(--ink);
+  padding: 0 4px;
   -moz-appearance: textfield;
 }
-.metronome__bpm::-webkit-outer-spin-button,
-.metronome__bpm::-webkit-inner-spin-button {
+.transport__bpm::-webkit-outer-spin-button,
+.transport__bpm::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.metronome__bpm:focus { border-color: var(--accent); }
+.transport__bpm:focus { border-color: var(--accent); }
+.transport__bpm-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
 
-/* Range inputs (tempo slider, volume slider) — shared style */
-.metronome__slider,
-.metronome__volume {
+/* Range inputs (tempo, volume). The element itself is a 44px touch target;
+   the visible 4px rail is drawn on the track pseudo-element so the hit area
+   is never the 4px line. */
+.transport__slider,
+.transport__volume {
   -webkit-appearance: none;
   appearance: none;
+  height: 44px;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.transport__slider { flex: 1; min-width: 0; }
+.transport__volume { width: 96px; flex: 0 0 auto; }
+.transport__slider::-webkit-slider-runnable-track,
+.transport__volume::-webkit-slider-runnable-track {
   height: 4px;
   background: var(--rule);
   border-radius: 2px;
-  margin: 0;
-  cursor: pointer;
-  flex: 1;
-  min-width: 0;
 }
-.metronome__slider { width: 100%; }
-.metronome__slider::-webkit-slider-thumb,
-.metronome__volume::-webkit-slider-thumb {
+.transport__slider::-webkit-slider-thumb,
+.transport__volume::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;      /* centers the 16px thumb on the 4px rail */
+  border: none;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  border: none;
 }
-.metronome__slider::-moz-range-thumb,
-.metronome__volume::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
+.transport__slider::-moz-range-track,
+.transport__volume::-moz-range-track {
+  height: 4px;
+  background: var(--rule);
+  border-radius: 2px;
+}
+.transport__slider::-moz-range-thumb,
+.transport__volume::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  border: none;
 }
 
-.metronome__timesig {
-  background: transparent;
+.transport__timesig {
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--bg);
   border: 1px solid var(--rule);
   border-radius: var(--r-s);
   font-family: var(--mono);
-  font-size: 0.6875rem;
-  padding: 4px 16px 4px 6px;
+  font-size: 0.875rem;
   color: var(--ink);
+  padding: 0 26px 0 10px;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
                     linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
-  background-position: calc(100% - 8px) 50%, calc(100% - 4px) 50%;
-  background-size: 4px 4px, 4px 4px;
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
+}
+.transport__timesig:focus { border-color: var(--accent); }
+
+.transport__beats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 10px;
+}
+.transport__beat {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--rule);
+  transition: background 60ms ease, transform 60ms ease;
+}
+/* Offbeats brass, downbeat brick — the red "1" is the whole point of the row,
+   so it must not be a scale difference alone. */
+.transport__beat.is-active { background: var(--gold); transform: scale(1.35); }
+.transport__beat.is-downbeat-active { background: var(--accent); transform: scale(1.35); }
+
+.transport__vol {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   flex-shrink: 0;
 }
-.metronome__timesig:focus { border-color: var(--accent); }
-
-.metronome__vol-icon {
-  font-size: 0.8125rem;
+.transport__vol-icon {
+  font-size: 0.875rem;
   color: var(--ink-soft);
+}
+
+.transport__collapse {
+  width: 44px;
+  height: 44px;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--r-pill);
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+.transport__collapse:hover { color: var(--accent); background: var(--paper-2); }
+
+/* Two rows below 720px: go · BPM · beats · collapse, then slider · timesig ·
+   volume. --transport-h is re-declared so the body reserve stays exactly the
+   dock's height. The break element below is zero-HEIGHT but not zero-LINE: it
+   is 100% wide, so flex gives it a line of its own and the row box pays TWO
+   row-gaps, not one. 12 + 44 + 8 + 0 + 8 + 44 + 12 = 128 (+1px border-top =
+   129 rendered, the same +1 the desktop row has). Measure before changing it —
+   a token that undershoots the real height is exactly the overlap bug this
+   package exists to kill. */
+@media (max-width: 720px) {
+  :root { --transport-h: 128px; }
+  .transport__row {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 10px;
+  }
+  /* Deterministic line break: a zero-height full-width flex item ordered
+     between the two groups. Without it the row re-wraps at arbitrary widths
+     as the beat count and BPM digits change. */
+  .transport__row::before {
+    content: '';
+    order: 5;
+    flex: 1 0 100%;
+    height: 0;
+  }
+  .transport__go { order: 1; }
+  .transport__bpm-wrap { order: 2; }
+  /* The dot row may shrink (and clip its last dot) rather than wrap the whole
+     control row on a narrower-than-390px phone. The padding/margin pair gives
+     the clip box vertical slack so the 1.35× beat pulse is never flattened.
+     flex-basis is 0, NOT auto: with `auto` the row's base width is the dot
+     count, so picking 7/8 on a 320px phone pushed row 1 onto two lines and the
+     dock to 181px against a 140px reserve. At 0 the dots only ever occupy
+     leftover space, so the beat count can never change the dock's height. */
+  .transport__beats {
+    order: 3;
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    padding: 4px 0;
+    margin: -4px 0;
+  }
+  .transport__collapse { order: 4; margin-left: auto; }
+  .transport__slider { order: 6; flex: 1 1 90px; }
+  .transport__timesig { order: 7; }
+  .transport__vol { order: 8; }
 }
 
 /* =====================  RESPONSIVE  ===================== */
@@ -1448,4 +1604,15 @@ hr.section-rule {
   .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .hero-upnext__title { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   .exercise { padding: 16px 12px; }
+
+  /* Below ~340px the dock's second row (slider · timesig · volume) runs out of
+     width and wraps to a third and fourth line — 233px of dock against a 140px
+     reserve, i.e. BL-036's overlap again at the narrow end. Everything here
+     exists to keep the dock at exactly two rows down to 280px (Galaxy Fold) so
+     --transport-h stays true. Verified by measurement at 320 and 280. */
+  .transport__row { column-gap: 8px; padding: 12px 12px; }
+  .transport__bpm-label { display: none; }
+  .transport__bpm { width: 60px; }
+  .transport__volume { width: 60px; }
+  .transport__slider { flex: 1 1 56px; }
 }
