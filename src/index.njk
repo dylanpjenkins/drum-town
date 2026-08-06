@@ -4,97 +4,98 @@ layout: base.njk
 
 <div class="container container--wide">
 
-  {# ======================  HERO  ====================== #}
-  {# Default state renders in HTML so first paint always works. The activation
-     script at the bottom replaces it with the "Up Next" hero if the user has
-     a stored lastVisited slug. #}
-  <section class="curriculum-hero" id="hero-default">
-    <p class="eyebrow">Drum Town</p>
-    <h1>The <em>Curriculum</em></h1>
-    <p class="lede">A complete drum curriculum — reading, rudiments, technique, and coordination in Foundations, then seven genre tracks from rock to jazz to hip-hop. Every lesson has real notation you can <em>play</em>: press play on any exercise to hear it, practice against the built-in metronome, and your progress is remembered between visits.</p>
-    <p class="stat">{{ curriculum | lessonCount }} lessons</p>
-    <p class="hero-default__completed" id="hero-completed-msg" hidden>
-      You've reached the end of the ready lessons.
-      <a href="https://github.com/dylanpjenkins/drum-town/issues">What else do you want to learn? →</a>
-    </p>
-  </section>
-
-  <section class="hero-upnext" id="hero-upnext" hidden>
-    <div class="hero-upnext__main">
-      <p class="hero-upnext__eyebrow">
-        <span class="hero-upnext__eyebrow-lead">Up Next</span>
-        <span class="hero-upnext__dot" aria-hidden="true">·</span>
-        <span data-slot="eyebrow"></span>
-      </p>
-      <h1 class="hero-upnext__title"><span data-slot="title"></span>.</h1>
-      <p class="hero-upnext__tagline" data-slot="tagline"></p>
-      <div class="hero-upnext__actions">
-        <a class="btn btn--primary" data-slot="open" href="#">Open lesson →</a>
-        <a class="btn btn--ghost" data-slot="review" href="#">Review previous lesson</a>
-      </div>
+  {# ======================  HERO  ======================
+     One hero, always the thesis. The returning-visitor state is carried by
+     the second CTA (#cta-continue), which the activation script at the
+     bottom of this file fills in and unhides; a first-time visitor sees
+     exactly one call to action. #}
+  <section class="hero">
+    <p class="eyebrow">drum.town · a free town for learning the drums</p>
+    <h1>The whole town practices to the same <em>clock.</em></h1>
+    <p class="hero__dek">A complete curriculum you can walk: <strong>{{ curriculum | lessonCount }} lessons</strong> with real notation you can press play on, <strong>{{ lessonContent | exerciseCount }} exercises</strong>, <strong>40 rudiments</strong> — free, in your browser, no sign-up.</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="/lessons/{{ curriculum.foundations.sections[0].lessons[0].slug }}/">Start here — your first lesson <span aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" id="cta-continue" href="#" hidden>Continue — <span data-slot="title"></span> <span aria-hidden="true">→</span></a>
     </div>
+    <p class="hero__honesty"><strong>The town remembers.</strong> Your progress lives in this browser — no account, nothing to join.</p>
+    {#- Two different end states. The positional one fires whenever the last
+        lesson you opened has nothing after it, which can happen on your very
+        first visit if you land on the final lesson from search. Only the second
+        may claim you finished anything. -#}
+    <p class="hero__honesty" id="hero-end-msg" hidden>That's the last stop on the walk. <a href="https://github.com/dylanpjenkins/drum-town/issues">What should the town build next? →</a></p>
+    <p class="hero__honesty" id="hero-completed-msg" hidden>You've walked every street in town. <a href="https://github.com/dylanpjenkins/drum-town/issues">What should the town build next? →</a></p>
   </section>
 
-  {# ======================  UNIFIED CURRICULUM  ======================
-     Foundations sub-sections, then one chapter per genre track, then a
-     final "Other Topics" chapter. Section anchors (#foundations, #tracks,
-     #mastery) live on the first chapter of each group so the site nav
-     keeps working. #}
+  <p class="ledger-legend">✓ streets you've walked · ● you are here · ○ still to visit</p>
+
+  {# ======================  THE LEDGER  ======================
+     One .ledger section per chapter: eleven Foundations sub-sections, then
+     one per genre track, then a final "Other Topics" chapter. Section
+     anchors (#foundations, #tracks, #mastery) live on the first chapter of
+     each group so the site nav keeps working. #}
 
   {% set foundationsCount = curriculum.foundations.sections.length %}
   {% set tracksCount = curriculum.tracks.length %}
+  {% set chapterTotal = foundationsCount + tracksCount + 1 %}
 
   {% for sec in curriculum.foundations.sections %}
-    <section class="chapter"{% if loop.first %} id="foundations"{% endif %}>
-      <header class="chapter__head">
-        <h2 class="chapter__title">{{ sec.title }}</h2>
-        <span class="chapter__num">Chapter {{ loop.index }}</span>
+    <section class="ledger"{% if loop.first %} id="foundations"{% endif %}>
+      <header class="ledger__head">
+        <span class="ledger__kicker">Chapter {{ loop.index }} of {{ chapterTotal }}</span>
+        <h2 class="ledger__title">{{ sec.title }}</h2>
+        <span class="ledger__count">{{ sec.lessons.length }} lessons</span>
       </header>
-      <ol class="chapter__lessons">
+      {% if sec.tagline %}<p class="ledger__tagline">{{ sec.tagline }}</p>{% endif %}
+      <ol class="ledger__rows">
         {% for lesson in sec.lessons %}
-          <li>
-            <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
-              <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
-              <span class="chapter-lesson__title">{{ lesson.title }}</span>
-            </a>
-          </li>
+          <li><a class="ledger-row" href="/lessons/{{ lesson.slug }}/">
+            <span class="ledger-row__num">{{ loop.index | pad2 }}</span>
+            <span class="ledger-row__title">{{ lesson.title }}</span>
+            <span class="ledger-row__leader" aria-hidden="true"></span>
+            <span class="ledger-row__meta"><span class="ledger-row__min">{{ lessonContent[lesson.slug].duration }}</span><span class="ledger-row__mark" aria-hidden="true"></span></span>
+          </a></li>
         {% endfor %}
       </ol>
     </section>
   {% endfor %}
 
   {% for track in curriculum.tracks %}
-    <section class="chapter"{% if loop.first %} id="tracks"{% endif %}>
-      <header class="chapter__head">
-        <h2 class="chapter__title">{{ track.title }}</h2>
-        <span class="chapter__num">Chapter {{ foundationsCount + loop.index }}</span>
+    {% set trackLessons = track | flatTrackLessons %}
+    <section class="ledger"{% if loop.first %} id="tracks"{% endif %}>
+      <header class="ledger__head">
+        <span class="ledger__kicker">Chapter {{ foundationsCount + loop.index }} of {{ chapterTotal }}</span>
+        <h2 class="ledger__title">{{ track.title }}</h2>
+        <span class="ledger__count">{{ trackLessons.length }} lessons</span>
       </header>
-      <ol class="chapter__lessons">
-        {% for lesson in track | flatTrackLessons %}
-          <li>
-            <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
-              <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
-              <span class="chapter-lesson__title">{{ lesson.title }}</span>
-            </a>
-          </li>
+      {% if track.tagline %}<p class="ledger__tagline">{{ track.tagline }}</p>{% endif %}
+      <ol class="ledger__rows">
+        {% for lesson in trackLessons %}
+          <li><a class="ledger-row" href="/lessons/{{ lesson.slug }}/">
+            <span class="ledger-row__num">{{ loop.index | pad2 }}</span>
+            <span class="ledger-row__title">{{ lesson.title }}</span>
+            <span class="ledger-row__leader" aria-hidden="true"></span>
+            <span class="ledger-row__meta"><span class="ledger-row__min">{{ lessonContent[lesson.slug].duration }}</span><span class="ledger-row__mark" aria-hidden="true"></span></span>
+          </a></li>
         {% endfor %}
       </ol>
     </section>
   {% endfor %}
 
-  <section class="chapter" id="mastery">
-    <header class="chapter__head">
-      <h2 class="chapter__title">Other Topics</h2>
-      <span class="chapter__num">Chapter {{ foundationsCount + tracksCount + 1 }}</span>
+  <section class="ledger" id="mastery">
+    <header class="ledger__head">
+      <span class="ledger__kicker">Chapter {{ chapterTotal }} of {{ chapterTotal }}</span>
+      <h2 class="ledger__title">Other Topics</h2>
+      <span class="ledger__count">{{ curriculum.mastery.lessons.length }} lessons</span>
     </header>
-    <ol class="chapter__lessons">
+    {% if curriculum.mastery.tagline %}<p class="ledger__tagline">{{ curriculum.mastery.tagline }}</p>{% endif %}
+    <ol class="ledger__rows">
       {% for lesson in curriculum.mastery.lessons %}
-        <li>
-          <a class="chapter-lesson" href="/lessons/{{ lesson.slug }}/">
-            <span class="chapter-lesson__num">{{ loop.index | pad2 }}</span>
-            <span class="chapter-lesson__title">{{ lesson.title }}</span>
-          </a>
-        </li>
+        <li><a class="ledger-row" href="/lessons/{{ lesson.slug }}/">
+          <span class="ledger-row__num">{{ loop.index | pad2 }}</span>
+          <span class="ledger-row__title">{{ lesson.title }}</span>
+          <span class="ledger-row__leader" aria-hidden="true"></span>
+          <span class="ledger-row__meta"><span class="ledger-row__min">{{ lessonContent[lesson.slug].duration }}</span><span class="ledger-row__mark" aria-hidden="true"></span></span>
+        </a></li>
       {% endfor %}
     </ol>
   </section>
@@ -123,14 +124,28 @@ layout: base.njk
       var visited = DCProgress.getVisited();
       var visitedSet = {};
       for (var i = 0; i < visited.length; i++) visitedSet[visited[i]] = true;
-      var links = document.querySelectorAll('.chapter-lesson');
-      for (var j = 0; j < links.length; j++) {
-        var href = links[j].getAttribute('href') || '';
+
+      // The ✓/● marks are CSS ::before content on an aria-hidden span, so the
+      // state has to be spoken separately or a screen reader hears nothing.
+      function announce(row, text) {
+        var s = document.createElement('span');
+        s.className = 'sr-only';
+        s.textContent = text;
+        row.appendChild(s);
+      }
+
+      var rows = document.querySelectorAll('.ledger-row');
+      for (var j = 0; j < rows.length; j++) {
+        var href = rows[j].getAttribute('href') || '';
         var m = href.match(/\/lessons\/([^\/]+)\/?$/);
         if (!m) continue;
         var slug = m[1];
-        if (visitedSet[slug]) links[j].classList.add('is-visited');
-        if (slug === last) links[j].classList.add('is-last-visited');
+        if (visitedSet[slug]) rows[j].classList.add('is-visited');
+        if (slug === last) rows[j].classList.add('is-last-visited');
+        // "here" supersedes "visited" — the last-visited row always carries
+        // both classes, and announcing both would read as a stutter.
+        if (slug === last) announce(rows[j], 'current lesson');
+        else if (visitedSet[slug]) announce(rows[j], 'visited');
       }
 
       if (!last) return;
@@ -140,7 +155,13 @@ layout: base.njk
       if (idx === -1) return;
 
       if (idx === order.length - 1) {
-        var msg = document.getElementById('hero-completed-msg');
+        // Reaching the last lesson is a POSITION, not an achievement. Someone
+        // who lands on the final lesson from a search result and clicks the
+        // logo has visited exactly one thing; telling them they had finished
+        // every lesson was false, and sat two lines under a button still
+        // reading "Start here — your first lesson".
+        var walkedAll = order.length > 0 && order.every(function (s) { return visited.indexOf(s) !== -1; });
+        var msg = document.getElementById(walkedAll ? 'hero-completed-msg' : 'hero-end-msg');
         if (msg) msg.hidden = false;
         return;
       }
@@ -149,33 +170,12 @@ layout: base.njk
       var lesson = (data.bySlug || {})[nextSlug];
       if (!lesson) return;
 
-      var hero = document.getElementById('hero-upnext');
-      var defaultHero = document.getElementById('hero-default');
-      if (!hero) return;
-
-      function setText(name, value) {
-        var el = hero.querySelector('[data-slot="' + name + '"]');
-        if (el) el.textContent = value || '';
-      }
-
-      setText('eyebrow', lesson.eyebrow);
-      setText('title', lesson.title);
-      setText('tagline', lesson.tagline);
-
-      var openLink = hero.querySelector('[data-slot="open"]');
-      if (openLink) openLink.setAttribute('href', lesson.url);
-
-      var reviewLink = hero.querySelector('[data-slot="review"]');
-      if (reviewLink) {
-        if (lesson.before) {
-          reviewLink.setAttribute('href', lesson.before.url);
-        } else {
-          reviewLink.hidden = true;
-        }
-      }
-
-      if (defaultHero) defaultHero.hidden = true;
-      hero.hidden = false;
+      var cta = document.getElementById('cta-continue');
+      if (!cta) return;
+      var titleSlot = cta.querySelector('[data-slot="title"]');
+      if (titleSlot) titleSlot.textContent = lesson.title;
+      cta.setAttribute('href', lesson.url);
+      cta.hidden = false;
     });
   })();
 </script>

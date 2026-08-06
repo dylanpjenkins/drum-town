@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 33,
-    "next_dimension": "ui",
+    "iteration": 34,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -722,10 +722,12 @@
         "design/packages.md PKG-5; DECISION amendment 2+3; kills BL-044 + BL-045 hero"
       ],
       "acceptance": "per design/packages.md PKG-5: thesis headline, CTA pair with conditional Continue, dotted-leader ledger rows with real minutes and ✓/● marks on existing hooks, mandatory 390px two-line stacking; screenshots both widths both themes",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 40 · 2026-08-06 · SHIPPED. One thesis hero replaces the #hero-default/#hero-upnext swap; the returning-visitor state now rides on a ghost 'Continue — <next lesson>' CTA instead of swapping headlines. The chapter chip grid becomes 19 .ledger sections of numbered rows: '01 Title ··· 12 min ✓ done', minutes rendered verbatim from lessonContent (all 217 have one), ✓ done in --green, ● here in --accent with an inset bar, ○ unvisited, each state also announced through an sr-only span. New exerciseCount filter renders 852. Two-line row grid at <=560px. FIVE defects were caught after the Builder reported all-gates-green. Three by orchestrator measurement: the 'you are here' row rendered its number in --green while its title, mark and bar were --accent, because setLastVisited always pushes the slug into visited so the row carries BOTH state classes; the mark kept its fixed 64px column when stacked, stranding a bare ○ in open space beside the minutes; and the ledger filled a 1128px container against a 720px hero, putting two measures on one page and stretching the dotted leader to 735px, further than an eye tracks from a title to its minutes (capped at 900px). Two by the adversarial panel (3 lenses, 17 findings, 15 refuted, 2 survived): (a) MAJOR — completion was gated on idx === order.length - 1, the POSITION of lastVisited rather than coverage of visited, so anyone who opened the final lesson (reachable in one click from the homepage's own last row, or from a search landing) saw 'You've finished every ready lesson' on a first visit with 216 rows still ○ and a button two lines above still reading 'Start here — your first lesson'. Split into two honest states: a positional 'That's the last stop on the walk.' and a real 'You've walked every street in town.' gated on visited covering the order. Verified all three states in a browser. (b) MINOR — the chapter head stacks EARLIER than the rows do, and scoping its stack to the row's 560px breakpoint orphaned 'N LESSONS' onto its own line between 561-631px and again at 721-739px, making those heads 63px against 41px elsewhere; head stack moved to its own <=760px block and head heights are now uniform at every width measured. Refuted and NOT changed: a claimed bfcache/pageshow staleness bug, and a claimed sr-only accumulation bug (the script has one entry point and the dual-state row announces once). Deviations from system.md, all recorded by the Builder: ○ as the default mark (the mandated legend names it, so without it the legend describes a glyph that never appears); row hairlines kept at <=560px (the BL-044 orphan was the chip grid's flowing separators, not row rules); .btn[hidden]{display:none} because .btn's inline-flex outranks the UA rule and the Continue CTA would otherwise ship visible to first-time visitors."
+      ]
     },
     {
       "id": "BL-053",
@@ -1019,11 +1021,12 @@
         "Critic iter 23: .chapter__lessons li::after dash separators dangle at the end of wrapped lines (visible after Tuning Your Drums on desktop, nearly every row at 390px) — separator-as-pseudo-element is wrap-hostile"
       ],
       "acceptance": "separators never orphan: swap to a gap-based/border treatment or place the separator inside the following item; verify via home screenshots at 1280 and 390",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed from adversarial critique (iter 23)."
+        "Filed from adversarial critique (iter 23).",
+        "iter 40 · Closed by PKG-5 [BL-052]. The em-dash separators lived in the chapter chip grid, which no longer exists. Ledger rows carry no inter-item separators at all — the wide layout uses a dotted leader that is a flex spacer with nothing typed in it, and the stacked layout uses row hairlines that cannot orphan because they are borders, not characters."
       ]
     },
     {
@@ -1039,7 +1042,8 @@
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed from adversarial critique (iter 23)."
+        "Filed from adversarial critique (iter 23).",
+        "iter 40 · Hero half closed by PKG-5 [BL-052]: the homepage now has one primary action ('Start here — your first lesson') plus a conditional Continue for returning visitors. The remaining half is the lesson-page label pile-up, which PKG-6 [BL-053] owns."
       ]
     },
     {

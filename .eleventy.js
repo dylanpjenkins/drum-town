@@ -145,6 +145,17 @@ module.exports = function (eleventyConfig) {
       + curriculum.mastery.lessons.length;
   });
 
+  // Filter: count of every playable exercise on the site. Takes the
+  // lessonContent map (slug → entry) and sums each entry's exercise list, so
+  // the homepage quotes a number that moves with the content rather than a
+  // hand-maintained constant.
+  eleventyConfig.addFilter('exerciseCount', function (lessonContent) {
+    return Object.keys(lessonContent || {}).reduce(
+      (sum, slug) => sum + ((lessonContent[slug] && lessonContent[slug].exercises) || []).length,
+      0
+    );
+  });
+
   // Collection: flat list of all lessons across foundations + tracks + mastery
   eleventyConfig.addCollection('allLessons', function () {
     const curriculum = require('./src/_data/curriculum.js');

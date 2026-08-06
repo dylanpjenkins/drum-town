@@ -457,19 +457,51 @@ hr.section-rule {
   margin: 40px 0;
 }
 
-/* =====================  HOMEPAGE — CURRICULUM  ===================== */
-.curriculum-hero {
-  text-align: center;
-  padding: 40px 0 30px;
+/* =====================  HOMEPAGE — HERO  =====================
+   One hero at all times (system.md §5.1): thesis headline, a CTA pair whose
+   second button only appears for a returning visitor, and the honesty line.
+   Left-aligned inside .container--wide, held to a reading measure. */
+.hero {
+  max-width: 720px;
+  padding: 32px 0 24px;
 }
-.curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); line-height: 1.05; letter-spacing: -0.015em; }
-.curriculum-hero .lede { margin: 0 auto 18px; }
-.curriculum-hero .stat {
+.hero h1 {
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 16px;
+}
+.hero__dek {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--ink-3);
+  margin: 0 0 24px;
+}
+.hero__dek strong { color: var(--ink); font-weight: 600; }
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+/* .btn sets display: inline-flex, which outranks the UA's [hidden] rule — the
+   continue CTA and any other hidden button need this or they ship visible. */
+.btn[hidden] { display: none; }
+.hero__honesty {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 560px;
+  margin: 24px 0 0;
+}
+.hero__honesty strong { color: var(--ink); font-weight: 600; }
+
+/* The one place the ✓/●/○ vocabulary is spelled out. */
+.ledger-legend {
   font-family: var(--mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--ink-soft);
-  text-transform: uppercase;
+  margin: 32px 0 0;
 }
 
 .curriculum-section {
@@ -495,30 +527,25 @@ hr.section-rule {
   margin: 0 auto;
 }
 
-/* Chapters: editorial table-of-contents block used by foundations sub-sections
-   and the final mastery section. Title + chapter number on the same row, then
-   a tagline, then an inline flowing numbered list of lessons. */
-.chapter {
-  margin: 40px 0;
-  padding-top: 14px;
-  border-top: 1px solid var(--rule-soft);
-}
-.chapter__head {
+/* =====================  HOMEPAGE — THE LEDGER  =====================
+   One section per chapter (system.md §5.2): a head with a 2px ink rule, then
+   numbered rows that run title → dotted leader → minutes → state mark, the
+   way a printed table of contents does. Rows are the only list language the
+   homepage speaks; genre pages adopt them later. */
+/* Capped rather than filling .container--wide. At 1128px the ledger ran 400px
+   wider than the hero above it — two measures on one page — and the dotted
+   leader stretched 735px, which is further than an eye will track from a title
+   to its minutes. This keeps the leader doing its job. */
+.ledger { margin: 48px 0; max-width: 900px; }
+.ledger__head {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
 }
-.chapter__title {
-  font-family: var(--display);
-  font-size: 2.125rem;
-  font-weight: 600;
-  font-style: italic;
-  letter-spacing: -0.01em;
-  margin: 0;
-  color: var(--ink);
-}
-.chapter__num {
+.ledger__kicker {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 500;
@@ -527,113 +554,111 @@ hr.section-rule {
   color: var(--accent);
   white-space: nowrap;
 }
-.chapter__lessons {
-  list-style: none;
-  padding: 0;
-  margin: 18px 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  row-gap: 10px;
-}
-.chapter__lessons > li {
-  display: inline-flex;
-  align-items: baseline;
-}
-.chapter__lessons > li::after {
-  content: '';
-  display: inline-block;
-  width: 22px;
-  border-top: 1px solid var(--rule);
-  margin: 0 12px;
-  transform: translateY(-4px);
-}
-.chapter__lessons > li:last-child::after { display: none; }
-
-.chapter-lesson {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  text-decoration: none;
+.ledger__title {
+  font-family: var(--display);
+  font-size: 2.125rem;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
   color: var(--ink);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-pill);
-  padding: 6px 14px;
 }
-.chapter-lesson:hover { border-color: var(--accent); }
-.chapter-lesson__num {
+.ledger__count {
   font-family: var(--mono);
   font-size: 0.6875rem;
   letter-spacing: 0.12em;
-  color: var(--ink-soft);
-}
-.chapter-lesson__title {
-  font-family: var(--display);
-  font-size: 1.0625rem;
-  font-weight: 600;
-  font-style: italic;
-}
-.chapter-lesson:hover { text-decoration: none; }
-.chapter-lesson:hover .chapter-lesson__title { color: var(--accent); }
-
-.chapter-lesson.is-visited { border-color: var(--green); }
-.chapter-lesson.is-visited .chapter-lesson__num { color: var(--green); }
-.chapter-lesson.is-visited .chapter-lesson__title { color: var(--green); }
-
-.chapter-lesson.is-last-visited { border-color: var(--accent); background: var(--accent); }
-.chapter-lesson.is-last-visited .chapter-lesson__num,
-.chapter-lesson.is-last-visited .chapter-lesson__title { color: var(--accent-ink); }
-.chapter-lesson.is-last-visited:hover .chapter-lesson__title { color: var(--accent-ink); }
-
-/* Mastery: horizontal rail of cross-cutting topics */
-/* Hero — "Up Next" state: shown when localStorage holds a lastVisited slug
-   that maps to a known lesson with a next neighbor. Replaces the default
-   curriculum-hero on the homepage. */
-.hero-default__completed {
-  font-family: var(--body);
-  font-size: 0.90625rem;
-  color: var(--ink-soft);
-  margin-top: 18px;
-}
-.hero-default__completed a { color: var(--accent); }
-
-.hero-upnext {
-  padding: 32px 0 40px;
-  margin-bottom: 48px;
-}
-.hero-upnext[hidden] { display: none; }
-.hero-upnext__main { min-width: 0; }
-.hero-upnext__eyebrow {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin: 0 0 18px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  margin-left: auto;
 }
-.hero-upnext__eyebrow-lead { font-weight: 500; }
-.hero-upnext__dot { margin: 0 8px; color: var(--accent); }
-.hero-upnext__title {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem);
-  line-height: 1.05;
-  margin: 0 0 18px;
-  color: var(--accent);
-  font-weight: 600;
-}
-.hero-upnext__tagline {
-  font-family: var(--body);
-  font-size: 1.125rem;
+.ledger__tagline {
+  font-size: 0.875rem;
+  line-height: 1.55;
   color: var(--ink-3);
-  max-width: 540px;
-  margin: 0 0 24px;
+  max-width: 640px;
+  margin: 12px 0 0;
 }
-.hero-upnext__actions {
+.ledger__rows {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+/* Hairlines belong to the row that follows, so the last row never trails a
+   rule and nothing can be orphaned onto a line of its own. */
+.ledger__rows > li + li { border-top: 1px solid var(--rule-soft); }
+
+.ledger-row {
   display: flex;
+  align-items: baseline;
   gap: 12px;
-  flex-wrap: wrap;
+  padding: 13px 6px;
+  color: var(--ink);
+  text-decoration: none;
 }
+.ledger-row:hover { background: var(--paper); text-decoration: none; }
+.ledger-row:hover .ledger-row__title { color: var(--accent); }
+/* The ring hugs the row inside the list gutter instead of spilling into the
+   column beside it. */
+.ledger-row:focus-visible { outline-offset: -2px; }
+.ledger-row__num {
+  flex: 0 0 2.5ch;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+.ledger-row__title {
+  min-width: 0;
+  font-family: var(--display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* A flex spacer, not typed characters: nothing to orphan, nothing to read. */
+.ledger-row__leader {
+  flex: 1 1 auto;
+  min-width: 40px;
+  border-bottom: 1.5px dotted var(--rule);
+  transform: translateY(-4px);
+}
+.ledger-row__meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.ledger-row__min {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ledger-row__mark {
+  flex: 0 0 64px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.ledger-row__mark::before { content: '○'; }
+
+/* States. The classes are added by the homepage activation script, which also
+   appends the sr-only text — these marks are decoration. */
+.ledger-row.is-visited .ledger-row__num { color: var(--green); }
+.ledger-row.is-visited .ledger-row__mark { color: var(--green); }
+.ledger-row.is-visited .ledger-row__mark::before { content: '✓ done'; }
+
+.ledger-row.is-last-visited { box-shadow: inset 3px 0 0 var(--accent); }
+/* The current row is always ALSO a visited row, so this has to win the green
+   back off the number — otherwise "you are here" renders in two colors at once. */
+.ledger-row.is-last-visited .ledger-row__num { color: var(--accent); }
+.ledger-row.is-last-visited .ledger-row__title { color: var(--accent); }
+.ledger-row.is-last-visited .ledger-row__mark { color: var(--accent); font-weight: 600; }
+.ledger-row.is-last-visited .ledger-row__mark::before { content: '● here'; }
 
 /* Buttons */
 .btn {
@@ -1583,26 +1608,58 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   h2 { font-size: 1.75rem; }
   /* The display steps are viewport-clamped; these h1 overrides restate the
      same clamps (kept so the selector inventory survives the repaint). */
-  .curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
+  .hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
-  .hero-upnext__title { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   .curriculum-section__header h2 { font-size: 1.75rem; }
-  .chapter__head { flex-wrap: wrap; gap: 4px 16px; }
-  .chapter__title { font-size: 1.75rem; }
+  /* .ledger__title is a class, so the bare h2 step above cannot reach it. */
+  .ledger__title { font-size: 1.75rem; }
   .level-block__header { flex-wrap: wrap; }
   .exercise { padding: 18px 16px; }
   .tracks-grid { grid-template-columns: 1fr; }
   .listening { margin-top: 36px; }
 }
 
+/* The ledger's two-line row (system.md §5.2). This is the designed narrow
+   form, not a wrapping accident: line 1 is `01  Lesson title` with the title
+   wrapping under itself, line 2 is `12 min  ✓ done` indented to the title
+   column. Leaders are a wide-format instrument and are dropped here. */
+@media (max-width: 560px) {
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 2.5ch 1fr;
+    row-gap: 2px;
+    padding: 10px 4px;
+  }
+  .ledger-row__leader { display: none; }
+  .ledger-row__title { grid-column: 2; }
+  .ledger-row__meta { grid-column: 2; display: flex; gap: 10px; }
+  /* The 64px column exists to align the wide layout's right edge. Stacked,
+     it just strands the mark in open space next to the minutes. */
+  .ledger-row__mark { flex: 0 0 auto; text-align: left; }
+}
+
+/* The head stacks EARLIER than the rows do. Line-breaking happens before
+   shrinking, so between 561 and ~740px a max-content title claimed line one and
+   orphaned "N LESSONS" onto a line of its own, tucked under the 2px ink rule and
+   making those chapter heads 63px tall against 41px everywhere else. */
+@media (max-width: 760px) {
+  .ledger__count { order: 1; margin-left: 0; }
+  .ledger__title { order: 2; flex: 1 1 100%; }
+}
+
+@media (max-width: 479px) {
+  /* Primary first, both full width — a thumb should not have to aim. */
+  .hero__actions { flex-direction: column; align-items: stretch; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+}
+
 @media (max-width: 400px) {
   .container { padding: 32px 16px; }
-  .curriculum-hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
+  .hero h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
-  .hero-upnext__title { font-size: clamp(2.5rem, 1.6rem + 4vw, 4rem); }
   .exercise { padding: 16px 12px; }
 
   /* Below ~340px the dock's second row (slider · timesig · volume) runs out of
