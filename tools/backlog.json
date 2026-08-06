@@ -358,10 +358,10 @@
       "title": "Exercise title numbering uses 3+ schemes",
       "evidence": ["822 use 'N — Title', 10 use '1A — Title', 17 ad-hoc ('Build-Up 1 —', 'Round 1 —', 'Pattern A —', 'Tour of the Kit —'); paradiddle uses 1A while sibling rudiments use plain N"],
       "acceptance": "single convention documented in style guide (descriptive prefixes may survive as the documented exception) and applied; meta.titleNumberingSchemes <= 2",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": ["iter 34 · 24 titles normalised to 'N — Title' with N as the exercise's position: orphan letter labels with no sibling (paradiddle '1A', fusion-polyrhythms '4A'), numbers that didn't match position (fusion-six-stroke-roll '2A/2B' at positions 0/1), a lesson starting at '0', and descriptive-only titles (the-drum-kit, setup-posture, recording-yourself) that also carried an internal em dash — now a colon, so the em dash belongs to the number alone. Kept by design: 7 genuine NA/NB variation pairs, and 6 named-sequence titles (slow-practice 'Round N', latin-yoruba 'Pattern A/B/C'). latin-yoruba was excluded outright after checking cross-references: its prose cites 'Pattern A/B/C' and renumbering would have broken them. first-beat's graduation criteria cite 'Ex 5', which canonical numbering makes correct rather than breaking. New gate check-exercise-titles.js catches duplicate/gapped numbering — the exact state the lesson was left in when three titles containing escaped quotes silently failed to match mid-edit."]
     },
     {
       "id": "BL-027",

@@ -41,7 +41,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "1A — Single Paradiddle on Snare",
+        title: "1 — Single Paradiddle on Snare",
         meta: "4/4 · 16th notes · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -86,7 +86,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "Build-Up 1 — Hi-Hat Alone, Quarter Notes",
+        title: "1 — Hi-Hat Alone, Quarter Notes",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -101,7 +101,7 @@ module.exports = {
         tip: "One hi-hat hit per beat. Count out loud: <em>1, 2, 3, 4</em>. The goal isn't speed or color — it's <em>steadiness</em>. Lock to the metronome and just be there for two minutes before moving on."
       },
       {
-        title: "Build-Up 2 — Add the Bass Drum on 1 and 3",
+        title: "2 — Add the Bass Drum on 1 and 3",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -122,7 +122,7 @@ module.exports = {
         tip: "Now the foot enters: bass drum on beats <em>1</em> and <em>3</em>. The kick is the heartbeat — it tells the listener where the bar starts and where the middle is. Hand and foot land at the same instant; let them lock together."
       },
       {
-        title: "Build-Up 3 — Drop the Kick, Add Snare on 2 and 4",
+        title: "3 — Drop the Kick, Add Snare on 2 and 4",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -137,7 +137,7 @@ module.exports = {
         tip: "Take the foot away for a moment and bring the snare in on beats <em>2</em> and <em>4</em>. This is the <strong>backbeat</strong> — the loud snap that distinguishes rock and pop from a march. Notice how it has propulsion all by itself, before the kick is even back in the picture."
       },
       {
-        title: "Build-Up 4 — Bring the Kick Back",
+        title: "4 — Bring the Kick Back",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -158,7 +158,7 @@ module.exports = {
         tip: "Three limbs now: hi-hat on every beat, kick on <em>1</em> and <em>3</em>, snare on <em>2</em> and <em>4</em>. This is the <em>bare backbeat</em>. From here, the only thing left is to fill in the spaces between the beats with a second hi-hat note on each <em>&amp;</em>."
       },
       {
-        title: "Basic Backbeat",
+        title: "5 — Basic Backbeat",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -1743,7 +1743,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "1A — Jazz Comping with Snare on 'and of 4'",
+        title: "1 — Jazz Comping with Snare on 'and of 4'",
         meta: "4/4 · swing 8ths · ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
@@ -1795,7 +1795,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "2A — Six-Stroke on Snare (8th-note triplets)",
+        title: "1A — Six-Stroke on Snare (8th-note triplets)",
         meta: "4/4 · 8th triplets · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -1817,7 +1817,7 @@ module.exports = {
         tip: "Two reps of <em>RLLRRL</em> per bar — four triplet groups total. <em>Sticking:</em> R L L R R L · R L L R R L. Accents on positions 1 and 4 only. Playback sits at ♩=80; work it from ♩=70 up to ♩=90 once it is clean."
       },
       {
-        title: "2B — Six-Stroke Around the Kit",
+        title: "1B — Six-Stroke Around the Kit",
         meta: "4/4 · 8th triplets · ♩ = 76",
         bpm: 76,
         timeSignature: "4/4",
@@ -1870,7 +1870,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "3A — 5/4 Groove (3+2 feel)",
+        title: "1A — 5/4 Groove (3+2 feel)",
         meta: "5/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "5/4",
@@ -1899,7 +1899,7 @@ module.exports = {
         tip: "Feel <em>'long, short'</em> — three beats then two. Bass drum on 1 and 4 anchors each group; snare on 3 and 5 marks the back end."
       },
       {
-        title: "3B — 7/8 Groove (2+2+3 feel)",
+        title: "1B — 7/8 Groove (2+2+3 feel)",
         meta: "7/8 · 8th = 180",
         bpm: 90,
         timeSignature: "7/8",
@@ -1950,7 +1950,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "4A — Quarter-Triplet Polyrhythm Groove",
+        title: "1 — Quarter-Triplet Polyrhythm Groove",
         meta: "4/4 · ♩ = 75",
         bpm: 75,
         timeSignature: "4/4",
@@ -1988,7 +1988,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "Funk Groove with Ghost Notes",
+        title: "1 — Funk Groove with Ghost Notes",
         meta: "4/4 · ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
@@ -2065,7 +2065,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "Tour of the Kit — One Hit on Each Piece",
+        title: "1 — Tour of the Kit: One Hit on Each Piece",
         meta: "4/4 · ♩ = 70",
         bpm: 70,
         timeSignature: "4/4",
@@ -2136,7 +2136,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "Posture Check — Eight Quarter-Note Singles on the Snare",
+        title: "1 — Posture Check: Eight Quarter-Note Singles on the Snare",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -2304,7 +2304,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "The Five-Minute Drill — Quarter-Note Singles on the Snare",
+        title: "1 — The Five-Minute Drill: Quarter-Note Singles on the Snare",
         meta: "4/4 · ♩ = 70 · play continuously for 5 minutes",
         bpm: 70,
         timeSignature: "4/4",
@@ -5182,7 +5182,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "0 — The Foundation: Ride + Hi-Hat Foot Alone",
+        title: "1 — The Foundation: Ride + Hi-Hat Foot Alone",
         meta: "4/4 · swing 8ths · ♩ = 85",
         bpm: 85,
         timeSignature: "4/4",
@@ -5205,7 +5205,7 @@ module.exports = {
         tip: "The Chapin scaffold. Ride pattern (<em>ding · ding-a · ding · ding-a</em>, swung) plus hi-hat foot on 2 and 4. EVERY exercise that follows happens on top of this. If this isn't rock-solid, no snare comping you put on top of it will sound good. Loop for one full minute before moving on."
       },
       {
-        title: "1 — Single Snare on the \"& of 2\"",
+        title: "2 — Single Snare on the \"& of 2\"",
         meta: "4/4 · swing 8ths · ♩ = 85",
         bpm: 85,
         timeSignature: "4/4",
@@ -5228,7 +5228,7 @@ module.exports = {
         tip: "ONE snare hit per bar — on the <em>&amp; of 2</em>, the swung skip-note position. The snare lands with the second note of the ride's <em>ding-a</em>. Easy version because the snare doubles a note already in the ride. Loop forty times before going on. The point is total automaticity at this position."
       },
       {
-        title: "2 — Single Snare on Beat 4",
+        title: "3 — Single Snare on Beat 4",
         meta: "4/4 · swing 8ths · ♩ = 85",
         bpm: 85,
         timeSignature: "4/4",
@@ -5251,7 +5251,7 @@ module.exports = {
         tip: "Snare on beat 4 — landing WITH the ride quarter and the hi-hat foot. Three things at once on that beat (ride, snare, hat-foot), then nothing snare-side until the next bar's beat 4. The body has to learn to fire all three simultaneously and then go quiet for three full beats of bar."
       },
       {
-        title: "3 — Single Snare on the \"& of 4\"",
+        title: "4 — Single Snare on the \"& of 4\"",
         meta: "4/4 · swing 8ths · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -5274,7 +5274,7 @@ module.exports = {
         tip: "Snare on the <em>&amp; of 4</em> — the swung skip into the next bar. This is the most-used jazz comping position; it's the natural pickup feel. The snare lands with the ride's <em>ding-a</em> at the end of beat 4. Loop until the snare arrives at the same micro-timing as the ride's swung 8th every time, never a hair early."
       },
       {
-        title: "4 — Single Snare on the \"a of 4\" (Late)",
+        title: "5 — Single Snare on the \"a of 4\" (Late)",
         meta: "4/4 · swing 8ths · ♩ = 75",
         bpm: 75,
         timeSignature: "4/4",
@@ -6517,7 +6517,7 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "The Recording Prompt — Basic Backbeat for 2 Minutes",
+        title: "1 — The Recording Prompt: Basic Backbeat for 2 Minutes",
         meta: "4/4 · ♩ = 80 · record this for 2 minutes against a click",
         bpm: 80,
         timeSignature: "4/4",
@@ -16809,7 +16809,7 @@ module.exports = {
         tip: "Now the opposite: every note lands <em>a fraction of a second before the click</em>. Don't rush — tempo stays at 90 — you've just moved your reference point to &quot;a hair ahead.&quot; This feel pushes; energy rises; the listener feels propelled. Used heavily in punk-leaning funk and some Tower-of-Power material. Record and listen back: now your hit should arrive first, then the click."
       },
       {
-        title: "4 — &quot;Find the Pocket&quot; — Free Feel Exercise",
+        title: "4 — &quot;Find the Pocket&quot;: Free Feel Exercise",
         meta: "4/4 · ♩ = 85",
         bpm: 85,
         timeSignature: "4/4",
@@ -30165,7 +30165,7 @@ module.exports = {
         tip: "Accents every <em>three 8th notes</em> — a dotted-quarter pulse — laid over a normal 4/4. In bar 1 the accents land on 1, &-of-2, and 4. Loop two more bars and the accents reset to beat 1. The 3-pulse is a quick, dance-like wheel; you'll often hear this in fusion choruses where the drummer is playing a normal 4/4 backbeat but accenting a 3-phrase on top."
       },
       {
-        title: "4 — The Wheel Effect — 5-Group Snare-Tom Phrase",
+        title: "4 — The Wheel Effect: 5-Group Snare-Tom Phrase",
         meta: "4/4 · 16ths · ♩ = 85",
         bpm: 85,
         timeSignature: "4/4",
