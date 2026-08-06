@@ -771,7 +771,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": null,
-      "log": ["Filed from adversarial critique (iter 23); the four factual errors and three in-prose violations were fixed the same tick."]
+      "log": ["Filed from adversarial critique (iter 23); the four factual errors and three in-prose violations were fixed the same tick.", "iter 35 · Listening half DONE, but by rejecting the premise: the critique called the four `work` shapes an inconsistency, and inspecting all 448 showed the variation is semantic, not sloppy — 'Paul Simon — 50 Ways' names a credit the drummer doesn't hold, bare 'Superstition' is Stevie's own record, '(book)' isn't a recording at all. Flattening them would have invented bands. Instead the CONDITIONAL rule is now written into the style guide and gated. Real defects found and fixed: 4 entries had the band in `artist` while naming the drummer in their own note (Zigaboo Modeliste, Chris Pennie, Hal Blaine), and 85 notes lacked a terminating period. New gate check-listening.js. STILL OPEN on this item: the ♩ spacing decision and the Back in Black double-use."]
     },
     {
       "id": "BL-030",

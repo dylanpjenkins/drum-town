@@ -1767,9 +1767,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Steve Smith", work: "Vital Information — Ray of Hope", note: "'Khanda West' is an odd-meter clinic" },
-      { artist: "Dave Weckl", work: "Master Plan", note: "Pay attention to how he leaves space" },
-      { artist: "Vinnie Colaiuta", work: "Sting — Ten Summoner's Tales", note: "Subtle, deep pocket fusion" }
+      { artist: "Steve Smith", work: "Vital Information — Ray of Hope", note: "'Khanda West' is an odd-meter clinic." },
+      { artist: "Dave Weckl", work: "Master Plan", note: "Pay attention to how he leaves space." },
+      { artist: "Vinnie Colaiuta", work: "Sting — Ten Summoner's Tales", note: "Subtle, deep pocket fusion." }
     ]
   },
 
@@ -5919,8 +5919,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Phil Collins", work: "Genesis — Turn It On Again", note: "Listen for how the fills mark every 4-bar phrase, even when small" },
-      { artist: "Ringo Starr", work: "The Beatles — A Day in the Life", note: "Tom fills built from the same 8th-note shape as Ex 5" }
+      { artist: "Phil Collins", work: "Genesis — Turn It On Again", note: "Listen for how the fills mark every 4-bar phrase, even when small." },
+      { artist: "Ringo Starr", work: "The Beatles — A Day in the Life", note: "Tom fills built from the same 8th-note shape as Ex 5." }
     ]
   },
 
@@ -6085,8 +6085,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade", work: "Brian Blade Fellowship — Perceptual", note: "Listen for the way pickups set up section changes" },
-      { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "The intro fill is essentially a long pickup" }
+      { artist: "Brian Blade", work: "Brian Blade Fellowship — Perceptual", note: "Listen for the way pickups set up section changes." },
+      { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "The intro fill is essentially a long pickup." }
     ]
   },
 
@@ -6247,9 +6247,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "John Bonham", work: "Led Zeppelin — Rock and Roll", note: "The opening fill is descending 16ths around the kit" },
-      { artist: "Stewart Copeland", work: "The Police — Synchronicity II", note: "Mixed orchestration — fills feel melodic" },
-      { artist: "Vinnie Colaiuta", work: "Sting — Seven Days", note: "Sticking-driven fills around odd shapes" }
+      { artist: "John Bonham", work: "Led Zeppelin — Rock and Roll", note: "The opening fill is descending 16ths around the kit." },
+      { artist: "Stewart Copeland", work: "The Police — Synchronicity II", note: "Mixed orchestration — fills feel melodic." },
+      { artist: "Vinnie Colaiuta", work: "Sting — Seven Days", note: "Sticking-driven fills around odd shapes." }
     ]
   },
 
@@ -6389,7 +6389,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Famously locked-in time at the studio level — the click was on 2 and 4 for most of his work" }
+      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Famously locked-in time at the studio level — the click was on 2 and 4 for most of his work." }
     ]
   },
 
@@ -6477,7 +6477,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Bill Stewart", work: "John Scofield — A Go Go", note: "Listen to how clean every stroke is — that's slow-practice infrastructure showing through at speed" }
+      { artist: "Bill Stewart", work: "John Scofield — A Go Go", note: "Listen to how clean every stroke is — that's slow-practice infrastructure showing through at speed." }
     ]
   },
 
@@ -6544,7 +6544,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Steve Jordan", work: "John Mayer Trio — Try!", note: "Live recording — listen to how rock-solid the time is across an entire show, not just one bar" }
+      { artist: "Steve Jordan", work: "John Mayer Trio — Try!", note: "Live recording — listen to how rock-solid the time is across an entire show, not just one bar." }
     ]
   },
 
@@ -6708,8 +6708,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Charlie Watts", work: "The Rolling Stones — Start Me Up", note: "Listen for the bar-by-bar discipline through the verses, then the crash entries on the choruses" },
-      { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "The ultimate textbook on holding a groove for an entire section without varying" }
+      { artist: "Charlie Watts", work: "The Rolling Stones — Start Me Up", note: "Listen for the bar-by-bar discipline through the verses, then the crash entries on the choruses." },
+      { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "The ultimate textbook on holding a groove for an entire section without varying." }
     ]
   },
 
@@ -6813,8 +6813,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Questlove", work: "The Roots — Things Fall Apart", note: "Listen to how long he holds each pocket without ever varying — the discipline is the sound" },
-      { artist: "Steve Gadd", work: "Paul Simon — 50 Ways to Leave Your Lover", note: "An entire iconic song built on a loop he basically never breaks" }
+      { artist: "Questlove", work: "The Roots — Things Fall Apart", note: "Listen to how long he holds each pocket without ever varying — the discipline is the sound." },
+      { artist: "Steve Gadd", work: "Paul Simon — 50 Ways to Leave Your Lover", note: "An entire iconic song built on a loop he basically never breaks." }
     ]
   },
 
@@ -6980,9 +6980,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade", work: "Joshua Redman — Spirit of the Moment", note: "Edge-of-snare ghost notes that whisper" },
-      { artist: "Steve Jordan", work: "Keith Richards — Talk Is Cheap", note: "Rim-shot backbeats with absolute commitment" },
-      { artist: "Brian Blade", work: "Bill Frisell — Good Dog, Happy Man", note: "Brush voicings that keep the song small" }
+      { artist: "Brian Blade", work: "Joshua Redman — Spirit of the Moment", note: "Edge-of-snare ghost notes that whisper." },
+      { artist: "Steve Jordan", work: "Keith Richards — Talk Is Cheap", note: "Rim-shot backbeats with absolute commitment." },
+      { artist: "Brian Blade", work: "Bill Frisell — Good Dog, Happy Man", note: "Brush voicings that keep the song small." }
     ]
   },
 
@@ -7131,9 +7131,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Bernard Purdie", work: "Aretha Franklin — Rock Steady", note: "Open-hat 16ths that breathe with the bass line" },
-      { artist: "Tony Williams", work: "Miles Davis — Four & More", note: "Foot splash on 2 and 4 underneath ride patterns" },
-      { artist: "Steve Jordan", work: "John Mayer — Continuum", note: "Half-open sizzle behind the choruses" }
+      { artist: "Bernard Purdie", work: "Aretha Franklin — Rock Steady", note: "Open-hat 16ths that breathe with the bass line." },
+      { artist: "Tony Williams", work: "Miles Davis — Four & More", note: "Foot splash on 2 and 4 underneath ride patterns." },
+      { artist: "Steve Jordan", work: "John Mayer — Continuum", note: "Half-open sizzle behind the choruses." }
     ]
   },
 
@@ -7287,9 +7287,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Tony Williams", work: "Lifetime — Emergency!", note: "The bell as a primary ride voice" },
-      { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "Surgical crash placement in the bridge" },
-      { artist: "Vinnie Colaiuta", work: "Sting — Ten Summoner's Tales", note: "Bow / bell / crash voicings inside one phrase" }
+      { artist: "Tony Williams", work: "Lifetime — Emergency!", note: "The bell as a primary ride voice." },
+      { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "Surgical crash placement in the bridge." },
+      { artist: "Vinnie Colaiuta", work: "Sting — Ten Summoner's Tales", note: "Bow / bell / crash voicings inside one phrase." }
     ]
   },
 
@@ -7400,9 +7400,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade", work: "Joshua Redman — Beyond", note: "Ghost notes that are practically inaudible but structurally essential" },
-      { artist: "Steve Jordan", work: "John Mayer — Try!", note: "16th-note ghost lattice underneath a pop backbeat" },
-      { artist: "Mark Guiliana", work: "Beat Music", note: "Modern jazz and electronica filtered through ghost-note craft" }
+      { artist: "Brian Blade", work: "Joshua Redman — Beyond", note: "Ghost notes that are practically inaudible but structurally essential." },
+      { artist: "Steve Jordan", work: "John Mayer — Try!", note: "16th-note ghost lattice underneath a pop backbeat." },
+      { artist: "Mark Guiliana", work: "Beat Music", note: "Modern jazz and electronica filtered through ghost-note craft." }
     ]
   },
 
@@ -7514,8 +7514,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Buddy Rich", work: "West Side Story Suite", note: "Stone-style accent-tap technique at fusion tempo" },
-      { artist: "Jojo Mayer", work: "Solos and Studies", note: "Modern hand-technique pedagogy on the Stone foundation" }
+      { artist: "Buddy Rich", work: "West Side Story Suite", note: "Stone-style accent-tap technique at fusion tempo." },
+      { artist: "Jojo Mayer", work: "Solos and Studies", note: "Modern hand-technique pedagogy on the Stone foundation." }
     ]
   },
 
@@ -7622,8 +7622,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Jim Chapin", work: "Speed Power Control Endurance", note: "Chapin's instructional video on Moeller — direct line from Sanford Moeller himself" },
-      { artist: "Dom Famularo", work: "Cyberdrumming pedagogy", note: "Modern Moeller technique applied to drum kit" }
+      { artist: "Jim Chapin", work: "Speed Power Control Endurance", note: "Chapin's instructional video on Moeller — direct line from Sanford Moeller himself." },
+      { artist: "Dom Famularo", work: "Cyberdrumming pedagogy", note: "Modern Moeller technique applied to drum kit." }
     ]
   },
 
@@ -7737,9 +7737,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade", work: "Joshua Redman — MoodSwing", note: "Pure finger control — soft, fast, edge-of-the-snare ghost work" },
-      { artist: "Vinnie Colaiuta", work: "Frank Zappa — Joe's Garage", note: "Finger-driven 32nd-note snare runs at impossible volume" },
-      { artist: "Buddy Rich", work: "any solo, any year", note: "The historical reference for finger-driven speed" }
+      { artist: "Brian Blade", work: "Joshua Redman — MoodSwing", note: "Pure finger control — soft, fast, edge-of-the-snare ghost work." },
+      { artist: "Vinnie Colaiuta", work: "Frank Zappa — Joe's Garage", note: "Finger-driven 32nd-note snare runs at impossible volume." },
+      { artist: "Buddy Rich", work: "any solo, any year", note: "The historical reference for finger-driven speed." }
     ]
   },
 
@@ -7893,9 +7893,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Mezzo-forte hi-hat held perfectly stable across an entire 7-minute arrangement" },
-      { artist: "John Riley", work: "Beautiful Love (with Phil Markowitz)", note: "Riley's pacing — pp into mf into f over a 6-minute song form" },
-      { artist: "Brian Blade", work: "Wayne Shorter Quartet — Footprints Live!", note: "Five-step dynamic range inside a single solo" }
+      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Mezzo-forte hi-hat held perfectly stable across an entire 7-minute arrangement." },
+      { artist: "John Riley", work: "Beautiful Love (with Phil Markowitz)", note: "Riley's pacing — pp into mf into f over a 6-minute song form." },
+      { artist: "Brian Blade", work: "Wayne Shorter Quartet — Footprints Live!", note: "Five-step dynamic range inside a single solo." }
     ]
   },
 
@@ -18512,7 +18512,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "The Meters", work: "Cissy Strut", note: "Zigaboo's archetypal kit version of the second-line — kick walking, snare pressing." },
+      { artist: "Zigaboo Modeliste", work: "The Meters — Cissy Strut", note: "Zigaboo's archetypal kit version of the second-line — kick walking, snare pressing." },
       { artist: "Professor Longhair", work: "Tipitina", note: "The piano figure that names the parade bass-drum pulse." },
       { artist: "Stanton Moore", work: "Garage a Trois — Boom-Boom", note: "Modern continuation of the Zigaboo lineage with contemporary kit production." }
     ]
@@ -21917,9 +21917,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Questlove (The Roots)", work: "Things Fall Apart", note: "Live-kit translations of MPC-era beats" },
-      { artist: "Karriem Riggins", work: "Common — Be", note: "A producer-drummer translating his own beats" },
-      { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "Studio sensibilities played on a live kit" }
+      { artist: "Questlove (The Roots)", work: "Things Fall Apart", note: "Live-kit translations of MPC-era beats." },
+      { artist: "Karriem Riggins", work: "Common — Be", note: "A producer-drummer translating his own beats." },
+      { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "Studio sensibilities played on a live kit." }
     ]
   },
 
@@ -22064,9 +22064,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "J Dilla", work: "Donuts", note: "The original wobble — every beat displaced differently" },
-      { artist: "Slum Village", work: "Fantastic, Vol. 2", note: "Dilla's wobble inside a full ensemble" },
-      { artist: "Karriem Riggins", work: "Headnod Suite", note: "Live-kit version of Dilla-school wobble" }
+      { artist: "J Dilla", work: "Donuts", note: "The original wobble — every beat displaced differently." },
+      { artist: "Slum Village", work: "Fantastic, Vol. 2", note: "Dilla's wobble inside a full ensemble." },
+      { artist: "Karriem Riggins", work: "Headnod Suite", note: "Live-kit version of Dilla-school wobble." }
     ]
   },
 
@@ -22239,9 +22239,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Travis Scott", work: "Astroworld", note: "808 patterns at trap-canon clarity" },
-      { artist: "Metro Boomin", work: "Heroes & Villains", note: "The producer-side reference for 808 voicing" },
-      { artist: "Tay Keith", work: "Production catalogue", note: "808 patterns with hat-rolls" }
+      { artist: "Travis Scott", work: "Astroworld", note: "808 patterns at trap-canon clarity." },
+      { artist: "Metro Boomin", work: "Heroes & Villains", note: "The producer-side reference for 808 voicing." },
+      { artist: "Tay Keith", work: "Production catalogue", note: "808 patterns with hat-rolls." }
     ]
   },
 
@@ -22411,9 +22411,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Chris Dave & The Drumhedz", work: "self-titled (2018)", note: "The whole approach in one record" },
-      { artist: "Robert Glasper Experiment", work: "Black Radio", note: "Dave's drumming inside a band context" },
-      { artist: "D'Angelo", work: "Black Messiah (Dave is one of the kit references)", note: "Dragged snare in a soul context" }
+      { artist: "Chris Dave & The Drumhedz", work: "self-titled (2018)", note: "The whole approach in one record." },
+      { artist: "Robert Glasper Experiment", work: "Black Radio", note: "Dave's drumming inside a band context." },
+      { artist: "D'Angelo", work: "Black Messiah (Dave is one of the kit references)", note: "Dragged snare in a soul context." }
     ]
   },
 
@@ -22598,9 +22598,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Anderson .Paak", work: "Malibu", note: "The signature singer-drummer record" },
-      { artist: "Anderson .Paak", work: "Oxnard / Ventura", note: "Continuation and refinement" },
-      { artist: "NxWorries (.Paak + Knxwledge)", work: "Yes Lawd!", note: "Pocket-only, no fills, song-aware drumming" }
+      { artist: "Anderson .Paak", work: "Malibu", note: "The signature singer-drummer record." },
+      { artist: "Anderson .Paak", work: "Oxnard / Ventura", note: "Continuation and refinement." },
+      { artist: "NxWorries (.Paak + Knxwledge)", work: "Yes Lawd!", note: "Pocket-only, no fills, song-aware drumming." }
     ]
   },
 
@@ -22762,8 +22762,8 @@ module.exports = {
     ],
     listening: [
       { artist: "J Dilla", work: "Donuts (2006)", note: "Listen for each voice sitting at its own offset — kick on, snare late, hat early — bar after bar." },
-      { artist: "J Dilla", work: "The Shining", note: "Posthumous, full songs in the same feel" },
-      { artist: "Karriem Riggins", work: "Alone Together", note: "A drummer translating Dilla's wobble back to the kit" }
+      { artist: "J Dilla", work: "The Shining", note: "Posthumous, full songs in the same feel." },
+      { artist: "Karriem Riggins", work: "Alone Together", note: "A drummer translating Dilla's wobble back to the kit." }
     ]
   },
 
@@ -22934,9 +22934,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Metro Boomin", work: "Heroes & Villains", note: "Genre-defining production catalogue" },
-      { artist: "Travis Scott", work: "Astroworld / Utopia", note: "The 808-and-hat-roll aesthetic at scale" },
-      { artist: "Pi'erre Bourne", work: "production for Playboi Carti", note: "Sparse-and-spacey wing of modern production" }
+      { artist: "Metro Boomin", work: "Heroes & Villains", note: "Genre-defining production catalogue." },
+      { artist: "Travis Scott", work: "Astroworld / Utopia", note: "The 808-and-hat-roll aesthetic at scale." },
+      { artist: "Pi'erre Bourne", work: "production for Playboi Carti", note: "Sparse-and-spacey wing of modern production." }
     ]
   },
 
@@ -23093,8 +23093,8 @@ module.exports = {
     ],
     listening: [
       { artist: "DJ Premier", work: "Gang Starr — Moment of Truth", note: "Listen for where the drums lock with the loop and where they deliberately leave it alone." },
-      { artist: "Pete Rock", work: "Mecca and the Soul Brother", note: "Sample-driven beats with live touches" },
-      { artist: "Madlib", work: "Madvillainy", note: "Producer-side study — what the live drummer is conversing with" }
+      { artist: "Pete Rock", work: "Mecca and the Soul Brother", note: "Sample-driven beats with live touches." },
+      { artist: "Madlib", work: "Madvillainy", note: "Producer-side study — what the live drummer is conversing with." }
     ]
   },
 
@@ -23274,9 +23274,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Louis Cole", work: "Time / Quality Over Opinion", note: "His own catalogue — start anywhere" },
-      { artist: "KNOWER", work: "Life", note: "His duo with Genevieve Artadi — drumming as machine" },
-      { artist: "Mark Guiliana", work: "Beat Music", note: "Adjacent vocabulary — also drum-machine sensibility on a kit" }
+      { artist: "Louis Cole", work: "Time / Quality Over Opinion", note: "His own catalogue — start anywhere." },
+      { artist: "KNOWER", work: "Life", note: "His duo with Genevieve Artadi — drumming as machine." },
+      { artist: "Mark Guiliana", work: "Beat Music", note: "Adjacent vocabulary — also drum-machine sensibility on a kit." }
     ]
   },
 
@@ -23470,9 +23470,9 @@ module.exports = {
     ],
     listening: [
       { artist: "Solange", work: "A Seat at the Table / When I Get Home", note: "Listen for meters shifting mid-song without ever feeling like a puzzle." },
-      { artist: "FKA Twigs", work: "Magdalene", note: "Hybrid live-electronic — kit and producer-side blurred" },
-      { artist: "Yussef Dayes", work: "Black Classical Music", note: "Forward-R&B drumming, 2020s" },
-      { artist: "Sam Wilkes / Sam Gendel", work: "Music for Saxofone & Bass Guitar", note: "Adjacent — alternate-grid contemporary instrumental music" }
+      { artist: "FKA Twigs", work: "Magdalene", note: "Hybrid live-electronic — kit and producer-side blurred." },
+      { artist: "Yussef Dayes", work: "Black Classical Music", note: "Forward-R&B drumming, 2020s." },
+      { artist: "Sam Wilkes / Sam Gendel", work: "Music for Saxofone & Bass Guitar", note: "Adjacent — alternate-grid contemporary instrumental music." }
     ]
   },
 
@@ -26141,7 +26141,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "The Dillinger Escape Plan", work: "Calculating Infinity", note: "Chris Pennie — the foundational mathcore drumming document." },
+      { artist: "Chris Pennie", work: "The Dillinger Escape Plan — Calculating Infinity", note: "Chris Pennie — the foundational mathcore drumming document." },
       { artist: "Converge", work: "Jane Doe", note: "Ben Koller — metallic hardcore intersected with mathcore-style meter changes." },
       { artist: "Botch", work: "We Are the Romans", note: "Tim Latona — proto-mathcore; uncompromising rhythm and density." },
       { artist: "Car Bomb", work: "Mordial", note: "Elliot Hoffman — modern mathcore with extreme polymetric construction." }
@@ -29391,7 +29391,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "The Wrecking Crew (various)", work: "Phil Spector and Beach Boys productions", note: "Hal Blaine — the prototype studio drummer. Listen for what he <em>doesn't</em> play." },
+      { artist: "Hal Blaine", work: "The Wrecking Crew — Phil Spector and Beach Boys productions", note: "Hal Blaine — the prototype studio drummer. Listen for what he <em>doesn't</em> play." },
       { artist: "Steely Dan", work: "Aja and Gaucho", note: "Steve Gadd, Bernard Purdie, Jeff Porcaro, Rick Marotta — the canonical late-'70s studio rock vocabulary." },
       { artist: "Toto", work: "Toto IV", note: "Jeff Porcaro — \"Rosanna\" half-time shuffle is a master class in click-perfect studio drumming with absolute restraint." }
     ]
@@ -31647,9 +31647,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Tony Williams", work: "Lifetime — Emergency!", note: "3:2 as orchestration, not exercise" },
-      { artist: "Steve Reich", work: "Drumming", note: "Polyrhythmic phasing — 3:2 stretched over minutes" },
-      { artist: "Jack DeJohnette", work: "Special Edition", note: "Foreground-switching as compositional device" }
+      { artist: "Tony Williams", work: "Lifetime — Emergency!", note: "3:2 as orchestration, not exercise." },
+      { artist: "Steve Reich", work: "Drumming", note: "Polyrhythmic phasing — 3:2 stretched over minutes." },
+      { artist: "Jack DeJohnette", work: "Special Edition", note: "Foreground-switching as compositional device." }
     ]
   },
 
@@ -31767,9 +31767,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Vinnie Colaiuta", work: "Sting — Seven Days", note: "Career-defining 5:4 over 7/4 vocabulary" },
-      { artist: "Mark Guiliana", work: "Beat Music", note: "5:4 quintuplet phrasing as a groove style" },
-      { artist: "Dave Weckl", work: "Master Plan", note: "Five-note phrases across straight bar lines" }
+      { artist: "Vinnie Colaiuta", work: "Sting — Seven Days", note: "Career-defining 5:4 over 7/4 vocabulary." },
+      { artist: "Mark Guiliana", work: "Beat Music", note: "5:4 quintuplet phrasing as a groove style." },
+      { artist: "Dave Weckl", work: "Master Plan", note: "Five-note phrases across straight bar lines." }
     ]
   },
 
@@ -31944,9 +31944,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Dave Brubeck Quartet", work: "Blue Rondo à la Turk", note: "The canonical 2+2+2+3 — Joe Morello phrasing 9/8 as three pairs and a triple" },
-      { artist: "Dream Theater", work: "The Dance of Eternity", note: "Encyclopedia of odd-meter writing" },
-      { artist: "Don Ellis", work: "Live at Monterey", note: "33/16, 27/16 — odd meter as compositional language" }
+      { artist: "Dave Brubeck Quartet", work: "Blue Rondo à la Turk", note: "The canonical 2+2+2+3 — Joe Morello phrasing 9/8 as three pairs and a triple." },
+      { artist: "Dream Theater", work: "The Dance of Eternity", note: "Encyclopedia of odd-meter writing." },
+      { artist: "Don Ellis", work: "Live at Monterey", note: "33/16, 27/16 — odd meter as compositional language." }
     ]
   },
 
@@ -32092,9 +32092,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Max Roach", work: "We Insist! Freedom Now Suite — All Africa", note: "Solo as composition; motifs developed across an entire piece" },
-      { artist: "Tony Williams", work: "Live at the Plugged Nickel — Miles Davis", note: "Trading fours with structural awareness" },
-      { artist: "Peter Erskine", work: "Everything Is Timekeeping (instructional video)", note: "Erskine narrating his own phrasing — hear a solo built from one motif in real time" }
+      { artist: "Max Roach", work: "We Insist! Freedom Now Suite — All Africa", note: "Solo as composition; motifs developed across an entire piece." },
+      { artist: "Tony Williams", work: "Live at the Plugged Nickel — Miles Davis", note: "Trading fours with structural awareness." },
+      { artist: "Peter Erskine", work: "Everything Is Timekeeping (instructional video)", note: "Erskine narrating his own phrasing — hear a solo built from one motif in real time." }
     ]
   },
 
@@ -32248,9 +32248,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Ed Thigpen", work: "The Sound of Brushes", note: "Figure-8, oval, and line sweeps, each named and demonstrated — hear how the shape changes the hiss" },
-      { artist: "Philly Joe Jones", work: "Miles Davis — 'Round About Midnight", note: "Brush mastery on slow ballads — listen to 'Tadd's Delight'" },
-      { artist: "Adam Nussbaum", work: "The Brush Project", note: "Modern brush vocabulary; comping and fills demonstrated" }
+      { artist: "Ed Thigpen", work: "The Sound of Brushes", note: "Figure-8, oval, and line sweeps, each named and demonstrated — hear how the shape changes the hiss." },
+      { artist: "Philly Joe Jones", work: "Miles Davis — 'Round About Midnight", note: "Brush mastery on slow ballads — listen to 'Tadd's Delight'." },
+      { artist: "Adam Nussbaum", work: "The Brush Project", note: "Modern brush vocabulary; comping and fills demonstrated." }
     ]
   },
 
@@ -32402,9 +32402,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Tony Williams", work: "Miles Davis — Live at the Plugged Nickel", note: "The benchmark for four-way independence in jazz" },
-      { artist: "Vinnie Colaiuta", work: "Frank Zappa — Joe's Garage", note: "Four-way independence at impossible tempos" },
-      { artist: "Mark Guiliana", work: "Beat Music", note: "Modern four-way independence in the electronic-music idiom" }
+      { artist: "Tony Williams", work: "Miles Davis — Live at the Plugged Nickel", note: "The benchmark for four-way independence in jazz." },
+      { artist: "Vinnie Colaiuta", work: "Frank Zappa — Joe's Garage", note: "Four-way independence at impossible tempos." },
+      { artist: "Mark Guiliana", work: "Beat Music", note: "Modern four-way independence in the electronic-music idiom." }
     ]
   },
 
@@ -33225,7 +33225,7 @@ module.exports = {
     listening: [
       { artist: "Bo Diddley", work: "Bo Diddley", note: "The original — a rumba-shaped accent pattern reframed as American R&amp;B." },
       { artist: "John \"Jabo\" Starks (with James Brown / Bobby Byrd)", work: "various", note: "Funk drumming with clave-shaped figures buried inside the groove." },
-      { artist: "The Meters", work: "Cissy Strut / Look-Ka Py Py", note: "New Orleans second-line — clave traditions filtered through American R&amp;B." },
+      { artist: "Zigaboo Modeliste", work: "The Meters — Cissy Strut / Look-Ka Py Py", note: "New Orleans second-line — clave traditions filtered through American R&amp;B." },
       { artist: "Ned Sublette", work: "Cuba and Its Music (book)", note: "The historical case for clave as a hidden organizer of much American popular music." }
     ]
   },

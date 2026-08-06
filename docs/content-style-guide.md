@@ -40,7 +40,13 @@ Every lesson keeps the shape: prose → exercises → (listening) → graduation
 
 ## Listening sections
 
-2–3 picks per lesson, `{ artist, work, note }`. The note (1–2 sentences) says **what to listen for** — the drummer and the specific device, timestamped or sectioned when it helps ("the hi-hat barks in the intro"). Picks must be real recordings, verified. Site-wide diversity rule: no single work cited in more than 3 lessons (BL-029). Foundations lessons take canonical, accessible picks; genre lessons dig deeper into the idiom.
+2–3 picks per lesson, `{ artist, work, note }`. Picks must be real recordings, verified. Site-wide diversity rule: no single work cited in more than 3 lessons (BL-029). Foundations lessons take canonical, accessible picks; genre lessons dig deeper into the idiom.
+
+**Field contract** (enforced by `tools/checks/check-listening.js`):
+
+- **`artist` is the drummer.** Never the band — that is the whole point of the section. If the note says "Zigaboo's archetypal…", then Zigaboo Modeliste belongs in this field.
+- **`work` is shaped by the credit, not by a template.** Use `Credited Act — Title` when the record is credited to someone other than the drummer (`Paul Simon — 50 Ways to Leave Your Lover`); use a bare `Title` when the drummer *is* the credited artist (`Stevie Wonder` → `Superstition`); add a parenthetical for medium or context (`(live)`, `(book)`, `(Kind of Blue)`). Do not flatten these into one shape — a bare title given a band-dash form would invent a band, and `The New Breed (book)` is not a recording at all. The separator, when present, is an em dash with single spaces.
+- **`note` says what to listen FOR**, in 1–2 finished sentences ending in a period — the specific device, sectioned or timestamped when it helps ("the hi-hat barks in the intro").
 
 ## Graduation criteria
 
