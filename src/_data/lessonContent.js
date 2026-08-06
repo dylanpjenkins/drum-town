@@ -5792,7 +5792,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Horacio \"El Negro\" Hernandez", work: "Italuba — first album", note: "Hear the foot-clave system in action across an entire record." },
+      { artist: "Horacio \"El Negro\" Hernández", work: "Italuba — first album", note: "Hear the foot-clave system in action across an entire record." },
       { artist: "Dafnis Prieto", work: "Absolute Quintet", note: "Foot-clave used in modern jazz contexts; the principle is the same." },
       { artist: "Giovanni Hidalgo (with Michel Camilo)", work: "Live at the Blue Note", note: "Not the drummer, but you can hear son 2-3 clearly in the percussion section." }
     ]
@@ -9150,7 +9150,7 @@ module.exports = {
     ],
     listening: [
       { artist: "Philly Joe Jones", work: "Miles Davis — Milestones", note: "Medium swing as a benchmark — every limb in its place, single-position comping for chorus after chorus." },
-      { artist: "\"Papa\" Jo Jones", work: "Count Basie — Live at Newport 1957", note: "The model for the feathered-kick approach." },
+      { artist: "Papa Jo Jones", work: "Count Basie — Live at Newport 1957", note: "The model for the feathered-kick approach." },
       { artist: "Kenny Clarke", work: "Modern Jazz Quartet — Fontessa", note: "Quiet, restrained medium swing — comping is sparse and always at the right moment." }
     ]
   },
@@ -11763,9 +11763,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "John Coltrane Quartet", work: "Crescent", note: "The triplet feel at its slowest and most exposed. Listen to 'Wise One' — the rolling triplet wave is the entire texture." },
-      { artist: "Elvin Jones Trio", work: "Live at the Lighthouse", note: "Triplet vocabulary in its full intensity. Pay attention to where the snare lands within the triplet group." },
-      { artist: "John Coltrane", work: "A Love Supreme", note: "'Resolution' contains the textbook 3-against-2 implications buried inside the triplet feel." }
+      { artist: "Elvin Jones", work: "John Coltrane — Crescent", note: "The triplet feel at its slowest and most exposed. Listen to 'Wise One' — the rolling triplet wave is the entire texture." },
+      { artist: "Elvin Jones", work: "Live at the Lighthouse", note: "Triplet vocabulary in its full intensity. Pay attention to where the snare lands within the triplet group." },
+      { artist: "Elvin Jones", work: "John Coltrane — A Love Supreme", note: "'Resolution' contains the textbook 3-against-2 implications buried inside the triplet feel." }
     ]
   },
 
@@ -11967,9 +11967,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Miles Davis Quintet", work: "Four & More", note: "Williams at full intensity, ♩=300+ — notice how much he leaves out to keep that tempo driving." },
-      { artist: "Miles Davis Quintet", work: "Nefertiti", note: "Williams at slower tempos, with the hi-hat-as-second-ride device fully developed." },
-      { artist: "Tony Williams Lifetime", work: "Emergency!", note: "Williams' fusion-era playing — the same vocabulary applied at electric volume." }
+      { artist: "Tony Williams", work: "Miles Davis — Four & More", note: "At full intensity, ♩=300+ — notice how much he leaves out to keep that tempo driving." },
+      { artist: "Tony Williams", work: "Miles Davis — Nefertiti", note: "At slower tempos, with the hi-hat-as-second-ride device fully developed." },
+      { artist: "Tony Williams", work: "Tony Williams Lifetime — Emergency!", note: "The fusion-era playing: the same vocabulary at electric volume." }
     ]
   },
 
@@ -12474,7 +12474,7 @@ module.exports = {
     ],
     listening: [
       { artist: "Tito Puente", work: "Dance Mania (1958)", note: "Foundational salsa clave — son 2-3 in motion." },
-      { artist: "Los Munequitos de Matanzas", work: "any rumba recording", note: "Folkloric rumba clave — the 3rd-hit displacement on the &amp; of 4 is unmistakable." },
+      { artist: "Los Muñequitos de Matanzas", work: "any rumba recording", note: "Folkloric rumba clave — the 3rd-hit displacement on the &amp; of 4 is unmistakable." },
       { artist: "Eddie Palmieri", work: "Vamonos Pa'l Monte", note: "Listen for clave direction — the band is locked to it whether you can name it or not." }
     ]
   },
@@ -16186,7 +16186,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Chris \"Daddy\" Dave", work: "D'Angelo — Black Messiah", note: "The displaced-backbeat bible. Every track." },
+      { artist: "Chris Dave", work: "D'Angelo — Black Messiah", note: "The displaced-backbeat bible. Every track." },
       { artist: "Mark Guiliana", work: "Mehliana — Taming The Dragon", note: "Sixteenth-note displacement at the center of the language." },
       { artist: "J Dilla", work: "Donuts", note: "Programmed, but the same idea — drunk-feeling backbeat displacement." }
     ]
@@ -18678,7 +18678,7 @@ module.exports = {
     listening: [
       { artist: "J Dilla", work: "Welcome 2 Detroit — instrumental beats", note: "Snare-on-the-& displacement as a programming aesthetic." },
       { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "Snare placement that wanders by 16ths around the home backbeat." },
-      { artist: "?uestlove", work: "D'Angelo — Voodoo", note: "The earliest mainstream record built around displaced backbeats played by a human." }
+      { artist: "Questlove", work: "D'Angelo — Voodoo", note: "The earliest mainstream record built around displaced backbeats played by a human." }
     ]
   },
 
@@ -19386,8 +19386,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "?uestlove + Pino Palladino", work: "D'Angelo — Voodoo (entire album)", note: "Listen many times before practicing — how far behind the click can a snare live and still lock? You cannot study what you have not internalized." },
-      { artist: "?uestlove", work: "D'Angelo — Untitled (How Does It Feel)", note: "The single clearest example of the late drag — slow tempo makes it audible." },
+      { artist: "Questlove + Pino Palladino", work: "D'Angelo — Voodoo (entire album)", note: "Listen many times before practicing — how far behind the click can a snare live and still lock? You cannot study what you have not internalized." },
+      { artist: "Questlove", work: "D'Angelo — Untitled (How Does It Feel)", note: "The single clearest example of the late drag — slow tempo makes it audible." },
       { artist: "James Gadson", work: "Bill Withers — Use Me", note: "An earlier ancestor — Gadson dragging hard, decades before Voodoo." }
     ]
   },
@@ -19840,9 +19840,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "?uestlove", work: "The Roots — Things Fall Apart", note: "The first full-length showcase of the deep-pocket vocabulary." },
-      { artist: "?uestlove", work: "D'Angelo — Voodoo", note: "The album that made the late pocket a stylistic option for everyone after." },
-      { artist: "?uestlove", work: "The Roots — How I Got Over", note: "Mature continuation — the placement is so internalized it never wavers." }
+      { artist: "Questlove", work: "The Roots — Things Fall Apart", note: "The first full-length showcase of the deep-pocket vocabulary." },
+      { artist: "Questlove", work: "D'Angelo — Voodoo", note: "The album that made the late pocket a stylistic option for everyone after." },
+      { artist: "Questlove", work: "The Roots — How I Got Over", note: "Mature continuation — the placement is so internalized it never wavers." }
     ]
   },
 
@@ -20373,7 +20373,7 @@ module.exports = {
     ],
     listening: [
       { artist: "J Dilla", work: "Slum Village — Fantastic, Vol. 2", note: "Programmed but human — the snare is famously late, the hat is famously square." },
-      { artist: "?uestlove", work: "The Roots — Things Fall Apart", note: "Live drums with a programmed-feeling pocket — the entire record is a master class in playing behind the beat." },
+      { artist: "Questlove", work: "The Roots — Things Fall Apart", note: "Live drums with a programmed-feeling pocket — the entire record is a master class in playing behind the beat." },
       { artist: "Karriem Riggins", work: "Common — The Dreamer/The Believer", note: "Reference behind-the-beat hip-hop drumming, played live on a real kit." }
     ]
   },
@@ -21196,8 +21196,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "?uestlove", work: "D'Angelo — Voodoo", note: "Reference neo-soul drumming. The behind-the-beat snare is the genre." },
-      { artist: "Pino Palladino + ?uestlove (rhythm section)", work: "D'Angelo and the Vanguard — Black Messiah", note: "Two musicians playing in perceptibly different time zones at the same tempo." },
+      { artist: "Questlove", work: "D'Angelo — Voodoo", note: "Reference neo-soul drumming. The behind-the-beat snare is the genre." },
+      { artist: "Pino Palladino + Questlove (rhythm section)", work: "D'Angelo and the Vanguard — Black Messiah", note: "Two musicians playing in perceptibly different time zones at the same tempo." },
       { artist: "Chris Dave", work: "Various — Robert Glasper, D'Angelo", note: "Pushed the pocket vocabulary further into the 2010s." }
     ]
   },
@@ -21729,9 +21729,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "?uestlove", work: "The Roots — Things Fall Apart", note: "The album that defined live-band hip-hop drumming. Every track is a study in deep pocket and ghost-note vocabulary." },
-      { artist: "?uestlove", work: "The Roots — How I Got Over", note: "Mature, varied — different feels across the record, all unmistakably his." },
-      { artist: "?uestlove", work: "D'Angelo — Voodoo", note: "The pocket masterpiece — Questlove and Pino in conversation across an entire album." }
+      { artist: "Questlove", work: "The Roots — Things Fall Apart", note: "The album that defined live-band hip-hop drumming. Every track is a study in deep pocket and ghost-note vocabulary." },
+      { artist: "Questlove", work: "The Roots — How I Got Over", note: "Mature, varied — different feels across the record, all unmistakably his." },
+      { artist: "Questlove", work: "D'Angelo — Voodoo", note: "The pocket masterpiece — Questlove and Pino in conversation across an entire album." }
     ]
   },
 
@@ -21917,7 +21917,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Questlove (The Roots)", work: "Things Fall Apart", note: "Live-kit translations of MPC-era beats." },
+      { artist: "Questlove", work: "Things Fall Apart", note: "Live-kit translations of MPC-era beats." },
       { artist: "Karriem Riggins", work: "Common — Be", note: "A producer-drummer translating his own beats." },
       { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "Studio sensibilities played on a live kit." }
     ]
@@ -25445,9 +25445,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Meshuggah", work: "Destroy Erase Improve", note: "Tomas Haake — the foundational document of polyrhythmic metal drumming." },
-      { artist: "Animals as Leaders", work: "The Joy of Motion", note: "Matt Garstka — djent vocabulary inside complex compositions." },
-      { artist: "Periphery", work: "Periphery III: Select Difficulty", note: "Matt Halpern — modern djent with virtuosic kick subgroupings." },
+      { artist: "Tomas Haake", work: "Meshuggah — Destroy Erase Improve", note: "The foundational document of polyrhythmic metal drumming." },
+      { artist: "Matt Garstka", work: "Animals as Leaders — The Joy of Motion", note: "Djent vocabulary inside complex compositions." },
+      { artist: "Matt Halpern", work: "Periphery — Periphery III: Select Difficulty", note: "Modern djent with virtuosic kick subgroupings." },
       { artist: "TesseracT", work: "Altered State", note: "Jay Postones — atmospheric djent, more groove than chaos." }
     ]
   },
@@ -25796,8 +25796,8 @@ module.exports = {
     ],
     listening: [
       { artist: "Meshuggah", work: "Catch Thirtythree", note: "Tomas Haake — a 47-minute single composition built almost entirely on polymeter." },
-      { artist: "Animals as Leaders", work: "The Joy of Motion", note: "Matt Garstka — polymetric kick patterns inside compositions with shifting harmony." },
-      { artist: "King Crimson", work: "Discipline", note: "Bill Bruford — in \"Frame by Frame\", listen for the guitars cycling at different lengths while the drums hold the ground." }
+      { artist: "Matt Garstka", work: "Animals as Leaders — The Joy of Motion", note: "Polymetric kick patterns inside compositions with shifting harmony." },
+      { artist: "Bill Bruford", work: "King Crimson — Discipline", note: "In \"Frame by Frame\", listen for the guitars cycling at different lengths while the drums hold the ground." }
     ]
   },
 
@@ -28786,10 +28786,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Led Zeppelin", work: "Physical Graffiti", note: "John Bonham — \"In My Time of Dying\" and \"Kashmir\" are heavy-foot triplet vocabulary at full scale." },
-      { artist: "Yes", work: "Close to the Edge", note: "Bill Bruford's asymmetric phrasing is the texture of the entire record." },
-      { artist: "Rush", work: "Moving Pictures", note: "Neil Peart's fills on \"YYZ\" and \"Tom Sawyer\" are composed, not improvised — the same fill every take, placed like a hook in the arrangement." },
-      { artist: "Emerson, Lake & Palmer", work: "Brain Salad Surgery", note: "Carl Palmer's hand-foot interplay across orchestral-scale arrangements." }
+      { artist: "John Bonham", work: "Led Zeppelin — Physical Graffiti", note: "\"In My Time of Dying\" and \"Kashmir\" are heavy-foot triplet vocabulary at full scale." },
+      { artist: "Bill Bruford", work: "Yes — Close to the Edge", note: "The asymmetric phrasing is the texture of the entire record." },
+      { artist: "Neil Peart", work: "Rush — Moving Pictures", note: "The fills on \"YYZ\" and \"Tom Sawyer\" are composed rather than improvised, and sit in the arrangement like hooks." },
+      { artist: "Carl Palmer", work: "Emerson, Lake & Palmer — Brain Salad Surgery", note: "Hand-foot interplay across orchestral-scale arrangements." }
     ]
   },
 
@@ -29812,9 +29812,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Led Zeppelin", work: "Led Zeppelin IV", note: "John Bonham — \"Stairway to Heaven\" travels from no drums at all to ff across eight minutes. Map where each dynamic step lands." },
+      { artist: "John Bonham", work: "Led Zeppelin — Led Zeppelin IV", note: "\"Stairway to Heaven\" travels from no drums at all to ff across eight minutes. Map where each dynamic step lands." },
       { artist: "Pink Floyd", work: "The Wall", note: "Nick Mason — every album-side has at least one major dynamic build into a song's bridge or solo." },
-      { artist: "Radiohead", work: "OK Computer", note: "Phil Selway — modern rock dynamic-mastery. Listen to how quietly he plays the verses and how big the choruses arrive without ever sounding like a different drummer." }
+      { artist: "Phil Selway", work: "Radiohead — OK Computer", note: "Modern rock dynamic mastery. Listen to how quietly the verses sit and how big the choruses arrive without the tempo ever lifting." }
     ]
   },
 
@@ -31944,8 +31944,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Dave Brubeck Quartet", work: "Blue Rondo à la Turk", note: "The canonical 2+2+2+3 — Joe Morello phrasing 9/8 as three pairs and a triple." },
-      { artist: "Dream Theater", work: "The Dance of Eternity", note: "Encyclopedia of odd-meter writing." },
+      { artist: "Joe Morello", work: "Dave Brubeck Quartet — Blue Rondo à la Turk", note: "Three bars of 2+2+2+3 answered by one of 3+3+3 — the same nine beats regrouped, and the reason the head never settles." },
+      { artist: "Mike Portnoy", work: "Dream Theater — The Dance of Eternity", note: "An encyclopedia of odd-meter writing: the piece changes time signature well over a hundred times." },
       { artist: "Don Ellis", work: "Live at Monterey", note: "33/16, 27/16 — odd meter as compositional language." }
     ]
   },
@@ -33470,9 +33470,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "AC/DC", work: "Back in Black", note: "Straight 8ths, nothing but. Calibrate your \"straight\" against Phil Rudd." },
-      { artist: "Toto", work: "Rosanna", note: "Swung 16ths in a half-time shuffle — the classic \"is this straight or swung?\" test case." },
-      { artist: "James Brown", work: "Funky Drummer", note: "16th-note density. Count the 4-bar phrases and predict where the band punches." }
+      { artist: "Phil Rudd", work: "AC/DC — Back in Black", note: "Straight 8ths, nothing but. Calibrate your \"straight\" against this." },
+      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Swung 16ths in a half-time shuffle — the classic \"is this straight or swung?\" test case." },
+      { artist: "Clyde Stubblefield", work: "James Brown — Funky Drummer", note: "16th-note density. Count the 4-bar phrases and predict where the band punches." }
     ]
   },
 

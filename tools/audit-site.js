@@ -168,6 +168,62 @@ for (const [, l] of lessons) {
 const dupPicks = [...pickCount.entries()].filter(([, n]) => n > 3).sort((a, b) => b[1] - a[1]);
 add('content.duplicateListeningPicks', dupPicks.length, dupPicks.map(([k, n]) => `${k} in ${n} lessons`));
 
+// The style guide's field contract is "artist is the drummer, never the band —
+// that is the whole point of the section". check-listening.js can only catch a
+// leading "The", so most band names sail through it. This counts the real
+// breaches so they can only ever go down.
+//
+// Two exceptions are legitimate and are NOT counted (both documented in
+// docs/content-style-guide.md): folkloric and dance-band traditions whose
+// rhythm is carried by a percussion battery with no single kit player, and
+// programmed or produced beats where the named producer authored the drum part.
+const ARTIST_ENSEMBLE_OK = new Set([
+  'Conjunto Folklórico Nacional de Cuba', 'Escola de samba batucada', 'La Conga de Los Hoyos',
+  'Los Muñequitos de Matanzas', 'Los Munequitos de Matanzas', 'Los Papines', 'Yoruba Andabo',
+  'Síntesis', 'Irakere', 'Orquesta Aragón', 'Machito & His Afro-Cubans', 'La Sonora Dinamita',
+  'Los Ángeles Azules', 'Juan Luis Guerra y 440', 'Willie Colón & Héctor Lavoe', 'Pérez Prado',
+  'Totó la Momposina', 'Lázaro Ros', 'Ned Sublette', 'Pello el Afrokán',
+]);
+const ARTIST_PRODUCER_OK = new Set([
+  'J Dilla', 'Madlib', 'Metro Boomin', 'Metro Boomin (production)', 'DJ Premier', 'Pete Rock',
+  '9th Wonder', 'Q-Tip', 'Karriem Riggins', 'Teddy Riley (production)', 'Babyface (production)',
+  'Jimmy Jam & Terry Lewis (production)', 'Organized Noize (production)',
+  'DJ Paul / Juicy J (production)', 'Lex Luger / Shawty Redd (production)',
+  'Doc McKinney / Illangelo (production)', "Pi'erre Bourne", 'Pi’erre Bourne',
+  'Pimp C (production)', 'Tay Keith', 'Daft Punk (programmed)', 'Various producers', 'Steve Reich',
+]);
+const ARTIST_NOT_DRUMMER = new Set([
+  'AC/DC', 'Animals as Leaders', 'Atheist', 'Behemoth', 'Botch', 'Cannibal Corpse', 'Car Bomb',
+  'Coldplay', 'Converge', 'Cryptopsy', 'Cynic', 'Dave Brubeck Quartet', 'Death', 'Devourment',
+  'Dream Theater', 'Emerson, Lake & Palmer', 'Foo Fighters', 'Green Day', 'Imagine Dragons',
+  'John Coltrane Quartet', 'King Crimson', 'Krisiun', 'Led Zeppelin', 'McCoy Tyner Trio',
+  'Meshuggah', 'Miles Davis Quintet', 'Modern Jazz Quartet', 'Napalm Death', 'Necrophagist',
+  'Nile', 'Origin', 'Periphery', 'Pink Floyd', 'Radiohead', 'Rage Against the Machine', 'Rush',
+  'Santana', 'Snarky Puppy', 'Steely Dan', 'Suffocation', 'TesseracT', 'Tool', 'Toto',
+  'Tower of Power', 'U2', 'Vulfpeck', 'Yes', 'Robert Glasper Experiment', 'Brian Setzer Orchestra',
+  'Joshua Redman Trio', 'Pedrito Martinez Group', 'Clifford Brown & Max Roach',
+  'Chris Dave & The Drumhedz', 'KNOWER', 'Slum Village', 'NxWorries (.Paak + Knxwledge)',
+  'Sam Wilkes / Sam Gendel',
+  'Antônio Carlos Jobim', 'João Gilberto', 'Miles Davis', 'John Coltrane', 'James Brown',
+  'Frank Zappa', 'Bo Diddley', 'Buck Owens', 'Johnny Cash', 'Professor Longhair',
+  'Wilfrido Vargas', 'Elis Regina & Tom Jobim', 'Solange', 'SZA', 'FKA Twigs', 'Daniel Caesar',
+  "D'Angelo", 'D’Angelo', 'Travis Scott', 'Erykah Badu / Karriem Riggins',
+  'Andrew Hale / Stuart Matthewman (Sade band)',
+  'Various', 'Various studio drummers',
+  // Drummer-led bands: the drummer's name is in there, but the field still
+  // holds a band, so the section stops reading as a list of players.
+  'Brian Blade Fellowship', 'Elvin Jones Trio', 'Paul Motian Trio', 'Tony Williams Lifetime',
+]);
+const notDrummer = [];
+for (const [slug, l] of lessons) {
+  (l.listening || []).forEach((item, i) => {
+    const a = item.artist || '';
+    if (ARTIST_ENSEMBLE_OK.has(a) || ARTIST_PRODUCER_OK.has(a)) return;
+    if (ARTIST_NOT_DRUMMER.has(a)) notDrummer.push(`${slug}#${i}: "${a}" — ${item.work}`);
+  });
+}
+add('content.listeningArtistNotDrummer', notDrummer.length, notDrummer);
+
 // --- css -------------------------------------------------------------------
 add('css.pxFontSizes', (cssSrc.match(/font-size:\s*[\d.]+px/g) || []).length);
 add('css.outlineNone', (cssSrc.match(/outline:\s*none/g) || []).length);

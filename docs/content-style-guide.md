@@ -44,7 +44,11 @@ Every lesson keeps the shape: prose → exercises → (listening) → graduation
 
 **Field contract** (enforced by `tools/checks/check-listening.js`):
 
-- **`artist` is the drummer.** Never the band — that is the whole point of the section. If the note says "Zigaboo's archetypal…", then Zigaboo Modeliste belongs in this field.
+- **`artist` is the drummer.** Never the band — that is the whole point of the section. If the note says "Zigaboo's archetypal…", then Zigaboo Modeliste belongs in this field. A band whose name contains the drummer's ("Elvin Jones Trio", "Brian Blade Fellowship") is still a band: write the person, and let `work` carry the group. Two exceptions, and only two:
+  - **Ensemble traditions.** Rumba, batucada, comparsa and charanga records are carried by a percussion battery with no single kit player. Name the ensemble (`Los Muñequitos de Matanzas`); there is no individual to credit.
+  - **Programmed and produced beats.** When the drum part was built rather than played, the producer is its author: `J Dilla`, `DJ Premier`, `Metro Boomin`. Say so in the note if the distinction matters to the lesson.
+
+  Counted by `content.listeningArtistNotDrummer` in `tools/audit-site.js`, which holds the exception lists; the metric ratchets down and never up. `tools/checks/check-listening.js` only catches a leading "The", so it is not the enforcement here.
 - **`work` is shaped by the credit, not by a template.** Use `Credited Act — Title` when the record is credited to someone other than the drummer (`Paul Simon — 50 Ways to Leave Your Lover`); use a bare `Title` when the drummer *is* the credited artist (`Stevie Wonder` → `Superstition`); add a parenthetical for medium or context (`(live)`, `(book)`, `(Kind of Blue)`). Do not flatten these into one shape — a bare title given a band-dash form would invent a band, and `The New Breed (book)` is not a recording at all. The separator, when present, is an em dash with single spaces.
 - **`note` says what to listen FOR**, in 1–2 finished sentences ending in a period — the specific device, sectioned or timestamped when it helps ("the hi-hat barks in the intro").
 

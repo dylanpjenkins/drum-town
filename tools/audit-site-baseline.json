@@ -1,12 +1,13 @@
 {
   "metrics": {
     "content.britishSpellings": 0,
-    "content.duplicateListeningPicks": 7,
+    "content.duplicateListeningPicks": 8,
     "content.lessonsFewExercises": 14,
     "content.lessonsMissingListening": 64,
     "content.lessonsNoSubheadings": 58,
     "content.lessonsThinProse": 43,
     "content.lessonsZeroExercises": 0,
+    "content.listeningArtistNotDrummer": 81,
     "css.missingDarkScheme": 0,
     "css.missingFocusVisible": 0,
     "css.missingReducedMotion": 0,
@@ -28,7 +29,7 @@
     "meta.durationFormats": 2,
     "meta.focusDistinctValues": 23,
     "meta.tempoRangeMetaMismatches": 0,
-    "meta.titleNumberingSchemes": 5,
+    "meta.titleNumberingSchemes": 4,
     "player.multiBarSpecsUnsupported": 0,
     "player.silentHits": 0,
     "player.unmappedDrumKeys": 0
