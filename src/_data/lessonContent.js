@@ -10180,9 +10180,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Miles Davis Quintet", work: "Workin'", note: "Philly Joe Jones — every track is a master class in the bop comping vocabulary." },
-      { artist: "Clifford Brown & Max Roach", work: "Study in Brown", note: "Max Roach's snare melodies and bell-of-the-ride accents." },
-      { artist: "Modern Jazz Quartet", work: "Django", note: "Kenny Clarke — quieter, but the same vocabulary, refined." }
+      { artist: "Philly Joe Jones", work: "Miles Davis Quintet — Workin'", note: "Every track is a master class in the bop comping vocabulary." },
+      { artist: "Max Roach", work: "Clifford Brown & Max Roach — Study in Brown", note: "Listen for the snare melodies and bell-of-the-ride accents." },
+      { artist: "Kenny Clarke", work: "Modern Jazz Quartet — Django (Prestige, 1956)", note: "Quieter, but the same vocabulary, refined." }
     ]
   },
 
@@ -10853,9 +10853,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "John Coltrane Quartet", work: "A Love Supreme", note: "Elvin Jones over static harmony — start with 'Acknowledgement' and follow how the energy builds with no chord changes to lean on." },
-      { artist: "Miles Davis", work: "Kind of Blue", note: "Jimmy Cobb — quieter modal comping, sparser, but the same architecture." },
-      { artist: "McCoy Tyner Trio", work: "Inception", note: "Elvin Jones in trio context — the rolling triplet feel laid bare." }
+      { artist: "Elvin Jones", work: "John Coltrane — A Love Supreme", note: "Start with 'Acknowledgement' and follow how the energy builds with no chord changes to lean on. The lift comes entirely from the ride tightening and the triplet pulse thickening underneath." },
+      { artist: "Jimmy Cobb", work: "Miles Davis — Kind of Blue", note: "Sparser, quieter modal comping over the same kind of static harmony. Listen to how much space the ride leaves on 'So What' and how rarely the snare interrupts." },
+      { artist: "Elvin Jones", work: "McCoy Tyner Trio — Inception", note: "Stripped to a piano trio, the rolling triplet feel is laid bare with no horns covering the ride. Use it to hear the pulse that the quartet records bury." }
     ]
   },
 
@@ -24867,10 +24867,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Nile", work: "Annihilation of the Wicked", note: "George Kollias — sustained extreme blasts as the spine of the album." },
-      { artist: "Behemoth", work: "Demigod", note: "Inferno — death-metal weight with surgical timing." },
-      { artist: "Cannibal Corpse", work: "Tomb of the Mutilated", note: "Paul Mazurkiewicz — brutal-death kick pattern, doubled snare." },
-      { artist: "Napalm Death", work: "From Enslavement to Obliteration", note: "Mick Harris — the player who named the blast beat." }
+      { artist: "George Kollias", work: "Nile — Annihilation of the Wicked", note: "Sustained extreme blasts run as the spine of the album. Listen for how long each one holds before the pattern shifts." },
+      { artist: "Zbigniew \"Inferno\" Promiński", work: "Behemoth — Demigod", note: "Death-metal weight delivered with surgical timing. Listen for how the double kick tracks the guitar figures rather than running as an undifferentiated blur underneath them." },
+      { artist: "Paul Mazurkiewicz", work: "Cannibal Corpse — Tomb of the Mutilated", note: "Early brutal-death drumming at its most direct. Listen for the swing between full blast sections and the mid-tempo grooves that let the riffs land." },
+      { artist: "Mick Harris", work: "Napalm Death — From Enslavement to Obliteration", note: "Grindcore's blast beat close to its point of origin. Listen for how the beat carries whole songs here rather than arriving as a two-bar burst." }
     ]
   },
 
@@ -25118,9 +25118,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Suffocation", work: "Effigy of the Forgotten", note: "Bomb blasts deployed as section punctuation, not full-song device." },
-      { artist: "Devourment", work: "Molesting the Decapitated", note: "Slamming-death evolution — bomb blasts at half-time relative to the riff." },
-      { artist: "Krisiun", work: "Conquerors of Armageddon", note: "Max Kolesne — bomb blasts at sustained extreme tempo." }
+      { artist: "Mike Smith", work: "Suffocation — Effigy of the Forgotten", note: "Bomb blasts deployed as section punctuation, not full-song device." },
+      { artist: "Brad Fincher", work: "Devourment — Molesting the Decapitated", note: "Slamming-death evolution — bomb blasts at half-time relative to the riff." },
+      { artist: "Max Kolesne", work: "Krisiun — Conquerors of Armageddon", note: "Bomb blasts sustained at extreme tempo across almost the entire album. Listen for the kick and snare staying locked in unison rather than alternating." }
     ]
   },
 
@@ -25611,10 +25611,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Cynic", work: "Focus", note: "Sean Reinert — the foundational tech-death drumming document." },
+      { artist: "Sean Reinert", work: "Cynic — Focus", note: "The foundational tech-death drumming document. Listen for jazz ride and hi-hat phrasing carried over metal riffing, with dynamic accents and fills where the genre would normally default to blast beats." },
       { artist: "Death", work: "Human / Individual Thought Patterns", note: "Reinert (Human) and Gene Hoglan (ITP) — two complementary tech-death languages." },
-      { artist: "Necrophagist", work: "Epitaph", note: "Hannes Grossmann — extreme tech-death with neoclassical phrasing." },
-      { artist: "Atheist", work: "Unquestionable Presence", note: "Steve Flynn — proto-tech-death; jazz-fusion drumming under death-metal riffs." }
+      { artist: "Hannes Grossmann", work: "Necrophagist — Epitaph", note: "A benchmark for clean execution at extreme tempo, with blast beats up to 240 bpm and polyrhythmic figures that still articulate. Listen for how the kick keeps its definition when it doubles the guitar lines instead of blurring into a wash." },
+      { artist: "Steve Flynn", work: "Atheist — Unquestionable Presence", note: "Proto-tech-death, and the clearest case of jazz-fusion drumming surviving inside a death metal band. Listen for the ride pattern and the way the snare answers the riff rather than just marking the beat." }
     ]
   },
 
@@ -25942,9 +25942,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Dream Theater", work: "A Dramatic Turn of Events", note: "Mike Mangini — modulations as part of the song architecture." },
-      { artist: "Tool", work: "Lateralus", note: "Danny Carey — Fibonacci-derived modulations through the title track." },
-      { artist: "Animals as Leaders", work: "The Joy of Motion", note: "Matt Garstka — modern modulations inside dense compositions." }
+      { artist: "Mike Mangini", work: "Dream Theater — A Dramatic Turn of Events", note: "The modulations are written into the song architecture rather than played over it. Start with 'Breaking All Illusions' and 'Lost Not Forgotten', where the rhythmic complexity is most exposed." },
+      { artist: "Danny Carey", work: "Tool — Lateralus", note: "The title track's main theme runs successive bars of 9/8, 8/8, and 7/8. Use it as the contrast case: the bar length keeps changing while the subdivision never does, which is shifting meter rather than a true modulation." },
+      { artist: "Matt Garstka", work: "Animals as Leaders — The Joy of Motion", note: "Reorientations of the pulse inside dense, through-composed writing. The kit is acoustic with the kick and snare reinforced by samples, so the machine-like precision you hear is played, not programmed like it was on the band's earlier records." }
     ]
   },
 
@@ -26141,10 +26141,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Chris Pennie", work: "The Dillinger Escape Plan — Calculating Infinity", note: "Chris Pennie — the foundational mathcore drumming document." },
-      { artist: "Converge", work: "Jane Doe", note: "Ben Koller — metallic hardcore intersected with mathcore-style meter changes." },
-      { artist: "Botch", work: "We Are the Romans", note: "Tim Latona — proto-mathcore; uncompromising rhythm and density." },
-      { artist: "Car Bomb", work: "Mordial", note: "Elliot Hoffman — modern mathcore with extreme polymetric construction." }
+      { artist: "Chris Pennie", work: "The Dillinger Escape Plan — Calculating Infinity", note: "The foundational mathcore drumming document." },
+      { artist: "Ben Koller", work: "Converge — Jane Doe", note: "Metallic hardcore intersected with mathcore-style meter changes." },
+      { artist: "Tim Latona", work: "Botch — We Are the Romans", note: "Proto-mathcore; uncompromising rhythm and density." },
+      { artist: "Elliot Hoffman", work: "Car Bomb — Mordial", note: "Modern mathcore with extreme polymetric construction." }
     ]
   },
 
@@ -27854,8 +27854,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Led Zeppelin", work: "Houses of the Holy", note: "John Bonham's half-time chorus moves are the template — stadium-scale without speeding up." },
-      { artist: "Tool", work: "Ænima", note: "Danny Carey moves between full-time and half-time as a structural device, not a feel change." },
+      { artist: "John Bonham", work: "Led Zeppelin — Houses of the Holy", note: "The half-time chorus moves here are the template — stadium-scale without speeding up." },
+      { artist: "Danny Carey", work: "Tool — Ænima", note: "Full-time and half-time alternate as a structural device, not a feel change." },
       { artist: "Foo Fighters", work: "The Color and the Shape", note: "Taylor Hawkins uses the half-time chorus as standard arena-rock vocabulary." }
     ]
   },
@@ -28411,9 +28411,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Foo Fighters", work: "Wasting Light", note: "Taylor Hawkins moves between regular and double-time as the structural backbone of every chorus." },
-      { artist: "Green Day", work: "American Idiot", note: "Tré Cool's pop-punk double-time — uptempo, snare on every off-beat, kick on every down — is the version every band you'll ever join expects you to know." },
-      { artist: "Rage Against the Machine", work: "Rage Against the Machine", note: "Brad Wilk uses double-time as a chorus accelerator without ever changing the metronome." }
+      { artist: "Taylor Hawkins", work: "Foo Fighters — Wasting Light", note: "Listen for how the choruses are built on the move between regular and double-time rather than on a tempo change." },
+      { artist: "Tré Cool", work: "Green Day — American Idiot", note: "The pop-punk double-time every band you'll ever join expects you to know: uptempo, snare on every off-beat, kick on every down." },
+      { artist: "Brad Wilk", work: "Rage Against the Machine — Rage Against the Machine", note: "Double-time works as a chorus accelerator here without the metronome ever changing." }
     ]
   },
 
@@ -28597,8 +28597,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "U2", work: "The Joshua Tree", note: "Larry Mullen Jr. builds every chorus the same way — floor-tom weight, minimal fills — and it fills stadiums. Study the restraint." },
-      { artist: "Coldplay", work: "Viva la Vida or Death and All His Friends", note: "Will Champion's tom-heavy anthem drumming — sparse, structural, calibrated for stadium scale." },
+      { artist: "Larry Mullen Jr.", work: "U2 — The Joshua Tree", note: "Floor-tom weight under the choruses and almost no fills — that restraint is what makes it fill a stadium. Study how few notes he adds each time the song lifts." },
+      { artist: "Will Champion", work: "Coldplay — Viva la Vida or Death and All His Friends", note: "Sparse, structural parts built for stadium scale: on the title track the kit is stripped to a kick drum, a bell and a little timpani. Listen for how much space is left around every hit." },
       { artist: "Imagine Dragons", work: "Night Visions", note: "Daniel Platzman — the modern descendent of U2-school anthem drumming, with electronic textures layered in." }
     ]
   },
