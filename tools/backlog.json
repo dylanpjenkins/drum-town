@@ -608,6 +608,22 @@
       "log": []
     },
     {
+      "id": "BL-062",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Renderer supports only one time signature per spec, so meter transitions cannot be notated",
+      "evidence": [
+        "tools/notation-renderer.js derives bar length from a single spec.timeSignature, and every bar in a multi-bar spec inherits it",
+        "This forces meter-transition lessons to notate one side only and describe the other in prose: latin-folkloric#0 (4/4→6/8), metal-mathcore#0 (4/4→7/8→5/4→6/8), rock-odd-meter#3 (4/4→5/4), fusion-metric-modulation, metal-metric-modulation, fusion-prog-fusion#2",
+        "These lessons exist to teach the transition, so showing half of it is the pedagogical gap behind BL-061's rewordings"
+      ],
+      "acceptance": "spec accepts a per-bar meter (e.g. timeSignature: ['4/4','7/8','5/4','6/8'] or a bars[] array), the renderer draws a new time signature at each change and splits bars accordingly, PatternMath/audit tick math follow the per-bar meter, and at least one lesson (rock-odd-meter#3) is renotated to show both bars; verified by reading the rendered stave",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed at iter 36 while fixing BL-061. This is the real fix those lessons deserve; the rewordings are honest labelling in the meantime."]
+    },
+    {
       "id": "BL-061",
       "dimension": "content",
       "priority": 2,
@@ -619,10 +635,10 @@
         "fusion-prog-fusion#2 — meta describes a 5/4 bar with implied 7/8 grouping (legitimate prose; listed for review alongside the others)"
       ],
       "acceptance": "for each: either notate the second meter (multi-bar spec, which the renderer already supports) or reword the meta and title so the exercise does not promise a transition it never shows; re-run check-exercise-meta",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": ["Surfaced by the new check-exercise-meta gate (iter 32). Deliberately NOT auto-fixed: choosing between 'notate the transition' and 'stop claiming it' is an authoring decision per exercise."]
+      "log": ["Surfaced by the new check-exercise-meta gate (iter 32). Deliberately NOT auto-fixed: choosing between 'notate the transition' and 'stop claiming it' is an authoring decision per exercise.", "iter 36 · The acceptance's first branch turned out to be impossible: the renderer takes ONE timeSignature per spec, so a 4/4→6/8 transition cannot be notated today (filed as BL-062). Took the second branch, per exercise: latin-folkloric#0 retitled 'Guaguanco: The 4/4 Bar Before the Flip' (also killed an ASCII '->' in a title) with meta pointing at Exercise 3 for the 6/8 side; metal-mathcore#0 meta now '4/4 · ♩ = 130 (bar 1 of a 4/4 → 7/8 → 5/4 → 6/8 phrase)' — its title already said '(4/4 portion)'; rock-odd-meter#3 retitled 'Metric Modulation: The 4/4 Bar' with meta pointing at Exercise 1. fusion-prog-fusion#2 left ALONE: 'Pivot bar — 5/4 with implied 7/8 grouping' is exactly what is notated, and the 7/8 is implied by grouping, not a second meter. Each lesson's tip already described the transition honestly ('Bar 1 of the modulation… use Exercise 1 for the 5/4 bar'), so the rewordings match the teaching rather than replacing it."]
     },
     {
       "id": "BL-060",

@@ -14574,8 +14574,8 @@ module.exports = {
     `,
     exercises: [
       {
-        title: "1 — Guaguanco to Bembe Transition (4/4 -> 6/8)",
-        meta: "4/4 then 6/8 · ♩ = 92",
+        title: "1 — Guaguanco: The 4/4 Bar Before the Flip",
+        meta: "4/4 · ♩ = 92 (the 6/8 side is Exercise 3)",
         bpm: 92,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -25985,7 +25985,7 @@ module.exports = {
     exercises: [
       {
         title: "1 — Phrase Changing Meter Every Bar (4/4 portion)",
-        meta: "4/4 → 7/8 → 5/4 → 6/8 · ♩ = 130",
+        meta: "4/4 · ♩ = 130 (bar 1 of a 4/4 → 7/8 → 5/4 → 6/8 phrase)",
         bpm: 130,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -28908,8 +28908,8 @@ module.exports = {
         tip: "Nine 8ths grouped <em>2 + 2 + 2 + 3</em> — three short groups, then one long. Snare on the 3rd, 5th, and 9th 8ths. Count <em>1-2 / 3-4 / 5-6 / 7-8-9</em>. The bar has the same shape as 4/4 plus an extra 8th tacked onto the end. Many prog tracks use 9/8 as exactly that: 4/4 with a hiccup."
       },
       {
-        title: "4 — Metric Modulation: 4/4 → 5/4",
-        meta: "4/4 + 5/4 · ♩ = 100",
+        title: "4 — Metric Modulation: The 4/4 Bar",
+        meta: "4/4 · ♩ = 100 (the 5/4 bar is Exercise 1)",
         bpm: 100,
         timeSignature: "4/4",
         hands: [
