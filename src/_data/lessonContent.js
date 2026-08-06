@@ -6389,7 +6389,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Jeff Porcaro", work: "Toto — Rosanna", note: "Famously locked-in time at the studio level — the click was on 2 and 4 for most of his work." }
+      { artist: "Papa Jo Jones", work: "Count Basie — Jumpin' at the Woodside (Decca, 1938)", note: "Jo Jones is why this 1938 side floats. His hi-hat is a near-continuous shimmer, not a bare click — he struck it as it opened and closed rather than only when clamped shut, which is what makes it hiss rather than snap. Underneath that stream the pedal shuts on 2 and 4. It's fast, around 240 bpm, so don't wait for a clean chick: listen for where the shimmer tightens, and count 1 and 3 out loud against it." }
     ]
   },
 
@@ -7289,7 +7289,7 @@ module.exports = {
     listening: [
       { artist: "Tony Williams", work: "Lifetime — Emergency!", note: "The bell as a primary ride voice." },
       { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "Surgical crash placement in the bridge." },
-      { artist: "Vinnie Colaiuta", work: "Sting — Ten Summoner's Tales", note: "Bow / bell / crash voicings inside one phrase." }
+      { artist: "Stewart Copeland", work: "The Police — Don't Stand So Close to Me (Zenyatta Mondatta, 1980)", note: "Verses ride the hi-hat; the chorus moves to the bell of the ride — a bright, dry, paradiddle-inspired hook that cuts straight through Summers' guitar. The same cymbal a stick's width away would give you the bow's ping instead; Copeland goes to the dome because only the dome cuts." }
     ]
   },
 

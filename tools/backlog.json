@@ -1,9 +1,10 @@
 {
   "meta": {
-    "iteration": 30,
+    "iteration": 31,
     "next_dimension": "ui",
-    "dimensions": ["ui", "quality", "ui", "content"],
-    "next_id": 58,
+    "dimensions": ["content", "ui", "content", "quality"],
+    "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
+    "next_id": 64,
     "epic": {
       "name": "communal-rebrand",
       "phase": "build",
@@ -396,8 +397,8 @@
       "acceptance": "no single work cited in more than 3 lessons unless genuinely canonical for each (justify in log); replacements factually correct and stylistically apt; content.duplicateListeningPicks falls",
       "status": "ready",
       "attempts": 0,
-      "chunk": null,
-      "log": []
+      "chunk": { "done": 3, "total": 9, "size": 1 },
+      "log": ["iter 37 · 2026-08-06 · Over-cap works 7 -> 5; Aja 6 -> 5; Ten Summoner's Tales and Rosanna now compliant. THREE slots refilled, each independently fact-checked before shipping: three-limb-patterns -> Carlton Barrett / Bob Marley and The Wailers - Exodus (site's first reggae pick and first Jamaican drummer anywhere in the listening data); cymbal-voicings -> Stewart Copeland / The Police - Don't Stand So Close to Me; metronome-practice -> Papa Jo Jones / Count Basie - Jumpin' at the Woodside (1938). Round 1 was 9 proposal agents each paired with an adversarial verifier: 1 accept, 8 reject, and every rejection had the SAME shape - correct drummer, real record, note describing a technique that is not actually audible there. Round 2 re-checked the three sourced corrections the round-1 verifiers offered, on the rule that a verifier's own suggestion has not itself been checked. Copeland and Jo Jones passed on facts (attribution and release confirmed from fetched pages) but had their NOTES rewritten before shipping: Copeland's contrasted hi-hat against ride bell, i.e. two different cymbals, on a lesson about striking ONE cymbal in different places - it would have taught the wrong distinction; Jo Jones's promised an audible pedal 'chick' that a ~240bpm 1938 shellac transfer cannot deliver, and its 'cymbals parked slightly apart' detail would mean no chick at all. Ben Riley / Monk - Straight, No Chaser REJECTED outright with no safe version offered: its note described the hi-hat foot as nearly inaudible, on the one lesson whose entire subject is hearing that foot. SIX slots still cite an over-used record and were deliberately LEFT THAT WAY rather than filled with a guess: pickup-fills, fusion-sixteenth, polyrhythms-5-4, jazz-comping-foot, hiphop-louis-cole, funk-displacement. Verifiers pre-disproved Harvey Mason / Chameleon and Gadd / Aja for the sixteenth-note-carpet slot, so a later pass should not retry them. One verifier also caught two search-engine summaries carrying FABRICATED citations (a page it fetched did not mention the song at all) and discarded both, resting only on pages it read directly - see BL-063."]
     },
     {
       "id": "BL-032",
@@ -606,6 +607,22 @@
       "attempts": 0,
       "chunk": null,
       "log": []
+    },
+    {
+      "id": "BL-063",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Audit the existing 448 listening notes for techniques that are not actually audible",
+      "evidence": [
+        "iter 37: of 9 freshly-proposed listening picks, 8 were rejected by independent fact-checkers for the SAME defect — correct drummer, real record, but a note describing a device that is not prominent or not present on that recording",
+        "Examples caught: a 'short pickup into the downbeat' on Try a Little Tenderness where the transition was a spontaneous tempo shift and the moment described as quiet is the densest in the song; a '16th-note hi-hat carpet' on Blue Matter that is accented 8ths over a shuffle; a 5:4 claim on an album with no verified 5:4 passage",
+        "The 448 existing notes were authored the same way and have never been checked against the recordings; the base rate above suggests a substantial number make claims a listening student cannot confirm"
+      ],
+      "acceptance": "start with the 52 notes that give an explicit instruction ('listen for', 'hear how', 'notice how') — those send a student to hear a specific thing and fail loudest — then sample the rest. Run them through the same adversarial fact-check used in iter 37, measure the true defect rate, and fix or soften every confirmed miss; if the rate is high, run all 448. A note may only assert what a student will actually hear.",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": ["Filed at iter 37. The 8/9 rejection rate on new picks is the evidence — there is no reason to think notes written earlier are better than notes written today by the same process."]
     },
     {
       "id": "BL-062",
