@@ -2,17 +2,40 @@
    Expects:
      currentSlug    — slug of current lesson
      currentSection — 'foundations' | 'track' | 'mastery'
-     currentTrack   — track slug (only if currentSection === 'track') #}
+     currentTrack   — track slug (only if currentSection === 'track')
+
+   system.md §6.3: above 960px this is a sticky column and the toggle is
+   display:none — no JS runs. At or below 960px the column becomes a
+   closed-by-default disclosure bar so the lesson, not the map, owns the
+   first screen (BL-037). chrome.js drives aria-expanded; the state is
+   deliberately not persisted. #}
+
+{% set chapterName = curriculum.mastery.title %}
+{% if currentSection == 'foundations' %}
+  {% set chapterName = curriculum.foundations.title %}
+{% elif currentSection == 'track' %}
+  {% set chapterName = (curriculum | findTrack(currentTrack)).title %}
+{% endif %}
 
 <aside class="curriculum-sidebar" aria-label="Curriculum navigation">
-  <div class="curriculum-sidebar__inner">
+
+  <button class="curriculum-sidebar__toggle" type="button" aria-expanded="false" aria-controls="lesson-map-panel">
+    <span class="curriculum-sidebar__k">In this chapter</span>
+    <span class="curriculum-sidebar__name">{{ chapterName }}</span>
+    <span class="curriculum-sidebar__car" aria-hidden="true">▾</span>
+  </button>
+
+  <div class="curriculum-sidebar__inner" id="lesson-map-panel">
 
     <div class="island-header">
       <a href="/" class="island-back">← All sections</a>
 
+      {# The eyebrow used to restate the section name the island-name prints
+         directly underneath ("I · Foundations" over "Foundations"). Only the
+         numeral is new information, so only the numeral stays — BL-045. #}
       {% if currentSection == 'foundations' %}
         <div class="island-title">
-          <span class="island-eyebrow">I · Foundations</span>
+          <span class="island-eyebrow">Section I</span>
           <span class="island-name">{{ curriculum.foundations.title }}</span>
         </div>
       {% elif currentSection == 'track' %}
@@ -23,7 +46,7 @@
         </div>
       {% elif currentSection == 'mastery' %}
         <div class="island-title">
-          <span class="island-eyebrow">III · Other Topics</span>
+          <span class="island-eyebrow">Section III</span>
           <span class="island-name">{{ curriculum.mastery.title }}</span>
         </div>
       {% endif %}

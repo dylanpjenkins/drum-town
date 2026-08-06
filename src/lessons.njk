@@ -50,33 +50,38 @@ eleventyComputed:
 {% include "curriculum-sidebar.njk" %}
 
 <div class="container">
+  {#- Title block, system.md §6.1. One consolidated breadcrumb carries the
+      section name (and, for a track lesson, the level) that the old .eyebrow
+      line repeated — the eyebrow is deleted here, not restyled. Duration and
+      focus become glyph chips: the "Duration ·"/"Focus ·" prefixes were the
+      fourth repetition of the same vocabulary in one quadrant (BL-045). The
+      labels survive for screen readers, where nothing is being repeated. -#}
   <header class="lesson-hero">
-    <div class="breadcrumb">
-      <a href="/">Curriculum</a>
-      {% if lesson.section == 'track' %}
-        · <a href="/genres/{{ lesson.track }}/">{{ lesson.trackTitle }}</a>
-        · {{ lesson.levelTitle }}
-      {% elif lesson.section == 'foundations' %}
-        · Foundations
-      {% elif lesson.section == 'mastery' %}
-        · Other Topics
-      {% endif %}
-    </div>
-    <p class="eyebrow">
-      {%- if lesson.section == 'track' -%}
-        Level {{ lesson.level }} · {{ lesson.trackTitle }}
-      {%- elif lesson.section == 'foundations' -%}
-        Foundation
-      {%- elif lesson.section == 'mastery' -%}
+    <p class="breadcrumb">
+      <a href="/">Lessons</a>
+      {%- if lesson.section == 'track' %}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="/genres/{{ lesson.track }}/">{{ lesson.trackTitle }}</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        {{ lesson.levelTitle }}
+      {%- elif lesson.section == 'foundations' %}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        Foundations
+        {%- if lesson.subSectionTitle %}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        {{ lesson.subSectionTitle }}
+        {%- endif %}
+      {%- elif lesson.section == 'mastery' %}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
         Other Topics
       {%- endif %}
     </p>
     <h1>{{ lesson.title }}</h1>
     {% if content and content.tagline %}<p class="lede">{{ content.tagline }}</p>{% endif %}
-    {% if content %}
-      <div class="lesson-meta">
-        {% if content.duration %}<span>Duration · <strong>{{ content.duration }}</strong></span>{% endif %}
-        {% if content.focus %}<span>Focus · <strong>{{ content.focus }}</strong></span>{% endif %}
+    {% if content and (content.duration or content.focus) %}
+      <div class="lesson-chips">
+        {% if content.duration %}<span class="chip"><i aria-hidden="true">⏱︎</i><span class="sr-only">Duration: </span>{{ content.duration }}</span>{% endif %}
+        {% if content.focus %}<span class="chip"><i aria-hidden="true">◎</i><span class="sr-only">Focus: </span>{{ content.focus }}</span>{% endif %}
       </div>
     {% endif %}
   </header>

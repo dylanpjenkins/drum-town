@@ -836,6 +836,12 @@ hr.section-rule {
 }
 .curriculum-sidebar::-webkit-scrollbar-thumb:hover { background: var(--ink-soft); }
 
+/* The lesson map's disclosure bar exists only at <=960px (system.md §6.3).
+   Hiding the button here — rather than showing it and hiding the panel — is
+   what keeps the desktop column free of JavaScript: the panel is visible
+   because nothing ever hides it, not because a script revealed it. */
+.curriculum-sidebar__toggle { display: none; }
+
 .island-header {
   padding-bottom: 14px;
   margin-bottom: 14px;
@@ -925,28 +931,32 @@ hr.section-rule {
   margin-bottom: 36px;
 }
 .lesson-hero h1 { margin-bottom: 12px; }
-.lesson-hero .breadcrumb {
+
+/* Breadcrumb — the system component (system.md §6.1), and the only place a
+   lesson page prints its section name in the title block. It wraps rather
+   than truncating: an ellipsized trail tells a phone reader nothing. */
+.breadcrumb {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 500;
+  line-height: 1.5;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-bottom: 12px;
+  margin: 0 0 12px;
 }
-.lesson-hero .breadcrumb a { color: var(--ink-soft); }
-.lesson-hero .breadcrumb a:hover { color: var(--accent); }
+.breadcrumb a { color: var(--accent); }
+.breadcrumb__sep { margin: 0 4px; }
 
-.lesson-meta {
+/* Duration and focus as glyph chips. The old .lesson-meta printed the words
+   "Duration" and "Focus" beside values that are self-evidently a duration and
+   a focus — the labels now live in .sr-only spans, where repetition costs a
+   sighted reader nothing and tells a screen-reader user what the glyph is. */
+.lesson-chips {
   display: flex;
-  gap: 24px;
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-soft);
   flex-wrap: wrap;
+  gap: 8px;
 }
-.lesson-meta strong { color: var(--accent); font-weight: 500; }
 
 .section-label {
   font-family: var(--mono);
@@ -1147,13 +1157,16 @@ hr.section-rule {
 }
 .tips strong, .callout strong { color: var(--accent); font-weight: 600; }
 
-/* =====================  PREREQUISITES  ===================== */
+/* =====================  PREREQUISITES  =====================
+   A plain row of pills under the title block, not a boxed callout
+   (system.md §6.1): three linked titles never needed a card, and the border
+   made the first thing under the h1 look like an alert. */
 .prereqs {
-  background: var(--paper);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-m);
-  padding: 14px 18px;
-  margin: 18px 0 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  margin: 0 0 32px;
   font-size: 0.875rem;
 }
 .prereqs__label {
@@ -1163,15 +1176,20 @@ hr.section-rule {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 6px;
-  display: block;
+  display: inline-block;
 }
 .prereqs ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .prereqs li a {
   background: var(--paper-2);
-  padding: 4px 10px;
+  padding: 6px 12px;
   font-size: 0.8125rem;
-  border: 1px solid var(--rule);
+  /* Accent, not body ink: at --ink-2 these measured 1.00 contrast against the
+     surrounding prose and 1.14 against the STATIC duration/focus chips sixty
+     pixels above them, with no underline and a transparent border. Two rows of
+     identical pills, only one of them clickable. */
+  color: var(--accent);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
   display: inline-block;
 }
 .prereqs li a:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); text-decoration: none; }
@@ -1582,20 +1600,97 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
 }
 
 /* =====================  RESPONSIVE  ===================== */
+/* The lesson map becomes a closed-by-default disclosure (system.md §6.3).
+   Before this, 240px of curriculum list rendered ABOVE the lesson on every
+   phone, so the lesson's own h1 opened below the fold — BL-037. The bar names
+   the chapter in one 48px row and the lesson takes the first screen back.
+   State is not persisted: every load starts closed, on purpose. */
 @media (max-width: 960px) {
-  /* Collapse the sidebar to a fixed-height panel above the lesson.
-     minmax(0, 1fr) — not 1fr — so wide content (exercises, notation)
+  /* minmax(0, 1fr) — not 1fr — so wide content (exercises, notation)
      can never inflate the column past the viewport. */
   .lesson-layout { grid-template-columns: minmax(0, 1fr); }
   .curriculum-sidebar {
     position: relative;
     top: 0;
     height: auto;
-    max-height: 240px;
+    overflow: visible;
     border-right: none;
     border-bottom: 1px solid var(--rule);
-    padding: 16px 20px 18px;
+    padding: 0;
   }
+  /* The dock reserve gives this column an explicit viewport-derived height
+     while the metronome is open. That is right for the sticky desktop column
+     and wrong here, where a closed bar would grow a screen-tall empty gap;
+     this rule matches its specificity and comes later in the sheet. */
+  html.transport-open .curriculum-sidebar { height: auto; }
+
+  .curriculum-sidebar__toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 20px;
+    background: var(--paper);
+    border: none;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: left;
+    cursor: pointer;
+  }
+  /* Full-bleed control: an outset ring would be clipped by the viewport edge. */
+  .curriculum-sidebar__toggle:focus-visible { outline-offset: -2px; }
+  .curriculum-sidebar__k {
+    /* The boilerplate yields before the chapter name does. With flex-shrink: 0
+       here, raising the browser text size pushed the name through the caret and
+       off the right edge — 13px of horizontal page scroll at a 24px root, 114px
+       at the 200% that WCAG 1.4.4 requires to work. */
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  /* The name absorbs a long chapter title — the caret has to stay pinned to the
+     right edge for the row to read as a control. overflow-wrap lets a single
+     long word break rather than spill past the caret. */
+  .curriculum-sidebar__name { flex: 1 1 auto; min-width: 0; overflow: hidden; overflow-wrap: anywhere; }
+  .curriculum-sidebar__car {
+    flex-shrink: 0;
+    margin-left: auto;
+    color: var(--accent);
+    font-size: 0.875rem;
+    line-height: 1;
+    transition: transform 0.15s ease;
+  }
+  .curriculum-sidebar.is-open .curriculum-sidebar__car { transform: rotate(180deg); }
+
+  .curriculum-sidebar__inner {
+    display: none;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 12px 20px 16px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .curriculum-sidebar.is-open .curriculum-sidebar__inner { display: block; }
+  /* The bar already names the chapter; the island title would print it twice
+     the moment the panel opens. The back link stays — it is a destination. */
+  .curriculum-sidebar__inner .island-title { display: none; }
+  .curriculum-sidebar__inner .island-header {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  /* Once the map is a phone control its rows are touch targets, not a
+     glanceable column of 30px lines. 13px (the ledger row's step) puts the
+     row at 44.2px measured — the site's touch floor, not an eyeball. */
+  .curriculum-sidebar__inner .curr-item a { padding: 13px 10px; }
 }
 
 @media (max-width: 720px) {

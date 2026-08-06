@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 35,
-    "next_dimension": "ui",
+    "iteration": 36,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -621,12 +621,13 @@
         "lesson-mobile.png iter 23: reader must scroll past the entire sidebar nav to reach the lesson title on every lesson page under 960px"
       ],
       "acceptance": "on small screens the sidebar collapses to a disclosure ('All lessons ▸') or moves below the lesson; lesson title visible within the first viewport; verify via 390px screenshot",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
         "Found by visual verification (iter 23). The 960px collapse keeps DOM order sidebar-first.",
-        "iter 24 · CONFIRMED at a true 390px viewport (iframe harness): the sidebar panel eats the first screen and opens mid-list at The Dragadiddle before the lesson title appears."
+        "iter 24 · CONFIRMED at a true 390px viewport (iframe harness): the sidebar panel eats the first screen and opens mid-list at The Dragadiddle before the lesson title appears.",
+        "iter 42 · Closed by PKG-6 [BL-053]. At a true 390px the lesson h1 now sits at top 174, inside the first viewport, on foundations, track and mastery lessons alike. The curriculum sidebar became a 48px closed-by-default disclosure bar instead of a full panel above the content, and its state is deliberately not persisted so the lesson owns the first screen on every load."
       ]
     },
     {
@@ -738,10 +739,12 @@
         "design/packages.md PKG-6; kills BL-037 (sidebar closed by default ≤960) + stacked-label pile-up"
       ],
       "acceptance": "per design/packages.md PKG-6: breadcrumb consolidation, eyebrow deleted, meta chips; sidebar disclosure closed ≤960px with lesson title in first viewport at 390; screenshots + a11y walk",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 42 · 2026-08-06 · SHIPPED. Title block consolidated: one breadcrumb (three variants for track/foundations/mastery), h1, lede, and glyph chips replacing .lesson-meta's 'Duration ·/Focus ·' prefixes; the .eyebrow line is deleted from all 217 lesson pages; prereqs restyled to pills. Sidebar becomes a closed-by-default disclosure at <=960px with a real aria-expanded toggle, and stays a pure-CSS sticky column above it (verified with every script tag stripped). BL-037 CLOSED: at a true 390px the h1 measures top 174 / bottom 245.5, so the lesson owns the first screen — previously the whole curriculum sidebar rendered above it. BL-045 label half: a track lesson's section name now appears twice instead of four times; foundations and mastery show three, the third being the site-header's current-section highlight in base.njk, which is outside this package and should not be removed. FOUR defects fixed after the Builder's all-gates-green report. One the Builder itself flagged rather than hid: U+23F1 STOPWATCH has EMOJI presentation by default in Unicode, so the duration chip rendered as a monochrome glyph on this Windows machine but would have shipped as the site's only colour emoji on iOS and most Androids, on every lesson page — U+FE0E appended, verified in the built HTML. Three more from the adversarial panel (3 lenses, 16 findings, 15 refuted, 1 survived): (a) MAJOR, survived refutation — the disclosure bar's kicker held flex-shrink: 0, so raising the browser text size painted the chapter name through the caret and off the right edge, giving 13px of horizontal page scroll at a 24px root and 114px at the 200% WCAG 1.4.4 requires, on all 224 pages carrying the bar; the kicker now yields first and the bar measures clean at 280/320/360/390 across 16, 24 and 32px roots. (b) The prereq pills rested at --ink-2: measured 1.00 contrast against the surrounding prose and 1.14 against the STATIC duration/focus chips sixty pixels above, with no underline and a transparent border — two rows of identical pills, only one clickable. Now --accent: 2.44 vs the chips, 2.14 vs prose, 4.71 against their own background. The panel's verifier had REFUTED this one; I measured it myself and it was right the first time. (c) Crossing 960px auto-closes the panel, and display:none dropped focus to <body> if the reader was inside it; focus now goes to the toggle, matching the contract setNav already keeps three functions up in the same file. RESIDUAL, measured and NOT this package's: at a 32px root there is still 38px of overflow at 320px and 86px at 390px, from fixed-width notation SVGs (418px staves that do not scale with root font — PKG-7/§6.5 owns this) and from the header row (BL-064). The disclosure bar itself measures exactly viewport-width at every size tested."
+      ]
     },
     {
       "id": "BL-054",
@@ -749,7 +752,8 @@
       "priority": 1,
       "title": "PKG-7 Reading room: prose set, exercise card, honest mobile notation",
       "evidence": [
-        "design/packages.md PKG-7; sticking engraving 10→14, scroll floor 55%→70% (letters 9.8px at 390), pan affordance — nothing deleted"
+        "design/packages.md PKG-7; sticking engraving 10→14, scroll floor 55%→70% (letters 9.8px at 390), pan affordance — nothing deleted",
+        "iter 42 measurement: at a 200% browser text size (32px root) the notation SVGs are still 418px wide against a 320px viewport, because the renderer writes stave widths in px that do not scale with the root font. That is 38px of horizontal page scroll at 320px and 86px at 390px — a WCAG 1.4.4 failure that §6.5's mobile-notation work needs to answer, not just the legibility half."
       ],
       "acceptance": "per design/packages.md PKG-7: prose/tip/listening/criteria components restyled, exercise card per spec, mobile sticking legible at true-390 (screenshot read for legibility), pan affordance visible; audit-lessons diff clean",
       "status": "ready",

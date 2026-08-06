@@ -1,9 +1,21 @@
 {# Section-level navigator for genre landing pages. Shows Foundations,
    all genre tracks, and Mastery — with the current track highlighted.
-   Expects: currentTrack (slug of the track this page belongs to). #}
+   Expects: currentTrack (slug of the track this page belongs to).
+
+   Same disclosure contract as curriculum-sidebar.njk (system.md §6.3):
+   sticky column above 960px with no JS, closed-by-default bar below it.
+   The kicker says "Sections" rather than "In this chapter" because this
+   panel lists every path, not the chapter this page sits in. #}
 
 <aside class="curriculum-sidebar" aria-label="Curriculum sections">
-  <div class="curriculum-sidebar__inner">
+
+  <button class="curriculum-sidebar__toggle" type="button" aria-expanded="false" aria-controls="lesson-map-panel">
+    <span class="curriculum-sidebar__k">Sections</span>
+    <span class="curriculum-sidebar__name">All paths</span>
+    <span class="curriculum-sidebar__car" aria-hidden="true">▾</span>
+  </button>
+
+  <div class="curriculum-sidebar__inner" id="lesson-map-panel">
 
     <div class="island-header">
       <a href="/" class="island-back">← Curriculum home</a>

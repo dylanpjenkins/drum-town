@@ -65,6 +65,72 @@
     }, { passive: true });
   }
 
+  // ---- Lesson-map disclosure (<=960px only) ----
+  // Above 960px the curriculum sidebar is a sticky column and the toggle is
+  // display:none — none of this runs and none of it is needed, which is why
+  // the panel's visibility there is pure CSS. Below 960px the map used to
+  // render its full length ABOVE the lesson, pushing the lesson's own h1 off
+  // the first screen (BL-037); it is now a closed disclosure bar.
+  //
+  // The state is deliberately NOT persisted. A remembered-open map would put
+  // the reader back where BL-037 started on the next lesson they open, and the
+  // lesson has to own the first screen every time.
+  const lessonMap = document.querySelector('.curriculum-sidebar');
+  const mapToggle = lessonMap && lessonMap.querySelector('.curriculum-sidebar__toggle');
+
+  if (lessonMap && mapToggle) {
+    // Unlike the header nav, the panel FOLLOWS its toggle in the DOM and in
+    // paint order, so Tab walks straight into it — moving focus on open would
+    // only fight the reader. Closing leaves focus on the toggle, which is
+    // where the click or the Enter key already put it.
+    // The panel is the scroll container at this width (the aside is not), and
+    // it opens 60vh tall onto a curriculum that can run to 60 lessons. Center
+    // the current lesson the way the desktop column's inline script does —
+    // otherwise opening the map shows lesson one, wherever the reader is.
+    // Nothing to center until the panel is displayed, so this runs on open.
+    const centerCurrent = () => {
+      const panel = lessonMap.querySelector('.curriculum-sidebar__inner');
+      const cur = panel && panel.querySelector('.curr-item.is-current');
+      if (!panel || !cur || panel.scrollHeight <= panel.clientHeight) return;
+      const pr = panel.getBoundingClientRect();
+      const cr = cur.getBoundingClientRect();
+      panel.scrollTop = Math.max(0, panel.scrollTop + (cr.top - pr.top) - (pr.height / 2 - cr.height / 2));
+    };
+
+    const setMap = open => {
+      lessonMap.classList.toggle('is-open', open);
+      mapToggle.setAttribute('aria-expanded', String(open));
+      if (open) centerCurrent();
+    };
+
+    mapToggle.addEventListener('click', () => {
+      setMap(!lessonMap.classList.contains('is-open'));
+    });
+
+    lessonMap.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lessonMap.classList.contains('is-open')) {
+        setMap(false);
+        mapToggle.focus();
+      }
+    });
+
+    // Crossing the breakpoint (including by zooming) must not leave the state
+    // pinned to a toggle that is no longer rendered.
+    let mapNarrow = window.matchMedia('(max-width: 960px)').matches;
+    window.addEventListener('resize', () => {
+      const narrow = window.matchMedia('(max-width: 960px)').matches;
+      if (mapNarrow !== narrow && lessonMap.classList.contains('is-open')) {
+        // Closing hides the panel; anyone focused inside it would land on
+        // <body> and lose their place. Same contract as setNav above.
+        const inside = lessonMap.contains(document.activeElement);
+        setMap(false);
+        if (inside && narrow) mapToggle.focus();
+        else if (inside) lessonMap.querySelector('a, button')?.focus();
+      }
+      mapNarrow = narrow;
+    }, { passive: true });
+  }
+
   // --header-h feeds the sticky sidebar offset and every anchor's
   // scroll-margin. The header grows when its row wraps (high zoom, long
   // labels), so measure it rather than trusting the 60px default.
