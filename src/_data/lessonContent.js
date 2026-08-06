@@ -4723,7 +4723,7 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Steve Gadd", work: "Steely Dan — Aja", note: "Three-limb economy. Pull out any one part and you can hear it underneath the others." },
+      { artist: "Carlton Barrett", work: "Bob Marley & The Wailers — Exodus", note: "Three limbs, three completely separate jobs: the kick drives a flat four, the hi-hat hand carries the subdivision and the open-hat accents, and the rimshot snare drops on 3 instead of the backbeat. Follow one limb at a time all the way through — each part is nearly trivial alone, and the whole groove lives in how the three stack." },
       { artist: "Bernard Purdie", work: "Aretha Franklin — Rock Steady", note: "Rock three-limb texture taken to its absolute peak." },
       { artist: "Tony Williams", work: "Miles Davis — Miles Smiles", note: "Ride + hat foot + snare interplay; the third limb is constantly moving." }
     ]
