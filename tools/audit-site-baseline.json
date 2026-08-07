@@ -1,13 +1,13 @@
 {
   "metrics": {
     "content.britishSpellings": 0,
-    "content.duplicateListeningPicks": 8,
+    "content.duplicateListeningPicks": 9,
     "content.lessonsFewExercises": 14,
     "content.lessonsMissingListening": 64,
     "content.lessonsNoSubheadings": 58,
     "content.lessonsThinProse": 43,
     "content.lessonsZeroExercises": 0,
-    "content.listeningArtistNotDrummer": 81,
+    "content.listeningArtistNotDrummer": 29,
     "css.missingDarkScheme": 0,
     "css.missingFocusVisible": 0,
     "css.missingReducedMotion": 0,

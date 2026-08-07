@@ -1384,9 +1384,9 @@ module.exports = {
     prerequisites: ['basic-coordination', 'latin-clave-intro'],
     nextLessons: ['latin-samba-feel'],
     listening: [
-      { "artist": "João Gilberto", "work": "Chega de Saudade", "note": "The founding bossa nova record — the guitar carries the clave-like pattern the cross-stick borrows." },
+      { "artist": "Milton Banana", "work": "João Gilberto — Chega de Saudade", "note": "The kit is a brush in one hand and a stick against the snare rim, kept deliberately soft and low. The guitar states the pattern; the drums stay under it." },
       { "artist": "Milton Banana", "work": "Stan Getz & João Gilberto — Getz/Gilberto", "note": "Brushes, cross-stick, total restraint — listen for how little Banana plays while the groove never thins." },
-      { "artist": "Antônio Carlos Jobim", "work": "Wave", "note": "Listen to how little the drums do — and how much the groove breathes anyway." }
+      { "artist": "Claudio Slon", "work": "Antônio Carlos Jobim — Wave", "note": "Listen to how little the drums do — and how much the groove breathes anyway." }
     ],
     graduationCriteria: [
       'Three-layer texture (hat 8ths, bossa kick, cross-stick on 2&amp;4) holds at ♩=92',
@@ -10593,8 +10593,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade Fellowship", work: "Perceptual", note: "Modern broken time — entire bars where the ride disappears and the form holds via the snare and the hi-hat foot." },
-      { artist: "Joshua Redman Trio", work: "Back East", note: "Brian Blade in conversation with bass — broken time as dialogue." },
+      { artist: "Brian Blade", work: "Brian Blade Fellowship — Perceptual", note: "Modern broken time — entire bars where the ride disappears and the form holds via the snare and the hi-hat foot." },
+      { artist: "Brian Blade", work: "Joshua Redman — Back East (Zarafah)", note: "Redman's trio carries no piano and no guitar, so the bass alone states the harmony. Listen for how the bass and the drums divide the job of holding the form when nothing else marks it." },
       { artist: "Jack DeJohnette (Keith Jarrett Trio)", work: "Standards Live", note: "Listen to 'Stella by Starlight': the ride fragments, the snare takes over the timekeeping for bars at a time, and the form never wobbles." }
     ]
   },
@@ -20830,9 +20830,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Andrew Hale / Stuart Matthewman (Sade band)", work: "Sade — Diamond Life", note: "Reference quiet-storm drumming — sparse, cool, the perfect frame for the voice." },
-      { artist: "Ricky Lawson", work: "Anita Baker — Rapture", note: "The brush-and-rim-click vocabulary at the canonical 80s tempo." },
-      { artist: "Various studio drummers", work: "Smokey Robinson — A Quiet Storm", note: "The album whose title gave the genre its name." }
+      { artist: "Dave Early", work: "Sade — The Sweetest Taboo", note: "The toms came off the kit for this one and the hi-hat was left out entirely, so the groove is kick, snare and rim against a shaker that runs the length of the song. Listen for how much space that leaves around the vocal." },
+      { artist: "Ricky Lawson", work: "Anita Baker — Sweet Love", note: "Paulinho da Costa plays percussion alongside the kit on this one. Listen for where the drum set ends and the percussion begins." },
+      { artist: "Gene Pello & Joseph A. Brown Jr.", work: "Smokey Robinson — A Quiet Storm", note: "This is the album whose title track named the format. Across nearly eight minutes the beat sits so far under the vocal that you have to go looking for it, which is exactly the point." }
     ]
   },
 
@@ -22411,8 +22411,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Chris Dave & The Drumhedz", work: "self-titled (2018)", note: "The whole approach in one record." },
-      { artist: "Robert Glasper Experiment", work: "Black Radio", note: "Dave's drumming inside a band context." },
+      { artist: "Chris Dave", work: "Chris Dave and the Drumhedz (2018)", note: "'Sensitive Granite' slows down and puts the snare between 3 and 4 for the first half of the track, then squarely on 4 for the second. 'Universal Language' and 'Destiny N Stereo' show the other side: slick grooves that point back at 90s hip-hop." },
+      { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "On 'Afro Blue' behind Erykah Badu the kit is all trebly snare and cymbals, a hip-hop feel played rather than looped. Then hear the switch to brushes on 'Smells Like Teen Spirit'." },
       { artist: "D'Angelo", work: "Black Messiah (Dave is one of the kit references)", note: "Dragged snare in a soul context." }
     ]
   },
@@ -25006,8 +25006,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Cryptopsy", work: "None So Vile", note: "Flo Mounier — gravity rolls integrated as song-vocabulary, not stunt." },
-      { artist: "Origin", work: "Echoes of Decimation", note: "John Longstreth — extreme-tempo gravity-roll layering." },
+      { artist: "Flo Mounier", work: "None So Vile", note: "Graves of the Fathers opens with start-stop drum figures that launch each groove cleanly. Across the record the rhythm keeps switching underneath the chaos, and passages that already sound flat out get pushed into another gear of blasting." },
+      { artist: "John Longstreth", work: "Origin — Informis Infinitas Inhumanitas", note: "The snare work ranges from triplet bursts to flat-out blasting, and the fills keep changing shape instead of repeating. Listen for how much variety survives at a tempo this extreme." },
       { artist: "Marco Minnemann", work: "Instructional / solo videos", note: "Clean technical demonstration of the technique in isolation." }
     ]
   },
@@ -28006,9 +28006,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Johnny Cash", work: "At Folsom Prison", note: "W.S. Holland's train-beat shuffle is the entire engine of the album." },
-      { artist: "Buck Owens", work: "Live at Carnegie Hall", note: "Willie Cantu — country train-beat at uptempo with absolute precision." },
-      { artist: "Brian Setzer Orchestra", work: "The Dirty Boogie", note: "Bernie Dresel — modern rockabilly train-beat with brushes and sticks both." }
+      { artist: "W.S. Holland", work: "Johnny Cash — At Folsom Prison", note: "The 1955 Sun original had no drummer at all: Cash imitated a snare by strumming with a piece of paper wedged under his guitar strings. Track 1 here is the same song taken faster with a real kit behind it, so play the two back to back and hear what the drums are actually doing." },
+      { artist: "Willie Cantu", work: "Buck Owens and His Buckaroos — Carnegie Hall Concert", note: "Owens called his own sound freight-train music, which is a fair label to test against this 1966 live set. Go to \"I've Got a Tiger By the Tail\" at track 12 and follow the snare instead of the Telecaster: the rhythm section, not the guitar, is where the Buckaroos' rock energy comes from." },
+      { artist: "Bernie Dresel", work: "Brian Setzer Orchestra — The Dirty Boogie", note: "Setzer's rockabilly songbook rescored for a 13-piece horn section, the opposite arranging choice from the Cash and Owens picks above. Play \"Rock This Town\" at track 8 and listen for how much of the drive still comes off the snare once a big band is carrying the tune." }
     ]
   },
 
@@ -28236,9 +28236,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Steely Dan", work: "Aja", note: "Steve Gadd's title-track fill — the urtext of orchestrated linear vocabulary in a rock context." },
-      { artist: "Frank Zappa", work: "Joe's Garage", note: "Vinnie Colaiuta's linear fills are the post-Gadd refinement — denser, faster, more displaced." },
-      { artist: "Tower of Power", work: "Back to Oakland", note: "David Garibaldi — linear thinking applied to funk grooves rather than fills, but the same vocabulary." }
+      { artist: "Steve Gadd", work: "Steely Dan — Aja (title track)", note: "The track has three drum breaks: two inside Wayne Shorter's tenor solo and one long finale, built from hand-to-foot triplets, offbeat hertas and hi-hat barks, some of it linear. Listen for the hi-hat pedal closing off the sixteenth-note triplet figures, and for the funk samba the fade settles into." },
+      { artist: "Vinnie Colaiuta", work: "Frank Zappa — Joe's Garage (The Central Scrutinizer)", note: "The opening track is one four-bar vamp with the narration dubbed on afterward, so underneath it the rhythm section is improvising over a figure that never changes. Listen to how the fills get orchestrated across the two toms while the bass drum keeps shifting around beat 3." },
+      { artist: "David Garibaldi", work: "Tower of Power — Back to Oakland", note: "The album opens and closes with \"Oakland Stroke\", a groove built deliberately without a backbeat on 2 and 4. Listen for the snare, hi-hat and bass drum interlocking into one sixteenth-note figure instead of a backbeat laid over a steady hand." }
     ]
   },
 
@@ -28934,9 +28934,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Pink Floyd", work: "The Dark Side of the Moon", note: "Nick Mason — \"Money\" sits in 7/4 and the rock backbeat reads as natural in it." },
-      { artist: "Tool", work: "Lateralus", note: "Danny Carey moves between 5/8, 7/8, and 9/8 phrases without ever leaving the song's pocket." },
-      { artist: "Rush", work: "Moving Pictures", note: "Neil Peart — the \"Tom Sawyer\" mid-section rides 7/8 without losing the head-nod. Count it once, then stop counting and feel where it turns around." }
+      { artist: "Nick Mason", work: "Pink Floyd — The Dark Side of the Moon", note: "\"Money\" runs in 7/4, and the seven-beat loop of coins and cash register lays that length out over the opening bars. The song drops to 4/4 for the guitar solo, so play those two sections back to back to hear what the extra beats were doing." },
+      { artist: "Danny Carey", work: "Tool — Lateralus", note: "\"Schism\" opens with two bars of 5/4 and a bar of 4/4, then settles into bars that alternate 5/8 and 7/8. The meter keeps shifting after that, so count one 5 and one 7 to feel the pair, then follow the bass line instead of the count." },
+      { artist: "Neil Peart", work: "Rush — Moving Pictures", note: "The \"Tom Sawyer\" mid-section rides 7/8 without losing the head-nod. Count it once, then stop counting and feel where it turns around." }
     ]
   },
 
@@ -29144,9 +29144,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Snarky Puppy", work: "We Like It Here", note: "Robert \"Sput\" Searight and Larnell Lewis — rock backbeat with funk and jazz textures threaded through every track." },
+      { artist: "Larnell Lewis", work: "Snarky Puppy — We Like It Here", note: "He learned most of this material on the flight to Utrecht, and the band cut it live over four nights in front of a studio audience with no overdubs. Start with 'Lingus' and follow what the kit does under Cory Henry's synth solo, where the rhythm section lifts every time Henry turns a corner." },
       { artist: "Vulfpeck", work: "The Beautiful Game", note: "Theo Katzman — rock-funk hybrid where the ghost notes are the entire personality." },
-      { artist: "Steely Dan", work: "Aja", note: "Steve Gadd, Bernard Purdie, Jeff Porcaro — the original generation of rock drummers fluent in funk, jazz, and Latin simultaneously." }
+      { artist: "Steve Gadd", work: "Steely Dan — Aja (title track)", note: "The chart breaks into roughly two dozen sections and hands a one-minute tenor solo to Wayne Shorter, but it also leaves designated spots for the drummer to improvise. Those passages are the first drum solos on a Steely Dan record, so listen for where the written figures stop and the improvising starts." }
     ]
   },
 
@@ -29391,9 +29391,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Hal Blaine", work: "The Wrecking Crew — Phil Spector and Beach Boys productions", note: "Hal Blaine — the prototype studio drummer. Listen for what he <em>doesn't</em> play." },
-      { artist: "Steely Dan", work: "Aja and Gaucho", note: "Steve Gadd, Bernard Purdie, Jeff Porcaro, Rick Marotta — the canonical late-'70s studio rock vocabulary." },
-      { artist: "Toto", work: "Toto IV", note: "Jeff Porcaro — \"Rosanna\" half-time shuffle is a master class in click-perfect studio drumming with absolute restraint." }
+      { artist: "Hal Blaine", work: "The Ronettes — Be My Baby", note: "The intro leaves the snare on beat 4 alone instead of 2 and 4, a pattern Blaine said came from dropping a stick and that Spector kept. Count how many fills he plays across the rest of the record." },
+      { artist: "Rick Marotta", work: "Steely Dan — Peg", note: "Chuck Rainey's bass and the kick hold one pocket through the verses, and by Marotta's own account everything lifted when the chorus arrived. Follow those two parts together and mark exactly where the feel changes." },
+      { artist: "Jeff Porcaro", work: "Toto — Toto IV", note: "The Africa groove is a one-bar tape loop cut from a live pass Porcaro played with Lenny Castro on congas, no click track. He picks the kit back up at the fill before each chorus and drops out again when the verse returns." }
     ]
   },
 
