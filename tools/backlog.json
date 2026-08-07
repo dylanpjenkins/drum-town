@@ -1,6 +1,6 @@
 {
   "meta": {
-    "iteration": 39,
+    "iteration": 40,
     "next_dimension": "ui",
     "dimensions": [
       "content",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 66,
+    "next_id": 69,
     "epic": {
       "name": "communal-rebrand",
       "phase": "build",
@@ -1121,6 +1121,59 @@
       "chunk": null,
       "log": [
         "Filed iter 44 from the PKG-7 Builder's own measurement — it drew the boundary of its retry loop honestly rather than letting these silently ride along."
+      ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "id": "BL-066",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Fourteen CSS rule-sets are orphaned — the components they styled were replaced by PKG-5/6/7",
+      "evidence": [
+        "iter 46 discovery: .curriculum-section, .curriculum-section__header, .curriculum-section__header--left, .level-block__num, .level-block__tag, .lesson-meta, .notation-error, .tips, .callout, .exercise-desc, .exercise-lesson-link, .listening__intro, .listening__context and .tracks-grid appear in no rendered page and in no JS. Sampled 40 built pages plus all five client scripts.",
+        "Most are casualties of replacements the epic made deliberately: .tracks-grid and .curriculum-section* were the homepage chip grid PKG-5 removed; .lesson-meta was the title block PKG-6 replaced; .exercise-desc predates PKG-7's card.",
+        "hygiene.deadFeatureRefs is also still 1: curriculum.generalistPath is data rendered by no template."
+      ],
+      "acceptance": "each rule-set is either deleted or shown to be reachable (name the page); .njk in a comment is a false positive and must not be counted; hygiene.deadFeatureRefs reaches 0 or generalistPath gets a documented reason to stay; no visual regression at 1280 and true-390 in both themes",
+      "log": [
+        "Filed iter 46 discovery. Deferred until PKG-10, which owns the orphan sweep, unless it lands sooner."
+      ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "id": "BL-067",
+      "dimension": "content",
+      "priority": 2,
+      "title": "callout-warn renders as an ordinary paragraph — four warnings have no warning",
+      "evidence": [
+        "iter 46 discovery: p.callout-warn appears 4 times in lessonContent.js bodyHtml and 0 times in style.css, so the class does nothing at all.",
+        "Flagged independently by the PKG-7 Builder while implementing the prose set; it is not in system.md 6.2, so it was left alone rather than guessed at."
+      ],
+      "acceptance": "either the four instances get a real component consistent with the tip callout in system.md 6.2 (distinct from it — a caution, not a tip), or they are rewritten as plain prose and the class is removed; no orphaned class left behind either way",
+      "log": [
+        "Filed iter 46 discovery."
+      ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "id": "BL-068",
+      "dimension": "content",
+      "priority": 1,
+      "title": "hiphop-chris-dave builds a whole section around two tracks that are not on the album",
+      "evidence": [
+        "iter 43: the lesson carries `<h2 class=\"section-label\">Drumhedz / Tabernacle</h2>` and the prose beneath it reads 'Dave's \"Drumhedz\" project, and tracks like \"Tabernacle\" or \"Stomp Groove,\" show the approach in its purest form'.",
+        "Neither title is on the 2018 Chris Dave and the Drumhedz album's fifteen-track listing: Rocks Crying / Universal Language / Dat Feelin' / Black Hole / 2N1 / Spread Her Wings / Whatever / Sensitive Granite / Cosmic Intercourse / Atlanta, Texas / Destiny N Stereo / Clear View / Job Well Done / Lady Jane / Trippy Tipsy.",
+        "Found by a BL-063 researcher while fixing the listening block, outside its own scope, and reported rather than ignored."
+      ],
+      "acceptance": "the section heading and prose name tracks that exist on a record the student can find, verified from a fetched source and refuted by an independent check, or the section is rewritten to make no track claim; the lesson's teaching point is preserved",
+      "log": [
+        "Filed iter 46 discovery. P1 because a section HEADING names a track that does not exist — a student following it finds nothing."
       ]
     }
   ]
