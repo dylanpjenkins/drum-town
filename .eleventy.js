@@ -45,13 +45,18 @@ module.exports = function (eleventyConfig) {
     );
     const rendered = renderPattern(spec);
     // Scale-aware width floor: staves wider than ~620 viewBox units keep a
-    // horizontal-scroll floor at 55% natural size so notes stay legible on
+    // horizontal-scroll floor at 70% natural size so notes stay legible on
     // phones; narrower staves simply fit their container (no forced pan).
     // viewBox may have a non-zero origin (staves whose tuplet brackets sit
     // above the stave grow the box upward) — read the width, not position 3.
+    //
+    // 0.55 → 0.70 is system.md §6.5 step 2. At the old floor a 760-unit stave
+    // shrank to 418px inside a ~320px phone scroller and the sticking row went
+    // with it; the trade is a longer pan for a legible one. Nothing is dropped
+    // at either floor — the whole bar is always reachable by scrolling.
     const vb = /viewBox="[-\d.]+ [-\d.]+ ([\d.]+)/.exec(rendered);
     const natW = vb ? parseFloat(vb[1]) : 0;
-    const minW = natW > 620 ? Math.round(natW * 0.55) : 0;
+    const minW = natW > 620 ? Math.round(natW * 0.70) : 0;
     const svg = rendered.replace(
       '<svg ',
       `<svg role="img" aria-label="${ariaLabel}" ${minW ? `style="min-width:${minW}px" ` : ''}`
@@ -98,7 +103,7 @@ module.exports = function (eleventyConfig) {
           ${controls}
         </div>
         ${descBlock}
-        <div class="notation">${svg}</div>
+        <div class="notation${minW ? ' notation--pan' : ''}">${svg}</div>
         ${tipBlock}
         ${linkBlock}
       </div>

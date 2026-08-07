@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 37,
-    "next_dimension": "ui",
+    "iteration": 38,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 65,
+    "next_id": 66,
     "epic": {
       "name": "communal-rebrand",
       "phase": "build",
@@ -756,10 +756,12 @@
         "iter 42 measurement: at a 200% browser text size (32px root) the notation SVGs are still 418px wide against a 320px viewport, because the renderer writes stave widths in px that do not scale with the root font. That is 38px of horizontal page scroll at 320px and 86px at 390px — a WCAG 1.4.4 failure that §6.5's mobile-notation work needs to answer, not just the legibility half."
       ],
       "acceptance": "per design/packages.md PKG-7: prose/tip/listening/criteria components restyled, exercise card per spec, mobile sticking legible at true-390 (screenshot read for legibility), pan affordance visible; audit-lessons diff clean",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 44 · 2026-08-06 · SHIPPED. Prose set, exercise card and the mobile notation strategy from system.md 6.2/6.4/6.5. Sticking annotations 10 -> 14, grace 8 -> 10, default height 130 -> 140, the shortcode's wide-stave floor 55% -> 70%, and a notation--pan class carrying a right-edge fade plus an always-visible thin scrollbar. MEASURED, not computed: sticking ink height at true 390px on paradiddle went 5px -> 10px (the spec predicted 9.8), and 1280 went ~9.5 -> 14px. Pan affordance present on all 33 panning frames at 390 and absent on all 33 at 1280. No annotation clips: sticking-heavy and 2-bar cards clear their viewBox by 7 units; the worst rudiment card is 0.78 over and is IDENTICAL before and after, proved by rendering the same spec through both renderers. MY OWN PREMISE WAS WRONG AND THE BUILDER DISPROVED IT. Iteration 42 recorded that the 200%-text overflow came from fixed-width notation SVGs, and filed that here. It does not: the staves sit inside overflow-x: auto, so their width never reaches the document scroll area — widening them from 418px to 532px moved page overflow by zero pixels. I re-measured independently and confirmed the builder. The real causes were two: the site header, whose collapse was keyed to VIEWPORT PIXELS so raised text never triggered it (86px of scroll at 390 and 107px at 1280), and a single unbreakable record title in a listening row (38px at 320). Both fixed. The header's collapse points moved from px to em — 53.75em and 22.5em, which are 860px and 360px at a 16px root, so behavior at default text size is byte-identical (verified at 858/859/860/861/862 and 359/360/361). An em media query resolves against the browser's default font size, so a raised browser text size now collapses the nav to the hamburger and frees the row, which is the mechanism the px query could never reach. Honest limit on that verification: a harness that sets html{font-size} moves rem lengths but NOT media-query ems, so the raised-text path is reasoned from the spec and confirmed only at the equivalence points; the Builder's overflow:hidden on the wordmark stays as a backstop for any case the query misses. Deviations, all flagged by the Builder rather than hidden: a width-retry loop in the renderer (14pt sticking pushed Flam Paradiddle-Diddle 51 units past its viewBox; the retry also fixed a PRE-EXISTING 6.26-unit truncation on that card); the edge fade built from two background layers rather than mask-image, because a mask would permanently dim the last 28px and hide the final notehead at max scroll — the exact truncation 6.5 forbids; and .play-btn.is-loading losing a grey fill that read as disabled. VexFlow writes font-size in POINTS, so setFont('Arial', 14) emits 14pt = 18.67 user units — the spec's arithmetic landed right by accident and this is now documented in the renderer."
+      ]
     },
     {
       "id": "BL-055",
@@ -1101,6 +1103,23 @@
       "chunk": null,
       "log": [
         "Filed iter 38 from the adversarial panel's BLOCKING finding — the fix shipped, but the structural fragility behind it did not go away."
+      ]
+    },
+    {
+      "id": "BL-065",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "Eight dense multi-bar staves draw past their frame and widening does not converge",
+      "evidence": [
+        "iter 44: rock-dynamics#1-3, jazz-modern-jazz#4, funk-modern-neo-soul#3, funk-modern-r-and-b#3, hiphop-questlove#3 and rock-studio-polish#2 draw 16-92 units past their frame today. The PKG-7 width-retry loop is scoped to sticking staves and deliberately excludes these: three passes still leave them 20-32 units over at widths up to 3057. None carries sticking, so PKG-7 is not the cause.",
+        "Suspected cause is the multi-bar 1400-unit cap rather than anything in system.md 6.5."
+      ],
+      "acceptance": "each of the eight named staves fits inside its viewBox (check-notation-frame stays green and a new assertion covers the multi-bar path); no regression to the 852 single-bar staves; audit-lessons beat-count section unchanged",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        "Filed iter 44 from the PKG-7 Builder's own measurement — it drew the boundary of its retry loop honestly rather than letting these silently ride along."
       ]
     }
   ]

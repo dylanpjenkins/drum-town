@@ -198,6 +198,15 @@ a:focus-visible { border-radius: 2px; }
   color: var(--ink);
   letter-spacing: -0.01em;
   text-decoration: none;
+  /* The wordmark is the header's designated slack — the same call the 360px
+     rule below already makes, extended to the case a width media query cannot
+     see. Text-only zoom does not change the viewport, so at a 32px root every
+     item in this row (all flex-shrink: 0) grew and the row pushed 86px of
+     sideways scroll onto all 228 pages at 390px: a WCAG 1.4.4 failure. The
+     seal, the toggles and the 44px clock pill keep their size; the wordmark
+     yields. Nothing changes at normal text sizes — there is slack to spare. */
+  min-width: 0;
+  overflow: hidden;
 }
 .site-logo:hover { text-decoration: none; }
 .site-logo__seal {
@@ -207,6 +216,7 @@ a:focus-visible { border-radius: 2px; }
   color: var(--accent);
   fill: var(--gold);
 }
+.site-logo__wm { min-width: 0; overflow: hidden; white-space: nowrap; }
 .site-logo__wm em { color: var(--accent); font-style: italic; }
 
 .site-nav {
@@ -308,7 +318,7 @@ a:focus-visible { border-radius: 2px; }
    once the nav collapses the pill is the ONLY way to reach the metronome, and
    every other touch control on the site holds a 44px floor. Grow the box, not
    the type. */
-@media (max-width: 860px) {
+@media (max-width: 53.75em) {   /* 860px at a 16px root; em so raised text collapses the nav too */
   .clock-pill { min-height: 44px; }
 }
 @media (max-width: 480px) {
@@ -322,7 +332,7 @@ a:focus-visible { border-radius: 2px; }
    The wordmark is the only slack: the seal alone carries the brand down here,
    and the pill keeps its 44px target. Cut at 360 rather than 340 so a stored
    three-digit tempo, which widens the pill, still fits. */
-@media (max-width: 360px) {
+@media (max-width: 22.5em) {    /* 360px at a 16px root */
   .site-logo__wm { display: none; }
   .site-header__inner { padding: 0 12px; gap: 6px; }
 }
@@ -353,7 +363,7 @@ a:focus-visible { border-radius: 2px; }
    icon buttons run out of room around 800px, where "Other Topics" used to
    wrap and take the header to two lines. The rest of the mobile layout keeps
    its own 720px breakpoint — different components, different limits. */
-@media (max-width: 860px) {
+@media (max-width: 53.75em) {   /* 860px at a 16px root; em so raised text collapses the nav too */
   .site-header { position: sticky; }
   .site-header__inner { padding: 0 20px; gap: 8px; }
   .nav-toggle { display: inline-flex; }
@@ -450,6 +460,13 @@ p { margin: 0 0 14px; }
 
 ul.bulleted { padding-left: 20px; margin: 12px 0; font-size: 0.96875rem; }
 ul.bulleted li { margin-bottom: 8px; }
+/* One list treatment (system.md §6.2). Authored bodyHtml carries both
+   `ul.bulleted` and bare `ul`/`ol`, and until now only the classed one was
+   styled — the bare ones inherited the browser default and read as a different
+   component. The marker is the only accent job in a list; the text is prose. */
+ul.bulleted > li::marker,
+.lesson-prose ul > li::marker,
+.lesson-prose ol > li::marker { color: var(--accent); }
 
 hr.section-rule {
   border: none;
@@ -983,6 +1000,11 @@ hr.section-rule {
 .lesson-prose p { margin: 0 0 1em; }
 .lesson-prose strong { color: var(--ink); font-weight: 600; }
 .lesson-prose em { color: var(--ink-soft); }
+/* Bare ul/ol in bodyHtml match ul.bulleted (system.md §6.2) — same step, same
+   gutter, same item rhythm. The measure cap is set with p/ul/ol above. */
+.lesson-prose ul,
+.lesson-prose ol { padding-left: 20px; margin: 12px 0; font-size: 0.96875rem; }
+.lesson-prose li { margin-bottom: 8px; }
 
 /* =====================  EXERCISE BLOCK  ===================== */
 .exercise {
@@ -990,7 +1012,7 @@ hr.section-rule {
   border: 1px solid var(--rule);
   border-radius: var(--r-l);
   box-shadow: var(--elev-1);
-  padding: 22px 24px;
+  padding: 20px 22px;
   margin: 16px 0 22px;
   /* Off-screen exercise cards skip layout and paint entirely — the
      /rudiments/ page renders 40 notation SVGs in one document and this is
@@ -1018,11 +1040,14 @@ hr.section-rule {
   margin: 0 0 4px;
 }
 
+/* Meta is information, not decoration (system.md §6.4). At --accent it read as
+   a link sitting under a heading, and it spent the page's one accent job on a
+   tempo marking while the play button beside it went unfilled. */
 .exercise-meta {
   font-family: var(--mono);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--ink-soft);
 }
 
 .exercise-controls {
@@ -1036,8 +1061,8 @@ hr.section-rule {
   appearance: none;
   -webkit-appearance: none;
   background: transparent;
-  border: 1px solid var(--rule);
-  border-radius: var(--r-s);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-pill);
   color: var(--ink);
   font-family: var(--mono);
   font-size: 0.6875rem;
@@ -1054,12 +1079,17 @@ hr.section-rule {
 .kit-selector__select:hover { border-color: var(--accent); color: var(--accent); }
 .kit-selector__select:focus { border-color: var(--accent); }
 
+/* The primary action on the page wears the primary fill (system.md §6.4).
+   Playing the exercise is the whole point of the card; an ink button with a
+   gold glyph read as chrome, and it spent --gold — a decorative slot — on the
+   one control that has to look pressable. player.js swaps the ▶/■/⏳ glyph and
+   the aria-label; every state below is CSS only. */
 .play-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-ink);
   border: none;
   font-family: var(--mono);
   font-size: 0.6875rem;
@@ -1071,13 +1101,15 @@ hr.section-rule {
   flex-shrink: 0;
   transition: background 0.12s ease, transform 0.08s ease;
 }
-.play-btn:hover { background: var(--accent); }
-.play-btn:active { transform: translateY(1px); }
+.play-btn:hover { background: var(--accent-2); }
+.play-btn:active { transform: translateY(1px); background: var(--accent-2); }
 .play-btn:disabled { cursor: default; opacity: 0.85; }
-.play-btn.is-loading { background: var(--ink-soft); cursor: wait; }
+/* Loading is the pulse, not a color: the button is still the same button, and
+   swapping to a grey fill mid-tap read as "disabled" rather than "loading". */
+.play-btn.is-loading { cursor: wait; }
 .play-btn.is-loading .play-btn__icon { animation: play-pulse 0.5s ease-in-out infinite; }
-.play-btn.is-playing { background: var(--accent); }
-.play-btn__icon { font-size: 0.8125rem; line-height: 1; color: var(--gold); }
+.play-btn.is-playing { background: var(--accent-2); }
+.play-btn__icon { font-size: 0.8125rem; line-height: 1; color: inherit; }
 .play-btn__label { line-height: 1; }
 
 @keyframes play-pulse {
@@ -1092,6 +1124,8 @@ hr.section-rule {
   border-radius: var(--r-s);
   padding: 8px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   margin: 10px 0;
 }
 
@@ -1102,6 +1136,54 @@ hr.section-rule {
   /* Wide staves carry a per-SVG min-width inline (set at build time from
      their viewBox width) so they pan inside .notation instead of shrinking
      illegibly; short staves simply fit their container. */
+}
+
+/* ---- Pan affordance (system.md §6.5 step 3) ----
+   The shortcode stamps .notation--pan on any frame it gave a width floor, i.e.
+   any frame that MAY need panning at some viewport. "May" is the operative
+   word: the same card that pans at 390px fits whole at 1280px, so the
+   affordance has to appear and disappear on its own rather than being painted
+   on by the class.
+
+   Both halves are self-cancelling by construction:
+
+   1. The edge fade is two background layers, not an overlay. Layer 1 is a
+      block of --notation-bg attached `local`, so it rides with the stave and
+      parks over the frame's right edge only when you have reached the end of
+      the bar. Layer 2 is the fade itself, attached `scroll`, pinned to the
+      frame. While there is more bar to the right the fade shows; at the end of
+      the scroll — and on any frame that never scrolls — the cover hides it.
+      Backgrounds paint BEHIND content, which is the point: the fade tints the
+      paper the stave sits on and can never dim, hide or clip a note. An
+      ::after overlay or a mask-image would have done exactly that to the last
+      notehead at maximum scroll, which is the truncation §6.5 refuses.
+   2. The scrollbar stays `overflow-x: auto`, so it exists only while there is
+      something to scroll. Styling ::-webkit-scrollbar opts the frame out of
+      macOS/iOS overlay scrollbars, which fade out after a second and take the
+      "there is more here" signal with them; scrollbar-width/-color do the same
+      job in Firefox and in Chrome 121+, which ignores the -webkit- rules once
+      the standard property is set. Both are set for that reason.
+
+   Colors come off the --notation-* slots, never --ink/--accent: the stave
+   ground is deliberately theme-invariant (§1.3), so its furniture must be too. */
+.notation--pan {
+  background-image:
+    linear-gradient(to left, var(--notation-bg), var(--notation-bg)),
+    linear-gradient(to left, color-mix(in srgb, var(--notation-ink) 24%, transparent), transparent);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right center, right center;
+  background-size: 28px 100%, 28px 100%;
+  background-attachment: local, scroll;
+  scrollbar-color: color-mix(in srgb, var(--notation-ink) 32%, var(--notation-bg)) var(--notation-bg);
+}
+.notation--pan::-webkit-scrollbar { height: 8px; }
+.notation--pan::-webkit-scrollbar-track {
+  background: var(--notation-bg);
+  border-radius: var(--r-pill);
+}
+.notation--pan::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--notation-ink) 32%, var(--notation-bg));
+  border-radius: var(--r-pill);
 }
 
 .notation svg .playhead {
@@ -1120,14 +1202,9 @@ hr.section-rule {
   font-size: 0.875rem;
 }
 
-.exercise-tip {
-  color: var(--ink-3);
-  font-size: 0.875rem;
-  max-width: 65ch;
-  margin-top: 10px;
-  padding-left: 14px;
-  border-left: 2px solid var(--ochre);
-}
+/* .exercise-tip is the same object as .tips/.callout and shares their rules
+   (system.md §6.4) — see the TIPS / CALLOUTS block below, which also owns its
+   spacing (it has to come later in the sheet to win at equal specificity). */
 .exercise-tip em { font-style: italic; color: var(--ink); font-weight: 400; }
 
 /* Reference cards (/rudiments/) fold a description and a lesson link into
@@ -1146,16 +1223,27 @@ hr.section-rule {
   text-transform: uppercase;
 }
 
-/* =====================  TIPS / CALLOUTS  ===================== */
-.tips, .callout {
-  background: var(--paper-2);
+/* =====================  TIPS / CALLOUTS  =====================
+   One component, three names (system.md §6.2): .tips and .callout in prose,
+   .exercise-tip inside an exercise card. Green, not accent — a tip is advice,
+   and accent is reserved for things you can click. On the card the old ochre
+   hairline was the only ochre text-adjacent rule left on the site. */
+.tips, .callout, .exercise-tip {
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+  border-left: 3px solid var(--green);
+  border-radius: var(--r-s);
   padding: 14px 18px;
-  border-left: 3px solid var(--accent);
   margin: 14px 0;
-  font-size: 0.90625rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
   color: var(--ink-2);
+  max-width: 65ch;
 }
-.tips strong, .callout strong { color: var(--accent); font-weight: 600; }
+.tips strong, .callout strong, .exercise-tip strong { color: var(--green); font-weight: 600; }
+/* Inside the card the tip is the last thing in the box, so it only needs
+   clearance from the stave above it. */
+.exercise-tip { margin: 12px 0 0; }
 
 /* =====================  PREREQUISITES  =====================
    A plain row of pills under the title block, not a boxed callout
@@ -1201,15 +1289,18 @@ hr.section-rule {
   border-radius: var(--r-m);
   padding: 14px 18px 16px;
   margin: 32px 0 0;
-  font-size: 0.90625rem;
+  font-size: 0.875rem;
 }
+/* Green is the progress vocabulary site-wide (system.md §6.2): the same green
+   that marks a finished lesson on the homepage ledger marks the bar you have
+   to clear to finish this one. In accent it read as a warning. */
 .grad-criteria__label {
   font-family: var(--mono);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--green);
   margin-bottom: 8px;
   display: block;
 }
@@ -1225,7 +1316,7 @@ hr.section-rule {
   position: absolute;
   left: 0;
   top: 4px;
-  color: var(--accent);
+  color: var(--green);
   font-weight: 600;
 }
 
@@ -1261,7 +1352,8 @@ hr.section-rule {
 .listening__intro {
   font-family: var(--body);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   color: var(--ink-soft);
   margin: 0 0 22px;
   max-width: 640px;
@@ -1306,6 +1398,10 @@ hr.section-rule {
   font-weight: 600;
   font-size: 1.0625rem;
   color: var(--ink-2);
+  /* A long record title is one unbreakable run at raised text sizes; without
+     this, "Paul Simon — 50 Ways to Leave Your Lover" pushed a 320px page 38px
+     sideways at 200% text. */
+  overflow-wrap: anywhere;
 }
 .listening__context {
   margin-left: 10px;
@@ -1317,7 +1413,7 @@ hr.section-rule {
 }
 .listening__note {
   margin: 0;
-  font-size: 0.90625rem;
+  font-size: 0.875rem;
   color: var(--ink-3);
   line-height: 1.55;
 }
@@ -1712,8 +1808,22 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   .ledger__title { font-size: 1.75rem; }
   .level-block__header { flex-wrap: wrap; }
   .exercise { padding: 18px 16px; }
+  .exercise-title { font-size: 1.125rem; }
   .tracks-grid { grid-template-columns: 1fr; }
   .listening { margin-top: 36px; }
+}
+
+/* The exercise card's controls stop competing with the title for one line
+   (system.md §6.4). Below 560px the header wraps anyway; wrapping it on
+   purpose gives the select room to breathe and puts both controls on the
+   44px touch floor the rest of the site holds. */
+@media (max-width: 560px) {
+  .exercise-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .kit-selector__select { flex: 1 1 auto; min-width: 0; }
+  .play-btn { min-height: 44px; }
 }
 
 /* The ledger's two-line row (system.md §5.2). This is the designed narrow

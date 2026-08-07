@@ -7,6 +7,38 @@ const { JSDOM } = require('jsdom');
 let cachedVF = null;
 let cachedDom = null;
 
+// Engraving sizes for the sticking row (system.md §6.5 step 1).
+//
+// UNITS WARNING: VexFlow 4 reads these numbers as POINTS and writes them to the
+// SVG as `font-size="14pt"`, which inside a viewBox is 14 * 4/3 = 18.67 user
+// units. The old values (10 / 8) therefore never rendered at 10 and 8 units —
+// they rendered at 13.33 and 10.67, and at the 0.55 phone scroll floor that put
+// an "R" about 5px tall. Raising them to 14 / 10 is the §6.5 step-1 change; the
+// user-unit consequence (18.67 / 13.33) is what the height headroom below and
+// the .eleventy.js floor are sized against.
+const STICKING_PT = 14;
+const GRACE_STICKING_PT = 10;
+// A sticking annotation hangs below the stave. At 18.67 user units the letter's
+// box reaches further down than the old 130-unit default frame allowed for, so
+// staves that carry sticking get 10 more units of floor (§6.5: 130 → 140).
+const DEFAULT_HEIGHT = 130;
+const STICKING_HEIGHT = 140;
+
+// Does any note in this spec carry a sticking label (its own, or on a grace
+// note)? Drives the taller default frame.
+function _hasSticking(spec) {
+  const voices = [spec.hands, spec.feet];
+  for (const arr of voices) {
+    for (const n of arr || []) {
+      if (!n) continue;
+      if (n.sticking) return true;
+      const graces = n.grace ? (Array.isArray(n.grace) ? n.grace : [n.grace]) : [];
+      if (graces.some(g => g && g.sticking)) return true;
+    }
+  }
+  return false;
+}
+
 function getVexFlow() {
   if (cachedVF) return { VF: cachedVF, dom: cachedDom };
   const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
@@ -60,13 +92,16 @@ function makeNote(VF, spec, stemDir) {
   }
   // Sticking: an "R" or "L" (or any short label) drawn below the staff.
   // Opt-in per note for rudiment lessons where the sticking is the lesson.
+  // Size: system.md §6.5 step 1. On a rudiment page the sticking row IS the
+  // lesson, and at the phone scroll floor a 10pt letter rendered ~5px tall.
+  // These sizes are VexFlow points, not user units — see STICKING_PT below.
   if (spec.sticking) {
     const ann = new VF.Annotation(spec.sticking);
     if (VF.Annotation && VF.Annotation.VerticalJustify) {
       ann.setVerticalJustification(VF.Annotation.VerticalJustify.BOTTOM);
     }
     if (typeof ann.setFont === 'function') {
-      ann.setFont('Arial', 10, 'normal');
+      ann.setFont('Arial', STICKING_PT, 'normal');
     }
     note.addModifier(ann, 0);
   }
@@ -102,7 +137,7 @@ function makeNote(VF, spec, stemDir) {
           ann.setVerticalJustification(VF.Annotation.VerticalJustify.BOTTOM);
         }
         if (typeof ann.setFont === 'function') {
-          ann.setFont('Arial', 8, 'normal');
+          ann.setFont('Arial', GRACE_STICKING_PT, 'normal');
         }
         gn.addModifier(ann, 0);
       }
@@ -122,7 +157,7 @@ function makeNote(VF, spec, stemDir) {
  *   timeSignature: "4/4",
  *   repeatBegin: bool, repeatEnd: bool,
  *   width: number (optional, default 760),
- *   height: number (optional, default 130),
+ *   height: number (optional, default 130; 140 when the spec carries sticking),
  *   hands: [ noteSpec, ... ],
  *   feet:  [ noteSpec, ... ],
  *   tuplets: [ { voice: 'hands'|'feet', start, length, num_notes, notes_occupied } ],
@@ -207,7 +242,7 @@ function _splitNotesIntoBars(notes, barQuarters, voiceName, tuplets) {
   return bars;
 }
 
-function renderPattern(spec) {
+function renderPattern(spec, _widthOverride, _depth) {
   const { VF, dom } = getVexFlow();
   const document = dom.window.document;
 
@@ -217,7 +252,9 @@ function renderPattern(spec) {
   document.body.appendChild(container);
 
   const barCount = _detectBarCount(spec);
-  const height = spec.height || 130;
+  const hasSticking = _hasSticking(spec);
+  // An explicit spec.height always wins; otherwise sticking buys extra floor.
+  const height = spec.height || (hasSticking ? STICKING_HEIGHT : DEFAULT_HEIGHT);
   // Single-bar staves size to their content — a four-hit bar doesn't need the
   // width of a dense 16th-note bar, and narrower staves fit phones without
   // panning. Explicit spec.width always wins; 760 is the historical ceiling.
@@ -226,7 +263,8 @@ function renderPattern(spec) {
   const baseWidth = spec.width || (barCount > 1 ? 760 : contentWidth);
   // Multi-bar layouts widen proportionally, but we cap so bars stay readable
   // and the layout doesn't go off-screen for very long phrases.
-  const width = barCount > 1 ? Math.min(1400, Math.max(baseWidth, baseWidth + (barCount - 1) * 240)) : baseWidth;
+  const width = _widthOverride
+    || (barCount > 1 ? Math.min(1400, Math.max(baseWidth, baseWidth + (barCount - 1) * 240)) : baseWidth);
 
   try {
     const renderer = new VF.Renderer(container, VF.Renderer.Backends.SVG);
@@ -291,6 +329,17 @@ function renderPattern(spec) {
 
     const allBeams = [];
     const drawnTuplets = new Set();
+    // How far past its own end barline did the widest bar actually draw?
+    //
+    // A sticking annotation is part of a note's modifier width, so raising it
+    // (§6.5 step 1) raises the width the engraver needs. When the slot is too
+    // narrow VexFlow does not compress the tail — it draws it past the barline
+    // and out of the viewBox, which is the truncation §6.5 forbids. This is
+    // MEASURED from the laid-out notes, not predicted: Formatter's
+    // getMinTotalWidth() is an ideal, routinely 100+ units above what actually
+    // fits, and retrying on it widened 32 staves that were drawing perfectly
+    // well (two of them past the deliberate 1400 cap, to 1988 and 3128).
+    let drawOverflow = 0;
 
     for (let b = 0; b < bars; b++) {
       const stave = staves[b];
@@ -341,7 +390,46 @@ function renderPattern(spec) {
       });
 
       voices.forEach(v => v.draw(ctx, stave));
+
+      // Measured AFTER draw: VexFlow only fills a note's bounding box (and its
+      // modifiers' geometry) once it has been rendered.
+      //
+      // The yardstick is the FRAME edge, not each bar's end barline. Dense
+      // multi-bar patterns have always drawn a little past their internal
+      // barlines — an engraving nit, but the ink is still inside the viewBox
+      // and still on the page. Only ink past `width` is actually cut off, and
+      // cutting notes off is the one thing §6.5 refuses to do.
+      voices.forEach(v => v.getTickables().forEach(n => {
+        try {
+          const bb = n.getBoundingBox();
+          if (bb) drawOverflow = Math.max(drawOverflow, bb.getX() + bb.getW() - width);
+          const m = typeof n.getMetrics === 'function' ? n.getMetrics() : null;
+          if (m) {
+            const right = n.getAbsoluteX() + (m.notePx || 0) + (m.modRightPx || 0) + (m.rightDisplacedHeadPx || 0);
+            drawOverflow = Math.max(drawOverflow, right - width);
+          }
+        } catch (e) { /* ghost notes and friends have no measurable box */ }
+      }));
     }
+
+    // Re-render wider when a sticking stave drew ink outside its own frame.
+    // An author-pinned spec.width is honored as-is, and the depth guard makes
+    // a loop impossible.
+    //
+    // Deliberately limited to sticking staves — the case §6.5 owns and the
+    // only one this package can create. Eight dense non-sticking multi-bar
+    // patterns (rock-dynamics#1–3, jazz-modern-jazz#4, funk-modern-neo-soul#3,
+    // funk-modern-r-and-b#3, hiphop-questlove#3, rock-studio-polish#2) already
+    // draw 16–92 units past their frame today, and widening does not converge
+    // for them: the tail note sits at a fixed fraction of the bar, so the
+    // overflow follows the frame out. That is a separate, older bug about the
+    // multi-bar width cap; fixing it here would silently re-engrave eight
+    // lessons on a guess. Logged for the backlog instead.
+    if (!spec.width && hasSticking && drawOverflow > 0.5 && (_depth || 0) < 3) {
+      container.remove();
+      return renderPattern(spec, Math.ceil(width + drawOverflow + 12), (_depth || 0) + 1);
+    }
+
     allBeams.forEach(bm => bm.setContext(ctx).draw());
     // Draw tuplets from the original index space — they were built against
     // the original notes and VexFlow keeps the geometry tied to the notes'
