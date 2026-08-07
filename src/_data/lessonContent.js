@@ -12490,7 +12490,7 @@ module.exports = {
     prerequisites: ['counting-sixteenths', 'first-beat'],
     nextLessons: ['latin-cha-cha'],
     listening: [
-      { "artist": "Elis Regina & Tom Jobim", "work": "Elis & Tom", "note": "Samba feel inside sophisticated songs — the surdo pulse is felt more than heard." },
+      { "artist": "Paulo Braga", "work": "Elis Regina & Tom Jobim — Elis & Tom", "note": "The section changes get marked by a shift in the groove rather than a fill. On 'Águas de Março' that shift is a foot splash on the 8th notes of beats 1 and 2, the same pedal foot this lesson drills." },
       { "artist": "Airto Moreira", "work": "Fingers", "note": "Brazilian percussion vocabulary translated to kit and band." },
       { "artist": "Escola de samba batucada", "work": "Any Mangueira or Portela carnival recording", "note": "The source: surdo on the pulse, caixa filling the 16ths — your two feet and one hand are imitating this." }
     ],
@@ -18512,9 +18512,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Zigaboo Modeliste", work: "The Meters — Cissy Strut", note: "Zigaboo's archetypal kit version of the second-line — kick walking, snare pressing." },
-      { artist: "Professor Longhair", work: "Tipitina", note: "The piano figure that names the parade bass-drum pulse." },
-      { artist: "Stanton Moore", work: "Garage a Trois — Boom-Boom", note: "Modern continuation of the Zigaboo lineage with contemporary kit production." }
+      { artist: "Zigaboo Modeliste", work: "The Meters — Cissy Strut", note: "The two-drummer parade squeezed onto one kit: the kick walks off the downbeat while the snare presses between the backbeats. Robert Christgau heard the drums as the lead voice here rather than the accompaniment." },
+      { artist: "Earl Palmer", work: "Professor Longhair — Tipitina", note: "Palmer keeps the cymbals out of it entirely. The groove is bass drum and snare only, syncopated against the piano figure that gives the parade pulse its name." },
+      { artist: "Stanton Moore", work: "All Kooked Out!", note: "Cut live in New Orleans right after Mardi Gras with no overdubs, no headphones and no samples. No click in anyone's ears, so the time is entirely the band's, tuba and horns included." }
     ]
   },
 
@@ -19641,8 +19641,8 @@ module.exports = {
     ],
     listening: [
       { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "The defining drummer of the post-Voodoo wave. Wobble, swung hat, machine-tight backbeat." },
-      { artist: "Anderson .Paak", work: "Malibu (entire album)", note: ".Paak drums and sings — the four-bar phrasing on tracks like 'Come Down' is the textbook example." },
-      { artist: "Erykah Badu / Karriem Riggins", work: "Mama's Gun", note: "Riggins's neo-soul kit work behind Badu's vocal phrasing." }
+      { artist: "Anderson .Paak", work: "Malibu (Heart Don't Stand a Chance, Your Prime)", note: "Both are DJ Khalil productions tracked with a live band, Sam Barsh on keys and Daniel Seeff on bass and guitar. They are the only two tracks on the album that carry a drum credit for the singer; every other beat is credited to its producer." },
+      { artist: "Questlove", work: "Erykah Badu — Mama's Gun", note: "Six of the fourteen cuts are his kit, including 'Penitentiary Philosophy,' 'Cleva' and 'Green Eyes.' Gino Iglehart plays 'Orange Moon' and 'Bag Lady,' and the two Dilla tracks, 'Didn't Cha Know' and 'My Life,' carry no live-kit credit at all, so the album sets played and programmed side by side." }
     ]
   },
 
@@ -21330,9 +21330,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Various producers", work: "Frank Ocean — Blonde", note: "Reference modern R&B — sparse drums, dominant atmosphere, 808s as melodic instruments." },
+      { artist: "Michael Uzowuru / Joe Thornalley (production)", work: "Frank Ocean — Nights", note: "The beat switch at 3:30 splits the track in two: an upbeat, guitar-driven first half, then a slower, synth-heavy second. Every drum here is programmed, so listen for how the groove is built rather than played." },
       { artist: "Doc McKinney / Illangelo (production)", work: "The Weeknd — House of Balloons", note: "The early-2010s blueprint for atmospheric R&B drum programming." },
-      { artist: "Various", work: "H.E.R. — H.E.R.", note: "The same vocabulary scaled into a song-form R&B context with live elements." }
+      { artist: "Various producers", work: "H.E.R. — H.E.R.", note: "No drummer is credited anywhere on this record; every beat is producer-built, across a dozen different producers. Listen for trap percussion folded into straight song-form R&B." }
     ]
   },
 
@@ -22239,9 +22239,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Travis Scott", work: "Astroworld", note: "808 patterns at trap-canon clarity." },
-      { artist: "Metro Boomin", work: "Heroes & Villains", note: "The producer-side reference for 808 voicing." },
-      { artist: "Tay Keith", work: "Production catalogue", note: "808 patterns with hat-rolls." }
+      { artist: "Various producers", work: "Travis Scott — Astroworld", note: "No drum credit appears anywhere in the personnel — the played instruments are keyboards, guitar, bass, cello and strings, so every kick and 808 here was programmed. More than twenty producers worked on the album, so listen for how the 808 tuning and decay shift from track to track." },
+      { artist: "Metro Boomin", work: "Heroes & Villains", note: "The personnel credit here is programming, not performance, so every kick and hat on the record was built rather than struck. Listen for how the live strings, trumpet and French horn sit against drums that no one played." },
+      { artist: "Tay Keith", work: "BlocBoy JB — Look Alive", note: "One producer built this entire instrumental, so the 808 line and the hat rolls come from a single author rather than a committee. Eminem's Not Alike interpolates the same beat, which lets you hear the pattern land in two different settings." }
     ]
   },
 
@@ -22271,8 +22271,8 @@ module.exports = {
       <h2 class="section-label">The Broken-Snare Line</h2>
       <p>A traditional ghost-note line is mathematical: backbeat backbeat (loud), ghosts (quiet) filling the space. Dave's line is unpredictable. Some 'ghosts' are almost loud. Some 'backbeats' are nearly ghosts. The line sounds like a drummer thinking out loud. It is hard to write down because the velocities themselves are the music; the rhythmic placement is only half the picture.</p>
 
-      <h2 class="section-label">Drumhedz / Tabernacle</h2>
-      <p>Dave's "Drumhedz" project, and tracks like "Tabernacle" or "Stomp Groove," show the approach in its purest form: half-time feel, sparse kick, deeply dragged snare, busy and broken hat line. The hat carries the small motion; the snare carries the large lean. Below is a study in that lineage.</p>
+      <h2 class="section-label">The Drumhedz Record</h2>
+      <p>Dave's own record, <em>Chris Dave and the Drumhedz</em> (2018), shows the approach in its purest form: half-time feel, sparse kick, deeply dragged snare, busy and broken hat line. The hat carries the small motion; the snare carries the large lean. Below is a study in that lineage.</p>
     `,
     exercises: [
       {
@@ -22412,7 +22412,7 @@ module.exports = {
     ],
     listening: [
       { artist: "Chris Dave", work: "Chris Dave and the Drumhedz (2018)", note: "'Sensitive Granite' slows down and puts the snare between 3 and 4 for the first half of the track, then squarely on 4 for the second. 'Universal Language' and 'Destiny N Stereo' show the other side: slick grooves that point back at 90s hip-hop." },
-      { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "On 'Afro Blue' behind Erykah Badu the kit is all trebly snare and cymbals, a hip-hop feel played rather than looped. Then hear the switch to brushes on 'Smells Like Teen Spirit'." },
+      { artist: "Chris Dave", work: "Robert Glasper Experiment — Black Radio", note: "On 'Afro Blue' behind Erykah Badu the kit is all trebly snare and cymbals, a hip-hop feel played rather than looped. 'Letter to Hermione' is the contrast: a martial groove that answers the vocal phrase by phrase instead of holding a pattern." },
       { artist: "D'Angelo", work: "Black Messiah (Dave is one of the kit references)", note: "Dragged snare in a soul context." }
     ]
   },
@@ -22598,9 +22598,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Anderson .Paak", work: "Malibu", note: "The signature singer-drummer record." },
-      { artist: "Anderson .Paak", work: "Oxnard / Ventura", note: "Continuation and refinement." },
-      { artist: "NxWorries (.Paak + Knxwledge)", work: "Yes Lawd!", note: "Pocket-only, no fills, song-aware drumming." }
+      { artist: "Anderson .Paak", work: "Malibu", note: "Two cuts carry his own drum credit in the album booklet, \"Heart Don't Stand a Chance\" and \"Your Prime\", and most of the rest of the record is a producer's beat rather than anyone's kit. Those two are where you hear his kit under his own vocal." },
+      { artist: "Anderson .Paak", work: "Oxnard / Ventura", note: "His own drum credits are \"The Chase\" and \"Brother's Keeper\" on Oxnard, and \"Come Home\", \"Good Heels\" and \"King James\" on Ventura. Those five are the cleanest places to hear him behind the kit, since the other cuts either credit no drums at all or put a producer's name on the drum line." },
+      { artist: "Knxwledge", work: "NxWorries — Yes Lawd!", note: "Every groove here is chopped from old soul, gospel and funk records rather than played, vinyl crackle and all. Anderson .Paak only sings on this one, so listen for how a looped bar, not a live drummer, sets the pocket he phrases against." }
     ]
   },
 
@@ -22934,9 +22934,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Metro Boomin", work: "Heroes & Villains", note: "Genre-defining production catalogue." },
-      { artist: "Travis Scott", work: "Astroworld / Utopia", note: "The 808-and-hat-roll aesthetic at scale." },
-      { artist: "Pi'erre Bourne", work: "production for Playboi Carti", note: "Sparse-and-spacey wing of modern production." }
+      { artist: "Metro Boomin", work: "Heroes & Villains", note: "He produced all fifteen tracks and holds the album's programming credit; no drummer or percussionist appears anywhere in the personnel. On Superhero, listen for the pummeling 808s and muted horns, then the point where they fade into somber synths behind Chris Brown's closing section." },
+      { artist: "Tay Keith", work: "BlocBoy JB — Look Alive", note: "He built this top-five Hot 100 single alone in FL Studio 11, in about thirty minutes. Listen for what he called Memphis bounce in the old Three 6 Mafia mold, rebuilt on a new 808 sound with a creepy piano figure over the top." },
+      { artist: "Pi'erre Bourne", work: "Playboi Carti — Magnolia", note: "One producer, no drummer in the credits: this beat was built, not played. Listen for the New Orleans bounce pattern that drives the track and the rattling low-end bass sitting under it." }
     ]
   },
 
@@ -25448,7 +25448,7 @@ module.exports = {
       { artist: "Tomas Haake", work: "Meshuggah — Destroy Erase Improve", note: "The foundational document of polyrhythmic metal drumming." },
       { artist: "Matt Garstka", work: "Animals as Leaders — The Joy of Motion", note: "Djent vocabulary inside complex compositions." },
       { artist: "Matt Halpern", work: "Periphery — Periphery III: Select Difficulty", note: "Modern djent with virtuosic kick subgroupings." },
-      { artist: "TesseracT", work: "Altered State", note: "Jay Postones — atmospheric djent, more groove than chaos." }
+      { artist: "Jay Postones", work: "TesseracT — War of Being", note: "TesseracT tracked this one live with the whole band in a room over the best part of a month, their first recorded kit since the debut. Listen for the room around the drums and the human timing under riffs that still run on a strict grid." }
     ]
   },
 
