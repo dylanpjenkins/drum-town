@@ -11277,9 +11277,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Sunny Murray (Albert Ayler)", work: "Spiritual Unity", note: "Notice how often Murray plays — and how the silences, not the hits, carry the structure." },
-      { artist: "Andrew Cyrille (Cecil Taylor)", work: "Conquistador!", note: "Texture-first drumming at high density. Tracking it metrically is impossible; tracking it texturally is the point." },
-      { artist: "Paul Motian Trio", work: "I Have the Room Above Her", note: "Late-period Motian — the polite version of free-time playing. The pulse is implied throughout but never stated." }
+      { artist: "Sunny Murray", work: "Albert Ayler Trio — Spiritual Unity", note: "Nobody is keeping time on this record. Follow the cymbals instead, which chatter and cascade gently one moment and attack outright the next, and hear texture doing the work a pulse usually does." },
+      { artist: "Andrew Cyrille", work: "Cecil Taylor — Conquistador!", note: "Texture-first drumming at high density. Tracking it metrically is impossible; tracking it texturally is the point." },
+      { artist: "Paul Motian", work: "I Have the Room Above Her", note: "On the title track the cymbals and brushes lay cross-rhythms under Lovano's melody while nothing marks a bar line. Across the record the drums work in texture and color rather than tempo, dropping to a near whisper and then churning into the turbulence of 'Shadows'." }
     ]
   },
 
@@ -11533,9 +11533,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Tony Williams (Miles Davis)", work: "Nefertiti", note: "The post-bop foundation. Williams varies the ride bar by bar; the kick is fully melodic." },
-      { artist: "Brian Blade Fellowship", work: "Season of Changes", note: "Anchor-phrase comping in modern context. Listen for short returning figures rather than continuous patterns." },
-      { artist: "Bill Stewart (John Scofield)", work: "Hand Jive", note: "Ride-pattern variations as primary vocabulary. Stewart almost never plays the standard skip pattern straight." }
+      { artist: "Tony Williams", work: "Miles Davis — Nefertiti", note: "The post-bop foundation. Williams varies the ride bar by bar; the kick is fully melodic." },
+      { artist: "Brian Blade", work: "Brian Blade & The Fellowship Band — Season of Changes", note: "Anchor-phrase comping in modern context. Listen for short returning figures rather than continuous patterns." },
+      { artist: "Bill Stewart", work: "John Scofield — Hand Jive", note: "Ride-pattern variations as primary vocabulary. Stewart almost never plays the standard skip pattern straight." }
     ]
   },
 
@@ -12296,10 +12296,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Brian Blade Fellowship", work: "Season of Changes", note: "The modern jazz drumming reference. Anchor phrases, broken time, melodic snare — all in one record." },
-      { artist: "Eric Harland (Charles Lloyd)", work: "Mirror", note: "Flexible swing 8ths within a single tune; deep-triplet to straight-8th and back." },
-      { artist: "Marcus Gilmore (Vijay Iyer Trio)", work: "Accelerando", note: "Capstone modern jazz — the entire vocabulary of this lesson, deployed conversationally." },
-      { artist: "Carlos Vega (James Taylor)", work: "Hourglass", note: "Studio-precision flexible swing — listen to how Vega reshapes the same groove across choruses." }
+      { artist: "Brian Blade", work: "Brian Blade & The Fellowship Band — Season of Changes", note: "The bandleader on this record is the drummer, and he barely solos on it. Start with the opener, Rubylou's Lullaby, and follow how Blade shapes the tune from the kit rather than waiting for a feature." },
+      { artist: "Eric Harland", work: "Charles Lloyd — Mirror", note: "Flexible swing 8ths within a single tune; deep-triplet to straight-8th and back." },
+      { artist: "Marcus Gilmore", work: "Vijay Iyer Trio — Accelerando", note: "The trio's Human Nature is the Michael Jackson song, so you already know the melody they are pulling out of shape. Listen underneath it for Gilmore's broken grooves, then go to Actions Speak for his extended feature." },
+      { artist: "Carlos Vega", work: "James Taylor — Hourglass", note: "Studio-precision flexible swing — listen to how Vega reshapes the same groove across choruses." }
     ]
   },
 
@@ -12690,9 +12690,9 @@ module.exports = {
     prerequisites: ['latin-clave-intro'],
     nextLessons: ['latin-mambo-intro'],
     listening: [
-      { "artist": "Orquesta Aragón", "work": "Classic cha-cha-chá sides (El Bodeguero)", "note": "The charanga source — güiro and timbales carve the quarter-note pulse." },
-      { "artist": "Tito Puente", "work": "Dance Mania (1958)", "note": "Cha-cha and mambo side by side; hear how the cha-cha stays unhurried." },
-      { "artist": "Santana", "work": "Oye Como Va", "note": "Puente's cha-cha translated to a rock band — the kit part is a direct model." }
+      { "artist": "Orquesta Aragón", "work": "El Bodeguero", "note": "Enrique Jorrín invented the cha-cha-chá in 1951; this charanga is what made it stick. Flute and violins carry the tune, so listen underneath for the güiro and timbales holding the pulse, and count off the percussion rather than the melody." },
+      { "artist": "Tito Puente", "work": "Oye Como Va (El Rey Bravo)", "note": "The cha-cha-chá Santana would rebuild for a rock band eight years later. Timbales ride a repeated piano tumbao of block chords with Johnny Pacheco's flute on top, and nothing rushes; holding that tempo is the discipline." },
+      { "artist": "Michael Shrieve", "work": "Santana — Oye Como Va (Abraxas)", "note": "A rock kit dropped into a real Latin percussion section: José Chepito Areas and Michael Carabello cover timbales and congas around it. Separate the kit from the hand drums while you listen, because most of what makes this track sound Cuban is coming from the hands." }
     ],
     graduationCriteria: [
       'Cha-cha bell quarters + cross-stick on 2 and 4 + kick on 1 holds at ♩=110 for two minutes',
@@ -13301,8 +13301,8 @@ module.exports = {
     prerequisites: ['counting-eighths'],
     nextLessons: ['latin-cumbia'],
     listening: [
-      { "artist": "Juan Luis Guerra y 440", "work": "Ojalá Que Llueva Café", "note": "Modern merengue at its most musical — tambora and güira drive everything." },
-      { "artist": "Wilfrido Vargas", "work": "El Africano and other 80s hits", "note": "High-energy merengue; hear the tambora's open-slap-open figure your kit part imitates." }
+      { "artist": "Guy Frómeta", "work": "Juan Luis Guerra y 440 — Ojalá Que Llueva Café", "note": "A full percussion battery shares this record with the kit: two tamboras, a güira, and three congueros. Find the güira scrape and the tambora figure first, since your hi-hat and toms are standing in for them, then listen for what the kit adds underneath." },
+      { "artist": "Juan de la Cruz \"Chocolate\"", "work": "Wilfrido Vargas — El Funcionario", "note": "The hit here is \"El Africano\", the opening cut, and the tambora rather than a kit is the drum credit on this record. Listen for the pa-ta-pa figure your tom part stands in for, and how it keeps driving under the horns." }
     ],
     graduationCriteria: [
       'Boom-chick feet (kick on 1 + hi-hat foot on 2) hold at ♩=160 for one minute',
@@ -14712,7 +14712,7 @@ module.exports = {
     nextLessons: ['fusion-modern-fusion'],
     listening: [
       { "artist": "Dafnis Prieto", "work": "Absolute Quintet", "note": "The modern hybrid at full complexity — folkloric sources, through-composed results." },
-      { "artist": "Pedrito Martinez Group", "work": "Pedrito Martinez Group", "note": "Rumba and timba vocabulary in a small-band format." },
+      { "artist": "Pedrito Martinez", "work": "The Pedrito Martinez Group", "note": "There is no drum set in this band: congas and hand percussion from Martinez and Jhair Sala over piano and bass, so the clave is carried by the battery rather than by one player's four limbs. The only kit on the record is guest producer Steve Gadd's, heard on 'La Luna' and 'Los Santos'." },
       { "artist": "Horacio \"El Negro\" Hernández", "work": "Italuba", "note": "Cuban drumming and fusion writing merged." }
     ],
     graduationCriteria: [
@@ -20246,8 +20246,8 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Anderson .Paak", work: "Ventura — Make It Better", note: "Modern R&B drumming with the live-trap and 808-kick aesthetic — .Paak playing himself." },
-      { artist: "SZA", work: "SOS — production team", note: "Programmed beats with a strong live drum sensibility; study the kick voicing." },
+      { artist: "Alchemist (production)", work: "Anderson .Paak — Make It Better", note: "The drums on this track belong to the producer, not to .Paak, who does play the kit on four other Ventura cuts. Listen to how that drum part sits against live bass, live keys and Miguel Atwood-Ferguson's string arrangement, then work out what a kit player would have to change to sound like it." },
+      { artist: "Carter Lang", work: "SZA — Kill Bill", note: "The kit here is a full live pass that was edited and comped, with a programmed drum-machine kick layered underneath it for extra low end. Study that doubled kick: an acoustic bass drum carrying the attack and a machine kick carrying the weight." },
       { artist: "Daniel Caesar", work: "Freudian", note: "Slow-tempo R&B with the half-time-feel + hat-roll vocabulary fully present." }
     ]
   },
@@ -22065,8 +22065,8 @@ module.exports = {
     ],
     listening: [
       { artist: "J Dilla", work: "Donuts", note: "The original wobble — every beat displaced differently." },
-      { artist: "Slum Village", work: "Fantastic, Vol. 2", note: "Dilla's wobble inside a full ensemble." },
-      { artist: "Karriem Riggins", work: "Headnod Suite", note: "Live-kit version of Dilla-school wobble." }
+      { artist: "J Dilla", work: "Slum Village — Fantastic, Vol. 2", note: "Hand-programmed on MPC pads with the quantize off, so the drums lean against the samples instead of sitting on the grid. \"Get Dis Money\" goes further and refuses to put a kick on the downbeat." },
+      { artist: "Karriem Riggins", work: "Headnod Suite", note: "A jazz drummer making his own beat tape: some of the drums are takes he recorded himself, the rest are samples, and all of it gets shaped on an MPC. Across the 29 short tracks, listen for a drummer's swing holding up under material pulled from soul, Brazilian jazz and library music." }
     ]
   },
 
@@ -23274,9 +23274,9 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Louis Cole", work: "Time / Quality Over Opinion", note: "His own catalogue — start anywhere." },
-      { artist: "KNOWER", work: "Life", note: "His duo with Genevieve Artadi — drumming as machine." },
-      { artist: "Mark Guiliana", work: "Beat Music", note: "Adjacent vocabulary — also drum-machine sensibility on a kit." }
+      { artist: "Louis Cole", work: "Time", note: "Cole wrote, recorded and mixed this himself in his Los Angeles garage, and he made the mix distorted and crunchy on purpose because he says it grooves way harder that way. Listen for how much of the aggression on these drums comes from that mix decision rather than from how hard he is hitting." },
+      { artist: "Louis Cole", work: "KNOWER — Life", note: "Cole is the drummer here and, with Genevieve Artadi, the producer, so the kit and the electronics were authored by the same person. He has said he leaned on electronic percussion far more in the KNOWER years than on his solo records, so the useful exercise is trying to hear which hits a person placed and which a machine did." },
+      { artist: "Mark Guiliana", work: "Beat Music (2013 EP)", note: "Guiliana's kit is not manipulated electronically on this project, so the machine accuracy you hear is coming from his hands. Go to 'Coin Castle', which he describes as a live drum performance with the rest of the track built from synths he played." }
     ]
   },
 
@@ -23469,10 +23469,10 @@ module.exports = {
       }
     ],
     listening: [
-      { artist: "Solange", work: "A Seat at the Table / When I Get Home", note: "Listen for meters shifting mid-song without ever feeling like a puzzle." },
-      { artist: "FKA Twigs", work: "Magdalene", note: "Hybrid live-electronic — kit and producer-side blurred." },
-      { artist: "Yussef Dayes", work: "Black Classical Music", note: "Forward-R&B drumming, 2020s." },
-      { artist: "Sam Wilkes / Sam Gendel", work: "Music for Saxofone & Bass Guitar", note: "Adjacent — alternate-grid contemporary instrumental music." }
+      { artist: "Q-Tip", work: "Solange — Borderline (An Ode to Self Care)", note: "No other track on the album carries a drum credit at all, and the one here goes to the producer, keyboards and drums in the same pair of hands. The credits also name a portion of the 'More Than a Woman' composition by Timbaland and Static Major, so listen for where that lineage surfaces." },
+      { artist: "FKA Twigs", work: "Magdalene", note: "Nobody is credited with a drum kit anywhere on this record. Twelve people hold a drums credit across its nine tracks, so listen for the rhythm changing authorship from song to song rather than carrying one player's habits." },
+      { artist: "Yussef Dayes", work: "Black Classical Music", note: "His debut solo album, played and co-produced by him with Miles James. Listen across the 19 tracks for how far the rhythmic sourcing travels, from African polyrhythm through Caribbean groove to Latin inflection." },
+      { artist: "Makaya McCraven", work: "In These Times", note: "Recorded across five studios and four live rooms, then cut apart and rebuilt in post at home, so the kit was played first and produced second. The rhythmic concept underneath it is 7/8, 5/8 and 11/8 folded into grooves rather than displayed, so listen for the point where the bar length stops announcing itself." }
     ]
   },
 
