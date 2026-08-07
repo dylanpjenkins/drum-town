@@ -16,28 +16,49 @@ eleventyComputed:
 {% include "section-nav.njk" %}
 
 <div class="container">
+  {#- Title block, system.md §8.3. The breadcrumb is the real component now —
+      the hand-rolled inline-styled copy that used to sit here was the last
+      inline style on the page (BL-032). It also says "Genres", which is what
+      the old `Genre Path` eyebrow said one line above it, so the eyebrow is
+      deleted rather than restyled (same call as §6.1 on lesson pages).
+      The tagline moves out of the h1: a title and its slogan are two thoughts
+      and only the title is the page's name. -#}
   <header class="genre-hero">
-    <div class="breadcrumb" style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px;">
-      <a href="/" style="color: var(--ink-soft);">Curriculum</a> · {{ track.title }}
-    </div>
-    <p class="eyebrow">Genre Path</p>
-    <h1>{{ track.title }} <em>—</em> {{ track.tagline }}</h1>
-    <p class="lede">{{ track.description }}</p>
+    <p class="breadcrumb">
+      <a href="/">Lessons</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      <a href="/#tracks">Genres</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>
+      {{ track.title }}
+    </p>
+    <h1>{{ track.title }}</h1>
+    <p class="lede">{{ track.tagline }}</p>
+    <p class="genre-hero__desc">{{ track.description }}</p>
   </header>
 
+  {#- Level blocks are ledger sections (§8.3): the head keeps its .level-block
+      classes and the lists are the homepage's ledger rows, reused rather than
+      forked, so a lesson looks the same wherever the town lists it. Numbering
+      restarts per block, exactly as it does per chapter on the homepage.
+      No state mark here — the ✓/●/○ vocabulary is only legible next to the
+      legend that defines it, which lives on the homepage. -#}
   {% for level in track.levels %}
   <section class="level-block">
     <header class="level-block__header">
       <h2 class="level-block__title">{{ level.title }}</h2>
+      <span class="level-block__tag">{{ level.lessons.length }} lessons</span>
     </header>
 
-    <div class="lesson-row">
+    <ol class="ledger__rows">
       {% for lesson in level.lessons %}
-        <a href="/lessons/{{ lesson.slug }}/" class="is-ready">
-          <span class="lesson-row__title">{{ lesson.title }}</span>
-        </a>
+        <li><a class="ledger-row" href="/lessons/{{ lesson.slug }}/">
+          <span class="ledger-row__num">{{ loop.index | pad2 }}</span>
+          <span class="ledger-row__title">{{ lesson.title }}</span>
+          <span class="ledger-row__leader" aria-hidden="true"></span>
+          <span class="ledger-row__meta"><span class="ledger-row__min">{{ lessonContent[lesson.slug].duration }}</span></span>
+        </a></li>
       {% endfor %}
-    </div>
+    </ol>
   </section>
   {% endfor %}
 </div>

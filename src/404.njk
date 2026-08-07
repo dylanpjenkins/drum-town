@@ -9,8 +9,12 @@ eleventyExcludeFromCollections: true
     <p class="eyebrow">404</p>
     <h1>Page not found</h1>
     <p class="lede">That page doesn't exist — maybe a lesson moved, or the URL has a typo.</p>
-    <p style="margin-top: 14px;">
-      <a href="/">← Back to the curriculum</a>
-    </p>
   </header>
+
+  {#- §8.6. A CTA pair, the same actions row the homepage hero uses, so a dead
+      end offers the two doors the town actually has. -#}
+  <div class="hero__actions">
+    <a class="btn btn--primary" href="/">Back to the lessons <span aria-hidden="true">→</span></a>
+    <a class="btn btn--ghost" href="/rudiments/">The 40 rudiments</a>
+  </div>
 </div>

@@ -5,17 +5,32 @@ description: "All 40 essential drum rudiments with playable notation — every r
 permalink: /rudiments/
 ---
 <div class="container">
+  {#- Title block per §8.4. The page is top-level, so there is no trail to
+      print: the meta line stays an eyebrow-style "Reference" at meta size. -#}
   <header class="lesson-hero">
     <p class="eyebrow">Reference</p>
     <h1>The 40 Essential <em>Rudiments</em></h1>
     <p class="lede">Every one of the forty standard rudiments — rolls, paradiddles, flams, and drags — rendered as real notation. Press play to hear any of them; where we have a full lesson, it's linked right on the card.</p>
+
+    {#- Family index (§8.4). Four jumps into a 40-card document, labeled from
+        the data rather than hard-coded, with the counts that add up to the 40
+        in the headline. The global `[id]` scroll-margin rule keeps the landing
+        heading clear of the sticky header. -#}
+    <nav class="family-index" aria-label="Rudiment families">
+      {%- for group in rudiments %}
+      <a class="chip family-index__chip" href="#{{ group.slug }}">{{ group.title | replace(" Rudiments", "s") }} <i aria-hidden="true">{{ group.rudiments.length }}</i></a>
+      {%- endfor %}
+    </nav>
   </header>
 
   <article class="lesson-prose">
     <p>Rudiments are to drumming what scales are to piano: small, repeatable sticking patterns that turn into fills, grooves, and solos once they're automatic. The Percussive Arts Society standardized forty of them, in the four families below. You don't need all forty at once — start with the single stroke roll, double stroke roll, and single paradiddle, then work outward. A practice pad and a metronome are all you need.</p>
 
     {% for group in rudiments %}
-      <h2 class="section-label" id="{{ group.slug }}">{{ group.title }}</h2>
+      <header class="rud-family" id="{{ group.slug }}">
+        <p class="rud-family__kicker">Family {{ loop.index }} of {{ rudiments.length }} · {{ group.rudiments.length }} rudiments</p>
+        <h2 class="rud-family__title">{{ group.title }}</h2>
+      </header>
       <p>{{ group.blurb }}</p>
       {% for r in group.rudiments %}
         {% exercise r.card %}

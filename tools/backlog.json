@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 40,
-    "next_dimension": "ui",
+    "iteration": 41,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -535,11 +535,12 @@
         "genres.njk:20-21 re-implements .breadcrumb as a 6-property inline style while the real class exists and is used by lessons.njk; also 404.njk:12 and lessons.njk:168"
       ],
       "acceptance": "inline style attributes replaced by existing/new classes in style.css; visual parity; no new raw colors outside the token block",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Added by discovery iter 10 (carried from initial exploration, was never seeded)."
+        "Added by discovery iter 10 (carried from initial exploration, was never seeded).",
+        "iter 47 · Closed by PKG-8 [BL-055]. The genre-page breadcrumb was the last inline-styled component; it now uses the real .breadcrumb. grep \"style=\" over genres/rudiments/metronome/404 returns nothing. One inline style remains in src/lessons.njk (a stub back-link), outside this package and owned by PKG-10."
       ]
     },
     {
@@ -772,10 +773,12 @@
         "design/packages.md PKG-8; ledger rows on genre pages, rudiment family chips, dock-truth copy, 404 CTA; clears BL-032 inline breadcrumb"
       ],
       "acceptance": "per design/packages.md PKG-8: all four page types on the new system; no inline style attributes remain (BL-032); screenshots each page both themes",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 47 · 2026-08-06 · SHIPPED. The last four old-shaped pages join the system, so the rebrand is visually complete. Genre pages: the inline-styled breadcrumb becomes the real .breadcrumb component (BL-032's remaining instance, CLOSED), the h1 splits from its tagline, and the .lesson-row card lists become LEDGER ROWS reused from PKG-5 rather than forked. Rudiments: a family index chip row (Rolls 15 · Diddles 4 · Flams 11 · Drags 10 — the Builder derived the counts from the data on its own so the four chips visibly pay off the '40 Essential Rudiments' headline) landing 10.7-11.4px clear of the sticky header at both widths. Metronome: an 'Open the metronome' button. 404: eyebrow, h1, CTA pair. Verified across 7 genre tracks, not one: all 141 track lessons resolve, every duration matches lessonContent, every row href resolves to a built page whose h1 equals the row label, zero heading skips. THE BUILDER CAUGHT A BUG ONLY DRIVING THE PAGE COULD FIND: its first metronome script ran at parse time, but #site-metronome is an aside the layout prints AFTER </main>, so the lookup was null, the script bailed silently, and the button shipped permanently hidden. Its own harness caught it. In its words: 'Had I only taken screenshots, this would have shipped.' Panel: 2 lenses, 8 findings, 5 refuted, 3 survived. TWO OF THE THREE WERE MY OWN LEFTOVER HARNESS — both lenses independently found _site/__f8.html, which I wrote during my screenshot step and did not delete; it has no <main> and no skip link, so it was failing audit-site --gate at that moment. Both also warned, correctly, never to clear it with --write-baseline, which would have baked a broken page into the committed baseline permanently. Deleted; gate exits 0 with 228 pages. Protocol amended: harness pages go under _site/dev/, the one directory audit-site's walk skips. THIRD FINDING, real: dc_metro_collapsed persists, so on a SECOND visit to /metronome/ the dock is already open on first paint while the button still read 'Open the metronome' and pressing it silently moved focus. The label is now driven from the dock's actual state through a MutationObserver, because the dock can also be toggled from the header pill, the chevron or Escape while the reader sits on that page. Verified across all four paths: fresh visit, click, reload, pill-collapse."
+      ]
     },
     {
       "id": "BL-056",

@@ -748,26 +748,40 @@ hr.section-rule {
   border: 0;
 }
 
-/* =====================  GENRE OVERVIEW  ===================== */
+/* =====================  GENRE OVERVIEW  =====================
+   system.md §8.3. The hero is the lesson title block's geometry (breadcrumb,
+   h1, lede) with the track description as a supporting line; the level blocks
+   are ledger sections wearing their own head. Nothing here re-implements a
+   row: the lists are .ledger__rows / .ledger-row from §5.2. */
 .genre-hero {
   border-bottom: 1px solid var(--rule);
-  padding-bottom: 32px;
+  padding-bottom: 28px;
   margin-bottom: 40px;
 }
-.genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
-
-.level-block {
-  margin-bottom: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--rule-soft);
+.genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); margin-bottom: 12px; }
+.genre-hero .lede { margin-bottom: 10px; }
+/* The track blurb sits a step under the tagline — same slot as the ledger
+   chapter tagline, so the two pages describe a track at the same weight. */
+.genre-hero__desc {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 640px;
+  margin: 0;
 }
-.level-block:first-of-type { border: none; padding-top: 0; }
 
+.level-block { margin: 0 0 44px; }
+
+/* Same head geometry as .ledger__head — the 2px ink rule is what tells a
+   reader the numbered list below it is a ledger. */
 .level-block__header {
   display: flex;
   align-items: baseline;
-  gap: 20px;
-  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 0;
 }
 .level-block__num {
   font-family: var(--display);
@@ -780,6 +794,8 @@ hr.section-rule {
 .level-block__title {
   font-family: var(--display);
   font-size: 2.125rem;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
   margin: 0;
   font-weight: 600;
 }
@@ -789,6 +805,7 @@ hr.section-rule {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-soft);
+  white-space: nowrap;
   margin-left: auto;
 }
 
@@ -1005,6 +1022,59 @@ hr.section-rule {
 .lesson-prose ul,
 .lesson-prose ol { padding-left: 20px; margin: 12px 0; font-size: 0.96875rem; }
 .lesson-prose li { margin-bottom: 8px; }
+
+/* =====================  RUDIMENTS PAGE  =====================
+   system.md §8.4. Two pieces: the family index under the lede, and the family
+   headings inside the prose. The 40 cards themselves are plain .exercise
+   blocks and inherit §6.4/§6.5 — including the content-visibility strategy,
+   which is what keeps 40 notation SVGs in one document fast. */
+.family-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+/* A chip that is a link, so it carries the touch floor the decorative
+   lesson chips do not need. The count rides in the .chip i glyph slot. */
+.family-index__chip {
+  min-height: 44px;
+  padding: 8px 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.family-index__chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.family-index__chip:hover i { color: var(--accent); }
+
+/* Family heading: a mono kicker over a display h2. The id lives on this
+   wrapper rather than the h2 so a chip jump lands above the kicker, not
+   between it and its heading. The global [id] scroll-margin does the rest. */
+.rud-family {
+  margin: 44px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+.rud-family__kicker {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 4px;
+}
+.rud-family__title {
+  font-family: var(--display);
+  font-size: 2.125rem;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
 
 /* =====================  EXERCISE BLOCK  ===================== */
 .exercise {
@@ -1804,9 +1874,11 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .curriculum-section__header h2 { font-size: 1.75rem; }
-  /* .ledger__title is a class, so the bare h2 step above cannot reach it. */
+  /* .ledger__title is a class, so the bare h2 step above cannot reach it —
+     and neither of the two heads that borrow its geometry is an exception. */
   .ledger__title { font-size: 1.75rem; }
-  .level-block__header { flex-wrap: wrap; }
+  .level-block__title { font-size: 1.75rem; }
+  .rud-family__title { font-size: 1.75rem; }
   .exercise { padding: 18px 16px; }
   .exercise-title { font-size: 1.125rem; }
   .tracks-grid { grid-template-columns: 1fr; }
@@ -1858,6 +1930,14 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   /* Primary first, both full width — a thumb should not have to aim. */
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; justify-content: center; }
+}
+
+/* The four family chips measure 355px plus gaps and stop fitting one row at
+   about 440px, where they break 3 + 1 and read as an accident rather than an
+   index. Two even rows are the designed narrow form. */
+@media (max-width: 440px) {
+  .family-index { display: grid; grid-template-columns: 1fr 1fr; }
+  .family-index__chip { justify-content: center; }
 }
 
 @media (max-width: 400px) {

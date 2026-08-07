@@ -9,6 +9,10 @@ permalink: /metronome/
     <p class="eyebrow">Tool</p>
     <h1>The <em>Metronome</em></h1>
     <p class="lede">Every page on Drum Town carries a metronome — the tempo pill in the header opens it. Tap the pill and the controls appear across the bottom of the screen. Set a tempo, pick a time signature, and press play. This page is about using it well.</p>
+    {#- §8.5. An enhancement over the pill, never a replacement for it: the
+        button ships hidden and only the script below reveals it, so a page
+        without JS shows exactly the one control that works — the pill. -#}
+    <button class="btn btn--primary" id="metronome-open" type="button" aria-controls="site-metronome" hidden>Open the metronome <span aria-hidden="true">↓</span></button>
   </header>
 
   <article class="lesson-prose">
@@ -33,3 +37,48 @@ permalink: /metronome/
     <p>The metronome follows you to every lesson on the site, so any exercise you open is one click away from being practiced properly.</p>
   </article>
 </div>
+
+<script>
+  (function () {
+    // Everything is looked up on DOMContentLoaded, not at parse time. This
+    // script sits inside <main>, and the dock is an <aside> that the layout
+    // prints AFTER </main> — at parse time getElementById('site-metronome')
+    // is null and an eager version of this bailed out silently. Waiting also
+    // means the deferred metronome.js has already bound the pill before the
+    // button is revealed, so it is never visible in a state where pressing it
+    // would do nothing.
+    document.addEventListener('DOMContentLoaded', function () {
+      var opener = document.getElementById('metronome-open');
+      var pill   = document.getElementById('metronome-pill');
+      var dock   = document.getElementById('site-metronome');
+      if (!opener || !pill || !dock) return;
+
+      // dc_metro_collapsed persists, so the second time anyone visits this page
+      // the dock is ALREADY open on first paint — and a button still reading
+      // "Open the metronome" would then be a lie that silently no-ops. Drive the
+      // label from the dock's real state. The observer matters because the dock
+      // can also be toggled from the header pill, the collapse chevron or Escape
+      // while the reader is sitting on this page.
+      function syncOpener() {
+        var open = !dock.classList.contains('is-collapsed');
+        opener.firstChild.nodeValue = open ? 'Jump to the metronome ' : 'Open the metronome ';
+      }
+      syncOpener();
+      new MutationObserver(syncOpener).observe(dock, { attributes: true, attributeFilter: ['class'] });
+      opener.hidden = false;
+
+      opener.addEventListener('click', function () {
+        // The pill is a real toggle. Pressing it while the dock is already open
+        // would CLOSE it, and a button reading "Open the metronome" must never
+        // do that; when the dock is already open the useful move is to hand
+        // focus to the play button, which is where the pill's open path lands.
+        if (dock.classList.contains('is-collapsed')) {
+          pill.click();
+          return;
+        }
+        var go = document.getElementById('metronome-toggle');
+        if (go) go.focus();
+      });
+    }, { once: true });
+  })();
+</script>
