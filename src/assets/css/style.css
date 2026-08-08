@@ -113,6 +113,17 @@
 /* Sticky-header offset so in-page anchors (/#tracks, rudiment families)
    never land under the header. */
 [id] { scroll-margin-top: calc(var(--header-h) + 12px); }
+/* The same reserve, for anything that can take FOCUS. The rule above only
+   covers elements with an id, which is enough for anchors and forward tabbing
+   but not for Shift+Tab: moving backwards, the browser scrolls the newly
+   focused element to the top of the viewport, straight under the sticky
+   header. A keyboard user then cannot see what they have focused. Measured on
+   a lesson page before this rule: 9 of 88 stops landed above the header's
+   bottom edge. The header's own controls and the skip link are excluded —
+   they belong up there. */
+:is(a, button, input, select, textarea, summary, [tabindex]):not(.skip-link):not(.site-header *) {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
 
 html, body {
   margin: 0;

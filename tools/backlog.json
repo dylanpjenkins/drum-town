@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 46,
-    "next_dimension": "ui",
+    "iteration": 47,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -903,7 +903,7 @@
     {
       "id": "BL-058",
       "dimension": "ui",
-      "priority": 1,
+      "priority": 2,
       "title": "Nav vocabulary fails beginners: no word 'Lessons', 'Other Topics' is a junk drawer, order implies difficulty",
       "evidence": [
         "Maya (beginner persona, iter 30) on the new mobile nav: 'There's no word Lessons anywhere I can tap… I have to guess the hamburger is where lessons live'",
@@ -916,7 +916,8 @@
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed from persona panel (iter 30). Deliberately NOT fixed inside PKG-2/3 — renaming chrome copy touches every page's IA and deserves its own reviewed tick against the §10 vocabulary leash."
+        "Filed from persona panel (iter 30). Deliberately NOT fixed inside PKG-2/3 — renaming chrome copy touches every page's IA and deserves its own reviewed tick against the §10 vocabulary leash.",
+        "iter 53 · Dropped P1 -> P2 on fresh evidence. This was filed from a persona read around iter 30. The epic-closing persona review at iter 51 put three fresh users through the site and NONE of them raised nav vocabulary: the beginner called the 'In this chapter' panel 'the best orientation device on the site', the returning player navigated to the funk track without comment, and the keyboard user's nav findings were all about focus and text size, not wording. The original concern may still be right, but it is now the weakest-evidenced P1 in the queue while seven items carry findings from a review that happened last week. Re-raise it if a later persona reproduces it."
       ]
     },
     {
@@ -1261,9 +1262,10 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        "iter 53 · 2026-08-08 · FIXED, and the process is the story. scroll-margin-top existed only on [id], which covers fragment anchors and forward tabbing but not Shift+Tab: going backwards the browser scrolls the newly focused element to the TOP of the viewport, straight under the sticky header. Added the same reserve to :is(a, button, input, select, textarea, summary, [tabindex]), excluding .skip-link and .site-header * because those legitimately live up there. MY FIRST NEGATIVE TEST PASSED WHEN IT SHOULD HAVE FAILED. I focused elements in reverse DOM order and got 0 buried both with and without the rule — which meant my harness never exercised the path, because sequential focus from the bottom keeps everything near the current scroll position. Rather than ship on a test that trivially passed, I rebuilt it to replicate the persona's actual walk: homepage, scroll to y=3000, focus a visible ledger row, then step backward and let the browser scroll each one in. That reproduced their numbers almost exactly — without the rule 10 of 26 backward stops land behind the header, including '04 Two-Bar Phrasing' at top=29 and '03 Backbeat Color' at top=0, the same two rows they named. With the rule, 0 of 26. Also checked the interaction risk, since [id] and the new selector both set scroll-margin-top: anchors are not double-offset, #foundations/#tracks/#mastery still land 10.6-11.3px below the header. The persona proposed html { scroll-padding-top }, which would also work but WOULD stack with the existing [id] rule and push anchors twice as far down."
       ],
       "id": "BL-072",
       "dimension": "ui",
