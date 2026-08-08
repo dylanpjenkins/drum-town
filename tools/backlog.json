@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 49,
-    "next_dimension": "content",
+    "iteration": 50,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 79,
+    "next_id": 81,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -18,7 +18,10 @@
       "note": "Dylan's direction 2026-08-05: full rebrand, modern + communal (design language only, no backend features); designer/builder/reviewer/persona pipeline; pushes to main deploy to drum.town via Netlify git integration. CLOSED 2026-08-08 after PKG-1..10 and a three-persona milestone review. The personas confirmed the rebrand landed — \"within about four seconds I knew this was a real drum school and not a funnel\" — and produced 22 findings now filed as BL-071..077.",
       "closed": "2026-08-08"
     },
-    "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
+    "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless.",
+    "discoveryNotes": [
+      "iter 56: a metadata sweep reported 228 pages with NO canonical link and a sitemap with 0 <loc> entries. Both are local-build artifacts, NOT defects: src/_data/site.js reads process.env.SITE_URL, netlify.toml sets it to https://drum.town, and base.njk/sitemap.njk are both gated on site.url. Rebuilt with SITE_URL set and got 1 canonical per page and 227 sitemap locs. Do not file these; if a sweep raises them again, check whether the build had SITE_URL."
+    ]
   },
   "items": [
     {
@@ -1382,6 +1385,43 @@
       "chunk": null,
       "log": [
         "Filed iter 52. The adjudicator was right not to fix one lesson: changing it locally would have made three lessons inconsistent with each other."
+      ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "id": "BL-079",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Three pairs of lessons ship identical page titles",
+      "evidence": [
+        "iter 56 discovery, first audit of page-level metadata across all 228 pages. Three <title> values each appear on two different lessons:",
+        "\"Basic Fills — Drum Town\" on /lessons/basic-fills/ and /lessons/rock-basic-fills/",
+        "\"Questlove Time-Feel — Drum Town\" on /lessons/funk-questlove/ and /lessons/hiphop-questlove/",
+        "\"The Six-Stroke Roll — Drum Town\" on /lessons/fusion-six-stroke-roll/ and /lessons/six-stroke-roll-found/",
+        "A reader with both open in tabs cannot tell them apart, a bookmark is ambiguous, and search engines treat identical titles as duplicate content. In each pair the lessons genuinely differ — one is the foundations treatment, the other the genre-track or fusion treatment — so the titles should say which."
+      ],
+      "acceptance": "every one of the 228 built pages has a unique <title>; the distinguishing word is meaningful to a reader rather than a slug fragment (e.g. the track name), and matches the lesson's own framing; no change to slugs or URLs",
+      "log": [
+        "Filed iter 56 discovery."
+      ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "id": "BL-080",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "404 and the homepage share one meta description",
+      "evidence": [
+        "iter 56 discovery: /404.html and / carry the same meta description, the site-wide default. Everything else on the site has a unique one.",
+        "The 404 is the one page whose description should not promise a curriculum."
+      ],
+      "acceptance": "/404.html carries its own description; no other page duplicates a description",
+      "log": [
+        "Filed iter 56 discovery. Small, but it is the only duplicate description on the site."
       ]
     }
   ]
