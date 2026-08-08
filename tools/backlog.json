@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 42,
-    "next_dimension": "ui",
+    "iteration": 43,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 69,
+    "next_id": 70,
     "epic": {
       "name": "communal-rebrand",
       "phase": "build",
@@ -166,10 +166,12 @@
         "base.njk has no favicon link; browsers 404 /favicon.ico"
       ],
       "acceptance": "inline SVG favicon (data URI or small committed file) linked in base.njk; no external assets",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 49 · Closed by PKG-9 [BL-056]. One committed SVG at /assets/img/seal.svg doing favicon duty, carrying its own prefers-color-scheme swap because a favicon renders outside the page cascade. No .ico: Safari below 16 will still 404 /favicon.ico, which is the known cost of the SVG-only approach and is recorded here rather than hidden."
+      ]
     },
     {
       "id": "BL-031",
@@ -789,10 +791,12 @@
         "design/packages.md PKG-9; closes BL-009 favicon as bonus"
       ],
       "acceptance": "per design/packages.md PKG-9: 4-column notice-board footer with motto + counts, seal favicon linked in base.njk; screenshots; BL-009 closed",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 49 · 2026-08-06 · SHIPPED. Four-column notice board with the motto 'The door's open. Bring sticks.', honest fine print, three labelled link columns and a counts base line driven by real data (217 lessons · 852 playable exercises · 40 rudiments, all three independently recomputed from the data files and matching). Measured across 13 widths x 2 themes x 2 page types, 52 rows: 4 columns above 820, 2 to 561, 1 below; zero horizontal overflow at every width; minimum link target 45px at 390. Footer headings stayed h2 because the audit did not flag them — an h2 after content h3s is a decrease, not a skip. Favicon linked, closing BL-009. THE BUILDER CAUGHT A BUG NO GATE IN THIS REPO COULD SEE: its first seal.svg had a token name with a doubled hyphen inside an XML comment, which is a FATAL XML parse error, so the favicon rendered as nothing at all — invisible in the tab, no console noise, and invisible to all 12 checks and the metric gate. It found it because its proof harness showed an empty column, then validated the fix with a jsdom XML parse and left a warning in the file. I re-validated independently: parses clean, 8 shapes, no parsererror."
+      ]
     },
     {
       "id": "BL-057",
@@ -923,7 +927,8 @@
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed from persona panel (iter 30)."
+        "Filed from persona panel (iter 30).",
+        "iter 49 · Mark REPLACED, acceptance NOT yet met. Maya's read in iter 30 was 'a record or a vinyl label first… it isn't shouting drums at me', and she was right: two concentric rings and four dots IS a vinyl label. The new seal is a snare drum in elevation — brass head inside a brick hoop, three tension rods down the shell, two lug casings breaking the silhouette, and a brass bottom counter-hoop. The Builder sketched six candidates and rasterised each at 16px rather than judging them large: a lugged hoop read as a gear, a 3/4 view read as a coin, a hoop with crossed sticks read as a cancel button. I reviewed its shipped version myself at 16 and 28px and found the two protruding side lugs plus vertical rods still read as a bucket with handles, which is the risk the Builder itself had flagged on an earlier candidate. Adding the bottom hoop is what fixes it: drums are hooped top AND bottom, buckets are not, and the symmetry is legible at 16px. The vinyl misread is now structurally impossible — the silhouette is not circular. STILL OWED: this item's acceptance asks for a persona to name it unprompted. I can prove it is no longer a record and that the cues survive rasterisation; I cannot prove the naming. Item stays open for that check."
       ]
     },
     {
@@ -1179,6 +1184,24 @@
       "log": [
         "Filed iter 46 discovery. P1 because a section HEADING names a track that does not exist — a student following it finds nothing.",
         "iter 48 · CLOSED. The two track titles were INVENTED — confirmed independently by the refuter, which re-derived the negative rather than trusting the researcher: neither 'Tabernacle' nor 'Stomp Groove' is on the 2018 Blue Note album (15 tracks) or the 2013 Drumhedz Mixtape (21 tracks), a direct search returns nothing, and neither is a plausible misspelling of a real title. The heading 'Drumhedz / Tabernacle' becomes 'The Drumhedz Record' and the sentence now names the album itself. The refuter also REJECTED the researcher's proposed second sentence for three separate reasons: it upgraded a source's 'subtly displaced playing style' into the specific snare-between-3-and-4 placement described elsewhere (inventing a technique on a recording), it invented a '90s-leaning' framing lifted circularly from the site's own listening card, and it duplicated a listening entry that already names all three tracks. Track-level pointers are what the listening block is for."
+      ]
+    },
+    {
+      "id": "BL-069",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Homepage scrolls sideways at 200% text below 480px — .ledger__title is a flex item at min-content",
+      "evidence": [
+        "iter 49, found by the PKG-9 Builder outside its own scope and reported rather than folded into an unrelated diff: at root 32px (WCAG 1.4.4 text-only zoom, viewport unchanged) the homepage overflows by +29px at 390 and +99px at 320. The offender is .ledger__title every time; footer-internal overflow measured 0 at all three root sizes.",
+        "Cause: .ledger__title inherits overflow-wrap: break-word from the shared heading rule, but as a FLEX ITEM its automatic minimum size is min-content, so a long chapter title still forces the row wide. The standard fix is min-width: 0.",
+        "Related but distinct from BL-064 (the header row has no slack) and from the PKG-7 finding that notation staves are NOT a source of page overflow because they sit inside overflow-x: auto."
+      ],
+      "acceptance": "documentElement.scrollWidth === clientWidth on the homepage at 320/360/390/480 with root font sizes 16, 24 and 32px, in both themes; no change to ledger layout at the default text size; measured, not reasoned",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        "Filed iter 49."
       ]
     }
   ]

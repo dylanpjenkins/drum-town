@@ -21,6 +21,10 @@
   {%- endif %}
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f2e9" />
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#211a14" />
+  {#- The seal, doing favicon duty (BL-009). One committed SVG, no external
+      asset and no .ico: the file carries its own prefers-color-scheme swap
+      because favicons render outside the page's cascade. -#}
+  <link rel="icon" type="image/svg+xml" href="/assets/img/seal.svg" />
   <script>try{var t=localStorage.getItem('dc_theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,11 +49,21 @@
 <header class="site-header">
   <div class="site-header__inner">
     <a href="/" class="site-logo">
-      <svg class="site-logo__seal" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
-        <circle cx="17" cy="17" r="15.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-        <circle cx="17" cy="17" r="8" fill="none" stroke="currentColor" stroke-width="1.5" />
-        <circle cx="17" cy="4.5" r="1.9" /><circle cx="29.5" cy="17" r="1.9" />
-        <circle cx="17" cy="29.5" r="1.9" /><circle cx="4.5" cy="17" r="1.9" />
+      {#- The seal (BL-059). A snare drum in elevation, not the ring-and-dots
+          mark it replaced — that geometry read as a vinyl label. Shell fills
+          with currentColor (--accent via .site-logo__seal); head, rods and lug
+          casings inherit fill: var(--gold). Same shape as
+          /assets/img/seal.svg, which hard-codes the same token values because
+          a favicon has no cascade to inherit from. -#}
+      <svg class="site-logo__seal" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect x="1" y="13.7" width="2.8" height="4.6" rx="1.3" />
+        <rect x="28.2" y="13.7" width="2.8" height="4.6" rx="1.3" />
+        <path d="M3.6 9.4V22.6a12.4 4.4 0 0 0 24.8 0V9.4Z" fill="currentColor" />
+        <rect x="7.15" y="9.8" width="2.9" height="14.1" rx="1.45" />
+        <rect x="14.55" y="9.8" width="2.9" height="15.4" rx="1.45" />
+        <rect x="21.95" y="9.8" width="2.9" height="14.1" rx="1.45" />
+        <path d="M3.6 22.6a12.4 4.4 0 0 0 24.8 0" fill="none" stroke="var(--gold)" stroke-width="2.6" />
+        <ellipse cx="16" cy="9.4" rx="12.4" ry="4.4" stroke="currentColor" stroke-width="2" />
       </svg>
       <span class="site-logo__wm">drum<em>.town</em></span>
     </a>
@@ -101,9 +115,56 @@
 {{ content | safe }}
 </main>
 
+{#- Footer — the notice board (system.md §4). Four columns at desktop, 2 at
+    820px, 1 at 560px with the identity block first. Every figure on the base
+    line is computed from the data files at build time, never typed: the
+    counts move when the curriculum does. -#}
+{%- set rudimentCount = 0 %}
+{%- for group in rudiments %}{% set rudimentCount = rudimentCount + group.rudiments.length %}{% endfor %}
 <footer class="site-footer">
-  <a href="/">Curriculum</a> · <a href="/rudiments/">Rudiments</a> · <a href="/metronome/">Metronome</a> · <a href="https://github.com/dylanpjenkins/drum-town">GitHub</a>
-  <br />Notation rendered with VexFlow at build time
+  <div class="site-footer__grid">
+    <div class="site-footer__id">
+      <svg class="site-footer__seal" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect x="1" y="13.7" width="2.8" height="4.6" rx="1.3" />
+        <rect x="28.2" y="13.7" width="2.8" height="4.6" rx="1.3" />
+        <path d="M3.6 9.4V22.6a12.4 4.4 0 0 0 24.8 0V9.4Z" fill="currentColor" />
+        <rect x="7.15" y="9.8" width="2.9" height="14.1" rx="1.45" />
+        <rect x="14.55" y="9.8" width="2.9" height="15.4" rx="1.45" />
+        <rect x="21.95" y="9.8" width="2.9" height="14.1" rx="1.45" />
+        <path d="M3.6 22.6a12.4 4.4 0 0 0 24.8 0" fill="none" stroke="var(--gold)" stroke-width="2.6" />
+        <ellipse cx="16" cy="9.4" rx="12.4" ry="4.4" stroke="currentColor" stroke-width="2" />
+      </svg>
+      {#- The one sanctioned poetry zone on the site (system.md §10). -#}
+      <p class="site-footer__motto">The door's open. Bring sticks.</p>
+      <p class="site-footer__fine">A free town for learning the drums. No accounts, no sign-ups — your progress lives in your own browser.</p>
+    </div>
+    {#- aria-labelledby rather than aria-label: the heading is already the
+        column's name, and a duplicate string would have screen readers
+        announce "Lessons navigation, heading, Lessons". -#}
+    <nav class="site-footer__col" aria-labelledby="footer-nav-lessons">
+      <h2 class="site-footer__h" id="footer-nav-lessons">Lessons</h2>
+      <ul>
+        <li><a href="/#foundations">Foundations</a></li>
+        <li><a href="/#tracks">Genre tracks</a></li>
+        <li><a href="/#mastery">Other topics</a></li>
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-labelledby="footer-nav-reference">
+      <h2 class="site-footer__h" id="footer-nav-reference">Reference</h2>
+      <ul>
+        <li><a href="/rudiments/">The {{ rudimentCount }} rudiments</a></li>
+        <li><a href="/metronome/">The metronome</a></li>
+      </ul>
+    </nav>
+    <nav class="site-footer__col" aria-labelledby="footer-nav-town">
+      <h2 class="site-footer__h" id="footer-nav-town">The town</h2>
+      <ul>
+        <li><a href="https://github.com/dylanpjenkins/drum-town">GitHub</a></li>
+        <li><a href="/lessons/{{ curriculum.foundations.sections[0].lessons[0].slug }}/">Start at lesson one</a></li>
+      </ul>
+    </nav>
+  </div>
+  <p class="site-footer__base">drum.town · {{ curriculum | lessonCount }} lessons · {{ lessonContent | exerciseCount }} playable exercises · {{ rudimentCount }} rudiments · notation rendered with VexFlow at build time · built on Eleventy</p>
 </footer>
 
 {#- Transport dock (system.md §7). Ships collapsed so no dock flashes open

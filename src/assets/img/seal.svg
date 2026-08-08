@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>Drum Town</title>
+  <!--
+    The drum.town seal: a snare drum in elevation. Brass batter head inside a
+    brick hoop, three tension rods down the shell, two lug casings breaking the
+    silhouette at the sides. All three cues survive a 16px rasterisation, which
+    is the whole brief: the mark this replaced was two concentric rings and
+    four dots, i.e. a vinyl label (BL-059).
+
+    This file is the FAVICON. A favicon has no CSS cascade to inherit from, so
+    currentColor is unavailable and the accent / gold token values are written
+    out literally here (and only here), with their dark twins behind
+    prefers-color-scheme. The header and footer copies of this geometry live
+    inline in _includes/base.njk and do use currentColor plus var(gold), so
+    they follow the site's own theme toggle. Keep all three in sync by shape;
+    they differ only in how they get their colour.
+
+    Careful: this is an XML document, not HTML. A doubled hyphen anywhere
+    inside a comment is a fatal parse error and the icon silently vanishes.
+    Token names are therefore written here without their CSS prefix.
+  -->
+  <style>
+    .shell { fill: #9a3a27 }
+    .brass { fill: #c99a3c }
+    .head  { fill: #c99a3c; stroke: #9a3a27; stroke-width: 2 }
+    .hoopline { fill: none; stroke: #c99a3c; stroke-width: 2.6 }
+    @media (prefers-color-scheme: dark) {
+      .shell { fill: #e07b5c }
+      .brass { fill: #e3a34d }
+      .head  { fill: #e3a34d; stroke: #e07b5c }
+      .hoopline { stroke: #e3a34d }
+    }
+  </style>
+  <g class="brass">
+    <rect x="1" y="13.7" width="2.8" height="4.6" rx="1.3" />
+    <rect x="28.2" y="13.7" width="2.8" height="4.6" rx="1.3" />
+  </g>
+  <path class="shell" d="M3.6 9.4V22.6a12.4 4.4 0 0 0 24.8 0V9.4Z" />
+  <g class="brass">
+    <rect x="7.15" y="9.8" width="2.9" height="14.1" rx="1.45" />
+    <rect x="14.55" y="9.8" width="2.9" height="15.4" rx="1.45" />
+    <rect x="21.95" y="9.8" width="2.9" height="14.1" rx="1.45" />
+  </g>
+  <path class="hoopline" d="M3.6 22.6a12.4 4.4 0 0 0 24.8 0" />
+  <ellipse class="head" cx="16" cy="9.4" rx="12.4" ry="4.4" />
+</svg>
