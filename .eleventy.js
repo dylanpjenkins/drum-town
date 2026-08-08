@@ -56,7 +56,40 @@ module.exports = function (eleventyConfig) {
     // at either floor — the whole bar is always reachable by scrolling.
     const vb = /viewBox="[-\d.]+ [-\d.]+ ([\d.]+)/.exec(rendered);
     const natW = vb ? parseFloat(vb[1]) : 0;
-    const minW = natW > 620 ? Math.round(natW * 0.70) : 0;
+    // DENSITY-AWARE FLOOR (BL-040). The flat 70% was a percentage of natural
+    // width, and natural width is itself capped at 1400 units for multi-bar
+    // phrases — so density got squeezed twice, and across the 432 staves that
+    // take a floor it delivered anywhere from 13.6 to 116.7 px per notated
+    // event. An 8.6x spread. The dense end sat at ~5px of sticking ink, which
+    // is exactly the illegibility PKG-7 fixed for SINGLE bars and left in place
+    // on multi-bar ones.
+    //
+    // Every constant here is derived rather than chosen:
+    //   PX_PER_EVENT 28    VexFlow writes annotations in POINTS, so the 14pt
+    //                      sticking is 18.67 user units and its rendered size
+    //                      is 18.67 * (pxPerEvent / UNITS_PER_EVENT). PKG-7
+    //                      measured 10px of sticking ink as legible at a true
+    //                      390px, and 10 = 18.67 * (28 / 52). This floor
+    //                      reproduces a measurement.
+    //   UNITS_PER_EVENT 52 the renderer's own per-note width allowance
+    //                      (notation-renderer.js: 140 + maxVoiceNotes * 52).
+    //   PAN_THRESHOLD 620  unchanged. Below it a stave already fits a phone
+    //                      scroller, so a floor would add panning for nothing.
+    //   FLOOR_RATIO 0.70   system.md 6.5 step 2, kept as the lower bound for
+    //                      wide-but-sparse staves where the density rule is slack.
+    //
+    // A 64-note four-bar phrase now floors at 1792px and pans about 5.6 screens
+    // at 320px. That is a lot of panning, and it is the trade 6.5 states
+    // outright: honest panning beats illegible shrinking. Nothing is dropped at
+    // any width, at either floor.
+    const PX_PER_EVENT = 28;
+    const UNITS_PER_EVENT = 52;
+    const PAN_THRESHOLD = 620;
+    const FLOOR_RATIO = 0.70;
+    const events = Math.max((spec.hands || []).length, (spec.feet || []).length, 1);
+    const minW = natW > PAN_THRESHOLD
+      ? Math.max(Math.round(natW * FLOOR_RATIO), events * PX_PER_EVENT)
+      : 0;
     const svg = rendered.replace(
       '<svg ',
       `<svg role="img" aria-label="${ariaLabel}" ${minW ? `style="min-width:${minW}px" ` : ''}`

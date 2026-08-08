@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 48,
-    "next_dimension": "ui",
+    "iteration": 49,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -981,11 +981,12 @@
         "Critic iter 23: old blanket floor 520px; new floor = 55% of natural width = 418px for a dense 760-unit 16th stave — ~20% below the old legibility minimum with ~6px sticking letters; constants 140/52/380/620/0.55 unmeasured; inline style=min-width bypasses the token system (overlaps BL-032)"
       ],
       "acceptance": "density-aware floor (minimum px per notated event, e.g. >=24px per 16th cell) replaces the flat 55%; constants documented with the measurement that justifies them; min-width moved to a CSS var or data attribute; verify with 390px screenshots of the densest stave (16x16ths) read for legibility",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed from adversarial critique (iter 23)."
+        "Filed from adversarial critique (iter 23).",
+        "iter 55 · 2026-08-08 · FIXED, and the measurement is the point. The flat floor was a PERCENTAGE of natural width, and natural width is itself capped at 1400 units for multi-bar phrases — so density got squeezed twice. Measured across the 432 staves that took a floor, it delivered between 13.6 and 116.7 px per notated event: an 8.6x spread. The dense end sat at ~5px of sticking ink, which is EXACTLY the illegibility PKG-7 fixed for single bars and silently left in place on multi-bar ones. jazz-modern-jazz#4 (72 notes, 12 bars) was the worst at 13.6px per event. Replaced with max(natural * 0.70, events * 28). Every constant is now derived and documented in .eleventy.js rather than asserted: 28 px/event comes from VexFlow writing annotations in POINTS, so 14pt sticking is 18.67 user units and rendered size is 18.67 * (pxPerEvent / 52) — PKG-7 measured 10px as legible at true 390, and 10 = 18.67 * (28/52). 52 is the renderer's own per-note allowance from its width formula. 620 is unchanged, the point below which a stave already fits a phone scroller. RESULT, measured after the change: 461 staves carry a floor, floor/natural now spans 0.70 to 1.44, and EIGHT staves floor ABOVE natural size — they scale UP and pan rather than shrinking. On rock-dynamics at a true 390px the dense frames now render a 1400-unit viewBox at 1792px, scale 1.28 where it used to be 0.70: notes 1.83x larger. Page overflow stays 0 at 280/320/360/390/480/720/1280 across four page types because the frames scroll internally. The widest floor is 2016px, which pans about 5.6 screens at 320px — a lot, and it is the trade system.md 6.5 states outright: honest panning beats illegible shrinking, and nothing is dropped at any width."
       ]
     },
     {
