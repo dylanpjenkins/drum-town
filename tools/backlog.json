@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 43,
-    "next_dimension": "content",
+    "iteration": 44,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 70,
+    "next_id": 71,
     "epic": {
       "name": "communal-rebrand",
       "phase": "build",
@@ -393,12 +393,13 @@
       "status": "ready",
       "attempts": 0,
       "chunk": {
-        "done": 1,
+        "done": 2,
         "total": 6,
         "size": 10
       },
       "log": [
-        "iter 16 · chunk 1/6 · Expanded first-beat-kicks, first-beat-color, counting-eighths, counting-sixteenths, single-stroke-roll, double-stroke-roll, basic-coordination, warm-ups, rock-eighth-grooves, jazz-ride-pattern. Each gained a descriptive h2 seam + practice-method and failure-mode paragraphs grounded in its exercises (recording drills, weak-hand leads, rebound mechanics, swing-ratio ear training). lessonsThinProse 53→43, lessonsNoSubheadings 68→58."
+        "iter 16 · chunk 1/6 · Expanded first-beat-kicks, first-beat-color, counting-eighths, counting-sixteenths, single-stroke-roll, double-stroke-roll, basic-coordination, warm-ups, rock-eighth-grooves, jazz-ride-pattern. Each gained a descriptive h2 seam + practice-method and failure-mode paragraphs grounded in its exercises (recording drills, weak-hand leads, rebound mechanics, swing-ratio ear training). lessonsThinProse 53→43, lessonsNoSubheadings 68→58.",
+        "iter 50 · 2026-08-06 · chunk 2/6. The ten THINNEST lessons expanded: fusion-odd-meters 64w -> 702w, funk-ghost-notes 70 -> 646, metal-double-bass-basics 85 -> 750, fusion-six-stroke-roll 91 -> 548, fusion-polyrhythms 105 -> 736, hiphop-boom-bap 111 -> 636, rock-quarter-hat 120 -> 594, metal-headbang 125 -> 649, latin-bossa-nova 128 -> 797, metal-thrash 129 -> 762. Every one gained two descriptive h2 seams. Lessons with two paragraphs or fewer: 44 -> 34. The binding rule was that every technical claim had to be grounded in that lesson's OWN exercises, because a wrong instruction on a drum site gets practised and becomes a habit — worse than a thin lesson. Writers returned each claim WITH its grounding, and a reviewer checked every statement against the real specs. It rejected a lot: a kick '8th-note grid' that does not exist in fusion-polyrhythms; 'both feet on pedals in every exercise' in metal-double-bass-basics, false for Ex 1 which is explicitly single foot; 'same tempo' across metal-thrash exercises that are 150 and 170 bpm; and — the one I liked best — a rock-quarter-hat instruction to 'set the metronome to quarter notes', which the reviewer refuted by reading base.njk and finding the site metronome has no subdivision control at all. A UI-truth error caught by checking the UI."
       ]
     },
     {
@@ -1202,6 +1203,28 @@
       "chunk": null,
       "log": [
         "Filed iter 49."
+      ]
+    },
+    {
+      "id": "BL-070",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Exercise tips and graduation criteria contradict their own notation in at least five lessons",
+      "evidence": [
+        "iter 50: found by BL-022's writers while expanding prose. They could only return bodyHtml, so every one of these is still live in a tip or a criterion — the text a student reads directly beside the staff.",
+        "metal-headbang Ex 2: the tip reads 'snare still on 2 and 4', but the hands array puts c/5 at indices 6 and 14 of 16 sixteenths — the & of 2 and the & of 4. The tip describes a backbeat the notation does not play.",
+        "fusion-polyrhythms: 'They only line up on beat 1' is false. The snare is 6 quarter-note triplets and the kick 4 plain quarters, so they coincide at beat 1 AND beat 3 — 6:4 reduces to 3:2 and the cycle closes every 2 beats. The same error appears in the prose (fixed this tick), in the exercise tip, and in graduation criterion 1, so two of the three are still wrong.",
+        "rock-quarter-hat: the body offered Charlie Watts as the model, but his signature move is the opposite of what is notated — he lifts the hat hand ON the backbeat, and all three exercises here play hat and snare together. Prose fixed; check whether the claim survives elsewhere.",
+        "hiphop-boom-bap: the body said 'push the snare a few milliseconds behind the click' while Ex 4's own tip says 'Not millisecond-late: PERCEPTIBLY late'. The sibling lesson quantifies the house position at 20-40ms. Prose fixed; the two lessons should agree.",
+        "metal-thrash Ex 4 tip: a claim about the gap between the 8th and the first 16th matching the gap between the two 16ths, flagged BLOCKING by the reviewer and outside bodyHtml.",
+        "fusion-six-stroke-roll: three statements contradicted by the notation, including 'the variations move the LL groups around the toms' when the left hand stays on the snare for all six of its notes and it is the accented R that moves."
+      ],
+      "acceptance": "each named tip and graduation criterion is checked against its own exercise spec and corrected, or the spec is corrected if the notation is what is wrong; a check script asserts the specific claims that can be machine-verified (snare placement named in a tip vs the hands array); audit-lessons beat-count section unchanged",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        "Filed iter 50. P1: these sit inches from the notation they contradict, and unlike prose a tip is read at the moment of practice."
       ]
     }
   ]
