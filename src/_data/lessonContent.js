@@ -7440,7 +7440,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "The backbeat groove with ghosts threaded between the 2 and 4 hits. Loud snare on 2 and 4 is the wrist; the lowercase <em>r</em> snare hits are the fingers, at ghost height. The ghosts are <em>sparse</em> here on purpose — five per bar. Hold the dynamic ratio for two minutes at ♩=90; that's your graduation."
+        tip: "The backbeat groove with ghosts threaded around the 2 and 4 hits. Loud snare on 2 and 4 is the wrist; the lowercase <em>r</em> snare hits are the fingers, at ghost height. The ghosts are <em>sparse</em> here on purpose — four per bar, on the &amp;-of-1, a-of-2, e-of-3, and a-of-4. Hold the dynamic ratio for two minutes at ♩=90; that's your graduation."
       }
     ],
     listening: [
@@ -11073,7 +11073,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "ABAC: bars 1 and 3 share the A figure (snare on &amp;-of-2 only); bar 2 is the B response (snare on 1 and the &amp;-of-4); bar 4 is the climax C (Philly Joe lick — snare on 1, 3, and the &amp;-of-4 with accents). The repetition of A in bar 3 reinforces the structure; the new C in bar 4 resolves the phrase. This is how a comping figure becomes a <em>solo statement</em>."
+        tip: "ABAC: bars 1 and 3 share the A figure (snare on &amp;-of-2 only); bar 2 is the B response, which keeps that &amp;-of-2 and adds snare on 1 and the &amp;-of-4 around it; bar 4 is the climax C, accented snare on 1, 3, and the &amp;-of-4, closing on the Philly Joe lick. Bar 3 repeats bar 1 exactly, hands and feet, so the snare drops from three hits back to one and you hear A return. The new C then resolves the phrase. This is how a comping figure becomes a <em>solo statement</em>."
       },
       {
         title: "5 — Improvisation Frame (4-bar template)",
@@ -23698,8 +23698,6 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -23709,6 +23707,8 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
         ],
         feet: [
@@ -25908,7 +25908,7 @@ module.exports = {
           { rest: true,    duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "This is the destination 5/4 bar. In practice, play 4 bars of 4/4 (snare on 2 and 4, kick on 1 and 3) at ♩=110, then on the bar boundary modulate to <em>this</em>. The quarter-note click stays the same; the bar grew by one. Snare lands on 3 and on the &amp;-of-4 — the asymmetric backbeat that makes 5/4 feel deliberate, not lopsided. Group it 3+2."
+        tip: "Five beats to the bar, and the click never moved. In practice: 4 bars of 4/4 at ♩=110 (snare on 2 and 4, kick on 1 and 3), then cross the bar line into <em>this</em>. The bar grew by one beat and the backbeat kept its old spots, 2 and 4 — across five beats that spacing is no longer even, and the unevenness is what makes the meter sound deliberate rather than lopsided. Count it 3+2 so the extra beat belongs to a group instead of hanging off the end; the kicks on 1 and 4 mark those two group downbeats. The snare on the &amp;-of-5 is your flag into the next 1."
       },
       {
         title: "2 — 8th Becomes the New Quarter",
@@ -29074,11 +29074,11 @@ module.exports = {
         repeatEnd: true,
         hands: [
           { keys: ['f/5/x2'], duration: 'q' },
-          { keys: ['f/5/x2'], duration: '8' },
           { keys: ['f/5/x2', 'c/5'], duration: '8' },
-          { keys: ['f/5/x2'], duration: 'q' },
           { keys: ['f/5/x2'], duration: '8' },
-          { keys: ['f/5/x2', 'c/5'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -29086,7 +29086,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' },
           { rest: true, duration: 'q' }
         ],
-        tip: "Jazz ride pattern (<em>ding · ding-a · ding · ding-a</em>, 8ths swung) on top, but a rock-style backbeat — snare on 2 and 4 (sharing the <em>&amp;</em> with the ride's skip-note), kick on 1 and 3. The hands swing; the feet play straight rock. The result is a groove that feels jazz-influenced but locks into a rock chorus naturally. Don't let the swung 8ths straighten when the rock backbeat lands."
+        tip: "Jazz ride pattern (<em>ding · ding-a · ding · ding-a</em>, 8ths swung) on top, but a rock-style backbeat underneath — snare on 2 and 4, landing in unison with the ride, while the swung skip-notes on the <em>&amp;</em> of 2 and the <em>&amp;</em> of 4 stay ride-only. Kick on 1 and 3. The hands swing; the feet play straight rock. The result is a groove that feels jazz-influenced but locks into a rock chorus naturally. Don't let the swung 8ths straighten when the rock backbeat lands."
       },
       {
         title: "3 — Rock-Latin Hybrid (Son Clave + Rock Kick)",
@@ -29157,11 +29157,11 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           // Bar 2 — rock-jazz (swung ride)
           { keys: ['f/5/x2'], duration: 'q' },
-          { keys: ['f/5/x2'], duration: '8' },
           { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
           { keys: ['f/5/x2'], duration: 'q' },
-          { keys: ['f/5/x2'], duration: '8' },
           { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
           // Bar 3 — rock-Latin (clave 3-side on cross-stick)
           { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },

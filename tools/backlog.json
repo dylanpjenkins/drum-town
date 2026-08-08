@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 45,
-    "next_dimension": "content",
+    "iteration": 46,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 78,
+    "next_id": 79,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1229,9 +1229,15 @@
       "acceptance": "each named tip and graduation criterion is checked against its own exercise spec and corrected, or the spec is corrected if the notation is what is wrong; a check script asserts the specific claims that can be machine-verified (snare placement named in a tip vs the hands array); audit-lessons beat-count section unchanged",
       "status": "ready",
       "attempts": 0,
-      "chunk": null,
+      "chunk": {
+        "done": 1,
+        "total": 2,
+        "size": 10
+      },
       "log": [
-        "Filed iter 50. P1: these sit inches from the notation they contradict, and unlike prose a tip is read at the moment of practice."
+        "Filed iter 50. P1: these sit inches from the notation they contradict, and unlike prose a tip is read at the moment of practice.",
+        "iter 52 · 2026-08-08 · SWEEP RUN, 5 lessons fixed, and TWO OF THEM WERE NOTATION BUGS rather than prose. Wrote a screening script comparing every tip that claims 'snare on X and Y' against where c/5 actually falls: 58 tips make a checkable claim, 13 did not match. Adjudicated each one by asking WHICH SIDE IS WRONG, with an independent refuter told to be hardest on any 'the notation is wrong' verdict, since changing a spec changes what the site PLAYS for every visitor. Result: 6 false positives (my script's own over-reporting), 4 tips wrong, 2 notation bugs. THE NOTATION BUGS. metal-headbang Ex 2 had its backbeat on the & of 2 and the & of 4 while Exercises 1, 3 and 4 all put it on 2 and 4, the lesson body says 'kick on every quarter, snare on 2 and 4', and the exercise's own title declares the hi-hat as the variation. rock-hybrid-grooves Ex 2 the same — and the refuter swept all 27 corpus exercises sharing that exact q,8,8,q,8,8 ride shape and found this was the ONLY one with the snare off the beat, then caught the identical buggy block copied into Ex 4's bar 2, which had to move in the same commit or the lesson would contradict itself. Both verified after the edit by asserting the snare indices, and the corrected stave was read on screen. THE FOUR TIP FIXES were all cases where the notation was right: ghost-notes-found said 'five ghosts per bar' where there are four, jazz-comping-vocab, hiphop-anderson-paak and metal-metric-modulation similar. One adjudicator also found a corpus-wide convention problem it declined to fix locally: ghost notes chorded with a hi-hat note are labelled sticking 'r' in three lessons, which is physically impossible when the right hand is on the hat — the letter has silently drifted from meaning a HAND to meaning a ghost. That needs deciding once for the whole corpus, not patching in one lesson.",
+        "iter 52 · Tool shipped as tools/audit-tip-claims.js, deliberately NOT wired into tools/checks. It raised 6 false positives out of 13 in two known classes — ghost notes counted as backbeats, and compound/shuffle meters counted in the wrong beat unit — and a gate that cries wolf half the time trains people to ignore it. The header documents exactly what each class needs. Chunk 2 should make it accent-aware and meter-aware, then wire it in and negative-test it."
       ]
     },
     {
@@ -1355,6 +1361,24 @@
         "The progress data itself is accurate and properly exposed — their words — so this is a surfacing problem, not a data problem."
       ],
       "acceptance": "a returning reader can see their own state on a lesson page and on a genre page, using the existing dc_progress data and the existing mark vocabulary; the homepage primary CTA reflects whether they are new"
+    },
+    {
+      "id": "BL-078",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Ghost-note sticking letters say the wrong hand, and the convention has drifted corpus-wide",
+      "evidence": [
+        "iter 52, found by a BL-070 adjudicator that declined to patch it in one lesson: in ghost-notes-found Ex 4 the hi-hat plays all sixteen 16ths and each ghost is CHORDED with a hat note, so the ghost is necessarily the hand that is NOT on the hat — yet all four ghosts carry sticking 'r'.",
+        "Exercises 1-3 of that same lesson use r/l strictly as hand designations with case carrying dynamics ('lowercase r/l are 1-inch ghost taps; uppercase R/L are 12-inch full strokes'), so a student reading straight through gets a physically impossible instruction.",
+        "Not local: snare-voicings#2 and finger-control#2 do the same, and finger-control#2's tip proves the drift — 'Hi-hat 16ths in the right hand, snare 16ths in the left. The r snare hits are all fingers.' The letter has stopped meaning a hand and started meaning a ghost."
+      ],
+      "acceptance": "one decision applied corpus-wide: either the letter always names the hand (and ghosts are marked some other way), or the notation documents that lowercase marks a ghost regardless of hand; every affected exercise and tip agrees with whichever is chosen; docs/content-style-guide.md records it",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        "Filed iter 52. The adjudicator was right not to fix one lesson: changing it locally would have made three lessons inconsistent with each other."
+      ]
     }
   ]
 }
