@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 47,
-    "next_dimension": "content",
+    "iteration": 48,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -1228,17 +1228,18 @@
         "fusion-six-stroke-roll: three statements contradicted by the notation, including 'the variations move the LL groups around the toms' when the left hand stays on the snare for all six of its notes and it is the accented R that moves."
       ],
       "acceptance": "each named tip and graduation criterion is checked against its own exercise spec and corrected, or the spec is corrected if the notation is what is wrong; a check script asserts the specific claims that can be machine-verified (snare placement named in a tip vs the hands array); audit-lessons beat-count section unchanged",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": {
-        "done": 1,
+        "done": 2,
         "total": 2,
         "size": 10
       },
       "log": [
         "Filed iter 50. P1: these sit inches from the notation they contradict, and unlike prose a tip is read at the moment of practice.",
         "iter 52 · 2026-08-08 · SWEEP RUN, 5 lessons fixed, and TWO OF THEM WERE NOTATION BUGS rather than prose. Wrote a screening script comparing every tip that claims 'snare on X and Y' against where c/5 actually falls: 58 tips make a checkable claim, 13 did not match. Adjudicated each one by asking WHICH SIDE IS WRONG, with an independent refuter told to be hardest on any 'the notation is wrong' verdict, since changing a spec changes what the site PLAYS for every visitor. Result: 6 false positives (my script's own over-reporting), 4 tips wrong, 2 notation bugs. THE NOTATION BUGS. metal-headbang Ex 2 had its backbeat on the & of 2 and the & of 4 while Exercises 1, 3 and 4 all put it on 2 and 4, the lesson body says 'kick on every quarter, snare on 2 and 4', and the exercise's own title declares the hi-hat as the variation. rock-hybrid-grooves Ex 2 the same — and the refuter swept all 27 corpus exercises sharing that exact q,8,8,q,8,8 ride shape and found this was the ONLY one with the snare off the beat, then caught the identical buggy block copied into Ex 4's bar 2, which had to move in the same commit or the lesson would contradict itself. Both verified after the edit by asserting the snare indices, and the corrected stave was read on screen. THE FOUR TIP FIXES were all cases where the notation was right: ghost-notes-found said 'five ghosts per bar' where there are four, jazz-comping-vocab, hiphop-anderson-paak and metal-metric-modulation similar. One adjudicator also found a corpus-wide convention problem it declined to fix locally: ghost notes chorded with a hi-hat note are labelled sticking 'r' in three lessons, which is physically impossible when the right hand is on the hat — the letter has silently drifted from meaning a HAND to meaning a ghost. That needs deciding once for the whole corpus, not patching in one lesson.",
-        "iter 52 · Tool shipped as tools/audit-tip-claims.js, deliberately NOT wired into tools/checks. It raised 6 false positives out of 13 in two known classes — ghost notes counted as backbeats, and compound/shuffle meters counted in the wrong beat unit — and a gate that cries wolf half the time trains people to ignore it. The header documents exactly what each class needs. Chunk 2 should make it accent-aware and meter-aware, then wire it in and negative-test it."
+        "iter 52 · Tool shipped as tools/audit-tip-claims.js, deliberately NOT wired into tools/checks. It raised 6 false positives out of 13 in two known classes — ghost notes counted as backbeats, and compound/shuffle meters counted in the wrong beat unit — and a gate that cries wolf half the time trains people to ignore it. The header documents exactly what each class needs. Chunk 2 should make it accent-aware and meter-aware, then wire it in and negative-test it.",
+        "iter 54 · 2026-08-08 · chunk 2/2. The screening script is now a real gate, tools/checks/check-tip-claims.js — the 13th check. 51 checkable 'snare on X and Y' claims verified against their own notation, and NEGATIVE-TESTED by reintroducing the exact metal-headbang bug chunk 1 fixed: it fails with the precise diagnosis ('tip says snare still on 2 and 4, notation: snare on beat(s) 2.5, 4.5'). Getting from 13 false positives to 0 took four passes and two of my own mistakes are worth recording. FIRST, I invented a note-count grid to handle shuffles and made that case WORSE (the backbeat moved from 2.5 to 3). The corpus already declares those bars with an explicit `tuplets` array scaling each note by notes_occupied/num_notes, and audit-lessons.js has done that arithmetic correctly all along against a committed zero baseline — reusing its math fixed both shuffle cases immediately. SECOND, I had `dot` as a '.' inside the duration string; it is a separate boolean field. Reading the proven implementation first would have saved both. Four false-positive classes are now handled explicitly rather than hand-waved: ghost notes (filter to accent:true when the bar marks any), tuplet-scaled shuffles, tips scoped to a later bar of a multi-bar phrase, and — a class I had not seen — staves that notate a DIFFERENT VOICE than the tip claims. independence-singing Ex 1 writes the SUNG pulse on the snare line, because that is the only place to put a vocalised quarter on a drum stave, while its tip's 'snare on 2 and 4' describes a played part the tip says outright is 'not notated above'. Checking one against the other was a category error, not a defect. Five exercises remain on a documented UNPARSEABLE list, each with the reason it defeats the parser and each verified by hand: a 4-bar melody whose claim is one clause of several, a bar with unmarked ghosts (which is BL-078's convention drift showing up as a second symptom), and three meter-changing phrases where one timeSignature cannot describe both bars. Shrinking that list is the future work; adding to it needs a stated reason."
       ]
     },
     {
