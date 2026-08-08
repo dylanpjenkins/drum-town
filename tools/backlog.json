@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 44,
-    "next_dimension": "ui",
+    "iteration": 45,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,13 +9,14 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 71,
+    "next_id": 78,
     "epic": {
       "name": "communal-rebrand",
-      "phase": "build",
+      "phase": "done",
       "started": "2026-08-05",
       "brief": "design/brief.md",
-      "note": "Dylan's direction 2026-08-05: full rebrand, modern + communal (design language only, no backend features); designer/builder/reviewer/persona pipeline; pushes to main deploy to drum.town via Netlify git integration."
+      "note": "Dylan's direction 2026-08-05: full rebrand, modern + communal (design language only, no backend features); designer/builder/reviewer/persona pipeline; pushes to main deploy to drum.town via Netlify git integration. CLOSED 2026-08-08 after PKG-1..10 and a three-persona milestone review. The personas confirmed the rebrand landed — \"within about four seconds I knew this was a real drum school and not a funnel\" — and produced 22 findings now filed as BL-071..077.",
+      "closed": "2026-08-08"
     },
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless."
   },
@@ -643,13 +644,14 @@
         "Dylan 2026-08-05: complete upgrade to a modern site with a communal drum.town identity; full rebrand license; strongest direction wins per reviewer + persona panel; design language only (no backend)"
       ],
       "acceptance": "phase directions: 2-3 boards in design/directions/ + screenshots read + reviewer/persona scoring + design/DECISION.md; phase spec: design/system.md + ordered build packages appended to this backlog; phase build: packages flow through normal ticks; epic closes with a persona milestone review of the deployed result",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
         "iter 25 · epic opened; Designer agent dispatched for direction boards. BL-036/037/044/045 are inputs to the brief and expected to resolve via epic packages.",
         "iter 25 · directions phase complete: 3 boards produced, screenshotted, judged by adversarial Reviewer + 3 personas + orchestrator. WINNER: A (The Square), amended — B's transport dock for the practice state, C's ledger for chapters, headline promotion, plus the shared violations all boards dodged (mobile nav, honest mobile notation, theme toggle, real prose components, token-slot continuity, font restraint). Full record: design/DECISION.md. Phase → spec.",
-        "iter 38 · build phase: PKG-4 done (BL-051). Shipped so far: PKG-1/2/3 + PKG-4. Remaining: PKG-5 ledger homepage (BL-052), PKG-6 lesson title block (BL-053), PKG-7 reading room (BL-054), PKG-8 remaining pages (BL-055), PKG-9 footer + favicon (BL-056), PKG-10 polish/QA (BL-057)."
+        "iter 38 · build phase: PKG-4 done (BL-051). Shipped so far: PKG-1/2/3 + PKG-4. Remaining: PKG-5 ledger homepage (BL-052), PKG-6 lesson title block (BL-053), PKG-7 reading room (BL-054), PKG-8 remaining pages (BL-055), PKG-9 footer + favicon (BL-056), PKG-10 polish/QA (BL-057).",
+        "iter 51 · 2026-08-08 · EPIC CLOSED. Ten packages shipped across iterations 25-51: tokens and type, header and mobile nav, dark theme, transport dock, ledger homepage, lesson title block and map disclosure, the reading room, the last four pages, footer and favicon, and this QA close-out. Then a three-persona milestone review. The rebrand landed on its own terms — the beginner: \"within about four seconds I knew this was a real drum school and not a funnel\"; the keyboard user found a focus ring on all 596 rendered stops, Escape working from inside the dock, and no horizontal scrolling at either text size; the returning player called the prose \"written by somebody who actually plays\" and the notation \"properly engraved, not a screenshot of tab\". The panel also produced 22 findings, now BL-071 to BL-077, three of them blocking for the persona who hit them. The mark is the one acceptance the epic did not meet: all three read it as a barrel, a keg or a jar of jam at real size (BL-059)."
       ]
     },
     {
@@ -808,10 +810,12 @@
         "design/packages.md PKG-10; 24-shot matrix (6 pages × 2 widths × 2 themes), orphaned-CSS purge, keyboard/reduced-motion walks"
       ],
       "acceptance": "per design/packages.md PKG-10: full shot matrix read and judged, all gates green, orphaned CSS purged, BL-036/037/044/045 verified closed with evidence; persona milestone review follows (epic phase → done)",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
-      "log": []
+      "log": [
+        "iter 51 · 2026-08-08 · RELEASE GATE PASSED, epic phase build -> done. Full 24-shot matrix read and judged coherent as one system. All 12 checks green, audit-site --gate OK (33 metrics), audit-lessons unchanged, integrity.* untouched. Mechanical sweep: style= now 0 across all 11 templates (the last survivor was a stub back-link on a branch 0 lessons render), no @import, nothing below the 11px font floor, DARK-TOKENS blocks byte-identical by sha, web fonts 110.5 KiB against a 120 KB budget. Keyboard walk: 596 rendered stops across 4 walks, 0 without a focus ring, 0 positive tabindex, 0 rendered stops that refused focus. Reduced motion verified with --force-prefers-reduced-motion: every duration collapses and the beat carries by color with transform none. BL-036 CLOSED (19 measurements, dock open, scrolled to the bottom: 0 intersections, 34.8-43.8px clearance). BL-037 CLOSED (h1 at 174/245.5 at true 390 on all three lesson kinds). BL-044 was NOT closed and now is (see its own log). BL-045 hero half closed, label half at 2 for the section name — which is what the item asked — but 3 on 23 lessons where the Focus chip happens to equal the chapter; the Builder declined to suppress a labeled metadata chip to satisfy a word count and left the call to me. I agree with it: that is a different axis, not a duplicate."
+      ]
     },
     {
       "id": "BL-063",
@@ -918,8 +922,8 @@
     {
       "id": "BL-059",
       "dimension": "ui",
-      "priority": 3,
-      "title": "Seal mark reads as a vinyl record, not a drum",
+      "priority": 2,
+      "title": "Seal reads as a barrel or a jar at real size — three of three personas, after the redesign",
       "evidence": [
         "Maya (iter 30): 'a record or a vinyl label first. Second guess, a drum seen from directly above… it isn't shouting drums at me'"
       ],
@@ -929,7 +933,8 @@
       "chunk": null,
       "log": [
         "Filed from persona panel (iter 30).",
-        "iter 49 · Mark REPLACED, acceptance NOT yet met. Maya's read in iter 30 was 'a record or a vinyl label first… it isn't shouting drums at me', and she was right: two concentric rings and four dots IS a vinyl label. The new seal is a snare drum in elevation — brass head inside a brick hoop, three tension rods down the shell, two lug casings breaking the silhouette, and a brass bottom counter-hoop. The Builder sketched six candidates and rasterised each at 16px rather than judging them large: a lugged hoop read as a gear, a 3/4 view read as a coin, a hoop with crossed sticks read as a cancel button. I reviewed its shipped version myself at 16 and 28px and found the two protruding side lugs plus vertical rods still read as a bucket with handles, which is the risk the Builder itself had flagged on an earlier candidate. Adding the bottom hoop is what fixes it: drums are hooped top AND bottom, buckets are not, and the symmetry is legible at 16px. The vinyl misread is now structurally impossible — the silhouette is not circular. STILL OWED: this item's acceptance asks for a persona to name it unprompted. I can prove it is no longer a record and that the cues survive rasterisation; I cannot prove the naming. Item stays open for that check."
+        "iter 49 · Mark REPLACED, acceptance NOT yet met. Maya's read in iter 30 was 'a record or a vinyl label first… it isn't shouting drums at me', and she was right: two concentric rings and four dots IS a vinyl label. The new seal is a snare drum in elevation — brass head inside a brick hoop, three tension rods down the shell, two lug casings breaking the silhouette, and a brass bottom counter-hoop. The Builder sketched six candidates and rasterised each at 16px rather than judging them large: a lugged hoop read as a gear, a 3/4 view read as a coin, a hoop with crossed sticks read as a cancel button. I reviewed its shipped version myself at 16 and 28px and found the two protruding side lugs plus vertical rods still read as a bucket with handles, which is the risk the Builder itself had flagged on an earlier candidate. Adding the bottom hoop is what fixes it: drums are hooped top AND bottom, buckets are not, and the symmetry is legible at 16px. The vinyl misread is now structurally impossible — the silhouette is not circular. STILL OWED: this item's acceptance asks for a persona to name it unprompted. I can prove it is no longer a record and that the cues survive rasterisation; I cannot prove the naming. Item stays open for that check.",
+        "iter 51 · 2026-08-08 · ACCEPTANCE TESTED AND NOT MET. The persona milestone review asked all three, unprompted, what they took the mark to be. Beginner: 'a small wooden barrel, or maybe a honey pot… I did not read it as a drum until I'd read the word drum next to it and back-filled the meaning.' Returning player: 'a little barrel, or a tin, or one of those wooden kegs. The word drum.town sitting right next to it is what told me it was a drum, not the mark.' Keyboard user: 'a small barrel, or honestly a jar of jam.' All three separately magnified it and all three then saw a snare drum — the beginner at 340px, the keyboard user at 6x. So the geometry is right and the SCALE is wrong: at 28px the tension rods collapse into three stripes and the gold batter head reads as a lid. I OWE A CORRECTION HERE: in iter 49 I wrote that adding the bottom counter-hoop made it read as a drum, on the strength of my own look at a magnified render. Three simulated users at the real size say otherwise, and the whole point of the persona check was that my own reading is not evidence. The beginner also caught the case that makes it worse rather than better: below 360px the wordmark drops out, so the barrel is the only branding left and there is no adjacent word to back-fill from. Next attempt should design AT 28px first and scale up, not the reverse — likely fewer, heavier elements: two rods rather than three, a thicker hoop, or a silhouette that is not a vessel at all."
       ]
     },
     {
@@ -1045,7 +1050,8 @@
       "chunk": null,
       "log": [
         "Filed from adversarial critique (iter 23).",
-        "iter 40 · Closed by PKG-5 [BL-052]. The em-dash separators lived in the chapter chip grid, which no longer exists. Ledger rows carry no inter-item separators at all — the wide layout uses a dotted leader that is a flex spacer with nothing typed in it, and the stacked layout uses row hairlines that cannot orphan because they are borders, not characters."
+        "iter 40 · Closed by PKG-5 [BL-052]. The em-dash separators lived in the chapter chip grid, which no longer exists. Ledger rows carry no inter-item separators at all — the wide layout uses a dotted leader that is a flex spacer with nothing typed in it, and the stacked layout uses row hairlines that cannot orphan because they are borders, not characters.",
+        "iter 51 · REOPENED AND RE-CLOSED during PKG-10. I marked this done at iter 40 because the chapter chip grid that carried the orphaning separators was deleted. It had already come back: at 280 and 320px the lesson and genre BREADCRUMBS dangled a '/' at the end of a wrapped line — the same failure mode in a component built after the item was closed. Fixed with this item's own prescribed remedy, an nbsp after each separator so the only break opportunity is before it. Verified across 8 pages x 18 widths from 280 to 1600: 180 separators, 0 orphans. Lesson for the loop: closing an item because its host component was deleted closes the symptom, not the mechanism."
       ]
     },
     {
@@ -1136,7 +1142,7 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "id": "BL-066",
       "dimension": "quality",
       "priority": 3,
@@ -1148,7 +1154,8 @@
       ],
       "acceptance": "each rule-set is either deleted or shown to be reachable (name the page); .njk in a comment is a false positive and must not be counted; hygiene.deadFeatureRefs reaches 0 or generalistPath gets a documented reason to stay; no visual regression at 1280 and true-390 in both themes",
       "log": [
-        "Filed iter 46 discovery. Deferred until PKG-10, which owns the orphan sweep, unless it lands sooner."
+        "Filed iter 46 discovery. Deferred until PKG-10, which owns the orphan sweep, unless it lands sooner.",
+        "iter 51 · Done via PKG-10, and MY LIST WAS WRONG. I derived the fourteen from a 40-page sample; the Builder re-derived across all 228 built pages, all 5 client scripts, all 12 templates, .eleventy.js and tools/, and found FOUR false positives: .level-block__tag is live on all 7 genre pages, .exercise-desc has 40 instances on /rudiments/, .exercise-lesson-link 12, and .notation-error is unreachable from any page but IS reachable from tools/notation-renderer.js and is deliberately kept so a failed stave looks failed. The '.tips' and '.tag' hits were prose — 'the tips should rise', 'Producers tag trap beats' — which is what a raw-text scan does to you. Ten rule-sets deleted, plus two dead template branches (content.listeningIntro, item.context) that 0 of 217 lessons populate. hygiene.deadFeatureRefs stays 1 by design: curriculum.generalistPath carries a documented NOTE and iter 7 decided it stays, since building /generalist/ would be an unprompted feature."
       ]
     },
     {
@@ -1226,6 +1233,128 @@
       "log": [
         "Filed iter 50. P1: these sit inches from the notation they contradict, and unlike prose a tip is read at the moment of practice."
       ]
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-071",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Lesson 1 asks the reader to point at a diagram it does not contain",
+      "evidence": [
+        "Beginner persona, BLOCKING, and the single thing that would have made her close the tab: '/lessons/the-drum-kit/' has zero images — 0 <img>, no photos, no diagrams — and teaches kit anatomy entirely in prose. Its own Move-on-when checklist then reads 'Can point to each piece on a diagram or photo'. The page sets a task it does not give the means to do.",
+        "This is the lesson the homepage's one big Start here button sends every new visitor to.",
+        "Related to BL-030 (photos stripped, blocked-human), but this half does not need photography: the criterion can be rewritten, or a labelled SVG kit diagram drawn, which the site already has the renderer skills for."
+      ],
+      "acceptance": "either /lessons/the-drum-kit/ carries a labelled kit diagram a reader can point at, or the graduation criterion stops asking for one; a beginner persona can complete every criterion on the page using only what the page provides"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-072",
+      "dimension": "ui",
+      "priority": 1,
+      "title": "Shift+Tab parks the focused row behind the sticky header",
+      "evidence": [
+        "Keyboard persona, BLOCKING. scroll-margin-top handles forward navigation and anchors, but tabbing BACKWARD scrolls the focused element to the top of the viewport where the sticky header covers it. The user cannot see what they have focused.",
+        "Same class of bug as the transport dock's body reserve: a fixed overlay against browser-driven scrolling."
+      ],
+      "acceptance": "at 1280 and true-390, Shift+Tab through a lesson page leaves every focused element fully visible below the header; measured as focusedRect.top >= headerRect.bottom for every stop, not eyeballed"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-073",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "69 Tab presses to reach the first exercise control; 228 to cross the homepage",
+      "evidence": [
+        "Keyboard persona: 69 presses after the skip link to reach the first exercise control on a lesson page, and 228 from the top of the homepage to the first footer link, with no in-page chapter jumps.",
+        "The skip link only skips the header. The lesson map disclosure and the 19-chapter homepage ledger are both long link lists sitting between the reader and the content."
+      ],
+      "acceptance": "a keyboard user can reach the first exercise on a lesson page, and any chapter on the homepage, in a small bounded number of stops; the mechanism is a real skip target or landmark, not a tabindex hack"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-074",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The header pill wears a play triangle but does not play anything",
+      "evidence": [
+        "Beginner persona, and she named it as the moment the site made her feel stupid: 'I tapped a play triangle and nothing played — it opened a drawer with a second, identical play triangle.' Three play triangles were on screen at once: the pill's, the dock's, and the exercise's PLAY button.",
+        "The pill's job is disclosure, not playback. A chevron would say that; a triangle says the opposite. Alternatively the pill could actually start the click on tap."
+      ],
+      "acceptance": "the header pill's icon matches what pressing it does; no screen shows two identical play glyphs with different behaviours"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-075",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The open metronome shows three glyphs and no words",
+      "evidence": [
+        "Beginner persona enumerated every visible text node in the opened dock at 390px. The complete list: '▶', '♪', '▾'. The BPM label is display:none at that width, so the tempo field is a naked box reading 80, and the two sliders are unlabelled — one is tempo, one is volume, and she had to guess.",
+        "No visible text anywhere on a 390px screen ever says metronome, tempo or beats per minute. Screen-reader users are told 'Metronome, 80 beats per minute, stopped'; a sighted phone user is told '80'."
+      ],
+      "acceptance": "at 390px the open dock visibly names what its controls do, without breaking the two-row layout or the 44px targets or the constant dock height that check-transport-reserve enforces"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-076",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The metronome does not carry the exercise's tempo, and closing it scrolls the page 65px",
+      "evidence": [
+        "Beginner persona: the header pill says 80 while the exercise directly below says ♩ = 70, on a site whose headline is 'The whole town practices to the same clock'. Opening the metronome from inside an exercise does not pick up that exercise's tempo.",
+        "Separately and reproducibly: closing the dock with the ▾ chevron moves scrollY by exactly 65px every time (3050 to 2985, 1500 to 1435), while closing it via the header pill leaves scroll untouched. Smells like focus moving to the pill as the chevron is hidden.",
+        "Returning persona independently: 'the metronome dies on every page navigation', and asked for tap tempo."
+      ],
+      "acceptance": "the 65px scroll jump is gone (measured at three scroll positions); and either the dock adopts the tempo of the exercise a reader opens it from, or the site stops claiming one clock"
+    },
+    {
+      "attempts": 0,
+      "chunk": null,
+      "status": "ready",
+      "log": [
+        "Filed iter 51 from the epic-closing persona milestone review."
+      ],
+      "id": "BL-077",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Progress is visible on the homepage and nowhere else",
+      "evidence": [
+        "Returning persona, BLOCKING for them: the ✓ done and ● here marks exist only on the homepage ledger. A lesson page does not say whether you have finished it, and the genre page — where they went looking — shows nothing.",
+        "They also flagged that 'Start here — your first lesson' stays the loudest button on the homepage for someone with 11 lessons of history, and that the site gives two conflicting answers to 'what do I do next'.",
+        "The progress data itself is accurate and properly exposed — their words — so this is a surfacing problem, not a data problem."
+      ],
+      "acceptance": "a returning reader can see their own state on a lesson page and on a genre page, using the existing dc_progress data and the existing mark vocabulary; the homepage primary CTA reflects whether they are new"
     }
   ]
 }

@@ -422,15 +422,6 @@ a:focus-visible { border-radius: 2px; }
 .skip-link:focus { left: 8px; }
 
 /* =====================  TYPE / HEADINGS  ===================== */
-.tag {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: inline-block;
-}
-
 .eyebrow {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -519,29 +510,6 @@ hr.section-rule {
   letter-spacing: 0.08em;
   color: var(--ink-soft);
   margin: 32px 0 0;
-}
-
-.curriculum-section {
-  margin-bottom: 72px;
-}
-.curriculum-section__header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-.curriculum-section__header--left {
-  text-align: left;
-}
-.curriculum-section__header--left .lede { margin-left: 0; margin-right: 0; }
-.curriculum-section__header h2 {
-  font-size: 2.125rem;
-  margin: 6px 0 8px;
-}
-.curriculum-section__header h2 em {
-  font-style: italic;
-  color: var(--accent);
-}
-.curriculum-section__header .lede {
-  margin: 0 auto;
 }
 
 /* =====================  HOMEPAGE — THE LEDGER  =====================
@@ -782,14 +750,6 @@ hr.section-rule {
   padding-bottom: 8px;
   border-bottom: 2px solid var(--ink);
   margin-bottom: 0;
-}
-.level-block__num {
-  font-family: var(--display);
-  font-size: 2.75rem;
-  font-style: italic;
-  color: var(--accent);
-  font-weight: 600;
-  line-height: 1;
 }
 .level-block__title {
   font-family: var(--display);
@@ -1265,6 +1225,10 @@ hr.section-rule {
 }
 .notation svg .playhead.is-active { opacity: 0.55; }
 
+/* Reachable only from tools/notation-renderer.js, which substitutes this block
+   for a stave it could not render. Deliberately kept with no page using it: a
+   build-time render failure has to look like a failure, not like unstyled text.
+   tools/checks/check-notation-frame.js asserts it never reaches a shipped page. */
 .notation-error {
   padding: 18px;
   color: var(--accent);
@@ -1272,9 +1236,9 @@ hr.section-rule {
   font-size: 0.875rem;
 }
 
-/* .exercise-tip is the same object as .tips/.callout and shares their rules
-   (system.md §6.4) — see the TIPS / CALLOUTS block below, which also owns its
-   spacing (it has to come later in the sheet to win at equal specificity). */
+/* .exercise-tip is the tip object (system.md §6.4) — see the TIP CALLOUT block
+   below, which also owns its spacing (it has to come later in the sheet to win
+   at equal specificity). */
 .exercise-tip em { font-style: italic; color: var(--ink); font-weight: 400; }
 
 /* Reference cards (/rudiments/) fold a description and a lesson link into
@@ -1293,12 +1257,14 @@ hr.section-rule {
   text-transform: uppercase;
 }
 
-/* =====================  TIPS / CALLOUTS  =====================
-   One component, three names (system.md §6.2): .tips and .callout in prose,
-   .exercise-tip inside an exercise card. Green, not accent — a tip is advice,
-   and accent is reserved for things you can click. On the card the old ochre
-   hairline was the only ochre text-adjacent rule left on the site. */
-.tips, .callout, .exercise-tip {
+/* =====================  TIP CALLOUT  =====================
+   One component, one name: .exercise-tip, emitted by the exercise shortcode
+   from a lesson's `tip` field. The .tips/.callout prose aliases were deleted in
+   PKG-10 — no lesson body used either, and the style guide routes coaching
+   through the exercise tip. Green, not accent — a tip is advice, and accent is
+   reserved for things you can click. On the card the old ochre hairline was the
+   only ochre text-adjacent rule left on the site. */
+.exercise-tip {
   background: var(--paper);
   border: 1px solid var(--rule-soft);
   border-left: 3px solid var(--green);
@@ -1310,7 +1276,7 @@ hr.section-rule {
   color: var(--ink-2);
   max-width: 65ch;
 }
-.tips strong, .callout strong, .exercise-tip strong { color: var(--green); font-weight: 600; }
+.exercise-tip strong { color: var(--green); font-weight: 600; }
 /* Inside the card the tip is the last thing in the box, so it only needs
    clearance from the stave above it. */
 .exercise-tip { margin: 12px 0 0; }
@@ -1419,15 +1385,6 @@ hr.section-rule {
   color: var(--ink);
   margin: 0 0 6px;
 }
-.listening__intro {
-  font-family: var(--body);
-  font-style: italic;
-  font-size: 1.0625rem;
-  line-height: 1.65;
-  color: var(--ink-soft);
-  margin: 0 0 22px;
-  max-width: 640px;
-}
 .listening__list {
   list-style: none;
   padding: 0;
@@ -1472,14 +1429,6 @@ hr.section-rule {
      this, "Paul Simon — 50 Ways to Leave Your Lover" pushed a 320px page 38px
      sideways at 200% text. */
   overflow-wrap: anywhere;
-}
-.listening__context {
-  margin-left: 10px;
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
 }
 .listening__note {
   margin: 0;
@@ -1967,7 +1916,6 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .lesson-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
   .genre-hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 2.875rem); }
-  .curriculum-section__header h2 { font-size: 1.75rem; }
   /* .ledger__title is a class, so the bare h2 step above cannot reach it —
      and neither of the two heads that borrow its geometry is an exception. */
   .ledger__title { font-size: 1.75rem; }
@@ -1975,7 +1923,6 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   .rud-family__title { font-size: 1.75rem; }
   .exercise { padding: 18px 16px; }
   .exercise-title { font-size: 1.125rem; }
-  .tracks-grid { grid-template-columns: 1fr; }
   .listening { margin-top: 36px; }
 }
 

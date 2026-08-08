@@ -59,21 +59,21 @@ eleventyComputed:
   <header class="lesson-hero">
     <p class="breadcrumb">
       <a href="/">Lessons</a>
+      {#- The &nbsp; after each separator is load-bearing (BL-044): it is the only
+          thing stopping a "/" from being the last glyph on a wrapped line. The
+          break opportunity is the source space BEFORE the separator, so a crumb
+          that wraps takes its separator down with it. Removing the entity puts
+          a dangling slash back at 280-320px. -#}
       {%- if lesson.section == 'track' %}
-        <span class="breadcrumb__sep" aria-hidden="true">/</span>
-        <a href="/genres/{{ lesson.track }}/">{{ lesson.trackTitle }}</a>
-        <span class="breadcrumb__sep" aria-hidden="true">/</span>
-        {{ lesson.levelTitle }}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;<a href="/genres/{{ lesson.track }}/">{{ lesson.trackTitle }}</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;{{ lesson.levelTitle }}
       {%- elif lesson.section == 'foundations' %}
-        <span class="breadcrumb__sep" aria-hidden="true">/</span>
-        Foundations
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;Foundations
         {%- if lesson.subSectionTitle %}
-        <span class="breadcrumb__sep" aria-hidden="true">/</span>
-        {{ lesson.subSectionTitle }}
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;{{ lesson.subSectionTitle }}
         {%- endif %}
       {%- elif lesson.section == 'mastery' %}
-        <span class="breadcrumb__sep" aria-hidden="true">/</span>
-        Other Topics
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;Other Topics
       {%- endif %}
     </p>
     <h1>{{ lesson.title }}</h1>
@@ -129,7 +129,6 @@ eleventyComputed:
         <span class="listening__count">{{ content.listening.length }} record{% if content.listening.length != 1 %}s{% endif %}</span>
       </header>
       <h3 class="listening__title">Listen for it</h3>
-      {% if content.listeningIntro %}<p class="listening__intro">{{ content.listeningIntro }}</p>{% endif %}
       <ol class="listening__list">
         {% for item in content.listening %}
           <li class="listening__item">
@@ -139,7 +138,6 @@ eleventyComputed:
                 <span class="listening__artist">{{ item.artist }}</span>
                 <span class="listening__dot" aria-hidden="true">·</span>
                 <em class="listening__work">{{ item.work }}</em>
-                {% if item.context %}<span class="listening__context">{{ item.context }}</span>{% endif %}
               </p>
               {% if item.note %}<p class="listening__note">{{ item.note }}</p>{% endif %}
             </div>
@@ -170,7 +168,7 @@ eleventyComputed:
     <div class="stub-message">
       <h3>This lesson is scaffolded, not yet written</h3>
       <p>The curriculum includes this lesson, but the full content — exercises, notation, listening recommendations — hasn't been authored yet.</p>
-      <p style="margin-top: 14px;"><a href="/">← Back to the curriculum</a></p>
+      <p><a href="/">← Back to the curriculum</a></p>
     </div>
 
   {% endif %}

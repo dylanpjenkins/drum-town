@@ -25,11 +25,10 @@ eleventyComputed:
       and only the title is the page's name. -#}
   <header class="genre-hero">
     <p class="breadcrumb">
+      {#- &nbsp; after each separator: see the note in lessons.njk (BL-044). -#}
       <a href="/">Lessons</a>
-      <span class="breadcrumb__sep" aria-hidden="true">/</span>
-      <a href="/#tracks">Genres</a>
-      <span class="breadcrumb__sep" aria-hidden="true">/</span>
-      {{ track.title }}
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;<a href="/#tracks">Genres</a>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>&nbsp;{{ track.title }}
     </p>
     <h1>{{ track.title }}</h1>
     <p class="lede">{{ track.tagline }}</p>
