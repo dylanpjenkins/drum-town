@@ -36,10 +36,10 @@
   const pillSig     = pill ? pill.querySelector('.clock-pill__sig') : null;
   const pillState   = document.getElementById('metronome-pill-state');
 
-  // The pill's glyph, tempo and time signature are all aria-hidden, so this one
+  // The pill's lamp, tempo and time signature are all aria-hidden, so this one
   // span IS the button's accessible name. Rebuilt whenever the tempo changes or
-  // a session starts or stops; the ■ glyph alone would tell a screen-reader user
-  // nothing about whether the click is currently running.
+  // a session starts or stops; the lamp's color alone would tell a screen-reader
+  // user nothing about whether the click is currently running.
   let pillRunning = false;
   function syncPillLabel() {
     if (!pillState) return;
@@ -310,15 +310,19 @@
 
   let session = null;
 
-  // Running state shows on both faces of the instrument: ■ on the go button
-  // and on the pill's dot, which also drops to a neutral disc so the brass
-  // offbeats and the brick downbeat read as color changes against it.
+  // Running state shows on both faces of the instrument: ■ on the go button —
+  // which does stop the click, so the glyph is honest there — and on the pill,
+  // whose lamp fills with a neutral ink so the brass offbeats and the brick
+  // downbeat read as color changes against it. The pill's border goes brass too:
+  // a 14px lamp is easy to miss from across the header (BL-074). No glyph is
+  // written into the lamp; the pill's only glyph is the disclosure chevron, and
+  // that one is CSS, driven by aria-expanded.
   function setPillRunning(running) {
     pillRunning = running;
     syncPillLabel();
+    if (pill) pill.classList.toggle('is-running', running);
     if (!pillDot) return;
     pillDot.classList.toggle('is-running', running);
-    pillDot.textContent = running ? '■' : '▶';
     if (!running) clearPulse(pillDot);
   }
 

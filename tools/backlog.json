@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 53,
-    "next_dimension": "ui",
+    "iteration": 59,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 82,
+    "next_id": 85,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -20,8 +20,10 @@
     },
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless.",
     "discoveryNotes": [
-      "iter 56: a metadata sweep reported 228 pages with NO canonical link and a sitemap with 0 <loc> entries. Both are local-build artifacts, NOT defects: src/_data/site.js reads process.env.SITE_URL, netlify.toml sets it to https://drum.town, and base.njk/sitemap.njk are both gated on site.url. Rebuilt with SITE_URL set and got 1 canonical per page and 227 sitemap locs. Do not file these; if a sweep raises them again, check whether the build had SITE_URL."
-    ]
+      "iter 56: a metadata sweep reported 228 pages with NO canonical link and a sitemap with 0 <loc> entries. Both are local-build artifacts, NOT defects: src/_data/site.js reads process.env.SITE_URL, netlify.toml sets it to https://drum.town, and base.njk/sitemap.njk are both gated on site.url. Rebuilt with SITE_URL set and got 1 canonical per page and 227 sitemap locs. Do not file these; if a sweep raises them again, check whether the build had SITE_URL.",
+      "Iteration counter reconciled at iter 59: meta.iteration had drifted to 53 against 58 PROGRESS entries, because bookkeeping-only and repair ticks did not always bump it. Set to 59 to match PROGRESS. Side effect: 59 % 10 == 9, so the NEXT tick is a discovery pass — that is intended, the last one was iter 56."
+    ],
+    "notes": []
   },
   "items": [
     {
@@ -933,14 +935,19 @@
         "Maya (iter 30): 'a record or a vinyl label first. Second guess, a drum seen from directly above… it isn't shouting drums at me'"
       ],
       "acceptance": "seal reads as percussion at 28px (e.g. lugs/tension rods around the rim rather than concentric rings, or a stick figure) without becoming fussy; verify by asking a fresh persona what it depicts, unprompted",
-      "status": "ready",
-      "attempts": 0,
+      "status": "blocked-human",
+      "attempts": 4,
       "chunk": null,
       "log": [
         "Filed from persona panel (iter 30).",
         "iter 49 · Mark REPLACED, acceptance NOT yet met. Maya's read in iter 30 was 'a record or a vinyl label first… it isn't shouting drums at me', and she was right: two concentric rings and four dots IS a vinyl label. The new seal is a snare drum in elevation — brass head inside a brick hoop, three tension rods down the shell, two lug casings breaking the silhouette, and a brass bottom counter-hoop. The Builder sketched six candidates and rasterised each at 16px rather than judging them large: a lugged hoop read as a gear, a 3/4 view read as a coin, a hoop with crossed sticks read as a cancel button. I reviewed its shipped version myself at 16 and 28px and found the two protruding side lugs plus vertical rods still read as a bucket with handles, which is the risk the Builder itself had flagged on an earlier candidate. Adding the bottom hoop is what fixes it: drums are hooped top AND bottom, buckets are not, and the symmetry is legible at 16px. The vinyl misread is now structurally impossible — the silhouette is not circular. STILL OWED: this item's acceptance asks for a persona to name it unprompted. I can prove it is no longer a record and that the cues survive rasterisation; I cannot prove the naming. Item stays open for that check.",
         "iter 51 · 2026-08-08 · ACCEPTANCE TESTED AND NOT MET. The persona milestone review asked all three, unprompted, what they took the mark to be. Beginner: 'a small wooden barrel, or maybe a honey pot… I did not read it as a drum until I'd read the word drum next to it and back-filled the meaning.' Returning player: 'a little barrel, or a tin, or one of those wooden kegs. The word drum.town sitting right next to it is what told me it was a drum, not the mark.' Keyboard user: 'a small barrel, or honestly a jar of jam.' All three separately magnified it and all three then saw a snare drum — the beginner at 340px, the keyboard user at 6x. So the geometry is right and the SCALE is wrong: at 28px the tension rods collapse into three stripes and the gold batter head reads as a lid. I OWE A CORRECTION HERE: in iter 49 I wrote that adding the bottom counter-hoop made it read as a drum, on the strength of my own look at a magnified render. Three simulated users at the real size say otherwise, and the whole point of the persona check was that my own reading is not evidence. The beginner also caught the case that makes it worse rather than better: below 360px the wordmark drops out, so the barrel is the only branding left and there is no adjacent word to back-fill from. Next attempt should design AT 28px first and scale up, not the reverse — likely fewer, heavier elements: two rods rather than three, a thicker hoop, or a silhouette that is not a vessel at all.",
-        "iter 57 · 2026-08-08 · FOURTH ATTEMPT, NOTHING SHIPPED — and that is the honest outcome, not a failure to finish. A Designer produced 27 rasterised sketches, all judged at true 16 and 28px rather than large, and delivered four finished candidates. I read the contact sheet myself at the actual pixel grid and rejected all four: at 28px they read as SHALLOW VESSELS WITH AN IMPLEMENT — ashtray with a cigarette, wok with a spatula, dark loaf with a knife. The Designer called ashtray a 'residual risk'; on the pixels it is the primary read. Candidate 4 (a cropped, open silhouette — structurally the right instinct) reads as a hamburger at 16px, which it said itself. None of the four is clearly better than what is shipped, so shipping one would have been motion without improvement. THE DIAGNOSIS IS NOW CLEAR AND IS THE REAL YIELD OF THIS TICK: the original failed as a TALL cylinder reading as a barrel; these over-corrected into SHALLOW dishes reading as pans. The misread migrated between vessel types instead of dying — barrel, honey pot, frying pan, ashtray, wok. Every closed rounded silhouette in this two-colour palette reads as a container. FOUR MEASURED FACTS worth more than the candidates: (1) --gold is 2.3:1 against the light page ground, so the CURRENT mark's largest element, its gold batter head, plus its three gold rods, are the lowest-contrast parts of the mark in the palette most visitors see — gold cannot carry a silhouette and must be treated as discardable decoration. (2) --gold against --accent is 1.35:1 in the DARK palette, so a gold head and an accent stick cannot be separated by colour at all; any crossing element needs a transparent corridor masked out of the form, showing the page ground. (3) A striking angle only reads as a strike between 28 and 38 degrees: shallower and it lies in the dish like a cigarette, steeper and it stands in it like a spoon. (4) Dead directions, each with what it actually reads as, so nobody spends another 27 sketches finding out: splayed legs = a stool; two cymbals on a rod = a fish skeleton; radiating arcs = wifi; gold centred in the head = a fried egg in a skillet; near-vertical stick = a candle on a cake; symmetric sticks = a beetle with antennae; three horizontal bands = a hamburger. Earlier rounds also killed lugged hoop = a gear, three-quarter view = a coin, crossed sticks = a cancel button. FOR THE NEXT ATTEMPT: stop drawing a drum in elevation. The two untried directions are an OPEN silhouette that is not a closed shape at all (candidate 4's instinct, better executed) and abandoning the drum image for something else the name affords — the word is drum.TOWN, and a mark does not have to be the instrument. Contact sheet and all 27 sketches are in the scratchpad under bl059/ for the session; the four candidate SVGs are there too if a later tick wants to iterate rather than restart."
+        "iter 57 · 2026-08-08 · FOURTH ATTEMPT, NOTHING SHIPPED — and that is the honest outcome, not a failure to finish. A Designer produced 27 rasterised sketches, all judged at true 16 and 28px rather than large, and delivered four finished candidates. I read the contact sheet myself at the actual pixel grid and rejected all four: at 28px they read as SHALLOW VESSELS WITH AN IMPLEMENT — ashtray with a cigarette, wok with a spatula, dark loaf with a knife. The Designer called ashtray a 'residual risk'; on the pixels it is the primary read. Candidate 4 (a cropped, open silhouette — structurally the right instinct) reads as a hamburger at 16px, which it said itself. None of the four is clearly better than what is shipped, so shipping one would have been motion without improvement. THE DIAGNOSIS IS NOW CLEAR AND IS THE REAL YIELD OF THIS TICK: the original failed as a TALL cylinder reading as a barrel; these over-corrected into SHALLOW dishes reading as pans. The misread migrated between vessel types instead of dying — barrel, honey pot, frying pan, ashtray, wok. Every closed rounded silhouette in this two-colour palette reads as a container. FOUR MEASURED FACTS worth more than the candidates: (1) --gold is 2.3:1 against the light page ground, so the CURRENT mark's largest element, its gold batter head, plus its three gold rods, are the lowest-contrast parts of the mark in the palette most visitors see — gold cannot carry a silhouette and must be treated as discardable decoration. (2) --gold against --accent is 1.35:1 in the DARK palette, so a gold head and an accent stick cannot be separated by colour at all; any crossing element needs a transparent corridor masked out of the form, showing the page ground. (3) A striking angle only reads as a strike between 28 and 38 degrees: shallower and it lies in the dish like a cigarette, steeper and it stands in it like a spoon. (4) Dead directions, each with what it actually reads as, so nobody spends another 27 sketches finding out: splayed legs = a stool; two cymbals on a rod = a fish skeleton; radiating arcs = wifi; gold centred in the head = a fried egg in a skillet; near-vertical stick = a candle on a cake; symmetric sticks = a beetle with antennae; three horizontal bands = a hamburger. Earlier rounds also killed lugged hoop = a gear, three-quarter view = a coin, crossed sticks = a cancel button. FOR THE NEXT ATTEMPT: stop drawing a drum in elevation. The two untried directions are an OPEN silhouette that is not a closed shape at all (candidate 4's instinct, better executed) and abandoning the drum image for something else the name affords — the word is drum.TOWN, and a mark does not have to be the instrument. Contact sheet and all 27 sketches are in the scratchpad under bl059/ for the session; the four candidate SVGs are there too if a later tick wants to iterate rather than restart.",
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Blocked-human after four attempts. Every closed rounded silhouette in this two-colour palette reads as a container: barrel, honey pot, keg, jar, frying pan, ashtray, wok. Ten dead directions are recorded in the log above with what each actually reads as at 28px. Two untried directions remain, and both are calls for the owner, not the loop: an OPEN silhouette that is not a closed shape, or abandoning the instrument entirely (the name is drum.town, and a mark need not be a drum). Also measured and unresolved by drawing alone: --gold is 2.3:1 on the light page ground, and gold-on-accent is 1.35:1 in dark, so a gold head and an accent stick cannot be separated by colour at all. Loop stops guessing here."
+        }
       ]
     },
     {
@@ -1305,13 +1312,23 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Raised P2 to P1: a control that lies about what it does, or gives the reader no words at all, is user-facing broken — priority 1 by the discovery-pass rule in .claude/commands/improve.md. Filed at P2 by mistake."
+        },
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Shipped. The pill lamp carries no glyph at all now: ring = stopped, filled = running, brass ring on the offbeat, brick on the downbeat, and the disclosure is a CSS chevron driven off the aria-expanded the button already publishes — no second source of truth in JS. Neither the play triangle nor the stop square was honest: pressing the pill neither starts nor stops the click. Critic walked every text node on /lessons/paradiddle/ with the dock open and found exactly two U+25B6 left, the dock go button and an exercise Play button, both of which start audio and differ in target rather than behaviour; /rudiments/ has 41 for the same reason. Also restored the pointer-only pill height, which the smaller lamp had silently taken from 34px to a measured 28px."
+        }
       ],
       "id": "BL-074",
       "dimension": "ui",
-      "priority": 2,
+      "priority": 1,
       "title": "The header pill wears a play triangle but does not play anything",
       "evidence": [
         "Beginner persona, and she named it as the moment the site made her feel stupid: 'I tapped a play triangle and nothing played — it opened a drawer with a second, identical play triangle.' Three play triangles were on screen at once: the pill's, the dock's, and the exercise's PLAY button.",
@@ -1322,13 +1339,23 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Raised P2 to P1: a control that lies about what it does, or gives the reader no words at all, is user-facing broken — priority 1 by the discovery-pass rule in .claude/commands/improve.md. Filed at P2 by mistake."
+        },
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Shipped. Every control sits in a 44px .transport__field with an absolutely positioned aria-hidden .transport__cap in the dead vertical space each 44px control already has above its own content, so the dock height is unchanged and the reserve still clears at 11px. Visible dock text at 390px went from the three glyphs the persona enumerated to: play, BPM 80, BEAT, TEMPO, METER 4/4, VOLUME, collapse. Caption vocabulary was corrected once after the critic: the first attempt captioned the beat-dot row METRONOME, and elementFromPoint proved the word naming the product returned the bare field while every other caption returned its control — the pills own play triangle one layer down. BEAT on the dots and METER on the select means each caption names its own control, and METER 4/4 also stops asserting visibly that 6/8 has six beats."
+        }
       ],
       "id": "BL-075",
       "dimension": "ui",
-      "priority": 2,
+      "priority": 1,
       "title": "The open metronome shows three glyphs and no words",
       "evidence": [
         "Beginner persona enumerated every visible text node in the opened dock at 390px. The complete list: '▶', '♪', '▾'. The BPM label is display:none at that width, so the tempo field is a naked box reading 80, and the two sliders are unlabelled — one is tempo, one is volume, and she had to guess.",
@@ -1341,11 +1368,16 @@
       "chunk": null,
       "status": "ready",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Raised P2 to P1: a control that lies about what it does, or gives the reader no words at all, is user-facing broken — priority 1 by the discovery-pass rule in .claude/commands/improve.md. Filed at P2 by mistake."
+        }
       ],
       "id": "BL-076",
       "dimension": "ui",
-      "priority": 2,
+      "priority": 1,
       "title": "The metronome does not carry the exercise's tempo, and closing it scrolls the page 65px",
       "evidence": [
         "Beginner persona: the header pill says 80 while the exercise directly below says ♩ = 70, on a site whose headline is 'The whole town practices to the same clock'. Opening the metronome from inside an exercise does not pick up that exercise's tempo.",
@@ -1443,6 +1475,73 @@
       "chunk": null,
       "log": [
         "Filed iter 58. The renderer's currentColor sweep is the right mechanism; it just does not reach these two."
+      ]
+    },
+    {
+      "id": "BL-082",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The transport dock does not scale with text zoom: fixed 44px fields, fixed --transport-h",
+      "evidence": [
+        "Critic measured the caption/value collision at 390px and 1280px across root font sizes. First intersection is an 18px root (BPM over 80 at +0.4px), not the 22px the CSS comment claimed. At 20px BPM/80 overlap 2.8px; at 24px 8.5px; at a 32px root (WCAG 1.4.4 200% text) BPM overlaps 80 by 20px and Beats overlaps 4/4 by 15px.",
+        "At a 32px root the damage is not only labels: the beat caption sits 7px INTO the dot row so a running beat indicator renders partly behind glyphs, the TEMPO caption overlaps the slider thumb near minimum tempo, and the select value 4/4 hangs below its own border box because height:44px and padding-top:11px are fixed while the line box scales.",
+        "What does NOT break, measured at every root from 16 to 32px: exactly two rows at <=720px and one above, dock 129/65px against a 140/76px reserve, scrollWidth === clientWidth, and all six controls still 44px tall and reachable. So this is legibility loss, not functional loss.",
+        "Root cause is that the field height and --transport-h are px constants while the text scales. The fix the critic proposes is to express them in rem (2.75rem field, 8rem/4rem dock) which is byte-identical at a 16px root and therefore keeps check-transport-reserve passing, so the dock grows with the text instead of crushing it."
+      ],
+      "acceptance": "at a 32px root the dock captions no longer overlap their values, the dot row, or the slider thumb, and the select value stays inside its border box; the reserve still clears the dock at 16px AND at 32px, proved by a negative test that raises the root font and shows check-transport-reserve failing before the fix",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Filed by the adversarial critic during BL-074/075, with measurements."
+        }
+      ]
+    },
+    {
+      "id": "BL-083",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Nothing visible on a phone says the dock is a metronome",
+      "evidence": [
+        "Beginner persona for BL-075: no visible text anywhere on a 390px screen ever says metronome, tempo or beats per minute. BL-075 fixed the second and third — the dock now reads BPM, TEMPO, METER, BEAT, VOLUME — and deliberately did not fix the first.",
+        "The first attempt put METRONOME as the caption over the beat-dot row. The critic killed it: elementFromPoint at that caption returns the bare field while every other caption returns its control, so the one word naming the product invited a tap that did nothing — the same failure shape as BL-074. It also sat mid-row in a series where every other caption names the control beneath it.",
+        "A dock title needs a treatment that does not read as a control label, and row 1 has no spare width at 280px (the dot row already takes the leftover and is allowed to clip), so this is a design question rather than a string swap."
+      ],
+      "acceptance": "a reader at 390px can tell what the open dock is without pressing anything, via a treatment visibly distinct from .transport__cap, at no cost to the constant dock height or the 44px targets",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Filed by the adversarial critic during BL-074/075, with measurements."
+        }
+      ]
+    },
+    {
+      "id": "BL-084",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Tab order through the open dock contradicts its visual order at <=720px",
+      "evidence": [
+        "Critic measured the tab sequence against rendered position at 390px: metronome-toggle (row 1, top 784), metronome-bpm (row 1), metronome-slider (row 2, top 844), metronome-timesig (row 2), metronome-volume (row 2), then metronome-collapse — which is the LAST tab stop but sits back up in row 1.",
+        "Caused by the order: values in the <=720px block that build the two-row layout out of one DOM order. Pre-existing, and not a regression from BL-075.",
+        "BL-075 made it more conspicuous rather than less: a keyboard user now tabs past five controls that are each visibly named, in an order those names contradict. WCAG 1.3.2 Meaning­ful Sequence and 2.4.3 Focus Order."
+      ],
+      "acceptance": "focus order through the dock matches its visual order at every width, without a tabindex hack and without changing the visual two-row arrangement",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 59,
+          "date": "2026-08-12",
+          "note": "Filed by the adversarial critic during BL-074/075, with measurements."
+        }
       ]
     }
   ]

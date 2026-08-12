@@ -92,11 +92,20 @@
       </svg>
     </button>
     {#- Collapsed state of the transport dock (system.md §3/§7). Live BPM and
-        time signature are written here by metronome.js; the dot pulses with
-        the beat so a running metronome is never hidden. -#}
+        time signature are written here by metronome.js; the lamp pulses with
+        the beat so a running metronome is never hidden.
+
+        The lamp carries no glyph (BL-074). It used to wear ▶ when stopped and ■
+        when running, but pressing this button does neither — it opens and closes
+        the dock, and a beginner who tapped the triangle got a drawer containing a
+        second, identical triangle. The lamp is now a pure indicator (ring =
+        stopped, filled = running, brass offbeat, brick downbeat) and the
+        disclosure is carried by the chevron, which flips off the same
+        aria-expanded this button already publishes — CSS only, no second source
+        of truth in JS. -#}
     <button class="clock-pill" id="metronome-pill" type="button" aria-expanded="false" aria-controls="site-metronome">
-      <span class="clock-pill__dot" aria-hidden="true">▶</span>
-      <b class="clock-pill__bpm" aria-hidden="true">80</b><small class="clock-pill__sig" aria-hidden="true">· 4/4</small>
+      <span class="clock-pill__dot" aria-hidden="true"></span>
+      <b class="clock-pill__bpm" aria-hidden="true">80</b><small class="clock-pill__sig" aria-hidden="true">· 4/4</small><span class="clock-pill__chev" aria-hidden="true"></span>
       {#- The whole accessible name lives in this one span rather than being
           concatenated from the visible parts: nothing separates <b> from the
           span in the rendered markup, so a composed name would run together as
@@ -169,30 +178,80 @@
 
 {#- Transport dock (system.md §7). Ships collapsed so no dock flashes open
     before metronome.js runs; the header clock pill expands it. Control IDs are
-    unchanged from the old floating card — metronome.js keeps its wiring. -#}
+    unchanged from the old floating card — metronome.js keeps its wiring.
+
+    Every control sits in a `.transport__field` whose `.transport__cap` names it
+    in words (BL-075). At 390px the whole dock used to read "▶ ♪ ▾": the BPM
+    label was display:none below 400px, so the tempo box was a naked "80", and
+    the two sliders were unlabelled — one tempo, one volume, and you had to
+    guess. The caps ride in the dead vertical space each 44px control already
+    has above its own content, so the dock's height is unchanged and the reserve
+    that tools/checks/check-transport-reserve.js enforces still holds. DOM order
+    is unchanged too: the ≤720px two-row arrangement is driven by `order`, and
+    the desktop row follows this source order.
+
+    Each caption names its OWN control and nothing else. The dot row's caption
+    read "Metronome" for one review cycle, on the theory that this field had the
+    spare width to carry the dock's title; that was the same false affordance as
+    the pill's old play triangle, one layer down — a beginner hunting for the word
+    "metronome" found it, tapped it, and got nothing, because the field under it
+    is decoration. It says "Beat" now, and the select next to it says "Meter"
+    rather than "Beats", which also stops the row asserting that 6/8 has six
+    beats. The dock has no visible title as a result; a title needs a treatment
+    that is not a control caption, and that is filed separately. -#}
 <aside class="transport is-collapsed" id="site-metronome" aria-label="Metronome">
   <div class="transport__row">
     <button class="transport__go" id="metronome-toggle" type="button" aria-label="Start metronome">
       <span class="transport__icon" aria-hidden="true">▶</span>
     </button>
-    <label class="transport__bpm-wrap">
-      <input type="number" class="transport__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="Tempo in beats per minute" />
-      <span class="transport__bpm-label" aria-hidden="true">BPM</span>
+    {#- Every caption is aria-hidden and every control keeps a single aria-label,
+        so there is exactly one accessible name per control and the visible word
+        is a substring of it — WCAG 2.5.3 is string containment, so a voice-control
+        user saying "click BPM" has to land somewhere. All four pairs, in full:
+          BPM     → "BPM, tempo in beats per minute"
+          Tempo   → "Tempo slider"
+          Meter   → "Meter, beats per bar"
+          Volume  → "Volume"
+        The BPM name gained its prefix here: "Tempo in beats per minute" does not
+        contain the string "BPM", and while the visible label was display:none
+        below 400px that was invisible as well as unspoken. A comma, not a dash —
+        screen readers announce an em dash. The fifth caption, Beat, names the dot
+        row, which is aria-hidden decoration and takes no name at all. -#}
+    <label class="transport__field transport__bpm-wrap">
+      <span class="transport__cap" aria-hidden="true">BPM</span>
+      <input type="number" class="transport__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="BPM, tempo in beats per minute" />
     </label>
-    <input type="range" class="transport__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
-    <select class="transport__timesig" id="metronome-timesig" aria-label="Beats per bar">
-      <option value="2">2/4</option>
-      <option value="3">3/4</option>
-      <option value="4" selected>4/4</option>
-      <option value="5">5/4</option>
-      <option value="6">6/8</option>
-      <option value="7">7/8</option>
-    </select>
-    <div class="transport__beats" id="metronome-beats" aria-hidden="true"></div>
-    <span class="transport__vol">
-      <span class="transport__vol-icon" aria-hidden="true">♪</span>
+    <label class="transport__field transport__tempo">
+      <span class="transport__cap" aria-hidden="true">Tempo</span>
+      <input type="range" class="transport__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
+    </label>
+    {#- A div, not a label, and deliberately: a <select> inside a <label> has a
+        history of taking two taps on mobile browsers, because the label forwards
+        a second click into the popup that just opened. Nothing is lost — the
+        caption is aria-hidden either way and the select carries its own
+        aria-label, and the select fills the field, so a tap on the caption still
+        lands on the control underneath it. -#}
+    <div class="transport__field transport__meter">
+      <span class="transport__cap" aria-hidden="true">Meter</span>
+      <select class="transport__timesig" id="metronome-timesig" aria-label="Meter, beats per bar">
+        <option value="2">2/4</option>
+        <option value="3">3/4</option>
+        <option value="4" selected>4/4</option>
+        <option value="5">5/4</option>
+        <option value="6">6/8</option>
+        <option value="7">7/8</option>
+      </select>
+    </div>
+    <div class="transport__field transport__pulse">
+      <span class="transport__cap" aria-hidden="true">Beat</span>
+      {#- metronome.js rewrites this element's innerHTML on every time-signature
+          change, so the caption has to be its sibling, not its child. -#}
+      <div class="transport__beats" id="metronome-beats" aria-hidden="true"></div>
+    </div>
+    <label class="transport__field transport__vol">
+      <span class="transport__cap" aria-hidden="true">Volume</span>
       <input type="range" class="transport__volume" id="metronome-volume" min="0" max="100" step="1" value="60" aria-label="Volume" />
-    </span>
+    </label>
     <button class="transport__collapse" id="metronome-collapse" type="button" aria-expanded="true" aria-label="Collapse metronome">▾</button>
   </div>
 </aside>

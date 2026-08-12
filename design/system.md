@@ -306,11 +306,13 @@ break-word`.
   elements the offset ring follows the curve automatically. Never
   `outline: none` anywhere (`css.outlineNone` metric stays 0).
 - **prefers-reduced-motion**: the existing kill-all block is preserved
-  verbatim, extended with the new moving parts: transport beat dots animate
-  color only (no `transform` pulse — same pattern as today's rule), the
-  clock-pill running dot pulses by color only, the mobile nav panel and
+  verbatim, extended with the new moving parts: the transport beat dots and the
+  clock-pill lamp drop their `transform` pulse, the mobile nav panel and
   transport dock appear/disappear instantly (no slide), theme switch has no
-  transition.
+  transition. **Amended by BL-075's review**: "color only" was wrong — the
+  running fill against the brick downbeat measures 1.08:1, so each beat state
+  also carries a box-shadow ring and the states differ by size as well as hue.
+  A beat indicator may never be left with hue as its only cue.
 - **`.sr-only` utility** (new): standard clipped text pattern; used for
   visited/current announcements in the ledger and the dock state.
 - **Buttons** `.btn` (restyle): Public Sans 700, 0.9375rem, `--r-pill`,
@@ -350,8 +352,8 @@ Markup (base.njk), replacing the current `.site-header__inner` contents:
     </nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme"><!-- inline sun/moon SVGs, currentColor, swapped via [data-theme] CSS --></button>
     <button class="clock-pill" id="metronome-pill" type="button" aria-expanded="false" aria-controls="site-metronome">
-      <span class="clock-pill__dot" aria-hidden="true">▶</span>
-      <b class="clock-pill__bpm">80</b><small class="clock-pill__sig">· 4/4</small>
+      <span class="clock-pill__dot" aria-hidden="true"></span><!-- lamp: no glyph (BL-074) -->
+      <b class="clock-pill__bpm">80</b><small class="clock-pill__sig">· 4/4</small><span class="clock-pill__chev" aria-hidden="true"></span>
       <span class="sr-only">beats per minute — open metronome</span>
     </button>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
@@ -377,8 +379,16 @@ Markup (base.njk), replacing the current `.site-header__inner` contents:
   returns focus to the toggle; clicking a link closes. All five destinations
   reachable — Foundations / Genres / Other Topics / Rudiments / Metronome.
   Header row at ≤720px: `logo … theme-toggle clock-pill nav-toggle`
-  (pill shrinks: dot + BPM, `.clock-pill__sig` hidden ≤480px). At 390px the
-  row fits in one line at all states — verified in the harness.
+  (pill shrinks: lamp + BPM + chevron, `.clock-pill__sig` hidden ≤480px). At
+  390px the row fits in one line at all states — verified in the harness.
+- **Clock pill contents (amended by BL-074)**: the `.clock-pill__dot` is a
+  14px **lamp with no glyph** — a ring in `--ink-soft` while stopped, filled
+  while running, `--gold`/`--accent` on the beat, each state also carrying a
+  box-shadow ring so size distinguishes them without color or motion. The
+  disclosure is a separate `.clock-pill__chev`, drawn from two borders and
+  rotated off `aria-expanded` (up = collapsed, down = open). The pill's own
+  border goes `--ochre` while a session runs. The pill neither plays nor stops,
+  so it must never wear ▶ or ■.
 - **Sticky behavior**: header stays `position: sticky; top: 0; z-index: 10;`
   bg `--bg`, 1px `--rule` bottom border. `--header-h` token feeds
   `.curriculum-sidebar { top: var(--header-h) }` (replaces the hardcoded
@@ -725,15 +735,23 @@ structurally, at all widths).
 ### Markup (base.njk — same element, same control IDs so metronome.js keeps
 its wiring; classes re-housed)
 
+**Amended by BL-075**: every control sits in a 44px `.transport__field` with an
+aria-hidden `.transport__cap` naming it in words, absolutely positioned in the
+dead space above the control's own content so the dock's height is unchanged.
+The `.transport__bpm-label` and the `♪` `.transport__vol-icon` are gone — at
+390px the dock's entire visible text used to be `▶ ♪ ▾`. Each caption names its
+own control and only that: the dot row's caption is `Beat`, not the dock's name,
+because a caption over a decorative field is a tap that does nothing.
+
 ```html
 <aside class="transport is-collapsed" id="site-metronome" aria-label="Metronome">
   <div class="transport__row">
     <button class="transport__go" id="metronome-toggle" type="button" aria-label="Start metronome"><span class="transport__icon" aria-hidden="true">▶</span></button>
-    <label class="transport__bpm-wrap"><input type="number" class="transport__bpm" id="metronome-bpm" …existing attrs… /><span class="transport__bpm-label" aria-hidden="true">BPM</span></label>
-    <input type="range" class="transport__slider" id="metronome-slider" …existing attrs… />
-    <select class="transport__timesig" id="metronome-timesig" …existing options…></select>
-    <div class="transport__beats" id="metronome-beats" aria-hidden="true"></div>
-    <span class="transport__vol"><span class="transport__vol-icon" aria-hidden="true">♪</span><input type="range" class="transport__volume" id="metronome-volume" …existing attrs… /></span>
+    <label class="transport__field transport__bpm-wrap"><span class="transport__cap" aria-hidden="true">BPM</span><input type="number" class="transport__bpm" id="metronome-bpm" aria-label="BPM, tempo in beats per minute" …existing attrs… /></label>
+    <label class="transport__field transport__tempo"><span class="transport__cap" aria-hidden="true">Tempo</span><input type="range" class="transport__slider" id="metronome-slider" …existing attrs… /></label>
+    <div class="transport__field transport__meter"><span class="transport__cap" aria-hidden="true">Meter</span><select class="transport__timesig" id="metronome-timesig" aria-label="Meter, beats per bar" …existing options…></select></div>
+    <div class="transport__field transport__pulse"><span class="transport__cap" aria-hidden="true">Beat</span><div class="transport__beats" id="metronome-beats" aria-hidden="true"></div></div>
+    <label class="transport__field transport__vol"><span class="transport__cap" aria-hidden="true">Volume</span><input type="range" class="transport__volume" id="metronome-volume" …existing attrs… /></label>
     <button class="transport__collapse" id="metronome-collapse" type="button" aria-expanded="true" aria-label="Collapse metronome">▾</button>
   </div>
 </aside>
@@ -750,10 +768,14 @@ its wiring; classes re-housed)
 - Pill click ⇒ expand + move focus to `#metronome-toggle`. Collapse button ⇒
   collapse + return focus to the pill. Esc inside the dock ⇒ collapse (same
   focus return). The metronome **keeps ticking when collapsed**; the pill's
-  dot pulses with the beat (downbeat = `--accent`, others = `--gold`;
-  color-only under reduced motion) and shows ■ while running, so running
-  state is never hidden (addresses the BL-043 "hidden stop" complaint —
-  state visible, stop is one tap away).
+  lamp pulses with the beat (downbeat = `--accent`, others = `--gold`, each with
+  its box-shadow ring so the states differ by size too under reduced motion),
+  and while running the lamp fills and the pill's border goes `--ochre`, so
+  running state is never hidden (addresses the BL-043 "hidden stop" complaint —
+  state visible, stop is one tap away). **Amended by BL-074**: the lamp does
+  NOT show ■ (or ▶) — this button opens and closes the dock, so a transport
+  glyph on it is a promise it cannot keep. `setPillRunning()` toggles
+  `is-running` on the lamp and the pill and writes no character.
 - `setBpm()` additionally writes the BPM into `.clock-pill__bpm`;
   the timesig change handler updates `.clock-pill__sig`.
 
@@ -774,8 +796,10 @@ html.transport-open body { padding-bottom: calc(var(--transport-h) + 12px); }
   4px `--rule` track, 16px `--accent` thumb — thumb up from 13px for touch),
   time-signature select (mono field), beat dots (10px discs, `--rule` idle;
   active beat `--gold`; **downbeat active `--accent` — B's red dot,
-  mandatory**; +`transform: scale(1.35)` pulse that reduced-motion strips,
-  color still carries the beat), volume (♪ + 96px slider), collapse chevron.
+  mandatory**; +`transform: scale(1.35)` pulse that reduced-motion strips, and
+  a box-shadow ring — 10/13/18px outer — that it cannot strip, because hue
+  alone measures 1.08:1 against the running fill), volume (96px slider, no ♪),
+  collapse chevron. Each control wears its `.transport__cap` name.
 - **≤720px open state**: two rows (`--transport-h: 128px` via media
   re-declaration): row 1 = go · BPM · beat dots · collapse; row 2 = slider
   (flex 1) · timesig · volume. Grid template areas; 12px 16px padding; every

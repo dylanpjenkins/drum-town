@@ -149,11 +149,15 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 /* The ring hugs text on inline links; pill-radius elements curve it automatically. */
 a:focus-visible { border-radius: 2px; }
 
-/* Reduced motion: collapse all animation/transition to imperceptible and
-   stop the beat indicators pulsing (their color change carries the beat
-   information without the scale pop) — both the dock's dots and the header
-   pill's dot. The !important is the point of this block — it must beat every
-   rule, including future ones. */
+/* Reduced motion: collapse all animation/transition to imperceptible and stop the
+   beat indicators pulsing — both the dock's dots and the header pill's lamp. The
+   !important is the point of this block: it must beat every rule, including
+   future ones.
+   What carries the beat once the scale pop is gone is color AND size: each beat
+   state also draws a box-shadow ring in its own color (lamp 14 → 17 → 20px, dots
+   10 → 13 → 18px), which is not a transform and so is not stripped here. That
+   ring is load-bearing, not decoration — color alone measures 1.08:1 between the
+   running fill and the brick downbeat in light, which is no signal at all. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -302,33 +306,80 @@ a:focus-visible { border-radius: 2px; }
   white-space: nowrap;
 }
 .clock-pill:hover { border-color: var(--accent); }
+/* The lamp. It held a ▶ / ■ glyph until BL-074: pressing this button opens and
+   closes the dock, so a play triangle promised playback it never delivered and
+   ■ would have promised a stop it does not perform either. The disc is now a
+   pure indicator and carries no character at all — stopped is a ring, running is
+   a filled disc, and the beat colors land on top of that. Ring rather than a dim
+   fill so a stopped metronome reads as ready, not as broken. */
 .clock-pill__dot {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.5625rem;
-  line-height: 1;
-  transition: background 60ms ease, transform 60ms ease;
+  background: transparent;
+  border: 2px solid var(--ink-soft);
+  transition: background 60ms ease, border-color 60ms ease, box-shadow 60ms ease, transform 60ms ease;
 }
-/* While a session runs the disc rests on a neutral ink so each beat reads as a
+/* While a session runs the disc fills with a neutral ink so each beat reads as a
    color change: --gold on the offbeats, --accent on the downbeat (§7). A brick
    disc pulsing brick would hide the downbeat, which is the one beat that must
-   never be lost. */
+   never be lost.
+   Color alone does NOT carry it, which the comment here claimed for two packages:
+   the running fill against the brick downbeat measures 1.08:1 in light and the
+   fill against the brass offbeat 1.10:1 in dark. The only other cue was
+   scale(1.2) — which the reduced-motion block strips on purpose, so a light-theme
+   reduced-motion user saw nothing whatsoever on beat 1. So each beat also grows,
+   via a box-shadow ring in its own color: 14px at rest, 17px on an offbeat, 20px
+   on the downbeat. box-shadow costs no layout, never enters scrollWidth, and
+   nothing in the reduced-motion block can take it away, so the three states stay
+   distinct by size even with color and motion both discounted. */
 .clock-pill__dot.is-running { background: var(--ink-soft); }
-.clock-pill__dot.is-active { background: var(--gold); transform: scale(1.2); }
-.clock-pill__dot.is-downbeat-active { background: var(--accent); transform: scale(1.2); }
+.clock-pill__dot.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1.5px var(--gold);
+  transform: scale(1.2);
+}
+.clock-pill__dot.is-downbeat-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+  transform: scale(1.2);
+}
 .clock-pill__bpm { font-weight: 500; }
 .clock-pill__sig { font-size: 0.78125rem; color: var(--ink-soft); }
-/* §3's padding alone makes the pill 34px tall. That is fine under a mouse, but
-   once the nav collapses the pill is the ONLY way to reach the metronome, and
-   every other touch control on the site holds a 44px floor. Grow the box, not
-   the type. */
+/* Disclosure affordance: the one thing this button actually does. Drawn from two
+   borders rather than a glyph so it can rotate off aria-expanded — the state the
+   button already publishes — instead of needing JS to swap a character. Points
+   up while collapsed (press to raise the dock) and down while open (press to put
+   it away), which is the same direction the dock's own ▾ collapse control means. */
+.clock-pill__chev {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  margin-top: -2px;
+  border-right: 1.5px solid var(--ink-soft);
+  border-bottom: 1.5px solid var(--ink-soft);
+  transform: rotate(-135deg);
+  transition: transform 0.15s ease;
+}
+.clock-pill[aria-expanded="true"] .clock-pill__chev { margin-top: 2px; transform: rotate(45deg); }
+.clock-pill:hover .clock-pill__chev { border-color: var(--accent); }
+/* A running metronome has to be legible from across the header, and a 14px lamp
+   alone is not. The pill's own edge goes brass while the click runs; brass, not
+   brick, so it never reads as the hover/focus state, and it stays declared after
+   :hover so hovering a running pill cannot hide that it is running. */
+.clock-pill.is-running { border-color: var(--ochre); }
+/* §3's padding around the tallest child used to make the pill 34px on its own.
+   It does not any more: the lamp went 20px → 14px with BL-074, which took the
+   pointer-only pill to a measured 28px at 1024 and 1280 — a control shrinking as
+   a side effect of a glyph being deleted. 2.125rem restores the 34px §3 designed,
+   in rem so raised text still grows it, and the 44px touch floor below wins by
+   source order at equal specificity. That floor exists because once the nav
+   collapses the pill is the ONLY way to reach the metronome, and every other
+   touch control on the site holds 44px. Grow the box, not the type. */
+.clock-pill { min-height: 2.125rem; }
 @media (max-width: 53.75em) {   /* 860px at a 16px root; em so raised text collapses the nav too */
   .clock-pill { min-height: 44px; }
 }
@@ -1733,14 +1784,63 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   color: inherit;
 }
 
-.transport__bpm-wrap {
-  display: inline-flex;
+/* Named controls (BL-075). Every control in the dock is a 44px touch target
+   whose own content — a 4px slider rail, an 18px number, a 14px select value —
+   uses at most the middle 22px of that box. The name goes in the dead space
+   above the content, absolutely positioned, so it costs the dock ZERO height and
+   the reserve arithmetic below stays exactly as documented. The field is the
+   flex item in the row: `order`, `flex` and the widths all belong on it, and the
+   control inside just fills it. */
+.transport__field {
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 6px;
   flex-shrink: 0;
+  height: 44px;
+  margin: 0;
 }
+.transport__cap {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  /* Text-only zoom, measured, and worse than the first version of this comment
+     claimed. HORIZONTALLY it is fine: at a 32px root the dock still renders two
+     rows, there is no sideways scroll at any width, and captions that outgrow
+     their control ellipsize ("VOLUME" → "VOL…") instead of widening the row.
+     VERTICALLY it degrades, because every offset in this stack is a fixed px
+     (top: 2, the fields' 44px, the controls' 10/11px padding-top) while the type
+     scales with the root:
+       18px root — first intersection: the BPM caption meets the tempo value's
+                   line box (~0.5px).
+       32px root — the Beat caption reaches 7px into the dot row, so a running
+                   metronome's beat indicator renders partly behind glyphs; the
+                   Tempo caption overlaps the top of the slider thumb (thumb
+                   y 19–35, caption bottom y 24) and so collides with it near
+                   minimum tempo; and the select's 4/4 hangs ~2px below its own
+                   border box.
+     The root cause is that --transport-h and this field height are px constants,
+     and rem-izing them is a change that needs its own negative test proving the
+     body reserve still clears a raised root — it is filed as its own item, not
+     bolted onto this one. Nothing is lost outright at any root: every string still
+     renders. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* The whole 44px control keeps its hit area — a tap on the caption falls
+     through to the input underneath it. */
+  pointer-events: none;
+}
+
+.transport__bpm-wrap { width: 72px; }
 .transport__bpm {
-  width: 72px;
+  width: 100%;
   height: 44px;
   background: var(--bg);
   border: 1px solid var(--rule);
@@ -1749,37 +1849,37 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   font-size: 1.125rem;
   text-align: center;
   color: var(--ink);
-  padding: 0 4px;
+  /* Top padding seats the tempo under its BPM caption instead of behind it. */
+  padding: 11px 4px 0;
   -moz-appearance: textfield;
 }
+.transport__bpm-wrap .transport__cap { text-align: center; }
 .transport__bpm::-webkit-outer-spin-button,
 .transport__bpm::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 .transport__bpm:focus { border-color: var(--accent); }
-.transport__bpm-label {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  color: var(--ink-soft);
-}
 
 /* Range inputs (tempo, volume). The element itself is a 44px touch target;
    the visible 4px rail is drawn on the track pseudo-element so the hit area
-   is never the 4px line. */
+   is never the 4px line. The top padding drops that rail below the caption:
+   Chromium and Gecko both center the track in the content box, so 10px of
+   padding-top moves rail and thumb down 5px and the 16px thumb still sits
+   wholly inside the 44px box. */
 .transport__slider,
 .transport__volume {
   -webkit-appearance: none;
   appearance: none;
+  width: 100%;
   height: 44px;
   background: transparent;
   margin: 0;
-  padding: 0;
+  padding: 10px 0 0;
   cursor: pointer;
 }
-.transport__slider { flex: 1; min-width: 0; }
-.transport__volume { width: 96px; flex: 0 0 auto; }
+.transport__tempo { flex: 1; min-width: 0; }
+.transport__vol { width: 96px; }
 .transport__slider::-webkit-slider-runnable-track,
 .transport__volume::-webkit-slider-runnable-track {
   height: 4px;
@@ -1816,30 +1916,49 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
 
 .transport__timesig {
   height: 44px;
-  flex-shrink: 0;
   background: var(--bg);
   border: 1px solid var(--rule);
   border-radius: var(--r-s);
   font-family: var(--mono);
   font-size: 0.875rem;
   color: var(--ink);
-  padding: 0 26px 0 10px;
+  /* Same top padding as the tempo field, and the arrow follows the value down
+     rather than staying pinned to the middle of a box whose text has moved. */
+  padding: 11px 26px 0 10px;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
                     linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
-  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-position: calc(100% - 15px) 66%, calc(100% - 10px) 66%;
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
 }
 .transport__timesig:focus { border-color: var(--accent); }
+/* The select's value is inset 10px, so its caption starts there too; the right
+   inset only has to clear the field's own rounding. */
+.transport__meter .transport__cap { left: 10px; right: 3px; }
 
+/* The dot row's field. Its caption says "Beat" — it names the dots and nothing
+   else. It carried the word "Metronome" for one review cycle, on the argument
+   that this was the only field with spare width for the dock's title; but the
+   field under a caption is decoration, so tapping the one word a beginner is
+   hunting for did nothing. That is the pill's old play triangle again, one layer
+   down. A visible dock title needs a treatment that is not a control caption.
+   Clipping is a clip-path and not `overflow: hidden` so that only the RIGHT edge
+   cuts: the dot row still clips there instead of wrapping row 1 (BL-036), while
+   the negative left inset lets the downbeat's ring paint outside the row's box.
+   `overflow: hidden` shaved that ring off dot 0, whose left edge is the field's
+   left edge — i.e. it deleted the size cue from the one beat that must not be
+   lost. 14px of bleed covers the widest case (18px ring x 1.35 scale) and still
+   clears the 8px column gap to the BPM field.
+   min-width keeps the caption legible when the beat count is small: at 2/4 the
+   dots are only 28px wide, and at ≥721px the field is sized by its content. */
+.transport__pulse { clip-path: inset(0 0 0 -14px); min-width: 2.5rem; }
 .transport__beats {
   display: flex;
   align-items: center;
   gap: 8px;
-  flex-shrink: 0;
   min-height: 10px;
 }
 .transport__beat {
@@ -1848,24 +1967,27 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--rule);
-  transition: background 60ms ease, transform 60ms ease;
+  transition: background 60ms ease, box-shadow 60ms ease, transform 60ms ease;
 }
-/* Offbeats brass, downbeat brick — the red "1" is the whole point of the row,
-   so it must not be a scale difference alone. */
-.transport__beat.is-active { background: var(--gold); transform: scale(1.35); }
-.transport__beat.is-downbeat-active { background: var(--accent); transform: scale(1.35); }
+/* Offbeats brass, downbeat brick — the red "1" is the whole point of the row, so
+   it must not be a scale difference alone. Nor a hue difference alone: the ring
+   below grows the dot from 10px at rest to 13px on an offbeat and 18px on the
+   downbeat, which survives both a reduced-motion setting (it is not a transform)
+   and a color-blind reading. Same reasoning as the pill's lamp above. */
+.transport__beat.is-active {
+  background: var(--gold);
+  box-shadow: 0 0 0 1.5px var(--gold);
+  transform: scale(1.35);
+}
+.transport__beat.is-downbeat-active {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent);
+  transform: scale(1.35);
+}
 
-.transport__vol {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.transport__vol-icon {
-  font-size: 0.875rem;
-  color: var(--ink-soft);
-}
-
+/* The volume slider's ♪ is gone with BL-075: a bare musical note next to an
+   unlabelled rail was one of the three glyphs that made up the entire visible
+   text of the dock at 390px, and the caption says the word instead. */
 .transport__collapse {
   width: 44px;
   height: 44px;
@@ -1913,23 +2035,23 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   .transport__go { order: 1; }
   .transport__bpm-wrap { order: 2; }
   /* The dot row may shrink (and clip its last dot) rather than wrap the whole
-     control row on a narrower-than-390px phone. The padding/margin pair gives
-     the clip box vertical slack so the 1.35× beat pulse is never flattened.
-     flex-basis is 0, NOT auto: with `auto` the row's base width is the dot
-     count, so picking 7/8 on a 320px phone pushed row 1 onto two lines and the
-     dock to 181px against a 140px reserve. At 0 the dots only ever occupy
-     leftover space, so the beat count can never change the dock's height. */
-  .transport__beats {
+     control row on a narrower-than-390px phone. flex-basis is 0, NOT auto: with
+     `auto` the row's base width is the dot count, so picking 7/8 on a 320px
+     phone pushed row 1 onto two lines and the dock to 181px against a 140px
+     reserve. At 0 the dots only ever occupy leftover space, so the beat count
+     can never change the dock's height. min-width returns to 0 here for the same
+     reason: the desktop floor that keeps the title legible must not become a
+     width this row has to find. The 44px field is its own vertical slack now, so
+     the old padding/margin pair that stopped the 1.35× pulse being clipped is
+     no longer needed. */
+  .transport__pulse {
     order: 3;
     flex: 1 1 0;
     min-width: 0;
-    overflow: hidden;
-    padding: 4px 0;
-    margin: -4px 0;
   }
   .transport__collapse { order: 4; margin-left: auto; }
-  .transport__slider { order: 6; flex: 1 1 90px; }
-  .transport__timesig { order: 7; }
+  .transport__tempo { order: 6; flex: 1 1 90px; }
+  .transport__meter { order: 7; }
   .transport__vol { order: 8; }
 }
 
@@ -2117,10 +2239,13 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
      width and wraps to a third and fourth line — 233px of dock against a 140px
      reserve, i.e. BL-036's overlap again at the narrow end. Everything here
      exists to keep the dock at exactly two rows down to 280px (Galaxy Fold) so
-     --transport-h stays true. Verified by measurement at 320 and 280. */
+     --transport-h stays true. Verified by measurement at 320 and 280.
+     This block used to hide the BPM label as part of that squeeze, which is how
+     the tempo box came to read as a naked "80" on a 390px phone (BL-075). The
+     label is now a caption in the field's own dead space and costs this row no
+     width at all, so the squeeze is down to the three widths below. */
   .transport__row { column-gap: 8px; padding: 12px 12px; }
-  .transport__bpm-label { display: none; }
-  .transport__bpm { width: 60px; }
-  .transport__volume { width: 60px; }
-  .transport__slider { flex: 1 1 56px; }
+  .transport__bpm-wrap { width: 60px; }
+  .transport__vol { width: 60px; }
+  .transport__tempo { flex: 1 1 56px; }
 }
