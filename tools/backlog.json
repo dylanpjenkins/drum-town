@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 52,
-    "next_dimension": "content",
+    "iteration": 53,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 81,
+    "next_id": 82,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1251,9 +1251,10 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        "iter 58 · 2026-08-08 · SHIPPED. /lessons/the-drum-kit/ — the lesson the homepage's one big Start here button sends every new visitor to — now carries a two-panel figure instead of zero images. Panel 1 places all eight named pieces as labelled shapes from the drummer's seat, at roughly true relative size, with a dashed seat marker so the viewpoint is anchored. Panel 2 is the one that earns the item: a five-line staff with each piece's notehead at its true vertical position and its NAME SITTING ON THE SAME LINE OR IN THE SAME SPACE, plus the position in words. A beginner can read 'Snare · 3rd space' and see the notehead in that space, which is the second half of the graduation criterion the page previously asked for and did not supply. Measured at a true 390px: zero horizontal overflow at 280/320/390/1280 (and 414/560/720/721/900/1024/1600), labels 14.4-14.6px, zero text boxes outside either viewBox, zero label collisions, verified in both themes. Accessibility: figure + role=img with a concise aria-label per panel plus a VISIBLE nine-item key list as the long description, not aria-hidden and not a visually-hidden list — so it is real resizable prose that benefits everyone, and it let the buggy prose enumeration be deleted rather than duplicated. Panels sit on --notation-bg so the staff stays manuscript-lit in dark like every other stave on the site; the key and caption take page tokens and flip. TWO THINGS THE BUILD FOUND ON ITS OWN. (1) The lesson's own prose was WRONG about two notation positions: it said 'ride and hi-hat (top line)' and 'mid tom (next space down)'. The Builder verified against real VexFlow geometry rather than the prose and corrected both — I re-verified independently: stave lines render at y 58/68/78/88/98 with a real ledger line at y48, so the ride is the top line, the hi-hat sits in the space ABOVE it, and the crash is on an added line. A diagram that disagreed with the paragraph beneath it would have been worse than no diagram. (2) It rejected its OWN first design — a stacked notehead column with fan-out leader lines — after screenshotting it and judging the noteheads a smudge at 390px, and rebuilt it. HONEST LIMIT, and I agree with the Builder's own assessment: panel 1 conveys layout, left/right, near/far and relative size, which is exactly what 'rack tom versus floor tom' turns on, but it is a schematic of labelled ellipses and does NOT show what a drum physically looks like. A photo is still the better answer and stays blocked on the owner (BL-030). Panel 2's staff is stretched ~2.8x vertically so labels fit beside their own line, which the caption discloses."
       ],
       "id": "BL-071",
       "dimension": "content",
@@ -1424,6 +1425,24 @@
       "acceptance": "/404.html carries its own description; no other page duplicates a description",
       "log": [
         "Filed iter 56 discovery. Small, but it is the only duplicate description on the site."
+      ]
+    },
+    {
+      "id": "BL-081",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Rendered staves emit raw hex colours that escape the token system",
+      "evidence": [
+        "iter 58, found by the BL-071 Builder outside its own scope: tools/notation-renderer.js sweeps black to currentColor, but ledger lines and some ancillary strokes come out of VexFlow as literal #444 and #999999. Verified independently on a rendered stave — both hex values present in the output alongside currentColor.",
+        "Harmless today because the notation ground is deliberately theme-invariant (--notation-bg / --notation-ink stay manuscript-lit in dark), so nothing looks wrong. But they are raw hex outside the token block, which the Style ledger forbids in style.css and which the renderer's own currentColor plumbing exists to prevent.",
+        "It matters the moment anyone reconsiders the theme-invariant notation ground, or adds a high-contrast mode: these two values will not follow."
+      ],
+      "acceptance": "a rendered stave contains no raw hex colour — every stroke and fill resolves through currentColor or a --notation-* token; check-notation-frame or a sibling check asserts it so it cannot come back; no visual change at the default theme, verified by screenshot",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        "Filed iter 58. The renderer's currentColor sweep is the right mechanism; it just does not reach these two."
       ]
     }
   ]

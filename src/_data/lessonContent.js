@@ -2088,7 +2088,94 @@ module.exports = {
     ],
     bodyHtml: `
       <p>Before you play a single note, it helps to know what you\'re looking at. The "5-piece kit" is the industry standard — five drums, three cymbals — and almost every recording you\'ve ever heard rides on some version of this layout. Once you can name the pieces and understand what each one does in a song, every lesson after this gets easier.</p>
-      <p>The kit divides into three families: <strong>drums</strong> (snare, bass, toms), <strong>cymbals</strong> (hi-hat, ride, crash), and <strong>pedals</strong> (the bass drum pedal under your right foot, the hi-hat pedal under your left). Drums are written as filled dots on the stave; cymbals are written as <em>x</em> noteheads. That visual distinction is the first thing to internalize.</p>
+      <p>The kit divides into three families: <strong>drums</strong> (snare, bass, toms), <strong>cymbals</strong> (hi-hat, ride, crash), and <strong>pedals</strong> (the bass drum pedal under your right foot, the hi-hat pedal under your left). Drums are written as filled dots on the staff; cymbals are written as <em>x</em> noteheads. That visual distinction is the first thing to internalize.</p>
+
+      <figure class="kit-map" id="kit-map">
+        <div class="kit-map__grid">
+          <div class="kit-map__panel">
+            <p class="kit-map__panel-label">The kit, from the drummer's seat</p>
+            <div class="kit-map__frame">
+              <svg class="kit-map__svg" viewBox="0 0 304 238" role="img" aria-label="Layout of a five-piece kit as the drummer sees it: the hi-hat on the far left, the crash cymbal above the two rack toms, the rack toms mounted over the bass drum in the middle, the snare nearest the seat, and the floor tom with the ride cymbal above it on the right.">
+                <line class="kit-map__rod" x1="44" y1="68" x2="44" y2="112" />
+                <line class="kit-map__rod" x1="100" y1="28" x2="100" y2="56" />
+                <line class="kit-map__rod" x1="252" y1="32" x2="252" y2="60" />
+                <ellipse class="kit-map__cym" cx="100" cy="28" rx="40" ry="12" />
+                <ellipse class="kit-map__cym" cx="252" cy="32" rx="44" ry="13" />
+                <ellipse class="kit-map__cym-under" cx="44" cy="98" rx="30" ry="8" />
+                <ellipse class="kit-map__cym" cx="44" cy="86" rx="33" ry="11" />
+                <ellipse class="kit-map__shell" cx="128" cy="91" rx="33" ry="14" />
+                <ellipse class="kit-map__drum" cx="128" cy="86" rx="33" ry="14" />
+                <ellipse class="kit-map__shell" cx="200" cy="89" rx="35" ry="15" />
+                <ellipse class="kit-map__drum" cx="200" cy="84" rx="35" ry="15" />
+                <ellipse class="kit-map__shell" cx="262" cy="154" rx="38" ry="16" />
+                <ellipse class="kit-map__drum" cx="262" cy="148" rx="38" ry="16" />
+                <ellipse class="kit-map__shell" cx="158" cy="161" rx="52" ry="22" />
+                <ellipse class="kit-map__drum" cx="158" cy="154" rx="52" ry="22" />
+                <ellipse class="kit-map__shell" cx="134" cy="191" rx="33" ry="14" />
+                <ellipse class="kit-map__drum" cx="134" cy="186" rx="33" ry="14" />
+                <ellipse class="kit-map__seat" cx="140" cy="220" rx="30" ry="10" />
+                <text class="kit-map__t" x="100" y="32.5" font-size="13" text-anchor="middle">Crash</text>
+                <text class="kit-map__t" x="252" y="36.5" font-size="13" text-anchor="middle">Ride</text>
+                <text class="kit-map__t" x="44" y="90.5" font-size="13" text-anchor="middle">Hi-hat</text>
+                <text class="kit-map__t" x="128" y="90.5" font-size="13" text-anchor="middle">High tom</text>
+                <text class="kit-map__t" x="200" y="88.5" font-size="13" text-anchor="middle">Mid tom</text>
+                <text class="kit-map__t" x="262" y="152.5" font-size="13" text-anchor="middle">Floor tom</text>
+                <text class="kit-map__t" x="158" y="152" font-size="13" text-anchor="middle">Bass drum</text>
+                <text class="kit-map__t kit-map__t--dim" x="158" y="166" font-size="11" text-anchor="middle">(kick)</text>
+                <text class="kit-map__t" x="134" y="190.5" font-size="13" text-anchor="middle">Snare</text>
+                <text class="kit-map__t kit-map__t--dim" x="140" y="224" font-size="11" text-anchor="middle">Your seat</text>
+              </svg>
+            </div>
+          </div>
+          <div class="kit-map__panel">
+            <p class="kit-map__panel-label">The same pieces on the staff</p>
+            <div class="kit-map__frame">
+              <svg class="kit-map__svg" viewBox="0 0 300 234" role="img" aria-label="A five-line staff, drawn tall so the names fit, with every kit voice sitting on the line or space it is written on: the crash on an added line above the staff, then hi-hat, ride, high tom, mid tom, snare, floor tom, bass drum, and the hi-hat pedal in the space below the staff.">
+                <line class="kit-map__staff" x1="10" y1="54" x2="292" y2="54" />
+                <line class="kit-map__staff" x1="10" y1="90" x2="292" y2="90" />
+                <line class="kit-map__staff" x1="10" y1="126" x2="292" y2="126" />
+                <line class="kit-map__staff" x1="10" y1="162" x2="292" y2="162" />
+                <line class="kit-map__staff" x1="10" y1="198" x2="292" y2="198" />
+                <line class="kit-map__staff" x1="10" y1="54" x2="10" y2="198" />
+                <line class="kit-map__staff" x1="26" y1="18" x2="70" y2="18" />
+                <rect class="kit-map__clef" x="14" y="90" width="6" height="72" />
+                <rect class="kit-map__clef" x="24" y="90" width="6" height="72" />
+                <path class="kit-map__x" d="M41 11 L55 25 M41 25 L55 11" />
+                <path class="kit-map__x" d="M41 29 L55 43 M41 43 L55 29" />
+                <path class="kit-map__x" d="M41 47 L55 61 M41 61 L55 47" />
+                <path class="kit-map__x" d="M41 209 L55 223 M41 223 L55 209" />
+                <ellipse class="kit-map__note" cx="48" cy="72" rx="11.5" ry="8" transform="rotate(-16 48 72)" />
+                <ellipse class="kit-map__note" cx="48" cy="90" rx="11.5" ry="8" transform="rotate(-16 48 90)" />
+                <ellipse class="kit-map__note" cx="48" cy="108" rx="11.5" ry="8" transform="rotate(-16 48 108)" />
+                <ellipse class="kit-map__note" cx="48" cy="144" rx="11.5" ry="8" transform="rotate(-16 48 144)" />
+                <ellipse class="kit-map__note" cx="48" cy="180" rx="11.5" ry="8" transform="rotate(-16 48 180)" />
+                <text class="kit-map__t kit-map__t--halo" x="70" y="23" font-size="13">Crash<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· added line above</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="41" font-size="13">Hi-hat<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· space above the top line</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="59" font-size="13">Ride<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· top line</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="77" font-size="13">High tom<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· top space</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="95" font-size="13">Mid tom<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· 4th line</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="113" font-size="13">Snare<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· 3rd space</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="149" font-size="13">Floor tom<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· 2nd space</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="185" font-size="13">Bass drum<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· bottom space</tspan></text>
+                <text class="kit-map__t kit-map__t--halo" x="70" y="221" font-size="13">Hi-hat foot<tspan class="kit-map__t--dim" font-size="10.5" dx="6">· below the staff</tspan></text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p class="kit-map__panel-label">The drum key, top of the staff downward</p>
+        <ol class="kit-map__key">
+          <li><strong>Crash</strong> — x notehead on the added line above the staff</li>
+          <li><strong>Hi-hat</strong> — x notehead in the space above the top line</li>
+          <li><strong>Ride</strong> — x notehead on the top line</li>
+          <li><strong>High tom</strong> — the top space, between the fourth and fifth lines</li>
+          <li><strong>Mid tom</strong> — the fourth line</li>
+          <li><strong>Snare</strong> — the middle space, third from the bottom</li>
+          <li><strong>Floor tom</strong> — the second space from the bottom</li>
+          <li><strong>Bass drum</strong> — the bottom space, stem down</li>
+          <li><strong>Hi-hat foot</strong> — x notehead in the space below the staff, stem down</li>
+        </ol>
+        <figcaption>Drums are filled noteheads, cymbals are x noteheads, and pitch runs bottom to top: the bass drum sits in the lowest space and the crash floats above the staff. That ninth position is the same hi-hat, played with your left foot instead of a stick. The staff here is drawn tall so the names fit beside their own line or space; in real music the five lines sit much closer together, as they do in the exercise below.</figcaption>
+      </figure>
 
       <h2 class="section-label">The Five Drums</h2>
       <p><strong>Snare drum</strong> — 14 inches across, sitting between your knees. The wires stretched under the bottom head are what give the snare its sharp, cracking sound. This is the loudest, most expressive drum on the kit and it carries the <em>backbeat</em> — the snap on counts 2 and 4 that defines almost every popular style.</p>
@@ -2105,7 +2192,7 @@ module.exports = {
       <p>You\'ll see kits marketed as either "rock" or "fusion" sizes. <strong>Rock</strong> sizes are bigger and deeper — 22-inch bass, 12 and 13-inch toms, 16-inch floor tom — and produce a thicker, lower-pitched sound suited to loud styles. <strong>Fusion</strong> sizes are smaller — 20-inch bass, 10 and 12-inch toms, 14-inch floor — with a faster attack and brighter pitch, well-suited to jazz, fusion, and lighter pop. The drums are the same instrument; only the resonance and pitch range differ.</p>
 
       <h2 class="section-label">How the Kit is Notated</h2>
-      <p>Drum music is written on a five-line stave with a special "neutral" clef (two short vertical lines) instead of treble or bass. Higher-pitched pieces sit higher on the stave; lower-pitched pieces sit lower. The basic positions: <em>crash</em> (above the top line), <em>ride</em> and <em>hi-hat</em> (top line, x noteheads), <em>high tom</em> (top space), <em>mid tom</em> (next space down), <em>snare</em> (third space), <em>floor tom</em> (second space from bottom), <em>bass drum</em> (bottom space, stems down), <em>hi-hat foot</em> (below the staff, x notehead, stems down). The exercise below plays each one in order so you can see and hear the layout.</p>
+      <p>Drum music is written on a five-line staff with a special "neutral" clef (two short vertical bars) instead of treble or bass. Higher-pitched pieces sit higher on the staff; lower-pitched pieces sit lower. The <a href="#kit-map">drum key above</a> spells out every position: the crash rides on an added line over the top of the staff, the bass drum sits in the lowest space, and everything else falls in between. Two details trip up most beginners. The hi-hat is <em>not</em> on the top line, it is in the space just above it; and the mid tom sits <em>on</em> the fourth line rather than in a space. The exercise below plays each piece in turn so you can see and hear the layout at once.</p>
     `,
     exercises: [
       {
