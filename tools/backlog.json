@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 60,
-    "next_dimension": "content",
+    "iteration": 61,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 97,
+    "next_id": 98,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1561,13 +1561,14 @@
         "IMPORTANT CAVEAT FOR WHOEVER TAKES THIS: most of the 14 triplet candidates are probably CORRECT. Writing straight eighths under a \"swing 8ths\" label is standard publishing convention, and the meta line carries that label - jazz-ride-pattern#1, cymbal-voicings#0, hi-hat-articulation#3, jazz-waltz#0, hiphop-r-and-b-basic#1 and hiphop-j-dilla#2 all read that way. The real ones assert triplets outright rather than labelling a swing feel. Verify each before touching it.",
         "SECOND, INDEPENDENT SWEEP (the prose-vs-notation lens) reached this class from tips rather than titles and named 14 sharp instances: hiphop-boom-bap#2, latin-modern-hybrid#0, funk-sixteenth-feel#2 and #3, funk-clyde-stubblefield#1, funk-the-meters-intro#1, funk-the-meters#1, funk-ghost-displacement#0/#1/#2, hiphop-neo-soul#0, hiphop-questlove#0, hiphop-anderson-paak#2, fusion-tony-williams-fusion#2.",
         "SHARPEST TWO: funk-the-meters#1 says \"Only the snare on beat 4 is loud — every other snare hit in the bar is a ghost note\" over six identically-rendered notes; and funk-ghost-displacement#2 says out loud \"beats 2 and 4 themselves must still be loud accented snares\" while carrying no accent flag at all.",
-        "AN HONEST ALTERNATIVE ALREADY EXISTS IN THE CORPUS: funk-ghost-notes bodyHtml says \"No accents are printed on the staff... so the whole 4-to-1 shape is yours to supply\". Either notate the dynamics or say that sentence — what cannot stand is a tip asserting a hierarchy the stave silently contradicts."
+        "AN HONEST ALTERNATIVE ALREADY EXISTS IN THE CORPUS: funk-ghost-notes bodyHtml says \"No accents are printed on the staff... so the whole 4-to-1 shape is yours to supply\". Either notate the dynamics or say that sentence — what cannot stand is a tip asserting a hierarchy the stave silently contradicts.",
+        "ITERATION 61 MEASUREMENT, worth keeping for the remaining chunks: check-tip-claims.js contributed NOTHING to validating these 18 edits. Its regex matches 58 tips corpus-wide and its overlap with the 12 exercises of the first pass was ZERO — every one of them phrases the claim differently (\"Snare on beat 2\", \"Backbeats on 2 and 4\", \"the snares on 2 and 4\", \"the loud snares (on 2, 4)\"). audit-lessons is structurally blind here too, since accents do not change tick arithmetic, and the string \"accent\" appears zero times in audit-site.js. This class has no gate at all today."
       ],
       "acceptance": "every exercise whose own title, tip or meta claims a dynamic distinction notates it with accent:true (or the words are corrected to match the notation), starting with the hand-verified three; a tools/checks script guards the class so it cannot silently regrow; and the triplet candidates are each individually judged against the swing-notation convention rather than swept; and a cheap second check asserts that any exercise whose tip names a loud-versus-ghost hierarchy carries at least one accent:true — the lens rates that class as zero-ambiguity",
       "status": "ready",
       "attempts": 0,
       "chunk": {
-        "done": 0,
+        "done": 1,
         "total": 7,
         "size": 10
       },
@@ -1576,6 +1577,16 @@
           "iteration": 60,
           "date": "2026-08-12",
           "note": "Found in the iteration-60 discovery pass, by hashing every exercise spec and asking which exercises share notation while promising different things. Three hand-verified instances, two of them unambiguous. NOTE: the same sweep produced three phantoms I caught on myself before filing - a duplicate-detection key that omitted the articulation property (which made rock-open-hats look like it notated no open hats, when it does), a ghost-note rule looking for a property the corpus does not have, and an accent rule that matched the NEGATION in titles like \"No Accents\". Regenerate candidates carefully."
+        },
+        {
+          "iteration": 61,
+          "date": "2026-08-13",
+          "note": "Chunk 1 of 7 shipped: 18 exercises across 9 lessons gained accent:true on the notes their own words call loud, and 3 prose sentences that asserted the opposite were rewritten. Corpus-wide, exercises carrying any accent went 235 to 253. WHAT THE ADVERSARIAL PASS CAUGHT, and it was the whole lesson of this chunk: the first 12 edits were chosen exercise-by-exercise on tip text, WITHOUT checking the other staves on the same page, which left pages half-marked and created three new contradictions of exactly the kind BL-085 exists to remove. hiphop-boom-bap bodyHtml still said \"The notation cannot show you that part. It prints six identical snare notes\" directly above a stave that had just started showing it. hiphop-neo-soul #0 and #1 are byte-identical bars and only #0 got accents, so the marks appeared to vanish as a dynamic instruction. funk-clyde-stubblefield #2 and #3 are the same groove plus an open hat, under a tip saying the delta is ONE symbol. All repaired in-tick by widening to the siblings. FUTURE CHUNKS MUST SELECT BY PAGE, NOT BY EXERCISE."
+        },
+        {
+          "iteration": 61,
+          "date": "2026-08-13",
+          "note": "DELIBERATELY EXCLUDED, with reasons. latin-samba-feel#3: a refuting agent rejected the plan and the tip also calls the pattern cross-stick, which this data model cannot express — needs its own judgement. funk-the-meters#3: a two-bar broken backbeat whose bar 1 has NO snare on beat 2, so the beats-2-4-6-8 pattern that fits every other two-bar case does not apply; guessing there would have been the BL-086 defect in miniature. Its tip also needs reading in full. STILL OWED BY THE ACCEPTANCE: the tools/checks script that guards the class. It is deferred rather than forgotten, because the ~57 candidates still outstanding would fail it on day one; it should land with a not-to-grow baseline, in the chunk that finishes the campaign."
         }
       ]
     },
@@ -1851,6 +1862,30 @@
         "The mechanism itself is properly built and should be kept: panned to the end the fade correctly disappears, via background-attachment: local, scroll."
       ],
       "acceptance": "the pan affordance never changes the apparent dynamic of a note — it sits beside or over the frame edge rather than tinting glyphs — and still self-cancels at the end of the scroll"
+    },
+    {
+      "id": "BL-097",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "Playback ignores accents entirely, so a ghost note and a backbeat come out at identical volume",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED IN SOURCE. player.js scheduleVoice() calls kit[drum](c, t, out) with no velocity or gain derived from the note. The string \"accent\" does not appear anywhere in src/assets/js/player.js. Every stroke in a pattern is played at the voice function's own fixed peak gain.",
+        "tools/notation-renderer.js:114 DOES draw the accent (a \">\" articulation above the note), so the two channels disagree: the stave can say loud and the audio cannot.",
+        "This is the companion half of BL-085 and arguably the worse half. On funk-ghost-notes#0 — the flagship exercise of the lesson about ghost notes — the tip asks for \"a 4-to-1 ratio between accented and ghosted snare\". Today the notation renders all five snares identically AND the playback sounds all five identically, so a learner has no way to perceive the ratio from the site at all, in either channel. Fixing only BL-085 leaves the audio still lying.",
+        "The machinery is half there already: hatElectronic(c, t, out, gainScale) takes a gainScale argument, so at least one voice can already be scaled. The other voice functions take (c, t, out) and would need the same parameter.",
+        "The site's own homepage premise is \"real notation and audio playback\", and dynamics are the one thing a drummer practises hardest."
+      ],
+      "acceptance": "a note carrying accent:true plays audibly louder than an unaccented note of the same voice, in both the electronic and acoustic kits, with the ratio chosen to match what the lessons ask for (funk-ghost-notes asks for roughly 4-to-1); unaccented notes in a bar that marks accents are treated as ghosts and play softer still, or the lessons stop claiming a hierarchy the audio cannot produce; no exercise gets louder overall than it is today",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 61,
+          "date": "2026-08-13",
+          "note": "Found while tracing what accent:true actually affects downstream, before starting the BL-085 content edits. The trace also turned up that check-tip-claims.js:133-138 changes its interpretation once a bar marks accents (unaccented c/5 hits become ghosts and stop counting), which is correct behaviour but means BL-085 edits must be re-gated; and that its exemption map carries hiphop-anderson-paak#2 with the comment \"bar has ghost strokes but marks no accent:true, so the ghost filter cannot fire\" — that exemption exists because of BL-085 and should be removable once that exercise is fixed."
+        }
+      ]
     }
   ]
 }

@@ -1609,7 +1609,7 @@ module.exports = {
       <p>Say the name out loud and you have the groove: <em>boom · bap · boom-boom · bap</em>. Kick on <em>1</em>, snare on <em>2</em>, kick on <em>3</em> and again on the <em>&amp;</em> of 3, snare on <em>4</em>. Exercise 2 is that bar note for note, and exercise 1 is the same bar with the extra kick removed. Play them back to back: one 8th note in the foot is all that separates a plain backbeat from golden-era hip-hop.</p>
       <p>That one note does real work. Beat <em>2</em>'s snare stands alone with no kick near it, while beat <em>4</em>'s is set up by a kick an 8th note ahead of it, so the back half of the bar leans forward and the front half sits still. Everything else in exercises 1, 2 and 4 stays plain: straight 8ths on the closed hi-hat, nothing shorter than an 8th note, no crash, no toms, no fills. Boom-bap gives you almost nothing to hide behind.</p>
       <h2 class="section-label">Six snare notes, only two of them loud</h2>
-      <p>Exercise 3 is where the groove starts to breathe. The hi-hat doubles to 16ths and runs all sixteen of them, and the snare now appears six times: the <em>a</em> of 1, <em>2</em>, the <em>&amp;</em> of 2, the <em>e</em> of 3, the <em>a</em> of 3, and <em>4</em>. Only <em>2</em> and <em>4</em> are backbeats; the other four are <strong>ghost notes</strong> at roughly a quarter of that volume. The notation cannot show you that part. It prints six identical snare notes and leaves the dynamics to you.</p>
+      <p>Exercise 3 is where the groove starts to breathe. The hi-hat doubles to 16ths and runs all sixteen of them, and the snare now appears six times: the <em>a</em> of 1, <em>2</em>, the <em>&amp;</em> of 2, the <em>e</em> of 3, the <em>a</em> of 3, and <em>4</em>. Only <em>2</em> and <em>4</em> are backbeats; the other four are <strong>ghost notes</strong> at roughly a quarter of that volume. The staff accents the two backbeats and leaves the four ghosts plain, so you can see the shape. The player still fires all six snare notes at the same volume, so the dynamics themselves are yours to supply.</p>
       <p>Snare and hat land together on back-to-back 16ths, so the hat line cannot be shared: the right hand carries all sixteen, and the left hand supplies every snare note, loud and soft. Two things will fight you. The <em>a</em> before each backbeat gives the left hand two consecutive 16ths, quiet then loud, into <em>2</em> and again into <em>4</em>; let the quiet one creep up and the ear hears two hits of equal weight, which blurs where the backbeat is. Beat 3 then alternates foot and left hand under the running hat: kick, ghost, kick, ghost, which puts the second half of the <em>boom-boom</em> on the <em>&amp;</em> of 3 between the two ghost notes. Learn the snare voice alone against the click before adding the hat; one-handed 16ths at ♩ = 88 are their own piece of work.</p>
       <h2 class="section-label">Dragging the snare without dragging the hat</h2>
       <p>Exercise 4 drops the ghost notes and returns to exercise 2's bar, deliberately: only one variable changes. Lock the hi-hat and the kick to the metronome, then place the snares on <em>2</em> and <em>4</em> late. That is the <strong>laid-back</strong> feel, and it is the whole assignment. Not late by a rounding error, though. At ♩ = 88 a 16th note runs about 170 milliseconds, and the drag you want is roughly a fifth of that, near 30 milliseconds: small on paper, unmistakable to the ear. Hat and snare are notated together on <em>2</em> and <em>4</em>, so they stop landing as one attack — hat first, snare a hair behind, about the width of a flam. That gap is the sound.</p>
@@ -1681,7 +1681,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -1689,7 +1689,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -2027,7 +2027,7 @@ module.exports = {
       <p>The hi-hat never steps aside for the snare. At each of the five snare notes there's a hat note stacked on the same stem, so no one hand can cover both, and you can't pass the hat back and forth between your hands the way continuous 16ths are usually played. One hand rides all sixteen 16ths on its own and the other takes every snare note: right on the hat, left on the snare, for most players. At ♩ = 90 that's six hat strokes a second, so keep the motion small and let the stick rebound rather than lifting it for each one.</p>
       <p>The left hand walks a fixed route: slap on 2, whisper on the <em>"&amp;" of 2</em>, whisper on the <em>"e" of 3</em>, whisper on the <em>"a" of 3</em>, slap on 4. That last whisper and the slap on 4 are back to back, a single 16th apart, so treat the <em>"a"</em> as the run-up into the backbeat rather than a note of its own. The two volumes come from two stick heights. Ghosts start about 1 inch off the head and are played from the fingers; the backbeats start 10–12 inches up and are driven from the wrist, and the hand has to drop straight back down to ghost height afterward.</p>
       <h2 class="section-label">Building the 4-to-1 ratio</h2>
-      <p>Add the layers in the order the difficulty arrives. Hands only first, no kick, slow enough that the three ghosts stay quiet under an even hat. Then set your stick heights on purpose and loop eight bars listening for one thing: the gap between backbeat and ghost, roughly 4 to 1 in volume. Bring in the kick on 1 and 3 last, since two quarter notes are the easiest layer in the bar and they won't disturb hands that have already settled. Use the Play button for placement rather than dynamics. No accents are printed on the staff and the player fires every snare note at the same volume, so the whole 4-to-1 shape is yours to supply.</p>
+      <p>Add the layers in the order the difficulty arrives. Hands only first, no kick, slow enough that the three ghosts stay quiet under an even hat. Then set your stick heights on purpose and loop eight bars listening for one thing: the gap between backbeat and ghost, roughly 4 to 1 in volume. Bring in the kick on 1 and 3 last, since two quarter notes are the easiest layer in the bar and they won't disturb hands that have already settled. Use the Play button for placement rather than dynamics. The backbeats on 2 and 4 carry accents on the staff and the ghosts deliberately do not, so you can see the shape as well as read it described. The player still fires every snare note at the same volume, so the 4-to-1 ratio itself is yours to supply.</p>
       <p>Two failures arrive first. The ghost on the <em>"&amp;" of 2</em> rides the rebound off the backbeat in front of it and comes out nearly as loud, which flattens the bar into a busy 16th-note snare part. The ghost on the <em>"a" of 3</em> drifts late and fuses with the backbeat on 4 into a flam. Record 30 seconds on a phone and play it back quietly: the two backbeats should still land, and the ghosts should read as motion underneath them rather than as five snare notes of equal weight. When you tire, the opposite failure shows up and the ghosts vanish altogether, which is the other way this groove dies.</p>
     `,
     exercises: [
@@ -2043,7 +2043,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -2051,7 +2051,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -14873,7 +14873,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -14881,7 +14881,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -16685,7 +16685,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
-          { keys: ['c/5'], duration: '16', sticking: 'R' },
+          { keys: ['c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
@@ -16693,7 +16693,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
-          { keys: ['c/5'], duration: '16', sticking: 'R' },
+          { keys: ['c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' }
@@ -16765,7 +16765,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
@@ -16773,7 +16773,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' }
@@ -16811,7 +16811,7 @@ module.exports = {
           { keys: ['c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['c/5'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['c/5'], duration: '16', sticking: 'L' },
@@ -16819,7 +16819,7 @@ module.exports = {
           { keys: ['c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['c/5'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['c/5'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
           { keys: ['c/5'], duration: '16', sticking: 'L' }
@@ -17053,7 +17053,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -17061,7 +17061,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' }
@@ -17099,7 +17099,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -17107,7 +17107,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16', articulation: 'open' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' }
@@ -17146,7 +17146,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -17154,7 +17154,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16', articulation: 'open' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -17163,7 +17163,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -17171,7 +17171,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' }
@@ -17306,7 +17306,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -17848,7 +17848,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -17856,7 +17856,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -17902,7 +17902,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' }
@@ -18319,7 +18319,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -18327,7 +18327,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -18365,7 +18365,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -18373,7 +18373,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -18411,7 +18411,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
@@ -18419,7 +18419,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' }
@@ -18445,7 +18445,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -18453,7 +18453,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -21174,7 +21174,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -21182,7 +21182,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -21209,7 +21209,7 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -21217,7 +21217,7 @@ module.exports = {
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
