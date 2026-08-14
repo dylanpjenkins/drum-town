@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 61,
-    "next_dimension": "quality",
+    "iteration": 62,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 98,
+    "next_id": 99,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1722,7 +1722,7 @@
       "acceptance": "a reader working outward from rudiment 1 always has somewhere to go: either the dead-end cards gain lessons, or each one states plainly that it is a reference card and links to the closest lesson that teaches its sticking — and the page stops implying forty lessons exist when twelve do"
     },
     {
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -1730,6 +1730,21 @@
           "iteration": 60,
           "date": "2026-08-12",
           "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        },
+        {
+          "iteration": 62,
+          "date": "2026-08-14",
+          "note": "Shipped as an ARMED state rather than continuous audio, because browsers block an AudioContext without a user gesture on the current document and the click that navigated belongs to the previous one. dc_metro_running lives in sessionStorage; on load, if it survived, the dock expands (without overwriting the collapse preference), the go button gains a brass ring and the accessible name \"Play, resume metronome at N BPM\", and a status line reads \"Paused. Press play.\" The /metronome/ copy now states the limitation instead of implying the sound follows you."
+        },
+        {
+          "iteration": 62,
+          "date": "2026-08-14",
+          "note": "THE ADVERSARIAL PASS FOUND A BLOCKER THAT WOULD HAVE SHIPPED: nothing listened for pageshow, and every page here is bfcache-eligible. Because an armed page holds no AudioContext at all (getCtx is lazy), a Back navigation restored the document verbatim and the arming code never re-ran — giving both a missed arm (idle dock, flag still set, i.e. the exact pre-fix behaviour, now intermittent) and a stale arm (a restored page still reading \"Paused. Press play.\" when nothing was paused). Fixed with a pageshow handler guarded on event.persisted and on session being null. The critic could not reproduce it because headless Edge does not enable bfcache by default; the builder then proved it in both directions with real restores under --enable-features=BackForwardCache."
+        },
+        {
+          "iteration": 62,
+          "date": "2026-08-14",
+          "note": "Also fixed in-tick: collapsing an ARMED dock now clears the flag and disarms, so a reader who has finished practising has a dismissal that survives navigation — before this the only route to clearing it was press-play-then-stop, and their collapse press also durably flipped the collapse preference the one-load override existed to protect. The status line gained a line clamp because it silently lost the word \"play.\" at a 20px root font. And a pre-existing bug found while proving the fix: on a back_forward navigation that MISSES bfcache the browser re-applies its own form state after metronome.js restores from localStorage, so the dock reported 4/4 while beatsPerBar, the dot row and the accent pattern were all 3. autocomplete=\"off\" on the four dock controls. Kept in this commit rather than split out because it directly falsifies the \"your tempo and meter still set\" promise this item just added."
         }
       ],
       "id": "BL-091",
@@ -1884,6 +1899,29 @@
           "iteration": 61,
           "date": "2026-08-13",
           "note": "Found while tracing what accent:true actually affects downstream, before starting the BL-085 content edits. The trace also turned up that check-tip-claims.js:133-138 changes its interpretation once a bar marks accents (unaccented c/5 hits become ghosts and stop counting), which is correct behaviour but means BL-085 edits must be re-gated; and that its exemption map carries hiphop-anderson-paak#2 with the comment \"bar has ghost strokes but marks no accent:true, so the ghost filter cannot fire\" — that exemption exists because of BL-085 and should be removable once that exercise is fixed."
+        }
+      ]
+    },
+    {
+      "id": "BL-098",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Pages scroll sideways at large text sizes, and a CSS comment claims they do not",
+      "evidence": [
+        "Measured during BL-091 across 13 widths x 3 meters x 4 root font sizes, armed and idle in the same document: at a 24px root, 3 of 39 cells overflow by up to 12px; at a 32px root, 9 of 39 cells overflow by up to 211px. The figures are IDENTICAL armed and idle, so this is page-level and pre-existing, not the transport dock.",
+        "style.css:1813 currently asserts the opposite — that a 32px root produces no sideways scroll at any width. That is the same class of false in-repo claim the loop has now corrected three times in prose and twice in comments.",
+        "Related to but wider than BL-069, which names .ledger__title on the homepage below 480px as one offender. A 211px overflow is far more than one flex item, so there are other offenders not yet identified.",
+        "A third data point from the iteration-60 persona walk, not yet chased: at 280px with a 32px root the page scrolled sideways by 20px and the offender measured there was a notation SVG in an exercise (532px wide, right edge 570px), while .site-header__inner measured exactly 280. Note the iteration-44 builder previously DISPROVED a similar claim about notation SVGs at normal text size, so verify before believing it."
+      ],
+      "acceptance": "no page scrolls sideways at a 32px root at any width from 280 to 1600, or the CSS comment is corrected to state exactly which widths and roots do overflow and by how much; every offender is identified by measurement rather than assumed",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 62,
+          "date": "2026-08-14",
+          "note": "Filed from a measurement taken while proving something else. The armed-vs-idle control is what makes it trustworthy: the overflow is identical in both states, so BL-091 did not cause it."
         }
       ]
     }

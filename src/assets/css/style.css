@@ -1985,6 +1985,78 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   transform: scale(1.35);
 }
 
+/* ---- Armed: the click was running when the reader left the last page ----
+   BL-091. A navigation destroys the AudioContext, and no browser will let a new
+   one make sound without a gesture on the NEW document, so the click cannot
+   restart itself. What it can do is say so and put the restart under one press.
+   metronome.js sets `is-armed` on the dock when the session flag survives the
+   navigation and nothing is playing.
+
+   The message takes over the dot field instead of sitting beside it. The dots
+   are inert while nothing is playing, so the field has nothing to lose, and
+   below 720px it is `flex: 1 1 0` — it takes leftover space and never asks for
+   any — so the swap costs row 1 zero width at every width down to 280px and the
+   dock's height, and the body reserve underneath it, do not move
+   (tools/checks/check-transport-reserve.js). min-width goes to 0 with it: the
+   2.5rem floor exists to keep the BEAT caption legible, and the caption is gone
+   while this is up. flex-shrink stops being 0 for the same reason — at a raised
+   root font size a sentence that refuses to shrink would be the one item in the
+   row that pushes the page sideways.
+
+   Sentence case, on the field's center line, brick. Every caption in this dock
+   is uppercase, letter-spaced and parked at the top of its field, and this must
+   not be read as one: captions name the control beneath them and this names
+   nothing (BL-075). Brick on the dock's paper measures 6.81:1 in daylight and
+   5.27:1 in the evening, so the state is carried by words that pass on their
+   own; the ring on the button is reinforcement, not the signal.
+
+   Two lines, clamped, with the ellipsis the clamp draws. The field is 44px and
+   this type is not: at the default root the sentence takes one line above 340px
+   and two below it, comfortably inside the box, but the offsets in this dock are
+   px constants while the type scales with the root (see the caption comment
+   above). Without a clamp the sentence simply ran out of the bottom of the box —
+   at a 32px root and 320px wide it wanted 80px of the 44px available and "play."
+   was gone with nothing to say so. Clamping does not buy back the height; it
+   marks the cut, which is the difference between degraded and silently wrong.
+   `pointer-events: none` for the same reason every caption has it: a reader who
+   takes "Press play." literally and taps the words must fall through to what is
+   underneath rather than press a paragraph. */
+.transport__status {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  pointer-events: none;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  color: var(--accent);
+}
+.transport.is-armed .transport__beats,
+.transport.is-armed .transport__pulse .transport__cap { display: none; }
+.transport.is-armed .transport__pulse { flex-shrink: 1; min-width: 0; }
+/* Brass, so the armed button is neither the idle brick nor the darker brick of
+   a running click. Read it honestly: the ring's separation from the fill is
+   2.72:1 in daylight and only 1.34:1 in the evening, where gold and a lit brick
+   are near-neighbours in luminance and the button reads as one warm disc with a
+   rim rather than as two colors. What does carry across both themes is the
+   outer edge — brass on the dock's paper is 2.51:1 in daylight and 7.07:1 in the
+   evening — and the shape: a 44px disc becomes a 50px one. Neither is asked to
+   carry the state on its own; the sentence beside it does that. box-shadow
+   rather than a border or an outline: it costs no layout, so nothing in the row
+   moves, and it is not the shape of the focus ring, which is brick and offset. */
+.transport.is-armed .transport__go { box-shadow: 0 0 0 3px var(--gold); }
+/* The global focus ring is brick at a 2px offset, which would land on top of
+   that brass and leave a keyboard user reading a 2.72:1 edge. Step it outside
+   the ring while armed; offset is not layout either, so the row still does not
+   move. */
+.transport.is-armed .transport__go:focus-visible { outline-offset: 5px; }
+
 /* The volume slider's ♪ is gone with BL-075: a bare musical note next to an
    unlabelled rail was one of the three glyphs that made up the entire visible
    text of the dock at 390px, and the caption says the word instead. */

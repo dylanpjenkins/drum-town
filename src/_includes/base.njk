@@ -217,13 +217,22 @@
         below 400px that was invisible as well as unspoken. A comma, not a dash —
         screen readers announce an em dash. The fifth caption, Beat, names the dot
         row, which is aria-hidden decoration and takes no name at all. -#}
+    {#- autocomplete="off" on all four controls, and it is load-bearing rather
+        than boilerplate. On a back/forward navigation that misses the bfcache
+        the browser re-applies the form state this page had when the reader left
+        it, and it does that AFTER metronome.js has restored the real values from
+        localStorage. Measured: leave a page in 4/4, set 3/4 on the next lesson,
+        press Back — the select snapped back to "4/4" while beatsPerBar, the dot
+        row and the accent pattern were all 3. The dock was reporting a meter it
+        was not going to play. localStorage is this component's single source of
+        truth; the browser's copy is a second one that silently disagrees. -#}
     <label class="transport__field transport__bpm-wrap">
       <span class="transport__cap" aria-hidden="true">BPM</span>
-      <input type="number" class="transport__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" aria-label="BPM, tempo in beats per minute" />
+      <input type="number" class="transport__bpm" id="metronome-bpm" value="80" min="30" max="240" step="1" autocomplete="off" aria-label="BPM, tempo in beats per minute" />
     </label>
     <label class="transport__field transport__tempo">
       <span class="transport__cap" aria-hidden="true">Tempo</span>
-      <input type="range" class="transport__slider" id="metronome-slider" min="30" max="240" step="1" value="80" aria-label="Tempo slider" />
+      <input type="range" class="transport__slider" id="metronome-slider" min="30" max="240" step="1" value="80" autocomplete="off" aria-label="Tempo slider" />
     </label>
     {#- A div, not a label, and deliberately: a <select> inside a <label> has a
         history of taking two taps on mobile browsers, because the label forwards
@@ -233,7 +242,7 @@
         lands on the control underneath it. -#}
     <div class="transport__field transport__meter">
       <span class="transport__cap" aria-hidden="true">Meter</span>
-      <select class="transport__timesig" id="metronome-timesig" aria-label="Meter, beats per bar">
+      <select class="transport__timesig" id="metronome-timesig" autocomplete="off" aria-label="Meter, beats per bar">
         <option value="2">2/4</option>
         <option value="3">3/4</option>
         <option value="4" selected>4/4</option>
@@ -247,10 +256,31 @@
       {#- metronome.js rewrites this element's innerHTML on every time-signature
           change, so the caption has to be its sibling, not its child. -#}
       <div class="transport__beats" id="metronome-beats" aria-hidden="true"></div>
+      {#- The armed message (BL-091). Empty on every page a reader has not left a
+          running click behind on, and empty is zero-width, so the dock they see
+          is the dock that shipped yesterday. When metronome.js fills it, the
+          dots and their caption step aside and this takes the field: nothing is
+          pulsing while the click is paused, so the dot row has nothing to say,
+          and the swap costs the row no width at any breakpoint.
+
+          Not a caption. The dock's five captions are uppercase, letter-spaced,
+          parked at the top of a field, and each one names the control directly
+          beneath it (BL-075) — this is a sentence, sits on the field's center
+          line, names no control and takes no taps.
+
+          role="status" is a best-effort extra, not the accessible path to this
+          state. A live region filled by a deferred script during a page's
+          initial load is commonly suppressed, and where it does fire it fires on
+          every armed load, which is its own kind of noise. What carries the
+          state reliably is the go button's own name, which becomes "Play, resume
+          metronome at 90 BPM", and the pill's sr-only text, which says "paused"
+          rather than "stopped". The role is here because when it does announce,
+          it is right, and it costs nothing when it does not. -#}
+      <p class="transport__status" id="metronome-status" role="status"></p>
     </div>
     <label class="transport__field transport__vol">
       <span class="transport__cap" aria-hidden="true">Volume</span>
-      <input type="range" class="transport__volume" id="metronome-volume" min="0" max="100" step="1" value="60" aria-label="Volume" />
+      <input type="range" class="transport__volume" id="metronome-volume" min="0" max="100" step="1" value="60" autocomplete="off" aria-label="Volume" />
     </label>
     <button class="transport__collapse" id="metronome-collapse" type="button" aria-expanded="true" aria-label="Collapse metronome">▾</button>
   </div>
