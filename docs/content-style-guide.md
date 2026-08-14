@@ -38,6 +38,41 @@ Every lesson keeps the shape: prose → exercises → (listening) → graduation
 - **Meta**: `TS · subdivision · ♩ = BPM`, where BPM **equals the spec's `bpm`** — the player honors exactly one tempo. Practice-range guidance ("work it 70→100") belongs in the tip, not the meta. (BL-027 applies this.)
 - **Tips** carry the coaching: sticking, what to listen for, the one thing that goes wrong first.
 
+### Notation: what a sticking letter means (BL-078)
+
+**A sticking letter names the hand that plays the note. Nothing else.** `R` is the right hand whether the stroke is a 14-inch fortissimo or a 1-inch whisper, and the letter under a loud backbeat and the letter under the ghost beside it are the same letter when it is the same hand. Case is not a dynamic and never was in drum notation — a ghost is marked by dynamics, an accent by `>`. Only two values are legal on a primary note: `R` and `L`.
+
+This rule exists because the corpus broke it. Four lessons had drifted into writing lowercase for "ghost" until `finger-control#2` printed *"Hi-hat 16ths in the right hand, snare 16ths in the left. The **r** snare hits are all fingers"* — a physically impossible instruction inside one sentence — and `ghost-notes-found#3`, `snare-voicings#2` and `finger-control#2` all lettered `r` on notes chorded against a continuous hi-hat, where the free hand is necessarily the left.
+
+**Deriving the hand.** Read it off the exercise, never off a rule of thumb. A continuous cymbal line is played one of two ways and they give opposite answers, so establish which one the exercise means before you letter anything:
+
+- **One hand rides the cymbal.** Then that hand is committed for the whole bar and every drum note chorded against it belongs to the other hand — `R` on the hat, `L` on the snare, loud or ghosted. `snare-voicings#2`, `ghost-notes-found#3` and `finger-control#2` are this shape, and `finger-control#2`'s tip says it outright.
+- **Both hands alternate on the cymbal.** Then no hand is free or committed: whichever hand's turn it is takes the drum note, so the letters keep alternating straight through and a ghost can be either hand. `funk-sixteenth-feel#2` and `#3` are this shape — their lesson body says "Continuous 16ths on a single hi-hat are usually played alternating R-L-R-L" — which is why `#2` ghosts `L` on the e-of-1 and `R` on the &-of-2. Both are correct.
+
+The tip must name which model is in play; nothing in the notation distinguishes them, and no check can (`check-sticking-case` reads case, never hand).
+
+Solo-drum exercises keep whatever alternation the notation already establishes; on straight alternating singles every even 16th is `R` and every odd one `L`.
+
+**Ghost notes** carry `ghost: true` on the note. That is the marker the player reads for the 0.25 (4-to-1) ghost tier — `src/assets/js/player.js`, `noteGain()` — so a ghost must be flagged, not implied by a letter. It is honored on snare and tom keys only, which is what lets a hat+snare unison stem drop the snare and leave the hi-hat ostinato alone. Never put `ghost: true` and `accent: true` on the same note. Exercises predating the marker still reach the ghost tier by an inference the player documents and is retiring; new and edited exercises mark it explicitly.
+
+**Grace notes are the one place case still carries meaning**, and there it is standard rudimental notation: the grace of a flam or drag is lowercase, the primary stroke uppercase. Six lesson bodies explain this to the reader. Keep it.
+
+`lR` and `llR` are what the reader *sees* — two glyphs, or three, under one main note. They are never one field. A grace lives in its own object, so a flam is:
+
+```js
+{ keys: ['c/5'], duration: 'q', sticking: 'R', accent: true, grace: { sticking: 'l' } }
+```
+
+and a drag takes two, which is the `llR` the reader sees:
+
+```js
+{ keys: ['c/5'], duration: 'q', sticking: 'R', accent: true, grace: [{ sticking: 'l' }, { sticking: 'l' }] }
+```
+
+Writing `sticking: 'lR'` fails `check-sticking-case`, and correctly: the primary field takes one uppercase letter.
+
+`tools/checks/check-sticking-case.js` enforces all of the above.
+
 ## Listening sections
 
 2–3 picks per lesson, `{ artist, work, note }`. Picks must be real recordings, verified. Site-wide diversity rule: no single work cited in more than 3 lessons (BL-029). Foundations lessons take canonical, accessible picks; genre lessons dig deeper into the idiom.

@@ -21,11 +21,34 @@
 //      GAIN_TAP = 1, handing the feet voice an empty `marked`, and reading the
 //      dynamic from the post-articulation voice name.
 //
+//      BL-078 added the two ways in which the tier is now CHOSEN, so both are
+//      cases: an explicit `ghost: true` must reach 0.25 (ghostfound, fingerctl,
+//      funk16th) and an unaccented full stroke without one must stay at 0.5
+//      (paradiddle). Until BL-078 that choice was read from the CASE of the
+//      sticking letter, which is not drum notation and had already produced a
+//      tip contradicting its own stave.
+//
 //   2. NOTHING GOT LOUDER. Every case is rendered twice: once as shipped and
-//      once with every accent flag stripped. A spec with no accents marks no
-//      voices, so no gain node is created and the graph is the one the player
-//      built before this feature existed — the stripped render IS the old
-//      behaviour, reproduced from the current code.
+//      once with every accent AND ghost flag stripped. A spec with neither marks
+//      no voices and marks no ghosts, so no gain node is created and the graph is
+//      the one the player built before any of this existed — the stripped render
+//      IS the old behaviour, reproduced from the current code. Stripping `ghost`
+//      as well as `accent` is load-bearing, not tidiness: ghost-notes-found#1 and
+//      finger-control#0 are sixteen ghost 16ths with no accent anywhere, so an
+//      accent-only strip would leave the control identical to the shipped render
+//      and every ratio on those pages would read 1.000 no matter what the player
+//      did.
+//
+//      READ THE CAPITALS NARROWLY. "Nothing got louder" is a WITHIN-RENDER
+//      invariant: shipped versus its own dynamics-blind control, both built from
+//      the code in the tree right now. It says the dynamics feature only ever
+//      lowers. It says nothing about one version against the last, and it cannot
+//      — BL-078 raised one note in the corpus (dynamic-spectrum#3's beat 2, from
+//      the ghost tier to the tap tier, because the exercise's own tip calls that
+//      beat piano) and this gate passed before and after without noticing, which
+//      is correct behaviour and not a hole to plug here. A version-over-version
+//      claim needs a baseline of measurements, which this file deliberately does
+//      not keep.
 //
 //      The invariant that actually holds is RMS: over all 201 accent-lowering
 //      exercises it fell in 201 and rose in none, so it is asserted flat. PEAKS
@@ -105,11 +128,31 @@ const CASES = [
     voiceKey: 'c/5',    expect: 'ghost' },
   { id: 'boombap/electronic/snare',  page: '/lessons/hiphop-boom-bap/',   ex: 2, kit: 'electronic', drop: ['g/5/x2'],
     voiceKey: 'c/5',    expect: 'ghost' },
-  // the sticking veto: identical spec shape to ghost-found#2, uppercase, so TAP
+  // Two exercises with the SAME spec shape — 16 solo snare 16ths accented on the
+  // four beats, all sticking uppercase — that must land on different tiers, so
+  // the marker is the only thing that can be separating them. paradiddle#0 asks
+  // only that its accents be "slightly louder than the rest"; ghost-notes-found#3
+  // asks for 4-to-1 and marks `ghost: true`.
   { id: 'paradiddle/electronic/tap', page: '/lessons/paradiddle/',        ex: 0, kit: 'electronic', drop: [],
     voiceKey: 'c/5',    expect: 'tap' },
-  { id: 'ghostfound/electronic/lc',  page: '/lessons/ghost-notes-found/', ex: 2, kit: 'electronic', drop: [],
+  { id: 'ghostfound/electronic/marked', page: '/lessons/ghost-notes-found/', ex: 2, kit: 'electronic', drop: [],
     voiceKey: 'c/5',    expect: 'ghost' },
+  // the marker on a unison hat+snare stem, where the ghost is the hand that is
+  // NOT on the hat — the shape BL-078 was filed over
+  { id: 'fingerctl/electronic/chord', page: '/lessons/finger-control/',   ex: 2, kit: 'electronic', drop: ['g/5/x2'],
+    voiceKey: 'c/5',    expect: 'ghost' },
+  // and the two exercises BL-078 moved from tap to ghost: all-uppercase sticking
+  // whose tips ask for "a ghost at roughly a quarter of their volume"
+  { id: 'funk16th/electronic/snare', page: '/lessons/funk-sixteenth-feel/', ex: 3, kit: 'electronic', drop: ['g/5/x2'],
+    voiceKey: 'c/5',    expect: 'ghost' },
+  // A SPEC THAT ACCENTS NOTHING — sixteen ghost 16ths, no ">" anywhere. This is
+  // the case the pre-BL-078 rule could not reach even in principle: with no
+  // accents, accentedVoices() returns {} and every note took GAIN_ACCENT, so a
+  // lesson whose tip asks for "a soft hum" played at full level. Only an explicit
+  // marker can lower it, which makes this the one case that fails the moment the
+  // markers are deleted rather than merely mis-set.
+  { id: 'ghostfound/electronic/noaccent', page: '/lessons/ghost-notes-found/', ex: 1, kit: 'electronic', drop: [],
+    voiceKey: 'c/5',    expect: 'ghost',  noAccents: true },
   // the tom path
   { id: 'polyrhythm/electronic/tom', page: '/lessons/polyrhythms-3-2/',   ex: 3, kit: 'electronic', drop: ['a/4'],
     voiceKey: 'e/5',    expect: 'ghost' },
@@ -181,7 +224,7 @@ const FRAME = `<!doctype html><meta charset="utf-8"><body><div id="o">pending</d
     const spec = JSON.parse(doc.querySelectorAll('[data-exercise-play]')[kase.ex].getAttribute('data-spec'));
     for (const v of ['hands', 'feet']) {
       (spec[v] || []).forEach(function (n) {
-        if (strip) delete n.accent;
+        if (strip) { delete n.accent; delete n.ghost; }
         if (!kase.drop || !n.keys) return;
         n.keys = n.keys.filter(function (k) { return kase.drop.indexOf(k) === -1; });
         if (!n.keys.length) { n.rest = true; delete n.keys; }
@@ -388,29 +431,45 @@ server.listen(0, '127.0.0.1', async () => {
       if (want === undefined) { fails.push(`${r.id} — unknown expect: ${kase.expect}`); continue; }
       const voice = r.notes.filter(n => (n.keys || '').split('+').indexOf(kase.voiceKey) !== -1);
       const acc = voice.filter(n => n.accent), quiet = voice.filter(n => !n.accent);
-      if (!acc.length || !quiet.length) {
+      // Both shapes need a guard that the case is still pointed at the exercise it
+      // was written for, or a renumbered lesson turns it into a silent no-op.
+      if (kase.noAccents) {
+        if (acc.length || quiet.length < 8) {
+          fails.push(`${r.id} — declared noAccents, measured ${acc.length} accented and ` +
+                     `${quiet.length} unaccented ${kase.voiceKey} notes; expected 0 and 8+. The ` +
+                     `exercise has changed under the case, so this case is asserting nothing.`);
+          continue;
+        }
+      } else if (!acc.length || !quiet.length) {
         fails.push(`${r.id} — expected accented and unaccented ${kase.voiceKey} notes, got ` +
                    `${acc.length}/${quiet.length}. The case's drop list or exercise index is wrong, ` +
                    `so this case has been asserting nothing.`);
         continue;
       }
       const att = n => n.peakStripped > 0 ? n.peakShipped / n.peakStripped : 1;
-      const qAtt = quiet.map(att), aAtt = acc.map(att);
+      const qAtt = quiet.map(att);
       const qLo = Math.min(...qAtt), qHi = Math.max(...qAtt);
-      const aLo = Math.min(...aAtt), aHi = Math.max(...aAtt);
-      // the human-readable number the lessons talk about, for the log only
-      const med = xs => { const s = [...xs].sort((p, q) => p - q); return s[Math.floor(s.length / 2)]; };
-      const ratio = med(acc.map(n => n.peakShipped)) / med(quiet.map(n => n.peakShipped));
-      lines.push(`  ${r.id} [${kase.expect} ${want}] ${kase.voiceKey}: ${quiet.length} lowered note(s) at ` +
-                 `${qLo.toFixed(3)}-${qHi.toFixed(3)}x, ${acc.length} accented at ${aLo.toFixed(3)}-${aHi.toFixed(3)}x` +
-                 `, sounding ${ratio.toFixed(2)}-to-1`);
+      if (acc.length) {
+        const aAtt = acc.map(att);
+        const aLo = Math.min(...aAtt), aHi = Math.max(...aAtt);
+        // the human-readable number the lessons talk about, for the log only
+        const med = xs => { const s = [...xs].sort((p, q) => p - q); return s[Math.floor(s.length / 2)]; };
+        const ratio = med(acc.map(n => n.peakShipped)) / med(quiet.map(n => n.peakShipped));
+        lines.push(`  ${r.id} [${kase.expect} ${want}] ${kase.voiceKey}: ${quiet.length} lowered note(s) at ` +
+                   `${qLo.toFixed(3)}-${qHi.toFixed(3)}x, ${acc.length} accented at ${aLo.toFixed(3)}-${aHi.toFixed(3)}x` +
+                   `, sounding ${ratio.toFixed(2)}-to-1`);
+        if (aLo < 1 - ACCENT_TOL || aHi > 1 + ACCENT_TOL) {
+          fails.push(`${r.id} — accented ${kase.voiceKey} notes land at ${aLo.toFixed(3)}-${aHi.toFixed(3)}x ` +
+                     `their accent-blind level; an accent must be left exactly as it was`);
+        }
+      } else {
+        lines.push(`  ${r.id} [${kase.expect} ${want}] ${kase.voiceKey}: ${quiet.length} lowered note(s) at ` +
+                   `${qLo.toFixed(3)}-${qHi.toFixed(3)}x, in a spec that accents nothing — ` +
+                   `only an explicit ghost marker can reach these`);
+      }
       if (qLo < want - TIER_TOL || qHi > want + TIER_TOL) {
         fails.push(`${r.id} — unaccented ${kase.voiceKey} notes land at ${qLo.toFixed(3)}-${qHi.toFixed(3)}x ` +
                    `their accent-blind level; the ${kase.expect} tier is ${want}`);
-      }
-      if (aLo < 1 - ACCENT_TOL || aHi > 1 + ACCENT_TOL) {
-        fails.push(`${r.id} — accented ${kase.voiceKey} notes land at ${aLo.toFixed(3)}-${aHi.toFixed(3)}x ` +
-                   `their accent-blind level; an accent must be left exactly as it was`);
       }
     }
 
@@ -448,10 +507,11 @@ server.listen(0, '127.0.0.1', async () => {
     console.error('[check-accent-dynamics] FAIL:');
     fails.forEach(f => console.error('  ' + f));
     console.error(`\n  The levels live in one table at the top of src/assets/js/player.js: an accented note`);
-    console.error(`  keeps the voice's own peak (1.0); an unaccented snare or tom of an accented voice drops`);
-    console.error(`  to 0.25 (the 4-to-1 the lessons print) UNLESS its own sticking is uppercase, which the`);
-    console.error(`  corpus writes for a full stroke, in which case it is a tap at 0.5; an unaccented cymbal`);
-    console.error(`  or kick drops to 0.5. Nothing is ever raised, so "no exercise gets louder" holds by`);
+    console.error(`  keeps the voice's own peak (1.0); a snare or tom marked ghost: true in the content drops`);
+    console.error(`  to 0.25 (the 4-to-1 the lessons print); an unaccented cymbal or kick, and any unaccented`);
+    console.error(`  snare or tom that carries a sticking letter without the marker, drops to 0.5. A sticking`);
+    console.error(`  letter names a HAND — its CASE means nothing here, and re-teaching the player to read it`);
+    console.error(`  is the BL-078 regression. Nothing is ever raised, so "no exercise gets louder" holds by`);
     console.error(`  construction — do not fix a ratio by boosting the accent.`);
     process.exit(1);
   }

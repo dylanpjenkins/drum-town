@@ -7044,20 +7044,20 @@ module.exports = {
         hands: [
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' }
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -7066,7 +7066,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "The <em>r</em> ghosts here are <strong>edge hits</strong> — about an inch from the rim, no rim contact, played from the fingers only. Brian Blade lives in this voicing: the head is stiffer at the edge, so soft strokes return the snare-wire rattle without the head's body tone. Backbeats on 2 and 4 are still center rim-shots. The contrast in <em>place</em> reinforces the contrast in <em>volume</em>."
+        tip: "The right hand rides the hat all bar, so every <em>L</em> is the left hand arriving on the snare — loud on 2 and 4, ghosted the other four times. Those four ghosts are <strong>edge hits</strong>: about an inch from the rim, no rim contact, played from the fingers only. Brian Blade lives in this voicing, because the head is stiffer at the edge, so soft strokes return the snare-wire rattle without the head's body tone. The backbeats stay center rim-shots. The contrast in <em>place</em> reinforces the contrast in <em>volume</em>."
       },
       {
         title: "4 — Cross-Stick Backbeat (the Ballad Voicing)",
@@ -7457,16 +7457,16 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['c/5'], duration: 'q', sticking: 'r' },
+          { keys: ['c/5'], duration: 'q', sticking: 'R', ghost: true },
           { keys: ['c/5'], duration: 'q', sticking: 'R', accent: true },
-          { keys: ['c/5'], duration: 'q', sticking: 'l' },
+          { keys: ['c/5'], duration: 'q', sticking: 'L', ghost: true },
           { keys: ['c/5'], duration: 'q', sticking: 'L', accent: true }
         ],
-        tip: "Alternate <em>whisper</em> and <em>slap</em>: lowercase <em>r/l</em> are 1-inch ghost taps; uppercase <em>R/L</em> with the accent are 12-inch full strokes. The slap should be at least 4× louder. Stand back from the kit and listen — if you can't hear the whisper from across the room, the slap isn't tall enough yet (or the whisper is too tall)."
+        tip: "Alternate <em>whisper</em> and <em>slap</em>, right hand for beats 1 and 2, left hand for beats 3 and 4. The two bare notes are 1-inch ghost taps; the two carrying a <em>&gt;</em> are 12-inch full strokes. <em>R</em> and <em>L</em> tell you the hand and nothing about the volume, which is why the same letter appears over both heights. The slap should be at least 4× louder. Stand back from the kit and listen — if you can't hear the whisper from across the room, the slap isn't tall enough yet (or the whisper is too tall)."
       },
       {
         title: "2 — Sixteenth-Note Ghost Stream on Snare",
-        meta: "4/4 · ♩ = 80",
+        meta: "4/4 · ♩ = 80 · pp throughout",
         bpm: 80,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -7474,10 +7474,11 @@ module.exports = {
         hands: Array.from({ length: 16 }, (_, i) => ({
           keys: ['c/5'],
           duration: '16',
-          sticking: i % 2 === 0 ? 'r' : 'l'
+          sticking: i % 2 === 0 ? 'R' : 'L',
+          ghost: true
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Sixteen 16ths, all <em>ghost-volume</em> (lowercase <em>r l r l</em>). No accents anywhere. The whole bar should sound like a soft hum, not a stream of articulated notes. Hold this for two minutes against the metronome — that's the discipline. If your forearm tightens or the volume drifts up, stop and reset. Wrist should be still; fingers should be doing the work."
+        tip: "Sixteen 16ths at <em>ghost volume</em>, alternating <em>R L R L</em>. No accents anywhere, so every note in the bar is a whisper. The whole bar should sound like a soft hum, not a stream of articulated notes. Hold this for two minutes against the metronome — that's the discipline. If your forearm tightens or the volume drifts up, stop and reset. Wrist should be still; fingers should be doing the work."
       },
       {
         title: "3 — Ghost-Loud-Ghost Pulse",
@@ -7489,11 +7490,12 @@ module.exports = {
         hands: Array.from({ length: 16 }, (_, i) => ({
           keys: ['c/5'],
           duration: '16',
-          sticking: i % 2 === 0 ? (i % 4 === 0 ? 'R' : 'r') : (i % 4 === 2 ? 'L' : 'l'),
-          accent: (i % 4 === 0)
+          sticking: i % 2 === 0 ? 'R' : 'L',
+          accent: (i % 4 === 0),
+          ...(i % 4 === 0 ? {} : { ghost: true })
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Same 16th-note stream, but now beats 1, 2, 3, 4 are <em>full strokes</em> (uppercase) and the e / &amp; / a positions are <em>ghosts</em> (lowercase). The accented downbeats should pop above the ghost bed by a 4:1 ratio. This isolates the <em>height switch</em>: the hand drops from 12 inches to 1 inch in one 16th-note interval, then back up to 12 inches by the next beat."
+        tip: "Same 16th-note stream and the same <em>R L R L</em> hands, but now beats 1, 2, 3, 4 carry a <em>&gt;</em> and are <em>full strokes</em>, while the e / &amp; / a positions between them stay <em>ghosts</em>. The accented downbeats should pop above the ghost bed by a 4:1 ratio. This isolates the <em>height switch</em>: the hand drops from 12 inches to 1 inch in one 16th-note interval, then back up to 12 inches by the next beat."
       },
       {
         title: "4 — Ghost-Note Backbeat Groove (the Application)",
@@ -7505,20 +7507,20 @@ module.exports = {
         hands: [
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' }
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -7527,7 +7529,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "The backbeat groove with ghosts threaded around the 2 and 4 hits. Loud snare on 2 and 4 is the wrist; the lowercase <em>r</em> snare hits are the fingers, at ghost height. The ghosts are <em>sparse</em> here on purpose — four per bar, on the &amp;-of-1, a-of-2, e-of-3, and a-of-4. Hold the dynamic ratio for two minutes at ♩=90; that's your graduation."
+        tip: "The backbeat groove with ghosts threaded around the 2 and 4 hits. The right hand rides the hat all bar, so every <em>L</em> is the left hand on the snare: loud snare on 2 and 4 from the wrist, the four unaccented <em>L</em> strokes from the fingers at ghost height. The ghosts are <em>sparse</em> here on purpose — four per bar, on the &amp;-of-1, a-of-2, e-of-3, and a-of-4. Hold the dynamic ratio for two minutes at ♩=90; that's your graduation."
       }
     ],
     listening: [
@@ -7786,7 +7788,7 @@ module.exports = {
     exercises: [
       {
         title: "1 — Pure Finger 16ths (No Wrist)",
-        meta: "4/4 · 16th notes · ♩ = 80",
+        meta: "4/4 · 16th notes · ♩ = 80 · pp throughout",
         bpm: 80,
         timeSignature: "4/4",
         repeatBegin: true,
@@ -7794,10 +7796,11 @@ module.exports = {
         hands: Array.from({ length: 16 }, (_, i) => ({
           keys: ['c/5'],
           duration: '16',
-          sticking: i % 2 === 0 ? 'r' : 'l'
+          sticking: i % 2 === 0 ? 'R' : 'L',
+          ghost: true
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Sixteen quiet 16ths. <strong>Park the wrist</strong> — visibly motionless — and let the fingers do everything. Stick travel: about one inch. If the wrist starts to move, slow down. The whole bar should sound like a soft murmur. Hold for two minutes and gradually push to ♩=100 over weeks, not minutes."
+        tip: "Sixteen quiet 16ths, alternating <em>R L R L</em>. <strong>Park the wrist</strong>, visibly motionless, and let the fingers do everything. Stick travel: about one inch. If the wrist starts to move, slow down. The whole bar should sound like a soft murmur. Hold for two minutes and gradually push to ♩=100 over weeks, not minutes."
       },
       {
         title: "2 — Fingers + Wrist: Accent on the Beat",
@@ -7809,13 +7812,12 @@ module.exports = {
         hands: Array.from({ length: 16 }, (_, i) => ({
           keys: ['c/5'],
           duration: '16',
-          sticking: i % 2 === 0
-            ? (i % 4 === 0 ? 'R' : 'r')
-            : 'l',
-          accent: (i % 4 === 0)
+          sticking: i % 2 === 0 ? 'R' : 'L',
+          accent: (i % 4 === 0),
+          ...(i % 4 === 0 ? {} : { ghost: true })
         })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Same finger 16ths as Ex 1, but the right hand plays an accent on every <em>1</em> — that one note uses the wrist (capital R). Everything else stays in the fingers (lowercase r/l). The transition is the lesson: wrist-on for one stroke, then fingers immediately resume. This is the technique behind Steve Jordan's 16th-note grooves."
+        tip: "Same finger 16ths as Ex 1, and the same alternating <em>R L R L</em>, but the right hand now plays an accent on every <em>1</em>. Those four notes use the wrist. The other twelve stay in the fingers at ghost height, in both hands. The transition is the lesson: wrist-on for one stroke, then fingers immediately resume. This is the technique behind Steve Jordan's 16th-note grooves."
       },
       {
         title: "3 — Backbeat with Finger-Driven 16ths Underneath",
@@ -7826,21 +7828,21 @@ module.exports = {
         repeatEnd: true,
         hands: [
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', accent: true },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'r' }
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', accent: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -7849,7 +7851,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Hi-hat 16ths in the right hand, snare 16ths in the left. The <em>r</em> snare hits are all fingers — ghost-volume; backbeats on 2 and 4 are wrist-driven. This is the canonical Brian Blade / Steve Jordan texture. Hold the dynamic ratio for two minutes at ♩=90; you should be able to hold a conversation while playing this."
+        tip: "Hi-hat 16ths in the right hand, snare 16ths in the left, so every <em>L</em> on the stave is a snare note. The unaccented <em>L</em> strokes are all fingers at ghost volume; the backbeats on 2 and 4 are the same left hand, wrist-driven. The letter never changes because the hand never changes. This is the canonical Brian Blade / Steve Jordan texture. Hold the dynamic ratio for two minutes at ♩=90; you should be able to hold a conversation while playing this."
       },
       {
         title: "4 — Finger-Controlled Buzz Roll",
@@ -7941,9 +7943,9 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['c/5'], duration: 'q', sticking: 'r' },
+          { keys: ['c/5'], duration: 'q', sticking: 'R', ghost: true },
           { keys: ['c/5'], duration: 'q', sticking: 'L', accent: true },
-          { keys: ['c/5'], duration: 'q', sticking: 'r' },
+          { keys: ['c/5'], duration: 'q', sticking: 'R', ghost: true },
           { keys: ['c/5'], duration: 'q', sticking: 'L', accent: true }
         ],
         tip: "Alternate <em>ghost</em> (1-inch) and <em>forte</em> (10-inch) on each beat. The leap is large on purpose: from 1\" to 10\" between beats 1 and 2. The accent / tap mechanic from the prerequisite is in play here, but applied dynamically rather than rhythmically — it's the same skill, used to <em>place dynamics</em> rather than to mark rhythmic accents."
@@ -7955,24 +7957,21 @@ module.exports = {
         timeSignature: "4/4",
         repeatBegin: true,
         repeatEnd: true,
-        hands: Array.from({ length: 16 }, (_, i) => {
-          const stickings = ['R','L','R','L','R','L','R','L','R','L','R','L','R','L','R','L'];
-          let accent = false;
-          let sticking = stickings[i];
-          if (i === 0)       { accent = true;  sticking = sticking.toUpperCase(); }   // f
-          else if (i === 4)  { sticking = sticking.toLowerCase(); }                    // p
-          else if (i === 8)  { sticking = sticking.toUpperCase(); }                    // mf
-          else if (i === 12) { accent = true;  sticking = sticking.toUpperCase(); }   // ff
-          else               { sticking = sticking.toLowerCase(); }                    // ghost
-          return {
-            keys: ['c/5'],
-            duration: '16',
-            sticking,
-            accent
-          };
-        }),
+        // Straight alternating singles; the letter is the hand and never moves.
+        // The dynamic lives in `accent` and `ghost`: the four downbeats are the
+        // four named levels (f / p / mf / ff) and everything between them is a
+        // ghost. p and mf both reach the player's tap tier — it has three levels,
+        // not five — so the two middle steps are a stick-height distinction you
+        // make yourself.
+        hands: Array.from({ length: 16 }, (_, i) => ({
+          keys: ['c/5'],
+          duration: '16',
+          sticking: i % 2 === 0 ? 'R' : 'L',
+          accent: (i === 0 || i === 12),
+          ...(i % 4 === 0 ? {} : { ghost: true })
+        })),
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "One bar, four dynamic levels. Beat 1: forte (accented). Beat 2: piano. Beat 3: mezzo. Beat 4: fortissimo (accented). The non-beat 16ths are all ghosts. Five different stick heights happen inside one bar — you have to <em>plan</em> them. The challenge is keeping the levels distinct as the bar repeats. If the f and ff start to blur, slow to ♩=60."
+        tip: "One bar, four dynamic levels on the beats. Beat 1: forte (accented). Beat 2: piano. Beat 3: mezzo. Beat 4: fortissimo (accented). The non-beat 16ths are all ghosts. Only the two loud beats carry a <em>&gt;</em>, and the player sounds piano and mezzo at one level, so beats 2 and 3 are a step you make with stick height and hear on your own recording rather than one the page or the playback can show you. Five different heights inside one bar means you have to <em>plan</em> them. If the f and ff start to blur, slow to ♩=60."
       },
       {
         title: "5 — The Dynamic Ladder (climbing through all 5 levels)",
@@ -7983,14 +7982,14 @@ module.exports = {
         repeatEnd: false,
         hands: [
           // Bar 1: ghost
-          { keys: ['c/5'], duration: '8', sticking: 'r' },
-          { keys: ['c/5'], duration: '8', sticking: 'l' },
-          { keys: ['c/5'], duration: '8', sticking: 'r' },
-          { keys: ['c/5'], duration: '8', sticking: 'l' },
-          { keys: ['c/5'], duration: '8', sticking: 'r' },
-          { keys: ['c/5'], duration: '8', sticking: 'l' },
-          { keys: ['c/5'], duration: '8', sticking: 'r' },
-          { keys: ['c/5'], duration: '8', sticking: 'l' },
+          { keys: ['c/5'], duration: '8', sticking: 'R', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'L', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'R', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'L', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'R', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'L', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'R', ghost: true },
+          { keys: ['c/5'], duration: '8', sticking: 'L', ghost: true },
           // Bar 2: piano
           { keys: ['c/5'], duration: '8', sticking: 'R' },
           { keys: ['c/5'], duration: '8', sticking: 'L' },
@@ -16762,20 +16761,20 @@ module.exports = {
         repeatEnd: true,
         hands: [
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'L' }
         ],
         feet: [
@@ -16808,21 +16807,21 @@ module.exports = {
         repeatEnd: true,
         hands: [
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2', 'c/5'], duration: '16', sticking: 'R', accent: true },
-          { keys: ['c/5'], duration: '16', sticking: 'L' },
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true },
           { keys: ['g/5/x2'], duration: '16', sticking: 'R' },
-          { keys: ['c/5'], duration: '16', sticking: 'L' }
+          { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },

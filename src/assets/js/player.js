@@ -61,13 +61,14 @@
   //
   //   1.00  an accented note, and every note of a voice this spec never accents
   //         (so an exercise that marks no accents is untouched)
-  //   0.25  an unaccented stroke of an accented SNARE or TOM voice: a ghost
-  //         note. The lessons print this number themselves — "roughly a quarter
-  //         of that volume", "a 4-to-1 ratio between accented and ghosted
-  //         snare", "if a backbeat is 5 on a 1-to-10 scale the ghosts are
-  //         between 1 and 1.5" — and that 1-to-10 scale is a linear amplitude
-  //         reading, so 4-to-1 is 0.25 (about -12 dB), not the 0.5 a power
-  //         reading would give.
+  //   0.25  a SNARE or TOM stroke the content marks `ghost: true`, and (by the
+  //         legacy inference in noteGain) an unaccented, unlettered stroke of an
+  //         accented snare or tom voice. The lessons print this number
+  //         themselves — "roughly a quarter of that volume", "a 4-to-1 ratio
+  //         between accented and ghosted snare", "if a backbeat is 5 on a
+  //         1-to-10 scale the ghosts are between 1 and 1.5" — and that 1-to-10
+  //         scale is a linear amplitude reading, so 4-to-1 is 0.25 (about
+  //         -12 dB), not the 0.5 a power reading would give.
   //   0.50  an unaccented stroke of an accented CYMBAL or KICK voice, and any
   //         unaccented full stroke (see fullStroke below): one dynamic level
   //         down (-6 dB), the ordinary reading of a ">". A ghost is a specific
@@ -455,52 +456,52 @@
     return marked;
   }
 
-  // A note the corpus writes as a FULL STROKE. The sticking letter carries the
-  // dynamic in this notation — ghost-notes-found#2's tip spells the convention out
-  // ("beats 1, 2, 3, 4 are full strokes (uppercase) and the e / & / a positions
-  // are ghosts (lowercase)"), and ghost-notes-found#0 and finger-control#1 say the
-  // same. Only four values exist corpus-wide: R, L, r, l.
-  //
-  // This is the difference between two specs that are otherwise IDENTICAL — 16
-  // solo snare 16ths accented on 1, 2, 3, 4:
-  //
-  //   ghost-notes-found#2   R l r l  R l r l  ...   the dropped notes are ghosts
-  //   paradiddle#0          R L R R  L R L L  ...   the dropped notes are TAPS,
-  //                                                 and its tip asks only that the
-  //                                                 accents be "slightly louder
-  //                                                 than the rest"
-  //
-  // So an unaccented snare/tom written as a full stroke takes the tap tier, not
-  // the ghost tier. Measured over the corpus: of the 190 exercises that lower an
-  // unaccented snare or tom, 62 are all-uppercase (the whole rudiment and reading
-  // shelf: accent-tap, moeller-stroke, accented-singles, the paradiddle family,
-  // rock-train-beat, fusion-mahavishnu), 7 are all-lowercase (ghost-notes-found,
-  // finger-control, snare-voicings#2, dynamic-spectrum#2), 2 are mixed
-  // (dynamic-spectrum#3 and #4, which need both tiers inside one bar), and 119
-  // carry no sticking at all and keep the ghost tier — including both lessons this
-  // change was filed for.
-  //
-  // CAVEAT: BL-078 records that this very convention has drifted corpus-wide (the
-  // letter has started meaning a ghost rather than a hand in some lessons), so this
-  // will misfire wherever the case is wrong. It misfires SAFE — a miscased ghost
-  // lands at 0.5 instead of 0.25, never the other way. Two exercises are miscased:
-  // funk-sixteenth-feel#2 and #3 write every 16th as an uppercase R/L while their
-  // tips call the off-backbeat snares "a ghost at roughly a quarter of their
-  // volume", so those ghosts under-drop to a half. The fix is a sticking-case
-  // correction under BL-078, not a gain change here — editing two lessons' letters
-  // in isolation is the exact local patch that filing warns against.
-  //
-  // stick-grip#2 looks like a third and is not: it is titled "Loud R, Soft L
-  // (Accent / Tap Demo)" and its tip asks for "taps from a low start", so its
-  // uppercase L is right and 0.5 is the level it wants.
-  function fullStroke(note) {
+  // Does this note carry a sticking letter at all? Note what this does NOT ask:
+  // whether the letter is upper or lower case. Until BL-078 it did, and the case
+  // was the whole discriminator — lowercase meant a ghost, uppercase a full
+  // stroke, because four lesson tips said so in prose. That is not drum notation
+  // (a letter names a HAND; a ghost is marked by dynamics or a parenthesized
+  // notehead) and the corpus had already broken under it: finger-control#2's tip
+  // read "Hi-hat 16ths in the right hand, snare 16ths in the left. The r snare
+  // hits are all fingers" over notes lettered r. Nothing here reads case now.
+  function hasSticking(note) {
     const s = note.sticking;
-    return typeof s === 'string' && /[A-Za-z]/.test(s) && !/[a-z]/.test(s);
+    return typeof s === 'string' && /[A-Za-z]/.test(s);
   }
 
+  // BL-078 gave the data an explicit marker, so a ghost says it is one:
+  //
+  //   { keys: ['c/5'], duration: '16', sticking: 'L', ghost: true }
+  //
+  // Honored on SNARE and TOM keys only. On a unison hat+snare stem — which is how
+  // every chorded ghost in the corpus is written — it lowers the snare and leaves
+  // the hi-hat ostinato at full level, the same split accentedVoices() applies to
+  // a ">" on that stem. It also fires on a spec that accents NOTHING, which the
+  // old rule structurally could not: ghost-notes-found#1 and finger-control#0 are
+  // sixteen ghost 16ths with no accent anywhere, so `marked` came back empty and
+  // all sixteen played at full level under a tip asking for "a soft hum".
+  //
+  // THE LAST CLAUSE IS A PROXY, NOT A RULE, and it is on its way out. 119
+  // exercises across 59 lessons still reach the ghost tier by inference:
+  // unaccented snare/tom of an accented voice, carrying no sticking at all.
+  // funk-ghost-notes#0 is the flagship. Against them sit 64 accent-tap exercises
+  // (the paradiddle family, accent-tap, moeller-stroke, accented-singles,
+  // rock-train-beat, fusion-mahavishnu) whose unaccented strokes are real full
+  // strokes at 0.5 — paradiddle#0 asks only that its accents be "slightly louder
+  // than the rest", and 4-to-1 is not slightly. Every one of those 64 letters its
+  // sticking and none of the 119 do, so today a letter's PRESENCE separates the
+  // piles.
+  //
+  // BL-078 asked for that proxy to disappear outright. Measured, it cannot yet:
+  // deleting it drops all 119 from 0.25 to 0.5, and marking them instead is an
+  // edit to 59 lessons against CLAUDE.md's 10-lesson cap. Marking them is the
+  // follow-up, and when the last one is marked this function loses its final two
+  // clauses. What did disappear is the case reading.
   function noteGain(note, voice, marked) {
-    if (note.accent === true || !marked[voice]) return GAIN_ACCENT;
-    if (!GHOST_VOICES[voice] || fullStroke(note)) return GAIN_TAP;
+    if (note.accent === true) return GAIN_ACCENT;
+    if (note.ghost === true && GHOST_VOICES[voice]) return GAIN_GHOST;
+    if (!marked[voice]) return GAIN_ACCENT;
+    if (!GHOST_VOICES[voice] || hasSticking(note)) return GAIN_TAP;
     return GAIN_GHOST;
   }
 

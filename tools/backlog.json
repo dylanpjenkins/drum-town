@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 66,
-    "next_dimension": "content",
+    "iteration": 67,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 107,
+    "next_id": 110,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1456,7 +1456,7 @@
         "ITERATION 65 GAVE THIS ITEM TEETH IT DID NOT HAVE. BL-097 now keys AUDIO DYNAMICS off the sticking case, because the corpus documents that convention in its own prose — ghost-notes-found#2 says \"beats 1, 2, 3, 4 are full strokes (uppercase) and the e / & / a positions are ghosts (lowercase)\", and ghost-notes-found#0 and finger-control#1 say the same. Measured over the 202 exercises that drop an unaccented drum note: 63 all-uppercase, 7 all-lowercase, 2 mixed, 130 with no sticking at all. TWO exercises are miscased against the convention and therefore play their ghosts at half volume instead of a quarter: funk-sixteenth-feel#2 and #3, both all-uppercase while their tips ask for \"a ghost at roughly a quarter of their volume\". The fix is their sticking case, not the gain table. I had listed stick-grip#2 as a third and the builder correctly refused it: that exercise is titled \"Loud R, Soft L (Accent / Tap Demo)\" and its tip asks for \"taps from a low start\", so its uppercase L is right and 0.5 is the level it wants — a false positive from matching ghost words in the lesson body rather than the exercise."
       ],
       "acceptance": "one decision applied corpus-wide: either the letter always names the hand (and ghosts are marked some other way), or the notation documents that lowercase marks a ghost regardless of hand; every affected exercise and tip agrees with whichever is chosen; docs/content-style-guide.md records it",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -1465,6 +1465,31 @@
           "iteration": 65,
           "date": "2026-08-14",
           "note": "Raised P2 to P1. Sticking case is no longer just a printed letter: it now decides how loud a note plays, so drift in the convention is drift in the audio."
+        },
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "Shipped. DECISION: a sticking letter names the hand and nothing else; ghosts carry an explicit marker. 101 lowercase letters corrected to the hand that actually plays them, 6 added, 114 ghost markers across 13 exercises in 5 lessons, player.js reading the marker instead of the case, 8 tips rewritten, new gate check-sticking-case.js, rule recorded in docs/content-style-guide.md. One documented carve-out: the grace note of a flam or drag stays lowercase, standard rudimental spelling that six lesson bodies teach by name."
+        },
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "THE BEST RESULT WAS UNSOUGHT: ghost-notes-found#1, titled Sixteenth-Note Ghost Stream on Snare with a tip asking for a soft hum, and finger-control#0 were playing sixteen FULL-VOLUME strokes each — measured at 1.000. Both now measure 0.250. Two ghost-note exercises that had never had a ghost. funk-sixteenth-feel#2 and #3 also improved 0.500 to 0.250, while paradiddle#0 correctly holds at 0.500 and funk-ghost-notes#0 at 0.250."
+        },
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "THE ADVERSARIAL PASS CHECKED THE HARD PARTS AND THEY HELD: all 114 markers verified against their own tips with independent position arithmetic (sum exactly 114, no marker on a note a tip calls loud, no unmarked note a tip calls a ghost), all three continuous-hat derivations verified from the key arrays rather than the prose, and no hand assignment changed anywhere. Exactly one note in the corpus got louder, the one already named. WHAT IT CAUGHT: dynamic-spectrum#3 promised four dynamic levels and now sounds two, because putting piano above the ghosts collapsed it into mezzo permanently — the player has three tiers and two are spent on forte and fortissimo — and that had been written into a source comment no reader sees while the tip kept promising four. The style guide printed lR as a flam spelling the new gate REJECTS. And its hand rule was falsified by two exercises in the same commit where the hat is played by both hands alternating."
+        },
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "AND THE GATE COULD BE EMPTIED SILENTLY: deleting all 114 markers printed 0 ghost markings all well-formed and exited 0, and no check-accent-dynamics case covered a zero-accent spec, so the two exercises that went 1.000 to 0.250 were pinned by nothing and the original bug could be reinstated with all 17 gates green. Now a noaccent case measures 0.250 x16 on a spec that accents nothing, mutation-proved to fail when markers are stripped, with a staleness guard if it is ever aimed at an accented exercise; and the header says plainly it enforces well-formedness rather than completeness, that the count is a tally not a floor, and that 9 of 13 marked exercises are held by review alone."
+        },
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "CORRECTION TO THE RECORD: the first build rejected parenthesized ghost noteheads as a VexFlow limitation. new VF.Parenthesis() takes position ?? LEFT so a bare constructor draws only the opener, but buildAndAttach adds LEFT and RIGHT per key and passing both draws complete parentheses — rendered at the site geometry with zero frame overflow. The conclusion survived on its second reason only, that bracketing 114 of ~750 ghosts would invent an unevenly-applied convention, which is this item own failure mode. Filed as BL-107 sequencing rather than left as a false capability claim. Also in this commit: the two exercises where every note is a ghost now print pp throughout in their meta, the convention rock-dynamics already used, which closes the only case where uppercasing left nothing visible saying quiet."
         }
       ]
     },
@@ -2217,6 +2242,77 @@
         "The guard is cheap: commit the 19 ids as a snapshot the gate diffs, so a rename becomes a deliberate act with a visible diff rather than a silent break."
       ],
       "acceptance": "a curriculum slug rename or reorder that would change a public fragment URL fails a gate with a message naming the old and new id, so it can only happen deliberately"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "Filed during BL-078. Each was deliberately sequenced out of that commit rather than forgotten."
+        }
+      ],
+      "id": "BL-107",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Draw ghost notes as parenthesized noteheads — the renderer can, and 750 of them are invisible",
+      "evidence": [
+        "BL-078 gave the data an explicit ghost marker and 114 notes now carry it, but tools/notation-renderer.js does not read the field at all — it is not even in the noteSpec JSDoc. A stave draws notehead, beam, accent, sticking letter, open-hat \"o\" and grace notes, and nothing else. So a ghost is audible and invisible.",
+        "For 11 of the 13 exercises BL-078 touched this is fine or better: the accents mark the loud strokes, so the ghosts read as the bare notes, which is real notation rather than the private lowercase convention it replaced. The gap is the exercises where a ghost sits among unaccented full strokes.",
+        "THE CAPABILITY EXISTS AND WAS WRONGLY RULED OUT. The BL-078 builder prototyped VexFlow parentheses and rejected them because only the opening bracket drew. The adversarial pass found why: new VF.Parenthesis() takes position ?? LEFT, so with no argument it can only ever draw the opener. VexFlow 4.2.5 own buildAndAttach adds TWO modifiers per key, LEFT and RIGHT, and passing both explicitly draws complete parentheses — rendered and screenshotted on four real exercises with beams, accents and the sticking row intact.",
+        "MEASURED COST AT THE SITE OWN GEOMETRY: rightmost ink moves from 746.7 to 746.7-747.0 user units against a stave end of 752.0 and a viewBox of 760, across all 12 sticking-bearing exercises. Zero overflow; check-notation-frame is not at risk.",
+        "THE REAL REASON TO SEQUENCE IT, and it is a good one: only 114 of roughly 750 unaccented drum strokes carry the marker today, so bracketing just those would invent an unevenly-applied convention — the exact failure BL-078 exists to end. This should ship WITH or AFTER the pass that marks the remaining ~636 across 59 lessons, not before it."
+      ],
+      "acceptance": "every note the data calls a ghost is drawn as a parenthesized notehead, and every note drawn plain is one the data does not call a ghost — so the convention is applied evenly corpus-wide; no stave overflows its frame and check-notation-frame still passes"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "Filed during BL-078. Each was deliberately sequenced out of that commit rather than forgotten."
+        }
+      ],
+      "id": "BL-108",
+      "dimension": "content",
+      "priority": 2,
+      "title": "The dynamics lessons teach five levels and the player has three, with nothing on the page saying so",
+      "evidence": [
+        "dynamic-spectrum#3 tip: \"One bar, four dynamic levels. Beat 1: forte (accented). Beat 2: piano. Beat 3: mezzo. Beat 4: fortissimo (accented).\" The player produces 1.0 / 0.5 / 0.5 / 1.0 — beats 2 and 3 are identical in the audio and identical on the page, both bare R.",
+        "This is structural, not a bug: the player has three tiers (accent 1.0, tap 0.5, ghost 0.25) and two are spent on forte and fortissimo, so piano and mezzo must collapse. dynamic-spectrum#4, titled \"The Dynamic Ladder (climbing through all 5 levels)\", has the same problem across bars.",
+        "PARENTHESES CANNOT FIX THIS, so BL-107 does not cover it: a bracket is binary and these exercises need piano separated from mezzo separated from ghost.",
+        "The missing notation is DYNAMIC TEXT. VexFlow 4.2.5 ships TextDynamics, and notation-renderer.js already places annotations TOP (the open-hat \"o\") and BOTTOM (the sticking row), so the placement machinery exists. It is standard music notation rather than a private convention, and it touches 2 exercises rather than 13, so the uneven-convention objection that sequences BL-107 does not apply here.",
+        "The corpus already prints whole-bar dynamics in the meta line — rock-dynamics reads \"4/4 · ♩ = 90 · pp throughout\" — and iteration 67 used that convention for the two exercises where every note is a ghost. What is missing is a dynamic that varies WITHIN a bar.",
+        "Interim: BL-078 fixed the tip so it no longer promises four levels the audio cannot produce. The lesson still teaches five and the site can sound three."
+      ],
+      "acceptance": "an exercise that teaches N dynamic levels either sounds N levels or says on the page how many it can sound; the dynamics lessons and the player agree, verified by rendering the affected exercises offline and comparing measured tiers against the printed claim"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 67,
+          "date": "2026-08-14",
+          "note": "Filed during BL-078. Each was deliberately sequenced out of that commit rather than forgotten."
+        }
+      ],
+      "id": "BL-109",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Three exercises assert a right hand that appears nowhere on their stave",
+      "evidence": [
+        "snare-voicings#2, ghost-notes-found#3 and finger-control#2 now say the right hand rides the hat, but the hi-hat notes carry no sticking letter, so a reader sees a stave lettered L and only L. The claim is true and unverifiable from the page.",
+        "Adding R to the hat line would make all three self-evident, and would also give the L on the snare something to mean. It is the same insight BL-078 acted on for the accented backbeats, which gained an L precisely so that the same letter over a 12-inch stroke and a 1-inch ghost would prove the letter is a hand and not a volume.",
+        "Left out of BL-078 because lettering a full hat line is an engraving change across the sticking row rather than a correction, and that commit was already at five lessons."
+      ],
+      "acceptance": "where a tip names which hand plays a voice, the stave letters that voice; no exercise asserts a hand the reader cannot see"
     }
   ]
 }
