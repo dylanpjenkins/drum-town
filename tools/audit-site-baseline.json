@@ -11,7 +11,7 @@
     "css.missingDarkScheme": 0,
     "css.missingFocusVisible": 0,
     "css.missingReducedMotion": 0,
-    "css.outlineNone": 0,
+    "css.outlineNone": 1,
     "css.pxFontSizes": 0,
     "dom.headingOrderViolations": 0,
     "dom.pagesMissingMain": 0,

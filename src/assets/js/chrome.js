@@ -12,6 +12,14 @@
   const navToggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('site-nav');
 
+  // Natively focusable, i.e. nothing has to be done to it before .focus()
+  // works. `tabindex` counts whatever its value, including "-1": an element
+  // already carrying one is already programmatically focusable.
+  const NATIVELY_FOCUSABLE = 'a[href], button, input, select, textarea, summary, [tabindex]';
+  function isFocusable(el) {
+    return !!el && el.nodeType === 1 && el.matches(NATIVELY_FOCUSABLE);
+  }
+
   // The panel renders below the header but the <nav> precedes the buttons in
   // the DOM, so opening it and pressing Tab would walk into the page behind
   // the panel. Opening therefore moves focus into the panel explicitly, and
@@ -26,7 +34,16 @@
       const first = nav && nav.querySelector('a');
       if (first) first.focus();
     } else if (focusTarget) {
-      if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+      // Only something that cannot already take focus needs the attribute, and
+      // getting that test wrong cost the site its mobile navigation (BL-073).
+      // The old test was `!hasAttribute('tabindex')`, which is true of every
+      // <button> ever written — so Escape-closing the menu stamped
+      // tabindex="-1" on #nav-toggle itself and REMOVED the only site-wide nav
+      // below 720px from the tab order, on all 228 pages, until a reload.
+      // Measured: 230 stops became 229 and Shift+Tab walked straight past the
+      // hamburger. Section targets still need the attribute; buttons and links
+      // never do.
+      if (!isFocusable(focusTarget)) focusTarget.setAttribute('tabindex', '-1');
       focusTarget.focus();
     }
   }

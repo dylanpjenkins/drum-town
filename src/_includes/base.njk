@@ -44,7 +44,35 @@
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to content</a>
+{#- The skip rail (BL-073). One focus-revealed group of bypass links, extending
+    the single skip link that used to sit here.
+
+    Two things were wrong with that one link. It only cleared the header, which
+    on a lesson page leaves the curriculum column and on the homepage leaves 217
+    ledger rows still between the reader and the content — 79 Tab presses to the
+    first Play button on /lessons/paradiddle/ at 1280px, 227 to the first footer
+    link on the homepage, both measured in Edge. And it did not work at all: a
+    fragment target that is not focusable leaves document.activeElement on
+    <body>, so pressing Enter on "Skip to content" set the hash, moved no focus
+    and announced nothing. Every target in this rail therefore carries
+    tabindex="-1" — that is not a tab-order hack (a negative value adds no tab
+    stop), it is the only thing that makes a fragment focusable at all.
+    tools/checks/check-skip-targets.js enforces both halves of that across all
+    228 built pages, so a future anchor cannot go back to lying.
+
+    The links are contextual: the rail names the destinations a given page type
+    actually has, and #main stays first because dom-smoke.js pins the first <a>
+    in the body to it. -#}
+<nav class="skip-rail" aria-label="Skip links">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {%- if '/lessons/' in page.url %}
+  <a class="skip-link" href="#exercises">Skip to exercises</a>
+  {%- endif %}
+  {%- if page.url == '/' %}
+  <a class="skip-link" href="#chapter-index">Jump to a chapter</a>
+  {%- endif %}
+  <a class="skip-link" href="#site-footer">Skip to footer</a>
+</nav>
 
 <header class="site-header">
   <div class="site-header__inner">
@@ -120,7 +148,10 @@
   </div>
 </header>
 
-<main id="main">
+{#- tabindex="-1" so "Skip to content" actually lands here. Without it the
+    browser sets the hash and leaves focus on <body>, which is where this link
+    had been quietly dumping screen-reader users. -#}
+<main id="main" tabindex="-1">
 {{ content | safe }}
 </main>
 
@@ -130,7 +161,7 @@
     counts move when the curriculum does. -#}
 {%- set rudimentCount = 0 %}
 {%- for group in rudiments %}{% set rudimentCount = rudimentCount + group.rudiments.length %}{% endfor %}
-<footer class="site-footer">
+<footer class="site-footer" id="site-footer" tabindex="-1">
   <div class="site-footer__grid">
     <div class="site-footer__id">
       <svg class="site-footer__seal" viewBox="0 0 32 32" aria-hidden="true" focusable="false">

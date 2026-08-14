@@ -27,7 +27,12 @@ permalink: /rudiments/
     <p>Rudiments are to drumming what scales are to piano: small, repeatable sticking patterns that turn into fills, grooves, and solos once they're automatic. The Percussive Arts Society standardized forty of them, in the four families below. You don't need all forty at once — start with the single stroke roll, double stroke roll, and single paradiddle, then work outward. A practice pad and a metronome are all you need.</p>
 
     {% for group in rudiments %}
-      <header class="rud-family" id="{{ group.slug }}">
+      {#- tabindex="-1" (BL-073): the four .family-index chips above are
+          fragment links, and until this attribute existed pressing Enter on one
+          set the hash, scrolled, and left focus on <body> — so a keyboard
+          reader who jumped to "Flams" resumed tabbing from the top of the page.
+          Adds no tab stop. -#}
+      <header class="rud-family" id="{{ group.slug }}" tabindex="-1">
         <p class="rud-family__kicker">Family {{ loop.index }} of {{ rudiments.length }} · {{ group.rudiments.length }} rudiments</p>
         <h2 class="rud-family__title">{{ group.title }}</h2>
       </header>

@@ -167,6 +167,28 @@ a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-under
 /* The ring hugs text on inline links; pill-radius elements curve it automatically. */
 a:focus-visible { border-radius: 2px; }
 
+/* The two full-bleed skip targets get a top bar instead of a ring (BL-073).
+   THE SUPPRESSED OUTLINE BELOW IS A REPLACEMENT, NOT A DELETION — it is the only
+   suppression in this stylesheet and it is the whole reason
+   metrics.css.outlineNone is baselined at 1 rather than 0. Removing a focus
+   indicator would be a defect; this swaps one that lies for one that does not,
+   and the metric is deliberately left telling the truth about it rather than
+   dodged with a transparent color or a zero width.
+   Both elements are as wide as the viewport, so three of the ring's four edges
+   are clipped by the viewport edge or hidden under the sticky header and only the
+   BOTTOM edge shows — which puts a 2px accent line somewhere with no focused
+   control near it. Measured on /404.html at 1280: after "Skip to content", rows
+   427-428 read rgb(154,58,39) edge to edge, floating in the 96px gap that
+   `.site-footer { margin-top: 96px }` leaves under <main>. On
+   /lessons/paradiddle/ it appears at y=762 as soon as the reader pages down with
+   Space, which scrolls without moving focus. One inset bar along the top of the
+   thing you just jumped into is both honest and easier to find. */
+main#main:focus-visible,
+#site-footer:focus-visible {
+  outline: none;
+  box-shadow: inset 0 3px 0 var(--focus-ring);
+}
+
 /* Reduced motion: collapse all animation/transition to imperceptible and stop the
    beat indicators pulsing — both the dock's dots and the header pill's lamp. The
    !important is the point of this block: it must beat every rule, including
@@ -486,20 +508,107 @@ a:focus-visible { border-radius: 2px; }
   .site-nav a.active { color: var(--accent-ink); }
 }
 
-/* Skip link — offscreen until keyboard focus lands on it */
-.skip-link {
+/* =====================  SKIP RAIL  =====================
+   BL-073. Offscreen until keyboard focus lands anywhere inside it, then the
+   whole group slides in at 8px. The positioning moved from the individual link
+   to the rail: two or three absolutely-positioned links would all claim the
+   same top:8px and stack on each other, whereas one positioned parent lays them
+   out as a row for free. :focus-within, not :focus, so the second and third
+   links stay visible while the reader tabs across them.
+   The rail is deliberately still position:absolute against the document rather
+   than fixed against the viewport — that is the geometry the single skip link
+   shipped with, and the rail is reached by tabbing from the top of a page, where
+   the two are identical. */
+.skip-rail {
   position: absolute;
-  left: -999px;
+  left: -9999px;
   top: 8px;
-  z-index: 70;   /* above the lifted header, or the skip link's focus ring hides behind it */
+  z-index: 70;   /* above the lifted header, or a focus ring hides behind it */
+  display: flex;
+  flex-wrap: wrap;   /* three links do not fit on one 390px row */
+  gap: 8px;
+  max-width: calc(100vw - 16px);
+}
+.skip-rail:focus-within { left: 8px; }
+.skip-link {
+  display: inline-flex;
+  align-items: center;
   background: var(--accent);
   color: var(--accent-ink);
   padding: 10px 18px;
   font-family: var(--mono);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+  white-space: nowrap;
 }
-.skip-link:focus { left: 8px; }
+
+/* The chapter panel the rail's "Jump to a chapter" link opens (BL-073).
+   display:none is what makes it worth having: closed, it contributes zero
+   client rects and zero tab stops, so the homepage keyboard walk is no longer
+   than it was, and 19 chapters sit 1-19 Tabs from the rail instead of up to 217
+   ledger rows deep. :target does the revealing, which means no JS owns this
+   state and it survives with scripting off.
+
+   IN THE FLOW, NOT AN OVERLAY, and that is a correction. This shipped for one
+   review cycle as position:fixed at (8,8) like the rail, and at 390x667 it then
+   covered [8,8,374,651] — 93% of the screen. Tabbing past the last chapter put
+   focus on the hero CTA with 100% of it behind the panel: every hit-test point
+   returned the panel, elementFromPoint never saw the focused link, and there was
+   no ring anywhere on screen. That is WCAG 2.4.11 Focus Not Obscured (AA), and
+   the panel's own Close link mitigates it without removing it — one more Tab and
+   you are under the panel again. In the flow nothing can be behind the panel at
+   all: it pushes the page down instead, at every width, and the fragment
+   navigation scrolls it into view exactly as it does for #exercises and the
+   rudiment family headings. Being fixed bought nothing that mattered; the "on
+   screen at the instant of focus" guarantee comes from scroll-into-view either
+   way, and tools/checks/check-skip-targets.js asserts it in a real browser.
+   It also fixes drum.town/#chapter-index as a shared URL: that opens the panel
+   for a mouse visitor too, and an overlay Escape could not close was a trap. */
+.chapter-index { display: none; }
+.chapter-index:target {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px 10px;
+  margin: 0 0 32px;
+  padding: 12px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-l);
+  box-shadow: var(--elev-1);
+}
+.chapter-index__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border-radius: var(--r-s);
+  color: var(--ink);
+  line-height: 1.3;
+}
+.chapter-index__row:hover { background: var(--bg); text-decoration: none; }
+.chapter-index__row:hover .chapter-index__title { color: var(--accent); }
+.chapter-index__num {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  flex: none;
+}
+.chapter-index__title { font-size: 0.875rem; font-weight: 600; }
+/* The way out (WCAG 2.4.11). Ruled off from the nineteen chapters because it is
+   a control on this panel, not a twentieth destination, and it spans the grid so
+   it reads as the panel's own footer at every column count. */
+.chapter-index__close {
+  grid-column: 1 / -1;
+  justify-content: center;
+  margin-top: 4px;
+  border-top: 1px solid var(--rule-soft);
+  border-radius: 0;
+  color: var(--ink-soft);
+}
+.chapter-index__close:hover { background: var(--bg); }
+.chapter-index__close .chapter-index__title { font-weight: 700; }
 
 /* =====================  TYPE / HEADINGS  ===================== */
 .eyebrow {

@@ -71,6 +71,16 @@ if (!nav.contains(document.activeElement)) {
 document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
 if (root.classList.contains('nav-open')) fails.push('Escape: panel did not close');
 if (document.activeElement !== toggle) fails.push('Escape: focus not returned to the toggle');
+// ...and it must still be REACHABLE afterwards (BL-073). setNav's focus handoff
+// used to stamp tabindex="-1" on anything that had no tabindex, which is true of
+// every <button>: closing the menu with Escape took #nav-toggle out of the tab
+// order, so the only site-wide navigation below 720px vanished from all 228
+// pages until a reload. Measured before the fix: 230 tab stops became 229 and
+// Shift+Tab walked straight past the hamburger. Focus landing correctly and
+// focus still being tabbable are two different assertions.
+if (toggle.hasAttribute('tabindex')) {
+  fails.push(`Escape: #nav-toggle gained tabindex="${toggle.getAttribute('tabindex')}" — a button with a tabindex is out of the tab order until reload`);
+}
 
 // --- link activation: closes without dumping focus to <body> ---
 toggle.click();
@@ -79,6 +89,15 @@ hashLink.dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
 if (root.classList.contains('nav-open')) fails.push('link: panel did not close on activation');
 if (document.activeElement === document.body || document.activeElement === null) {
   fails.push('link: focus dumped to <body> — the reader loses their place');
+}
+// The same guard on the link path, which hands focus to the anchor's target or
+// falls back to the toggle. Whatever it lands on, an already-focusable element
+// must come out of it exactly as focusable as it went in.
+if (toggle.hasAttribute('tabindex')) {
+  fails.push(`link: #nav-toggle gained tabindex="${toggle.getAttribute('tabindex')}" — the hamburger left the tab order`);
+}
+if (document.activeElement && document.activeElement.tagName === 'A' && document.activeElement.hasAttribute('tabindex')) {
+  fails.push('link: an <a href> was given a tabindex it did not need');
 }
 
 // --- toggle labelling: an action label, and no contradictory pressed state ---

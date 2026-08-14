@@ -2090,7 +2090,7 @@ module.exports = {
       <p>Before you play a single note, it helps to know what you\'re looking at. The "5-piece kit" is the industry standard — five drums, three cymbals — and almost every recording you\'ve ever heard rides on some version of this layout. Once you can name the pieces and understand what each one does in a song, every lesson after this gets easier.</p>
       <p>The kit divides into three families: <strong>drums</strong> (snare, bass, toms), <strong>cymbals</strong> (hi-hat, ride, crash), and <strong>pedals</strong> (the bass drum pedal under your right foot, the hi-hat pedal under your left). Drums are written as filled dots on the staff; cymbals are written as <em>x</em> noteheads. That visual distinction is the first thing to internalize.</p>
 
-      <figure class="kit-map" id="kit-map">
+      <figure class="kit-map" id="kit-map" tabindex="-1">
         <div class="kit-map__grid">
           <div class="kit-map__panel">
             <p class="kit-map__panel-label">The kit, from the drummer's seat</p>

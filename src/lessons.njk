@@ -104,7 +104,15 @@ eleventyComputed:
       {% if content.bodyHtml %}{{ content.bodyHtml | safe }}{% endif %}
 
       {% if content.exercises %}
-        <h2 class="section-label">Exercises</h2>
+        {#- The rail's #exercises target (BL-073). Unguarded on purpose: all 217
+            lessons have a content entry and at least one exercise, so this
+            heading exists on every lesson page the site builds, and a lesson
+            that ever lost its exercises should fail the skip-target check
+            loudly rather than silently drop a rail link. tabindex="-1" is what
+            makes the heading focusable; it adds no tab stop. From here the kit
+            selector is one Tab and Play is two or three, depending on whether
+            the exercise earns a tempo-handoff button. -#}
+        <h2 class="section-label" id="exercises" tabindex="-1">Exercises</h2>
         {% for ex in content.exercises %}
           {% exercise ex %}
         {% endfor %}

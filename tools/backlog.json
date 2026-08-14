@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 65,
-    "next_dimension": "ui",
+    "iteration": 66,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 104,
+    "next_id": 107,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1299,13 +1299,33 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
         "Filed iter 51 from the epic-closing persona milestone review.",
         {
           "iteration": 64,
           "date": "2026-08-14",
           "note": "Raised P2 to P1. It was filed as an accessibility item scored 2 by the discovery rule, but iteration 64 measurably made it worse (+40 tab stops on /rudiments/ alone) and two separate personas have now hit it. A keyboard user cannot practically reach the content."
+        },
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "Shipped. A focus-revealed skip rail plus an #exercises target on every lesson, a 19-link chapter panel that costs zero tab stops while closed, and aria-labelledby naming all 19 chapter regions. Re-derived independently across all 217 lessons at both widths: first exercise control exactly 4 presses on 217 of 217 (from 77), first Play 6 or 5, first footer link on the homepage 5 (from 227), any of 19 chapters within 23. Cost +1 to +2 stops per page. Chosen by a judge from three independent designs after all three mechanisms were tested in a real browser."
+        },
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "THREE PRE-EXISTING DEFECTS FOUND BY MEASURING. The site skip link had been lying for 70 iterations: Enter set the hash but activeElement became body because #main had no tabindex, so it worked for sighted Tab users and silently failed the screen-reader users it exists for. The four rudiments family chips and one in-prose link added in iteration 58 were dead the same way. And Escape-closing the mobile menu permanently removed the only sub-720px navigation from the tab order on all 228 pages until reload, because setNav stamped tabindex=-1 on a button. All fixed; 698 in-page anchors across 228 pages now resolve to something focusable."
+        },
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "THE ADVERSARIAL PASS FOUND A BLOCKER THAT WOULD HAVE SHIPPED: at a true 390px the chapter panel covered 100 percent of the focused control, all five hit-test points, no focus ring on screen, three consecutive stops fully hidden, and no dismiss of any kind — Escape and outside clicks both left it open, and #chapter-index is a shareable URL that landed a visitor with 93 percent of the screen covered and the header unclickable beneath. WCAG 2.4.11. A close link was prescribed; the builder added it, saw its own new assertion still fail, and made the panel IN-FLOW instead of fixed, so nothing can be behind it. Now 0 of 23 stops obscured at three viewport sizes. Separately the new gate was asserting the mechanism and not one digit of the bound — seq.indexOf(ae) was always -1 because every rail target carries tabindex=-1 and the tabbable list filters those out, so all 20 rows were null and nothing read them. It now commits the bounds as failing assertions plus two re-inflation budgets, one of them literally the shape of iteration 64."
+        },
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "css.outlineNone 0 to 1, deliberately, baseline regenerated in the same commit. main:focus-visible painted a 2px accent rule edge to edge across every page in the 96px gap above the footer, pixel-probed at rows 427-428 on /404 and y=762-763 on a lesson after paging down. Replaced by box-shadow inset 0 3px 0 — an indicator replaced, never deleted, which is the one legitimate use of that declaration. Exactly one baseline key moved, verified by diff."
         }
       ],
       "id": "BL-073",
@@ -2126,6 +2146,77 @@
           "note": "Filed by the adversarial critic during BL-097, which judged that every case fails as an omission or an overstatement rather than a lie, so none of it blocked that change."
         }
       ]
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "Filed during BL-073, from the design panel and the adversarial pass. Each was explicitly ruled out of that commit as a separate concern rather than forgotten."
+        }
+      ],
+      "id": "BL-104",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The curriculum sidebar lives inside <main>, so \"Skip to content\" lands 69 stops from the lesson",
+      "evidence": [
+        "MEASURED IN THE BUILT HTML: 69 focusable elements sit between <main id=\"main\"> and #exercises on /lessons/paradiddle/, 64 of them curriculum sidebar links. That is the same 69 presses BL-073 was filed about — so the site's first and most conventional skip link, now that it genuinely moves focus, delivers exactly the pre-fix experience.",
+        "BL-073 met its acceptance by routing around this with a second rail link (\"Skip to exercises\", measured at press 4) rather than repairing it. So the headline \"69 to 4\" is only true of a reader who ignores the link they already know.",
+        "main#main contains .curriculum-sidebar on 224 pages (confirmed: true on lesson and genre pages, false on /rudiments/, /metronome/ and /404).",
+        "The judge ruled this out of that commit deliberately: moving .lesson-layout out of <main> is a 224-page grid restructure, the proposal that suggested it admitted its own 390px verification could not be trusted, and #exercises beats it anyway (4 presses versus 8-10). It is still the structurally right fix and it helps readers who never discover the rail.",
+        "A cheaper variant exists and should be judged against the restructure: id=\"lesson\" tabindex=\"-1\" on the lesson prose container, with a rail link pointing at it, or relabelling \"Skip to content\" so it stops implying it reaches the content."
+      ],
+      "acceptance": "the site's primary skip link lands a reader at the lesson rather than in front of the curriculum column, at every width; the 224-page layout still passes dom-smoke, check-nav-a11y, check-skip-targets and the heading-order metric, and the sticky sidebar and its 960px disclosure both still work"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "Filed during BL-073, from the design panel and the adversarial pass. Each was explicitly ruled out of that commit as a separate concern rather than forgotten."
+        }
+      ],
+      "id": "BL-105",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Design question for the owner: collapse the homepage ledger and the lesson map into disclosures",
+      "evidence": [
+        "One of the three BL-073 proposals (\"Chapter Drawers\") had by far the strongest keyboard numbers: it REMOVES the mass instead of routing around it, taking the homepage from 234 tab stops to 36 and a lesson page from 89 to 25, verified in a real browser (a closed <details> removes its inner links from the tab walk while adding exactly one stop for the summary, and an <h2> inside <summary> survives as a level-2 heading in the AX tree).",
+        "It was also the only proposal that helps mouse and touch users at all, and the only one that read the gated metrics carefully enough to notice it introduces no outline: none.",
+        "It was NOT chosen because it is a visible redesign of the site's two flagship page types, needing a design checkpoint and owner sign-off, while BL-073 was P1 with two personas already blocked. The keyboard bound is now met by other means, so this is purely a design question now.",
+        "ITS OWN HONEST COSTS, which the owner should weigh: 217 lesson links leave the default accessibility tree, the \"list all links\" rotor and the voice-control target set (217 one-step spoken targets become 19 two-step ones — the only proposal that makes a population strictly worse off); find-in-page silently fails in Firefox and Safari where Chromium auto-expands; the chapter taglines vanish from the default view; the desktop lesson map closes, reversing BL-037; and the homepage walked-streets ledger, the product's whole affective idea, sits behind 19 closed doors on a first visit.",
+        "Worth keeping regardless of the verdict: its per-chapter progress tally in the ledger head (\"6 lessons · 4 walked\"), which is a good idea on its own and relates to BL-077."
+      ],
+      "acceptance": "the owner has seen both the current ledger and a disclosure version at 390px and 1280px and chosen; if adopted, no population is left worse off without that being a stated trade"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 66,
+          "date": "2026-08-14",
+          "note": "Filed during BL-073, from the design panel and the adversarial pass. Each was explicitly ruled out of that commit as a separate concern rather than forgotten."
+        }
+      ],
+      "id": "BL-106",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Nineteen public fragment URLs are derived from curriculum slugs and position, with nothing pinning them",
+      "evidence": [
+        "src/_data/chapters.js derives the homepage chapter ids as chapter-<slug> for 16 chapters, and assigns #foundations / #tracks / #mastery by index position (i === 0 and friends). So renaming a curriculum slug — a pure content edit — silently changes a public fragment URL, and reordering the curriculum silently relocates the three ids that the header nav, the footer and check-nav-a11y all depend on.",
+        "check-skip-targets.js leg (b3) does not catch it: panel link, section id and data file all move together, so internal agreement is preserved. The adversarial pass only caught its own mutation because it made them INCONSISTENT on purpose.",
+        "Severity is low today because the ids are new and nobody has bookmarked them. It rises the moment anyone links to a chapter from outside the site.",
+        "The guard is cheap: commit the 19 ids as a snapshot the gate diffs, so a rename becomes a deliberate act with a visible diff rather than a silent break."
+      ],
+      "acceptance": "a curriculum slug rename or reorder that would change a public fragment URL fails a gate with a message naming the old and new id, so it can only happen deliberately"
     }
   ]
 }

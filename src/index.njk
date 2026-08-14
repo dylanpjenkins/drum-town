@@ -4,6 +4,47 @@ layout: base.njk
 
 <div class="container container--wide">
 
+  {# ======================  CHAPTER PANEL  ======================
+     BL-073. The homepage is 234 tab stops wide at 1280px and 217 of them
+     (92.7%) are consecutive ledger rows, so a keyboard reader who wants
+     chapter 14 pays for chapters 1 to 13 one lesson at a time. This panel is
+     the bypass: the rail's "Jump to a chapter" link targets it, :target
+     reveals it, and every chapter is then 1 to 19 Tabs away.
+
+     display:none until targeted, which is the whole design. Offscreen-but-
+     rendered (the left:-9999px trick the rail itself uses) would put 19 more
+     links in every homepage tab walk, and this item exists to remove stops,
+     not add them. Verified in Edge: closed, the panel has zero client rects
+     and contributes zero tab stops; opened by the rail link, focus lands on
+     the <nav> itself and the next Tab is chapter 1.
+
+     No heading. The panel is named for assistive tech by aria-label, and a
+     visible h2 here would be a twentieth chapter title on a page whose whole
+     structure is chapter titles.
+
+     Picking a chapter changes the hash to that chapter's id, so this panel
+     stops being :target and closes itself.
+
+     THE CLOSE LINK IS NOT DECORATION. The panel is opened by a URL, so it can
+     be opened by a LINK: drum.town/#chapter-index is shareable, and Chromium
+     opens it in the revealed state for a mouse visitor as readily as for a
+     keyboard one. With no JS owning the state there is no Escape handler and an
+     outside click does nothing, so without this row the only way out is to pick
+     one of the nineteen chapters. href="#main" drops :target — closing the
+     panel — and lands focus on the content in the same press. It costs one tab
+     stop while the panel is open and none while it is closed.
+     Deliberately NOT the zero-markup `:target:not(:focus-within)` variant, which
+     would lean even harder on the same unguaranteed Chromium focus behavior that
+     tools/checks/check-skip-targets.js leg (c) exists to watch. The panel is in
+     the flow rather than an overlay for a separate reason (see style.css): an
+     overlay covered 93% of a 390x667 screen and put focus behind itself. #}
+  <nav class="chapter-index" id="chapter-index" tabindex="-1" aria-label="Chapters">
+    {%- for ch in chapters %}
+    <a class="chapter-index__row" href="#{{ ch.id }}"><span class="chapter-index__num">{{ loop.index | pad2 }}</span><span class="chapter-index__title">{{ ch.title }}</span></a>
+    {%- endfor %}
+    <a class="chapter-index__row chapter-index__close" href="#main"><span class="chapter-index__num" aria-hidden="true">×</span><span class="chapter-index__title">Close</span></a>
+  </nav>
+
   {# ======================  HERO  ======================
      One hero, always the thesis. The returning-visitor state is carried by
      the second CTA (#cta-continue), which the activation script at the
@@ -32,17 +73,27 @@ layout: base.njk
      One .ledger section per chapter: eleven Foundations sub-sections, then
      one per genre track, then a final "Other Topics" chapter. Section
      anchors (#foundations, #tracks, #mastery) live on the first chapter of
-     each group so the site nav keeps working. #}
+     each group so the site nav keeps working; the other sixteen ids come from
+     src/_data/chapters.js, read here BY POSITION so the chapter panel above
+     and these sections cannot fall out of step.
+
+     Each section is a named region (BL-073): aria-labelledby points at its own
+     visible title rather than repeating it in an aria-label, the same call the
+     footer columns make. Before this, arriving from the header's "Foundations"
+     link put a reader inside a 900x433 unnamed <section> that announced
+     nothing at all. tabindex="-1" is what lets that arrival actually move
+     focus; it adds no tab stop. #}
 
   {% set foundationsCount = curriculum.foundations.sections.length %}
   {% set tracksCount = curriculum.tracks.length %}
   {% set chapterTotal = foundationsCount + tracksCount + 1 %}
 
   {% for sec in curriculum.foundations.sections %}
-    <section class="ledger"{% if loop.first %} id="foundations"{% endif %}>
+    {%- set chId = chapters[loop.index0].id %}
+    <section class="ledger" id="{{ chId }}" tabindex="-1" aria-labelledby="{{ chId }}-title">
       <header class="ledger__head">
         <span class="ledger__kicker">Chapter {{ loop.index }} of {{ chapterTotal }}</span>
-        <h2 class="ledger__title">{{ sec.title }}</h2>
+        <h2 class="ledger__title" id="{{ chId }}-title">{{ sec.title }}</h2>
         <span class="ledger__count">{{ sec.lessons.length }} lessons</span>
       </header>
       {% if sec.tagline %}<p class="ledger__tagline">{{ sec.tagline }}</p>{% endif %}
@@ -61,10 +112,11 @@ layout: base.njk
 
   {% for track in curriculum.tracks %}
     {% set trackLessons = track | flatTrackLessons %}
-    <section class="ledger"{% if loop.first %} id="tracks"{% endif %}>
+    {%- set chId = chapters[foundationsCount + loop.index0].id %}
+    <section class="ledger" id="{{ chId }}" tabindex="-1" aria-labelledby="{{ chId }}-title">
       <header class="ledger__head">
         <span class="ledger__kicker">Chapter {{ foundationsCount + loop.index }} of {{ chapterTotal }}</span>
-        <h2 class="ledger__title">{{ track.title }}</h2>
+        <h2 class="ledger__title" id="{{ chId }}-title">{{ track.title }}</h2>
         <span class="ledger__count">{{ trackLessons.length }} lessons</span>
       </header>
       {% if track.tagline %}<p class="ledger__tagline">{{ track.tagline }}</p>{% endif %}
@@ -81,10 +133,11 @@ layout: base.njk
     </section>
   {% endfor %}
 
-  <section class="ledger" id="mastery">
+  {%- set chId = chapters[chapterTotal - 1].id %}
+  <section class="ledger" id="{{ chId }}" tabindex="-1" aria-labelledby="{{ chId }}-title">
     <header class="ledger__head">
       <span class="ledger__kicker">Chapter {{ chapterTotal }} of {{ chapterTotal }}</span>
-      <h2 class="ledger__title">Other Topics</h2>
+      <h2 class="ledger__title" id="{{ chId }}-title">Other Topics</h2>
       <span class="ledger__count">{{ curriculum.mastery.lessons.length }} lessons</span>
     </header>
     {% if curriculum.mastery.tagline %}<p class="ledger__tagline">{{ curriculum.mastery.tagline }}</p>{% endif %}
