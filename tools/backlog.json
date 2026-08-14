@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 67,
-    "next_dimension": "quality",
+    "iteration": 68,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 110,
+    "next_id": 111,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1150,11 +1150,31 @@
         "Suspected cause is the multi-bar 1400-unit cap rather than anything in system.md 6.5."
       ],
       "acceptance": "each of the eight named staves fits inside its viewBox (check-notation-frame stays green and a new assertion covers the multi-bar path); no regression to the 852 single-bar staves; audit-lessons beat-count section unchanged",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed iter 44 from the PKG-7 Builder's own measurement — it drew the boundary of its retry loop honestly rather than letting these silently ride along."
+        "Filed iter 44 from the PKG-7 Builder's own measurement — it drew the boundary of its retry loop honestly rather than letting these silently ride along.",
+        {
+          "iteration": 68,
+          "date": "2026-08-14",
+          "note": "Shipped, but NOT as the item described and not as the first build implemented. The filed symptom was eight staves drawing past their frame; the actual disease was that the same eight had 95 note-on-note collisions across 42 internal barlines. On hiphop-questlove#3 bar 0 last four sixteenths were drawn ON TOP OF bar 1 first four — 90.7 units, about 3.5 noteheads — and the barline carried a run of eight X-heads at half spacing under two superimposed beams where there should be four. On rock-dynamics#1, an ACCENT lesson, the collisions printed doubled accent marks that do not exist in the spec, so a student reading accent placement off that page read the wrong pattern. Clipping hid only the fourth instance of a defect already visible three times over."
+        },
+        {
+          "iteration": 68,
+          "date": "2026-08-14",
+          "note": "THE FIRST BUILD GREW THE VIEWBOX HORIZONTALLY — one line, no re-render, byte-exact blast radius of eight viewBox attributes and zero moved glyphs. It was correct code encoding the wrong decision: it fixed zero of the 95 collisions and merely turned three invisible notes into three orphaned ones past the closing barline. The adversarial pass measured the collisions and refuted the premise I had given the builder. The renderer own comment had ruled convergence out on numbers that were wrong: it said widening does not converge (it converges in 2-14 rounds), that the fixed point lands at 1700-1800 (measured 1043-1802), and that it costs a flat ~22% (measured 20.4-22.3% on seven and 4.1% on the eighth)."
+        },
+        {
+          "iteration": 68,
+          "date": "2026-08-14",
+          "note": "WHAT SHIPPED: generalized width convergence — the retry loop lost its hasSticking scope, depth cap 3 to 20, hard ceiling 2400, and the overflow yardstick became max(drawOverflow, rectOverflow) measured AFTER beams and tuplets draw. Collisions 95 to 5: seven of eight completely clean. Zero staves still overflow, zero hit either cap, and the viewBox backstop fired zero times. Frame-edge-to-ink gap is now 7.00 on all 932 staves with a rect as the rightmost ink every time — the same gutter every other stave on the site has. Blast radius unchanged from the first build: 924 of 932 byte-identical, exactly the same 8 changed. min-width unchanged on all 892 built staves, so BL-040 density work is untouched, and pixel spacing per event stays at 28.0 which is BL-040 own derived target — what shrinks is glyph size, 12.8px to 10.1px noteheads, and none of the eight carries sticking so PKG-7 10px floor is not in play."
+        },
+        {
+          "iteration": 68,
+          "date": "2026-08-14",
+          "note": "ALSO FIXED, found by the critic and confirmed by the builder building the adversarial spec itself: drawOverflow did not bound tuplet-bracket ink and the comment claimed it did. Tuplet brackets are bare rect end-ticks emitted outside any vf-tuplet group and attached to no tickable, so a 4-bar phrase whose closing tuplet ends in ghost rests put 13.91 units of bracket outside the frame. Twelve real corpus tuplets already end in a rest and were safe only by luck, sitting on 760-wide single-bar staves with 7u of gutter. The new gate catches it — proved by a mutant that fails at a CONVERGED width, which is what shows rectOverflow rather than convergence is the fix. The gate parses path data independently rather than reusing drawOverflow, which is why it could catch a bug in the number the renderer widens by."
+        }
       ]
     },
     {
@@ -2313,6 +2333,29 @@
         "Left out of BL-078 because lettering a full hat line is an engraving change across the sticking row rather than a correction, and that commit was already at five lessons."
       ],
       "acceptance": "where a tip names which hand plays a voice, the stave letters that voice; no exercise asserts a hand the reader cannot see"
+    },
+    {
+      "id": "BL-110",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "One bar still collides with its neighbour because every bar gets the same width regardless of density",
+      "evidence": [
+        "jazz-modern-jazz#4 bar5|bar6 still overlaps by 80.5 units across 5 notes after BL-065 convergence cleared the other 41 of 42 barlines. It is the only one left.",
+        "Root cause is barWidth = innerWidth / bars in notation-renderer.js: every bar in a phrase gets an equal slot no matter how many events it holds. A bar of sixteen 16ths and a bar of four quarters are given the same room, so a dense bar overruns while a sparse one wastes space. No total width fixes that — the critic and the builder independently reached the same conclusion, and convergence at any width leaves this one bar colliding.",
+        "The fix is proportional bar widths: divide the inner width by each bar tick count rather than by the bar count. That is a real engraving change to the multi-bar path, so it needs its own visual verification across the 153 multi-bar specs, not a rider on another item.",
+        "Cheap guard worth having either way: BL-065 added a frame check that asserts ink is inside the FRAME, and it is structurally blind to ink inside the frame but on top of another bar. A check asserting ink stays inside its own BAR would have caught all 95 collisions years ago."
+      ],
+      "acceptance": "no note in any multi-bar stave overlaps a note in an adjacent bar, verified by measuring glyph boxes against bar boundaries across all 153 multi-bar specs; a check asserts it so the class cannot silently regrow",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 68,
+          "date": "2026-08-14",
+          "note": "Filed as the residue of BL-065. Both the adversarial critic and the builder identified the same root cause independently and both declined to fix it inside that item, correctly — it is an engraving change, not a width change."
+        }
+      ]
     }
   ]
 }

@@ -24,6 +24,14 @@ const GRACE_STICKING_PT = 10;
 const DEFAULT_HEIGHT = 130;
 const STICKING_HEIGHT = 140;
 
+// Width convergence (BL-065). A stave that draws past its own right edge is
+// re-rendered wider until it stops. Measured across the corpus, the slowest
+// spec converges in 14 retries and the widest fixed point is 1802 units, so
+// neither guard binds on real content; both exist so a pathological spec cannot
+// spin or grow without limit.
+const MAX_RETRY_DEPTH = 20;
+const MAX_RENDER_WIDTH = 2400;
+
 // Does any note in this spec carry a sticking label (its own, or on a grace
 // note)? Drives the taller default frame.
 function _hasSticking(spec) {
@@ -412,24 +420,6 @@ function renderPattern(spec, _widthOverride, _depth) {
       }));
     }
 
-    // Re-render wider when a sticking stave drew ink outside its own frame.
-    // An author-pinned spec.width is honored as-is, and the depth guard makes
-    // a loop impossible.
-    //
-    // Deliberately limited to sticking staves — the case §6.5 owns and the
-    // only one this package can create. Eight dense non-sticking multi-bar
-    // patterns (rock-dynamics#1–3, jazz-modern-jazz#4, funk-modern-neo-soul#3,
-    // funk-modern-r-and-b#3, hiphop-questlove#3, rock-studio-polish#2) already
-    // draw 16–92 units past their frame today, and widening does not converge
-    // for them: the tail note sits at a fixed fraction of the bar, so the
-    // overflow follows the frame out. That is a separate, older bug about the
-    // multi-bar width cap; fixing it here would silently re-engrave eight
-    // lessons on a guess. Logged for the backlog instead.
-    if (!spec.width && hasSticking && drawOverflow > 0.5 && (_depth || 0) < 3) {
-      container.remove();
-      return renderPattern(spec, Math.ceil(width + drawOverflow + 12), (_depth || 0) + 1);
-    }
-
     allBeams.forEach(bm => bm.setContext(ctx).draw());
     // Draw tuplets from the original index space — they were built against
     // the original notes and VexFlow keeps the geometry tied to the notes'
@@ -445,6 +435,83 @@ function renderPattern(spec, _widthOverride, _depth) {
 
     const svg = container.querySelector('svg');
     if (!svg) throw new Error('No SVG produced');
+
+    // What did this attempt actually draw past its own right edge?
+    //
+    // Two measurements, because neither alone is complete:
+    //
+    //   drawOverflow   VexFlow's note geometry, gathered in the bar loop above.
+    //                  Covers noteheads, stems, beams and note modifiers.
+    //   rectOverflow   the markup. A TUPLET BRACKET is a bare <rect> with x and
+    //                  width, drawn after the bar loop and attached to no
+    //                  tickable, so drawOverflow cannot see it at all; the loop
+    //                  also swallows ghost rests in its catch. A 4-bar spec whose
+    //                  closing tuplet ends in ghost rests puts 13.9 units of
+    //                  bracket outside a frame sized from drawOverflow alone.
+    //                  Twelve corpus tuplets already end in a rest and are safe
+    //                  only because they sit on 760-wide single-bar staves with
+    //                  7 units of gutter to spare.
+    //
+    // Measured AFTER the beams and tuplets are drawn, so the markup is complete.
+    let rectOverflow = 0;
+    svg.querySelectorAll('rect').forEach(r => {
+      const rx = parseFloat(r.getAttribute('x'));
+      const rw = parseFloat(r.getAttribute('width'));
+      if (!Number.isNaN(rx)) {
+        rectOverflow = Math.max(rectOverflow, rx + (Number.isNaN(rw) ? 0 : rw) - width);
+      }
+    });
+    const overflow = Math.max(drawOverflow, rectOverflow);
+
+    // CONVERGE THE WIDTH (BL-065). When a bar's slot is narrower than the
+    // engraver's minimum, VexFlow does not compress it — it draws the tail
+    // straight through the barline and on top of the next bar. Re-render wider
+    // until every bar fits. An author-pinned spec.width is honored as-is.
+    //
+    // This used to be limited to sticking staves, on the stated grounds that
+    // widening "does not converge" for the eight dense multi-bar patterns
+    // (rock-dynamics#1–3, jazz-modern-jazz#4, funk-modern-neo-soul#3,
+    // funk-modern-r-and-b#3, hiphop-questlove#3, rock-studio-polish#2). That was
+    // wrong, and it is worth recording why, because the claim survived dozens of
+    // iterations by being quoted rather than re-measured.
+    //
+    // What was actually happening: those staves were not merely overrunning
+    // their LAST barline, they were overrunning EVERY internal barline. Measured
+    // on glyph bounding boxes, the eight carried 95 note-on-note collisions
+    // spread over 42 of their internal barlines. On hiphop-questlove#3 bar 0's
+    // last four sixteenths
+    // are drawn on top of bar 1's first four — 90.7 units, about 3.5 noteheads,
+    // rendering as eight X-heads at half spacing under two superimposed beams.
+    // On rock-dynamics#1, an ACCENT lesson, the pile-up prints doubled ">"
+    // accents that are not in the spec, so the page teaches the wrong pattern.
+    // The final-bar overrun that made this item visible was the fourth instance
+    // of a defect already present three times over; it was just the only one the
+    // viewBox happened to clip.
+    //
+    // Convergence clears 41 of those 42 colliding barlines, taking the eight
+    // from 95 collisions to 5. It reaches its fixed point in 2–14 retries at
+    // widths of 1043–1802 (funk-modern-r-and-b#3 in 2 retries at 1043,
+    // hiphop-questlove#3 in 8 at 1776, rock-studio-polish#2 in 12 at 1802),
+    // which is why a depth cap of 3 never got there. It re-engraves exactly the
+    // eight and no other stave — 924 of the 932 specs render byte-for-byte
+    // identical — and it changes min-width on none of the site's 892 staves,
+    // because these staves' density floor is pinned by event count
+    // (events × 28px), not by natural width. The one survivor is
+    // jazz-modern-jazz#4 bar 5, a bar too dense for a uniform
+    // barWidth = innerWidth / bars at any total width. That is a separate bug
+    // about even bar division, not about frame size.
+    //
+    // MAX_RENDER_WIDTH is a stop, not a target: the widest fixed point in the
+    // corpus is 1802, so it never binds here and exists only so a pathological
+    // spec cannot widen without limit.
+    if (!spec.width && overflow > 0.5 && (_depth || 0) < MAX_RETRY_DEPTH) {
+      const next = Math.min(MAX_RENDER_WIDTH, Math.ceil(width + overflow + 12));
+      if (next > width) {
+        container.remove();
+        return renderPattern(spec, next, (_depth || 0) + 1);
+      }
+    }
+
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     if (!svg.getAttribute('viewBox')) {
       svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
@@ -476,8 +543,18 @@ function renderPattern(spec, _widthOverride, _depth) {
     }
     const top = minY < 0 ? Math.floor(minY) - 4 : 0;
     const bottom = maxY > height ? Math.ceil(maxY) + 4 : height;
-    if (top !== 0 || bottom !== height) {
-      svg.setAttribute('viewBox', `0 ${top} ${width} ${bottom - top}`);
+    // Same idea sideways (BL-065), as a BACKSTOP only. Convergence above is what
+    // fixes the layout; this exists for the case convergence cannot resolve —
+    // a spec pinned by the author's own spec.width, or one that hits
+    // MAX_RENDER_WIDTH. In those cases the notes are still misplaced, but at
+    // least none of them is invisible: clipping a note is the one thing §6.5
+    // refuses to do, and a frame is cheaper to widen than a layout is to fix.
+    //
+    // On the current corpus this is a no-op — all 932 specs converge, so
+    // `overflow` is 0 by the time we get here and the width is left alone.
+    const right = overflow > 0.5 ? Math.ceil(width + overflow) : width;
+    if (top !== 0 || bottom !== height || right !== width) {
+      svg.setAttribute('viewBox', `0 ${top} ${right} ${bottom - top}`);
       out = svg.outerHTML;
     }
     container.remove();
