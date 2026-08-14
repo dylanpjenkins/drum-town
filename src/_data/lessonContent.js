@@ -5369,8 +5369,8 @@ module.exports = {
           { keys: ['g/5/x2'], duration: 'q' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['g/5/x2'], duration: 'q' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' }
         ],
         feet: [
@@ -5379,7 +5379,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Snare on beat 4 — landing WITH the ride quarter and the hi-hat foot. Three things at once on that beat (ride, snare, hat-foot), then nothing snare-side until the next bar's beat 4. The body has to learn to fire all three simultaneously and then go quiet for three full beats of bar."
+        tip: "Snare on beat 4 — landing WITH the ride and the hi-hat foot. Three things at once on that beat (ride, snare, hat-foot), then nothing snare-side until the next bar's beat 4. The body has to learn to fire all three simultaneously and then go quiet for three full beats of bar."
       },
       {
         title: "4 — Single Snare on the \"& of 4\"",
@@ -13014,8 +13014,8 @@ module.exports = {
           { rest: true, duration: '8' },
           { keys: ['c/5'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
-          { keys: ['e/5/x2'], duration: '8' },
-          { keys: ['c/5'], duration: '8' },
+          { keys: ['e/5/x2', 'c/5'], duration: '8' },
+          { rest: true, duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' }
         ],
@@ -13192,8 +13192,8 @@ module.exports = {
           { keys: ['e/5/x2', 'c/5'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
-          { keys: ['e/5/x2', 'c/5'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' },
+          { keys: ['e/5/x2', 'c/5'], duration: '8' },
           { keys: ['e/5/x2'], duration: '8' }
         ],
         feet: [
@@ -16587,13 +16587,13 @@ module.exports = {
           { rest: true, duration: '8' },
           { keys: ['c/5'], duration: '8' },
           { rest: true, duration: 'q' },
-          { keys: ['f/5/x2'], duration: '8' },
-          { keys: ['c/5'], duration: '8' }
+          { rest: true, duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
           { rest: true, duration: '8' },
+          { keys: ['f/4'], duration: '8' },
           { keys: ['d/4/x2'], duration: 'q' },
           { rest: true, duration: 'q' }
         ],
@@ -18265,8 +18265,8 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' }
@@ -18783,16 +18783,16 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2', 'c/5'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
         ],
@@ -21080,8 +21080,8 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['a/4'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { rest: true, duration: '8', visible: true },
+          { keys: ['g/5/x2', 'a/4'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -28468,8 +28468,6 @@ module.exports = {
         hands: [
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
@@ -28479,6 +28477,8 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2', 'c/5'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
+          { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' }
@@ -28766,7 +28766,7 @@ module.exports = {
     nextLessons: ['rock-odd-meter', 'fusion-prog-fusion'],
     graduationCriteria: [
       'Triplet-kick groove (the heavy-foot vocabulary) holds at ♩=85 for 2 minutes without the foot triplets dragging',
-      'Asymmetric snare phrase (snare on 1.5 + 4) loops without resolving back to a 2-and-4 reflex',
+      'Asymmetric snare phrase (snare on 1.5 + 4.5) loops without resolving back to a 2-and-4 reflex',
       'Around-the-kit fill orchestrates across snare + 3 toms with no flam-ing on landings',
       'Hand-foot combination (R-L on snare, K-K on kick) sustains as a 4-beat phrase'
     ],
@@ -28824,8 +28824,8 @@ module.exports = {
         repeatEnd: true,
         hands: [
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },

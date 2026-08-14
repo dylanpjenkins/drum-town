@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 62,
-    "next_dimension": "content",
+    "iteration": 63,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 99,
+    "next_id": 101,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -24,7 +24,8 @@
       "Iteration counter reconciled at iter 59: meta.iteration had drifted to 53 against 58 PROGRESS entries, because bookkeeping-only and repair ticks did not always bump it. Set to 59 to match PROGRESS. Side effect: 59 % 10 == 9, so the NEXT tick is a discovery pass — that is intended, the last one was iter 56.",
       "Iteration 60, page weight: do NOT re-file the rudiments page as a byte-weight problem. It is 906 KB of raw HTML but Netlify serves brotli, which is 72 KB over the wire; the heaviest lesson is 31 KB. The real costs there are DOM node count (6,866 elements, 6,095 of them SVG primitives — content-visibility spares layout and paint but the parser still builds every node) and BL-008's unconditional 2.3 MB WAV prefetch, which is live and is ~32x the brotli'd HTML.",
       "Iteration 60, three phantoms the orchestrator caught on itself before filing, recorded so the next sweep does not repeat them: (1) a duplicate-spec hash that omitted the articulation property, which made rock-open-hats look as though a lesson about open hi-hats notated none — it does notate them; (2) a ghost-note rule looking for a property the corpus does not have (ghosts are unaccented notes beside accented ones, so they cannot be detected that way); (3) an accent rule that matched the NEGATION in titles like \"No Accents\" and \"Diddles Even, No Accent\". Also: counting curriculum slugs without excluding section slugs produces 18 fake orphans.",
-      "Iteration 60, tooling: check-transport-reserve.js FAILS with \"the harness produced no measurements\" when run through the sandboxed Bash tool, and PASSES (36 measurements, 129/65px, 11px clearance) when the identical command runs from PowerShell. Edge is not the problem — it dumped a data: URL fine from PowerShell, and the same gate had passed twice earlier in the same session on the same code. Run browser-driving checks from PowerShell. Recorded in .claude/commands/improve.md step 6."
+      "Iteration 60, tooling: check-transport-reserve.js FAILS with \"the harness produced no measurements\" when run through the sandboxed Bash tool, and PASSES (36 measurements, 129/65px, 11px clearance) when the identical command runs from PowerShell. Edge is not the problem — it dumped a data: URL fine from PowerShell, and the same gate had passed twice earlier in the same session on the same code. Run browser-driving checks from PowerShell. Recorded in .claude/commands/improve.md step 6.",
+      "Iteration 63: a critic reported that accent:true renders no ink anywhere on the site (censusing the class \"vf-articulation\", which came back 0 across every built page) and concluded BL-085 chunk 1 had shipped a no-op. THAT IS WRONG. VexFlow 4 does not tag articulation glyphs with a vf-articulation class. Rendering the same spec with and without accents differs by 1,272 bytes and exactly TWO extra <path> elements for two accents, and the built page path count matches the with-accents render. Accents draw real ink, as the iteration-61 screenshots showed. Do not census VexFlow output by class name — count paths, or look at the picture."
     ],
     "notes": []
   },
@@ -1550,7 +1551,7 @@
     {
       "id": "BL-085",
       "dimension": "content",
-      "priority": 1,
+      "priority": 2,
       "title": "Exercises omit the one notation feature they exist to teach: ghost/accent dynamics and triplets that are described in words but never notated",
       "evidence": [
         "VERIFIED BY HAND — funk-ghost-notes#0 \"1 — Funk Groove with Ghost Notes\", the flagship exercise of the lesson about ghost notes. Snare falls at 16th indices 4, 6, 9, 11, 12. Its tip says \"Snare on beat 2 and beat 4 is loud (the backbeat). All other snare hits are ghost notes - barely audible.\" Not one note in the spec carries accent:true, so the two backbeats and the three ghosts render as five IDENTICAL noteheads. A reader cannot tell from the stave which two are loud, which is the entire content of the lesson.",
@@ -1587,6 +1588,11 @@
           "iteration": 61,
           "date": "2026-08-13",
           "note": "DELIBERATELY EXCLUDED, with reasons. latin-samba-feel#3: a refuting agent rejected the plan and the tip also calls the pattern cross-stick, which this data model cannot express — needs its own judgement. funk-the-meters#3: a two-bar broken backbeat whose bar 1 has NO snare on beat 2, so the beats-2-4-6-8 pattern that fits every other two-bar case does not apply; guessing there would have been the BL-086 defect in miniature. Its tip also needs reading in full. STILL OWED BY THE ACCEPTANCE: the tools/checks script that guards the class. It is deferred rather than forgotten, because the ~57 candidates still outstanding would fail it on day one; it should land with a not-to-grow baseline, in the chunk that finishes the campaign."
+        },
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "Dropped P1 to P2 for the remaining six chunks, deliberately and on severity rather than convenience. Chunk 1 cleared the acute cases — the flagship exercise of the lesson about ghost notes, and the two whose tips name a single loud stroke. What is left is a long tail where the WORDS ARE CORRECT and the notation is merely silent about a dynamic. BL-086 and BL-087 outrank that because the site there states something FALSE: prose that puts a voice on a beat the stave does not, and a reading lesson that teaches the wrong staff position. An omission a reader can work around; a falsehood they cannot."
         }
       ]
     },
@@ -1594,7 +1600,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": {
-        "done": 0,
+        "done": 1,
         "total": 2,
         "size": 10
       },
@@ -1603,6 +1609,26 @@
           "iteration": 60,
           "date": "2026-08-12",
           "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        },
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "Chunk 1 of 2 shipped: 12 note moves across 9 exercises in 9 lessons, each one moving a voice from the beat the notation had it on to the beat the exercise's own title and tip say it is on. Every duration untouched — these are key moves between two existing note slots — and verified by three corpus-wide invariants: no duration changed anywhere, the multiset of keys inside each touched exercise is identical before and after (a move cannot create or destroy a voice), and only the intended 9 exercises changed at all. Fixed: independence-chapin-method#2 (snare 3 to 4, so snare + hat + hat-foot now really do strike together as the tip promises), funk-displacement#3 (snare to the e of 2 and e of 4, so the exercise is no longer byte-identical to the reference backbeat), rock-double-time#1 (snare off the downbeats to the & of 1 and & of 3), rock-prog#1, funk-purdie-intro#3, latin-mambo-intro#2, latin-songo#2, hiphop-trap#2, fusion-broken-time#2 (all four clauses of its tip are now true)."
+        },
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "CHUNK 2 IS THE HARDER HALF, and here is exactly why. Four of the seventeen planned moves need the target beat to not exist yet, so they cannot be done as key moves and require rewriting rests and durations: jazz-broken-time-intro#3 (ride 2 to 1.5), hiphop-808-translation#0 (kick 4.5 to 3.5), hiphop-modern-production#3 (kick+floor-tom 4 to 3.5), hiphop-future-r-and-b#2 (kick 3.5 to 2.5). hiphop-808-translation#0 ALSO has a safe snare move (2 to 3) which was deliberately NOT applied: doing half of a two-error exercise would leave the page contradicting itself differently, which is the mistake iteration 61 taught. Still unexamined and also owed: four-way-foundation#2/#3/#4 (the three-exercise snare walk whose tips all say \"& of 2\" where the stave says beat 2) and rock-shuffle-rock#1 (title claims a kick on every beat while its own tip and spec agree on three). And the acceptance still owes the generalized check-tip-claims parser."
+        },
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "CHUNK-2 DIAGNOSIS CORRECTED BY THE ADVERSARIAL PASS — the earlier note was wrong twice, and acting on it would have made things worse. four-way-foundation#4: it has NO snare on beat 2 at all (snares at 1, 2.5, 3.5, 4.5) so its \"& of 2\" is already correct; its single error is 3.5 -> 3, the target slot exists, and its own tip confirms the target with \"landing with the kick on 1 and 3\" against kicks at 1 and 3. So it is a SAFE key move, not the mis-stated one. four-way-foundation#2 looks like FIX_THE_WORDS, not a note move: its tip says \"still on the & of 2, but now on the & of 3 instead of beat 4\" while the stave has 2 + 3.5, sibling #1 has 2 + 4, and graduationCriteria says \"First variation (snare moved off the backbeat to the and of 3)\" — i.e. ONE snare moves, so \"& of 2\" is a typo for \"2\" and moving the note would cement an error. #3 is genuinely ambiguous (\"both off the backbeat now\" argues for 2.5). rock-shuffle-rock#1 is confirmed a TITLE problem only: with its feet tuplet applied the kicks land at 1, 1.667 and 3, exactly as the tip says."
+        },
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "IN-TICK REPAIR after the adversarial pass, one blocking. rock-prog#1: the snare moved to the & of 1 and its accent:true STAYED BEHIND on the bare hi-hat at beat 2 — so the bar drew an accent over a hi-hat on the one beat whose tip says \"not on 2 and 4 at all\". My own two invariants (durations unchanged, key multiset unchanged) were both blind to it, because the accent is a non-key property and its position sequence was byte-identical. Accent and snare indices now match at [1,7]. Also fixed: rock-prog graduationCriteria still named the old second hit (1.5 + 4, now 1.5 + 4.5); the chapin#2 tip called beat 4 \"the ride quarter\" when beat 4 is an eighth and the quarters are beats 1 and 3; and hiphop-trap#2 got visible:true on the rest the floor tom vacated, since an invisible rest left a blank with no symbol. I REJECTED the critic's alternative fix there (swap so the hat sounds on 4 and the tom alone on 4.5) because it would have moved the HI-HAT from 4.5 to 4, changing a voice rhythm no title, tip or lesson body asks to change."
         }
       ],
       "id": "BL-086",
@@ -1616,7 +1642,8 @@
         "CORROBORATED FROM A SECOND, INDEPENDENT DIRECTION: hashing every exercise spec found funk-displacement#3 and rock-double-time#1 sitting in a group of EIGHT exercises that share one byte-identical plain 16th-hat backbeat. Several of that group are legitimate feel exercises (the same notation played behind or ahead of the click, which cannot be notated); these two are not. The duplication is the mechanism — a reference spec was reused where a displaced one was needed.",
         "REPORTED BY THE LENS, NOT YET RE-VERIFIED BY THE ORCHESTRATOR (11 more): rock-prog#1 (half the asymmetry missing), funk-purdie-intro#3 (snare at 2.5 not 3, and its bodyHtml calls a 1-bar spec a four-bar preview), hiphop-808-translation#0, hiphop-modern-production#3, fusion-broken-time#2, jazz-broken-time-intro#3, latin-mambo-intro#2, latin-songo#2 (tip says cross-stick \"still on 2 and 4\", spec moved it to 3.5), hiphop-future-r-and-b#2, hiphop-trap#2, latin-mozambique#1.",
         "PLUS four-way-foundation#2/#3/#4, a three-exercise snare walk whose tips all say \"and of 2\" where the stave says beat 2 — and #2 says \"still on the and of 2\" when no earlier exercise ever put it there.",
-        "The lens hand-checked 111 position lists and cleared 94. The dominant false-positive sources it documents are contrastive clauses (\"not on 2 and 4\", \"no snare on 2\", \"Beginners want to add a snare on 2; resist\"), bar-scoped tips over multi-bar specs, and explicitly-unnotated voices (\"the crash lives on beat 1 of the next bar (not shown)\")."
+        "The lens hand-checked 111 position lists and cleared 94. The dominant false-positive sources it documents are contrastive clauses (\"not on 2 and 4\", \"no snare on 2\", \"Beginners want to add a snare on 2; resist\"), bar-scoped tips over multi-bar specs, and explicitly-unnotated voices (\"the crash lives on beat 1 of the next bar (not shown)\").",
+        "LESSON FOR THE REMAINING CHUNKS, learned the hard way in chunk 1: verifying that durations and key multisets are unchanged is NOT sufficient. Moving a key between slots leaves every other property behind, so an accent, an articulation or a visible-rest flag can end up on the wrong note while both invariants still report clean. Any future move must carry the note's other properties with it, or explicitly decide not to."
       ],
       "acceptance": "each of the 20 is judged against its own spec and its lesson siblings, and either the notation or the words are corrected so they agree — the fix going to whichever is the outlier, since in every verified case so far the prose was internally coherent and the spec was wrong; and check-tip-claims.js is generalized from its single \"snare on X and Y\" shape to a voice-on-position-list parser, with explicit guards for negative and contrastive clauses and a requirement that the parsed list terminate at a clause boundary"
     },
@@ -1922,6 +1949,59 @@
           "iteration": 62,
           "date": "2026-08-14",
           "note": "Filed from a measurement taken while proving something else. The armed-vs-idle control is what makes it trustworthy: the overflow is identical in both states, so BL-091 did not cause it."
+        }
+      ]
+    },
+    {
+      "id": "BL-099",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Nineteen exercises say \"ride\" and notate a hi-hat, including the lesson that teaches the ride pattern",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED corpus sweep: 19 exercises across 8 lessons have the word \"ride\" in their title, tip or meta while their hands array contains only g/5/x2 (hi-hat) and neither f/5/x2 (ride) nor e/5/x2 (bell).",
+        "independence-chapin-method is the worst case — all five exercises. Its bodyHtml states the lesson's premise as \"lock the ride and hi-hat foot into their jazz roles\", exercise 1 is titled \"The Foundation: Ride + Hi-Hat Foot Alone\", and every stave draws that voice as a hi-hat. The hi-hat FOOT is separately notated as d/4/x2 in the same exercises, so the hand voice is unambiguously meant to be the ride.",
+        "jazz-ride-pattern#0 \"Quarters on the Ride\", #1 \"Add the Skip-Note (the Ride Pattern)\" and #3 are the same defect in the lesson whose entire subject is the ride pattern.",
+        "Also: three-limb-patterns#0 \"Pair: Ride + Hi-Hat Foot\", #1, #4 \"Three-Limb Combo C: Hi-Hat + Kick + Ride\"; independence-clave-foot x3; four-way-foundation#0 \"Three Limbs First (Ride + Hat Foot + Kick)\" and #1; the-shuffle, latin-guaguanco, rock-open-hats one each.",
+        "A reader following the notation plays a hi-hat where the lesson means a ride — and in a jazz independence lesson that is the difference between the exercise working and not. It also renders on the wrong staff position, so it teaches the wrong reading too.",
+        "CAVEAT FOR WHOEVER TAKES THIS: the sweep matched any mention of the word, so passing references (\"you could move this to the ride\") will be in the 19 and are NOT defects. Read each tip. rock-open-hats and latin-guaguanco are the likeliest false positives. three-limb-patterns#4 also carries a separate, already-filed voice confusion (BL-089).",
+        "Found while fixing BL-086 in the same lesson: distinct defect class (wrong instrument, not wrong beat) so it was filed rather than folded in, and the BL-086 fix stands on its own."
+      ],
+      "acceptance": "every exercise whose words name the ride notates the ride, or its words are corrected to say hi-hat — decided per exercise by reading the tip and the lesson body, not by sweeping; the change is visually verified because it moves noteheads to a different staff position and changes which voice plays",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 2,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "Filed during BL-086 chunk 1. Noticed because independence-chapin-method#2 tip says the snare lands \"WITH the ride quarter\" while the notation had no ride at all, then confirmed as a corpus-wide class by sweep."
+        }
+      ]
+    },
+    {
+      "id": "BL-100",
+      "dimension": "content",
+      "priority": 1,
+      "title": "hiphop-808-translation exercise 2 is a byte-identical duplicate of exercise 1 and notates none of the floor tom it is named for",
+      "evidence": [
+        "JSON.stringify of hands is IDENTICAL between hiphop-808-translation#0 and #1, and so is feet. Verified by the adversarial pass during BL-086.",
+        "Exercise 2 is titled \"Floor-Tom-as-808 Sub Layer\" and its tip says \"The floor tom doubles every kick note\". There is no a/4 anywhere in it. Its feet are kick-only, the same as exercise 1.",
+        "So the exercise that exists to introduce the floor-tom-as-808 layer contains no floor tom, and is otherwise a copy of the exercise before it. That is a whole exercise of missing pedagogical content, not a misplaced note.",
+        "It also shares exercise 1 unfixed snare error (snare on beat 2 where the lesson's premise, siblings #2 and #3, and the prerequisite lesson all put it on 3), and #1 is NOT in BL-086 inventory. So BL-086 chunk 2 must fix #0 and #1 together or the page stays half-fixed — which is the mistake iteration 61 recorded."
+      ],
+      "acceptance": "exercise 2 notates the floor tom doubling the kick as its title and tip describe, and is no longer a duplicate of exercise 1; both exercises snare positions agree with the lesson premise and its siblings",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 63,
+          "date": "2026-08-14",
+          "note": "Found by the adversarial critic while checking whether BL-086 chunk 1 left any page half-fixed. Filed rather than fixed because it needs new notation written, not a note moved."
         }
       ]
     }
