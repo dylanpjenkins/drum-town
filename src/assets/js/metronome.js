@@ -198,15 +198,28 @@
   bpmInput.addEventListener('change', () => setBpm(parseInt(bpmInput.value, 10), 'input'));
   slider.addEventListener('input',    () => setBpm(parseInt(slider.value, 10),   'slider'));
 
-  tsSelect.addEventListener('change', () => {
-    const v = parseInt(tsSelect.value, 10);
+  // One path for a meter change whoever asks for it: the select itself, or an
+  // exercise handing over its own signature (BL-076). The option lookup guards
+  // THIS function's two callers and nothing else — a numerator with no option
+  // behind it would leave the control blank and syncPillSig would fall back to
+  // numerator + '/4', inventing a denominator the dock cannot play. It is not a
+  // global guard on beatsPerBar: the initial readInt(TS_KEY, …, 2, 12) above and
+  // the bfcache pageshow restore below both still assign tsSelect.value
+  // directly, so a stored 8 through 12 would reach the select unchecked. Nothing
+  // writes those values today (this function is the only writer of TS_KEY, and
+  // it validates), which is why the bounds are left alone here rather than
+  // widened into a second source of truth.
+  function setMeter(v) {
     if (!Number.isFinite(v) || v < 2) return;
+    if (!tsSelect.querySelector('option[value="' + v + '"]')) return;
     beatsPerBar = v;
+    tsSelect.value = String(v);
     writeInt(TS_KEY, v);
     renderBeats();
     syncPillSig();
     if (session) session.beatsPerBar = v;
-  });
+  }
+  tsSelect.addEventListener('change', () => setMeter(parseInt(tsSelect.value, 10)));
 
   volSlider.addEventListener('input', () => {
     const v = parseInt(volSlider.value, 10);
@@ -347,7 +360,22 @@
     }
     applyCollapsed(collapsed);
     try { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); } catch (e) {}
-    if (focusEl) focusEl.focus();
+    // preventScroll, and it is load-bearing rather than defensive. Both targets
+    // this function is ever handed are permanently on screen — the pill lives in
+    // a sticky header pinned to the top, the go button in a fixed dock pinned to
+    // the bottom — so scrolling either into view can only ever move the page for
+    // no reason. It did: a stylesheet rule gave every element with an id a 74px
+    // scroll-margin-top meant for in-page anchors, the pill has an id, and this
+    // one call therefore scrolled the reader 65px up the page every time they
+    // closed the dock with the chevron (BL-076). The rule is fixed at the
+    // source; this stops the same class of bug reaching the reader again, and
+    // costs nothing where no scroll was wanted in the first place.
+    //
+    // Only the chevron path ever showed the bug, because focus() on an element
+    // that ALREADY has focus is a no-op: pressing the pill focuses the pill
+    // first, so its own focus() call did nothing, while pressing the chevron
+    // left focus on a button that display:none then swallowed.
+    if (focusEl) focusEl.focus({ preventScroll: true });
   }
 
   let storedCollapsed = null;
@@ -366,6 +394,55 @@
   if (collapseBtn) collapseBtn.addEventListener('click', () => setCollapsed(true, pill));
   root.addEventListener('keydown', e => {
     if (e.key === 'Escape') setCollapsed(true, pill);
+  });
+
+  // ---- Tempo handoff from an exercise (BL-076) ----
+  // The homepage promises that the whole town practices to the same clock, and
+  // the dock was the one thing on the page that never heard the exercise it sat
+  // under: the pill read 80 while the notation above it said ♩ = 70.
+  //
+  // It is a HANDOFF, never an adoption. Nothing here runs on scroll, on load or
+  // on any event the reader did not aim: someone who deliberately set 60 to
+  // practice a fill slowly must not lose it because they scrolled past an
+  // exercise marked 120. The tempo moves when, and only when, a reader presses a
+  // button that names the tempo it is about to apply.
+  //
+  // The button also does not start anything. Setting the click and starting it
+  // are two different intents, the dock's go button already owns the second one,
+  // and one control quietly doing both is the mistake BL-074 was filed for.
+  // A button only exists where the dock can be made to agree with the notation
+  // exactly, so both attributes are always present and both are always applied —
+  // the shortcode decides, nothing is guessed here. See .eleventy.js for the 60
+  // exercises that get no button (tempo outside 30-240, or a meter whose beat is
+  // not a quarter note).
+  function adoptTempo(el) {
+    const b     = parseInt(el.getAttribute('data-bpm'), 10);
+    const beats = parseInt(el.getAttribute('data-beats'), 10);
+    if (Number.isFinite(b)) setBpm(b);
+    if (Number.isFinite(beats)) setMeter(beats);
+    // Opening the dock is the only way to SHOW what just changed, and it follows
+    // the rule the pill already set: an open that really opens lands focus on the
+    // play button, because that is the next thing anyone presses. A second press
+    // while the dock is already open leaves focus alone — the reader is reading an
+    // exercise, not operating the dock, and yanking them to the bottom of the
+    // document to re-read a number they can already see is not help.
+    //
+    // applyCollapsed, NOT setCollapsed, and that is the whole point of the line:
+    // setCollapsed persists dc_metro_collapsed, so one tap on a tempo button
+    // would durably flip a reader who keeps the dock CLOSED into having it open
+    // on all 217 lessons afterwards. They asked for a tempo, not a permanent
+    // layout preference. This is the same one-load override applyArmedFromFlag
+    // already takes, for the same reason, and it leaves the pill and the chevron
+    // to publish the new state via applyCollapsed's aria sync.
+    if (root.classList.contains('is-collapsed')) {
+      applyCollapsed(false);
+      btn.focus({ preventScroll: true });
+    }
+  }
+  // Bound directly rather than delegated: every exercise on this page was
+  // rendered at build time, and this script is deferred, so they all exist.
+  document.querySelectorAll('[data-exercise-metronome]').forEach(el => {
+    el.addEventListener('click', () => adoptTempo(el));
   });
 
   // ---- Toggle ----

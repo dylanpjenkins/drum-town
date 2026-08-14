@@ -113,6 +113,24 @@
 /* Sticky-header offset so in-page anchors (/#tracks, rudiment families)
    never land under the header. */
 [id] { scroll-margin-top: calc(var(--header-h) + 12px); }
+/* But not for the header's OWN ids, for the same reason its focusable controls
+   are excluded from the rule below — they live inside the sticky bar, so they
+   are never under it. There the offset is not a correction but a bug, and it
+   shipped one (BL-076): scroll-margin-top grows an element's scroll box UPWARD,
+   so scrolling a header control into view presses that grown box against the top
+   of the scrollport and drags the whole page down with it. Measured on
+   /lessons/paradiddle/ at 390px: chrome.js rewrites --header-h to the header's
+   real 62px, making this offset 74px, while #metronome-pill sits 9px from the
+   top of the viewport — so every programmatic focus() on the pill scrolled the
+   page up by 74 - 9 = 65px, at any scroll position. Closing the transport dock
+   with its chevron does exactly that focus() call. At 1280px, where the pill is
+   34px rather than 44px tall, the same arithmetic gave 60px.
+   A descendant selector and a separate rule, NOT `[id]:not(.site-header *)`: a
+   complex selector inside :not() needs Safari 16.4, and where it is unsupported
+   the whole declaration is dropped — which would take the offset away from every
+   in-page anchor on the site to fix one control. This form degrades to "no
+   exclusion", the state before this item, instead of "no reserve anywhere". */
+.site-header [id] { scroll-margin-top: 0; }
 /* The same reserve, for anything that can take FOCUS. The rule above only
    covers elements with an id, which is enough for anchors and forward tabbing
    but not for Shift+Tab: moving backwards, the browser scrolls the newly
@@ -1170,6 +1188,36 @@ hr.section-rule {
 }
 .kit-selector__select:hover { border-color: var(--accent); color: var(--accent); }
 .kit-selector__select:focus { border-color: var(--accent); }
+
+/* Hand this exercise's tempo to the metronome (BL-076). It wears the kit
+   selector's outline rather than the play button's fill, because that is what it
+   is: a setting, sitting beside the other setting, while the one filled button in
+   the card stays the one that makes a sound. No glyph — the word and the number
+   are the whole label. A fourth mark in a row that already carries ▶ is how the
+   header pill came to promise playback and deliver a drawer (BL-074), and the
+   number is what stops this button reading as a second copy of the pill: the
+   pill opens the dock, this one opens it AT ♩ = 80.
+   Uppercased by text-transform like its neighbours, so the source label stays
+   readable prose and the check script can match it. */
+.tempo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid var(--rule);
+  border-radius: var(--r-pill);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+.tempo-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* The primary action on the page wears the primary fill (system.md §6.4).
    Playing the exercise is the whole point of the card; an ink button with a
@@ -2248,14 +2296,38 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
 /* The exercise card's controls stop competing with the title for one line
    (system.md §6.4). Below 560px the header wraps anyway; wrapping it on
    purpose gives the select room to breathe and puts both controls on the
-   44px touch floor the rest of the site holds. */
+   44px touch floor the rest of the site holds.
+   flex-wrap arrived with the third control (BL-076). One line needs the
+   selector's own 125px plus the handoff's 121px (a two-digit tempo) or 129px
+   (three), plus the play button's 78px and two 8px gaps: 340 to 348px. The row
+   is 332px wide at 390px, 302 at 360 and 262 at 320, so it cannot hold one line
+   on a phone and does hold one from 480px up. Wrapping is what it does instead
+   of shrinking ELECTRONIC to ELECTRON… — nothing clips and nothing scrolls
+   sideways at 320.
+   The cost is two bands, both A/B-measured against the same pages with the
+   handoff display:none'd, so the numbers are this control's and not the layout's:
+     * <=414px, HERE: the row itself takes a second line. +24px per card at 320,
+       +52px at 360 to 414.
+     * 560 to ~820px, and again ~1024 to ~1100px: the row still fits one line but
+       no longer fits BESIDE the title, so .exercise-header wraps it underneath.
+       +41px per card. Title-length dependent — on reading-time-signatures only
+       one card does it and only at 600 to 640; on jazz-up-tempo, whose titles are
+       long, three of five do it across the whole band. The gap and the second
+       band exist because above 960 the curriculum sidebar takes its own column
+       and narrows the measure again; at 480 to 560 and from 1280 up the delta is
+       zero.
+   Neither band is chased with another breakpoint. Making the ragged widths tidy
+   means forcing every card at every width below 560 onto two lines, which trades
+   a variable cost for a fixed one and pays it at the widths that currently fit. */
 @media (max-width: 560px) {
   .exercise-controls {
     width: 100%;
+    flex-wrap: wrap;
     justify-content: flex-end;
   }
   .kit-selector__select { flex: 1 1 auto; min-width: 0; }
   .play-btn { min-height: 44px; }
+  .tempo-btn { min-height: 44px; }
 }
 
 /* The ledger's two-line row (system.md §5.2). This is the designed narrow

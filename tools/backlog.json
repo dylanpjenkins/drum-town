@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 63,
-    "next_dimension": "ui",
+    "iteration": 64,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 101,
+    "next_id": 103,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1301,15 +1301,21 @@
       "chunk": null,
       "status": "ready",
       "log": [
-        "Filed iter 51 from the epic-closing persona milestone review."
+        "Filed iter 51 from the epic-closing persona milestone review.",
+        {
+          "iteration": 64,
+          "date": "2026-08-14",
+          "note": "Raised P2 to P1. It was filed as an accessibility item scored 2 by the discovery rule, but iteration 64 measurably made it worse (+40 tab stops on /rudiments/ alone) and two separate personas have now hit it. A keyboard user cannot practically reach the content."
+        }
       ],
       "id": "BL-073",
       "dimension": "ui",
-      "priority": 2,
+      "priority": 1,
       "title": "69 Tab presses to reach the first exercise control; 228 to cross the homepage",
       "evidence": [
         "Keyboard persona: 69 presses after the skip link to reach the first exercise control on a lesson page, and 228 from the top of the homepage to the first footer link, with no in-page chapter jumps.",
-        "The skip link only skips the header. The lesson map disclosure and the 19-chapter homepage ledger are both long link lists sitting between the reader and the content."
+        "The skip link only skips the header. The lesson map disclosure and the 19-chapter homepage ledger are both long link lists sitting between the reader and the content.",
+        "MEASUREMENT UPDATED AT ITERATION 64: BL-076 added a per-exercise tempo-handoff button, which adds one tab stop per exercise. Re-measured tab stops: /rudiments/ 112 -> 152 (+40, +36%), /lessons/reading-101/ 97 -> 103, /lessons/paradiddle/ 88 -> 89. The first Play on paradiddle moved from stop 78 to 79, and the Nth exercise Play moves by +N. So the 69 presses in the original evidence is now an UNDERSTATEMENT, and it grew in exactly the direction this item exists to fix. The handoff was judged worth its cost (a beginner previously paid 8 actions to match the click to an exercise tempo; now one tap) and no cheaper shape avoided the extra stop — the .exercise-meta alternative needs the same one. That makes the skip mechanism this item asks for more valuable, not less."
       ],
       "acceptance": "a keyboard user can reach the first exercise on a lesson page, and any chapter on the homepage, in a small bounded number of stops; the mechanism is a real skip target or landmark, not a tabindex hack"
     },
@@ -1370,13 +1376,23 @@
     {
       "attempts": 0,
       "chunk": null,
-      "status": "ready",
+      "status": "done",
       "log": [
         "Filed iter 51 from the epic-closing persona milestone review.",
         {
           "iteration": 59,
           "date": "2026-08-12",
           "note": "Raised P2 to P1: a control that lies about what it does, or gives the reader no words at all, is user-facing broken — priority 1 by the discovery-pass rule in .claude/commands/improve.md. Filed at P2 by mistake."
+        },
+        {
+          "iteration": 64,
+          "date": "2026-08-14",
+          "note": "Both halves shipped. The 65px scroll jump: bisected in a real browser to [id] { scroll-margin-top: calc(var(--header-h) + 12px) } matching #metronome-pill, so the focus() at the end of setCollapsed ran scroll-into-view against a scroll box grown 74px upward — and it only showed on the chevron path because a pointer press on the pill focuses it first, making focus() a no-op. Both my guess and the persona guess were wrong about the mechanism. The number is 65 at 390 and 60 at 1280 because chrome.js overwrites --header-h with the measured 62px and the pill is 44px tall on mobile against 34px on desktop; the persona reported the narrow case. Fixed with focus({preventScroll:true}) plus .site-header [id] { scroll-margin-top: 0 } — the simple form, chosen over [id]:not(.site-header *) because complex selectors inside :not() need Safari 16.4 and where unsupported the whole declaration drops, sending EVERY in-page anchor under the sticky header. Mid-page deltas are now 0 at both widths for the chevron, the pill and Escape; the max-scroll residual of 76 and 140 is exactly the lost body reserve (64+12, 128+12) and is identical for all three and for a bare class toggle. Every in-page anchor re-measured on three pages at two widths: 10.6 to 11.5px clear of the header."
+        },
+        {
+          "iteration": 64,
+          "date": "2026-08-14",
+          "note": "Tempo handoff: each exercise card gained a third control reading METRONOME 80 that sets the dock tempo and meter and opens it without starting anything — a handoff the reader asks for, never an adoption, so a deliberately-set 60 is never overwritten. New gate check-tempo-handoff.js (14 checks now) pairs every button to its play spec from the BUILT markup and reads the dock meter table and bpm range out of the built dock, so the shortcode and base.njk cannot drift; mutation-tested 8 for 8. THE ADVERSARIAL PASS FOUND TWO BLOCKING ERRORS: seven exercises at 250 to 280 bpm named a tempo the dock clamps to 240, and all 53 x/8 exercises handed the dock a bar TWICE the notated bar, because spec.bpm is a quarter-note rate while the dock bpm is clicks per minute and beatsPerBar is clicks per bar. Both fixed by omitting the button — 60 of 892 — after rejecting three alternatives: tempo-only (a quarter click cuts across the dotted-quarter pulse and helps nobody), bpm x denominator/4 (musically exact but prints a number that contradicts the exercise), and beats = numerator/2 (barline lands right but the intermediate clicks are a 3-against-2, and the dock labels 3 as 3/4). A correct absence beats a wrong presence in a component with four previous false affordances. Cost measured and accepted: +52px per card at <=414px, +41px in a second band from 560 to about 1100, and one tab stop per exercise, which moved BL-073 measurement and raised it to P1."
         }
       ],
       "id": "BL-076",
@@ -2002,6 +2018,58 @@
           "iteration": 63,
           "date": "2026-08-14",
           "note": "Found by the adversarial critic while checking whether BL-086 chunk 1 left any page half-fixed. Filed rather than fixed because it needs new notation written, not a note moved."
+        }
+      ]
+    },
+    {
+      "id": "BL-101",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "Changing the meter mid-click resets the accent phase to the wrong place in the bar",
+      "evidence": [
+        "metronome.js sets session.beatsPerBar on a meter change while beatIndex keeps counting, and scheduleAhead accents when beatIndex % beatsPerBar === 0. So switching 4 to 6 mid-run puts the next downbeat 1 to 5 clicks away instead of on the bar, and the accented 1 — which the dock design calls the whole point of the beat row — lands in the middle of a bar until the counters happen to realign.",
+        "Pre-existing on the time-signature select path. Found by the adversarial pass during BL-076, which noted that the new per-exercise tempo handoff multiplies exposure by 892: every handoff that changes the meter while a click is running hits it.",
+        "The fix looks like one line — zero beatIndex when the meter changes during a session — but it needs a decision about whether the bar should restart immediately or at the next bar boundary, and a real-browser check that the beat dots and the pill lamp both follow."
+      ],
+      "acceptance": "changing the meter while the click is running puts the next accented beat on a bar boundary, verified in a real browser by sampling the beat-dot classes across the change; the beat row and the pill lamp agree",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 64,
+          "date": "2026-08-14",
+          "note": "Filed by the adversarial critic during BL-076. Pre-existing, not caused by that change, but that change made it far more reachable."
+        }
+      ]
+    },
+    {
+      "id": "BL-102",
+      "dimension": "content",
+      "priority": 1,
+      "title": "44 exercises play at a tempo that contradicts the tempo printed on them",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED across all 892 specs. The exercise meta prints a tempo against a note-value glyph, and player.js reads the same number as a QUARTER-note rate regardless of the glyph. 44 exercises disagree with themselves as a result.",
+        "41 of them are marked with a DOTTED QUARTER, e.g. double-paradiddle#0 \"6/8 · ♩. = 80\". One 6/8 bar is two dotted quarters, so the printed tempo means a 1.5s bar. The player treats 80 as quarters and plays 3 quarter-units, i.e. a 2.25s bar — the audio is 50% SLOWER than the marking printed directly above it. Affects all four 6/8 rudiment lessons (double-paradiddle, six-stroke-roll-found and siblings) and the 6/8 latin material.",
+        "3 are marked with an EIGHTH: reading-time-signatures#3 \"6/8 · ♪ = 160\" and #4 \"12/8 · ♪ = 180\" plus one more. The player reads 160 as quarters, so the audio runs at TWICE the printed tempo.",
+        "Some compound-meter metas are correct and must not be swept: rock-odd-meter#1 prints \"8th = 200\" against bpm 100, which is exactly right. The fix has to read the glyph, not the meter.",
+        "tools/checks/check-exercise-meta.js cannot see any of this: it matches /♩\\s*=\\s*(\\d+)/ and compares the number to spec.bpm without knowing which note value the glyph names. The 40 dotted-quarter metas do not even match its regex, so they are silently skipped (777 checked, 40 skipped).",
+        "Found while deciding what BL-076 tempo handoff should do on x/8 pages. It is pre-existing and NOT caused by that change — and it is a third, independent reason the handoff correctly omits those pages, because there is no single tempo on them to hand over.",
+        "The site premise on the homepage is real notation AND audio playback. An exercise whose audio contradicts its own printed tempo by 1.5x fails that on both halves at once."
+      ],
+      "acceptance": "every exercise sounds at the tempo printed on it: either the meta glyph is corrected to the note value the player actually counts, or the player and pattern-math learn the glyph, decided per exercise by reading the meta rather than sweeping; check-exercise-meta.js is extended to parse the note-value glyph so the class cannot silently regrow, and it stops skipping the 40 metas its regex currently misses",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 5,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 64,
+          "date": "2026-08-14",
+          "note": "Surfaced by the builder while resolving what the BL-076 tempo handoff should do for x/8 meters; independently re-derived by the orchestrator across all 892 specs before filing. Note the interaction with BL-097 (playback ignores accents) and BL-099 (ride notated as hi-hat): three separate ways the audio and the page disagree, all found in the same fortnight."
         }
       ]
     }
