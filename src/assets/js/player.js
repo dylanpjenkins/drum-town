@@ -28,6 +28,64 @@
     'a/4':    'tomFloor'
   };
 
+  // ---- Accent dynamics (BL-097) ----
+  // tools/notation-renderer.js draws a ">" over any note with accent: true, and
+  // until this existed the audio ignored the flag completely: on
+  // funk-ghost-notes#0 — the flagship exercise of the lesson about ghost notes,
+  // whose tip asks for "a 4-to-1 ratio between accented and ghosted snare" — all
+  // five snare strokes left the speakers at one level. The stave could say loud
+  // and the player could not.
+  //
+  // Three levels. Every note is either left at the level it already played at or
+  // LOWERED — nothing is ever scaled up — so no exercise gets louder overall.
+  // Measured by rendering all 201 accent-lowering exercises twice, shipped and
+  // accent-blind: RMS fell in 201 of 201 (ratio 0.4375 to 0.9973, i.e. -7.2 dB to
+  // -0.02 dB) and rose in none.
+  //
+  // "Nothing gets louder" is true of the exercise and FALSE of individual samples,
+  // so do not write the stronger claim here again. Samples are signed and the mix
+  // is a linear sum, so lowering one of two partially cancelling contributions can
+  // raise |sum|. Measured: 71 of the 201 have at least one note window above its
+  // accent-blind level, worst 1.87% (funk-james-brown#3 hands#32, fusion-
+  // mahavishnu#2 hands#8), and 4 have a higher buffer peak — hiphop-neo-soul#0 and
+  // #1 go 1.54463 -> 1.54519. LOUDER_TOL in
+  // tools/checks/check-accent-dynamics.js absorbs exactly that and is load-bearing,
+  // not slack: it sits above the 1.019 cancellation ceiling and below the 1.20 an
+  // accent-boost mutant produces.
+  //
+  // The net effect on peaks runs the other way, which is a free win worth keeping:
+  // 196 of the 201 already clipped past full scale before this existed (up to
+  // 2.172) and lowering the quiet strokes CUTS that — latin-mozambique#1
+  // 2.094 -> 1.487, rock-hybrid-grooves#3 2.016 -> 1.545, funk-new-orleans#3
+  // 1.850 -> 1.184, rock-train-beat#3 1.819 -> 1.487.
+  //
+  //   1.00  an accented note, and every note of a voice this spec never accents
+  //         (so an exercise that marks no accents is untouched)
+  //   0.25  an unaccented stroke of an accented SNARE or TOM voice: a ghost
+  //         note. The lessons print this number themselves — "roughly a quarter
+  //         of that volume", "a 4-to-1 ratio between accented and ghosted
+  //         snare", "if a backbeat is 5 on a 1-to-10 scale the ghosts are
+  //         between 1 and 1.5" — and that 1-to-10 scale is a linear amplitude
+  //         reading, so 4-to-1 is 0.25 (about -12 dB), not the 0.5 a power
+  //         reading would give.
+  //   0.50  an unaccented stroke of an accented CYMBAL or KICK voice, and any
+  //         unaccented full stroke (see fullStroke below): one dynamic level
+  //         down (-6 dB), the ordinary reading of a ">". A ghost is a specific
+  //         SNARE/TOM stroke — fingers, stick an inch off the head — and there is
+  //         no such thing on a ride, so the bell-accent exercises
+  //         (jazz-bop-vocabulary#1, metal-thrash#1) get a contrast without their
+  //         cymbal line dropping to a whisper. `foot` (the hi-hat pedal) is never
+  //         accented anywhere in the corpus, so in practice this tier is reached
+  //         by hat, ride, bell, crash, china and — in jazz-modern-jazz#2 and one
+  //         other — the kick.
+  //
+  // GHOST_VOICES is keyed by the values of KEY_TO_DRUM but nothing enforces that:
+  // add a drum voice there and forget it here and it silently joins the tap tier.
+  const GAIN_ACCENT = 1;
+  const GAIN_GHOST = 0.25;
+  const GAIN_TAP = 0.5;
+  const GHOST_VOICES = { snare: 1, tomHigh: 1, tomMid: 1, tomFloor: 1 };
+
   const KIT_STORAGE_KEY = 'dc_kit';
   const DEFAULT_KIT = 'electronic';
 
@@ -356,7 +414,97 @@
   // notes and tuplets are handled there; multi-bar specs report their full
   // length via patternDurationSecs.
 
-  function scheduleVoice(notes, c, kit, out, startAt, bpm, spec, voiceName) {
+  // Which VOICES this spec accents. Two rules, and the corpus forces both.
+  //
+  // PER VOICE, NOT PER BAR. funk-ghost-notes#0 accents the two backbeats and
+  // leaves all sixteen hi-hat 16ths bare, so "every unaccented note in a bar that
+  // marks accents is a ghost" would whisper the ostinato the groove rides on.
+  // Only a voice that is accented somewhere in the spec has its unaccented
+  // strokes lowered — the same convention tools/checks/check-tip-claims.js:133-138
+  // already applies when it decides which c/5 hits count as backbeats.
+  //
+  // AN ACCENT ON A UNISON STEM MOSTLY BELONGS TO THE DRUM. 204 accented notes in
+  // the corpus carry a hat and a snare on one stem (keys: ['g/5/x2','c/5']) and
+  // the ">" is drawn over the whole stem, so reading it per-key would mark the hat
+  // as accented too — and then 93 exercises would ghost their hi-hat line. Mostly
+  // the lessons mean the drum: jazz-bop-vocabulary#0 accents ride+snare and its
+  // own tip says "Keep the ride absolutely steady; only the snare changes", and
+  // snare-voicings#1 accents hat+snare to ask for a rim-shot. So a drum on the
+  // stem takes the accent alone; a cymbal is marked only when accented on its own.
+  //
+  // That is a generalisation, not a law, and it is wrong in at least four places:
+  // funk-james-brown#2 says "kick, snare, and accented hat land together",
+  // jazz-tony-williams#3 calls for "one sharp snare-and-ride accent", and
+  // jazz-modern-jazz#1 and latin-modern-hybrid#1 read the same way. Those lose an
+  // accent on the cymbal they wanted it on. It is still the right trade: every
+  // counterexample is one omitted accent, against whispering 93 hi-hat ostinati.
+  function accentedVoices(spec) {
+    const marked = {};
+    for (const voiceName of ['hands', 'feet']) {
+      for (const note of (spec[voiceName] || [])) {
+        if (note.rest || note.accent !== true) continue;
+        const drums = [];
+        for (const key of (note.keys || [])) {
+          const drum = KEY_TO_DRUM[key];
+          if (drum) drums.push(drum);
+        }
+        const ghostable = drums.filter(d => GHOST_VOICES[d]);
+        for (const drum of (ghostable.length ? ghostable : drums)) marked[drum] = true;
+      }
+    }
+    return marked;
+  }
+
+  // A note the corpus writes as a FULL STROKE. The sticking letter carries the
+  // dynamic in this notation — ghost-notes-found#2's tip spells the convention out
+  // ("beats 1, 2, 3, 4 are full strokes (uppercase) and the e / & / a positions
+  // are ghosts (lowercase)"), and ghost-notes-found#0 and finger-control#1 say the
+  // same. Only four values exist corpus-wide: R, L, r, l.
+  //
+  // This is the difference between two specs that are otherwise IDENTICAL — 16
+  // solo snare 16ths accented on 1, 2, 3, 4:
+  //
+  //   ghost-notes-found#2   R l r l  R l r l  ...   the dropped notes are ghosts
+  //   paradiddle#0          R L R R  L R L L  ...   the dropped notes are TAPS,
+  //                                                 and its tip asks only that the
+  //                                                 accents be "slightly louder
+  //                                                 than the rest"
+  //
+  // So an unaccented snare/tom written as a full stroke takes the tap tier, not
+  // the ghost tier. Measured over the corpus: of the 190 exercises that lower an
+  // unaccented snare or tom, 62 are all-uppercase (the whole rudiment and reading
+  // shelf: accent-tap, moeller-stroke, accented-singles, the paradiddle family,
+  // rock-train-beat, fusion-mahavishnu), 7 are all-lowercase (ghost-notes-found,
+  // finger-control, snare-voicings#2, dynamic-spectrum#2), 2 are mixed
+  // (dynamic-spectrum#3 and #4, which need both tiers inside one bar), and 119
+  // carry no sticking at all and keep the ghost tier — including both lessons this
+  // change was filed for.
+  //
+  // CAVEAT: BL-078 records that this very convention has drifted corpus-wide (the
+  // letter has started meaning a ghost rather than a hand in some lessons), so this
+  // will misfire wherever the case is wrong. It misfires SAFE — a miscased ghost
+  // lands at 0.5 instead of 0.25, never the other way. Two exercises are miscased:
+  // funk-sixteenth-feel#2 and #3 write every 16th as an uppercase R/L while their
+  // tips call the off-backbeat snares "a ghost at roughly a quarter of their
+  // volume", so those ghosts under-drop to a half. The fix is a sticking-case
+  // correction under BL-078, not a gain change here — editing two lessons' letters
+  // in isolation is the exact local patch that filing warns against.
+  //
+  // stick-grip#2 looks like a third and is not: it is titled "Loud R, Soft L
+  // (Accent / Tap Demo)" and its tip asks for "taps from a low start", so its
+  // uppercase L is right and 0.5 is the level it wants.
+  function fullStroke(note) {
+    const s = note.sticking;
+    return typeof s === 'string' && /[A-Za-z]/.test(s) && !/[a-z]/.test(s);
+  }
+
+  function noteGain(note, voice, marked) {
+    if (note.accent === true || !marked[voice]) return GAIN_ACCENT;
+    if (!GHOST_VOICES[voice] || fullStroke(note)) return GAIN_TAP;
+    return GAIN_GHOST;
+  }
+
+  function scheduleVoice(notes, c, kit, out, startAt, bpm, spec, voiceName, marked) {
     const scale = PatternMath.tupletScales(spec, voiceName, notes.length);
     let t = startAt;
     notes.forEach((note, i) => {
@@ -364,12 +512,27 @@
       const dur = (ticks === null ? 1 : ticks) * scale[i] * (60 / bpm);
       if (!note.rest) {
         for (const key of (note.keys || [])) {
-          let drum = KEY_TO_DRUM[key];
-          if (!drum) continue;
+          const voice = KEY_TO_DRUM[key];
+          if (!voice) continue;
+          let drum = voice;
           // Articulation modifiers — currently just `open` to swap the
-          // closed-hat voice for the open-hat voice.
+          // closed-hat voice for the open-hat voice. The dynamic is decided from
+          // the base voice, so an open hat inherits the hat line's marking.
           if (drum === 'hat' && note.articulation === 'open') drum = 'openHat';
-          if (kit[drum]) kit[drum](c, t, out);
+          if (!kit[drum]) continue;
+          // One gain node per (note, KEY) — not per note. A single stem can carry
+          // a ghosted snare and an ostinato hi-hat, and one node per note would
+          // have to pick a single level for both. The node is skipped entirely
+          // when the level is 1, so a spec that marks no accents builds exactly
+          // the graph it built before this code existed.
+          const level = noteGain(note, voice, marked);
+          let dest = out;
+          if (level !== 1) {
+            dest = c.createGain();
+            dest.gain.value = level;
+            dest.connect(out);
+          }
+          kit[drum](c, t, dest);
         }
       }
       t += dur;
@@ -379,8 +542,9 @@
 
   function schedulePattern(spec, c, kit, out, startAt) {
     const bpm = spec.bpm || 80;
-    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, spec, 'hands');
-    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, spec, 'feet');
+    const marked = accentedVoices(spec);
+    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, spec, 'hands', marked);
+    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, spec, 'feet', marked);
   }
 
   // ---- Playhead ----

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 64,
-    "next_dimension": "quality",
+    "iteration": 65,
+    "next_dimension": "ui",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 103,
+    "next_id": 104,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1427,19 +1427,25 @@
     {
       "id": "BL-078",
       "dimension": "content",
-      "priority": 2,
+      "priority": 1,
       "title": "Ghost-note sticking letters say the wrong hand, and the convention has drifted corpus-wide",
       "evidence": [
         "iter 52, found by a BL-070 adjudicator that declined to patch it in one lesson: in ghost-notes-found Ex 4 the hi-hat plays all sixteen 16ths and each ghost is CHORDED with a hat note, so the ghost is necessarily the hand that is NOT on the hat — yet all four ghosts carry sticking 'r'.",
         "Exercises 1-3 of that same lesson use r/l strictly as hand designations with case carrying dynamics ('lowercase r/l are 1-inch ghost taps; uppercase R/L are 12-inch full strokes'), so a student reading straight through gets a physically impossible instruction.",
-        "Not local: snare-voicings#2 and finger-control#2 do the same, and finger-control#2's tip proves the drift — 'Hi-hat 16ths in the right hand, snare 16ths in the left. The r snare hits are all fingers.' The letter has stopped meaning a hand and started meaning a ghost."
+        "Not local: snare-voicings#2 and finger-control#2 do the same, and finger-control#2's tip proves the drift — 'Hi-hat 16ths in the right hand, snare 16ths in the left. The r snare hits are all fingers.' The letter has stopped meaning a hand and started meaning a ghost.",
+        "ITERATION 65 GAVE THIS ITEM TEETH IT DID NOT HAVE. BL-097 now keys AUDIO DYNAMICS off the sticking case, because the corpus documents that convention in its own prose — ghost-notes-found#2 says \"beats 1, 2, 3, 4 are full strokes (uppercase) and the e / & / a positions are ghosts (lowercase)\", and ghost-notes-found#0 and finger-control#1 say the same. Measured over the 202 exercises that drop an unaccented drum note: 63 all-uppercase, 7 all-lowercase, 2 mixed, 130 with no sticking at all. TWO exercises are miscased against the convention and therefore play their ghosts at half volume instead of a quarter: funk-sixteenth-feel#2 and #3, both all-uppercase while their tips ask for \"a ghost at roughly a quarter of their volume\". The fix is their sticking case, not the gain table. I had listed stick-grip#2 as a third and the builder correctly refused it: that exercise is titled \"Loud R, Soft L (Accent / Tap Demo)\" and its tip asks for \"taps from a low start\", so its uppercase L is right and 0.5 is the level it wants — a false positive from matching ghost words in the lesson body rather than the exercise."
       ],
       "acceptance": "one decision applied corpus-wide: either the letter always names the hand (and ghosts are marked some other way), or the notation documents that lowercase marks a ghost regardless of hand; every affected exercise and tip agrees with whichever is chosen; docs/content-style-guide.md records it",
       "status": "ready",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed iter 52. The adjudicator was right not to fix one lesson: changing it locally would have made three lessons inconsistent with each other."
+        "Filed iter 52. The adjudicator was right not to fix one lesson: changing it locally would have made three lessons inconsistent with each other.",
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "Raised P2 to P1. Sticking case is no longer just a printed letter: it now decides how loud a note plays, so drift in the convention is drift in the audio."
+        }
       ]
     },
     {
@@ -1934,7 +1940,7 @@
         "The site's own homepage premise is \"real notation and audio playback\", and dynamics are the one thing a drummer practises hardest."
       ],
       "acceptance": "a note carrying accent:true plays audibly louder than an unaccented note of the same voice, in both the electronic and acoustic kits, with the ratio chosen to match what the lessons ask for (funk-ghost-notes asks for roughly 4-to-1); unaccented notes in a bar that marks accents are treated as ghosts and play softer still, or the lessons stop claiming a hierarchy the audio cannot produce; no exercise gets louder overall than it is today",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -1942,6 +1948,26 @@
           "iteration": 61,
           "date": "2026-08-13",
           "note": "Found while tracing what accent:true actually affects downstream, before starting the BL-085 content edits. The trace also turned up that check-tip-claims.js:133-138 changes its interpretation once a bar marks accents (unaccented c/5 hits become ghosts and stop counting), which is correct behaviour but means BL-085 edits must be re-gated; and that its exemption map carries hiphop-anderson-paak#2 with the comment \"bar has ghost strokes but marks no accent:true, so the ghost filter cannot fire\" — that exemption exists because of BL-085 and should be removable once that exercise is fixed."
+        },
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "Shipped. One GainNode per (note, key) between the voice and the session master, created only when the level is not 1, so the 26 voice functions are untouched and an accent-free spec builds byte-for-byte the graph it built before. Three tiers: an accented note and every note of a voice this spec never accents play at 1.0 (so nothing is boosted); an unaccented snare or tom of an accented voice is a ghost at 0.25; an unaccented cymbal or kick of an accented voice is a tap at 0.5. Measured with OfflineAudioContext against the shipped data-spec on the built page: attenuation lands on exactly 0.250 / 0.500 / 1.000, giving 4.00-to-1 on funk-ghost-notes#0 electronic and 3.97-to-1 acoustic — the ratio its tip has always asked for and the audio never delivered."
+        },
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "TWO THINGS THE ADVERSARIAL PASS CHANGED, AND THE FIRST WAS A REAL BLOCKER. The builder applied 0.25 to all 190 exercises that lower a drum note, and defended it by claiming paradiddle#0 and ghost-notes-found#2 have structurally identical specs so nothing readable could separate them. They are not identical: the sticking case separates them, and the corpus documents that convention in the very exercise cited — ghost-notes-found#2 says \"beats 1, 2, 3, 4 are full strokes (uppercase) and the e / & / a positions are ghosts (lowercase)\". 62 exercises were whispering at 4-to-1 while the letters printed under their own staves called those strokes full, on the accent-tap shelf and the most-trafficked rudiment lesson on the site. An uppercase-sticking veto sends those to 0.5: paradiddle#0 went 5.24 to 2.62, matching its tip which asks for \"slightly louder\", while both ghost lessons and both new prose sentences stayed exactly where they were."
+        },
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "The second change was to the claim, not the code. Both comments said nothing anywhere could come out louder. False: samples are signed and the mix is a linear sum, so attenuating one of two partially-cancelling contributions can raise a peak — four exercises peak higher and the worst note-window rise is 1.0187. What is actually invariant is RMS, which fell in 201 of 201 accent-lowering exercises, so the gate now asserts RMS rather than peak. That measurement also caught a bug in the gate: its LOUDER_TOL was 1.002, below the 1.019 cancellation ceiling, so it would have failed correct code the moment a case covered funk-james-brown#3. An unclaimed win worth recording: 196 of 201 of these exercises already peaked past full scale, up to 2.172, and this change reduces that clipping — latin-mozambique#1 2.094 to 1.487, funk-new-orleans#3 1.850 to 1.184."
+        },
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "New gate check-accent-dynamics.js, the fifteenth and the first that can hear anything. It renders each case twice — shipped and with accent stripped — so it needs no baseline: an accent-free spec marks no voices and creates no gain node, and therefore IS the old behaviour reproduced from current code. Nine cases across ghost and tap tiers, snare/tom/kick/hi-hat voices and both kits, asserting attenuation against each note own accent-blind peak rather than a cross-note ratio (a paradiddle accent already reads 1.31x its own taps in the accent-blind render purely from burst summation, so cross-note ratios measure the exercise as much as the code). Ten mutants run, nine caught; openHatBypass passes and is documented as a named blind spot because no corpus exercise has an unaccented open hat in a hat-accenting spec, making that mutant behaviourally identical to correct code today. Exits 0 with a loud SKIP where no browser exists, ~2s."
         }
       ]
     },
@@ -2070,6 +2096,34 @@
           "iteration": 64,
           "date": "2026-08-14",
           "note": "Surfaced by the builder while resolving what the BL-076 tempo handoff should do for x/8 meters; independently re-derived by the orchestrator across all 892 specs before filing. Note the interaction with BL-097 (playback ignores accents) and BL-099 (ride notated as hi-hat): three separate ways the audio and the page disagree, all found in the same fortnight."
+        }
+      ]
+    },
+    {
+      "id": "BL-103",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Some accents mean a timbre or a pitch, not a volume, and the player now plays them as volume",
+      "evidence": [
+        "BL-097 made accent:true audible. That is right where the mark means louder, but the corpus also uses the same mark for other things, and those exercises now get a dynamic they never asked for.",
+        "snare-voicings#4: the accent labels a RIM-SHOT timbre. Beat 1 is a plain centre stroke and now plays at a quarter of the rim-shot volume. Roughly a third of that lesson is affected — its cross-stick and buzz exercises are legitimately quieter, so it is not uniform.",
+        "polyrhythms-3-2#3: the tip says the pitch separation lets a listener hear BOTH pulses, and 4 of the 6 high-tom notes now play at 0.25 under a floor-tom pulse at 1.0 — measured 3.988 to 1. The exercise exists to make two pulses equally audible.",
+        "Eleven reading studies with no sticking at all: reading-time-signatures#0 through #4, whose tip says the accent makes the bar audible as a unit, and reading-syncopation#1/#3/#4. reading-syncopation#4 now plays 10 of its 13 notes at a quarter volume, in a lesson about counting.",
+        "Found by the adversarial pass during BL-097. The gain table cannot fix this: the data says accent and means three different things. Either those exercises stop using accent for a non-dynamic purpose, or the data gains a way to say which kind of mark it is."
+      ],
+      "acceptance": "no exercise plays a dynamic its own tip does not ask for: the accents that mean timbre or pitch are either re-expressed in the data or the affected tips state the dynamic the player will produce; verified by rendering the affected exercises and comparing against their tips",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 2,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 65,
+          "date": "2026-08-14",
+          "note": "Filed by the adversarial critic during BL-097, which judged that every case fails as an omission or an overstatement rather than a lie, so none of it blocked that change."
         }
       ]
     }
