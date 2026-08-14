@@ -1,6 +1,6 @@
 {
   "meta": {
-    "iteration": 59,
+    "iteration": 60,
     "next_dimension": "content",
     "dimensions": [
       "content",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 85,
+    "next_id": 97,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -21,7 +21,9 @@
     "selection_rule": "first item with status==ready and dimension==next_dimension, sorted by (priority asc, id asc); if none, advance dimension (max 3 tries); if none anywhere, run a discovery pass. Every 10th iteration (iteration % 10 == 9) is a discovery pass regardless.",
     "discoveryNotes": [
       "iter 56: a metadata sweep reported 228 pages with NO canonical link and a sitemap with 0 <loc> entries. Both are local-build artifacts, NOT defects: src/_data/site.js reads process.env.SITE_URL, netlify.toml sets it to https://drum.town, and base.njk/sitemap.njk are both gated on site.url. Rebuilt with SITE_URL set and got 1 canonical per page and 227 sitemap locs. Do not file these; if a sweep raises them again, check whether the build had SITE_URL.",
-      "Iteration counter reconciled at iter 59: meta.iteration had drifted to 53 against 58 PROGRESS entries, because bookkeeping-only and repair ticks did not always bump it. Set to 59 to match PROGRESS. Side effect: 59 % 10 == 9, so the NEXT tick is a discovery pass — that is intended, the last one was iter 56."
+      "Iteration counter reconciled at iter 59: meta.iteration had drifted to 53 against 58 PROGRESS entries, because bookkeeping-only and repair ticks did not always bump it. Set to 59 to match PROGRESS. Side effect: 59 % 10 == 9, so the NEXT tick is a discovery pass — that is intended, the last one was iter 56.",
+      "Iteration 60, page weight: do NOT re-file the rudiments page as a byte-weight problem. It is 906 KB of raw HTML but Netlify serves brotli, which is 72 KB over the wire; the heaviest lesson is 31 KB. The real costs there are DOM node count (6,866 elements, 6,095 of them SVG primitives — content-visibility spares layout and paint but the parser still builds every node) and BL-008's unconditional 2.3 MB WAV prefetch, which is live and is ~32x the brotli'd HTML.",
+      "Iteration 60, three phantoms the orchestrator caught on itself before filing, recorded so the next sweep does not repeat them: (1) a duplicate-spec hash that omitted the articulation property, which made rock-open-hats look as though a lesson about open hi-hats notated none — it does notate them; (2) a ghost-note rule looking for a property the corpus does not have (ghosts are unaccented notes beside accented ones, so they cannot be detected that way); (3) an accent rule that matched the NEGATION in titles like \"No Accents\" and \"Diddles Even, No Accent\". Also: counting curriculum slugs without excluding section slugs produces 18 fake orphans."
     ],
     "notes": []
   },
@@ -1543,6 +1545,311 @@
           "note": "Filed by the adversarial critic during BL-074/075, with measurements."
         }
       ]
+    },
+    {
+      "id": "BL-085",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Exercises omit the one notation feature they exist to teach: ghost/accent dynamics and triplets that are described in words but never notated",
+      "evidence": [
+        "VERIFIED BY HAND — funk-ghost-notes#0 \"1 — Funk Groove with Ghost Notes\", the flagship exercise of the lesson about ghost notes. Snare falls at 16th indices 4, 6, 9, 11, 12. Its tip says \"Snare on beat 2 and beat 4 is loud (the backbeat). All other snare hits are ghost notes - barely audible.\" Not one note in the spec carries accent:true, so the two backbeats and the three ghosts render as five IDENTICAL noteheads. A reader cannot tell from the stave which two are loud, which is the entire content of the lesson.",
+        "VERIFIED BY HAND — latin-samba-feel#3 \"4 — Telecoteco Accents (Full Samba Pattern)\". An exercise with the word Accents in its title, and zero accent flags in its spec. The tip promises \"Two displaced accents per bar (on the &s)\". Snare placement itself is correct (indices 2, 4, 10, 12 = &-of-1, 2, &-of-3, 4).",
+        "VERIFIED BY HAND — jazz-modal-comping#0 \"1 — Triplet Kicks Under the Ride\". Its own meta line reads \"4/4 · 8th-note triplets\" and spec.tuplets is null; the hands are q 8 8 q 8 8, i.e. straight eighths. The owner has corrected this exact error on this project before: quarter-note TRIPLETS in 4/4 once shipped described as quarter notes.",
+        "THE CAPABILITY EXISTS AND IS SIMPLY UNUSED HERE: 235 of 852 exercises do use accent:true and 60 do use tuplets, so this is not a renderer limit. Nor is it the ghost-note sticking-letter problem already filed as BL-078 - that is about which HAND is named; this is about no dynamic being notated at all.",
+        "CLASS SIZE, MECHANICAL, NOT YET HAND-VERIFIED: 70 exercises whose title, tip or meta claims ghost/accent dynamics while no note carries accent:true (heavily concentrated in the latin-* tracks, where bell and cascara patterns are described by their accent pattern in prose and drawn without it), and 14 that claim triplets or swing with no tuplets in a simple meter. Candidate lists in the iteration-60 discovery scratch.",
+        "IMPORTANT CAVEAT FOR WHOEVER TAKES THIS: most of the 14 triplet candidates are probably CORRECT. Writing straight eighths under a \"swing 8ths\" label is standard publishing convention, and the meta line carries that label - jazz-ride-pattern#1, cymbal-voicings#0, hi-hat-articulation#3, jazz-waltz#0, hiphop-r-and-b-basic#1 and hiphop-j-dilla#2 all read that way. The real ones assert triplets outright rather than labelling a swing feel. Verify each before touching it.",
+        "SECOND, INDEPENDENT SWEEP (the prose-vs-notation lens) reached this class from tips rather than titles and named 14 sharp instances: hiphop-boom-bap#2, latin-modern-hybrid#0, funk-sixteenth-feel#2 and #3, funk-clyde-stubblefield#1, funk-the-meters-intro#1, funk-the-meters#1, funk-ghost-displacement#0/#1/#2, hiphop-neo-soul#0, hiphop-questlove#0, hiphop-anderson-paak#2, fusion-tony-williams-fusion#2.",
+        "SHARPEST TWO: funk-the-meters#1 says \"Only the snare on beat 4 is loud — every other snare hit in the bar is a ghost note\" over six identically-rendered notes; and funk-ghost-displacement#2 says out loud \"beats 2 and 4 themselves must still be loud accented snares\" while carrying no accent flag at all.",
+        "AN HONEST ALTERNATIVE ALREADY EXISTS IN THE CORPUS: funk-ghost-notes bodyHtml says \"No accents are printed on the staff... so the whole 4-to-1 shape is yours to supply\". Either notate the dynamics or say that sentence — what cannot stand is a tip asserting a hierarchy the stave silently contradicts."
+      ],
+      "acceptance": "every exercise whose own title, tip or meta claims a dynamic distinction notates it with accent:true (or the words are corrected to match the notation), starting with the hand-verified three; a tools/checks script guards the class so it cannot silently regrow; and the triplet candidates are each individually judged against the swing-notation convention rather than swept; and a cheap second check asserts that any exercise whose tip names a loud-versus-ghost hierarchy carries at least one accent:true — the lens rates that class as zero-ambiguity",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 7,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Found in the iteration-60 discovery pass, by hashing every exercise spec and asking which exercises share notation while promising different things. Three hand-verified instances, two of them unambiguous. NOTE: the same sweep produced three phantoms I caught on myself before filing - a duplicate-detection key that omitted the articulation property (which made rock-open-hats look like it notated no open hats, when it does), a ghost-note rule looking for a property the corpus does not have, and an accent rule that matched the NEGATION in titles like \"No Accents\". Regenerate candidates carefully."
+        }
+      ]
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 2,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        }
+      ],
+      "id": "BL-086",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Twenty exercises put a named voice on a different beat than their own words say",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED, three of three checked reproduced exactly. independence-chapin-method#2 is titled \"3 — Single Snare on Beat 4\" and its tip promises \"Snare on beat 4 — landing WITH the ride quarter and the hi-hat foot. Three things at once on that beat.\" The snare is chorded at beat 3. The hat foot is on 2 and 4. The unison the exercise exists to teach happens nowhere in the bar, and it is the only step out of place in a graded walk whose siblings (and-of-2 = 2.5, and-of-4 = 4.5, a-of-4 = 4.667) are all correct.",
+        "ORCHESTRATOR-VERIFIED. funk-displacement#3 \"4 — 16th-Shifted Backbeat\": the tip says \"snare on the e of 2 and the e of 4, one 16th off the home position\" (2.25 and 4.25). The spec puts the snare at exactly 2 and 4. The displacement is ZERO — the entire subject of the exercise is absent from the stave.",
+        "ORCHESTRATOR-VERIFIED. rock-double-time#1: tip says \"snare on the and of 1 and the and of 3 ... Notice the snare does not land on the downbeats.\" Spec has the snare at 2 and 4, which are exactly the downbeats it tells the reader it avoids.",
+        "CORROBORATED FROM A SECOND, INDEPENDENT DIRECTION: hashing every exercise spec found funk-displacement#3 and rock-double-time#1 sitting in a group of EIGHT exercises that share one byte-identical plain 16th-hat backbeat. Several of that group are legitimate feel exercises (the same notation played behind or ahead of the click, which cannot be notated); these two are not. The duplication is the mechanism — a reference spec was reused where a displaced one was needed.",
+        "REPORTED BY THE LENS, NOT YET RE-VERIFIED BY THE ORCHESTRATOR (11 more): rock-prog#1 (half the asymmetry missing), funk-purdie-intro#3 (snare at 2.5 not 3, and its bodyHtml calls a 1-bar spec a four-bar preview), hiphop-808-translation#0, hiphop-modern-production#3, fusion-broken-time#2, jazz-broken-time-intro#3, latin-mambo-intro#2, latin-songo#2 (tip says cross-stick \"still on 2 and 4\", spec moved it to 3.5), hiphop-future-r-and-b#2, hiphop-trap#2, latin-mozambique#1.",
+        "PLUS four-way-foundation#2/#3/#4, a three-exercise snare walk whose tips all say \"and of 2\" where the stave says beat 2 — and #2 says \"still on the and of 2\" when no earlier exercise ever put it there.",
+        "The lens hand-checked 111 position lists and cleared 94. The dominant false-positive sources it documents are contrastive clauses (\"not on 2 and 4\", \"no snare on 2\", \"Beginners want to add a snare on 2; resist\"), bar-scoped tips over multi-bar specs, and explicitly-unnotated voices (\"the crash lives on beat 1 of the next bar (not shown)\")."
+      ],
+      "acceptance": "each of the 20 is judged against its own spec and its lesson siblings, and either the notation or the words are corrected so they agree — the fix going to whichever is the outlier, since in every verified case so far the prose was internally coherent and the spec was wrong; and check-tip-claims.js is generalized from its single \"snare on X and Y\" shape to a voice-on-position-list parser, with explicit guards for negative and contrastive clauses and a requirement that the parsed list terminate at a clause boundary"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        }
+      ],
+      "id": "BL-087",
+      "dimension": "content",
+      "priority": 1,
+      "title": "reading-101 teaches the wrong staff position for the snare, and contradicts lesson 1",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED. reading-101 bodyHtml: \"For this curriculum the layout is: hi-hat / ride as an X-shaped notehead at the top, snare on the MIDDLE LINE, kick in the bottom space\". the-drum-kit bodyHtml, corrected in iteration 58 against real VexFlow geometry: \"Snare — the middle SPACE, third from the bottom\". The two foundational lessons directly contradict each other about the most-used voice on the site.",
+        "Geometry settles it in favour of the-drum-kit: stave lines render at y 58/68/78/88/98, and every reading-101 exercise notates the snare as c/5, which renders in the third space rather than on the middle line at y 78. The middle line is empty.",
+        "Second false claim in the same sentence: \"Toms sit between snare and hi-hat in pitch order — high tom near the top, floor tom near the bottom.\" The floor tom (a/4) renders BELOW the snare, as the-drum-kit own list states (\"Floor tom — the second space from the bottom\" versus \"Snare — the middle space\"). So the floor tom is not between snare and hi-hat.",
+        "This is the BL-071 defect class surviving in the lesson that teaches people to READ — the one place a wrong position claim propagates into every later lesson."
+      ],
+      "acceptance": "reading-101 states the same staff positions as the-drum-kit and as the rendered geometry, verified against built SVG coordinates rather than against another paragraph; and no two lessons on the site give conflicting positions for any voice"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 3,
+        "size": 10
+      },
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        }
+      ],
+      "id": "BL-088",
+      "dimension": "content",
+      "priority": 2,
+      "title": "About 22 exercise titles promise a phrase length the stave does not contain",
+      "evidence": [
+        "metal-prog-metal#3 \"Four-Bar Prog Phrase (4/4 + 7/8 + 4/4 + 5/4)\" is a ONE-bar spec in a single meter — the title enumerates four meters that are not on the stave.",
+        "metal-hyperblasts#1 \"Endurance Test at 260 (8 Bars)\" is 1 bar, and its own tip says 4 bars — three different numbers for one exercise.",
+        "rock-studio-polish#2 \"16-Bar Form Simulation\" is 8 bars; rock-open-hats#3 \"4-Bar Pattern\" is 2 bars.",
+        "Eleven more narrate per-bar content (\"Bar 3 is the tom build\") over a one-bar stave: metal-djent#3, metal-mathcore#3, metal-metric-modulation#3, hiphop-studio-translation#3, accompaniment#2, four-way-independence#1, soloing-improvisation#1, fusion-broken-time#0, solo-drumming#0, rock-dynamics#0, metal-polymeters#3.",
+        "THIS IS A CONVENTION PROBLEM, NOT PURELY AN ERROR: of 61 raw hits, 18 disclose the reduction honestly in the title itself (\"(Bar 1 Shown)\", \"notation shows core 1-bar\", \"Bar 9 (the Bridge)\"), and 3 were regex artifacts where \"4/4 Bar\" matched as \"4 Bar\". The site already has a good convention and applies it inconsistently."
+      ],
+      "acceptance": "every title claiming N bars either notates N bars or discloses the reduction in the title the way the existing 18 do; the disclosure wording is one form, not several"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        }
+      ],
+      "id": "BL-089",
+      "dimension": "content",
+      "priority": 2,
+      "title": "A sticking that never alternates, and two tips naming a voice that is not on the stave",
+      "evidence": [
+        "moeller-stroke#3 \"Moeller Triplets, Both Hands Accented\". Tip: \"Sticking RLR / LRL / RLR / LRL — the lead hand of each triplet alternates.\" The spec sticking is R L R | R L R | R L R | R L R: the lead hand is R every time and never alternates. accent:true sits on indices 0, 3, 6 and 9 — all four are R, so \"Both Hands Accented\" is false as well. Uppercase hand designation, so outside BL-078, which covers the lowercase ghost convention.",
+        "three-limb-patterns#4: the tip says \"then add the hat foot on 2 and 4\", but the spec feet contain only f/4 and no d/4/x2 anywhere — while siblings #0 and #1 do notate it. Three-way inconsistent: the lesson body defines this combo as hi-hat hand + kick + ride, the tip substitutes the hat foot, and the stave shows a third thing.",
+        "rock-stadium-anthem#3: \"Bar 4 is the chorus arrival with the crash on 1.\" There is no a/5/x2 in the exercise at all. Its sibling claim in the same tip does check out (\"Bar 3 is the tom build (4 loud quarter-note toms)\")."
+      ],
+      "acceptance": "each of the three is corrected on whichever side is the outlier, verified against the lesson siblings that establish the convention"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 4,
+        "size": 7
+      },
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-090",
+      "dimension": "content",
+      "priority": 2,
+      "title": "28 of the 40 rudiments are a flashcard with nowhere to go",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED against _site/rudiments/index.html: 40 cards carrying class=\"exercise\", and 12 carrying an exercise-lesson-link. 28 cards end at the stave.",
+        "The persona named this the one finding that would have made them close the tab, and the reason is the page's own advice: the intro says to start with the single stroke roll, double stroke roll and single paradiddle \"then work outward\". Working outward from #1 lands on #2 Single Stroke Four, #3 Single Stroke Seven, #4 Multiple Bounce, #5 Triple Stroke — none of which have anywhere to go. The whole numbered-roll spine (#7, #9 through #15) is dead ends.",
+        "NOBODY LIED: the lede does say \"where we have a full lesson, it is linked right on the card\". The gap is between the page title — \"The 40 Essential Rudiments\" — and what a reader can actually learn here, which is twelve.",
+        "Distinct from BL-031 (rudiment specs unaudited by any tool) and from BL-041 (the page lacks in-page navigation).",
+        "A cheaper partial exists and may be the right first move: the 28 dead-end cards could say what they are, or point at the nearest lesson that uses the sticking, instead of ending silently."
+      ],
+      "acceptance": "a reader working outward from rudiment 1 always has somewhere to go: either the dead-end cards gain lessons, or each one states plainly that it is a reference card and links to the closest lesson that teaches its sticking — and the page stops implying forty lessons exist when twelve do"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-091",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "The running click dies on every page navigation, which is the difference between a practice tool and a demo",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED IN SOURCE: metronome.js persists only dc_metro_bpm, dc_metro_ts, dc_metro_vol and dc_metro_collapsed. The session is a module-scope variable plus an AudioContext, both destroyed on unload. The file header states it outright: \"Each page navigation reloads the page, so the playing state resets.\"",
+        "The persona set 90 BPM, pressed play, tapped through to the rudiment they wanted, and got silence. In a room with a kit and the phone propped up, they said they would have opened their phone's metronome app instead — which for that goal is the same as leaving.",
+        "Measured: loading a page carrying exactly what a playing session leaves behind (dc_metro_collapsed=0, dc_metro_bpm=90) restores the open dock and the tempo, but the go button reads play, its label reads \"Start metronome\", and the accessible name reads \"Metronome, 90 beats per minute, stopped\".",
+        "The /metronome/ page closes by saying \"The metronome follows you to every lesson on the site, so any exercise you open is one click away from being practiced properly.\" The dock follows; the click does not. The sentence is literally true and quietly concedes the point, but it reads as a promise that it keeps going.",
+        "BL-076 makes this worse rather than overlapping it: because the dock will not adopt the exercise tempo, the reader pays the full tempo-entry cost again after every navigation. BL-076 is within a page; this is across pages, and BL-076 acceptance does not cover it.",
+        "CONSTRAINT THE IMPLEMENTER MUST DESIGN AROUND, NOT DISCOVER: browsers block an AudioContext from producing sound without a user gesture, so a naive \"resume automatically on load\" cannot work. The honest shapes are a one-tap resume that is obvious and pre-armed, or a persistent-session architecture that does not reload.",
+        "CAVEAT ON THE EVIDENCE, stated by the walker: they could not drive a live cross-page navigation with audio actually running, because headless Edge stopped producing DOM output mid-session. The finding rests on the source and on a real-browser load of the persisted state, not on a live observation, and they said so rather than claiming it."
+      ],
+      "acceptance": "a reader who starts the click and then navigates either keeps hearing it, or is one obvious tap from resuming it at the same tempo — and no copy on the site promises more than the implementation delivers"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-092",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The site name clips to \"drum.tov\" at 150% text, on every page",
+      "evidence": [
+        "Measured on .site-logo__wm: at a 16px root scrollWidth 104 = clientWidth 104. At a 24px root (150%) scrollWidth 155 against clientWidth 126 — 29px sliced. At a 32px root, 207 against 118, so the header reads \"drum.\" plus a sliver.",
+        "It uses text-overflow: clip rather than ellipsis, so there is no signal anything was cut. It does not read as truncation; it reads as a different wordmark.",
+        "Cause: .site-logo is flex: 0 1 auto with min-width: 0 and overflow: hidden, and is the only shrinkable item in a header whose theme toggle (40px), clock pill (86px) and hamburger (44px) are all fixed. It absorbs the entire deficit.",
+        "No horizontal overflow results at any zoom, which is exactly why no gate catches it.",
+        "Distinct from BL-064: that item is prospective, about any FUTURE item added to the header row. This is present breakage at an ordinary browser setting, and the thing being broken is the site's name."
+      ],
+      "acceptance": "the wordmark renders in full at a 24px root and degrades legibly rather than silently above it; no gate metric regresses"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-093",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "Notation is the one thing on a card immune to text zoom — and at 200% the open dock covers the sticking letters entirely",
+      "evidence": [
+        "Measured on rudiment card 01 at a 32px root: title 18 to 36px, meta 11 to 22px, PLAY 11 to 22px, card height 391 to 781px. The notation frame stays byte-identical at 116px tall, scrollWidth 548, clientWidth 330. Zooming the text makes the stave relatively half the size it was — the reader zooms in and the content they zoomed for shrinks.",
+        "It compounds: at 200% text with the metronome open, the dock covers 52 of the notation frame's 116px and 67 of the lesson link's 75px. Sticking letters sit BELOW the noteheads, so at that setting they are entirely behind the dock — the only part of the notation a non-reader can use is 100% invisible while the metronome they came for is on screen.",
+        "Distinct from BL-082, which is about the dock's own controls not scaling. This is the notation component, and it is the one carrying the content.",
+        "Note the interaction with BL-082's eventual fix: if the dock grows with text, it will cover MORE of the stave unless the reserve grows with it."
+      ],
+      "acceptance": "at a 32px root the stave scales with the page rather than staying fixed, and no part of a notation frame or its sticking row sits under the open dock at any text size"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-094",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "The volume slider is the smallest control in the dock, in the hardest corner, and the phone gets a smaller one than the desktop",
+      "evidence": [
+        "ORCHESTRATOR-VERIFIED IN CSS: .transport__vol is 96px wide at desktop and 60px below 400px (style.css:2249, inside the max-width: 400px block — the walker attributed it to 720px, which is wrong; the narrowing is at 400px, and their 390px measurement is on the correct side of it).",
+        "A 16px thumb over a 60px track leaves about 44px of travel for 0 to 100, i.e. 2.3 percentage points per pixel. The walker overshot to 100 and could not get back to 70 one-handed.",
+        "Position: x 318 to 378 in a 390px viewport and y 744 to 788 in an 800px one — the far bottom-right corner, where a horizontal drag competes with the browser's own edge gesture.",
+        "In the same row and the same gap budget, the aria-hidden beat-dot field gets 194px, of which 130px is empty. For someone practicing in a room with a kit, volume is the control they reach for most.",
+        "BL-043 (volume slider has no visible label) is fixed — the caption reads VOLUME. The size and placement were never filed."
+      ],
+      "acceptance": "the volume control is at least as wide on a phone as on a desktop, and is not the outermost control in the bottom corner; the 44px target and the constant dock height both hold"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-095",
+      "dimension": "ui",
+      "priority": 2,
+      "title": "The metronome page's own button becomes a dead control after one press",
+      "evidence": [
+        "Press once: the dock opens and the label changes to \"Jump to the metronome ↓\". Press again, and again, and nothing visible happens. Measured across three runs: scrollY stays 0, the dock stays open, focus moves to the play button — which on touch produces no visible change at all, because the focus ring is :focus-visible only.",
+        "So the reader is left with a large primary-coloured button carrying a down arrow that never goes down.",
+        "This is the same false-affordance shape the loop has now fought twice: the pill wearing a play triangle that did not play (BL-074) and the METRONOME caption that returned a bare field to elementFromPoint (BL-075). One layer further out, on the page dedicated to the feature."
+      ],
+      "acceptance": "the button does what its label and arrow say on every press, or its label and arrow change to describe what it actually does — verified by pressing it three times in a row and measuring"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 60,
+          "date": "2026-08-12",
+          "note": "Filed in the iteration-60 discovery pass from a simulated-user walk of /rudiments/ and /metronome/ at 390px — a six-year covers-band player who reads chord charts but fakes drum notation, whose two goals were to learn the 40 rudiments and to practice to a click. Load-bearing claims re-verified by the orchestrator against the built site."
+        }
+      ],
+      "id": "BL-096",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "The pan-affordance fade tints the notes, so a bar reads as a decrescendo nobody wrote",
+      "evidence": [
+        "33 of the 40 rudiment staves need panning at 390px (min-widths 462/498/532/560/672 against a 330px frame). Worst is #17 Double Paradiddle: scrollWidth 688 against clientWidth 330, so 358px — 52% of the bar — is hidden, and ten of twenty-four sticking letters are visible at rest.",
+        "The affordance is a 28px background gradient at 24% of --notation-ink painted BEHIND the glyphs, so the last two or three noteheads and their sticking letters render visibly paler than the rest of the bar.",
+        "On a page about rudiments, notes getting quieter toward the end of a bar is a meaningful musical statement, and it is not one anybody made. The walker read the first stave as a decrescendo before working out it was a scroll hint.",
+        "The mechanism itself is properly built and should be kept: panned to the end the fade correctly disappears, via background-attachment: local, scroll."
+      ],
+      "acceptance": "the pan affordance never changes the apparent dynamic of a note — it sits beside or over the frame edge rather than tinting glyphs — and still self-cancels at the end of the scroll"
     }
   ]
 }
