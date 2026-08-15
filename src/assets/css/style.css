@@ -2212,9 +2212,18 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   text-transform: uppercase;
   color: var(--ink-soft);
   /* Text-only zoom, measured, and worse than the first version of this comment
-     claimed. HORIZONTALLY it is fine: at a 32px root the dock still renders two
-     rows, there is no sideways scroll at any width, and captions that outgrow
-     their control ellipsize ("VOLUME" → "VOL…") instead of widening the row.
+     claimed. HORIZONTALLY THE DOCK is fine: at a 32px root it still renders two
+     rows, and captions that outgrow their control ellipsize ("VOLUME" → "VOL…")
+     instead of widening the row.
+     THAT CLAIM USED TO BE WRITTEN AS "there is no sideways scroll at any width",
+     which was a statement about the PAGE that this block had no standing to
+     make, and it was false when it was written (BL-098). At the time, /metronome/
+     scrolled 18px sideways at 280px/@40 and the homepage 208px, and neither was
+     the dock's doing. The dock has since been checked properly rather than
+     asserted: across 810 measured cells it is not a culprit in a single one, so
+     it is exonerated by measurement instead of by comment. Page-level overflow
+     is now owned by SIDEWAYS SCROLL CONTAINMENT near the end of this sheet,
+     which is where the real offenders and their numbers live.
      VERTICALLY it degrades, because every offset in this stack is a fixed px
      (top: 2, the fields' 44px, the controls' 10/11px padding-top) while the type
      scales with the root:
@@ -2527,6 +2536,154 @@ html.transport-open { scroll-padding-bottom: calc(var(--transport-h) + 12px); }
   .transport__meter { order: 7; }
   .transport__vol { order: 8; }
 }
+
+/* ==========  SIDEWAYS SCROLL CONTAINMENT (roots 16 to 40)  ==========
+   BL-069 + BL-098. WCAG 1.4.4 asks that text scale to 200% without loss of
+   content or function, and 1.4.10 that content reflow to a 320px-equivalent
+   without a second scroll direction. Both failed here, on every page type, and
+   nothing in the build reported it: a page that scrolls sideways still builds,
+   still passes the metric gates, and still screenshots fine at a 16px root.
+
+   THE HEADING IS BOUNDED ON PURPOSE. This is verified from a 16px root to a
+   40px one, which covers 1.4.4's 200% (a 32px root) with room over it. It is
+   NOT a promise at any root whatsoever, and it is known to fail at 48px: 20 of
+   300 cells on the grid that found them, worst at
+   /lessons/independence-chapin-method/ 280px +46px on `a`, /metronome/ 280px
+   +40px and 301px +19px, / 280px +27px on span.ledger-row__min. That is filed
+   as its own backlog item rather than quietly implied to be handled here.
+   THOSE FIGURES WERE RE-MEASURED AGAINST THIS SHEET RATHER THAN CARRIED OVER.
+   An earlier draft of this paragraph quoted 10 cells and +23px on span.chip,
+   which were true of a draft of this block that no longer exists: dropping
+   .btn's flex-wrap reopened /metronome/ at this root, and moving .chip from
+   flex-wrap to min-width: 0 took independence-chapin from +23 to +46 and
+   removed span.chip as a culprit anywhere. A number describing a version of the
+   code you are not looking at is worth nothing, which is the whole complaint
+   behind this package. The last comment in this file to make an unqualified
+   claim about sideways scroll is the one at TRANSPORT DOCK CAPTIONS that this
+   package had to correct.
+
+   MEASURED BEFORE, in headless Edge, documentElement.scrollWidth vs
+   clientWidth, 10 widths x 5 root sizes on 5 page types (250 cells) plus 7
+   widths x 4 roots on 20 more pages (560 cells). 108 of those 810 cells
+   scrolled sideways: 26 of the 250 and 82 of the 560. Roots 16 and 20 were
+   clean everywhere; every failure was at a root of 24px or more, i.e. exactly
+   the readers who need the text big.
+   Worst cells: the homepage +208px at 280/@40, /genres/jazz-fusion/ +179px,
+   /genres/latin/ +140px, a lesson page +91px, /rudiments/ +86px.
+   AFTER: 0 of 810.
+
+   THREE DISTINCT MECHANISMS, and they need three different answers. Reaching
+   for min-width: 0 everywhere fixes only the first.
+
+   1. A FLEX OR GRID ITEM'S AUTOMATIC MINIMUM SIZE. min-width's initial value
+      is auto, and on a flex/grid item auto resolves to the item's min-content
+      size — so the item refuses to shrink past its longest word and shoves the
+      track, the row and the page out with it. overflow-wrap: break-word does
+      NOT rescue this: CSS Text 3 is explicit that break opportunities it
+      introduces are not considered when calculating min-content, which is why
+      .ledger__title had break-word already (it is an h2) and still pushed the
+      homepage 208px sideways. min-width: 0 is the fix, and only here.
+   2. A BOX THAT FITS WITH TEXT THAT DOES NOT. .ledger-row__title already had
+      min-width: 0, so its box was sized correctly and the WORDS hung out of it
+      anyway — "Superimposition", "Independence", "Post-Bop". Nothing about the
+      box is wrong; the text needs permission to break. That is half A below.
+   3. A NOWRAP RUN. white-space: nowrap outranks both of the above: the box can
+      shrink and the text may break, but a run that is forbidden to wrap simply
+      cannot. Those items are named individually in half C, because dropping
+      nowrap is a design decision each time and not a sweep.
+
+   THE DEFAULT TEXT SIZE DOES NOT MOVE. Measured, and measured on a grid stated
+   here so the next reader can judge whether it was dense enough:
+     roots 16 / 18 / 20 / 22 / 24
+     x widths 280 to 472 in steps of 16, plus 480 itself — 14 widths, because
+       480 does not land on a 16px step from 280 and it is a breakpoint
+     x all five page types                                        = 350 cells
+     plus six wide cells on each page type: 560/720/1024/1280 at a 16px root,
+       and 1280 and 390 at a 20px root                            =  30 cells
+                                                                  = 380 cells
+     and roughly 700,000 element rects, each compared against the same page with
+     this whole block reverted. THE ARITHMETIC IS SPELLED OUT because an earlier
+     draft wrote "280 to 480 in steps of 16 ... plus four wide cells", which
+     sums to 345 and not 380, and left two of the wide cells undisclosed. A
+     stated grid that a reader cannot add up is not a stated grid.
+   RESULT: zero changed boxes at roots 16, 18 and 20 — the default and the two
+   steps above it. Five cells change, all at roots 22 and 24 and all at 312px or
+   narrower, and each one is this block doing its job rather than disturbing a
+   layout that was fine:
+     / 280@24 (1335 boxes) and / 296@24 (1335) — both were SCROLLING SIDEWAYS
+       before, by 19px and 3px. The head is taller now because the kicker wraps.
+     / 280@22 (485) and / 312@24 (1) — .ledger__title measured 259.25px inside a
+       248px content box, and 283px inside 280px. It stayed on screen, so no
+       gate saw it, but it was bleeding into the container's padding. Now 248
+       and 280: contained.
+     /rudiments/ 280@24 (8) — four chips change width by at most 1.25px. Nothing
+       below them reflows.
+   THE GRID IS THIS DENSE FOR A REASON. An earlier version of this block carried
+   `flex-wrap: wrap` on .btn, and the first parity grid sampled 320px and 390px
+   at a 16px root and reported zero. The regression it missed starts at 312px
+   and re-laid the site's primary call to action. A parity claim is worth exactly
+   as much as the spacing of the grid behind it. */
+
+/* Half A — the text half. Safe to apply broadly for the reason above. The
+   wordmark is exempt without needing an exception: .site-logo__wm is nowrap,
+   and nowrap suppresses the opportunity this introduces. */
+body { overflow-wrap: break-word; }
+
+/* Half B — flex/grid items whose min-content floor was the offender. Every
+   selector here was OBSERVED overflowing in the sweep; none is speculative and
+   none is here for symmetry. .listening__eyebrow was, until it was tested:
+   it sat beside .listening__count on the assumption that a flex sibling needed
+   the same treatment, removing it changed nothing across all 810 cells, so it
+   is gone. Anything added here later gets the same test. */
+.ledger__title,                 /* homepage chapter head — the worst offender */
+.level-block__title,            /* genre page, same geometry */
+.rud-family__title,             /* /rudiments/, same geometry */
+.listening__count,              /* "2 RECORDS", mono and tracked, on a lesson */
+.lesson-row a,
+.lesson-row__title,             /* "Where Next" cards */
+.prereqs__label,                /* "Prerequisites" — one 13-character word */
+/* Covers .family-index__chip too: every one of those also carries .chip
+   (rudiments.njk:21), so naming both would be one selector doing nothing. */
+.chip { min-width: 0; }
+
+/* A shrink-to-fit box (an inline-flex button in normal flow) floors at its own
+   min-content width, and min-width: 0 does not lower that floor. Capping the
+   box is what works, and ONE cell proves it is needed: with this declaration
+   removed, /metronome/ at 280px/@40 overflows by 17.7px on
+   button#metronome-open, and nothing else in the 810 moves.
+   It is exactly one declaration because the other one was tested and dropped.
+   `flex-wrap: wrap` shipped here for one review round on the theory that the
+   trailing arrow needed somewhere to go; it bought nothing (still 0 of 810
+   without it) and it COST the default text size, which BL-069 forbids outright:
+   it re-laid the homepage hero CTA and this button at roots 16 to 24 — at
+   280px/@16 the primary CTA went 248x75.5 to 248x108.25 and the arrow glyph
+   was orphaned alone on a centered second line, 1701 boxes changed. The parity
+   grid that missed it sampled 320px and 390px at a 16px root; the regression
+   starts at 312px. A guard is only as good as the grid it was run on. */
+.btn { max-width: 100%; }
+
+/* Half C — the nowrap runs, named one at a time.
+   .ledger__kicker: "Chapter 10 of 19" is 16 tracked uppercase mono characters,
+   268px at a 32px root against a 248px content box, and nowrap meant it could
+   never be anything else. It now breaks between words at that extreme. At the
+   default size it measures ~134px on a line that has ~248px, so it does not
+   wrap and the head does not move: zero boxes changed at roots 16, 18 and 20
+   on the dense grid above. It DOES wrap from a 24px root at 280 and 296px,
+   which takes the chapter head from 122px tall to 169px — and both of those
+   cells were scrolling sideways before, by 19px and 3px, so the taller head is
+   the trade rather than a regression. An earlier draft of this comment claimed
+   the head was unchanged full stop; that was true of this element's own
+   geometry and false of the head's height, which is a different claim.
+   .ledger-row__meta: the subtler one, and the reason `1fr` is not a promise of
+   flexibility. `1fr` is shorthand for minmax(auto, 1fr), so the track's floor
+   is the largest min-content contribution among its items — and this item still
+   carried min-width: auto over two nowrap children. Measured at 280px/@40 the
+   row's tracks resolved to 61.19px + 12px gap + 197.02px = 278px inside a 248px
+   box, with the 197.02px being this item's min-content rather than its 1fr
+   share of 166.8px. min-width: 0 lowers the floor; flex-wrap lets the mark drop
+   under the minutes rather than spill. */
+.ledger__kicker { white-space: normal; min-width: 0; }
+.ledger-row__meta { min-width: 0; flex-wrap: wrap; }
 
 /* =====================  RESPONSIVE  ===================== */
 /* The lesson map becomes a closed-by-default disclosure (system.md §6.3).

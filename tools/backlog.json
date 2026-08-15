@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 72,
-    "next_dimension": "ui",
+    "iteration": 73,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 117,
+    "next_id": 118,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -1271,11 +1271,26 @@
         "ITERATION 69 MEASUREMENT, from a 648-cell sweep during the header work: the header contributes ZERO to page overflow at every overflowing cell, so the offenders are content. Named with numbers: / at 280px with a 24px root overflows 19px and the culprit is h2.ledger__title (Independence Systems); at 320px/32px root it is 73px; at 320px/40px root 168px. On /lessons/paradiddle/ at 280px/32px root it is 20px from .listening__count and .lesson-row a. On /rudiments/ at 280px/32px root, 35px. All of it is long unbreakable headings and meta strings, not chrome."
       ],
       "acceptance": "documentElement.scrollWidth === clientWidth on the homepage at 320/360/390/480 with root font sizes 16, 24 and 32px, in both themes; no change to ledger layout at the default text size; measured, not reasoned",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed iter 49."
+        "Filed iter 49.",
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "Shipped with BL-098 — one defect class, one package. The diagnosis in the title was right but incomplete: .ledger__title IS a flex item floored at min-content, and min-width: 0 is its fix, but that mechanism accounts for only part of the corpus. Two more were found by measurement: a box that fits with text that does not (.ledger-row__title already had min-width: 0 and the WORDS hung out, needing break-word), and nowrap runs that outrank both (.ledger__kicker, .ledger-row__meta). Acceptance met with margin: the homepage is contained at 320/360/390/480 at roots 16/24/32 and far beyond — 0 of 810 cells across 5 page types, and 0 of 2700 on the critic independent grid spanning 20 pages, widths 280 to 1599 including off-step values, roots 16 to 40 including off-step values, in both themes forced explicitly."
+        },
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "THE ADVERSARIAL PASS BLOCKED THIS ONCE, ON THE ONE CLAUSE OF THE ACCEPTANCE I HAD CALLED LOAD-BEARING. The first version shipped .btn { flex-wrap: wrap }, which re-laid the homepage hero CTA and the /metronome/ CTA at roots 16 to 24 on widths 280 to 414 — cells with no overflow before and none after. At 280px/@16, the literal default text size, the primary CTA went 248x75.5 to 248x108.25 and the arrow glyph was orphaned alone on a centered second line; 1701 boxes moved. The builder parity grid had sampled 320 and 390 at a 16px root and reported zero changed boxes, and the regression starts at 312px — the claim was an artifact of the sampling, 8px outside the grid. It was also unnecessary: with flex-wrap removed the sweep is still 0 of 810. Dropped. The replacement grid is roots 16/18/20/22/24 x widths 280 to 480 in steps of 16 x five page types = 380 cells and 695,961 box observations, and the comment now states that grid so the next reader can judge its density instead of trusting the word zero."
+        },
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "TWO FURTHER CORRECTIONS THE BUILDER FOUND BY APPLYING THE CRITIC STANDARD TO ITSELF. .chip { flex-wrap: wrap } was the wrong mechanism — the culprit reports min-width: auto, so it was mechanism 1 all along; .chip { min-width: 0 } holds the same 0 of 810 and cut the /rudiments/ default-size parity delta from 6736 changed boxes to 8, and it subsumes .family-index__chip because every one of those also carries .chip. And .listening__eyebrow was dead weight, added by symmetry with .listening__count without ever having been observed to overflow; removing it changed nothing across all 810, so it is gone and the comment says why, so nobody re-adds it. Against that, max-width: 100% on .btn was challenged as inert and survived: with it removed, /metronome/ at 280px/@40 overflows by 17.7px and nothing else in the 810 moves. The comment cites that cell rather than asserting the declaration is needed."
+        }
       ]
     },
     {
@@ -2097,7 +2112,7 @@
         "ITERATION 69: the header is exonerated. A 648-cell sweep (54 widths x 12 root sizes) found headerCulprits = 0 at every overflowing cell, so the remaining sideways scroll at raised text is entirely content: h2.ledger__title on the homepage, .listening__count and .lesson-row a on lesson pages, and the rudiments cards. BL-064 fixed three header-caused overflow cells that no gate had caught; what is left belongs here and to BL-069."
       ],
       "acceptance": "no page scrolls sideways at a 32px root at any width from 280 to 1600, or the CSS comment is corrected to state exactly which widths and roots do overflow and by how much; every offender is identified by measurement rather than assumed",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -2105,6 +2120,21 @@
           "iteration": 62,
           "date": "2026-08-14",
           "note": "Filed from a measurement taken while proving something else. The armed-vs-idle control is what makes it trustworthy: the overflow is identical in both states, so BL-091 did not cause it."
+        },
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "Closed with BL-069. Both halves of the acceptance are met: no page scrolls sideways at a 32px root at any width in the range (verified to 1599px, and to a 40px root, on 2700 cells), AND the false comment is corrected. The comment was not at the line I briefed — it is in the TRANSPORT DOCK CAPTIONS block, and it claimed there is no sideways scroll at any width, which was a statement about the PAGE that the dock block had no standing to make and which was false when written: /metronome/ scrolled 18px at 280/@40 and the homepage 208px, neither of them the dock doing. The dock is now exonerated by measurement instead of by assertion — not a culprit in a single one of the 810 cells — and page-level overflow is owned by a new SIDEWAYS SCROLL CONTAINMENT block that carries the real numbers."
+        },
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "THE ITEM PUNISHED ITS OWN FIX TWICE, WHICH IS THE POINT OF IT. First: the new block asserted in capitals that the default text size does not move, on a grid too sparse to have caught the .btn regression it was hiding — the same class of unbacked in-repo claim this item exists to remove, re-introduced inside the block closing it. Second: the block said 104 of 810 cells overflowed. Independent re-measurement gives 26 core + 82 broad = 108, and the builder own sweep artifacts on disk give the same 26 and 82; 104 was not reproducible from anything. Corrected, with the split stated. The section heading is now bounded as SIDEWAYS SCROLL CONTAINMENT (roots 16 to 40) rather than reading as an unqualified promise, and the 48px failure is named in-comment as filed elsewhere rather than quietly implied to be handled."
+        },
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "AND A THIRD TIME, ON RE-REVIEW OF THE REWORK. The corrected block quoted the root-48 failures as 10 cells with independence-chapin at +23px on span.chip — the critic own numbers from the artifact it had reviewed BEFORE the rework. Two of the four rule changes moved them: dropping .btn flex-wrap reopened /metronome/ at that root, and moving .chip to min-width: 0 took independence-chapin to +46px on `a` and removed span.chip as a culprit anywhere. Re-measured against the shipped sheet it is 20 of 300, and the comment now says so and says why the old figures were wrong. Two smaller ones fixed with it: the stated grid did not sum to its stated total (280 to 480 in steps of 16 is 13 widths, not 14, and two wide cells were undisclosed — the arithmetic is now spelled out to 350 + 30), and three box counts were off by one from a sentinel key in the builder map (1336/1336/486 against real HEAD is 1335/1335/485). The 695,961 figure could not be independently verified and is now stated as roughly 700,000. Three rounds, three classes of unbacked in-repo number, all in the package written to end unbacked in-repo numbers — recorded because that is the honest lesson of this item and not a footnote to it."
         }
       ]
     },
@@ -2576,6 +2606,32 @@
           "iteration": 72,
           "date": "2026-08-15",
           "note": "Filed at the builder request — it could not edit the backlog and flagged it twice rather than quietly leaving an exemption."
+        }
+      ]
+    },
+    {
+      "id": "BL-117",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Sideways-scroll containment holds to a 40px root and breaks at 48, in 20 measured cells",
+      "evidence": [
+        "Found by the adversarial pass on BL-069 + BL-098 (iteration 73), in a 2700-cell sweep: 20 pages x 15 widths (280-1599, including off-step 301/347/455/561/777) x 9 roots (including off-step 18/29/36), both themes forced explicitly.",
+        "Roots 16 through 40: 0 of 2700 overflow, in both themes. Root 48: 20 of 300.",
+        "The cells, RE-MEASURED AGAINST THE SHIPPED SHEET rather than the draft that first surfaced them: /lessons/independence-chapin-method/ 280 +46px, culprit a; /metronome/ 280 +40px and 301 +19px; / 280 +27px, culprit span.ledger-row__min; plus six +2px lesson cells and the /genres/jazz-fusion/ and /genres/metal/ pages in the same shape as /.",
+        "THE FIRST DRAFT OF THIS ITEM SAID 10 CELLS AND +23px ON span.chip AND WAS WRONG, which is worth recording because of how it happened. Those figures were measured against a version of the fix that did not ship. Two of the four rules changed after: dropping .btn flex-wrap reopened /metronome/ at this root, and moving .chip from flex-wrap to min-width: 0 took independence-chapin from +23 to +46 and removed span.chip as a culprit anywhere. The critic caught its own stale numbers on re-review. Re-measure before trusting anything here.",
+        "DELIBERATELY OUT OF SCOPE at iteration 73. WCAG 1.4.4 asks for 200% text, which is a 32px root; 48px is 300%. Both acceptances were written to 32px and both are met with margin. The builder was told to hand this back rather than widen scope to chase it, and the SIDEWAYS SCROLL CONTAINMENT comment is bounded to roots 16-40 and names these failures rather than implying they are handled.",
+        "The /metronome/ cell was the interesting one at +11px with no nameable culprit; at +40px it still has none, so the detector has a blind spot rather than the page being fine. Whoever takes this should fix the detector first.",
+        "ALSO INSIDE THE PROMISED BAND, and the reason this is P3 rather than P4: at 280px/@40 — a root the containment comment does claim — /metronome/ button#metronome-open is capped at 248px while its content measures 258px, so the trailing arrow glyph paints on the page ground past the pill edge, dark on plaster. No sideways scroll, and no spill at a 32px root, so it clears both acceptances. It is the price of dropping .btn flex-wrap, which was the right trade because that declaration broke the DEFAULT text size, but it is a real visual artifact at 250% and it belongs here."
+      ],
+      "acceptance": "either documentElement.scrollWidth === clientWidth at a 48px root across the same 2700-cell grid, or the SIDEWAYS SCROLL CONTAINMENT comment states the exact root at which containment stops and why that bound was chosen; the /metronome/ no-culprit cell is explained rather than left unnamed; and the arrow glyph on button#metronome-open no longer paints outside the pill at 280px/@40",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 73,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator from the adversarial pass, not by the builder — the builder was explicitly told not to chase it. Recorded with the culprit selectors already named so the next attempt starts from measurement rather than a sweep."
         }
       ]
     }
