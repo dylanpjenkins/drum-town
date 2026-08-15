@@ -4956,10 +4956,10 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Snare moves: still on the <em>&amp; of 2</em>, but now on the <em>&amp; of 3</em> instead of beat 4. The snare and the hat-foot no longer line up — that free assist is gone. This is where four-way independence really begins; the snare hand has to find its own time, not borrow from the hat-foot's. Drop 5 BPM if anything wobbles."
+        tip: "Snare moves: still on <em>2</em>, but now on the <em>&amp; of 3</em> instead of beat 4. Half the free assist is gone — snare and hat-foot still meet on 2, but beat 4 is the hat-foot alone. This is where four-way independence really begins; the snare hand has to find its own time, not borrow from the hat-foot's. Drop 5 BPM if anything wobbles."
       },
       {
-        title: "4 — Variation: Snare on the \"& of 4\"",
+        title: "4 — Variation: Snare Off Both Backbeats",
         meta: "4/4 · ♩ = 80",
         bpm: 80,
         timeSignature: "4/4",
@@ -4968,12 +4968,12 @@ module.exports = {
         hands: [
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
+          { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // & of 2
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }
+          { keys: ['g/5/x2', 'c/5'], duration: '8' }    // & of 4
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -4992,14 +4992,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // 1
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // & of 2
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // 3
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }
+          { keys: ['g/5/x2', 'c/5'], duration: '8' }    // & of 4
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5008,7 +5008,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Four snare hits walking the bar: <em>1</em>, <em>&amp; of 2</em>, <em>3</em>, <em>&amp; of 4</em> — landing with the kick on 1 and 3, alone on the &'s. Pass check: two minutes without slowing down means you have working four-way independence."
+        tip: "Snare on <em>1</em>, the <em>&amp; of 2</em>, <em>3</em> and the <em>&amp; of 4</em> — four hits walking the bar, landing with the kick on 1 and 3, alone on the &'s. Pass check: two minutes without slowing down means you have working four-way independence."
       }
     ],
     listening: [
@@ -10034,12 +10034,12 @@ module.exports = {
       <p>So far, every jazz pattern in this curriculum has STATED the ride pattern — every quarter and every skip note in their place, the pulse explicit. <strong>Broken time</strong> is the next move: the ride pattern fragments, leaves space, and is implied rather than stated. The pulse is still there — the bassist and the hat-foot keep it — but the ride no longer plays it on every beat.</p>
       <p>Broken time is what most modern jazz drummers do most of the time. Brian Blade, Bill Stewart, Eric Harland, Marcus Gilmore — when they're not doing something more elaborate, they're playing broken time. It's the contemporary default, the way medium swing was the default in 1960. If you understand it, you understand modern jazz drumming; if you can't do it, your playing will sound dated regardless of how clean your technique is.</p>
       <h2 class="section-label">The Logic of Implication</h2>
-      <p>If the ride pattern is the explicit statement of jazz time, broken time is what happens when you start removing parts of that statement. Pull out the quarter on beat 2 — but the hat-foot still hits beat 2, so the listener still feels beat 2. Pull out the quarter on beat 3 — same logic. Now your ride is only playing the skip-notes (the swung 8ths), and the time is still completely intact because the bass and the hat-foot are holding it.</p>
+      <p>If the ride pattern is the explicit statement of jazz time, broken time is what happens when you start removing parts of that statement. The ride pattern only has two quarters in it, on beats 1 and 3. Pull out the one on beat 3 and the bar still reads as jazz, because the hat-foot is marking 2 and 4 underneath and the bass is walking through. Pull out the one on beat 1 as well and the ride has stopped stating any downbeat at all. Take away the on-the-beat 8ths too and you are left with nothing but the swung skip notes, and the time is <em>still</em> intact, because the bass and the hat-foot never stopped holding it.</p>
       <p>This is harder than it sounds, because removing notes from a memorized pattern goes against years of muscle memory. The exercises below build the skill incrementally: first remove one note, then two, then everything but the skip-notes. The hat-foot on 2 and 4 stays constant the entire time — it's the anchor that makes the implication possible.</p>
     `,
     exercises: [
       {
-        title: "1 — Ride Pattern with Beat 2 Removed",
+        title: "1 — Ride Pattern with Beat 3 Removed",
         meta: "4/4 · swing 8ths · ♩ = 140",
         bpm: 140,
         timeSignature: "4/4",
@@ -10093,15 +10093,17 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          // Beat 1: rest
-          { rest: true, duration: 'q', visible: true },
-          // & of 1: skip note
-          { keys: ['f/5/x2'], duration: '8' },
-          { keys: ['f/5/x2'], duration: '8' },
-          // Beat 3: rest
-          { rest: true, duration: 'q', visible: true },
-          { keys: ['f/5/x2'], duration: '8' },
-          { keys: ['f/5/x2'], duration: '8' }
+          // Skip notes ONLY — the second 8th of each pair. jazz-ride-pattern Ex 2
+          // defines the terms: "the first 8th is on the beat (ding), the second is
+          // the swung skip (a)". So the on-the-beat 8ths on 2 and 4 go too, which
+          // is what makes this the third step of the build and not a copy of Ex 2.
+          // 1 + .5 + .5 + 1 + .5 + .5 = 4.
+          { rest: true, duration: 'q', visible: true },   // 1
+          { rest: true, duration: '8', visible: true },   // 2
+          { keys: ['f/5/x2'], duration: '8' },            // & of 2 — skip note
+          { rest: true, duration: 'q', visible: true },   // 3
+          { rest: true, duration: '8', visible: true },   // 4
+          { keys: ['f/5/x2'], duration: '8' }             // & of 4 — skip note
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -10109,7 +10111,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "The ride is down to two swung 8th pairs — the <em>&amp; of 1</em> into 2, and the <em>&amp; of 3</em> into 4. Every quarter is gone. The stuttered, off-balance result is the bedrock of broken time; the hat-foot is what keeps a listener oriented, so it cannot waver here."
+        tip: "Ride on the <em>&amp; of 2</em> and the <em>&amp; of 4</em> only — the two swung skips, with every quarter and every on-the-beat 8th now gone. Nothing of yours lands on a beat at all. The stuttered, off-balance result is the bedrock of broken time; the hat-foot is what keeps a listener oriented, so it cannot waver here."
       },
       {
         title: "4 — Broken-Time Bar Responding to a Phantom Soloist",
@@ -10145,7 +10147,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Bar 1: ride on the <em>&amp; of 1</em>, snare on the <em>&amp; of 2</em>, then nothing — the soloist is holding a long note and you're just acknowledging it. Bar 2: the full ride pattern returns. That empty-bar / full-bar alternation is the conversational logic of broken time."
+        tip: "Bar 1: one ride note on <em>beat 2</em>, the snare on the swung 8th right after it, then nothing — the soloist is holding a long note and you're just acknowledging it. Bar 2: the full ride pattern returns. That empty-bar / full-bar alternation is the conversational logic of broken time."
       }
     ],
     listening: [
@@ -12175,7 +12177,7 @@ module.exports = {
           { keys: ['f/4'], duration: 'q' }, { keys: ['d/4/x2'], duration: 'q' }, { rest: true, duration: 'q' }, { keys: ['d/4/x2'], duration: 'q' },
           { rest: true, duration: 'q' }, { keys: ['d/4/x2'], duration: 'q' }, { rest: true, duration: 'q' }, { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "<em>Anchor figure structure (paraphrased from the recurring-fragment device in the Blade phrases):</em> the snare lands on the &amp;-of-3 in bars 1 and 3 — that's the anchor. Bars 2 and 4 are improvised (varied snare placements). The repeating &amp;-of-3 hit gives the phrase an internal logic that the listener can track even though the comping is otherwise free."
+        tip: "<em>Anchor figure structure (paraphrased from the recurring-fragment device in the Blade phrases):</em> the snare lands on beat 4 in bars 1 and 3 — that's the anchor. Bars 2 and 4 are improvised (varied snare placements). The repeating beat-4 hit gives the phrase an internal logic that the listener can track even though the comping is otherwise free."
       },
       {
         title: "2 — Phrase Study B: Flurry-and-Resolution (paraphrased)",
@@ -13360,7 +13362,7 @@ module.exports = {
           { rest: true, duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Gadd-style funky mozambique. Kick on 1, 2, and the <em>&-of-3</em> — that &-of-3 is the funk-pocket addition that makes the pattern crackle. Snare adds a hit on beat 3 plus the &-of-3, almost like a paradiddle accent. The &-of-2 snare accent is still the loudest. <em>Late in the Evening</em>, by Paul Simon — if you have it on hand, play it once and try to match Gadd's pattern."
+        tip: "Gadd-style funky mozambique. Kick on 1, 2, and the <em>&-of-3</em> — that &-of-3 is the funk-pocket addition that makes the pattern crackle. Snare adds a hit on the &-of-3 as well, landing right on top of that new kick, almost like a paradiddle accent. The &-of-2 snare accent is still the loudest. <em>Late in the Evening</em>, by Paul Simon — if you have it on hand, play it once and try to match Gadd's pattern."
       },
       {
         title: "3 — Mozambique with Bell Variation",
@@ -17879,7 +17881,7 @@ module.exports = {
           { rest: true, duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "Tresillo-flavoured kick: 1, the <em>a</em> of 1, 3, the <em>a</em> of 3 — a 3+3+2 shape that's the rhythmic skeleton of countless Caribbean and New Orleans grooves. Snare lands on the <em>e</em> of 2, beat 2, the <em>a</em> of 3, and 4 — a busy, almost-rim-popping snare line. Loose feel, slightly behind, ghost the non-backbeat snares heavily."
+        tip: "Tresillo-flavoured kick: 1, the <em>a</em> of 1, 3, the <em>a</em> of 3 — a 3+3+2 shape that's the rhythmic skeleton of countless Caribbean and New Orleans grooves. Snare lands on the <em>&amp;</em> of 1, beat 2, the <em>a</em> of 2, the <em>&amp;</em> of 3, and 4 — a busy, almost-rim-popping snare line. Loose feel, slightly behind, ghost the non-backbeat snares heavily."
       },
       {
         title: "2 — Broken Backbeat (Snare on 4 Only)",
@@ -21118,12 +21120,14 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' }
         ],
         feet: [
-          { keys: ['f/4'], duration: 'q' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: '8' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '8' }
+          // Kick on 1, the & of 3 and the & of 4 — the tip's list, and the same
+          // snare-on-3 / kick-on-the-&-of-3 pocket Ex 1 says is the whole point.
+          { keys: ['f/4'], duration: 'q' },   // 1
+          { rest: true, duration: 'q' },      // 2
+          { rest: true, duration: '8' },      // 3 (the snare's beat, kick stays off it)
+          { keys: ['f/4'], duration: '8' },   // & of 3
+          { rest: true, duration: '8' },      // 4
+          { keys: ['f/4'], duration: '8' }    // & of 4
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
         tip: "16th-note hat, snare on 3, floor-tom 808 on the 14th 16th of the bar, kick on 1, the &amp; of 3, and the &amp; of 4 to grab the 808. At ♩=72 (144 in trap-talk) the test is feel: busy hat or not, the bar has to sit half-time."
@@ -22242,24 +22246,26 @@ module.exports = {
         hands: [
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // snare on 3 (half-time backbeat)
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' }
         ],
         feet: [
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: '8' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { keys: ['f/4'], duration: '8' }
+          // 808 kick: 1, & of 2, & of 3 (the anticipation), 4. Eight 8ths = 4.
+          { keys: ['f/4'], duration: '8' },   // 1
+          { rest: true, duration: '8' },      // & of 1
+          { rest: true, duration: '8' },      // 2
+          { keys: ['f/4'], duration: '8' },   // & of 2
+          { rest: true, duration: '8' },      // 3
+          { keys: ['f/4'], duration: '8' },   // & of 3
+          { keys: ['f/4'], duration: '8' },   // 4
+          { rest: true, duration: '8' }       // & of 4
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "808 kick pattern voiced on the bass drum only. Notes on 1, &-of-2, &-of-3 (anticipation), 4. <strong>The snare is on 3</strong> — the half-time backbeat. This sparse syncopated kick line is the shape; in exercise 2 we'll add the floor tom as the 808-sub layer. Practice this until the kick pattern is locked. The kick must <em>not</em> drift toward 1-and-3 on autopilot — every 808 hit lands deliberately."
+        tip: "808 kick pattern voiced on the bass drum only. Kick on 1, the &-of-2, the &-of-3 and 4. That &-of-3 is the anticipation. <strong>The snare is on 3</strong> — the half-time backbeat. This sparse syncopated kick line is the shape; in exercise 2 we'll add the floor tom as the 808-sub layer. Practice this until the kick pattern is locked. The kick must <em>not</em> drift toward 1-and-3 on autopilot — every 808 hit lands deliberately."
       },
       {
         title: "2 — Floor-Tom-as-808 Sub Layer",
@@ -22269,23 +22275,27 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
+          // Same hat and snare as Ex 1, with the floor-tom 808 (a/4) stacked on
+          // every kick note: 1, the & of 2, the & of 3, 4.
+          { keys: ['g/5/x2', 'a/4'], duration: '8' },   // 1        + tom
           { keys: ['g/5/x2'], duration: '8' },
           { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['g/5/x2', 'a/4'], duration: '8' },   // & of 2   + tom
+          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // snare on 3 (half-time backbeat)
+          { keys: ['g/5/x2', 'a/4'], duration: '8' },   // & of 3   + tom
+          { keys: ['g/5/x2', 'a/4'], duration: '8' },   // 4        + tom
           { keys: ['g/5/x2'], duration: '8' }
         ],
         feet: [
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: '8' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { keys: ['f/4'], duration: '8' }
+          // Identical 808 kick line to Ex 1 — the tom above doubles it note for note.
+          { keys: ['f/4'], duration: '8' },   // 1
+          { rest: true, duration: '8' },      // & of 1
+          { rest: true, duration: '8' },      // 2
+          { keys: ['f/4'], duration: '8' },   // & of 2
+          { rest: true, duration: '8' },      // 3
+          { keys: ['f/4'], duration: '8' },   // & of 3
+          { keys: ['f/4'], duration: '8' },   // 4
+          { rest: true, duration: '8' }       // & of 4
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
         tip: "The floor tom doubles every kick note, right hand and right foot landing as one — that alignment is the whole challenge, and dropping to ♩=55 to get it clean is legitimate. Locked, the pair reads as a single <em>808</em>: transient on top, sub underneath. Flammed, it reads as two drums."
@@ -22316,13 +22326,15 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' }
         ],
         feet: [
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: '8' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { keys: ['f/4'], duration: '8' }
+          // Same 808 kick line as Ex 1 and 2: 1, & of 2, & of 3, 4.
+          { keys: ['f/4'], duration: '8' },   // 1
+          { rest: true, duration: '8' },      // & of 1
+          { rest: true, duration: '8' },      // 2
+          { keys: ['f/4'], duration: '8' },   // & of 2
+          { rest: true, duration: '8' },      // 3
+          { keys: ['f/4'], duration: '8' },   // & of 3
+          { keys: ['f/4'], duration: '8' },   // 4
+          { rest: true, duration: '8' }       // & of 4
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
         tip: "The 16th hat is the engine — if it stumbles, the groove dies. Build in layers: hat alone, then the snare on 3, then the kick pattern. The likely fail point is the &-of-3, where a kick lands mid-roll and the temptation is to drop a hat note. Don't."
@@ -22347,22 +22359,27 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
           { keys: ['g/5/x2'], duration: '16' },
+          // Beat 4: two plain 16ths, then the four-32nd roll ON the & of 4, where
+          // the tip puts it — it has to sit at the end of the bar to signal the repeat.
+          { keys: ['g/5/x2'], duration: '16' },   // 4
+          { keys: ['g/5/x2'], duration: '16' },   // e of 4
+          { keys: ['g/5/x2'], duration: '32' },   // & of 4 — roll starts
           { keys: ['g/5/x2'], duration: '32' },
           { keys: ['g/5/x2'], duration: '32' },
-          { keys: ['g/5/x2'], duration: '32' },
-          { keys: ['g/5/x2'], duration: '32' },
-          { keys: ['g/5/x2'], duration: '16' },
-          { keys: ['g/5/x2'], duration: '16' }
+          { keys: ['g/5/x2'], duration: '32' }
         ],
         feet: [
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '16' },
-          { rest: true, duration: '16' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { keys: ['f/4'], duration: '8' }
+          // Busy 808 line: 1, the 16th syncopation on 2, the & of 2, the & of 3,
+          // the & of 4. .5+.5+.25+.25+.5+.5+.5+.5+.5 = 4.
+          { keys: ['f/4'], duration: '8' },    // 1
+          { rest: true, duration: '8' },       // & of 1
+          { keys: ['f/4'], duration: '16' },   // 2 (the 16th syncopation)
+          { rest: true, duration: '16' },      // e of 2
+          { keys: ['f/4'], duration: '8' },    // & of 2
+          { rest: true, duration: '8' },       // 3
+          { keys: ['f/4'], duration: '8' },    // & of 3
+          { rest: true, duration: '8' },       // 4
+          { keys: ['f/4'], duration: '8' }     // & of 4
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16, 32, 32, 32, 32, 16]],
         tip: "The rolling-hat gesture on the &-of-4 — 32nds, sticking R-L-R-L — is the hard part; start at ♩=50 and creep up. Around it: snare on 3 and the busy kick line (1, &-of-2, the 16th syncopation, &-of-3, &-of-4). The roll signals the section repeat, so it can't smear."
@@ -23052,12 +23069,15 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '32' }
         ],
         feet: [
-          { keys: ['f/4'], duration: 'q' },
-          { rest: true, duration: '8' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4', 'a/4'], duration: '8' },
-          { keys: ['f/4', 'a/4'], duration: '8' }
+          // Kick on 1, the & of 2, the & of 3 and the & of 4, exactly as the tip
+          // says; the floor-tom-808 doubles the last two. 1 + 4x0.5 + ... = 4.
+          { keys: ['f/4'], duration: 'q' },          // 1
+          { rest: true, duration: '8' },             // 2
+          { keys: ['f/4'], duration: '8' },          // & of 2
+          { rest: true, duration: '8' },             // 3
+          { keys: ['f/4', 'a/4'], duration: '8' },   // & of 3
+          { rest: true, duration: '8' },             // 4
+          { keys: ['f/4', 'a/4'], duration: '8' }    // & of 4
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16, 32, 32, 32, 32, 32, 32, 32, 32]],
         tip: "Working modern production bar. Hat 16ths through, then a 32nd-roll on beat 4 (eight even 32nds, sticking R-L alternating). Snare on 3. Kick on 1, &-of-2, &-of-3, &-of-4 — and the &-of-3 and &-of-4 kicks have a floor-tom-808 doubled in (kick + floor tom together = trap sub voice). <strong>The 32nd hat-roll on beat 4 is the producer signature</strong>: it is the gesture that says 'section change next bar'. Practice the roll alone first."
@@ -23545,12 +23565,13 @@ module.exports = {
           { keys: ['g/5/x2'], duration: '8' }
         ],
         feet: [
-          { keys: ['f/4'], duration: 'q' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: '8' },
-          { keys: ['f/4'], duration: '8' },
-          { rest: true, duration: 'q' },
-          { keys: ['f/4'], duration: 'q' }
+          // Kick on 1, the & of 2, 3 and 5 — the tip's list. 1 + .5 + .5 + 1 + 1 + 1 = 5.
+          { keys: ['f/4'], duration: 'q' },   // 1
+          { rest: true, duration: '8' },      // 2
+          { keys: ['f/4'], duration: '8' },   // & of 2
+          { keys: ['f/4'], duration: 'q' },   // 3
+          { rest: true, duration: 'q' },      // 4
+          { keys: ['f/4'], duration: 'q' }    // 5
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8], [2, 8]],
         tip: "Feel the bar as <em>2 + 3</em>, snares on positions 2 and 4, kick on 1, the &-of-2, 3, and 5. The test is musicality, not arithmetic: sing any melody over it while you play. If the tune feels bolted on, the five isn't natural yet."
@@ -26469,7 +26490,7 @@ module.exports = {
           { keys: ['f/4'], duration: '16' }
         ],
         beamGroups: [[4, 16], [4, 16], [4, 16], [4, 16]],
-        tip: "The resolution bar: chops sticking runs across the toms into an accented floor-tom hit on beat 4, then a unison china-and-snare on the &amp;-of-4 that hands off to the next cycle's downbeat. Underneath, the kick abandons the polymeter for a pure 16th gallop — metal foot, gospel hands."
+        tip: "The resolution bar: chops sticking runs across the toms into an accented floor-tom hit on beat 4, then a unison china-and-snare on the a-of-4 that hands off to the next cycle's downbeat. Underneath, the kick abandons the polymeter for a pure 16th gallop — metal foot, gospel hands."
       }
     ],
     listening: [
@@ -27367,7 +27388,7 @@ module.exports = {
         tip: "Standard shuffle backbeat at rock weight — same pattern as the foundations <em>the-shuffle</em> Ex 4, but hit harder and at a slightly higher tempo. Snare on 2 and 4 lands with the long note of the triplet (the first triplet partial). The hi-hat plays the long-short shuffle pattern on every beat. Lock the long note of the hat to the click and let the short notes arrive late."
       },
       {
-        title: "2 — Heavier Kick Pattern (Kick on Every Beat's Long Note)",
+        title: "2 — Heavier Kick Pattern (Doubled Kick at the Top of the Bar)",
         meta: "4/4 · 8th triplets · ♩ = 88",
         bpm: 88,
         timeSignature: "4/4",
