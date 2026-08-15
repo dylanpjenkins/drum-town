@@ -108,6 +108,50 @@ if (document.getElementById('theme-toggle').hasAttribute('aria-pressed')) {
   fails.push('theme toggle: aria-pressed contradicts the action label ("do this" + "already done")');
 }
 
+// --- the menu's theme row: same control, same contract (BL-064 step 4) ---
+// When the header row sheds the theme toggle it lands in the nav panel, and
+// that row's VISIBLE TEXT is its accessible name — there is no aria-label to
+// check, which is the point: one string, nothing to drift. But a string written
+// by JS can stop being written, and if syncToggleLabel ever stopped touching it
+// the row would silently keep the static markup text and tell every dark-theme
+// reader to "Switch to dark theme" — with every other gate still green, because
+// counting the controls says nothing about what they say.
+const navTheme = document.getElementById('nav-theme-toggle');
+if (!navTheme) {
+  fails.push('menu theme row: #nav-theme-toggle is missing — the header has nowhere to shed the theme control to');
+} else {
+  const text = (navTheme.textContent || '').trim();
+  if (!/^Switch to (light|dark) theme$/.test(text)) {
+    fails.push(`menu theme row: visible text "${text}" is not an action label`);
+  }
+  if (navTheme.hasAttribute('aria-label')) {
+    fails.push('menu theme row: it has an aria-label, which can drift from the words on screen; its text is meant to be its whole name');
+  }
+  if (navTheme.hasAttribute('aria-pressed')) {
+    fails.push('menu theme row: aria-pressed contradicts the action label');
+  }
+  // Two controls, one setting: they must never name opposite actions.
+  const headerLabel = document.getElementById('theme-toggle').getAttribute('aria-label');
+  if (text !== headerLabel) {
+    fails.push(`menu theme row: says "${text}" while the header toggle says "${headerLabel}" — one setting, two stories`);
+  }
+  // ...and it must still say the right thing after the theme actually changes.
+  navTheme.dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
+  const after = (navTheme.textContent || '').trim();
+  if (after === text) {
+    fails.push(`menu theme row: text did not change after activation (still "${after}") — it is not wired to the theme`);
+  }
+  if (!/^Switch to (light|dark) theme$/.test(after)) {
+    fails.push(`menu theme row: text after activation is "${after}", not an action label`);
+  }
+  if (after !== document.getElementById('theme-toggle').getAttribute('aria-label')) {
+    fails.push('menu theme row: after activation the two theme controls disagree');
+  }
+  if (root.classList.contains('nav-open') === false && document.activeElement === document.body) {
+    fails.push('menu theme row: activating it dumped focus to <body>');
+  }
+}
+
 if (fails.length) {
   console.error('[check-nav-a11y] FAIL:');
   fails.forEach(f => console.error('  ' + f));

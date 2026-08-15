@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 68,
-    "next_dimension": "ui",
+    "iteration": 69,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -1133,11 +1133,36 @@
         "PKG-9 (BL-056) and BL-059 both touch header/brand furniture."
       ],
       "acceptance": "the header row degrades by rule rather than by ad-hoc media queries (e.g. an explicit priority order for what sheds first, or a container-query/overflow menu); check-transport-reserve.js's scrollWidth assertion still passes at 280px with a three-digit stored tempo and any one additional header item",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
-        "Filed iter 38 from the adversarial panel's BLOCKING finding — the fix shipped, but the structural fragility behind it did not go away."
+        "Filed iter 38 from the adversarial panel's BLOCKING finding — the fix shipped, but the structural fragility behind it did not go away.",
+        {
+          "iteration": 69,
+          "date": "2026-08-15",
+          "note": "Shipped together with BL-092, because they were one defect: the row had no shedding rule, so the only shrinkable item — the site name — absorbed every deficit and clipped to \"drum.tov\" with text-overflow: clip, which reads as a different wordmark rather than as truncation. An explicit ladder now sheds in priority order, cheapest loss first: the nav row folds into the hamburger, then the pill meter readout, then the wordmark goes cleanly to the seal, then the theme toggle MOVES INTO the menu panel as a labelled row. The hamburger and the clock pill never shed, because below their folds each is the only route to something — site navigation, and the metronome."
+        },
+        {
+          "iteration": 69,
+          "date": "2026-08-15",
+          "note": "Driven by @container with rem-keyed thresholds rather than more media queries. The unconditional reason, which the first justification missed: the row is capped at max-width 1200px while the viewport is not, so above 1200px a media query measures a box the row never gets. Thresholds are the row parts summed rather than chosen numbers — the model predicts a 897px min-content at a 16px root and the measured value is 897.1. Fifteen broken cells of 56 went to zero: twelve wordmark clips and three row overflows, and three of those overflows were horizontal page scroll on all 228 pages that no gate had caught."
+        },
+        {
+          "iteration": 69,
+          "date": "2026-08-15",
+          "note": "THE ADVERSARIAL PASS FOUND NO BLOCKER AND VERIFIED MORE THAN WAS ASKED: 895 cells (648 CSS cells across twelve root sizes, eight of them untested by the builder, plus 247 state cells across menu-open, dock-open, no-JS, legacy-engine and both themes), and the pill and hamburger held in every one, hit-tested at centre and both diagonal corners. It independently confirmed all three @container claims including the load-bearing one — inline-size containment does NOT hide overflow from documentElement.scrollWidth, so the existing gates stay awake — and found that container-type does not make the row a containing block for the fixed dock or the skip rail. It caught 8 of 8 mutations of the new gate."
+        },
+        {
+          "iteration": 69,
+          "date": "2026-08-15",
+          "note": "WHAT IT CAUGHT: the fit guard listened to window resize and fonts.ready but to nothing inside the row, so changing the stored tempo from 80 to 240 — what the dock does when a reader drags the tempo slider — left the row 5px over with no shed classes until the next resize. The prescribed ResizeObserver on the row alone would NOT have fixed it, as the builder then showed: the row is block-level and its own box never changes when a child grows inside it, so it observes the row AND every element child, which means a future control added to this row is observed by construction. Also fixed: the guard stopped at clientWidth + 1 while the gate failed above clientWidth, so a guard could not always satisfy its own gate; and check-nav-a11y now asserts the menu theme row label, agreement with the header toggle, and that the text actually changes on activation — mutation-proved, since without it a broken syncToggleLabel would leave every dark-theme reader a wrong label with all 18 gates green."
+        },
+        {
+          "iteration": 69,
+          "date": "2026-08-15",
+          "note": "HONESTY CORRECTION, made by the critic and accepted by the builder against its own headline: the 15 before/after cells were measured by setting html font-size, which models Firefox minimum-font-size, user stylesheets, extensions and devtools rather than \"a reader at 150% text\" generally — because this site sets html, body { font-size: 1rem } and 1rem on the root IS the browser default, so a reader changing their browser font setting moved the old media thresholds with them. The cells are real and the fix is strictly better; the population they represent is narrower than first claimed. The unconditional half of the case — the 1200px cap, and the row having had no shedding rule at all — stands untouched."
+        }
       ]
     },
     {
@@ -1240,7 +1265,8 @@
       "evidence": [
         "iter 49, found by the PKG-9 Builder outside its own scope and reported rather than folded into an unrelated diff: at root 32px (WCAG 1.4.4 text-only zoom, viewport unchanged) the homepage overflows by +29px at 390 and +99px at 320. The offender is .ledger__title every time; footer-internal overflow measured 0 at all three root sizes.",
         "Cause: .ledger__title inherits overflow-wrap: break-word from the shared heading rule, but as a FLEX ITEM its automatic minimum size is min-content, so a long chapter title still forces the row wide. The standard fix is min-width: 0.",
-        "Related but distinct from BL-064 (the header row has no slack) and from the PKG-7 finding that notation staves are NOT a source of page overflow because they sit inside overflow-x: auto."
+        "Related but distinct from BL-064 (the header row has no slack) and from the PKG-7 finding that notation staves are NOT a source of page overflow because they sit inside overflow-x: auto.",
+        "ITERATION 69 MEASUREMENT, from a 648-cell sweep during the header work: the header contributes ZERO to page overflow at every overflowing cell, so the offenders are content. Named with numbers: / at 280px with a 24px root overflows 19px and the culprit is h2.ledger__title (Independence Systems); at 320px/32px root it is 73px; at 320px/40px root 168px. On /lessons/paradiddle/ at 280px/32px root it is 20px from .listening__count and .lesson-row a. On /rudiments/ at 280px/32px root, 35px. All of it is long unbreakable headings and meta strings, not chrome."
       ],
       "acceptance": "documentElement.scrollWidth === clientWidth on the homepage at 320/360/390/480 with root font sizes 16, 24 and 32px, in both themes; no change to ledger layout at the default text size; measured, not reasoned",
       "status": "ready",
@@ -1877,7 +1903,7 @@
       "acceptance": "a reader who starts the click and then navigates either keeps hearing it, or is one obvious tap from resuming it at the same tempo — and no copy on the site promises more than the implementation delivers"
     },
     {
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -2045,7 +2071,8 @@
         "Measured during BL-091 across 13 widths x 3 meters x 4 root font sizes, armed and idle in the same document: at a 24px root, 3 of 39 cells overflow by up to 12px; at a 32px root, 9 of 39 cells overflow by up to 211px. The figures are IDENTICAL armed and idle, so this is page-level and pre-existing, not the transport dock.",
         "style.css:1813 currently asserts the opposite — that a 32px root produces no sideways scroll at any width. That is the same class of false in-repo claim the loop has now corrected three times in prose and twice in comments.",
         "Related to but wider than BL-069, which names .ledger__title on the homepage below 480px as one offender. A 211px overflow is far more than one flex item, so there are other offenders not yet identified.",
-        "A third data point from the iteration-60 persona walk, not yet chased: at 280px with a 32px root the page scrolled sideways by 20px and the offender measured there was a notation SVG in an exercise (532px wide, right edge 570px), while .site-header__inner measured exactly 280. Note the iteration-44 builder previously DISPROVED a similar claim about notation SVGs at normal text size, so verify before believing it."
+        "A third data point from the iteration-60 persona walk, not yet chased: at 280px with a 32px root the page scrolled sideways by 20px and the offender measured there was a notation SVG in an exercise (532px wide, right edge 570px), while .site-header__inner measured exactly 280. Note the iteration-44 builder previously DISPROVED a similar claim about notation SVGs at normal text size, so verify before believing it.",
+        "ITERATION 69: the header is exonerated. A 648-cell sweep (54 widths x 12 root sizes) found headerCulprits = 0 at every overflowing cell, so the remaining sideways scroll at raised text is entirely content: h2.ledger__title on the homepage, .listening__count and .lesson-row a on lesson pages, and the rudiments cards. BL-064 fixed three header-caused overflow cells that no gate had caught; what is left belongs here and to BL-069."
       ],
       "acceptance": "no page scrolls sideways at a 32px root at any width from 280 to 1600, or the CSS comment is corrected to state exactly which widths and roots do overflow and by how much; every offender is identified by measurement rather than assumed",
       "status": "ready",

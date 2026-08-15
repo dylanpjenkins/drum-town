@@ -237,10 +237,32 @@ main#main:focus-visible,
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 36px;
-  min-height: var(--header-h);
+  /* 60px, NOT var(--header-h), and the difference is a feedback loop. chrome.js
+     measures this bar and writes its height back into --header-h for the sticky
+     offsets and the panel's max-height; while that token was also this bar's own
+     min-height, every measurement raised the floor for the next one and the
+     header grew 1px per pass — it is +1 on every page load (the fonts.ready
+     re-measure) and +1 on every resize. Measured across 56 successive resizes in
+     Edge: 63px to 73px, with no page or text change to explain it.
+     The token stays the OUTPUT. This is the input, and the two are now separate
+     numbers. The bar still grows when its contents need more room at a raised
+     root font — 67px at a 32px root — because that is content, not a floor. */
+  min-height: 60px;
   display: flex;
   align-items: center;
   gap: 16px;
+  /* This row is the query container for its own shedding ladder (see HEADER
+     SHEDDING LADDER, below). It has to be this box and not .site-header:
+     .site-header spans the viewport, but the row is capped at 1200px, and at a
+     32px root that difference IS the bug — the row asks for 1335px inside a
+     1128px content box on a 1600px screen, and the wordmark used to swallow the
+     207px shortfall in silence.
+     Container size queries measure the CONTENT box, so every threshold in the
+     ladder is stated in the space the flex items actually receive, with the
+     padding already subtracted. The padding itself stays on media queries: a
+     container cannot be restyled by its own @container rules. */
+  container-type: inline-size;
+  container-name: hdr;
 }
 
 .site-logo {
@@ -253,15 +275,19 @@ main#main:focus-visible,
   color: var(--ink);
   letter-spacing: -0.01em;
   text-decoration: none;
-  /* The wordmark is the header's designated slack — the same call the 360px
-     rule below already makes, extended to the case a width media query cannot
-     see. Text-only zoom does not change the viewport, so at a 32px root every
-     item in this row (all flex-shrink: 0) grew and the row pushed 86px of
-     sideways scroll onto all 228 pages at 390px: a WCAG 1.4.4 failure. The
-     seal, the toggles and the 44px clock pill keep their size; the wordmark
-     yields. Nothing changes at normal text sizes — there is slack to spare. */
-  min-width: 0;
-  overflow: hidden;
+  /* NOT shrinkable, and that is the fix for BL-092. This box used to carry
+     `min-width: 0; overflow: hidden` and was the only shrinkable item in a row
+     of four, so it absorbed every deficit the row ever had: measured at a 24px
+     root, the wordmark rendered 155px into a 126px slot and the site's name
+     read "drum.tov" — with `text-overflow: clip`, so nothing signalled that
+     anything had been cut. It did not look truncated, it looked like a
+     different wordmark, and because no horizontal overflow resulted no gate
+     could see it.
+     The ladder removes the wordmark cleanly before the row runs out of room.
+     If a threshold is ever wrong, the row now overflows instead of quietly
+     shaving the name — and overflow is something the gates and the reader can
+     both see. Loud beats silent. */
+  flex-shrink: 0;
 }
 .site-logo:hover { text-decoration: none; }
 .site-logo__seal {
@@ -271,7 +297,7 @@ main#main:focus-visible,
   color: var(--accent);
   fill: var(--gold);
 }
-.site-logo__wm { min-width: 0; overflow: hidden; white-space: nowrap; }
+.site-logo__wm { white-space: nowrap; }
 .site-logo__wm em { color: var(--accent); font-style: italic; }
 
 .site-nav {
@@ -297,6 +323,29 @@ main#main:focus-visible,
 
 .site-nav a:hover { color: var(--accent); background: var(--paper-2); text-decoration: none; }
 .site-nav a.active { color: var(--accent-ink); background: var(--accent); }
+
+/* The theme control's second home. Ladder step 4 moves the theme toggle out of
+   the header row and into the menu panel, and this is where it lands — hidden
+   at every other width, so the page never carries two controls for one setting.
+   The two are gated on the same condition, in both directions, which is the
+   invariant tools/checks/check-header-shed.js asserts at every cell it measures:
+   exactly one theme control, always.
+   Its visible text IS its accessible name. No aria-label, so there is nothing
+   to drift out of step with the words on screen, and nothing for WCAG 2.5.3 to
+   catch — chrome.js rewrites the one string. */
+.site-nav__theme {
+  display: none;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-top: 1px solid var(--rule);
+  background: transparent;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.site-nav__theme:hover { color: var(--accent); background: var(--paper-2); }
 
 /* Icon buttons in the header row (theme toggle, menu). */
 .theme-toggle,
@@ -420,22 +469,16 @@ main#main:focus-visible,
    collapses the pill is the ONLY way to reach the metronome, and every other
    touch control on the site holds 44px. Grow the box, not the type. */
 .clock-pill { min-height: 2.125rem; }
-@media (max-width: 53.75em) {   /* 860px at a 16px root; em so raised text collapses the nav too */
-  .clock-pill { min-height: 44px; }
+/* The row's gutters and gaps. These are page rhythm, not shedding — they match
+   the gutters .container uses at the same widths — and they are the one header
+   decision that cannot be a container query, because a container cannot be
+   restyled by its own @container rules. The ladder's thresholds are content-box
+   widths, so whichever of these applies has already been subtracted before any
+   threshold is compared. */
+@media (max-width: 53.75em) {   /* 860px at a 16px root */
+  .site-header__inner { padding: 0 20px; gap: 8px; }
 }
-@media (max-width: 480px) {
-  .clock-pill__sig { display: none; }
-}
-/* Below ~340px the header row — logo, theme toggle, pill, hamburger — is wider
-   than the viewport, and every item in it is flex-shrink: 0. The result was a
-   sideways scroll on all 228 pages and, at 280px, a hamburger entirely off the
-   right edge. 320px is the normative reflow width of WCAG 2.1 SC 1.4.10 and is
-   also what 400% zoom gives on a 1280px desktop, so this is not a fringe case.
-   The wordmark is the only slack: the seal alone carries the brand down here,
-   and the pill keeps its 44px target. Cut at 360 rather than 340 so a stored
-   three-digit tempo, which widens the pill, still fits. */
 @media (max-width: 22.5em) {    /* 360px at a 16px root */
-  .site-logo__wm { display: none; }
   .site-header__inner { padding: 0 12px; gap: 6px; }
 }
 
@@ -461,19 +504,118 @@ main#main:focus-visible,
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
 
-/* The nav collapses at 860px, not 720px: five links plus the logo and two
-   icon buttons run out of room around 800px, where "Other Topics" used to
-   wrap and take the header to two lines. The rest of the mobile layout keeps
-   its own 720px breakpoint — different components, different limits. */
-@media (max-width: 53.75em) {   /* 860px at a 16px root; em so raised text collapses the nav too */
-  .site-header { position: sticky; }
-  .site-header__inner { padding: 0 20px; gap: 8px; }
+/* =====================  HEADER SHEDDING LADDER  =====================
+   BL-064 + BL-092. One rule for what leaves the header row, in one order, in
+   one place — replacing the three unrelated one-shot breakpoints (860px for the
+   nav, 480px for the meter, 360px for the wordmark) that each answered its own
+   crisis and none of which knew about the others.
+
+   THE ORDER, and the question that fixes it: what can a reader lose and still
+   use the site, and what is the ONLY route to something?
+
+     never  ·  the hamburger   Below its own fold it is the only site-wide
+                               navigation there is. Iteration 66 shipped a fix
+                               for a bug that merely took it out of the TAB
+                               ORDER; removing it outright is not on the table.
+     never  ·  the clock pill  Below the fold it is the only way to reach the
+                               metronome, which is why iteration 59 gave it a
+                               44px target. It never shrinks and never leaves.
+     4th    ·  the theme       A preference, not a route. prefers-color-scheme
+                               still dresses the page and a stored choice still
+                               wins, and the control does not vanish — it moves
+                               into the menu panel, behind the hamburger, which
+                               by rule is still there. See .site-nav__theme.
+     3rd    ·  the wordmark    Goes cleanly to the seal, which is still the link
+                               home and still the brand. This is the behaviour
+                               the old 360px rule already chose; the difference
+                               is that it now happens by fit rather than by a
+                               number, and it never half-happens.
+     2nd    ·  the pill's meter  "· 4/4" is a readout, not a route: the meter is
+                               still in the dock the pill opens. The pill keeps
+                               its lamp, its tempo and its full touch target.
+     1st    ·  the nav row     Folds into the menu. It is the only step that
+                               loses nothing at all — every destination is one
+                               tap behind the hamburger — and it is by far the
+                               largest saving (474px at a 16px root, 821px at a
+                               32px one). Cheapest first, so it goes first.
+
+   WHY @container AND NOT @media. The trigger is the space this row actually
+   has, and @media cannot see it. em and rem in a media query resolve against the
+   browser's DEFAULT font size and never against html{font-size}; inside
+   @container, rem resolves against the root element for real (verified in the
+   same headless Edge the gates run in), so the thresholds below grow with the
+   text they are measuring.
+   Be precise about how much that buys, because the first draft of this comment
+   was not. This sheet sets `html, body { font-size: 1rem }`, and 1rem ON the
+   root IS the initial value — so a reader who raises the font size in their
+   browser's own settings moves the root font and the media thresholds together,
+   and the old breakpoints did scale for them. What the two do NOT share is every
+   case where the computed root font diverges from the media base: Firefox's
+   minimum-font-size, a user stylesheet, an extension, and any future change that
+   gives html a font-size of its own. Those are the readers the old rules failed
+   silently, plus every measurement of this row anyone will ever take by setting
+   html{font-size} in devtools — which is how BL-092 was found and how
+   check-header-shed.js drives its four root sizes.
+   The container query is right for a second and simpler reason that holds no
+   matter whose font size moved: the row is capped at 1200px while the viewport
+   is not, so above 1200px a media query is measuring a box the row never gets.
+   At a 32px root that gap is the entire bug.
+
+   THE NUMBERS are the row's own parts, summed, not chosen. Measured in Edge on
+   /lessons/paradiddle/ at roots 16/20/24/32, each part is linear in the root
+   font size to within a rounding:
+       seal 28px · theme 40px · hamburger 44px   (fixed, px)
+       wordmark            6.475rem
+       nav row             128px + 21.66rem      (5 links: fixed padding + text)
+       pill, with meter     61px + 3.75rem
+       pill, without         55px + 1.40625rem   (at a three-digit tempo, the
+                                                  widest the readout ever gets)
+   Add the gaps (3 x 16px with the nav row, 3 x 8px with the menu) and each
+   threshold below is that sum, rounded up in both terms — 6-9px and a tenth of a
+   rem — so that a font that loads a shade wider than measured sheds a step early
+   rather than overflowing.
+   The full-row figure predicts a min-content of 897px at a 16px root; measured,
+   it is 897.1px. That is why the nav now folds near 900px and not at 860px:
+   860px only ever "fit" because the wordmark was being shaved by 36px to make
+   it fit, which is the bug, not the layout.
+
+   AND WHAT ABOUT THE NEXT ITEM ADDED TO THIS ROW — the whole of BL-064? A
+   constant cannot know about a control that does not exist yet, so the constants
+   are not the last word: chrome.js measures the row and walks THIS SAME ORDER
+   until it fits, via the .hdr-shed-* hooks paired with each step below. CSS
+   rules the row as built; the JS covers the row as it will be. Neither can put
+   back a step the other has taken. tools/checks/check-header-shed.js proves both
+   halves in a browser, with a probe control injected, across 14 widths x 4 root
+   sizes. */
+
+/* ---- Step 1 — the nav row folds into the menu. ----------------------------
+   Threshold: logo(38px + 6.475rem) + 3 gaps(48px) + nav(128px + 21.66rem)
+              + theme(40px) + pill with meter(61px + 3.75rem)
+            = 315px + 31.885rem, rounded up.
+   At a 16px root that folds the nav below a ~907px viewport rather than the old
+   860px, and that is the bug being fixed rather than a breakpoint being moved:
+   at 861px the row's min-content is 897px, and the 36px it was over by came out
+   of the wordmark.
+
+   AND THE CONSEQUENCE NOBODY SHOULD HAVE TO REDISCOVER: above roughly a 25px
+   root the nav row never comes back, at any screen width. The query container is
+   the row, and the row is capped at max-width: 1200px — a 1128px content box no
+   matter how wide the monitor — while this threshold at a 32px root asks for
+   1347px. Measured: the hamburger at 1280px, at 1600px and at 1690px. It is the
+   right answer, because the nav genuinely needs 1335px of a 1128px box and the
+   alternative is the clipping this ladder exists to end, but it is a real cliff
+   and it is here in writing rather than waiting to surprise someone. Raising the
+   cap on .site-header__inner is the lever if that is ever the wrong call. */
+@container hdr (max-width: calc(323px + 32rem)) {
   .nav-toggle { display: inline-flex; }
   /* .site-nav leaves the flex row when it becomes a panel, taking its
      margin-left:auto with it — the trailing buttons must hold the right
      edge themselves. */
   .theme-toggle { margin-left: auto; }
-  /* The nav becomes a full-width disclosure panel under the header bar. */
+  /* The pill is the only route to the metronome from here down, and every other
+     touch control on the site holds 44px. Grow the box, not the type. */
+  .clock-pill { min-height: 44px; }
+  /* The nav becomes a disclosure panel under the header bar. */
   .site-nav {
     position: absolute;
     top: 100%;
@@ -504,8 +646,110 @@ main#main:focus-visible,
     border-bottom: 1px solid var(--rule);
     color: var(--ink);
   }
-  .site-nav a:last-child { border-bottom: none; }
+  /* :last-of-type, not :last-child: the theme row (step 4) is a <button> that
+     sits after the links whether or not it is displayed, so :last-child stopped
+     matching any <a> the moment it was added and left the final link wearing a
+     rule it did not need. The theme row supplies its own border-top instead. */
+  .site-nav a:last-of-type { border-bottom: none; }
   .site-nav a.active { color: var(--accent-ink); }
+}
+
+/* ---- Step 2 — the pill's meter readout. -----------------------------------
+   Threshold: logo(38px + 6.475rem) + 3 gaps(24px) + theme(40px)
+              + pill with meter(61px + 3.75rem) + hamburger(44px)
+            = 207px + 10.225rem, rounded up. */
+@container hdr (max-width: calc(213px + 10.3rem)) { .clock-pill__sig { display: none; } }
+.site-header.hdr-shed-sig .clock-pill__sig { display: none; }
+
+/* ---- Step 3 — the wordmark goes to the seal. ------------------------------
+   Threshold: the same row with the meter already gone —
+              logo(38px + 6.475rem) + 3 gaps(24px) + theme(40px)
+              + pill(55px + 1.40625rem) + hamburger(44px)
+            = 201px + 7.88rem, plus the margin.
+   At a 16px root that is 338px of content, which the gutters at these widths put
+   a little under a 380px viewport. Measured either side: 360px keeps the seal
+   alone, exactly as the old 360px cut did, and 390px carries the full name. The
+   number was arrived at rather than picked, and it lands where the old one was. */
+@container hdr (max-width: calc(210px + 8rem)) { .site-logo__wm { display: none; } }
+.site-header.hdr-shed-wm .site-logo__wm { display: none; }
+
+/* ---- Step 4 — the theme toggle moves into the menu. -----------------------
+   Threshold: seal(28px) + 3 gaps(24px) + theme(40px) + pill(55px + 1.40625rem)
+              + hamburger(44px) = 191px + 1.40625rem, plus a deliberate 52px —
+   one more 44px control and its gap.
+   That reserve is this step's whole point and it is the reason the step exists
+   at all: BL-064's acceptance is a 280px viewport carrying a three-digit tempo
+   AND one more header item, and 280px offers 256px of content against a 207.5px
+   row. There is no room for another control unless something leaves, and the
+   theme toggle is the only thing in the row that is not the sole route to
+   somewhere. So the row hands it to the menu before the new control exists —
+   over-shedding by one control's width, on purpose. Measured, that costs exactly
+   one column of the matrix: at a 280px viewport the toggle is in the menu, at
+   320px and everything above it is back in the row, at every root size tested.
+   280px is below the 320px reflow floor of WCAG 2.1 SC 1.4.10, and the price of
+   that one column is that this row is never again the thing that breaks when the
+   site grows a control. */
+@container hdr (max-width: calc(243px + 1.45rem)) {
+  .theme-toggle { display: none; }
+  .clock-pill { margin-left: auto; }
+  .site-nav__theme { display: block; }
+}
+.site-header.hdr-shed-theme .theme-toggle { display: none; }
+.site-header.hdr-shed-theme .clock-pill { margin-left: auto; }
+.site-header.hdr-shed-theme .site-nav__theme { display: block; }
+
+/* ---- The ladder's floor: engines with no container queries. ----------------
+   Chrome < 105, Safari < 16, Firefox < 110. Small, but not empty — an iPhone 7
+   cannot leave iOS 15, and Safari 15 is exactly the kind of browser a reader
+   arrives on. Without this block NONE of the four steps above would apply
+   there, which does not mean "no shedding": it means the nav row stays a row at
+   every width, the hamburger is never displayed, and the only site-wide
+   navigation on the site is gone on a phone. That is a worse outcome than
+   anything either BL-064 or BL-092 describes, so it gets a floor.
+   The floor is the three viewport breakpoints this ladder replaced, reinstated
+   verbatim, giving those engines exactly the behaviour the site shipped
+   yesterday. @supports not (...) is false wherever container queries exist, so
+   no browser ever evaluates both paths and there is only ever one source of
+   truth for the row.
+   What those engines do NOT get back is the clipping. .site-logo is no longer
+   shrinkable anywhere, so a raised default font size there overflows the row
+   rather than quietly shaving the site's name down to "drum.tov". Loud beats
+   silent on every engine, not just the ones that can measure themselves. */
+@supports not (container-type: inline-size) {
+  @media (max-width: 53.75em) {   /* 860px at a 16px root */
+    .nav-toggle { display: inline-flex; }
+    .theme-toggle { margin-left: auto; }
+    .clock-pill { min-height: 44px; }
+    .site-nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: calc(100vh - var(--header-h));
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+      margin-left: 0;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      box-shadow: var(--elev-2);
+      font-size: 1rem;
+    }
+    .nav-open .site-nav { display: flex; }
+    .site-nav a {
+      padding: 13px 20px;
+      border-radius: 0;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
+    }
+    .site-nav a:last-of-type { border-bottom: none; }
+    .site-nav a.active { color: var(--accent-ink); }
+  }
+  @media (max-width: 480px) { .clock-pill__sig { display: none; } }
+  @media (max-width: 22.5em) { .site-logo__wm { display: none; } }
 }
 
 /* =====================  SKIP RAIL  =====================

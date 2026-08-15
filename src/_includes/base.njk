@@ -107,6 +107,27 @@
       <a href="/#mastery"{% if sec == 'mastery' %} class="active" aria-current="true"{% endif %}>Other Topics</a>
       <a href="/rudiments/"{% if sec == 'rudiments' %} class="active" aria-current="page"{% endif %}>Rudiments</a>
       <a href="/metronome/"{% if sec == 'metronome' %} class="active" aria-current="page"{% endif %}>Metronome</a>
+      {#- The theme control's second home (BL-064 step 4). The header row sheds
+          in a fixed priority order, and the theme toggle is the one control in
+          it that is a preference rather than the only route to something — so
+          it is the first thing allowed to leave. It does not disappear when it
+          does: it lands here, inside the menu, behind the hamburger, which by
+          rule never sheds.
+
+          There is exactly one theme control on the page at any width. This
+          button and #theme-toggle are gated on the same container-query
+          condition in both directions, and check-header-shed.js asserts the
+          count is 1 at every width x root-size cell it measures.
+
+          No aria-label. Its visible text is its accessible name, so the two
+          cannot drift apart and there is no WCAG 2.5.3 containment to get wrong
+          — chrome.js rewrites this one string, the same string it writes into
+          the header toggle's aria-label. The static text below is the state a
+          light-themed page loads in; with JS off this button is unreachable
+          anyway, because with JS off the panel that holds it never opens (and
+          with JS off the header toggle does nothing either, so nothing is lost
+          that was not already gone). -#}
+      <button class="site-nav__theme" id="nav-theme-toggle" type="button">Switch to dark theme</button>
     </nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
       <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
