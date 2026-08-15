@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 69,
-    "next_dimension": "content",
+    "iteration": 70,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 111,
+    "next_id": 114,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -25,7 +25,9 @@
       "Iteration 60, page weight: do NOT re-file the rudiments page as a byte-weight problem. It is 906 KB of raw HTML but Netlify serves brotli, which is 72 KB over the wire; the heaviest lesson is 31 KB. The real costs there are DOM node count (6,866 elements, 6,095 of them SVG primitives — content-visibility spares layout and paint but the parser still builds every node) and BL-008's unconditional 2.3 MB WAV prefetch, which is live and is ~32x the brotli'd HTML.",
       "Iteration 60, three phantoms the orchestrator caught on itself before filing, recorded so the next sweep does not repeat them: (1) a duplicate-spec hash that omitted the articulation property, which made rock-open-hats look as though a lesson about open hi-hats notated none — it does notate them; (2) a ghost-note rule looking for a property the corpus does not have (ghosts are unaccented notes beside accented ones, so they cannot be detected that way); (3) an accent rule that matched the NEGATION in titles like \"No Accents\" and \"Diddles Even, No Accent\". Also: counting curriculum slugs without excluding section slugs produces 18 fake orphans.",
       "Iteration 60, tooling: check-transport-reserve.js FAILS with \"the harness produced no measurements\" when run through the sandboxed Bash tool, and PASSES (36 measurements, 129/65px, 11px clearance) when the identical command runs from PowerShell. Edge is not the problem — it dumped a data: URL fine from PowerShell, and the same gate had passed twice earlier in the same session on the same code. Run browser-driving checks from PowerShell. Recorded in .claude/commands/improve.md step 6.",
-      "Iteration 63: a critic reported that accent:true renders no ink anywhere on the site (censusing the class \"vf-articulation\", which came back 0 across every built page) and concluded BL-085 chunk 1 had shipped a no-op. THAT IS WRONG. VexFlow 4 does not tag articulation glyphs with a vf-articulation class. Rendering the same spec with and without accents differs by 1,272 bytes and exactly TWO extra <path> elements for two accents, and the built page path count matches the with-accents render. Accents draw real ink, as the iteration-61 screenshots showed. Do not census VexFlow output by class name — count paths, or look at the picture."
+      "Iteration 63: a critic reported that accent:true renders no ink anywhere on the site (censusing the class \"vf-articulation\", which came back 0 across every built page) and concluded BL-085 chunk 1 had shipped a no-op. THAT IS WRONG. VexFlow 4 does not tag articulation glyphs with a vf-articulation class. Rendering the same spec with and without accents differs by 1,272 bytes and exactly TWO extra <path> elements for two accents, and the built page path count matches the with-accents render. Accents draw real ink, as the iteration-61 screenshots showed. Do not census VexFlow output by class name — count paths, or look at the picture.",
+      "Iteration 70, methodology for any future accessibility audit: without --force-renderer-accessibility, headless Chromium leaves content-visibility: auto subtrees uncomputed, so /rudiments/ reports 4 of 40 headings and 4 of 40 notation images in the AX tree. The screen-reader walker nearly filed that as a blocking finding. With the flag, all 40 are present at every scroll position and queryAXTree finds the fortieth card without scrolling. CONTENT-VISIBILITY COSTS A SCREEN READER NOTHING HERE — do not re-file it.",
+      "Iteration 70, the shape of nearly every gate defect found: a gate that measures the output with the thing that produced it, an exemption broader than its author realised, or a field computed and never asserted. When adding a gate, the useful question is not \"does it pass\" but \"construct the defect it names and watch it fail\" — 17 of 17 gates passed their own headline claim while failing at least one mutation of it."
     ],
     "notes": []
   },
@@ -2173,7 +2175,8 @@
         "Some compound-meter metas are correct and must not be swept: rock-odd-meter#1 prints \"8th = 200\" against bpm 100, which is exactly right. The fix has to read the glyph, not the meter.",
         "tools/checks/check-exercise-meta.js cannot see any of this: it matches /♩\\s*=\\s*(\\d+)/ and compares the number to spec.bpm without knowing which note value the glyph names. The 40 dotted-quarter metas do not even match its regex, so they are silently skipped (777 checked, 40 skipped).",
         "Found while deciding what BL-076 tempo handoff should do on x/8 pages. It is pre-existing and NOT caused by that change — and it is a third, independent reason the handoff correctly omits those pages, because there is no single tempo on them to hand over.",
-        "The site premise on the homepage is real notation AND audio playback. An exercise whose audio contradicts its own printed tempo by 1.5x fails that on both halves at once."
+        "The site premise on the homepage is real notation AND audio playback. An exercise whose audio contradicts its own printed tempo by 1.5x fails that on both halves at once.",
+        "MECHANISM CORRECTED AT ITERATION 70 by mutation-testing the gate: check-exercise-meta does NOT \"compare the last number without reading the glyph\". Its regex is a bare quarter glyph, and it cannot match \"♩. = 80\" at all because the dot sits between the glyph and the equals sign — so `tempos` comes back empty, `declared` is null, and the whole comparison block is skipped. All 40 dotted-quarter metas are therefore not merely mis-compared but never compared, while still being counted in the gate \"all 852 exercise metas match their spec\" line. Rewriting all 40 to a tempo three times wrong still exits 0."
       ],
       "acceptance": "every exercise sounds at the tempo printed on it: either the meta glyph is corrected to the note value the player actually counts, or the player and pattern-math learn the glyph, decided per exercise by reading the meta rather than sweeping; check-exercise-meta.js is extended to parse the note-value glyph so the class cannot silently regrow, and it stops skipping the 40 metas its regex currently misses",
       "status": "ready",
@@ -2383,6 +2386,85 @@
           "note": "Filed as the residue of BL-065. Both the adversarial critic and the builder identified the same root cause independently and both declined to fix it inside that item, correctly — it is an engraving change, not a width change."
         }
       ]
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 70,
+          "date": "2026-08-15",
+          "note": "Filed by the iteration-70 discovery pass: a mutation audit of all 18 gates (\"audit the auditors\"), plus the first screen-reader walk of the site."
+        }
+      ],
+      "id": "BL-111",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "292 staves clip ink off the bottom of their frame today, and the gate that exists to prevent exactly this prints OK",
+      "evidence": [
+        "MEASURED ON THE SHIPPED SITE, not hypothetically: 292 of 852 lesson staves draw path ink BELOW their viewBox, up to 13.88 units, and 34 draw above it, up to 20.75. check-notation-frame exits 0 on all of them.",
+        "rock-prog#0 puts two 9.2x12.1 glyphs at y 131.8-143.9 against a 130-tall viewBox. Those glyphs are the tuplet \"3\" numerals for its two feet triplets, confirmed invisible by rendering the same SVG with and without extra frame. A student reading that page sees two beamed eighth-note groups where the lesson means triplets, and plays the bar wrong.",
+        "fusion-half-time-shuffle#1 loses the \"3\" over its THIRD triplet — the one pushed higher to clear an accent — so the page prints 3, 3, (nothing), 3 over four identical triplets. On a half-time-shuffle lesson that is the single most important marking on the page. funk-purdie-shuffle#1-3, funk-modern-neo-soul#2 and fusion-metric-modulation#2 are in the same set. hi-hat-articulation#4 loses the bottom of a hi-hat-foot X notehead.",
+        "THIS IS VERBATIM THE DEFECT THE GATE WAS WRITTEN FOR. Its header says tuplet brackets \"were drawn at negative y and silently clipped, so every shuffle lesson rendered without the 3 that is the entire point of the exercise (iter 31)\". The same defect is live on the OPPOSITE edge.",
+        "ROOT CAUSE — the vertical half is a tautology. notation-renderer.js derives the frame from minY/maxY using the identical two regexes the gate re-runs, then pads by 4. So the gate re-checks the renderer arithmetic with the renderer own measurement — the exact anti-pattern its own header names: \"Never measure the output with the thing that produced it.\" Across all 932 staves the y-scan finds ZERO elements outside the frame and the smallest slack it ever sees is exactly the renderer 4-unit pad. It can only fire if the grow formula is deleted, never on new content.",
+        "The horizontal half, added at iteration 68, does it properly — it parses path data with exact cubic and quadratic extremes. The fix is to give that arithmetic a y twin and compare against vy and vy+vh instead of scanning y attributes. One change also closes three related blind spots: <text> can never be caught below the frame (the scan requires both y AND height, which only <rect> has, and 247 staves carry sticking letters that hang below the stave), <line> is invisible vertically (y1/y2 do not match /\\sy=\"/), and neither axis composes ancestor transforms."
+      ],
+      "acceptance": "no stave draws ink outside its frame on either axis, measured by parsing path geometry rather than by re-reading the attributes the renderer used; the named examples render their tuplet numerals; the gate fails on the current code before the fix and passes after, and its coverage count is asserted rather than printed"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": {
+        "done": 0,
+        "total": 4,
+        "size": 5
+      },
+      "log": [
+        {
+          "iteration": 70,
+          "date": "2026-08-15",
+          "note": "Filed by the iteration-70 discovery pass: a mutation audit of all 18 gates (\"audit the auditors\"), plus the first screen-reader walk of the site."
+        }
+      ],
+      "id": "BL-112",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "Audit of all 18 gates: none fully protects what it claims, and five have blind spots that are live today",
+      "evidence": [
+        "Iteration 70 mutation-tested every gate against its own stated claim — construct a change that breaks exactly what the header says it prevents, then see whether the gate fails. 17 gates audited across 4 agents, roughly 180 mutations. VERDICTS: 1 passes-for-the-wrong-reason, 16 partial, ZERO rated protects-what-it-claims.",
+        "check-exercise-meta is the worst and is rated passes-for-the-wrong-reason. Its tempo regex is a bare quarter glyph, so it cannot match \"♩. = 80\" at all — the dot sits between glyph and equals — which means all 40 dotted-quarter metas are skipped entirely while being counted in the \"all 852 match\" line. That is the mechanism behind BL-102, and the earlier description of it was wrong. Separately its \"journey\" escape disables the meter assertion whenever the meta contains a bare plus sign, which about 13 of the 18 currently-exempt metas trip on ordinary prose (\"cross-stick over kick + hi-hat foot\"), and its meter whitelist silently drops 8/8, 10/8 and 13/8 — odd-meters-9-8#3 is 100% unchecked today while being counted.",
+        "check-beam-groups examines 39 of 852 exercises (4.6%): scan() returns early unless the spec carries tuplets, so 616 exercises that have beamGroups and no tuplets are never looked at. Setting paradiddle#0 to a single [3,8] group — the exact case its own failure message describes as a lie about rhythm — passes.",
+        "check-tip-claims class-4 filter is a bare substring test for \"sing \" which matches inside phra-sing, clo-sing, u-sing, pas-sing, relea-sing and more: 39 of 852 tips already contain such a token and only 5 are the actual word, so any tip that gains one silently exempts its exercise from the only gate guarding prose-versus-notation. Its later-bar branch also downgrades a real contradiction to an informational note and still exits 0.",
+        "check-exercise-titles named-label branch continues before any duplicate or sequence check, so slow-practice could ship three staves all titled \"Round 1\" while its own tips cite \"20% faster than Round 1\". Live on 2 real lessons.",
+        "check-accent-dynamics cannot see the one constant its failure text warns about: GAIN_ACCENT is the master gain of both the shipped render AND the accent-blind control, so it cancels out of every ratio including RMS. Raising it to 1.02 passes.",
+        "The pattern across all of them is the same: a gate that measures the output with the thing that produced it, or that exempts more than its author realised, or that computes a field and never asserts it. Full per-gate results with mutations, live-versus-latent status and the cheapest fix for each are in the iteration-70 discovery scratch."
+      ],
+      "acceptance": "each gate either protects what its header claims or its header is rewritten to claim only what it protects; every exemption is anchored so it cannot fire on ordinary prose; every coverage count is asserted with a floor rather than printed; and no gate measures the output with the thing that produced it"
+    },
+    {
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 70,
+          "date": "2026-08-15",
+          "note": "Filed by the iteration-70 discovery pass: a mutation audit of all 18 gates (\"audit the auditors\"), plus the first screen-reader walk of the site."
+        }
+      ],
+      "id": "BL-113",
+      "dimension": "content",
+      "priority": 1,
+      "title": "A screen reader gets the title and tempo of a stave and never the notes — 892 of 892",
+      "evidence": [
+        "FIRST SCREEN-READER WALK OF THE SITE, measured from the real accessibility tree via CDP Accessibility.getFullAXTree rather than inferred. Every notation SVG has an accessible name of exactly the form \"Drum notation: <title> — <meta>\". All 892 across 229 pages, zero deviate. So a stave announces what it is CALLED and how fast, never what it IS.",
+        "For 685 of 892 (77%) the SVG contributes ZERO text nodes to the accessibility tree — these are the grooves, kick/snare/hat, which is most of the site. /lessons/first-beat/ exercise 1 is, in full: image \"Drum notation: 1 — Hi-Hat Alone, Quarter Notes — 4/4 · ♩ = 80\", childCount 0. A titled blank.",
+        "WHAT SAVES IT, AND IT GENUINELY DOES: 685 of 685 of those grooves carry an exercise tip, and the tips are largely prose transcriptions. Sampled and hand-read across genres — metal-quarter-bass#1 \"Four quarter-note kicks, sticking R L R L. Hands silent.\"; latin-iyesa#1 \"hit on 1, 2, 4, 5, 6, leave 3 empty.\"; independence-clave-foot#4 \"Bar 1 (2-side): beat 2, beat 3. Bar 2 (3-side): beat 1, & of 2, beat 4.\" The walker could practice from those and called it a real and uncommon strength. Whoever writes the tips should know it landed.",
+        "It is still blocking for that reader because the site headline promises real notation, the notation is the one thing they cannot get at, and NOTHING anywhere tells them the tip is their substitute — they found that out by reading 892 labels. An automated pass flags about 15 whose tip names no voice, no count and no sticking; hand-reading narrowed it, and accompaniment#1 (\"this exact bar\") is genuinely opaque.",
+        "The fix is not necessarily a full notation-to-speech render: it may be as small as making the relationship explicit (describedby from the stave to its tip), plus filling the handful of tips that transcribe nothing."
+      ],
+      "acceptance": "a reader using a screen reader can learn what a stave contains without seeing it — either the accessible name carries the pattern or it points at the prose that does — and no exercise leaves them with a title and a tempo and nothing else"
     }
   ]
 }
