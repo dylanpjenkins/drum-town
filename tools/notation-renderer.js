@@ -32,6 +32,315 @@ const STICKING_HEIGHT = 140;
 const MAX_RETRY_DEPTH = 20;
 const MAX_RENDER_WIDTH = 2400;
 
+// ---------------------------------------------------------------------------
+// INK EXTENT (BL-111). What did this stave actually DRAW, in user units?
+//
+// The frame used to be derived from a scan of `y="…"` attributes: `minY` from
+// every `y`, `maxY` from every `y` that also carried a `height`. That reads the
+// POSITION of a handful of elements and calls it the drawing. Three things it
+// cannot see:
+//
+//   <path>   glyph outlines — noteheads, stems, beams, rest glyphs and the
+//            tuplet NUMERAL — carry no `y` attribute at all. 332 corpus staves
+//            shipped with up to 14.6 units of ink below their own frame,
+//            including both "3"s over rock-prog#0's feet triplets, and 66 with
+//            ink above it, up to 21.5.
+//   <text>   a baseline is not the top of a letter, and only <rect> carries
+//            `height`, so a sticking letter could never be caught below the
+//            frame at all — 247 staves carry one, held in by a hard-coded
+//            10-unit floor with nothing measuring it.
+//   <line>   `y1`/`y2` do not match `\sy="`, so lines were invisible on this
+//            axis. (None in the corpus today; the frame should not depend on
+//            that staying true.)
+//
+// 332 and 66 are the gate's own numbers, not this file's: run
+// check-notation-frame against a renderer with the `bottom` grow disabled and it
+// prints FAIL on 332, with `top` disabled 66, and against the whole pre-fix
+// renderer 398 — 332 + 66. An earlier draft of this comment said 292, from a
+// measurement that read the path CENTERLINE and forgot these paths are stroked;
+// the half-stroke below is exactly what it was missing.
+//
+// The frame now bounds the geometry: exact stationary points of every cubic and
+// quadratic, sampled arcs, rect and line corners, and a text box built from
+// Arial's ascent and descent.
+//
+// Growing to that moved 382 of the 932 frames. 369 of them grew on measured
+// path/rect geometry. The other 13 grew on the <text> box alone, which is a
+// deliberate over-estimate: it reserves the full Arial ascender for every
+// annotation, and the open-hat "o" only reaches x-height, so those 13 gain about
+// 10 units of manuscript air they did not strictly need. Rastering them puts the
+// "o"'s real ink 0.83 units INSIDE the old frame — they were never clipping. A
+// per-glyph ascent table would recover the air; it would also be a second guess
+// table to keep in sync across two files, and reserving air is the harmless
+// direction for a frame.
+//
+// The sibling of this code in tools/checks/check-notation-frame.js is a
+// SEPARATE implementation on purpose and must stay one. It re-derives the
+// extents from the shipped markup and shares no code, no constants and no
+// intermediate number with this file — asserting on the number computed here is
+// exactly what made the old vertical gate a tautology. Its text box is
+// deliberately tighter than the one below (0.88/0.22 em against 0.92/0.26) so a
+// metric disagreement can never fail a stave this file sized correctly, and both
+// stay comfortably above real Arial ink for the glyphs VexFlow emits here
+// (R, L, o, digits: cap height 0.716em, ascender 0.905em, no descenders).
+const FRAME_PAD = 4;
+const TEXT_ASCENT_EM = 0.92;
+const TEXT_DESCENT_EM = 0.26;
+const ARC_SAMPLES = 128;
+
+// Extremes of a bezier along one axis: the endpoints, plus any stationary point
+// strictly inside the segment. Solving the derivative rather than taking the
+// control hull matters — the hull over-reports by up to 6 units on real VexFlow
+// glyph outlines, which would pad every frame with whitespace it does not need.
+function _cubicSpan(p0, p1, p2, p3) {
+  let lo = Math.min(p0, p3), hi = Math.max(p0, p3);
+  const a = 3 * (-p0 + 3 * p1 - 3 * p2 + p3);
+  const b = 6 * (p0 - 2 * p1 + p2);
+  const c = 3 * (p1 - p0);
+  const ts = [];
+  if (Math.abs(a) < 1e-12) {
+    if (Math.abs(b) > 1e-12) ts.push(-c / b);
+  } else {
+    const disc = b * b - 4 * a * c;
+    if (disc >= 0) {
+      const s = Math.sqrt(disc);
+      ts.push((-b + s) / (2 * a), (-b - s) / (2 * a));
+    }
+  }
+  for (const t of ts) {
+    if (!(t > 0 && t < 1)) continue;
+    const u = 1 - t;
+    const v = u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3;
+    if (v < lo) lo = v;
+    if (v > hi) hi = v;
+  }
+  return [lo, hi];
+}
+function _quadSpan(p0, p1, p2) {
+  let lo = Math.min(p0, p2), hi = Math.max(p0, p2);
+  const den = p0 - 2 * p1 + p2;
+  if (Math.abs(den) > 1e-12) {
+    const t = (p0 - p1) / den;
+    if (t > 0 && t < 1) {
+      const u = 1 - t;
+      const v = u * u * p0 + 2 * u * t * p1 + t * t * p2;
+      if (v < lo) lo = v;
+      if (v > hi) hi = v;
+    }
+  }
+  return [lo, hi];
+}
+// Arcs turn up inside glyph outlines (982 of them in a 120-stave sample).
+// Endpoint -> center parameterization per the SVG spec, then sampled; at 128
+// steps the sampling error on glyph-scale radii is under a thousandth of a unit.
+function _arcSweep(box, x0, y0, rx, ry, rot, laf, sf, x1, y1) {
+  if (!rx || !ry) return;
+  rx = Math.abs(rx); ry = Math.abs(ry);
+  const phi = (rot * Math.PI) / 180, cosP = Math.cos(phi), sinP = Math.sin(phi);
+  const dx2 = (x0 - x1) / 2, dy2 = (y0 - y1) / 2;
+  const xp = cosP * dx2 + sinP * dy2, yp = -sinP * dx2 + cosP * dy2;
+  const lam = (xp * xp) / (rx * rx) + (yp * yp) / (ry * ry);
+  if (lam > 1) { const s = Math.sqrt(lam); rx *= s; ry *= s; }
+  const num = rx * rx * ry * ry - rx * rx * yp * yp - ry * ry * xp * xp;
+  const den = rx * rx * yp * yp + ry * ry * xp * xp;
+  let co = den === 0 ? 0 : Math.sqrt(Math.max(0, num / den));
+  if (laf === sf) co = -co;
+  const cxp = (co * rx * yp) / ry, cyp = (-co * ry * xp) / rx;
+  const cx = cosP * cxp - sinP * cyp + (x0 + x1) / 2;
+  const cy = sinP * cxp + cosP * cyp + (y0 + y1) / 2;
+  const ang = (ux, uy, vx, vy) => {
+    const d = Math.hypot(ux, uy) * Math.hypot(vx, vy);
+    let c = d === 0 ? 1 : (ux * vx + uy * vy) / d;
+    c = Math.min(1, Math.max(-1, c));
+    const a = Math.acos(c);
+    return ux * vy - uy * vx < 0 ? -a : a;
+  };
+  const t0 = ang(1, 0, (xp - cxp) / rx, (yp - cyp) / ry);
+  let dt = ang((xp - cxp) / rx, (yp - cyp) / ry, (-xp - cxp) / rx, (-yp - cyp) / ry);
+  if (!sf && dt > 0) dt -= 2 * Math.PI;
+  if (sf && dt < 0) dt += 2 * Math.PI;
+  for (let i = 0; i <= ARC_SAMPLES; i++) {
+    const t = t0 + (dt * i) / ARC_SAMPLES;
+    const ct = Math.cos(t), st = Math.sin(t);
+    _point(box, cx + rx * ct * cosP - ry * st * sinP, cy + rx * ct * sinP + ry * st * cosP);
+  }
+}
+function _point(box, x, y) {
+  if (x < box.minX) box.minX = x;
+  if (x > box.maxX) box.maxX = x;
+  if (y < box.minY) box.minY = y;
+  if (y > box.maxY) box.maxY = y;
+}
+function _span(box, xs, ys) {
+  _point(box, xs[0], ys[0]);
+  _point(box, xs[1], ys[1]);
+}
+const _PATH_ARGC = { M: 2, L: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, T: 2, A: 7, Z: 0 };
+function _pathInk(box, d) {
+  const toks = d.match(/[MmLlHhVvCcSsQqTtAaZz]|[-+]?(?:\d*\.\d+|\d+\.?)(?:[eE][-+]?\d+)?/g) || [];
+  let cx = 0, cy = 0, sx = 0, sy = 0;
+  let rcx = null, rcy = null, rqx = null, rqy = null; // reflected control points
+  let cmd = null, i = 0;
+  while (i < toks.length) {
+    if (/[A-Za-z]/.test(toks[i])) {
+      cmd = toks[i]; i++;
+      if (cmd === 'Z' || cmd === 'z') { cx = sx; cy = sy; continue; }
+    }
+    if (cmd === null) { i++; continue; }
+    const up = cmd.toUpperCase(), rel = cmd !== up, n = _PATH_ARGC[up];
+    if (n === undefined) { i++; continue; }
+    const a = [];
+    for (let k = 0; k < n; k++) a.push(parseFloat(toks[i + k]));
+    if (a.some(Number.isNaN)) break;
+    i += n;
+    const AX = v => (rel ? cx + v : v), AY = v => (rel ? cy + v : v);
+    let nx = cx, ny = cy;
+    if (up === 'M') {
+      nx = AX(a[0]); ny = AY(a[1]); sx = nx; sy = ny; _point(box, nx, ny);
+      cmd = rel ? 'l' : 'L'; // a moveto's extra coordinate pairs are linetos
+    } else if (up === 'L') {
+      nx = AX(a[0]); ny = AY(a[1]); _point(box, cx, cy); _point(box, nx, ny);
+    } else if (up === 'H') {
+      nx = AX(a[0]); _point(box, cx, cy); _point(box, nx, cy);
+    } else if (up === 'V') {
+      ny = AY(a[0]); _point(box, cx, cy); _point(box, cx, ny);
+    } else if (up === 'C') {
+      const x1 = AX(a[0]), y1 = AY(a[1]), x2 = AX(a[2]), y2 = AY(a[3]);
+      nx = AX(a[4]); ny = AY(a[5]);
+      _span(box, _cubicSpan(cx, x1, x2, nx), _cubicSpan(cy, y1, y2, ny));
+      rcx = x2; rcy = y2;
+    } else if (up === 'S') {
+      const x1 = rcx === null ? cx : 2 * cx - rcx, y1 = rcy === null ? cy : 2 * cy - rcy;
+      const x2 = AX(a[0]), y2 = AY(a[1]);
+      nx = AX(a[2]); ny = AY(a[3]);
+      _span(box, _cubicSpan(cx, x1, x2, nx), _cubicSpan(cy, y1, y2, ny));
+      rcx = x2; rcy = y2;
+    } else if (up === 'Q') {
+      const x1 = AX(a[0]), y1 = AY(a[1]);
+      nx = AX(a[2]); ny = AY(a[3]);
+      _span(box, _quadSpan(cx, x1, nx), _quadSpan(cy, y1, ny));
+      rqx = x1; rqy = y1;
+    } else if (up === 'T') {
+      const x1 = rqx === null ? cx : 2 * cx - rqx, y1 = rqy === null ? cy : 2 * cy - rqy;
+      nx = AX(a[0]); ny = AY(a[1]);
+      _span(box, _quadSpan(cx, x1, nx), _quadSpan(cy, y1, ny));
+      rqx = x1; rqy = y1;
+    } else if (up === 'A') {
+      nx = AX(a[5]); ny = AY(a[6]);
+      _point(box, cx, cy); _point(box, nx, ny);
+      _arcSweep(box, cx, cy, a[0], a[1], a[2], a[3], a[4], nx, ny);
+    }
+    if (up !== 'C' && up !== 'S') { rcx = null; rcy = null; }
+    if (up !== 'Q' && up !== 'T') { rqx = null; rqy = null; }
+    cx = nx; cy = ny;
+  }
+}
+function _tagAttr(tag, name) {
+  const m = new RegExp('\\s' + name + '="([^"]*)"').exec(tag);
+  return m ? m[1] : null;
+}
+// VexFlow writes annotation sizes in POINTS ("14pt"), which inside a viewBox is
+// 14 * 4/3 user units. Getting this wrong is how the sticking row ended up at
+// half the size it was specified at (see STICKING_PT above).
+function _ptToUnits(raw) {
+  const m = /([\d.]+)\s*(pt|px)?/.exec(raw || '');
+  if (!m) return null;
+  return m[2] === 'px' ? parseFloat(m[1]) : parseFloat(m[1]) * (4 / 3);
+}
+// Most annotations name their own size, but the open-hat "o" does not: 438 of
+// the corpus's 3091 <text> elements carry no font-size and INHERIT the root
+// <svg font-size="10pt"> (13.33 units). Both this file and the gate used to fall
+// back on a hard-coded 12pt/16 units for those, which was wrong by 2.67 units
+// and safe only because it happened to be the larger number — a root size above
+// 12pt would have made both under-measure in step and certified a clipped
+// annotation. Read the root instead of guessing.
+function _rootFontUnits(markup) {
+  const root = /<svg\b[^>]*>/.exec(markup);
+  const v = root ? _ptToUnits(_tagAttr(root[0], 'font-size')) : null;
+  return v === null ? 16 : v; // 16 = the CSS initial, for markup with no root size
+}
+function _fontUnits(tag, inherited) {
+  const own = _ptToUnits(_tagAttr(tag, 'font-size'));
+  return own === null ? inherited : own;
+}
+// <text> carries neither width nor height. Upper-bound both: Arial advances by
+// class for the horizontal, ascent/descent for the vertical.
+function _textInk(box, tag, body, inheritedFont) {
+  const x = parseFloat(_tagAttr(tag, 'x') || 'NaN');
+  const y = parseFloat(_tagAttr(tag, 'y') || 'NaN');
+  if (Number.isNaN(x) || Number.isNaN(y)) return;
+  const size = _fontUnits(tag, inheritedFont);
+  const txt = body.replace(/<[^>]*>/g, '');
+  let em = 0;
+  for (const ch of txt) em += /[0-9]/.test(ch) ? 0.58 : 0.75;
+  const adv = em * size;
+  const anchor = _tagAttr(tag, 'text-anchor') || 'start';
+  const x0 = anchor === 'end' ? x - adv : anchor === 'middle' ? x - adv / 2 : x;
+  _point(box, x0, y - TEXT_ASCENT_EM * size);
+  _point(box, x0 + adv, y + TEXT_DESCENT_EM * size);
+}
+// A path's `d` is its CENTERLINE, and VexFlow strokes as well as fills: the
+// stave lines, the stems and the beams are all `fill="none"` paths whose entire
+// visible ink is stroke. So real ink runs half a stroke-width past the geometry
+// on every side. Stroke state is inherited — the root carries stroke-width 0.3
+// and at least one <g> carries 1 — and this file deliberately does not walk
+// ancestors (see the transform note below), so bound it instead of resolving
+// it: the widest stroke-width anywhere in the document, halved. That
+// over-reports for the fill-only glyphs, by at most 0.75 units on today's
+// corpus, which costs a unit of frame and cannot hide a clipped notehead.
+function _maxHalfStroke(markup) {
+  let w = 1; // SVG's own default, for a document that never names one
+  let seen = false;
+  for (const m of markup.matchAll(/\sstroke-width="([\d.]+)"/g)) {
+    const v = parseFloat(m[1]);
+    if (Number.isNaN(v)) continue;
+    if (!seen || v > w) w = v;
+    seen = true;
+  }
+  return w / 2;
+}
+// Every element the renderer can emit, measured. Ancestor transforms are NOT
+// composed: VexFlow emits none today (verified across all 932 corpus staves),
+// and a frame sized by a measurement that quietly ignored one would be the same
+// class of silent lie this whole function exists to end. So: refuse to measure,
+// which surfaces as a visible .notation-error block and a red gate.
+function _inkExtent(markup) {
+  if (/<[a-zA-Z][^>]*\stransform="/.test(markup)) {
+    throw new Error('SVG carries a transform attribute; ink extent cannot be measured without composing it');
+  }
+  const box = { minX: Infinity, maxX: -Infinity, minY: Infinity, maxY: -Infinity };
+  for (const m of markup.matchAll(/<path\b[^>]*\sd="([^"]*)"[^>]*>/g)) _pathInk(box, m[1]);
+  for (const m of markup.matchAll(/<rect\b[^>]*>/g)) {
+    const x = parseFloat(_tagAttr(m[0], 'x') || 'NaN');
+    const y = parseFloat(_tagAttr(m[0], 'y') || 'NaN');
+    if (Number.isNaN(x) || Number.isNaN(y)) continue;
+    const w = parseFloat(_tagAttr(m[0], 'width') || '0');
+    const h = parseFloat(_tagAttr(m[0], 'height') || '0');
+    _point(box, x, y);
+    _point(box, x + (Number.isNaN(w) ? 0 : w), y + (Number.isNaN(h) ? 0 : h));
+  }
+  for (const m of markup.matchAll(/<line\b[^>]*>/g)) {
+    const x1 = parseFloat(_tagAttr(m[0], 'x1') || 'NaN');
+    const y1 = parseFloat(_tagAttr(m[0], 'y1') || 'NaN');
+    const x2 = parseFloat(_tagAttr(m[0], 'x2') || 'NaN');
+    const y2 = parseFloat(_tagAttr(m[0], 'y2') || 'NaN');
+    if ([x1, y1, x2, y2].some(Number.isNaN)) continue;
+    _point(box, x1, y1);
+    _point(box, x2, y2);
+  }
+  const inheritedFont = _rootFontUnits(markup);
+  for (const m of markup.matchAll(/<text\b([^>]*)>([\s\S]*?)<\/text>/g)) {
+    _textInk(box, '<text' + m[1] + '>', m[2], inheritedFont);
+  }
+  if (Number.isFinite(box.minX) && Number.isFinite(box.minY)) {
+    const half = _maxHalfStroke(markup);
+    box.minX -= half; box.maxX += half;
+    box.minY -= half; box.maxY += half;
+  }
+  return box;
+}
+// ---------------------------------------------------------------------------
+
 // Does any note in this spec carry a sticking label (its own, or on a grace
 // note)? Drives the taller default frame.
 function _hasSticking(spec) {
@@ -526,35 +835,41 @@ function renderPattern(spec, _widthOverride, _depth) {
     svg.querySelectorAll('[fill="black"]').forEach(el => el.setAttribute('fill', 'currentColor'));
     svg.querySelectorAll('[stroke="black"]').forEach(el => el.setAttribute('stroke', 'currentColor'));
     let out = svg.outerHTML;
-    // Tuplet brackets sit above the stave, above the stems and flags, and on
-    // unbeamed triplets (every shuffle) they were drawn at negative y — i.e.
-    // outside a viewBox pinned to 0 — so the bracket and its "3" were
-    // silently clipped off the top of the frame. Grow the viewBox to whatever
-    // was actually drawn.
-    // Feet tuplets bracket BELOW the stave and clip the same way, so bound
-    // the frame in both directions.
-    let minY = 0;
-    let maxY = height;
-    for (const m of out.matchAll(/\sy="(-?[\d.]+)"/g)) {
-      minY = Math.min(minY, parseFloat(m[1]));
-    }
-    for (const m of out.matchAll(/\sy="(-?[\d.]+)"[^>]*?height="([\d.]+)"/g)) {
-      maxY = Math.max(maxY, parseFloat(m[1]) + parseFloat(m[2]));
-    }
-    const top = minY < 0 ? Math.floor(minY) - 4 : 0;
-    const bottom = maxY > height ? Math.ceil(maxY) + 4 : height;
-    // Same idea sideways (BL-065), as a BACKSTOP only. Convergence above is what
-    // fixes the layout; this exists for the case convergence cannot resolve —
-    // a spec pinned by the author's own spec.width, or one that hits
-    // MAX_RENDER_WIDTH. In those cases the notes are still misplaced, but at
-    // least none of them is invisible: clipping a note is the one thing §6.5
-    // refuses to do, and a frame is cheaper to widen than a layout is to fix.
+    // GROW THE FRAME TO THE INK (iter 31, BL-065, BL-111).
     //
-    // On the current corpus this is a no-op — all 932 specs converge, so
-    // `overflow` is 0 by the time we get here and the width is left alone.
-    const right = overflow > 0.5 ? Math.ceil(width + overflow) : width;
-    if (top !== 0 || bottom !== height || right !== width) {
-      svg.setAttribute('viewBox', `0 ${top} ${right} ${bottom - top}`);
+    // Tuplet brackets sit above the stave (hands) or below it (feet), beyond the
+    // stems and flags, and on unbeamed triplets — every shuffle — they are drawn
+    // outside a viewBox pinned to "0 0 w h", so the bracket and the "3" that is
+    // the entire point of the exercise get silently clipped. So do the bottoms
+    // of hi-hat-foot X noteheads, and the descenders of the sticking row.
+    //
+    // Measured from the drawn geometry, not from element positions: see
+    // _inkExtent above for what the `y="…"` scan this replaced could not see and
+    // for the 292 staves that shipped clipped behind it.
+    const ink = _inkExtent(out);
+    const measured = Number.isFinite(ink.minY) && Number.isFinite(ink.maxY);
+    const top = measured && ink.minY < 0 ? Math.floor(ink.minY) - FRAME_PAD : 0;
+    const bottom = measured && ink.maxY > height ? Math.ceil(ink.maxY) + FRAME_PAD : height;
+    // Sideways (BL-065) the layout fix is the width convergence above; the frame
+    // is only a BACKSTOP, for the case convergence cannot resolve — a spec pinned
+    // by the author's own spec.width, or one that hits MAX_RENDER_WIDTH. There
+    // the notes are still misplaced, but none of them is invisible: clipping a
+    // note is the one thing §6.5 refuses to do, and a frame is cheaper to widen
+    // than a layout is to fix.
+    //
+    // Both horizontal terms are no-ops on the current corpus — all 932 specs
+    // converge, so `overflow` is 0 by the time we get here, and every stave ends
+    // its ink 7.00 units short of its own right edge and starts it 8.00 units
+    // in. That matters beyond tidiness: .eleventy.js reads `natW` off this
+    // viewBox's WIDTH to size the density floor, so the width is left alone
+    // unless ink genuinely escapes it.
+    const left = measured && ink.minX < 0 ? Math.floor(ink.minX) - FRAME_PAD : 0;
+    const right = Math.max(
+      overflow > 0.5 ? Math.ceil(width + overflow) : width,
+      measured && ink.maxX > width ? Math.ceil(ink.maxX) + FRAME_PAD : width
+    );
+    if (top !== 0 || bottom !== height || left !== 0 || right !== width) {
+      svg.setAttribute('viewBox', `${left} ${top} ${right - left} ${bottom - top}`);
       out = svg.outerHTML;
     }
     container.remove();

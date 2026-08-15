@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 70,
-    "next_dimension": "quality",
+    "iteration": 71,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 114,
+    "next_id": 115,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -2388,7 +2388,7 @@
       ]
     },
     {
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -2396,6 +2396,16 @@
           "iteration": 70,
           "date": "2026-08-15",
           "note": "Filed by the iteration-70 discovery pass: a mutation audit of all 18 gates (\"audit the auditors\"), plus the first screen-reader walk of the site."
+        },
+        {
+          "iteration": 71,
+          "date": "2026-08-15",
+          "note": "Shipped. Clipping of 332 staves below and 66 above went to 0 on all four edges. The renderer now measures true ink — exact cubic and quadratic stationary points, sampled arcs, real rect and text boxes, plus the half-stroke VexFlow adds because d is a centerline — and grows the frame on all four edges; the gate got an independent full-box parser on both axes sharing no code or constants with it. 382 frames grew, 0 shrank, 0 changed WIDTH, so natW is untouched and all 494 density floors are byte-identical and BL-040 is undisturbed. The change is purely framing: strip the viewBox and the auto-ids and all 852 lesson staves are byte-identical old versus new, so grow-to-fit cannot be masking a placement bug. Verified three independent ways including raster ground truth at 4-6 device pixels per unit."
+        },
+        {
+          "iteration": 71,
+          "date": "2026-08-15",
+          "note": "THREE CORRECTIONS FROM THE ADVERSARIAL PASS, one of them to my own number. I reported 292 clipping staves as independently verified; the real figure is 332, because my parser measured path centerlines and forgot VexFlow strokes them — the same 0.75-unit inflation the builder had found and I had missed, now reproduced three ways from the gate own output. The dead-space check would have false-fired on an author-pinned spec.height, turning a supported authoring move into a red build. And 438 text elements carry no font-size (the open-hat annotations, 14% of the corpus text) with both parsers guessing 12pt where the real inherited value is 10pt — wrong identically, safe only because the guess was larger. That correction also sharpened the blast radius: 369 of 382 frames grew on measured geometry, and 13 grew on the text estimate alone having never clipped. The gate header now states what green does NOT mean: disabling the arc sweep, the cubic stationary points or the stroke inflation each leaves it green, because the 4-unit pad absorbs anything under about 5 units."
         }
       ],
       "id": "BL-111",
@@ -2465,6 +2475,36 @@
         "The fix is not necessarily a full notation-to-speech render: it may be as small as making the relationship explicit (describedby from the stave to its tip), plus filling the handful of tips that transcribe nothing."
       ],
       "acceptance": "a reader using a screen reader can learn what a stave contains without seeing it — either the accessible name carries the pattern or it points at the prose that does — and no exercise leaves them with a title and a tempo and nothing else"
+    },
+    {
+      "id": "BL-114",
+      "dimension": "content",
+      "priority": 2,
+      "title": "A literal \"&amp;\" prints on 51 pages, because stored strings hold pre-escaped entities the template escapes again",
+      "evidence": [
+        "ORCHESTRATOR-MEASURED across the built site: 130 double-escaped entities render on 51 of 228 pages — 22% of the site. A reader sees a literal \"&amp;\" where an ampersand belongs.",
+        "Worst pages: genres/funk 8, genres/hip-hop 6, lessons/funk-d-angelo 6, lessons/rock-open-hats 5, then funk-vinnie-funk, hi-hat-foot, hiphop-modern-r-and-b, latin-cumbia, metal-gospel-chops and slow-practice at 4 each.",
+        "The visible damage is in EXERCISE TITLES, which is the worst place for it — a heading a reader scans. first-beat-kicks prints \"1 — Kick on the &amp; of 3\", \"2 — Anticipated Kick on the &amp; of 2\" and \"5 — The Pop Kick (1, &amp; of 2, 3, &amp; of 4)\"; first-beat-color prints \"4 — Open Hat &amp; Anticipated Kick (Synthesis)\". 31 exercise titles hold a pre-escaped entity.",
+        "IMPORTANT DISTINCTION FOR WHOEVER FIXES THIS — do not sweep blindly. 211 exercise TIPS and 54 lesson bodyHtml values also contain entities, and those are CORRECT: both are rendered as raw HTML, so their entities resolve properly. Only the fields the template escapes (titles, taglines) double-escape. Fixing the wrong ones would print raw ampersands into HTML and could break markup.",
+        "Found when the BL-111 adversarial critic noticed one literal &amp; on /lessons/rock-open-hats/ and reported it as a one-off tagline defect. It is not a one-off.",
+        "No gate can see it: the HTML is well-formed either way, and every metric counts structure rather than reading text. That is why it has survived every sweep."
+      ],
+      "acceptance": "no page renders a literal HTML entity where its character belongs, verified by scanning the built site for double-escaped sequences; the fix distinguishes escaped fields (titles, taglines) from raw-HTML fields (tips, bodyHtml) and leaves the latter alone; a check asserts the count stays at zero",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 71,
+          "date": "2026-08-15",
+          "note": "Found by the adversarial critic during BL-111, outside its scope, reported rather than fixed."
+        },
+        {
+          "iteration": 71,
+          "date": "2026-08-15",
+          "note": "Re-sized by the orchestrator immediately after filing: the critic saw one tagline, but the built site renders 130 double-escaped entities across 51 pages, mostly in exercise titles. Raised P3 to P2 and rewritten with the real numbers and with the trap that matters — tips and bodyHtml hold entities legitimately because they render as raw HTML."
+        }
+      ]
     }
   ]
 }
