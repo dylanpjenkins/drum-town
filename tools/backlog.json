@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 73,
-    "next_dimension": "content",
+    "iteration": 74,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 118,
+    "next_id": 120,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -27,7 +27,8 @@
       "Iteration 60, tooling: check-transport-reserve.js FAILS with \"the harness produced no measurements\" when run through the sandboxed Bash tool, and PASSES (36 measurements, 129/65px, 11px clearance) when the identical command runs from PowerShell. Edge is not the problem — it dumped a data: URL fine from PowerShell, and the same gate had passed twice earlier in the same session on the same code. Run browser-driving checks from PowerShell. Recorded in .claude/commands/improve.md step 6.",
       "Iteration 63: a critic reported that accent:true renders no ink anywhere on the site (censusing the class \"vf-articulation\", which came back 0 across every built page) and concluded BL-085 chunk 1 had shipped a no-op. THAT IS WRONG. VexFlow 4 does not tag articulation glyphs with a vf-articulation class. Rendering the same spec with and without accents differs by 1,272 bytes and exactly TWO extra <path> elements for two accents, and the built page path count matches the with-accents render. Accents draw real ink, as the iteration-61 screenshots showed. Do not census VexFlow output by class name — count paths, or look at the picture.",
       "Iteration 70, methodology for any future accessibility audit: without --force-renderer-accessibility, headless Chromium leaves content-visibility: auto subtrees uncomputed, so /rudiments/ reports 4 of 40 headings and 4 of 40 notation images in the AX tree. The screen-reader walker nearly filed that as a blocking finding. With the flag, all 40 are present at every scroll position and queryAXTree finds the fortieth card without scrolling. CONTENT-VISIBILITY COSTS A SCREEN READER NOTHING HERE — do not re-file it.",
-      "Iteration 70, the shape of nearly every gate defect found: a gate that measures the output with the thing that produced it, an exemption broader than its author realised, or a field computed and never asserted. When adding a gate, the useful question is not \"does it pass\" but \"construct the defect it names and watch it fail\" — 17 of 17 gates passed their own headline claim while failing at least one mutation of it."
+      "Iteration 70, the shape of nearly every gate defect found: a gate that measures the output with the thing that produced it, an exemption broader than its author realised, or a field computed and never asserted. When adding a gate, the useful question is not \"does it pass\" but \"construct the defect it names and watch it fail\" — 17 of 17 gates passed their own headline claim while failing at least one mutation of it.",
+      "Iteration 74, HOW TO MEASURE A STAFF POSITION, and the two ways it goes wrong. Stave lines render at y 58/68/78/88/98; spacing is 10, so one staff position is 5 units. The position of a note is its notehead INK BOUNDING-BOX CENTRE (exact bezier stationary points, not the control hull), which lands on VexFlow own ledger lines to under 0.001 units. NEVER measure from the raw path origin, the \"M x y\" that opens the d attribute: it sits 5.054 ABOVE the centre for round noteheads and 4.015 BELOW the centre for x-heads. Trap one is measuring from the origin at all, which puts every note one staff position too high and makes the snare look like a line note — that is how the orchestrator briefed reading-101 as correct and the-drum-kit as broken, when the reverse is true. Trap two is correcting it with a single constant: a uniform +5.054 fixes drums and moves every cymbal by 9.069 units, 1.81 staff positions, which would have taken the ride off the top line and turned the-drum-kit correct cymbal claims into errors. Calibrate against a ledger line for BOTH glyph families before trusting any position: c/4 and c/4/x2 both give a ledger line at y=108, a/5 and a/5/x2 both at y=48. Verified table: china b/5/x2 43, crash a/5/x2 48, hat g/5/x2 53, ride f/5/x2 58 (top line), bell e/5/x2 and high tom e/5 63 (SAME position, distinguished only by notehead shape), mid tom d/5 68, snare c/5 73 (3rd space), b/4 78 (middle line, ZERO drum uses — though 145 visible RESTS default to restKey b/4, so it is not unused ink), floor tom a/4 83, kick f/4 93, hi-hat foot d/4/x2 103. Any key census must read BOTH hands and feet and must follow grace notes, which inherit their parent keys: hands-only reports f/4 as 1 use instead of 2345, and skipping grace notes reports c/5 as 3922 instead of 4082."
     ],
     "notes": []
   },
@@ -1798,7 +1799,7 @@
       "acceptance": "each of the 20 is judged against its own spec and its lesson siblings, and either the notation or the words are corrected so they agree — the fix going to whichever is the outlier, since in every verified case so far the prose was internally coherent and the spec was wrong; and check-tip-claims.js is generalized from its single \"snare on X and Y\" shape to a voice-on-position-list parser, with explicit guards for negative and contrastive clauses and a requirement that the parsed list terminate at a clause boundary"
     },
     {
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -1806,6 +1807,31 @@
           "iteration": 60,
           "date": "2026-08-12",
           "note": "Filed in the iteration-60 discovery pass by the prose-vs-notation lens. The orchestrator independently re-derived the three most severe instances from the specs before filing."
+        },
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "Shipped. reading-101 told beginners the snare sits on the MIDDLE LINE. It sits in the middle SPACE, third from the bottom — and b/4, the middle line, has ZERO drum uses across all 852 exercises, so the lesson that teaches reading was pointing at the one position on the stave that is always empty. Two more claims in the same lesson were wrong with it: \"Toms sit between snare and hi-hat in pitch order\" is false for the floor tom (a/4 at y 83, BELOW the snare at 73), and the corpus draws the hi-hat above the top line rather than sharing the ride position. the-drum-kit was correct throughout and was left alone, including its hand-drawn diagram, whose SVG geometry the critic verified glyph by glyph. The rewrite states all nine positions the lesson covers and turns the empty middle line into a teaching point rather than a silence: \"No drum is written on the middle line itself, so the snare space sits just above it.\""
+        },
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "A THIRD LESSON WAS WRONG AND I HAD NOT FLAGGED IT. rock-tom-grooves said most of the rhythmic activity \"sits below\" the snare, on the high tom (e/5), mid tom (d/5) and floor tom (a/4). The high tom at 63 and the mid tom at 68 are ABOVE the snare at 73; only the floor tom is below. The builder found it in the corpus-wide sweep the acceptance demanded rather than in the two lessons the item named. Four more were fixed on my instruction after the adversarial pass: metal-quarter-bass said two kicks are \"notated on the same line (f/4)\" under its own Notation Note heading, where f/4 renders in a SPACE, and rock-cross-stick, hiphop-r-and-b-basic and transcription-method each said cross-stick is \"notated on the snare line\". The rule applied, and now recorded: a sentence is a position claim when it pairs line or space with either a concrete key or the verb notated in a notation context. The bare possessive idiom — \"the snare line\", \"a busy kick line\", meaning a part rather than a stave line — is correct English and all 57 instances of it were deliberately left alone. Six lessons against the 10-lesson cap."
+        },
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "THE GATE THIS ACCEPTANCE OWED, AND THE FIRST ONE IN THIS PROJECT TO SURVIVE AN INDEPENDENT MUTATION AUDIT. tools/checks/check-staff-positions.js derives the position table from rendered SVG on every run — including the stave line positions themselves, so a stave-geometry change re-derives rather than silently shifting every claim — and asserts position claims, ordering claims (a collective \"toms\" must hold for EVERY member), that the middle line carries no drum voice, and a coverage floor. Final: 35 claims across 7 lessons, floor 32, 22 mutation cases with 20 caught and 2 controls correctly green. The builder fixed two real holes its own harness found: a clause naming a second voice after the position was skipped as ambiguous, and b/4 was skipped by the middle-line rule precisely BECAUSE it has no player voice, so a middle-line note sailed past the one rule written to catch it. The critic then ran 41 mutations of its own and found NO UNDOCUMENTED HOLE — all six documented holes reproduce exactly as documented. Iteration 70 mutation-tested all 18 gates and rated zero as protecting what they claim; this is the first to clear that bar. Every number in the gate header was re-derived from what the code computes rather than patched, after the critic found four of them wrong."
+        },
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "THE BUILDER REFUSED A FALSE GREEN RATHER THAN BANKING IT. Re-running the mutation harness produced one case reporting PASS where FAIL was expected — an apparent hole in the gate, discovered after the critic had already signed off. It did not report that as a hole and it did not quietly drop the case. It read the patch: the mutation set centre = span.minY + 5.054, the ink TOP plus a constant, not the raw path origin plus a constant. Every notehead VexFlow emits here is exactly 10.108 units tall for both glyph families, so half the height IS 5.054 and minY + 5.054 lands on the true centre for every key. The mutation injected no defect, so green was correct and the harness had mislabelled its own patch. The variant that matters — raw origin plus a uniform constant, which is the mistake I actually made — is caught, on c/4/x2 at 117.069 against a ledger line at 108. That is recorded in the gate header as a trap for the next auditor."
+        },
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "I BRIEFED A WRONG CONSTANT AND BOTH AGENTS CAUGHT IT. I measured positions from the raw path origin, got every note one staff position too high, and concluded the snare was a LINE note — which would have made the-drum-kit, the lesson that is correct, look like the one needing repair. I caught that much myself with a ledger-line check and briefed the builder with a \"+5 correction\". That was still wrong: the offset is +5.054 for round noteheads and MINUS 4.015 for x-heads, so a uniform +5.054 fixes drums and moves every cymbal by 9.069 units, 1.81 staff positions. The builder refused it and derived both; the critic reproduced both to under 0.001 units against VexFlow ledger lines. Had my constant shipped, the ride would have come off the top line and the-drum-kit cymbal claims would have been \"fixed\" into errors. Recorded in meta.discoveryNotes so the next iteration pays nothing for it."
         }
       ],
       "id": "BL-087",
@@ -2632,6 +2658,54 @@
           "iteration": 73,
           "date": "2026-08-15",
           "note": "Filed by the orchestrator from the adversarial pass, not by the builder — the builder was explicitly told not to chase it. Recorded with the culprit selectors already named so the next attempt starts from measurement rather than a sweep."
+        }
+      ]
+    },
+    {
+      "id": "BL-118",
+      "dimension": "content",
+      "priority": 2,
+      "title": "playing-to-a-song#3 draws the kick twice and fires the sample twice on beat 1",
+      "evidence": [
+        "Found by the adversarial pass on BL-087 (iteration 74), while checking a counterexample to reading-101 new \"kick ... stems pointing down\" claim.",
+        "hands[0] is [\"a/5/x2\",\"f/4\"] and feet[0] is [\"f/4\"]. The same kick is in both voices on the same beat, so beat 1 draws two kick noteheads and fires the kick sample twice.",
+        "It is the ONLY f/4 in the hands voice out of 2345 uses corpus-wide, and because it is in hands it renders on an UP stem — stem path at x=84.01 running y 89 to 13.75 — against every other kick on the site and against the-drum-kit own \"stem down\".",
+        "The prose in reading-101 and the-drum-kit is right and this exercise is the anomaly, so this is not a documentation fix. Pre-existing, not introduced by BL-087.",
+        "check-staff-positions does not check stem direction at all; that gap is now named in its own holes list."
+      ],
+      "acceptance": "the kick appears once on beat 1 of playing-to-a-song#3, in the feet voice, rendering stem-down like every other kick in the corpus; the sample fires once; and no other exercise puts a kick in the hands voice",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator from the adversarial pass. The builder was told to report it and not to widen scope."
+        }
+      ]
+    },
+    {
+      "id": "BL-119",
+      "dimension": "content",
+      "priority": 2,
+      "title": "reading-101 teaches nine staff positions where the corpus draws eleven, and never states the round-versus-x rule",
+      "evidence": [
+        "Found by the adversarial pass on BL-087 (iteration 74), after that item corrected the nine positions the lesson does state.",
+        "Omitted: china (b/5/x2, 200 uses across 13 lessons, y 43) and cowbell/ride bell (e/5/x2, 278 uses across 15 lessons, y 63).",
+        "THE SHARP EDGE: the bell at y 63 shares its position with the HIGH TOM (e/5, 138 uses). They are distinguished ONLY by notehead shape — x versus round. reading-101 says \"high tom in the top space\" and never tells the reader that drums are round and cymbals are x. Only the-drum-kit says that.",
+        "So a reader who learns notation from the lesson built to teach notation will misread 278 noteheads as a tom.",
+        "Not false and not introduced by BL-087 — a gap rather than an error, which is why it is filed rather than folded in. But check-staff-positions would certify the lesson green forever, because a missing claim is not a wrong claim."
+      ],
+      "acceptance": "reading-101 states the notehead-shape rule (round = drum, x = cymbal) and covers every position the corpus actually draws, or names explicitly which it defers to the-drum-kit and why; the bell-versus-high-tom collision at y 63 is called out where a reader meets it",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 74,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator from the adversarial pass. A missing claim is invisible to the gate this iteration shipped, which is exactly why it needs an item."
         }
       ]
     }
