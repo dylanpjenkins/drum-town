@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 152,
+    "next_id": 156,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -38,7 +38,12 @@
       "Iteration 81, HOW TO RUN THE CHECK SUITE, and why \"all checks pass\" from a tight loop is weaker evidence than it looks. Running all 22 tools/checks back to back with no gap produces transient failures across DIFFERENT checks on different runs — one run failed check-swing-feel alone, a later run failed check-nav-a11y and check-notation-frame together, and every one passed individually immediately afterward. check-notation-frame does not drive a browser at all, so this is not the headless-Edge sandbox artifact recorded at iteration 60; it looks like resource exhaustion from 22 node processes in immediate succession. A 1.5 second sleep between checks gives a clean 22 of 22. RUN THE SUITE SPACED, and if a check goes red in a tight loop, re-run that check alone before believing it. Filed as part of BL-149.",
       "Iteration 81, A BUG CLASS FOUND BY FAULT INJECTION THAT NO GREEN RUN COULD HAVE FOUND. While hardening check-swing-feel retry path, the builder injected faults (deleting a built page, deleting ride.wav) to prove the new instrument-failure messages fire — and the first injection died with ReferenceError: __CASE_TRIES__ is not defined. String.replace with a STRING pattern replaces only the first occurrence, and that placeholder appeared twice, so the retry path called an undefined identifier. It could only ever have fired AFTER the environment had already flaked, which is exactly when a retry is needed. The lesson generalises: a retry or error path that has never executed is not tested by any number of passing runs. Inject the fault."
     ],
-    "notes": []
+    "notes": [],
+    "paused": {
+      "at": "2026-08-16",
+      "iteration": 81,
+      "reason": "Paused at Dylan's explicit request after iteration 81. Four items filed and unstarted: BL-152, BL-153, BL-154, BL-155. BL-152 and BL-153 bear on a defect the owner is reporting from the live site — he hears no accent difference — and BL-152 should be established before any further accent audio work, because if assets are cached unversioned he may never have received the code. The loop resumes only when Dylan says so: no next item is selected, no heartbeat is armed, and no wakeup is scheduled."
+    }
   },
   "items": [
     {
@@ -938,7 +943,12 @@
       "log": [
         "Filed from persona panel (iter 30). Deliberately NOT fixed inside PKG-2/3 — renaming chrome copy touches every page's IA and deserves its own reviewed tick against the §10 vocabulary leash.",
         "iter 53 · Dropped P1 -> P2 on fresh evidence. This was filed from a persona read around iter 30. The epic-closing persona review at iter 51 put three fresh users through the site and NONE of them raised nav vocabulary: the beginner called the 'In this chapter' panel 'the best orientation device on the site', the returning player navigated to the funk track without comment, and the keyboard user's nav findings were all about focus and text size, not wording. The original concern may still be right, but it is now the weakest-evidenced P1 in the queue while seven items carry findings from a review that happened last week. Re-raise it if a later persona reproduces it.",
-        "iter 57 · Moved to blocked-human. This is a BRAND VOCABULARY decision, not an implementation task, and it now conflicts with a shipped spec: design/system.md §10 canonises exactly these five labels (Foundations · Genres · Other Topics · Rudiments · Metronome), and PKG-10's vocabulary sweep checked all chrome strings against that canon and found them compliant. So resolving this item means amending §10, which is Dylan's call rather than a guess I should make. The evidence is also stale — it was filed from a persona read around iter 30, and the three fresh personas at iter 51 never raised nav wording; the beginner called the 'In this chapter' panel 'the best orientation device on the site'. Two things a decision could act on if he wants them: the nav contains no word a beginner would search for ('Lessons'), and 'Other Topics' is doing junk-drawer duty for a 12-lesson chapter that includes clave, polyrhythms and ear training. Deterministic selection kept handing me this item at the head of the UI queue with no fresh evidence and no authority to change the canon, which is what blocked-human exists for."
+        "iter 57 · Moved to blocked-human. This is a BRAND VOCABULARY decision, not an implementation task, and it now conflicts with a shipped spec: design/system.md §10 canonises exactly these five labels (Foundations · Genres · Other Topics · Rudiments · Metronome), and PKG-10's vocabulary sweep checked all chrome strings against that canon and found them compliant. So resolving this item means amending §10, which is Dylan's call rather than a guess I should make. The evidence is also stale — it was filed from a persona read around iter 30, and the three fresh personas at iter 51 never raised nav wording; the beginner called the 'In this chapter' panel 'the best orientation device on the site'. Two things a decision could act on if he wants them: the nav contains no word a beginner would search for ('Lessons'), and 'Other Topics' is doing junk-drawer duty for a 12-lesson chapter that includes clave, polyrhythms and ear training. Deterministic selection kept handing me this item at the head of the UI queue with no fresh evidence and no authority to change the canon, which is what blocked-human exists for.",
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "MAY BE UNBLOCKED BY BL-155. Dylan has asked for the town metaphor to be retired and the site treated as a normal learning resource. design/system.md section 10 sanctioned-poetry canon is part of why this item is blocked-human; when BL-155 lands, re-examine this item and update its status either way rather than leaving it blocked by a constraint that no longer exists."
+        }
       ]
     },
     {
@@ -962,6 +972,11 @@
           "iteration": 59,
           "date": "2026-08-12",
           "note": "Blocked-human after four attempts. Every closed rounded silhouette in this two-colour palette reads as a container: barrel, honey pot, keg, jar, frying pan, ashtray, wok. Ten dead directions are recorded in the log above with what each actually reads as at 28px. Two untried directions remain, and both are calls for the owner, not the loop: an OPEN silhouette that is not a closed shape, or abandoning the instrument entirely (the name is drum.town, and a mark need not be a drum). Also measured and unresolved by drawing alone: --gold is 2.3:1 on the light page ground, and gold-on-accent is 1.35:1 in dark, so a gold head and an accent stick cannot be separated by colour at all. Loop stops guessing here."
+        },
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "MAY BE UNBLOCKED BY BL-155. Dylan has asked for the town metaphor to be retired and the site treated as a normal learning resource. design/system.md section 10 sanctioned-poetry canon is part of why this item is blocked-human; when BL-155 lands, re-examine this item and update its status either way rather than leaving it blocked by a constraint that no longer exists."
         }
       ]
     },
@@ -2130,6 +2145,11 @@
           "iteration": 65,
           "date": "2026-08-14",
           "note": "New gate check-accent-dynamics.js, the fifteenth and the first that can hear anything. It renders each case twice — shipped and with accent stripped — so it needs no baseline: an accent-free spec marks no voices and creates no gain node, and therefore IS the old behaviour reproduced from current code. Nine cases across ghost and tap tiers, snare/tom/kick/hi-hat voices and both kits, asserting attenuation against each note own accent-blind peak rather than a cross-note ratio (a paradiddle accent already reads 1.31x its own taps in the accent-blind render purely from burst summation, so cross-note ratios measure the exercise as much as the code). Ten mutants run, nine caught; openHatBypass passes and is documented as a named blind spot because no corpus exercise has an unaccented open hat in a hat-accenting spec, making that mutant behaviourally identical to correct code today. Exits 0 with a loud SKIP where no browser exists, ~2s."
+        },
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "UNPROVEN, NOT WORKING — owner report, 2026-08-16. Dylan still hears no volume difference on accented exercises. This item acceptance was measured and met as written, but it measured an ISOLATED snare line with the hi-hat keys dropped so nothing would mask the attack, which proves the gain node and not the experience. In the real mix sixteen hi-hat 16ths at full volume play over a ghost at roughly -12 dB. Superseded by BL-153, which owns the in-mix verification, and gated behind BL-152, which asks whether the deployed player.js contains this code at all — assets ship unversioned, so Dylan may never have received it. Do not cite the 4.00-to-1 figure as evidence that a reader can hear an accent."
         }
       ]
     },
@@ -3697,6 +3717,108 @@
           "iteration": 81,
           "date": "2026-08-16",
           "note": "Filed by the orchestrator. The critic went in expecting to argue for a tempo curve and the content talked it out; this item records that reasoning so the next agent does not redo it."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-152",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "Assets are served unversioned, so a returning visitor may still be running months-old JS and CSS",
+      "evidence": [
+        "OWNER-REPORTED, 2026-08-16. Dylan still hears no volume difference on accented exercises despite iteration 65 measuring 4.00-to-1 offline. This is the leading suspected cause.",
+        "base.njk loads /assets/js/player.js, /assets/js/metronome.js, /assets/js/chrome.js and /assets/css/style.css with NO hash, NO version query and NO fingerprint, and nothing in the build renames them.",
+        "So a returning visitor keeps whatever the browser cached and Netlify answers a conditional request with 304. Every JS and CSS fix this loop has shipped is silently invisible to anyone who visited before it landed.",
+        "That is a large set: the accent gain tiers (BL-097), the sticking-case ghost markers (BL-078), the metronome phase reset (BL-101), the header shed ladder, the skip rail, the transport dock captions, the tempo handoff, and as of iteration 81 the swing itself — all of it lives in player.js, metronome.js, chrome.js or style.css.",
+        "It also plausibly explains Dylan much earlier report, at around iteration 40, that he noticed no major changes when visiting the site.",
+        "THE SECOND HALF OF THE ACCEPTANCE IS THE DIAGNOSTIC ONE: fetch the currently deployed player.js from drum.town and check whether it contains the accent gain code at all. That single fact decides whether BL-097 was ever live for him, and it should be established BEFORE any further work on the accent audio."
+      ],
+      "acceptance": "built asset URLs change whenever their content changes, verified by diffing two builds of the same tree and two builds with a changed asset; the deployed page references the new URLs; and it is confirmed in writing whether the player.js currently served from drum.town contains the accent gain code",
+      "log": [
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "Filed at Dylan's explicit request when he paused the loop. He reports hearing no accent difference on the live site; this is the leading suspected cause and it bears on a defect the owner is seeing right now."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-153",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "The accent work is unproven: iteration 65 measured the code, not the experience",
+      "evidence": [
+        "OWNER-REPORTED, 2026-08-16. Dylan still hears no volume difference on accented exercises. Iteration 65's 4.00-to-1 is to be treated as UNPROVEN rather than as working.",
+        "What iteration 65 actually measured: an ISOLATED snare line with the hi-hat keys dropped, in its own words \"so nothing masks the attack\". That establishes the gain node works. It does not establish that a reader can hear it.",
+        "In the real mix the same exercise plays sixteen hi-hat 16ths at full volume over a ghost note attenuated to 0.25, roughly -12 dB. Masking is the whole question and it was excluded by construction.",
+        "Compounding it, iteration 65 own uppercase-sticking veto put 62 exercises at 0.5 rather than 0.25 — including paradiddle#0, the most-trafficked rudiment lesson on the site — so on many pages the intended contrast is 2:1 and not 4:1.",
+        "THE CASE WHERE IT SHOULD BE UNMISTAKABLE is funk-ghost-notes exercise 1, which is a genuine ghost-note exercise at the full 4:1. If it is not obvious there, the tiers are wrong rather than merely subtle.",
+        "BLOCKED BEHIND BL-152: if assets are cached unversioned, Dylan may never have received the accent code at all, and no amount of re-measuring will explain his experience. Establish that first.",
+        "Every number this loop has produced about accents is a number. Nobody has listened."
+      ],
+      "acceptance": "the offline buffer is rendered to a WAV in the scratchpad and the path given to Dylan, alongside an A/B page under _site/dev/ with \"as shipped\" and \"accent-blind\" buttons on the same exercise; band-limited RMS is measured in the FULL MIX and the masked contribution is measured by rendering with and without the snare and diffing; and an audible margin is asserted in the mix rather than in isolation",
+      "log": [
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "Filed at Dylan's explicit request when he paused the loop. Supersedes the claim in BL-097, which is measured and met as written but proves the code rather than the experience."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-154",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "check-playhead-sync.js — the cursor must drift from the noteheads mid-bar even when the audio is perfect",
+      "evidence": [
+        "getMusicBounds takes startX from the first notehead and endX from lastCenter plus spacing, where spacing is the AVERAGE gap, then sweeps linearly in time.",
+        "But VexFlow allocates width by DURATION and adds width for clefs, time signatures and accidentals. So the mapping is wrong by construction and the cursor drifts from the noteheads mid-bar even when every onset is perfectly on time.",
+        "This needs no listening and no ear: compute each note sounding time from PatternMath, read its notehead x out of the built SVG, and assert playhead_x(t) lands within a few pixels of it.",
+        "RELATED TO BL-143, which owns the same defect from the space-axis side and measured a median error of 0.250 note-slots on staves that mix note values, up to 1.63, across a 24% sample. Check whether the two should merge — this item is the gate, BL-143 is the fix.",
+        "Iteration 81 established the time axis is now correct after the swing work (straightTime un-swings the cursor clock, exact at every onset within 0.004), so what remains is purely the space axis.",
+        "TRAP TO RECORD BEFORE BUILDING THE HARNESS: an earlier attempt saw the playhead frozen at x1=101.57 because --virtual-time-budget freezes the AudioContext clock. The same flag also stops rAF. Drive it in real time."
+      ],
+      "acceptance": "a check computes each note sounding time from PatternMath, reads its notehead x from the built SVG, and asserts the playhead x at that time is within a stated pixel tolerance, on staves that mix note values as well as those that do not; mutation-tested by restoring the linear sweep and watching it fail",
+      "log": [
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "Filed at Dylan's explicit request when he paused the loop."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-155",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Retire the town metaphor and treat the site as a normal learning resource",
+      "evidence": [
+        "DYLAN INSTRUCTION, VERBATIM, 2026-08-16: \"please add to the pipeline the removal of the weird 'Town' jargon and references, just forget that theme and treat the site as a normal learning resource.\"",
+        "Inventory to start from, not to be treated as complete: the footer motto \"The door's open. Bring sticks.\"; the tagline \"A free town for learning the drums\"; the footer column heading \"The town\"; the \"notice board\" framing; and the homepage headline \"The whole town practices to the same clock\".",
+        "THE NAME AND THE WORDMARK STAY. The domain is drum.town. It is the METAPHOR that goes, not the identity.",
+        "THIS UNBLOCKS OTHER WORK, which is the main reason it is worth doing rather than merely tidy. design/system.md section 10 designates a \"sanctioned poetry zone\", and that canon is precisely why BL-058 is blocked-human — the nav has no word \"Lessons\" and files everything else under \"Other Topics\", a junk drawer. Retiring the theme removes the constraint that blocked it.",
+        "It may also unblock BL-059, the seal, which has failed four separate attempts partly because it was trying to be a town mark rather than a clear icon.",
+        "MUST ALSO APPEND TO THE CLAUDE.md STYLE LEDGER, which is explicitly permitted (the guardrail sections are protected; appending to the ledger is not). Record that the metaphor is retired and that new prose must not reintroduce it. Without that, a future content tick writes it straight back in — the ledger is the only thing that carries a decision like this across iterations.",
+        "RE-CHECK BL-058 AND BL-059 FOR UN-BLOCKING once this lands."
+      ],
+      "acceptance": "no town-metaphor phrasing remains in shipped copy (tagline, footer motto and heading, notice-board framing, homepage headline), the name and wordmark are untouched, design/system.md section 10 no longer sanctions the theme, and CLAUDE.md Style ledger records the retirement; BL-058 and BL-059 are re-examined for un-blocking and their status updated either way",
+      "log": [
+        {
+          "iteration": 82,
+          "date": "2026-08-16",
+          "note": "Filed at Dylan's explicit request when he paused the loop, quoting his instruction verbatim so the intent survives."
         }
       ],
       "status": "ready",
