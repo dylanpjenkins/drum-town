@@ -1300,10 +1300,10 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' }
         ],
         tip: "Just quarter notes on the ride cymbal. The 8ths come next, but first your hand needs to feel the pulse without the skip-note. Steady, even, lock to the click."
       },
@@ -1315,12 +1315,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         tip: "<em>Ding · ding-a · ding · ding-a</em>. The two 8ths are swung — play the second one late, where the third note of an 8th-triplet would land. The first 8th is on the beat (\"<em>ding</em>\"), the second is the swung skip (\"<em>a</em>\")."
       },
@@ -1332,12 +1332,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -1355,12 +1355,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5320,12 +5320,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -5343,12 +5343,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -5366,12 +5366,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -5389,12 +5389,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -5416,7 +5416,7 @@ module.exports = {
           // We'll render as 8th triplets to place the snare on the third triplet of beat 4.
           const isRide = true;
           const isSnareSpot = (i === 11); // last slot of the bar
-          const note = { keys: isSnareSpot ? ['g/5/x2', 'c/5'] : ['g/5/x2'], duration: '8' };
+          const note = { keys: isSnareSpot ? ['f/5/x2', 'c/5'] : ['f/5/x2'], duration: '8' };
           return note;
         }),
         feet: [

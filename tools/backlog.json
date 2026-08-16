@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 75,
-    "next_dimension": "content",
+    "iteration": 76,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 123,
+    "next_id": 124,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -2182,8 +2182,8 @@
       "status": "ready",
       "attempts": 0,
       "chunk": {
-        "done": 0,
-        "total": 2,
+        "done": 1,
+        "total": 3,
         "size": 10
       },
       "log": [
@@ -2191,6 +2191,36 @@
           "iteration": 63,
           "date": "2026-08-14",
           "note": "Filed during BL-086 chunk 1. Noticed because independence-chapin-method#2 tip says the snare lands \"WITH the ride quarter\" while the notation had no ride at all, then confirmed as a corpus-wide class by sweep."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "Chunk 1 of 3 shipped: the two lessons whose entire subject is the ride. jazz-ride-pattern (all four exercises) and independence-chapin-method (all five) had every hand notehead on g/5/x2, a hi-hat, while their words named the ride throughout — \"Quarters on the Ride\" notating a hi-hat, and a jazz independence lesson whose stated premise is \"lock the ride and hi-hat foot into their jazz roles\" drawing the hand as a hat while separately notating the hi-hat FOOT as d/4/x2 in the same exercises. So there was no reading on which the hand voice was correct. 47 source lines changed, g/5/x2 to f/5/x2. That is 58 noteheads, not the 48 first reported — 46 literal note objects plus a generator at L5419 emitting 12 more, counted two independent ways by the adversarial pass."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "THE BUILDER EXTENDED MY SCOPE BY ONE AND WAS RIGHT. I briefed eight exercises; it changed nine, adding jazz-ride-pattern#2 \"Add the Hi-Hat Foot on 2 and 4\" — which my sweep missed because its own tip says \"hi-hat foot\" rather than \"ride\". The lesson body prescribes the build order literally: \"Quarters first. Add the skip-note. Add the hi-hat foot on 2 and 4. Add the bass drum on 1.\" So #2 is #1 plus a foot with the hand voice unchanged, and fixing only #0/#1/#3 would have put three steps of a four-step progression on the top line and the fourth in the space above it — worse than the status quo, and a direct failure of the acceptance, which says decided by reading the tip AND THE LESSON BODY. That is the third time a builder on this loop has overruled the orchestrator and been right."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "NO PROSE NEEDED REPAIRING, WHICH IS THE UNUSUAL SHAPE OF THIS BUG. Every \"hi-hat\" in both lessons refers to the FOOT and every \"ride\" was already true of the intent, so the notation was the only liar. Verified rather than assumed: an orchestrator diff of HEAD against the working tree, parsed per slug, shows 217 slugs before and after, exactly 2 changed, 9 exercises, and ZERO prose or metadata changes anywhere in the corpus. Normalising the diff by swapping the key back makes every added line byte-identical to the line it replaced, so no duration, dot, rest, accent or sticking moved — which is what a voice change must look like. chapin#4 \"the ride is written as straight triplets for clarity\" survives and is now literally about the ride rather than vacuous."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "MEASURED, NOT EYEBALLED. Geometry: every hand notehead in all 9 exercises now sits at y=58, exactly the top line, against reference probes of g/5/x2=53 and f/5/x2=58, with glyph identity confirmed by SVG command sequence so they are still x-heads and only the snare and kick are round. Audio: player.js maps f/5/x2 to the ride, and all 9 exercises rendered through the real player in an OfflineAudioContext against their pre-change specs give 0 of 18 renders unchanged — the change reached the ears in both kits. jazz-ride-pattern#0 electronic moved its sub-1kHz energy fraction from roughly 0.010 to roughly 0.175 — the builder measured 0.0113 to 0.1776 and the critic 0.0099 to 0.1727 with an independent filter, same direction and magnitude — landing on a single-note ride probe. Decay times were reported but NOT independently verified, so they are not recorded here as fact. And the fix puts these lessons onto the site own documented convention: reading-101 states \"hi-hat in the space above the top line, ride on the top line\". Before this, jazz-ride-pattern and its own downstream lesson jazz-medium-swing taught the same pattern on two different staff positions; they now render identically."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "TWO AUDIBLE CONSEQUENCES WORTH RECORDING, NEITHER A REGRESSION. In the ACOUSTIC kit the change roughly HALVES RMS across all nine exercises — jazz-ride-pattern#0 from 0.0470 to 0.0241, chapin#4 from 0.0899 to 0.0510 — because the acoustic ride sample is much quieter than the acoustic hat. That is a global property other lessons already inherit rather than something this change introduced, but these nine get noticeably quieter for acoustic-kit readers and someone should listen. And chapin exercise 5 now plays twelve ride strokes per bar at 75 BPM with a ride long decay where it previously played twelve short hat ticks; its tip already owns the notation choice (\"the ride is written as straight triplets for clarity\"), so the page stays honest, but it is the one exercise where the change is more than a different drum. Also an asterisk on the no-prose-repair claim: jazz-ride-pattern listening[2].note says \"the hi-hat on 2 and 4 is quiet, constant, and completely load-bearing\", the only \"hi-hat\" in either lesson not explicitly qualified as the foot. It describes an Oscar Peterson record rather than the notation, and in jazz it means the foot chick, so it is not falsified — but the claim needed the footnote."
+        },
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "CHUNK PLAN REVISED FROM 2 TO 3, because the builder corrected sweep found more than either of us had. four-way-foundation is 5 exercises and not 2 — #2/#3/#4 continue the same hand voice under a graduation criterion reading \"ride 8ths, hat-foot 2 and 4, kick 1 and 3, snare 2 and 4\" — and two lessons were invisible to an exercise-words sweep entirely because no individual tip says the word: independence-melodic-snare (4 exercises, graduation criterion \"holds shape over the ride + hat-foot scaffold\", and it is chapin own nextLessons target) and fusion-coordination-foundation (1, body says \"The ride plays a jazz pattern\"). Chunk 2 = three-limb-patterns #0/#1/#4, four-way-foundation #0-#4, independence-clave-foot #1/#2/#4 (11 exercises). Chunk 3 = the two new lessons (5). DO NOT SWEEP three-limb-patterns: its #2 and #3 are deliberately the hi-hat, \"the rock starting pair\", and changing them would be a new defect. And three-limb-patterns#4 needs more than a voice change — its title names \"Hi-Hat + Kick + Ride\" while only two voices are notated, and once the hand becomes the ride there is no hi-hat on that stave at all; that is the BL-089 overlap."
         }
       ]
     },
@@ -2812,6 +2842,34 @@
           "iteration": 75,
           "date": "2026-08-15",
           "note": "Filed by the orchestrator. The builder measured it, judged it, proposed a fix and a rejected alternative, and did not widen scope to take it — which is the right call and the reason this item starts with the engineering already done."
+        }
+      ]
+    },
+    {
+      "id": "BL-123",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "No gate can see a note on a wrong but legal staff position, which is how BL-099 survived 76 iterations",
+      "evidence": [
+        "Raised by the builder during BL-099 chunk 1 (iteration 76) and then MUTATION-PROVED by the adversarial pass, which found it wider than first stated.",
+        "PROVED, not argued: reverting all nine BL-099 exercises to their exact pre-fix state leaves EVERY source-side gate green — 11 checks, audit-lessons Total 0, audit-site source metrics identical. The harness was validated with controls that do fail: a b/4 notehead trips check-player-keys and check-staff-positions, and a dropped beat gives audit-lessons Total 1.",
+        "AND IT IS NOT SPECIFIC TO RIDE VERSUS HI-HAT. Writing the chapin SNARE on the hi-hat line also passes all 20 gates. The blind spot is the whole class: a note on a wrong but legal staff position, where no prose happens to claim a position. The only tripwire today is a sentence someone chose to write.",
+        "A wrong-voice notation that makes no prose claim about a POSITION is invisible to all 20 checks. check-staff-positions only reads sentences that name a line or space. check-tip-claims only reads beat positions. check-notation-frame reads geometry, not meaning. Nothing cross-references the INSTRUMENT a tip names against the keys the stave actually contains.",
+        "A concrete gap in check-staff-positions found alongside this: its positionsIn() requires a qualifier such as \"middle\", \"top\" or an ordinal, so the bare phrase \"the hi-hat line\" never parses — even though it pairs \"notated\" with \"line\" and therefore meets the exact BL-087 criterion that gate was built to enforce. three-limb-patterns#4 contains that phrase today.",
+        "That is how a lesson titled \"Quarters on the Ride\" shipped a hi-hat, and how a jazz independence lesson whose premise is \"lock the ride and hi-hat foot into their jazz roles\" drew the hand as a hat for 76 iterations with every gate green.",
+        "The missing check: for each exercise, extract the instrument words from its title, tip, meta and graduationCriteria (ride, hi-hat, bell, crash, china, cowbell, floor tom, high tom, kick, snare, cross-stick) and assert the stave contains a key mapping to each named voice — with an exemption model for verb-sense and comparative uses, which the corpus is full of: \"ride the offbeats\", \"this is how a ride cymbal swings\", \"the brush equivalent of the jazz ride pattern\".",
+        "Eleven such false positives are already identified and can seed the exemption tests: the-shuffle#3, jazz-brushes-intro#2, jazz-broken-time#1, triplet-feel#3, latin-guaguanco#3, rock-open-hats#0, accompaniment#1, snare-voicings#2, ghost-notes-found#3, metal-metric-modulation#2, odd-meters-9-8#0.",
+        "It would find BL-099 chunks 2 and 3 automatically instead of leaving them resting entirely on human judgement, which is the current situation."
+      ],
+      "acceptance": "a check asserts that every instrument named in an exercise words is present in its stave, with verb-sense and comparative uses exempted by rule rather than by a slug list; it exits 1 on the pre-BL-099 corpus and 0 on the fixed one; it also fails on the snare-written-on-the-hi-hat-line mutation, since the class is wider than ride-versus-hat; and check-staff-positions positionsIn() is widened to parse an unqualified \"the <voice> line\"",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 76,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator from the builder own \"still weak\" list. It is the gate this whole item class has been missing."
         }
       ]
     }
