@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 78,
-    "next_dimension": "quality",
+    "iteration": 79,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 128,
+    "next_id": 149,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -29,7 +29,12 @@
       "Iteration 70, methodology for any future accessibility audit: without --force-renderer-accessibility, headless Chromium leaves content-visibility: auto subtrees uncomputed, so /rudiments/ reports 4 of 40 headings and 4 of 40 notation images in the AX tree. The screen-reader walker nearly filed that as a blocking finding. With the flag, all 40 are present at every scroll position and queryAXTree finds the fortieth card without scrolling. CONTENT-VISIBILITY COSTS A SCREEN READER NOTHING HERE — do not re-file it.",
       "Iteration 70, the shape of nearly every gate defect found: a gate that measures the output with the thing that produced it, an exemption broader than its author realised, or a field computed and never asserted. When adding a gate, the useful question is not \"does it pass\" but \"construct the defect it names and watch it fail\" — 17 of 17 gates passed their own headline claim while failing at least one mutation of it.",
       "Iteration 74, HOW TO MEASURE A STAFF POSITION, and the two ways it goes wrong. Stave lines render at y 58/68/78/88/98; spacing is 10, so one staff position is 5 units. The position of a note is its notehead INK BOUNDING-BOX CENTRE (exact bezier stationary points, not the control hull), which lands on VexFlow own ledger lines to under 0.001 units. NEVER measure from the raw path origin, the \"M x y\" that opens the d attribute: it sits 5.054 ABOVE the centre for round noteheads and 4.015 BELOW the centre for x-heads. Trap one is measuring from the origin at all, which puts every note one staff position too high and makes the snare look like a line note — that is how the orchestrator briefed reading-101 as correct and the-drum-kit as broken, when the reverse is true. Trap two is correcting it with a single constant: a uniform +5.054 fixes drums and moves every cymbal by 9.069 units, 1.81 staff positions, which would have taken the ride off the top line and turned the-drum-kit correct cymbal claims into errors. Calibrate against a ledger line for BOTH glyph families before trusting any position: c/4 and c/4/x2 both give a ledger line at y=108, a/5 and a/5/x2 both at y=48. Verified table: china b/5/x2 43, crash a/5/x2 48, hat g/5/x2 53, ride f/5/x2 58 (top line), bell e/5/x2 and high tom e/5 63 (SAME position, distinguished only by notehead shape), mid tom d/5 68, snare c/5 73 (3rd space), b/4 78 (middle line, ZERO drum uses — though 145 visible RESTS default to restKey b/4, so it is not unused ink), floor tom a/4 83, kick f/4 93, hi-hat foot d/4/x2 103. Any key census must read BOTH hands and feet and must follow grace notes, which inherit their parent keys: hands-only reports f/4 as 1 use instead of 2345, and skipping grace notes reports c/5 as 3922 instead of 4082.",
-      "Iteration 77, scratchpad collision between roles: the builder and the adversarial critic share one scratchpad directory, and the critic wrote its own mutate.js over the builder harness of the same name mid-iteration. Nothing shipped wrong, but the builder had to rebuild a 44-case suite. CONVENTION from here: name any harness or scratch script with its item id, e.g. bl123-mut-nv.js, and write temporaries under the same prefix. Both roles are told to use the same directory and neither can see the other files list in advance, so a generic name WILL eventually collide."
+      "Iteration 77, scratchpad collision between roles: the builder and the adversarial critic share one scratchpad directory, and the critic wrote its own mutate.js over the builder harness of the same name mid-iteration. Nothing shipped wrong, but the builder had to rebuild a 44-case suite. CONVENTION from here: name any harness or scratch script with its item id, e.g. bl123-mut-nv.js, and write temporaries under the same prefix. Both roles are told to use the same directory and neither can see the other files list in advance, so a generic name WILL eventually collide.",
+      "Iteration 79, OFFLINE AUDIO HARNESS METHOD, learned the hard way and reusable. Rendering many specs into one OfflineAudioContext by offset is fast but the offsets MUST be snapped to 128-frame render quanta: unsnapped, one probe read 1.487 at offset 0 and 1.211 elsewhere, a 19% pure artefact. Sample-snapping fixed 3 of 5 probes; quantum-snapping fixed all 5. Validate any such harness by rendering the same probe solo and at two different offsets and requiring bit-identical output, then re-render a corpus sample all three ways — the iteration-79 run got 33 of 41 bit-identical, 40 of 41 within 1.6%, and the clip verdict agreeing 41 of 41. Quote a tolerance with every peak. Validate a LEVEL metric against something set in code and not in data: footAcoustic is literally playAcousticSample(\"hat\", …, 0.55), so a correct probe returns 0.55000.",
+      "Iteration 79, MEASURE VOICES SEPARATELY RATHER THAN BY RMS. Iteration 76 reported the acoustic ride at \"roughly half the RMS\" of the hat and iteration 79 showed why that is misleading: the ride PEAK equals the hat (0.9999 vs 1.0000) and the difference is length and body — energy 26.9 against 101.3, ring 2.49s against 0.14s. A single conflated RMS number cannot tell a quieter stroke from a longer one. Use peak, total energy and ring time as three separate numbers.",
+      "Iteration 79, FALSE ALARMS CAUGHT BY THE AGENTS THEMSELVES, recorded so no future sweep re-files them. (1) A duplicate-spec key omitting the grace field made all four dragadiddle exercises look identical, which reads as \"the lesson about drags notates none\" — #1/#2/#3 each carry 8 grace notes and only #0 (\"No Drags Yet\") has none. This is the SECOND time a duplicate-spec hash has produced a phantom by omitting a property; the first was articulation at iteration 60. Include every distinguishing field. (2) An accent checker resolving \"beat 1\" against bar 1 flagged independence-melodic-snare#1, whose \"accent on beat 1\" is scoped to bar 2 and sits correctly at absolute beat 5. (3) A parser mis-read \"dotted-8th kick\" against a spec carrying dot:true with duration 8.",
+      "Iteration 79, THE nextLessons GRAPH IS NOT A REACHABILITY GRAPH. Walking nextLessons alone from lesson 1 reaches only 106 of 217 lessons. That is a graph statistic and NOT an orphan defect: the built homepage links all 217 (219 hrefs, 217 unique) and every lesson appears in its chapter sidebar. Any future sweep quoting \"111 unreachable lessons\" is wrong. Related and also verified clean: 343 prerequisite edges and 336 nextLessons edges have zero dangling targets, zero section-slug targets, zero self-references and zero cycles; and difficulty is monotonic within all seven genre tracks, so the seven apparent regressions in flat curriculum order are track boundaries by design.",
+      "Iteration 79, WHAT THE PROSE-VS-NOTATION SEAM NO LONGER CONTAINS. Swept and clean, with counts, so the next campaign is aimed at something real: voice counts (\"N kicks/snares/toms\") 39 phrases and 0 real defects; per-voice duration claims 178 phrases and 0; title-level subdivision labels 153 and 0; sticking claims 87 explicit strings plus 45 \"alternating\" and 0 new beyond BL-089; sibling and graduation-criteria references 89 plus 216 and 0 dangling; graduation-criteria tempo and bar-count claims are correct BY DESIGN, since a criterion sets a target and asks the reader to loop — 27 naming a tempo above every exercise bpm are pedagogy, not defects. The seam that IS still live is meta subdivision tokens, accent POSITION claims, note-count titles and counting lines."
     ],
     "notes": []
   },
@@ -2358,6 +2363,11 @@
           "iteration": 64,
           "date": "2026-08-14",
           "note": "Surfaced by the builder while resolving what the BL-076 tempo handoff should do for x/8 meters; independently re-derived by the orchestrator across all 892 specs before filing. Note the interaction with BL-097 (playback ignores accents) and BL-099 (ride notated as hi-hat): three separate ways the audio and the page disagree, all found in the same fortnight."
+        },
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "ITERATION 79 DISCOVERY CORRECTS THIS ITEM NUMBER: it is 43, not 44. Exhaustive re-derivation over every tempo token form in all 852 metas gives 41 dotted-quarter cases (40 written as the dotted-quarter glyph plus odd-meters-9-8#1, whose meta prints BOTH \"8th = 240\" and \"dotted-♩ = 80\" — the two agree with each other and both disagree with bpm 80) and 2 eighth cases (reading-time-signatures#3 and #4). There is no third eighth case: fusion-odd-meters#1 \"8th = 180\" against bpm 90 and all four \"8th = 200/220\" metas are CORRECT. 14 lessons affected. Sharper figure for the gate hole: check-exercise-meta.js compares a tempo on 776 of 852 metas while printing \"all 852 exercise metas match their spec\" — and the 76 it never compares include all 43 defects plus 18 correct \"quarter = N\" metas."
         }
       ]
     },
@@ -2493,6 +2503,11 @@
           "iteration": 67,
           "date": "2026-08-14",
           "note": "Filed during BL-078. Each was deliberately sequenced out of that commit rather than forgotten."
+        },
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "ITERATION 79 DISCOVERY adds four instances: dynamic-spectrum#0 (tip \"Run all five levels in order\"), rock-dynamics#0, rock-dynamics#3 and brushes-mastery#2 all name two or more dynamic levels. rock-dynamics#3 is the sharpest — an eight-bar crescendo mp to mf to f to ff that the player renders as a SINGLE STEP, because the marks only distinguish two tiers."
         }
       ],
       "id": "BL-108",
@@ -2768,6 +2783,11 @@
           "iteration": 74,
           "date": "2026-08-15",
           "note": "Filed by the orchestrator from the adversarial pass. The builder was told to report it and not to widen scope."
+        },
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "ITERATION 79 DISCOVERY: census complete and the cost measured. Across all 892 play buttons there is EXACTLY ONE double-triggered voice — playing-to-a-song#3 beat 1 — and f/4 in a hands array is 1 of 2345. Removing the stray kick takes the rendered buffer peak from 2.4236 to 1.5477 electronic and 2.4488 to 1.5055 acoustic, a drop of 3.9 and 4.2 dB. It is currently THE LOUDEST ACOUSTIC EXERCISE ON THE SITE, so this item also removes the acoustic clipping ceiling that BL-136 measures."
         }
       ]
     },
@@ -3024,6 +3044,510 @@
           "iteration": 78,
           "date": "2026-08-16",
           "note": "Filed by the orchestrator. The builder flagged it against its own change rather than letting it pass silently, which is the only reason it is written down — and the critic then corrected the framing of both the builder and the orchestrator, which is why the evidence above leads with the wrong version rather than quietly discarding it."
+        }
+      ]
+    },
+    {
+      "id": "BL-128",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "Seventy-six exercises print a swing instruction and play dead straight, including the lesson that teaches the jazz ride",
+      "evidence": [
+        "MEASURED TWICE, INDEPENDENTLY: 76 exercises across 27 lessons carry \"swing 8ths\", \"swung 16ths\" or \"shuffle\" in their meta, have no tuplets, and place notes on the subdivisions the instruction would move. That is 16 of the site 21 jazz lessons. The second lens counted 75 across 26 with a slightly narrower filter; the difference is filter width, not disagreement.",
+        "THERE IS NO SWING ANYWHERE IN THE PLAYBACK CODE. src/assets/js/pattern-math.js converts durations by pure binary subdivision ({w:4,h:2,q:1,8:0.5,16:0.25,32:0.125}, x1.5 for dots, x tuplet scale). src/assets/js/player.js contains zero occurrences of \"swing\". A repo-wide grep outside lessonContent.js finds the word only in prose.",
+        "jazz-ride-pattern #1-#3 — the lesson that teaches the jazz ride — are q,8,8,q,8,8 at \"4/4 · swing 8ths · ♩ = 90\". The skip note plays on the & instead of the last triplet partial, so it sounds like a straight-8ths rock ride.",
+        "THE CORPUS CONTRADICTS ITSELF ON ONE PAGE: all five independence-chapin-method metas read \"4/4 · swing 8ths\", but #4 carries 3:2 tuplets and swings while #0-#3 do not. Same in jazz-modern-jazz (#4 swings, #0/#2 do not). the-shuffle #0-#3 use real tuplets and are correct — so the site already contains both the right way and the wrong way.",
+        "The site own words define the target it misses. hi-hat-articulation#3 tip: \"Treat the swing 8ths as triplets with the middle note rested out.\"",
+        "NOT a duplicate of BL-085, whose caveat explicitly rules the NOTATION correct and never mentions playback. The straight-eighth notation is right by convention; only the audio is wrong. This is the same shape as BL-097, where accents were inaudible until iteration 65 made them real."
+      ],
+      "acceptance": "an exercise whose meta names a swing or shuffle feel sounds swung — either the player applies a swing ratio when the meta says so, or those specs gain tuplets the way the-shuffle already does; verified by rendering at least three of the 76 through the real player in an OfflineAudioContext and measuring inter-onset intervals against the straight baseline, and by a check asserting the two 8ths of a swung beat are not equally spaced",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found independently by the playback lens and the curriculum lens, with matching numbers."
+        }
+      ]
+    },
+    {
+      "id": "BL-129",
+      "dimension": "quality",
+      "priority": 1,
+      "title": "A flam and a drag are the same audio file — grace notes are drawn and never played",
+      "evidence": [
+        "PROVED, NOT INFERRED: player.js contains no reference to grace. Six shipped specs rendered as-is and with grace deleted produce BIT-IDENTICAL buffers (FNV-1a over every float32 sample). The control — promoting the grace to a real key — changes the hash in all six.",
+        "flam#0 \"A Single R-Flam on Each Beat\" and drag#0 \"A Single R-Drag on Each Beat\" hash to the SAME VALUE, 1503681920. So do /rudiments/ card #20 Flam and card #31 Drag.",
+        "Scale: 160 grace strokes on 120 notes in 23 exercises across 6 lessons (flam, drag, flam-tap, flam-accent, swiss-army-triplet, dragadiddle), plus 116 strokes on 20 of the 40 rudiment cards — the entire Flam group (#20-30) and the entire Drag group (#31-40 except #35). 276 strokes behind 43 play buttons.",
+        "The lessons state the contract the audio breaks. flam graduation criteria: \"Grace note clearly softer than the main note — never matched in volume.\" drag#0 tip: \"Listen for l-l-RIGHT — three distinct sounds.\" drag#2 tip: \"it sounds like a flam instead of a drag.\"",
+        "SAME CLASS: rudiment #4 Multiple Bounce Roll carries tremolo:3 on four notes (the buzz glyph) and plays four plain quarters, identical to five unrelated four-quarter-note exercises.",
+        "THE FIX IS ALREADY EXPRESSIBLE: rudiment #35 Single Dragadiddle writes its drag as two metered 32nds and IS audible, and card #30 own description says the drag is \"written out so you can hear it\".",
+        "No gate covers grace, tremolo or articulation. check-player-keys asserts key coverage only and does not even read grace keys."
+      ],
+      "acceptance": "a flam sounds as two strokes and a drag as three; a check renders flam#0 and drag#0 offline and asserts each differs from its own grace-stripped control, that the two differ from each other, and that the grace stroke peaks below its principal",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens, proved by buffer hashing rather than by inference."
+        }
+      ]
+    },
+    {
+      "id": "BL-130",
+      "dimension": "content",
+      "priority": 1,
+      "title": "The site draws two notation symbols it never teaches, one of them on 92% of its staves",
+      "evidence": [
+        "THE REPEAT BARLINE: repeatBegin/repeatEnd are set on 786 of 852 exercises, in 211 of 217 lessons, first at curriculum position 1 (gear-basics). It renders as real ink — reading-101 first stave emits a 3px rect, a 1px rect and two arc dots at y 73.5 and 83.5.",
+        "The ONLY explanation anywhere in the corpus is reading-complex-charts at curriculum position 211 of 217, one bullet: \"Repeat (||: :||) — replay the bracketed bars.\" reading-101 — whose tagline is \"How drum notation works, from the staff up\", and which enumerates the neutral clef, bar lines, the time signature, every staff position, every note value and rests — never mentions it, and ALL SIX of its own exercises carry the mark.",
+        "THE ACCENT WEDGE: accent:true first draws at position 3 (stick-grip#2); 39 accented notes appear across positions 3-16; the first prose to name the glyph is paradiddle at position 17 (\"the accents (the > marks above the staff)\"). reading-101 sits between them and never mentions it, while using the word \"accent\" from lesson 1 as though the glyph were already known.",
+        "THE BEGINNER CONSEQUENCE, observed rather than theorised: a persona walking the path hit stick-grip#0, titled \"Eight Quarter Notes\", counted four notes on the stave, and could not reconcile it — because the thing that reconciles them is the repeat sign nobody had explained. Its words: \"That is where I first felt stupid rather than new.\"",
+        "Adjacent to BL-119 (which is about staff POSITIONS rather than glyphs) — merge if one reading-101 item is preferred."
+      ],
+      "acceptance": "reading-101, or a named sibling in Chapter 2, states what the repeat barline and the accent wedge mean; a check asserts that every glyph class the renderer can emit is named in prose at or before its first use in curriculum order",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found independently by the beginner persona and the curriculum lens, with matching numbers."
+        }
+      ]
+    },
+    {
+      "id": "BL-131",
+      "dimension": "content",
+      "priority": 1,
+      "title": "reading-syncopation teaches the tie, and the site cannot draw one",
+      "evidence": [
+        "ZERO ties exist in 852 exercises. There is no tie field in the data model (note fields are keys, duration, sticking, accent, rest, articulation, visible, dot, grace, ghost) and tools/notation-renderer.js contains no tie code — the only match for \"tie\" is inside an unrelated comment at line 734.",
+        "Meanwhile the lesson body DEFINES the symbol: \"you need to read ties: a curved line connecting two notes of the same pitch.\"",
+        "graduationCriteria[1] is \"Counts ties accurately — does not re-strike the tied note.\"",
+        "Exercise #2 is TITLED \"Tied Notes Across Beats\" and its tip says \"a tie comes in\". #3 tip says \"8th + accented 8th tied to beat 4\". Both staves draw a note followed by a rest.",
+        "So a beginner told to find the curved line will not find one on this page or on any other page of the site."
+      ],
+      "acceptance": "either the renderer draws ties and those two exercises use them, or the lesson states plainly that this site writes the tie as a note plus a rest; a check asserts that no prose teaches a symbol the renderer cannot emit",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the prose-vs-notation lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-132",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Two reading lessons print a counting line that contradicts their own stave",
+      "evidence": [
+        "reading-dotted-rhythms#3 \"Reverse: 16th + Dotted-8th (Scotch Snap)\". Counting line: \"1 (e &) a-of-1 → 2 (e &) a-of-2\" — second strike on the a (x.75) with e and & silent. The stave strikes at 1.00 and 1.25, a 16th then a dotted 8th, so the second strike is on the E. The tip prose is correct (\"the short note lands on the beat, the long one follows\"); only the count line is wrong. Sibling #1, which #3 says it mirrors, strikes at 1.00 and 1.75 and correctly calls that the a.",
+        "reading-syncopation#1 \"Backbeat-Style Mix\", two errors of the same half-beat slip. Counting line \"1 (&) &-of-2 3 (&) & 4 (&)\" against a stave sounding at 1, 2, 2.5, 3.5, 4 and resting at 1.5, 3, 4.5 — slots 3, 4 and 5 are labelled \"&-of-2\", \"3\", \"(&)\" where they should be \"2\", \"&\", \"(3)\".",
+        "And in the same tip: \"The accents fall on the & of 2 and beat 4\" — accent:true sits at 2.0 and 4.0. The & of 2 is an unaccented note.",
+        "Sibling #4 is a model of the convention and fully correct across all four beats, which makes #1 the outlier rather than a second convention.",
+        "Invisible to check-tip-claims, which parses \"<voice> on <positions>\" and reads no counting lines."
+      ],
+      "acceptance": "every Counts/Count line in the corpus names the slot its own stave sounds, verified by recomputing all 11 counting lines against their specs; and reading-syncopation#1 accent claim names the notes actually marked",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the prose-vs-notation lens. Same family as BL-087: the lessons that teach reading, teaching it wrongly."
+        }
+      ]
+    },
+    {
+      "id": "BL-133",
+      "dimension": "content",
+      "priority": 1,
+      "title": "The site promises to say when a lesson needs equipment, then hides a pad-to-kit cliff at lesson 30 and mis-sells the pad",
+      "evidence": [
+        "gear-basics makes the promise explicitly: \"When a lesson in this curriculum needs a piece of equipment, the lesson says so.\"",
+        "THE CLIFF: 33 of 64 Foundations lessons are playable on a practice pad, 31 are not, and the boundary is exact — chapters 1-3 use only c/5, and from first-beat (position 30) onward every lesson needs a kick and a hi-hat. No chapter tagline, lesson header or prerequisite says so. Lessons that need a kit and say nothing include first-beat, first-beat-kicks, first-beat-color, two-bar-phrasing, the-shuffle, snare-voicings, cymbal-voicings, ghost-notes-found, basic-fills, pickup-fills and playing-to-a-song.",
+        "THE MIS-SALE: gear-basics says \"A practice pad (~the price of a video game) plus a metronome covers every rudiment and hand-technique lesson in Foundations.\" Foundations chapter 6 is titled \"Hand Technique on the Kit\" and 5 of its 8 lessons notate a kick pedal and hi-hat — snare-voicings, hi-hat-articulation, cymbal-voicings, ghost-notes-found, finger-control. Only accent-tap, moeller-stroke and dynamic-spectrum are pad-playable. This is a sentence a beginner spends money against.",
+        "The persona stopped the walk here, and the reason is the finding: \"Not because I was bored — because I could no longer tell which of the remaining lessons I was allowed to do.\""
+      ],
+      "acceptance": "the gear-basics claim is narrowed to what is true or scoped to named lessons; every lesson whose exercises use a key other than c/5 declares the equipment it needs; a check derives the required pieces from the exercise keys and fails on any lesson that needs more than a pad without declaring it",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the beginner persona, who was making a purchase decision at the time."
+        }
+      ]
+    },
+    {
+      "id": "BL-134",
+      "dimension": "content",
+      "priority": 1,
+      "title": "Nothing on the site tells a first-time kit player that the right arm crosses over the left",
+      "evidence": [
+        "first-beat builds the backbeat limb by limb — hi-hat alone, add the kick, drop the kick and add the snare, put the kick back, then eighths — and carries NO sticking on any of its five exercises and no prose about hand assignment.",
+        "Searching all 217 lessons: the first mention of crossing over is basic-fills at position 55, and it is about reaching the high tom, not the hi-hat. Open-handed playing appears once, in fusion-mahavishnu at position 165.",
+        "setup-posture comes closest — \"Hi-hat cymbals — high enough that your right stick can reach them comfortably without lifting your shoulder\" — but never says the arms cross, which is the part a beginner cannot infer.",
+        "This is the single most physical thing a first-time kit drummer has to be told, and the persona named it as the thing they would have got wrong alone in a room."
+      ],
+      "acceptance": "first-beat states which hand plays the hi-hat and which the snare, and that the hi-hat hand crosses over, with open-handed named as the legitimate alternative; ideally its exercises carry sticking",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the beginner persona as a verified absence."
+        }
+      ]
+    },
+    {
+      "id": "BL-135",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Thirteen Prerequisites boxes point at lessons that come later on the site own path",
+      "evidence": [
+        "The curriculum flattens to 217 lessons in 19 chapters, 1:1 with lessonContent keys, and src/index.njk walks that exact order for the homepage Continue CTA — so there IS one canonical linear path and a forward-pointing prerequisite is self-contradictory rather than theoretical.",
+        "Thirteen cases, worst first by gap: independence-clave-foot (pos 53, Foundations) requires latin-clave-intro (125, +72); rock-linear-fills (76) requires fusion-linear-basics (148, +72); rock-prog (79) and rock-odd-meter (80) require fusion-odd-meters (150); jazz-elvin-jones (102) requires fusion-polyrhythms (155); funk-linear-funk (111) requires fusion-linear-basics; funk-displacement (116) and funk-vinnie-funk (123) require fusion-displacement (152); funk-purdie-shuffle (117) requires fusion-half-time-shuffle (147); independence-chapin-method (50, Foundations) requires jazz-ride-pattern (84, +34); jazz-bossa-jazz (92) requires latin-bossa-nova (126); rock-hybrid-grooves (81) requires funk-displacement (116); funk-new-orleans (115) requires latin-clave-intro (125).",
+        "The two Foundations cases are unambiguous, because Foundations is Section I and both lessons are genuinely built on the missing prerequisite: independence-chapin-method#0 is \"Ride pattern plus hi-hat foot on 2 and 4. EVERY exercise that follows happens on top of this\", and independence-clave-foot#0 is son 3-2 clave.",
+        "Also three lessons whose prerequisite is labelled HARDER than themselves, worst: hiphop-modern-r-and-b (Intermediate) requires funk-modern-r-and-b (Expert).",
+        "Referential integrity is otherwise clean: 343 prerequisite edges and 336 nextLessons edges, zero dangling, zero pointing at a section slug, zero self-references, zero cycles."
+      ],
+      "acceptance": "no lesson prerequisites names a slug appearing later in lessonsData.order, or the ledger order changes so that it does not; a tools/checks script asserts it",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the curriculum lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-136",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "782 of 852 exercises clip past full scale, and the loudest was never in range of the accent work",
+      "evidence": [
+        "Rendered: peak above 1.0 in 782 of 852 electronic (91.8%) and 708 acoustic (83.1%); above 2.0 in 28 and 9; maximum 2.768 on latin-comparsa#2 electronic and 2.449 on playing-to-a-song#3 acoustic. Hard-clipped samples are 0.047% and 0.133%, so it reads as a crack on downbeats rather than continuous distortion.",
+        "ANSWER TO WHETHER ITERATION 65 MADE IT BETTER: on the comparable population, unchanged. Iteration 65 measured the accent-lowering set at 196 of 201, up to 2.172; that set is now 211 exercises and reads 200 of 211, max 2.170. Identical proportion and ceiling.",
+        "What iteration 65 never measured is the other 641. latin-comparsa#2 has NO ACCENTS AT ALL, so it was outside that set: its four downbeats stack bell, floor tom, snare and kick, and it has always peaked at 2.768, about +8.8 dB.",
+        "Every peak carries a measured tolerance of plus or minus 1.6%, established by re-rendering a 41-exercise sample three ways; the clip verdict agreed 41 of 41."
+      ],
+      "acceptance": "no exercise rendered buffer exceeds 1.0 in either kit, by a master limiter or per-voice headroom; a check renders the 28 worst and asserts peak at or below 1.0, with the baseline written down so it cannot regrow",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens, which also answered the iteration-65 comparison question."
+        }
+      ]
+    },
+    {
+      "id": "BL-137",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "The two kits have different internal balances, so the backbeat disappears when you switch to acoustic",
+      "evidence": [
+        "Isolated single strokes, peak: hi-hat 0.4008 electronic against 1.0000 acoustic; snare 1.2404 against 0.9999; ride 0.4101 against 0.9999; crash 0.5838 in both; floor tom 0.7866 in both; bell 0.3121 in both.",
+        "SNARE-TO-HI-HAT IS 3.09 (+9.8 dB) ELECTRONIC AND 1.00 (0 dB) ACOUSTIC. In the acoustic kit the backbeat is level with the ostinato.",
+        "Cause: the five sampled voices are all normalised to full scale and play with no gain reduction, while the synthesized fallbacks keep levels tuned against each other. So in acoustic a crash is 4.7 dB QUIETER than a hi-hat and a floor tom 2.1 dB quieter — an inversion that does not exist electronically, where the crash is 3.3 dB above the hat.",
+        "Corpus consequence: 18 exercises more than double in RMS when you switch to acoustic, up to 5.39x, and they are exactly the hi-hat lessons — fusion-sixteenth#0, latin-bossa-nova#0, hi-hat-foot#1, the-shuffle#0, first-beat#0, hi-hat-articulation#0. None more than halves.",
+        "It also corrects iteration 76: the acoustic ride PEAK equals the hat (0.9999 vs 1.0000); its energy is 26.9 against 101.3 and it rings 2.49s against 0.14s. The \"half the RMS\" reading is real but it is a length-and-body difference, not a quieter stick.",
+        "NOT a regression of BL-039: bell, crash, china and all three toms being byte-identical between kits is that item shipped decision. It is the CAUSE of this imbalance, not a separate defect."
+      ],
+      "acceptance": "a stated per-voice level table that both kits are mixed to, with the snare-to-hat, crash-to-hat and tom-to-hat ratios agreeing between kits within a documented tolerance; a check asserts them from isolated one-shot renders",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens using isolated single-stroke probes rather than a conflated RMS."
+        }
+      ]
+    },
+    {
+      "id": "BL-138",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Fifty-eight exercises draw an accent that produces no sound at all",
+      "evidence": [
+        "player.js only ever LOWERS. When every note of an accented voice carries the mark there is nothing to lower against, so the wedge is silent. 58 exercises, 210 accent glyphs; in 44 of them every voice sits at one level, so the whole stave is dynamically flat.",
+        "latin-clave-intro #0-#4: all five clave notes accented, all at 1.0, indistinguishable from no accents — and the accents exist to lift the clave over the kick and hi-hat foot, which also play at 1.0.",
+        "Also flam #0-#2, drag #0-#2, funk-quarter-pulse #0/#1/#3, cymbal-voicings #2 and #3 (one accent on the only crash or china note in the bar), moeller-stroke#0, metal-thrash#1.",
+        "DISTINCT from BL-103 (accents that should be a timbre rather than volume) and BL-108 (lessons teaching more levels than the player has tiers): this is an accent that IS meant to be volume and produces none."
+      ],
+      "acceptance": "an exercise that draws an accent produces an audible level difference at that note, or the mark is removed; verified by rendering each of the 58 and asserting a measurable ratio",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens. Distinct from BL-103 and BL-108."
+        }
+      ]
+    },
+    {
+      "id": "BL-139",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Six exercises promise a change from their sibling that the notation never makes",
+      "evidence": [
+        "Each is byte-identical to its sibling across every note field (keys, duration, sticking, accent, rest, articulation, visible, dot, grace, ghost), plus tuplets and beamGroups, AND at the same bpm — so no tempo-push reading rescues them.",
+        "jazz-up-tempo-intro#2 \"Up-Tempo Time with No Kick\": \"Same ride as Exercise 2, but the kick is completely absent — not feathered, gone.\" #1 has no kick either, and no exercise in the lesson has one. The removal that is this exercise stated content never happens.",
+        "jazz-bossa-jazz#2 \"Add a Chapin-Style Snare Comp\": identical to #1 at 130 BPM. The lesson third graduation criterion grades \"Single Chapin-style snare comp (Ex 3) lands cleanly\" — a thing not present. #3 in the same lesson DOES notate a real two-bar comp, so the capability is right there.",
+        "paradiddle-diddle#2 \"Lead Accent (Downbeat of Each Bar)\": identical to #0 and states the same content. Counter-argument to weigh before editing: the lesson runs accent, no accent, accent, so this may be a deliberate A-B-A — but neither exercise says so and the criterion presents \"Lead accent (Ex 3)\" as new.",
+        "bass-drum-doubles#2 == #3 \"Kick-Double-Snare Groove\".",
+        "metal-bomb-blasts#2 \"Alternating Bomb Bar\" is identical to #1 while its graduation criterion grades an alternation, and its own tip contradicts itself: \"The notation shows bar 1 — snare 16ths over kick 16ths. In practice bar 1 = snare-only, bar 2 = kick-only.\" The renderer handles rests (2513 in the corpus), so a two-bar spec would show it.",
+        "fusion-superimposition#0 == #1, claiming to be a five-beat and a seven-beat phrase — one bar of eight hi-hat 8ths with a snare on beat 1 only, and no accents anywhere. A 5-beat and a 7-beat phrase cannot be the same picture.",
+        "NEAR-identical (differing only in beamGroups): jazz-up-tempo-intro#1 == #2.",
+        "CHECKED AND LEGITIMATE, do not sweep: 40 of the 43 byte-identical sibling pairs are honest — micro-timing lessons whose subject notation cannot express and whose tips say so, declared tempo pushes (\"Same Shape, Slower\", \"Tempo Push\"), technique variants that disclose (\"Same notes, but the snare hits are cross-sticks\"), and paradiddle-diddle#0 == #2 in the OTHER direction where Ex 2 strips the accent and says so."
+      ],
+      "acceptance": "each of the six is corrected on whichever side is the outlier, or its words stop promising the change; a check flags a same-bpm byte-identical sibling pair whose words claim a notated difference",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by all three data lenses independently, which is why it is one item rather than three."
+        }
+      ]
+    },
+    {
+      "id": "BL-140",
+      "dimension": "content",
+      "priority": 2,
+      "chunk": {
+        "done": 0,
+        "total": 2,
+        "size": 8
+      },
+      "title": "Fifteen countable prose claims disagree with their own stave, in four classes no gate reads",
+      "evidence": [
+        "SUBDIVISION LABELS IN META (5). check-exercise-meta reads only the tempo glyph and the time signature; the subdivision token is never compared. metal-extreme#0 \"4/4 · 16th notes · ♩ = 240\" draws 16 notes every one of duration 8; metal-hyperblasts#0 and #1 the same; fusion-prog-fusion#3 \"· 16ths ·\" draws 16 eighths; fusion-electronic-fusion#3 \"· 16ths ·\" draws 8 eighths and 4 quarters and no 16ths at all. The site own convention settles which side is wrong — metal-blast-beats#1 labels 24 real 16ths correctly, and siblings inside both fusion lessons label real 16ths correctly.",
+        "ACCENT POSITION CLAIMS (4). An accent claim names no voice, so all 39 in the corpus are unguarded by check-tip-claims, and check-accent-dynamics measures gain rather than placement. accented-singles#4 — the capstone of the lesson that TEACHES accent positions — says \"Accents on 1, 2-&, 3-a, 4\" with accents at 1.00, 2.50, 3.50, 4.00, so 3.50 is the & of 3 and not the a; as notated the mixed-positions exercise contains no e and no a at all, which argues the spec is the bug. fusion-linear-basics#3 says \"accents on beats 2 and 4 (snare)\" with the snare at 1.5, 2.5, 3.5, 4.5 and accents at 2.5 and 4.5 — there is no snare on 2 or 4 at all. four-way-independence#2 claims three accent positions and marks two. solo-drumming#2 says \"the single accent on the & of 2\"; it is on beat 3.",
+        "NOTE-COUNT TITLES (3). solo-drumming#3 says \"Six Notes Per Bar\" in its title, \"exactly 6 sounds per bar\" in its meta and \"Six sounds — count them\" in its tip; the bar draws FIVE. stick-grip#0 \"Eight Quarter Notes\" draws four and its own tip says \"One stroke per beat\". dynamic-spectrum#0 \"Eight Quarter Notes at Each Level\" draws four and its own tip opens \"Four quarter notes\" — title and tip contradicting each other on the same card. In both lessons Ex 2 draws 8 notes and is correctly titled \"Eighth-\", so the likely intent is \"Four Quarter Notes\".",
+        "PHRASE ARITHMETIC (1) plus smaller slips (2). fusion-superimposition#1 lists seven accent positions where a 7-beat phrase over 4/4 gives five (absolute beats 1, 8, 15, 22, 29 = bar 1 b1, bar 2 b4, bar 4 b3, bar 6 b2, bar 8 b1); the tip advances bar numbers by one where they should advance by two, and \"bar 5 beat 1 (almost!)\" is not a phrase start at all. rock-dynamics#1 says \"The notation never changes\" over a stave whose accents per bar run 0,0,0,0,2,2,4,8. latin-cascara grad[1] promises \"a steady hi-hat foot on 2 and 4\" on an exercise with no feet voice at all — which check-named-voices passes because its rule 2 is lesson-scoped presence only, exactly its documented note (e).",
+        "NEGATIVE RESULT WORTH AS MUCH AS THE DEFECTS, so nobody re-sweeps these: voice counts (\"N kicks/snares/toms\") 39 phrases, 0 real; per-voice duration claims 178 phrases, 0 defects; title-level subdivision labels 153, 0 defects; sticking claims 87 explicit strings and 45 \"alternating\", 0 new beyond BL-089; sibling and graduation references 89 plus 216, 0 dangling; graduation-criteria tempos and bar counts are correct BY DESIGN because a criterion sets a target and asks you to loop."
+      ],
+      "acceptance": "all fifteen corrected on the side each lesson siblings establish; and the two classes worth gating get one — a meta subdivision token must appear as a real duration in the spec (skipping the 79 swing labels, which label straight notation by convention), and an \"accents fall on <positions>\" claim must match accent:true, each with a coverage floor",
+      "status": "ready",
+      "attempts": 0,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the prose-vs-notation lens sweeping claim types the three existing gates do not parse."
+        }
+      ]
+    },
+    {
+      "id": "BL-141",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "The micro-timing lessons ship identical audio for \"on the click\", \"early\" and \"late\" — and the player could express it",
+      "evidence": [
+        "Lessons whose entire subject is where a note sits against the click ship exercises indistinguishable in both picture and sound. hiphop-displacement#0 \"AT The Click (Reference)\" == #1 \"Snare Consistently 30ms Early (Pushed)\" == #2 \"...30ms Late (Dragged)\" — all three byte-identical.",
+        "Also funk-pocket-drumming #0/#1/#2 (\"AT the click\" / \"slightly behind\" / \"slightly in front\"), hiphop-pocket-time #0/#1 (\"~30ms Behind\"), hiphop-neo-soul #0/#1, hiphop-studio-translation #0/#1, hiphop-j-dilla #0/#1, hiphop-boom-bap #1/#3.",
+        "The notation genuinely cannot express 30ms and every tip says so, which is why the previous sweeps correctly classified these as legitimate duplicates. But the PLAYER can express it — a per-note time offset is a few lines — and the audio is the only channel these lessons have.",
+        "So this is not the BL-100 duplicate-spec class. It is a capability the site needs in order for eight exercises to teach the thing they are about."
+      ],
+      "acceptance": "an exercise whose title or tip promises a specific placement against the click sounds different from its own reference sibling; verified by rendering the pair and measuring the onset delta against the stated milliseconds",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-142",
+      "dimension": "content",
+      "priority": 2,
+      "title": "latin-folkloric#1 and #3 play a whole bar of bare hi-hat pedal their tips never mention",
+      "evidence": [
+        "In both exercises the hands total 4 quarters and the feet total 8. The renderer therefore draws TWO bars — confirmed in the built page, two vf-stave groups each — with bar 2 containing only four d/4/x2 quarters, and the player loops over 8 quarters. So half of every loop is bare pedal chicks.",
+        "#1 tip describes ONE bar, with \"hat-foot taps quarters\" as a layer under the 16th palitos line.",
+        "#3 tip promises \"three distinct timbres — bell, click, low drum\"; bar 2 has none of them.",
+        "The hi-hat foot was appended as an extra bar instead of being chorded into the existing one."
+      ],
+      "acceptance": "both exercises are one bar with the hi-hat foot chorded under the hands, and the hands and feet tick totals are equal; a check asserts no exercise has one voice a whole bar shorter than the other unless its tip says so",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-143",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "The playhead points at the wrong note on any bar that mixes note values",
+      "evidence": [
+        "startPlayhead() maps time to x LINEARLY; VexFlow spaces notes by duration. Measured on 208 staves where notehead centres could be paired unambiguously with onsets: on staves using one note value the median error is 0.002 note-slots; on staves mixing note values it is 0.250, with a maximum of 1.63 and 34% of them at or above half a slot.",
+        "Worst: counting-subdivision#0 (four 8ths then eight 16ths, titled \"8ths to 16ths (Two Beats Each)\") at 1.63 slots or 92.7 units; fills-around-kit#4 at 1.63; counting-subdivision#3 at 1.53; latin-folkloric#1 at minus 1.50.",
+        "The lessons hit hardest are the counting and reading lessons, where showing the reader where the subdivision falls is the cursor entire job.",
+        "580 of 852 exercises mix note values, so the measured sample understates the population.",
+        "COVERAGE CAVEAT: only 208 of 852 staves could be paired, because chords and the hands/feet split produce more distinct x centres than onsets. This is a 24% sample rather than a census, but the mechanism is deterministic and predicts the rest."
+      ],
+      "acceptance": "the playhead x at time t is within a stated fraction of a note spacing of the notehead sounding at t on every stave; a check measures it against getMusicBounds",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens with a 24% sample and a deterministic mechanism."
+        }
+      ]
+    },
+    {
+      "id": "BL-144",
+      "dimension": "content",
+      "priority": 3,
+      "title": "A lesson whose subject is sticking prints no sticking, and its two staves are identical",
+      "evidence": [
+        "rock-sixteenth-hats#0 \"16th Hat (Two-Handed, RLRL) + Backbeat\" and #2 \"One-Handed 16th Hat (Right Hand Only) + Backbeat\" are byte-identical. The ONLY difference between them is sticking, and none of the lesson four staves carries a single sticking value — including #1 \"Continuous Alternating Sticking (RLRL Across the Bar)\", whose tip says \"every right lands on a downbeat or an &\".",
+        "The class: 11 exercises name a sticking in their title or meta and 7 print none — the three above plus metal-quarter-bass#0 and #2 and metal-eighth-bass#0 and #3.",
+        "44 other lessons DO use sticking letters, so this is an opt-in that was not taken rather than a missing capability.",
+        "Adjacent to BL-109 (three tips asserting a right hand the stave never letters) — check whether they should merge."
+      ],
+      "acceptance": "every exercise whose title or meta names a sticking carries that sticking on the stave, and rock-sixteenth-hats#0 and #2 are no longer identical specs",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the curriculum lens; the prose lens independently reached the same exercises from the other direction."
+        }
+      ]
+    },
+    {
+      "id": "BL-145",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Nothing points at reading-101, and five lessons are dead ends",
+      "evidence": [
+        "39 lessons have zero inbound nextLessons links, including 7 of the 19 chapter-opening lessons: reading-101 (pos 6), bass-drum-technique (34), independence-singing (49), warm-ups (57), latin-clave-intro (125), fusion-coordination-foundation (145), hiphop-boom-bap (185).",
+        "The worst is reading-101 — the lesson that teaches the notation every other page uses. The last lesson of Chapter 1, the-practice-mindset, sends the reader to single-stroke-roll (15) and counting-eighths (9), hopping over reading-101, reading-time-signatures and reading-rests.",
+        "latin-clave-intro is the entry point of the Latin track and is named as a prerequisite by three lessons, yet no Where Next opens it.",
+        "FIVE LESSONS HAVE NO WHERE NEXT AT ALL, confirmed in the built HTML against 212 of 217 that do: dragadiddle (26, mid-Rudiments, every sibling rudiment has one), metal-gospel-chops (184) and hiphop-future-r-and-b (204) — the last lessons of the Metal and Hip-Hop tracks, while the other five tracks all hand off — and solo-drumming (212) and practice-systems (214), mid-Other-Topics.",
+        "HARM IS MODERATE and the reason is recorded so nobody overstates it: the homepage and the chapter sidebar still reach all 217 lessons. This is about the guided path, not reachability."
+      ],
+      "acceptance": "every chapter-opening lesson is the target of at least one nextLessons edge from an earlier lesson, and every lesson has at least one resolving nextLessons entry or a stated end-of-track affordance; a check asserts both",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the curriculum lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-146",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Three gaps a beginner falls into: no drum key for tuning, no sticking in the whole Reading chapter, nothing for left-handers",
+      "evidence": [
+        "TUNING WITHOUT A KEY: tuning-basics says \"Finger-tighten every tension rod until it just touches the hoop\" then \"Half-turns in a star pattern\". Half-turns of a tension rod require a drum key. Across the corpus \"drum key\" occurs only in the-drum-kit meaning the NOTATION legend; \"tuning key\" never occurs; gear-basics shopping list never mentions one. A pad-only reader also has nothing to tune and the lesson does not say so.",
+        "NO STICKING IN READING: all 9 reading lessons have zero sticking fields, including reading-101#4, sixteen 16ths at 65 BPM whose tip says only \"Four strokes per beat\". The lessons immediately before (stick-grip, setup-posture) and all 14 rudiments after print R/L on every note, so the gap reads as an omission rather than a choice. A reader twelve minutes into holding sticks has a coin-flip about whether to use one hand or two.",
+        "NOTHING FOR LEFT-HANDERS: two mentions in 217 lessons, neither addressed to the reader (fills-around-kit \"don not reverse the sticking\"; fusion-mahavishnu, historical). setup-posture assigns the bass pedal to the right foot and the hi-hat pedal to the left as fact, and everything is R-lead. A left-handed beginner reaches setup-posture in the first fifteen minutes with no signal that mirroring is normal and permitted."
+      ],
+      "acceptance": "tuning-basics names the drum key as required equipment and gear-basics lists it under acoustic-kit gear; reading exercises denser than eighths carry sticking or state the hands in the tip; one paragraph covers the mirrored left-handed setup, referenced once from the rudiments chapter",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the beginner persona."
+        }
+      ]
+    },
+    {
+      "id": "BL-147",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Four open-hat marks sit on voices the player cannot open, and two play buttons produce total silence",
+      "evidence": [
+        "player.js swaps to openHat only when the key is g/5/x2. Four notes carry articulation:open on other keys and the ink is on the page, verified in the built SVGs.",
+        "jazz-up-tempo#4 feet #0 and #2 on d/4/x2, two \"o\" marks drawn. Its tip: \"alternating loose-open (1, 3) and closed (2, 4) — the open articulation marks the loose hits.\" All four pedal notes sound identical, and the alternation IS the exercise.",
+        "metal-headbang#2 and metal-d-beat#2 hands #7 on b/5/x2 (china), one mark each, tips saying \"open china\". Lower confidence that an open china should be a distinct voice.",
+        "SILENT PLAY BUTTONS: practice-systems#1 (a journal template) and accompaniment#2 (a deliberately empty bar 3) are all visible rests and both ship a Play button, confirmed in the built HTML, that renders a buffer peaking below 1e-4 in both kits. The intent is right; the affordance says otherwise, and a reader cannot tell it from broken audio."
+      ],
+      "acceptance": "jazz-up-tempo#4 marked pedal notes sound different from its unmarked ones or the mark is removed; a check asserts no articulation value reaches a voice the kit cannot render; and an exercise that will produce no sound either has no play button or says so on the button",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the playback lens."
+        }
+      ]
+    },
+    {
+      "id": "BL-148",
+      "dimension": "ui",
+      "priority": 3,
+      "title": "Two drum-key labels are struck through by the staff lines they name, and drag graces draw a slur the code calls a beam",
+      "evidence": [
+        "In the-drum-kit right-hand panel, the white halo sits behind the bold name but not the grey explainer, so the top staff line runs straight through \"· top line\" and the fourth line runs through \"· 4th line\". These are precisely the two sits-on-a-line entries — and the prose two sections down calls the mid tom out as a beginner trap (\"the mid tom sits on the fourth line rather than in a space\") while the diagram renders that entry as deleted text. Still legible; it cost the persona a second look rather than the lesson.",
+        "SEPARATELY, in notation-renderer.js lines 463-464: const beamGraces = graces.length > 1; // beam two-grace drags, passed to new VF.GraceNoteGroup(graceNotes, beamGraces) — but VexFlow 4 second parameter is showSlur, not a beam flag. Evidence: pages with two-grace drags emit vf-stavetie (drag 28, dragadiddle 12, /rudiments/ 34) and pages with single-grace flams emit none.",
+        "Whether a slur is acceptable engraving for a rudimental drag needs someone who reads notation. The comment is wrong either way."
+      ],
+      "acceptance": "the diagram halo covers the full label including the dim tspan, or the staff lines stop short of the text; and the grace-group comment states what the flag actually does, with the slur either kept deliberately or removed",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 79,
+          "date": "2026-08-16",
+          "note": "Filed in the iteration-79 discovery pass. Found by the beginner persona at 1280px; the renderer comment mismatch found by the playback lens."
         }
       ]
     }
