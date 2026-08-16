@@ -1,6 +1,8 @@
 // src/assets/js/player.js
 // Tiny client-side drum player. Reads exercise specs from data-spec
 // attributes on .play-btn buttons and schedules drum hits via Web Audio.
+// The same button may carry data-swing (8 or 16), derived from the exercise
+// meta at build time; see the Swing block below.
 //
 // Two kits:
 //   electronic — synthesized voices (oscillators + filtered noise)
@@ -86,6 +88,131 @@
   const GAIN_GHOST = 0.25;
   const GAIN_TAP = 0.5;
   const GHOST_VOICES = { snare: 1, tomHigh: 1, tomMid: 1, tomFloor: 1 };
+
+  // ---- Swing (BL-128) ----
+  // Until this existed the word "swing" appeared nowhere in this file. 76
+  // exercises across 27 lessons — 16 of the site's 21 jazz lessons — print
+  // "swing 8ths", "swing 16ths" or "swung 16ths" in their meta and were played
+  // in even binary halves, so jazz-ride-pattern taught the jazz ride with a
+  // straight-eighths rock ride.
+  //
+  // WHERE THE NUMBER COMES FROM. `data-swing` on the play button, derived from
+  // the meta at build time in .eleventy.js (swingLevelFor), never parsed here.
+  // 8 = the beat's second eighth moves; 16 = each eighth's second sixteenth
+  // moves and the eighths themselves do NOT. Absent = straight, which is 816 of
+  // the 892 buttons.
+  //
+  // THE RATIO IS 2:1, and the site sets it rather than taste. reading-dotted-
+  // rhythms states it outright: "A swung 8th pair is built from a triplet (the
+  // long is two-thirds of a beat, the short is one-third)." hi-hat-articulation#3,
+  // itself one of the 76: "Treat the swing 8ths as triplets with the middle note
+  // rested out." the-shuffle#0, which already notates that as real tuplets: the
+  // short note "arrive[s] a third of a beat before the next click." All three put
+  // the off-beat at 2/3, and 2/3 is what the corpus's 198 3:2 tuplets already
+  // play at.
+  //
+  // IT IS FLAT, AND THE SITE DOES NOT ENTIRELY AGREE. jazz-ride-pattern's own
+  // "Getting the Swing Right" section says "At MEDIUM tempos the skip-note lands
+  // like the third note of a triplet" and then "The ratio also breathes with
+  // tempo: swing tightens toward even 8ths as things get fast, so trust your ear
+  // over any formula." That is true of players (Friberg and Sundstrom measured
+  // it) and it is not modelled here, on two grounds and one absence:
+  //
+  //   * A curve would make one page contradict itself. jazz-modern-jazz#2 and #4
+  //     are the same lesson at the same 130 BPM; #4 notates its triplets and #2
+  //     does not. Flat 2:1 makes them identical, which is what a reader playing
+  //     both expects. A curve makes the tupleted one deeper than its neighbour at
+  //     one tempo, and no reader can see why.
+  //   * The corpus's whole vocabulary for the feel is the 3:2 tuplet. There is no
+  //     second number anywhere in it to interpolate toward.
+  //   * "Trust your ear over any formula" is advice to a drummer, not a spec. The
+  //     site states no curve, so implementing one would be inventing content.
+  //
+  // Recorded as the honest weak spot: at jazz-up-tempo#2's 250 BPM a flat 2:1
+  // ride is deeper than the page's own prose asks for. Changing it means changing
+  // the ratio here, RATIO_TOL in tools/checks/check-swing-feel.js, and the lesson
+  // prose, in one move.
+  //
+  // A PROJECTION, NOT A WARP, AND THAT IS THE WHOLE SAFETY ARGUMENT. swungOnset
+  // moves a note only when it sits EXACTLY on the moved subdivision, and the
+  // place it moves to is not itself a moved subdivision — the domain (p = cell/2)
+  // and the image (p = 2*cell/3) are disjoint. So swungOnset(swungOnset(t)) ===
+  // swungOnset(t) for every t: feeding an already-swung timeline through this
+  // function changes nothing, and double-swinging is not a thing the code can be
+  // made to do. That matters because independence-chapin-method#4 prints
+  // "swing 8ths" AND notates the triplets, and it is the one exercise in that
+  // lesson that sounds right today. A continuous grid warp — the obvious
+  // alternative, and what a DAW groove template does — would have moved its 1/3
+  // to 4/9 and its 2/3 to 7/9 and broken it.
+  //
+  // Three independent things now have to fail before a correct page breaks, and
+  // they are NOT equally load-bearing on today's content — say which is which:
+  //   1. .eleventy.js refuses to emit data-swing for a spec with any tuplet. This
+  //      is the one doing the work in production: it is what keeps
+  //      independence-chapin-method#4, jazz-modern-jazz#4 and triplet-feel#3 out
+  //      of this function entirely.
+  //   2. a note whose tuplet scale is not 1 is never displaced (below). DEFENSE IN
+  //      DEPTH, not a live guard. The shape it defends against is a SEXTUPLET,
+  //      whose 4th note lands on p = 0.5 by arithmetic and is the only tuplet
+  //      shape the projection alone would move — but the corpus's one 6:4,
+  //      hiphop-modern-production#1, has a meta of "4/4 (half-time) - quarter =
+  //      70" which names no feel, so rule 1 already stops it and no live page
+  //      depends on this line. It is reachable only when data-swing is forced on,
+  //      which is exactly how check-swing-feel.js exercises it.
+  //   3. the projection is idempotent, so even a doubled application is a no-op.
+  //
+  // DURATIONS DO NOT MOVE. `u` below always advances by the straight length, so
+  // the note after a swung one is scheduled from the straight grid, the pattern
+  // is exactly as long as PatternMath says, and the loop point is untouched.
+  // Swing is where a note SOUNDS, never how long the bar is.
+  //
+  // THE ACCUMULATOR CHANGED UNITS, AND THAT IS AN IMPROVEMENT, NOT A WASH. This
+  // loop used to accumulate SECONDS (t += ticks * scale * 60/bpm); it now
+  // accumulates quarter-note beats and multiplies once. Replaying the old loop
+  // against this one over all 852 bpm-carrying specs gives a worst onset delta of
+  // 2.84e-14 s — sample-identical at 44.1kHz, not bit-identical, and the stronger
+  // word should not be written here. Ten of those deltas are half-sample rounding
+  // ties in exercises with no feel at all, e.g. latin-comparsa#1 hands[7]
+  // 1.8749999999999998 against 1.875, and in every one of the ten THIS value is
+  // the exact one: repeated addition of 60/bpm had drifted off the grid and a
+  // single multiply does not.
+  const SWING_FEELS = {
+    8:  { cell: 1 },     // the quarter-note beat
+    16: { cell: 0.5 }    // the eighth
+  };
+  const SWING_LANDING = 2 / 3;   // the off-subdivision's position inside its cell
+  const SWING_EPS = 1e-6;        // in quarter-note units: 0.24us at 250 BPM
+
+  function swingFeelFrom(btn) {
+    const raw = btn && btn.dataset ? btn.dataset.swing : null;
+    return SWING_FEELS[Number(raw)] || null;
+  }
+
+  // straight position (quarter-note units from the pattern's start) -> swung.
+  function swungOnset(u, feel, tupletScale) {
+    if (!feel || tupletScale !== 1) return u;
+    const cell = feel.cell;
+    const base = Math.floor(u / cell + SWING_EPS) * cell;
+    const p = u - base;
+    return Math.abs(p - cell / 2) < SWING_EPS ? base + cell * SWING_LANDING : u;
+  }
+
+  // The inverse, for the playhead: swung wall-position -> the straight position
+  // the STAVE draws. Piecewise-linear through the three points swungOnset fixes
+  // inside a cell — 0->0, cell/2 -> cell*2/3, cell -> cell — so at the instant a
+  // swung note sounds the cursor is exactly over that note's own notehead, and
+  // between notes it interpolates. Both maps read the same two constants, so they
+  // cannot drift apart.
+  function straightTime(u, feel) {
+    if (!feel) return u;
+    const cell = feel.cell;
+    const base = Math.floor(u / cell + SWING_EPS) * cell;
+    const p = u - base;
+    const land = cell * SWING_LANDING;
+    return p < land
+      ? base + p * (cell / 2) / land
+      : base + cell / 2 + (p - land) * (cell / 2) / (cell - land);
+  }
 
   const KIT_STORAGE_KEY = 'dc_kit';
   const DEFAULT_KIT = 'electronic';
@@ -505,12 +632,17 @@
     return GAIN_GHOST;
   }
 
-  function scheduleVoice(notes, c, kit, out, startAt, bpm, spec, voiceName, marked) {
+  function scheduleVoice(notes, c, kit, out, startAt, bpm, spec, voiceName, marked, feel) {
     const scale = PatternMath.tupletScales(spec, voiceName, notes.length);
-    let t = startAt;
+    const secsPerBeat = 60 / bpm;
+    // `u` is the STRAIGHT position in quarter-note units and is the only thing
+    // that accumulates; the swung time is computed from it per note and thrown
+    // away. Swing therefore cannot compound across a bar or shift a loop point.
+    let u = 0;
     notes.forEach((note, i) => {
       const ticks = PatternMath.durationTicks(note);
-      const dur = (ticks === null ? 1 : ticks) * scale[i] * (60 / bpm);
+      const len = (ticks === null ? 1 : ticks) * scale[i];
+      const t = startAt + swungOnset(u, feel, scale[i]) * secsPerBeat;
       if (!note.rest) {
         for (const key of (note.keys || [])) {
           const voice = KEY_TO_DRUM[key];
@@ -536,16 +668,16 @@
           kit[drum](c, t, dest);
         }
       }
-      t += dur;
+      u += len;
     });
-    return t;
+    return startAt + u * secsPerBeat;
   }
 
-  function schedulePattern(spec, c, kit, out, startAt) {
+  function schedulePattern(spec, c, kit, out, startAt, feel) {
     const bpm = spec.bpm || 80;
     const marked = accentedVoices(spec);
-    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, spec, 'hands', marked);
-    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, spec, 'feet', marked);
+    scheduleVoice(spec.hands || [], c, kit, out, startAt, bpm, spec, 'hands', marked, feel);
+    scheduleVoice(spec.feet  || [], c, kit, out, startAt, bpm, spec, 'feet', marked, feel);
   }
 
   // ---- Playhead ----
@@ -610,10 +742,12 @@
   const SCHEDULE_INTERVAL_MS = 200; // top-up cadence
   const STOP_FADE_SECS = 0.02;      // master fade-out on stop
 
-  function PlaybackSession(c, kit, spec, btn, svg, bounds, line) {
+  function PlaybackSession(c, kit, spec, btn, svg, bounds, line, feel) {
     this.c = c;
     this.kit = kit;
     this.spec = spec;
+    this.feel = feel || null;
+    this.secsPerBeat = 60 / (spec.bpm || 80);
     this.btn = btn;
     this.svg = svg;
     this.container = svg ? svg.closest('.notation') : null;
@@ -662,7 +796,7 @@
     if (this.stopped) return;
     const horizon = this.c.currentTime + SCHEDULE_AHEAD;
     while (this.scheduledUntil < horizon) {
-      schedulePattern(this.spec, this.c, this.kit, this.gain, this.scheduledUntil);
+      schedulePattern(this.spec, this.c, this.kit, this.gain, this.scheduledUntil, this.feel);
       this.scheduledUntil += this.patternDuration;
     }
   };
@@ -677,7 +811,24 @@
         return;
       }
       const elapsed = Math.max(0, session.c.currentTime - session.audioStart);
-      const progress = (elapsed % session.patternDuration) / session.patternDuration;
+      // On a swung exercise the cursor runs on the STAVE's clock, not the
+      // speaker's: the notation is straight (correctly — BL-085), so the moment
+      // the late eighth sounds the cursor has to be over the notehead drawn at
+      // the straight eighth. straightTime is the exact inverse of the offset
+      // scheduleVoice applied, so onsets and cursor cannot disagree. Leaving this
+      // out would have swapped one lie for another — every off-beat notehead lit
+      // up to a sixth of a beat early (125ms at 80 BPM, 71ms at 140).
+      //
+      // This is the TIME axis only. The separate, older error is BL-143: progress
+      // maps to x linearly while VexFlow spaces noteheads by duration, so any bar
+      // mixing note values already drifts in the SPACE axis. That is untouched
+      // here, and a swung bar is neither better nor worse for it — the same
+      // progress value produces the same x it always did.
+      const phase = elapsed % session.patternDuration;
+      const straightPhase = session.feel
+        ? straightTime(phase / session.secsPerBeat, session.feel) * session.secsPerBeat
+        : phase;
+      const progress = straightPhase / session.patternDuration;
       const x = session.bounds.startX + progress * span;
       session.line.setAttribute('x1', x);
       session.line.setAttribute('x2', x);
@@ -767,7 +918,7 @@
     const bounds = svg ? getMusicBounds(svg) : null;
     const line = (svg && bounds) ? ensurePlayhead(svg, bounds) : null;
 
-    const session = new PlaybackSession(c, kit, spec, btn, svg, bounds, line);
+    const session = new PlaybackSession(c, kit, spec, btn, svg, bounds, line, swingFeelFrom(btn));
     btn._session = session;
     btn.classList.add('is-playing');
     setBtnState(btn, 'playing');

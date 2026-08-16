@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 80,
-    "next_dimension": "quality",
+    "iteration": 81,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 149,
+    "next_id": 152,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -34,7 +34,9 @@
       "Iteration 79, MEASURE VOICES SEPARATELY RATHER THAN BY RMS. Iteration 76 reported the acoustic ride at \"roughly half the RMS\" of the hat and iteration 79 showed why that is misleading: the ride PEAK equals the hat (0.9999 vs 1.0000) and the difference is length and body — energy 26.9 against 101.3, ring 2.49s against 0.14s. A single conflated RMS number cannot tell a quieter stroke from a longer one. Use peak, total energy and ring time as three separate numbers.",
       "Iteration 79, FALSE ALARMS CAUGHT BY THE AGENTS THEMSELVES, recorded so no future sweep re-files them. (1) A duplicate-spec key omitting the grace field made all four dragadiddle exercises look identical, which reads as \"the lesson about drags notates none\" — #1/#2/#3 each carry 8 grace notes and only #0 (\"No Drags Yet\") has none. This is the SECOND time a duplicate-spec hash has produced a phantom by omitting a property; the first was articulation at iteration 60. Include every distinguishing field. (2) An accent checker resolving \"beat 1\" against bar 1 flagged independence-melodic-snare#1, whose \"accent on beat 1\" is scoped to bar 2 and sits correctly at absolute beat 5. (3) A parser mis-read \"dotted-8th kick\" against a spec carrying dot:true with duration 8.",
       "Iteration 79, THE nextLessons GRAPH IS NOT A REACHABILITY GRAPH. Walking nextLessons alone from lesson 1 reaches only 106 of 217 lessons. That is a graph statistic and NOT an orphan defect: the built homepage links all 217 (219 hrefs, 217 unique) and every lesson appears in its chapter sidebar. Any future sweep quoting \"111 unreachable lessons\" is wrong. Related and also verified clean: 343 prerequisite edges and 336 nextLessons edges have zero dangling targets, zero section-slug targets, zero self-references and zero cycles; and difficulty is monotonic within all seven genre tracks, so the seven apparent regressions in flat curriculum order are track boundaries by design.",
-      "Iteration 79, WHAT THE PROSE-VS-NOTATION SEAM NO LONGER CONTAINS. Swept and clean, with counts, so the next campaign is aimed at something real: voice counts (\"N kicks/snares/toms\") 39 phrases and 0 real defects; per-voice duration claims 178 phrases and 0; title-level subdivision labels 153 and 0; sticking claims 87 explicit strings plus 45 \"alternating\" and 0 new beyond BL-089; sibling and graduation-criteria references 89 plus 216 and 0 dangling; graduation-criteria tempo and bar-count claims are correct BY DESIGN, since a criterion sets a target and asks the reader to loop — 27 naming a tempo above every exercise bpm are pedagogy, not defects. The seam that IS still live is meta subdivision tokens, accent POSITION claims, note-count titles and counting lines."
+      "Iteration 79, WHAT THE PROSE-VS-NOTATION SEAM NO LONGER CONTAINS. Swept and clean, with counts, so the next campaign is aimed at something real: voice counts (\"N kicks/snares/toms\") 39 phrases and 0 real defects; per-voice duration claims 178 phrases and 0; title-level subdivision labels 153 and 0; sticking claims 87 explicit strings plus 45 \"alternating\" and 0 new beyond BL-089; sibling and graduation-criteria references 89 plus 216 and 0 dangling; graduation-criteria tempo and bar-count claims are correct BY DESIGN, since a criterion sets a target and asks the reader to loop — 27 naming a tempo above every exercise bpm are pedagogy, not defects. The seam that IS still live is meta subdivision tokens, accent POSITION claims, note-count titles and counting lines.",
+      "Iteration 81, HOW TO RUN THE CHECK SUITE, and why \"all checks pass\" from a tight loop is weaker evidence than it looks. Running all 22 tools/checks back to back with no gap produces transient failures across DIFFERENT checks on different runs — one run failed check-swing-feel alone, a later run failed check-nav-a11y and check-notation-frame together, and every one passed individually immediately afterward. check-notation-frame does not drive a browser at all, so this is not the headless-Edge sandbox artifact recorded at iteration 60; it looks like resource exhaustion from 22 node processes in immediate succession. A 1.5 second sleep between checks gives a clean 22 of 22. RUN THE SUITE SPACED, and if a check goes red in a tight loop, re-run that check alone before believing it. Filed as part of BL-149.",
+      "Iteration 81, A BUG CLASS FOUND BY FAULT INJECTION THAT NO GREEN RUN COULD HAVE FOUND. While hardening check-swing-feel retry path, the builder injected faults (deleting a built page, deleting ride.wav) to prove the new instrument-failure messages fire — and the first injection died with ReferenceError: __CASE_TRIES__ is not defined. String.replace with a STRING pattern replaces only the first occurrence, and that placeholder appeared twice, so the retry path called an undefined identifier. It could only ever have fired AFTER the environment had already flaked, which is exactly when a retry is needed. The lesson generalises: a retry or error path that has never executed is not tested by any number of passing runs. Inject the fault."
     ],
     "notes": []
   },
@@ -3101,7 +3103,7 @@
         "NOT a duplicate of BL-085, whose caveat explicitly rules the NOTATION correct and never mentions playback. The straight-eighth notation is right by convention; only the audio is wrong. This is the same shape as BL-097, where accents were inaudible until iteration 65 made them real."
       ],
       "acceptance": "an exercise whose meta names a swing or shuffle feel sounds swung — either the player applies a swing ratio when the meta says so, or those specs gain tuplets the way the-shuffle already does; verified by rendering at least three of the 76 through the real player in an OfflineAudioContext and measuring inter-onset intervals against the straight baseline, and by a check asserting the two 8ths of a swung beat are not equally spaced",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -3114,6 +3116,36 @@
           "iteration": 80,
           "date": "2026-08-16",
           "note": "PROSE SURFACE WIDENED BY BL-099 CHUNK 3, recorded here rather than reverted. The five tip clauses added in iteration 80 name a swung ride — \"the ding · ding-a pattern\", \"its jazz pattern\", \"the jazz pattern\" — over q,8,8,q,8,8 specs with no tuplets, which is exactly the shape this item evidence cites. The metas already said \"swing 8ths\", so no new defect class was created and the clauses are true of the NOTATION; but five more sentences now assert a feel the player does not produce, so whoever fixes this item has five more places to check. The swing wording in fusion-coordination-foundation body was deliberately left alone as belonging to this item."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "Shipped. The player swings. 76 exercises across 27 lessons — 73 at swing 8ths and 3 at swung 16ths — carried a printed feel the playback code had no concept of; player.js contained zero occurrences of the word. The fix is a data-swing attribute derived at BUILD time in .eleventy.js and never parsed in the browser, which keeps the prose parsing in the one gated place that already derives data-bpm and data-beats. Orchestrator-verified off the built site: 73 data-swing=\"8\" plus 3 data-swing=\"16\" across 27 pages, matching the builder count and iteration 79 discovery exactly, and pattern-math.js and metronome.js contain zero occurrences of swing or shuffle, so nothing leaked into the beat math or the click."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "DOUBLE-SWING IS IMPOSSIBLE BY CONSTRUCTION, WHICH WAS THE RISK THAT MATTERED. Some exercises were already swung by tuplets and would have been broken by a naive fix — independence-chapin-method#4, jazz-modern-jazz#4 and all four the-shuffle exercises are correct TODAY. swungOnset is a PROJECTION rather than a warp: it moves a note only when it sits exactly on p = cell/2, and the image p = 2·cell/3 is not in that domain, so it is idempotent. Three independent layers: the build refuses data-swing for any tupleted spec; a note whose tuplet scale is not 1 is never displaced; and the projection itself. The middle layer earns its place on a case nobody predicted — a SEXTUPLET whose fourth note lands on p = 0.5 by arithmetic, which is hiphop-modern-production#1, the corpus only 6:4. The gate asserts the PROPERTY rather than the policy: its force8 cases put data-swing on tupleted specs the build refuses to mark and require those onsets to be unchanged."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "THE BUILDER FOUND EVIDENCE AGAINST ITS OWN DECISION AND REPORTED IT. The ratio is a flat 2:1, justified by the site own words in four places — reading-dotted-rhythms \"the long is two-thirds of a beat, the short is one-third\", hi-hat-articulation#3, the-shuffle#0, and the 198 existing 3:2 tuplets that already play at 2/3. But jazz-ride-pattern own \"Getting the Swing Right\" section says \"The ratio also breathes with tempo: swing tightens toward even 8ths as things get fast, so trust your ear over any formula\" — and the builder first draft comment had claimed there was no caveat, which was false and was corrected in both files. It kept the ratio flat on one concrete ground: jazz-modern-jazz#2 and #4 are the same lesson at the same 130 BPM, one tupleted and one not, so a flat 2:1 makes them identical while any curve makes one page contradict itself at one tempo for no visible reason. Recorded as the honest weak spot: at jazz-up-tempo#2 250 BPM a flat 2:1 is deeper than that page asks for."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "THREE LABELS, THREE MEANINGS, AND THE LOAD-BEARING ROW. swing 8ths moves the eighth off-beats; swung 16ths moves the sixteenth off-beats and NOT the eighths — proved on hiphop-j-dilla#2, where the sixteenths move and the eighth at 0.5 stays put. shuffle maps to the eighth division and has a population of ZERO, because every shuffle lesson already writes \"8th triplets\" in its meta and notates real tuplets; it is mapped rather than ignored so future content inherits the feel, and it is exercised by forcing the flag onto the-shuffle#0. The flag reads the META and not the title, and the corpus forces that: hiphop-r-and-b-basic#2 is titled \"New Jack Swing Kick\" while its tip says the kick \"sits exactly on the second 8th of beat 2, EQUIDISTANT between the snare on 2 and the kick on 3\" — a title reader would break the one exercise whose tip demands even spacing."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "THE PLAYHEAD FOLLOWS, AND THE TWO AXES ARE KEPT SEPARATE. straightTime un-swings the cursor clock, so at the instant a swung eighth sounds the cursor sits at the fraction of the pattern its STRAIGHT notehead occupies — which is correct, because the notation is straight by convention (BL-085). Measured within 0.004 of the pattern at every onset. Without it every off-beat notehead would have lit up to a sixth of a beat early: 0.4167 against 0.3750 on the ride at 90 BPM, which is 125ms at 80. This is the TIME axis; BL-143 records a SPACE-axis error where VexFlow spaces noteheads by duration while progress maps to x linearly, and that is untouched — the same progress value produces the same x it always did. Durations never move either: the accumulator takes the straight length only, so patternDurationSecs and the loop point are unchanged and audit-lessons BEAT-COUNT is byte-identical."
+        },
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "AND IT APPLIED ITERATION 80 AUDIO LESSON WITHOUT BEING TOLD TWICE. Measuring with gain-resolved instrumentation rather than sample URLs caught that one test case hi-hat line and its PEDALED hi-hat are the same buffer — buf:8453 on all eight onsets — split 6 at gain 1.000 and 2 at gain 0.550, with the pedal beats 1 and 3 correctly unmoved. In the builder own words, a sample-URL reading would have called that one voice. That is exactly the trap iteration 80 recorded, avoided on the first attempt by the next builder."
         }
       ]
     },
@@ -3595,6 +3627,81 @@
           "note": "Filed in the iteration-79 discovery pass. Found by the beginner persona at 1280px; the renderer comment mismatch found by the playback lens."
         }
       ]
+    },
+    {
+      "id": "BL-149",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "Several checks rmdir _site/dev on cleanup and delete another agent harness mid-run",
+      "evidence": [
+        "Hit twice by the BL-128 builder during iteration 81, and it cost real work each time.",
+        "The loop runs a builder and an adversarial critic against the same tree, and the protocol tells BOTH to put harness pages under _site/dev/ because audit-site.js walks every .html and skips only that one directory.",
+        "But several checks remove the whole directory on cleanup rather than removing the file they created. check-header-shed guards this correctly with a devDirWasOurs flag; the others do not.",
+        "So one agent finishing a gate run deletes another agent live harness. It is silent — the second agent sees a missing file rather than an error naming a cause.",
+        "Related and already recorded at iteration 77: a critic wrote its own mutate.js over a builder harness of the same name, destroying a 44-case suite. The convention that came out of that — name scratch files with the item id — does not help here, because the collision is on the DIRECTORY.",
+        "CONCRETE MECHANISM, located at iteration 81: check-skip-targets.js:604 does a RECURSIVE fs.rmSync on the shared _site/dev, while check-accent-dynamics, check-metro-phase and check-header-shed all use the safer rmdirSync, which fails harmlessly on a non-empty directory. Making that one match the other three closes the hazard at source rather than making every check defend itself.",
+        "A SECOND, SEPARATE FLAKINESS FOUND AT ITERATION 81 AND WORTH FIXING IN THE SAME PASS: running all 22 checks back to back in a tight loop produces transient failures across DIFFERENT checks on different runs. Observed by the orchestrator: one run failed check-swing-feel alone, a later run failed check-nav-a11y and check-notation-frame together, and every one of them passed individually immediately afterward. check-notation-frame does not even drive a browser, so this is not a headless-Edge problem — it looks like resource exhaustion from 22 node processes with no gap. Inserting a 1.5 second sleep between checks gave a clean 22 of 22. That means an \"all checks pass\" result from a tight loop is weaker evidence than it appears, which matters because that is how every iteration of this loop has verified itself."
+      ],
+      "acceptance": "no check removes _site/dev itself unless it created it, following check-header-shed devDirWasOurs pattern, with check-skip-targets rmSync changed to rmdirSync; each removes only the files it wrote; AND the suite runs clean repeatedly back to back with no gap, or the documented way to run it states the required spacing; verified by running two harnesses concurrently and by three consecutive ungapped full-suite runs",
+      "log": [
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator from the builder still-weak list. Pure loop hygiene, but it has now cost work in two separate iterations."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-150",
+      "dimension": "content",
+      "priority": 3,
+      "title": "Two exercises still print a swing instruction and play straight, because the feel is in the tip rather than the meta",
+      "evidence": [
+        "Found by the BL-128 builder while deriving the swing population and confirmed by the adversarial pass, which established that BL-128 completeness claim is scoped to the META and that these two sit outside it.",
+        "funk-purdie-intro#3 is a genuine straight-played shuffle. Its TIP says \"Swing the 8ths — each beat divides into a triplet and you play its 1st and 3rd parts.\" Its META reads \"4/4 · ♩ = 72 (half-time)\" and names no feel, so the build derives no data-swing. Eight straight eighths, no tuplets, four off-beat eighths a swing would move.",
+        "jazz-modal-comping#0 has meta \"4/4 · 8th-note triplets · ♩ = 100\" — the same words the shuffle lessons use — but no tuplets, and two off-beat eighths. It has the right words in the right FIELD and still gets nothing, because \"8th-note triplets\" is a notation statement rather than one of the three feel labels the build recognises.",
+        "Neither is a regression: both played straight before BL-128 and both play straight after. They are the remainder the meta-scoped fix does not reach.",
+        "This is the inverse of the BL-128 defect class — there the words were right and the audio wrong; here the audio is now capable and the words do not ask for it in a form the build can read.",
+        "The fix is a content decision rather than a code one, and it should be made once for both: either the metas name a feel the build recognises, or the build learns to read \"8th-note triplets\" as a feel, which would also need checking against the lessons that use that phrase WITH tuplets and are already correct."
+      ],
+      "acceptance": "both exercises sound shuffled, by whichever mechanism their lesson siblings use; and a check asserts no tip or meta promising a swung or triplet division sits on an untupleted exercise the build has not marked",
+      "log": [
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator. The builder found it, scoped it out correctly, and handed it back with the mechanism identified."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
+    },
+    {
+      "id": "BL-151",
+      "dimension": "content",
+      "priority": 2,
+      "title": "jazz-ride-pattern says the swing ratio breathes with tempo, and now the Play button demonstrably does not",
+      "evidence": [
+        "Created BY the BL-128 fix at iteration 81, and recommended by the adversarial pass as the right follow-up INSTEAD of a tempo curve in the player.",
+        "jazz-ride-pattern \"Getting the Swing Right\" says: \"The ratio also breathes with tempo: swing tightens toward even 8ths as things get fast, so trust your ear over any formula.\" The player now applies a flat 2:1 at every tempo, so that sentence describes something the page can no longer demonstrate.",
+        "THE RATIO WAS DELIBERATELY LEFT FLAT and the reasoning should not be relitigated without new evidence. jazz-modern-jazz#2 and #4 are the same lesson at the same 130 BPM, one tupleted and one not, so a flat 2:1 makes them identical while any curve makes one page contradict itself at one tempo with nothing on the page to explain why; the same split exists in independence-chapin-method at 75. There is also no second number in the corpus to interpolate toward — every notated feel is a 3:2 tuplet, with no 5:4 and no dotted-eighth feel anywhere. And \"trust your ear over any formula\" is instruction to a drummer; encoding a formula is the one thing that sentence rules out.",
+        "THE MEASURED COST OF FLAT, so the prose can be honest about it: only 4 of the 76 marked exercises sit at 180 BPM or above and the median is 125, with 38 at or below 120. At 250 BPM the beat is 240ms, a flat 2:1 puts the skip 80ms before the next beat where a player would put it around 100ms — about 20ms late, on ONE note per bar, in TWO exercises. And the site already solves the fast-tempo problem structurally rather than by ratio: jazz-up-tempo body says \"past 220 the second 8th becomes a liability... the fix is structural: drop the skip-note\", and its exercises at 250 carry exactly one swung eighth per bar.",
+        "So the fix is one clause of prose, not a curve: say in jazz-up-tempo (and possibly jazz-ride-pattern) that the player renders the full triplet and the ear should tighten it as the tempo climbs."
+      ],
+      "acceptance": "the lesson prose tells the reader what the Play button actually does at fast tempos and what to do differently by ear; no tempo curve is added to the player without new evidence that resolves the jazz-modern-jazz #2-versus-#4 contradiction",
+      "log": [
+        {
+          "iteration": 81,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator. The critic went in expecting to argue for a tempo curve and the content talked it out; this item records that reasoning so the next agent does not redo it."
+        }
+      ],
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null
     }
   ]
 }

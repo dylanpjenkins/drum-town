@@ -1,5 +1,6 @@
 // .eleventy.js
 const { renderPattern } = require('./tools/notation-renderer');
+const PatternMath = require('./src/assets/js/pattern-math');
 
 // DEV TOOLING — review dashboard backend. Delete the next line and the
 // setServerOptions block below to remove the dashboard.
@@ -49,6 +50,123 @@ module.exports = function (eleventyConfig) {
   // so a tempo outside it does not merely fail to arrive — it arrives WRONG,
   // silently, as 240. Same file, same check reads these off the built input.
   const DOCK_MIN_BPM = 30, DOCK_MAX_BPM = 240;
+
+  // ---- Swing feel (BL-128) ----
+  // 76 exercises across 27 lessons print a feel in their meta — "swing 8ths",
+  // "swing 16ths", "swung 16ths" — carry no tuplets, and put notes on exactly the
+  // subdivisions the instruction moves. That is 16 of the site's 21 jazz lessons,
+  // and until this existed pattern-math.js divided every beat in binary halves and
+  // player.js contained the word "swing" zero times, so jazz-ride-pattern — the
+  // lesson that teaches the jazz ride — played a straight-eighths rock ride.
+  //
+  // THE NOTATION IS NOT THE BUG. Straight eighths under a printed "swing 8ths" is
+  // correct engraving and BL-085 already ruled it right, so this is fixed in the
+  // player. What the player needs is one number, and it is derived HERE rather
+  // than in the browser for the same reason data-bpm/data-beats are: the meta is
+  // prose, prose parsing belongs in one gated place, and `data-spec` is a copy of
+  // audio-relevant CONTENT fields — a derived flag inside it invites someone to
+  // "fix" it by adding a `swing` key to lessonContent.js in one lesson and not the
+  // other 26. Emitted as an attribute it is greppable in _site and readable by
+  // tools/checks/check-swing-feel.js off the built markup, exactly the way
+  // check-tempo-handoff.js reads the handoff.
+  //
+  // READ THE META, NOT THE TITLE. An earlier draft of this comment justified that
+  // with hiphop-r-and-b-basic#2, "3 — New Jack Swing Kick (& of 2)", whose tip
+  // demands the kick be "equidistant between the snare on 2 and the kick on 3" —
+  // a title reader, the argument went, would break the one exercise that asks for
+  // even spacing. IT IS NOT TRUE OF THE READER BELOW: swingLevelFromMeta needs a
+  // digit after swing|swung and that title has none, so it returns 0. The claim
+  // holds only against a looser bare-word /swing/ reader that nothing here
+  // implements, and the accent block above already carries the lesson about not
+  // writing the stronger claim.
+  //
+  // Measured with the actual function instead: 12 exercises put a swing word in
+  // the title while their meta names no feel, the regex returns a level for 10 of
+  // them, and 9 of those are vetoed by tuplets anyway. So a title reader would
+  // differ on exactly ONE exercise — funk-purdie-intro#3, "4 — Half-Time Shuffle
+  // Preview (Triplet Feel)", whose tip does say "Swing the 8ths" and which is
+  // genuinely played straight today. That is a META gap in the content, not an
+  // argument for reading titles: the fix is to print the feel in its meta like
+  // the other 76, and then the reader here picks it up with no code change.
+  //
+  // Reading TIPS is a worse idea and the corpus says so plainly:
+  // jazz-modern-jazz#3's tip sets a different feel per BAR ("Bar 1: dead
+  // straight ... Bar 2: standard swing. Bar 3: deep triplet feel") and nothing in
+  // a spec is addressable per bar, so a tip reader would flatten four deliberately
+  // different bars into one feel. Its meta names nothing and it gets nothing,
+  // which is the correct outcome available today.
+  //
+  // 16 IS TESTED FIRST because "swing 16ths" contains no "swing 8".
+  function swingLevelFromMeta(meta) {
+    const s = String(meta || '').toLowerCase();
+    if (/(?:swing|swung)\s*16(?:th|ths)?\b/.test(s)) return 16;
+    if (/(?:swing|swung)\s*8(?:th|ths)?\b/.test(s)) return 8;
+    // No meta in the corpus says "shuffle" today (the six shuffle lessons write
+    // "8th triplets" and notate real tuplets, which is why they are already
+    // right). A shuffle IS the swing-8ths division — the-shuffle#0's own tip
+    // says the short note "arrive[s] a third of a beat before the next click" —
+    // so the word is mapped rather than ignored, and a future meta that uses it
+    // gets the feel instead of silence. Population today: 0.
+    if (/\bshuffle\b/.test(s)) return 8;
+    return 0;
+  }
+  // THE GRID IS THE LABEL'S OWN, and getting this wrong is subtle enough to be
+  // worth spelling out. Every onset must sit on the grid the feel divides: the
+  // EIGHTH grid for "swing 8ths", the SIXTEENTH grid for "swung 16ths".
+  //
+  // It is the monotonicity guarantee, not neatness. A swung eighth lands at 2/3
+  // of its beat, so under a sixteenth-tolerant test a spec written in 16ths under
+  // a "swing 8ths" meta would ship wrong on both axes at once: the 16th at 0.25
+  // stays put while the eighth at 0.5 moves to 0.667, crushing a 0.25-beat gap to
+  // 0.083, and the playhead would read 0.1875 at the moment the 0.25 note sounds.
+  // A 32nd at 0.625 would be overtaken outright. On the label's own grid the
+  // image (2/3 of the cell) always falls strictly between its neighbours at 1/2
+  // and 1, so playback order can never differ from reading order.
+  //
+  // Every one of the 76 passes: measured across the corpus, ZERO swing-8ths
+  // onsets sit off the eighth grid and zero swung-16ths onsets sit off the
+  // sixteenth grid. Nothing is currently excluded by this test, which is exactly
+  // why it has to be written down rather than discovered later — a spec that
+  // fails it silently drops back to straight rather than scrambling itself.
+  function onLevelGrid(spec, level) {
+    const step = level === 16 ? 0.25 : 0.5;   // quarter-note units
+    for (const voice of ['hands', 'feet']) {
+      const arr = spec[voice] || [];
+      const scale = PatternMath.tupletScales(spec, voice, arr.length);
+      let u = 0;
+      for (let i = 0; i < arr.length; i++) {
+        if (Math.abs(u / step - Math.round(u / step)) > 1e-6) return false;
+        const ticks = PatternMath.durationTicks(arr[i]);
+        if (ticks === null) return false;
+        u += ticks * scale[i];
+      }
+    }
+    return true;
+  }
+  // THE FIRST OF THE THREE THINGS THAT MAKE DOUBLE-SWINGING IMPOSSIBLE: a spec
+  // that already expresses the feel in notation is never handed the instruction.
+  // Exactly three specs print a swing meta AND notate tuplets, and all three are
+  // vetoed here: independence-chapin-method#4, jazz-modern-jazz#4, triplet-feel#3.
+  // The first two sit in lessons whose other swing exercises are NOT tupleted —
+  // chapin #0-#3 and jazz-modern-jazz #0/#2 — which is precisely the split that
+  // made #4 the only one in its lesson that sounded right before BL-128. All four
+  // the-shuffle exercises are tupleted and were already correct. Any tuplet at all
+  // disqualifies a spec; tools/checks/check-swing-feel.js prints the vetoed list
+  // on every run so the number cannot drift unnoticed.
+  //
+  // The denominator test is the unit collision documented at the tempo handoff
+  // below, reused verbatim: spec.bpm is QUARTER-note BPM, so "the beat" is a
+  // quarter only when the denominator is 4. In 6/8 or 12/8 the eighth is already
+  // the triplet subdivision and a quarter-keyed swing map would be nonsense. No
+  // swing meta is in such a meter today (75 are 4/4, 4 are 3/4).
+  function swingLevelFor(spec) {
+    const level = swingLevelFromMeta(spec.meta);
+    if (!level) return 0;
+    if ((spec.tuplets || []).length) return 0;
+    if (Number(String(spec.timeSignature || '').split('/')[1]) !== 4) return 0;
+    if (!onLevelGrid(spec, level)) return 0;
+    return level;
+  }
   eleventyConfig.addShortcode('exercise', function (ex) {
     const spec = typeof ex === 'string' ? JSON.parse(ex) : ex;
     const ariaLabel = labelText(
@@ -128,6 +246,11 @@ module.exports = function (eleventyConfig) {
         tuplets: spec.tuplets
       };
       const data = escapeAttr(JSON.stringify(audioSpec));
+      // The feel rides as its own attribute rather than a key inside audioSpec —
+      // see the swingLevelFor block above. `8` displaces the off-BEAT eighths;
+      // `16` displaces the off-EIGHTH sixteenths and leaves the eighths alone.
+      const swingLevel = swingLevelFor(spec);
+      const swingAttr = swingLevel ? ` data-swing="${swingLevel}"` : '';
       // Tempo handoff to the site metronome (BL-076). The exercise already knows
       // the tempo the player will use and the meta already prints it; the dock
       // was the only part of the page that never heard it, so the header pill
@@ -185,7 +308,7 @@ module.exports = function (eleventyConfig) {
             <option value="electronic">Electronic</option>
             <option value="acoustic">Acoustic</option>
           </select>${handoff}
-          <button class="play-btn" type="button" data-exercise-play data-spec="${data}" aria-label="Play exercise"><span class="play-btn__icon" aria-hidden="true">▶</span><span class="play-btn__label">Play</span></button>
+          <button class="play-btn" type="button" data-exercise-play${swingAttr} data-spec="${data}" aria-label="Play exercise"><span class="play-btn__icon" aria-hidden="true">▶</span><span class="play-btn__label">Play</span></button>
         </div>`;
     }
     return `
