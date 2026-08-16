@@ -147,6 +147,17 @@
       beatsBox.appendChild(dot);
       beatDots.push(dot);
     }
+    // Rebuilding the row throws away whatever dot was mid-pulse, and the pill is
+    // not rebuilt with it, so a change landing inside a flash left the lamp lit
+    // above an empty row. Measured by sweeping a real exercise tempo handoff
+    // across a downbeat flash: 10ms to 75ms of the pill showing a downbeat over
+    // four dark dots, worst at a press 5ms after the beat. Both faces of the
+    // instrument go dark together instead; the next beat lights them both.
+    //
+    // This does NOT stop the row being wiped mid-pulse, which is a separate and
+    // still-open defect: renderBeats runs on every setMeter, including the 817
+    // handoff buttons that name the meter the dock is already in.
+    clearPulse(pillDot);
   }
   renderBeats();
 
@@ -157,11 +168,27 @@
   }
 
   // The pill pulses alongside the dock's dots, so the beat stays visible while
-  // the dock is collapsed. The dot at `index` may be gone if the user shrank
-  // the time signature between scheduling and firing — the pill still fires.
+  // the dock is collapsed. They have to pulse TOGETHER: one lamp lighting over a
+  // dark row is the dock disagreeing with itself in the reader's peripheral
+  // vision, which is the one thing the beat row exists to be trusted about.
+  //
+  // `index` is captured at scheduling time and can outlive its own dot. Up to
+  // SCHEDULE_AHEAD of clicks are already committed when the meter changes, so a
+  // shrink from 7/8 to 2/4 leaves beats indexed 5 and 6 to fire into a two-dot
+  // row. Those clicks are real and audible, so the answer is not to drop them:
+  // they are the tail of the outgoing bar, immediately before the new downbeat,
+  // and the last dot is where that reads.
+  //
+  // Clamping cannot invent a downbeat, and the reason is not that index 0 is
+  // always in range. Math.min(index, len - 1) returns 0 for index 0, but it also
+  // returns 0 for ANY index when len is 1, which would light a lone dot and call
+  // it a downbeat. What rules that out is that no row is ever one dot wide:
+  // setMeter refuses v < 2, readInt bounds the stored signature to 2..12, and
+  // every <option> the dock ships is 2 or more. If a 1/4 option is ever added,
+  // this clamp needs revisiting before that option does.
   function flashBeat(index) {
     const downbeat = (index === 0);
-    const dot = beatDots[index];
+    const dot = beatDots.length ? beatDots[Math.min(index, beatDots.length - 1)] : null;
     [dot, pillDot].forEach(el => {
       if (!el) return;
       el.classList.add('is-active');
@@ -217,7 +244,33 @@
     writeInt(TS_KEY, v);
     renderBeats();
     syncPillSig();
-    if (session) session.beatsPerBar = v;
+    if (session) {
+      // The PHASE, not just the bar length. beatIndex counts clicks since the
+      // session began and scheduleAhead accents beatIndex % beatsPerBar, so
+      // carrying the old count into a new meter puts the next accent wherever
+      // that counter happens to land: 4 to 6 with beatIndex at 7 gives 7 % 6 = 1
+      // and the downbeat is five clicks away. Measured before this line existed:
+      // a 2/4 to 7/8 change waited six clicks for its first "1", and a 5/4 to
+      // 3/4 change at 30 BPM waited four seconds. Zeroing the count puts the
+      // next NEWLY scheduled click on 1, which is what someone who just changed
+      // the meter asked to hear.
+      //
+      // Clicks already handed to the audio clock keep the accent they were
+      // given. They are correct for the bar they were scheduled in, and
+      // unscheduling them would mean holding a reference to every oscillator.
+      // The cost is that the outgoing pattern stays in flight until the last
+      // committed click sounds, bounded by SCHEDULE_AHEAD at 500ms and measured
+      // as high as 424ms. Three of the check's 13 changes leave an ACCENTED
+      // click in that window, so the reader can hear the old "1" and the new one
+      // inside a beat of each other. Filed, not fixed here.
+      //
+      // Only on a real change. adoptTempo calls setMeter on every press of every
+      // exercise tempo button, and 817 of the 832 name 4/4, the meter the dock
+      // is usually already in, so an unconditional reset would restart the bar
+      // under a reader who pressed "Metronome 90" beneath a 4/4 exercise.
+      if (v !== session.beatsPerBar) session.beatIndex = 0;
+      session.beatsPerBar = v;
+    }
   }
   tsSelect.addEventListener('change', () => setMeter(parseInt(tsSelect.value, 10)));
 
@@ -306,9 +359,9 @@
         if (!b.fired && b.t <= now && now - b.t < 0.08) {
           b.fired = true;
           // indexInBar is captured at scheduling time, so it stays correct
-          // even if beatsPerBar changes between scheduling and firing.
-          // But the dot at that index might no longer exist if the user
-          // shrank the time signature — guard against that.
+          // even if beatsPerBar changes between scheduling and firing. It can
+          // therefore point past the end of a row the reader has since shrunk;
+          // flashBeat owns that case and keeps the index inside the row.
           flashBeat(b.indexInBar);
         }
       });

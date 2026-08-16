@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 74,
-    "next_dimension": "quality",
+    "iteration": 75,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 120,
+    "next_id": 123,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -2233,7 +2233,7 @@
         "The fix looks like one line — zero beatIndex when the meter changes during a session — but it needs a decision about whether the bar should restart immediately or at the next bar boundary, and a real-browser check that the beat dots and the pill lamp both follow."
       ],
       "acceptance": "changing the meter while the click is running puts the next accented beat on a bar boundary, verified in a real browser by sampling the beat-dot classes across the change; the beat row and the pill lamp agree",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -2241,6 +2241,36 @@
           "iteration": 64,
           "date": "2026-08-14",
           "note": "Filed by the adversarial critic during BL-076. Pre-existing, not caused by that change, but that change made it far more reachable."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "Shipped. scheduleAhead accents beatIndex % beatsPerBar, and setMeter reassigned beatsPerBar while leaving beatIndex counting, so the accented 1 landed wherever the counter happened to fall. Measured on the built site before the fix: a 6/8 to 4/4 change at 100 BPM waited 1200ms for its first downbeat, a 2/4 to 7/8 change waited six clicks, and a 5/4 to 3/4 change at 30 BPM waited FOUR SECONDS. The dot row told the same lie — 6/8 to 4/4 ran 1 2 3 4 5 (blank) 3 4 1, and 5/4 to 3/4 jumped from dot 4 straight to dot 2. Fixed by zeroing session.beatIndex on a real meter change, so the next NEWLY scheduled click is the downbeat."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "THE GUARD ON THAT RESET IS THE PART I WOULD HAVE SHIPPED WRONG. I briefed \"reset the phase\" without qualification. adoptTempo calls setMeter on EVERY press of every exercise tempo button, and 832 of those name a meter the dock is frequently already in, so an unconditional reset would have restarted the bar under a reader sitting in 4/4 who pressed \"Metronome 90\" beneath a 4/4 exercise — turning a fix for a rare mid-bar accent into a common one. The builder guarded it on v !== session.beatsPerBar and made the same-meter handoff a gate scenario. Type safety of that comparison was checked separately: setMeter opens with Number.isFinite(v), which does not coerce, and both call sites pass parseInt results, so v and session.beatsPerBar are always numbers and !== cannot misfire."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "TWO MORE DEFECTS ON THE SAME CONTROL, FOUND BY MEASURING RATHER THAN BY THE ITEM. (1) A click committed under the old meter fired into a shorter row, beatDots[5] was undefined, and the pill lamp pulsed ALONE for a full 88-96ms flash — the dock disagreeing with itself in peripheral vision, which is the one thing the beat row exists to be trusted about. Fixed by clamping the index to the last dot: those clicks are the tail of the outgoing bar and the last dot is where that reads, and index 0 is in range for every row the dock can build, so a clamp cannot invent a false downbeat. (2) renderBeats rebuilt the row without clearing the pill, leaving the lamp holding is-downbeat-active for 24ms over four dark dots; both faces now go dark together. The clamp also repairs a prefers-reduced-motion path: style.css strips the scale transform for those readers and leaves colour alone to carry the beat, so before the clamp they lost the beat row entirely for out-of-range clicks rather than merely losing the animation."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "THE GATE: tools/checks/check-metro-phase.js, the 20th check. It serves _site over loopback and drives the real built page in headless Edge through 10 scenarios, swapping AudioContext and requestAnimationFrame on the iframe window — both resolved by metronome.js at call time, so no source change was needed to make it testable. Accent truth is read from the oscillator FREQUENCY and beat truth from the dot classes, and it reads SCHEDULE_AHEAD out of the built script so the window it reports cannot drift from the code. Necessary because the headless audio clock advances 0.0000s while performance.now advances 1500ms under --virtual-time-budget, and rAF fires zero callbacks in that time. Mutation audit: 29 mutants, 29 of 29 as expected — 23 defects caught, 6 controls correctly green — including the original bug, an unconditional reset, reset-to-1, reset-on-grow-only, the clamp reverted and three wrong clamps, setBpm resetting phase, and SCHEDULE_AHEAD raised past its own bound. Adds ~13s to the suite."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "THE ADVERSARIAL PASS BLOCKED THE GATE, NOT THE FIX. It verified all three code edits as correct and would have shipped them: it reproduced every defect measurement independently, and it swept a single meter change across the whole bar in 1/10-beat steps — 50 positions across three meter and tempo combinations — getting 50 of 50 landing the first newly scheduled click on an accent, with zero row/pill disagreements across all 65 scenarios it ran. What it blocked on was hygiene and honesty in the new check. (1) The harness was written to the _site ROOT, which .claude/commands/improve.md forbids explicitly and notes has already cost two ticks: audit-site.js walks every .html and skips only a top-level dev/, so the harness counts as a page with no main landmark and no skip link and bumps pageCount. Three newer browser checks do it correctly; this one copied check-transport-reserve, the oldest and the one the note was written about. (2) The tempo scenario asserted NOTHING — deleting session.bpm = bpm left the gate green while the running click ignored tempo changes entirely, intervals staying at 0.6s instead of 0.375s, and the gate printed \"a tempo change left the phase alone\". That is the computed-and-never-asserted shape the iteration-70 audit catalogued. (3) The header claimed \"every run is identical\" against six runs measuring 217/216/216/216/214/217 clicks, with a three-click tolerance that would flake red before a push. All fixed, and the false claim is the same class BL-098 existed to remove."
+        },
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "MEASUREMENTS CORRECTED AGAINST THE CRITIC RE-MEASUREMENT. The committed comment said 24ms of pill-alone over four dark dots; the critic reproduced 24ms over a SEVEN-dot row, and the case that actually matches four dark dots measures 56-80ms and comes from a SAME-METER handoff landing 30-60ms into a downbeat flash — so the number understated its own defect roughly threefold and named the wrong row. And \"4 of 14 change events carried a committed accented click\" is 3 distinct events of 13: the check drives 13 control changes, not 14, and two of the four marks were the same stale click counted twice, 72ms apart in the rapid scenario. The critic also corrected the reduced-motion claim: the dot keeps a box-shadow ring under prefers-reduced-motion, so those readers were not uniquely harmed — before the clamp an out-of-range click lit NO dot at all for every reader, which is the real and larger finding."
         }
       ]
     },
@@ -2706,6 +2736,82 @@
           "iteration": 74,
           "date": "2026-08-15",
           "note": "Filed by the orchestrator from the adversarial pass. A missing claim is invisible to the gate this iteration shipped, which is exactly why it needs an item."
+        }
+      ]
+    },
+    {
+      "id": "BL-121",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "The commonest press on the site wipes the beat row mid-pulse, erasing a beat entirely",
+      "evidence": [
+        "Found by the adversarial pass on BL-101 (iteration 75), after that item fixed the phase reset and the pill/row disagreement.",
+        "adoptTempo calls setMeter, which runs renderBeats() UNCONDITIONALLY, before the phase reset that BL-101 deliberately guarded on a real meter change.",
+        "Counted on the built site: 832 handoff buttons, distributed {\"2\":1,\"3\":5,\"4\":817,\"5\":9}. So 817 of them name 4/4 — the meter the dock is usually already in — and every one of those presses rebuilds a row that did not change.",
+        "Measured: a press 20ms after a beat erases that beat dot flash ENTIRELY. The row reads [1] 2 3 4 [1] 3 4 [1] with the \"2\" never appearing.",
+        "BL-101 edit 3 (clearPulse on the pill in renderBeats) is what HIDES this from the gate: row and pill now agree, both dark. The gate cannot see it by construction.",
+        "Pre-existing, not caused by BL-101. It is the same guard-the-common-case reasoning BL-101 applied to the phase reset, left unapplied to the row rebuild one line above it."
+      ],
+      "acceptance": "pressing an exercise tempo button whose meter matches the dock does not rebuild the beat row and does not interrupt a dot mid-pulse; the beat that was flashing completes its flash; verified in a real browser by sampling dot classes across a same-meter handoff at several offsets into a flash",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator from the adversarial pass. The builder was told to confirm the mechanism and hand it back rather than widen scope inside a blocked iteration."
+        }
+      ]
+    },
+    {
+      "id": "BL-122",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "check-transport-reserve still writes its harness to the _site root, the trap that has cost the loop two ticks",
+      "evidence": [
+        "Found by the adversarial pass on BL-101 (iteration 75) while identifying which precedent the new gate had copied.",
+        "check-transport-reserve.js:139-140 writes its harness page to the _site ROOT. .claude/commands/improve.md step 6b forbids this explicitly and records that it has already cost two ticks.",
+        "The mechanism, verified rather than trusted: tools/audit-site.js:290-296 walks every .html in _site and continues only on a top-level dev/ directory; lines 303-313 then count any page with no <main> into dom.pagesMissingMain and no skip-link into dom.pagesMissingSkipLink, and info.pageCount is bumped. A harness page has neither.",
+        "The three newer browser-driving checks all do it correctly — check-skip-targets.js:581, check-header-shed.js:222, and check-accent-dynamics.js:95, which even carries the comment \"the one directory audit-site.js skips\". check-transport-reserve is the oldest and the last one wrong.",
+        "BL-101 fixed the same defect in the new check-metro-phase, which had copied this file as its precedent. Leaving the bad precedent in place is how it gets copied again.",
+        "Deliberately NOT folded into BL-101: adding an unrelated gate edit to an iteration already blocked on a different finding is how a commit gets muddled. Filed instead."
+      ],
+      "acceptance": "check-transport-reserve writes its harness under _site/dev/ like every other browser-driving check; the gate still passes; and a crash mid-run cannot leave a page at the _site root that audit-site would count",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator. Three lines, but it is the live landmine that the protocol note is about."
+        }
+      ]
+    },
+    {
+      "id": "BL-120",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "A meter change leaves up to 500ms of the old accent pattern in flight, and sometimes that includes the old downbeat",
+      "evidence": [
+        "Measured during BL-101 (iteration 75), and deliberately filed rather than folded in.",
+        "Clicks inside the scheduler lookahead are already handed to the audio clock with their accent baked in by click(), so they cannot be changed without holding a reference to every oscillator. Bound is SCHEDULE_AHEAD = 500ms; measured maximum across 14 control changes was 370ms. Stale click count is ceil(SCHEDULE_AHEAD / period): 2 at 240 BPM, 1 at 100, 0-1 at 30.",
+        "IN 4 OF 14 CHANGE EVENTS the committed click was itself ACCENTED, so the reader hears the old 1, then a short bar of 1-2 clicks, then the new 1 — measured as close as 250ms apart at 240 BPM.",
+        "The builder judgement, which the orchestrator accepted: this is legible as \"I changed it, so the bar broke\" in a way that an accent five clicks out of place is not. It is a rough edge rather than a lie about the beat.",
+        "PROPOSED FIX, already worked out: have click() return its oscillator, hold it on the beatTimes entry, and have setMeter stop() every entry past currentTime + ~20ms, rewind scheduledUntil to that guard, drop those entries and re-schedule. Cost is at most 2 live node references.",
+        "REJECTED ALTERNATIVE: shrinking SCHEDULE_AHEAD works proportionally but trades a rare short bar for a rare DROPOUT under main-thread jank on a phone, which is worse.",
+        "The same commit window affects a mid-run TEMPO change — measured 292ms before the new period takes effect — with the same cause and the same proposed fix. The tempo path is otherwise coherent and was verified not to disturb phase."
+      ],
+      "acceptance": "a meter or tempo change while the click is running takes effect within one click period, with no stale accent from the outgoing pattern audible after the new downbeat; no dropout is introduced under main-thread jank; verified in a real browser by reading oscillator frequencies across the change",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 75,
+          "date": "2026-08-15",
+          "note": "Filed by the orchestrator. The builder measured it, judged it, proposed a fix and a rejected alternative, and did not widen scope to take it — which is the right call and the reason this item starts with the engineering already done."
         }
       ]
     }
