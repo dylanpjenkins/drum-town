@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 76,
-    "next_dimension": "quality",
+    "iteration": 77,
+    "next_dimension": "content",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 124,
+    "next_id": 127,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -28,7 +28,8 @@
       "Iteration 63: a critic reported that accent:true renders no ink anywhere on the site (censusing the class \"vf-articulation\", which came back 0 across every built page) and concluded BL-085 chunk 1 had shipped a no-op. THAT IS WRONG. VexFlow 4 does not tag articulation glyphs with a vf-articulation class. Rendering the same spec with and without accents differs by 1,272 bytes and exactly TWO extra <path> elements for two accents, and the built page path count matches the with-accents render. Accents draw real ink, as the iteration-61 screenshots showed. Do not census VexFlow output by class name — count paths, or look at the picture.",
       "Iteration 70, methodology for any future accessibility audit: without --force-renderer-accessibility, headless Chromium leaves content-visibility: auto subtrees uncomputed, so /rudiments/ reports 4 of 40 headings and 4 of 40 notation images in the AX tree. The screen-reader walker nearly filed that as a blocking finding. With the flag, all 40 are present at every scroll position and queryAXTree finds the fortieth card without scrolling. CONTENT-VISIBILITY COSTS A SCREEN READER NOTHING HERE — do not re-file it.",
       "Iteration 70, the shape of nearly every gate defect found: a gate that measures the output with the thing that produced it, an exemption broader than its author realised, or a field computed and never asserted. When adding a gate, the useful question is not \"does it pass\" but \"construct the defect it names and watch it fail\" — 17 of 17 gates passed their own headline claim while failing at least one mutation of it.",
-      "Iteration 74, HOW TO MEASURE A STAFF POSITION, and the two ways it goes wrong. Stave lines render at y 58/68/78/88/98; spacing is 10, so one staff position is 5 units. The position of a note is its notehead INK BOUNDING-BOX CENTRE (exact bezier stationary points, not the control hull), which lands on VexFlow own ledger lines to under 0.001 units. NEVER measure from the raw path origin, the \"M x y\" that opens the d attribute: it sits 5.054 ABOVE the centre for round noteheads and 4.015 BELOW the centre for x-heads. Trap one is measuring from the origin at all, which puts every note one staff position too high and makes the snare look like a line note — that is how the orchestrator briefed reading-101 as correct and the-drum-kit as broken, when the reverse is true. Trap two is correcting it with a single constant: a uniform +5.054 fixes drums and moves every cymbal by 9.069 units, 1.81 staff positions, which would have taken the ride off the top line and turned the-drum-kit correct cymbal claims into errors. Calibrate against a ledger line for BOTH glyph families before trusting any position: c/4 and c/4/x2 both give a ledger line at y=108, a/5 and a/5/x2 both at y=48. Verified table: china b/5/x2 43, crash a/5/x2 48, hat g/5/x2 53, ride f/5/x2 58 (top line), bell e/5/x2 and high tom e/5 63 (SAME position, distinguished only by notehead shape), mid tom d/5 68, snare c/5 73 (3rd space), b/4 78 (middle line, ZERO drum uses — though 145 visible RESTS default to restKey b/4, so it is not unused ink), floor tom a/4 83, kick f/4 93, hi-hat foot d/4/x2 103. Any key census must read BOTH hands and feet and must follow grace notes, which inherit their parent keys: hands-only reports f/4 as 1 use instead of 2345, and skipping grace notes reports c/5 as 3922 instead of 4082."
+      "Iteration 74, HOW TO MEASURE A STAFF POSITION, and the two ways it goes wrong. Stave lines render at y 58/68/78/88/98; spacing is 10, so one staff position is 5 units. The position of a note is its notehead INK BOUNDING-BOX CENTRE (exact bezier stationary points, not the control hull), which lands on VexFlow own ledger lines to under 0.001 units. NEVER measure from the raw path origin, the \"M x y\" that opens the d attribute: it sits 5.054 ABOVE the centre for round noteheads and 4.015 BELOW the centre for x-heads. Trap one is measuring from the origin at all, which puts every note one staff position too high and makes the snare look like a line note — that is how the orchestrator briefed reading-101 as correct and the-drum-kit as broken, when the reverse is true. Trap two is correcting it with a single constant: a uniform +5.054 fixes drums and moves every cymbal by 9.069 units, 1.81 staff positions, which would have taken the ride off the top line and turned the-drum-kit correct cymbal claims into errors. Calibrate against a ledger line for BOTH glyph families before trusting any position: c/4 and c/4/x2 both give a ledger line at y=108, a/5 and a/5/x2 both at y=48. Verified table: china b/5/x2 43, crash a/5/x2 48, hat g/5/x2 53, ride f/5/x2 58 (top line), bell e/5/x2 and high tom e/5 63 (SAME position, distinguished only by notehead shape), mid tom d/5 68, snare c/5 73 (3rd space), b/4 78 (middle line, ZERO drum uses — though 145 visible RESTS default to restKey b/4, so it is not unused ink), floor tom a/4 83, kick f/4 93, hi-hat foot d/4/x2 103. Any key census must read BOTH hands and feet and must follow grace notes, which inherit their parent keys: hands-only reports f/4 as 1 use instead of 2345, and skipping grace notes reports c/5 as 3922 instead of 4082.",
+      "Iteration 77, scratchpad collision between roles: the builder and the adversarial critic share one scratchpad directory, and the critic wrote its own mutate.js over the builder harness of the same name mid-iteration. Nothing shipped wrong, but the builder had to rebuild a 44-case suite. CONVENTION from here: name any harness or scratch script with its item id, e.g. bl123-mut-nv.js, and write temporaries under the same prefix. Both roles are told to use the same directory and neither can see the other files list in advance, so a generic name WILL eventually collide."
     ],
     "notes": []
   },
@@ -2221,6 +2222,11 @@
           "iteration": 76,
           "date": "2026-08-15",
           "note": "CHUNK PLAN REVISED FROM 2 TO 3, because the builder corrected sweep found more than either of us had. four-way-foundation is 5 exercises and not 2 — #2/#3/#4 continue the same hand voice under a graduation criterion reading \"ride 8ths, hat-foot 2 and 4, kick 1 and 3, snare 2 and 4\" — and two lessons were invisible to an exercise-words sweep entirely because no individual tip says the word: independence-melodic-snare (4 exercises, graduation criterion \"holds shape over the ride + hat-foot scaffold\", and it is chapin own nextLessons target) and fusion-coordination-foundation (1, body says \"The ride plays a jazz pattern\"). Chunk 2 = three-limb-patterns #0/#1/#4, four-way-foundation #0-#4, independence-clave-foot #1/#2/#4 (11 exercises). Chunk 3 = the two new lessons (5). DO NOT SWEEP three-limb-patterns: its #2 and #3 are deliberately the hi-hat, \"the rock starting pair\", and changing them would be a new defect. And three-limb-patterns#4 needs more than a voice change — its title names \"Hi-Hat + Kick + Ride\" while only two voices are notated, and once the hand becomes the ride there is no hi-hat on that stave at all; that is the BL-089 overlap."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "SEQUENCING CONSTRAINT FOR CHUNKS 2 AND 3, discovered by the adversarial pass on BL-123 and binding on whoever takes them. check-named-voices holds seven of the remaining exercises by their LESSON graduation criteria rather than per-exercise, because those exercises never say \"ride\" in their own words — which is exactly why the original BL-099 sweep missed them. The hazard: fixing ANY ONE exercise in such a lesson satisfies the lesson-scoped criterion, which retires the grad exemption, which takes the tripwire with it. Ten exercises are covered by nothing but a grad entry — three-limb-patterns#2 and #3, four-way-foundation#2/#3/#4, independence-melodic-snare#0-3, fusion-coordination-foundation#0 — and once that entry is deleted there is no miss left to exempt and nothing to re-add. THEREFORE: each of the five remaining lessons must be converted ATOMICALLY, in one commit, never exercise by exercise. Also note the critic could not reconcile the \"16 exercises\" figure: it counts the five lessons as holding 20 exercises, 18 of them hat-only-with-no-ride, and only 8 saying \"ride\" in their own words. Re-derive the number before planning the chunk rather than trusting either figure."
         }
       ]
     },
@@ -2862,7 +2868,7 @@
         "It would find BL-099 chunks 2 and 3 automatically instead of leaving them resting entirely on human judgement, which is the current situation."
       ],
       "acceptance": "a check asserts that every instrument named in an exercise words is present in its stave, with verb-sense and comparative uses exempted by rule rather than by a slug list; it exits 1 on the pre-BL-099 corpus and 0 on the fixed one; it also fails on the snare-written-on-the-hi-hat-line mutation, since the class is wider than ride-versus-hat; and check-staff-positions positionsIn() is widened to parse an unqualified \"the <voice> line\"",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": null,
       "log": [
@@ -2870,6 +2876,109 @@
           "iteration": 76,
           "date": "2026-08-15",
           "note": "Filed by the orchestrator from the builder own \"still weak\" list. It is the gate this whole item class has been missing."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "Shipped. tools/checks/check-named-voices.js, the 21st check, asserts that every instrument named in an exercise own title, meta or tip is notated in that exercise; that every instrument named in a lesson graduationCriteria is notated somewhere in that lesson; and that the two foot voices live in the feet array, because the renderer stems by VOICE and not by key. Matching is by KEY IDENTITY, never geometry — the ride bell e/5/x2 and the high tom e/5 share a staff position, so a position-based check could not see one swapped for the other. The voice map is read from player.js and every key centre y is re-measured through the real renderer each run and asserted against the verified table. 3398 mentions, 2043 pairs, 0.8s, no build required, no new dependency."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "THE VERB-SENSE RULE, WHICH THE ACCEPTANCE DEMANDED BE A RULE AND NOT A LIST. The builder established by census that \"ride\" is the ONLY word in the vocabulary with a verb sense anywhere in the corpus — kicks, snares, hats and chinas are plural nouns in every occurrence, confirmed independently by the critic reading all 135. So the rule has two limbs: an inflected form (rides/riding/rode) not preceded by a determiner or hyphenated modifier is the verb, which keeps \"quarter-note rides only\" a noun; and \"ride\" immediately followed by a determiner opening an object is the verb, which catches \"ride the offbeats\" and \"surf records ride this pattern\". Prepositions are deliberately EXCLUDED, because \"ride on the & of 2\" and \"the ride on beats 2 and 4\" are both nouns and including \"on\" would have swallowed six true sentences. Comparatives are a separate rule. All twelve KNOWN_CLEAN rows come out clean BY RULE, and the rule that cleared each one is ASSERTED rather than commented, so if any starts passing for a different reason the gate fails."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "THE EXEMPTIONS, BUILT AGAINST THE ITERATION-70 FINDING THAT OVER-BROAD EXEMPTIONS ARE THE COMMONEST GATE DEFECT HERE. 20 entries, each scoped to one exercise and one voice, each tied by name to the item that will remove it, and each REQUIRED TO BE USED — an entry whose defect is fixed makes the gate fail until it is deleted, so the list can only shrink. The critic proved that three ways and confirmed no entry is broader than one slug, one exercise-or-grad, one voice, by broadening the matcher and watching both mutants fail."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "FOUR HOLES THE BUILDER OWN HARNESS FOUND AND CLOSED, none visible by reading, and the critic verified all four closures are STRUCTURAL rather than narrowed until the test passes. The sharpest: \"as\" as a substitution marker exempted \"read it as the ride\" — the BL-099 defect stated in writing. And DISPLACED markers were sentence-scoped, so chapin#4 \"next downbeat\" excused the ride 21 characters later and hid a FULLY REVERTED BL-099 exercise. Also added KNOWN_CLAIMED: eleven exercises must still be READ AS CLAIMS rather than merely come out green, which is what catches a rule quietly swallowing them — it fired on four separate rule-widening mutants, including the playing-to-a-song#3 case its own comment predicted."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "THE ADVERSARIAL PASS BLOCKED ON THE DOCUMENTATION, WHICH FOR THIS FILE IS THE DELIVERABLE. Three header claims were false in checkable ways. DISCLAIMERS contains a sixth rule, KNOWLEDGE, that the header list omitted — the widest rule in the file, and load-bearing, since removing it fails the corpus. \"Two markers are sentence-scoped\" was false: SIX are, and it is exploitable rather than academic — \"Notate this bar from memory, then play the crash on beat 1 and the china on beat 3\" exempts both claims and the gate stays green. And the load-bearing ledger the header offers as its widening tripwire disagreed with the file own --defects output (DISPLACED 17 vs 16, COMPARED 7 vs 8), with the totals coinciding at 80 so the error was invisible line by line; those 80 are tuples over 74 distinct pairs. Also fixed: the VERB rule second limb never looked left, so \"Give the ride a rest for one bar\" classified as a verb — latent, with zero corpus occurrences, but the header advertised the preposition exclusion as the safeguard while the gap was on the other side of the word."
+        },
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "check-staff-positions WIDENED AND VERIFIED NOT WEAKENED. positionsIn() now resolves an unqualified \"the <voice> line\" — the phrase that pairs \"notated\" with \"line\" and therefore met the BL-087 criterion the gate was built for, while never parsing. Three corpus sentences meet the promotion test; the other 43 idiomatic uses stay invisible. 35 claims across 7 lessons to 38 across 10, floor 32 to 36 — 36 and not 35 because rule 5 contributes exactly 3, so a floor of 35 let the whole rule be deleted and still pass, which a mutant proved. Its mutation suite was rebuilt from scratch, the iteration-72 harness not being in the repo, and re-run at 34 cases with 0 silent passes. The critic verified the change is STRICTLY ADDITIVE: zero claims lost, exactly three gained. It also found that reducing rule 5 to the tautology INDEX[p.key] === p.index passed against the ENTIRE corpus, because all three voice-line sentences happen to be true — so selfTestRule5() now runs the real comparison against a constructed stave every run, and it is the only thing holding rule 5 up."
+        }
+      ]
+    },
+    {
+      "id": "BL-124",
+      "dimension": "content",
+      "priority": 2,
+      "title": "Four exercises and a lesson goal instruct a crash on beat 1 and notate none, and the site only draws a crash seven times in 852",
+      "evidence": [
+        "Found by check-named-voices on the run that shipped it (iteration 77), and independently confirmed by the adversarial pass.",
+        "The exercises: rock-stadium-anthem#2 (TITLED \"Chorus: Crash on Every 1\", tip \"every bar 1 gets a crash and a kick\"), rock-stadium-anthem#3 (\"the chorus arrival with the crash on 1\"), rock-studio-polish#2 (\"crash on 1 of bar 5\" — bar 5 IS drawn, so the gate bar arithmetic resolved it as a miss rather than as displacement), rock-dynamics#2 (\"that crash is the chorus arrival\"). Plus three of rock-stadium-anthem four graduation criteria name it.",
+        "Scale check that makes this a convention question rather than four typos: a/5/x2 appears in exactly 7 of 852 exercises corpus-wide — the-drum-kit#0, playing-to-a-song#3, cymbal-voicings#2, rock-basic-fills#3, rock-power-ballad#2 and #3, reading-complex-charts#2.",
+        "rock-stadium-anthem#2 already documents a workaround in prose: \"the accent on slot 1 of each bar represents a crash + snare unison stab\".",
+        "ONE DECISION, NOT FOUR FIXES: either the crash gets notated in these bars, or the site adopts an explicit convention for representing it and says so once in the-drum-kit and reading-101 rather than per-exercise.",
+        "TRAP RECORDED BY BOTH AGENTS: do not resolve this by adding a \"notated as\" exemption to check-named-voices. \"The accent represents a crash\" and \"notated on the hi-hat line — read it as the ride\" are the same shape, what is drawn is not what is meant, and the second is a live BL-099 chunk-2 defect sitting in EXEMPTIONS right now. A rule keyed on that shape would permanently exempt the class the gate exists to find. If this is resolved by rewording, the new wording must not use \"represents\" or \"read it as\" either, and note that check-staff-positions rule 5 now reads that sentence LITERALLY and will fire once BL-099 fixes the notation."
+      ],
+      "acceptance": "every exercise whose words promise a crash either notates one, or the site states its crash convention once in a lesson that teaches notation and the exercise wording follows it; the decision is made once for the class; no \"notated as\" exemption is added to check-named-voices; the five EXEMPTIONS entries are deleted",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator. Found by the gate on its own first run, which is the argument for the gate."
+        }
+      ]
+    },
+    {
+      "id": "BL-125",
+      "dimension": "content",
+      "priority": 3,
+      "title": "independence-singing#1 prescribes hi-hat 8ths over a stave with no hi-hat, and its own sibling knows how to say so",
+      "evidence": [
+        "Found by check-named-voices on the run that shipped it (iteration 77), independently confirmed.",
+        "The stave is c/5 and f/4 only. The tip prescribes \"the basic backbeat (kick 1 and 3, snare 2 and 4, hi-hat 8ths)\".",
+        "Sibling exercise #0 prescribes the IDENTICAL hats and writes \"(not notated above; play them)\". So the lesson demonstrably knows how to say it and this exercise does not.",
+        "Small, and the fix is a choice between notating the hats or borrowing the sibling parenthetical — which is why it is P3 rather than folded into BL-124. But it is exactly the class the gate was built for."
+      ],
+      "acceptance": "independence-singing#1 either notates the hi-hat 8ths its tip prescribes or carries the same explicit not-notated parenthetical its sibling uses; the EXEMPTIONS entry is deleted",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator from the gate first run."
+        }
+      ]
+    },
+    {
+      "id": "BL-126",
+      "dimension": "quality",
+      "priority": 2,
+      "title": "One hedged word frees every mention of every voice in an exercise, and 127 staves are covered by nothing else",
+      "evidence": [
+        "The largest hole in check-named-voices, found by its own author chasing an example from the adversarial pass (iteration 77), and documented in the file as note (m) plus a rewritten note (a).",
+        "Six of the eleven rules are SENTENCE-scoped and four of those have no proximity limit at all — KNOWLEDGE, OPTIONAL, EXAMPLE, RECORDED. One hedged mention then spreads through DISCLAIMED to free every other mention of that voice in the exercise.",
+        "Exploitable, demonstrated with real sentences: \"Notate this bar from memory, then play the crash on beat 1 and the china on beat 3\" exempts BOTH claims and the gate stays green. So does \"If you can, add a shaker later, and put a crash on beat 1 with a china on beat 3.\"",
+        "AND IT IS ALREADY LIVE ON A REAL PAGE, needing no contrived sentence. jazz-medium-swing#0 is titled \"Ride Pattern Alone\" over a stave of nothing but a ride, and its existing tip says \"Faster tempo than your EARLIER ride-pattern work\" — earlier is a DISPLACED marker, so both mentions are freed today. Redrawing that entire stave on the hi-hat line passes the gate right now.",
+        "Blast radius, printed by the gate on every run: 132 exercise/voice pairs are DISCLAIMED — 5 absent voices actively excused, and 127 satisfied today whose notation could break unnoticed.",
+        "WHY IT IS NOT TIGHTENABLE, per the builder: the four unlimited rules have no notion of which VOICE a hedge is about, which the four clause-scoped rules get for free from adjacency. Narrowing the window alone would break true hedges rather than fix false ones. The fix is a rewrite of how a hedge binds to a subject."
+      ],
+      "acceptance": "a hedge binds to the voice it is actually about rather than to the whole exercise; the two demonstrated exploit sentences fail the gate; hatting jazz-medium-swing#0 fails the gate; the DISCLAIMED satisfied-today count falls substantially from 127 and the remainder is justified pair by pair; no true hedge in the corpus starts failing",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 77,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator. The gate shipped WITH this hole and prints it on every run, which is the right trade — it still catches the entire pre-BL-099 corpus, the snare-on-the-hi-hat-line class and a bell swapped for a high tom, all of which were invisible to all 20 previous gates. But 127 staves resting on nothing is an item, not a footnote."
         }
       ]
     }

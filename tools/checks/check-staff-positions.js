@@ -60,6 +60,13 @@
 //      reading-rests Ex 3 depends on that and is correct.
 //   4. COVERAGE FLOOR, so a refactor cannot quietly stop reading the corpus and
 //      report a green zero.
+//   5. THE "<voice> LINE" IDIOM, WHERE IT IS A CLAIM. Added under BL-123. An
+//      unqualified "the hi-hat line" names a position by naming a voice, so it
+//      is checked against the EXERCISE rather than against the voice's usual
+//      home: the stave must draw something at that position. Only fires when
+//      note (a)'s own test is met — the sentence pairs the phrase with a
+//      concrete key or the verb "notated". Three sentences in the corpus meet
+//      it; the other 43 uses of the idiom stay invisible, as they should.
 //
 // ---------------------------------------------------------------------------
 // WHAT STAYS GREEN THAT ARGUABLY SHOULD NOT — read this before trusting a pass.
@@ -71,6 +78,34 @@
 // by calibrate() before a single claim is read. One attacks the ENGLISH table
 // (note g) by remapping "middle space" onto the middle line, and takes 6 claims
 // down with it.
+//
+// RE-RUN at iteration 77 after BL-123 added rule 5, against 37 cases: 28 caught,
+// 9 correctly green (the baseline, 7 controls and one documented hole), 0 silent
+// passes. The iteration-72 harness was not kept in the repo, so the suite was
+// rebuilt from the classes this header describes — the five geometry attacks and
+// the minY+5.054 control all behave as recorded above, and four more attack the
+// English table. The four findings worth writing down:
+//
+//   * DELETING RULE 5 ENTIRELY passed against a floor of 35, because rule 5
+//     contributes exactly 3 claims and the gap was exactly 3. The floor is 36
+//     now and the mutant fails.
+//   * REDUCING RULE 5 TO A TAUTOLOGY (`INDEX[p.key] === p.index`, which is where
+//     p.index came from) passed against the whole corpus, because all three
+//     voice-line sentences are true today. That is what selfTestRule5 exists
+//     for; it runs the real comparison against a constructed stave every run.
+//   * DROPPING THE NOTATION TRIGGER passes against the corpus at 53 claims
+//     across 22 lessons, all true — so the 43 idioms, read literally, happen to
+//     be right about their own staves. The trigger stays because that is luck
+//     rather than a property, and the self-test now fails without it.
+//   * REMOVING RULE 3 — the empty-middle-line scan — passed everything. Nothing
+//     in the corpus is on the middle line, so the rule's output is an empty map
+//     whether it ran or not, and no floor counted its work. It now counts the
+//     noteheads it examines (MIDDLE_LINE_SCAN_FLOOR) and asserts its own premise
+//     (that b/4 is the middle line) rather than assuming it.
+//
+// FROM_TOP re-basing ("the second space from the top") has ZERO corpus
+// instances, so inverting its arithmetic is a silent pass. That branch is
+// untested by anything but reading.
 //
 // ONE MUTATION THAT SHOULD *NOT* FAIL, recorded because it looks like a hole and
 // is not. Patching `centre` to `span.minY + 5.054` — the ink TOP plus a constant
@@ -86,13 +121,26 @@
 // The list below is what the harness could NOT make fail, or made fail for the
 // wrong reason. It is the honest list, not the flattering one.
 //
-//   a. THE BARE `<voice> line` IDIOM IS INVISIBLE, ON PURPOSE. "the snare
+//   a. THE BARE `<voice> line` IDIOM IS MOSTLY INVISIBLE, ON PURPOSE. "the snare
 //      line", "a busy kick line", "no gap in the hat line" — 53 sentences across
 //      34 lessons. In drum writing "line" there means PART, the way "bass line"
-//      does, and none of them names a line of the stave. The parser cannot see
-//      them because a position phrase must carry a qualifier ("middle", "top",
-//      "fourth"); a bare possessive has none. That is structural rather than an
-//      exemption list, so it cannot widen by accident.
+//      does, and none of them names a line of the stave. 43 of them carry no
+//      key and no "notated" and are still invisible: rule 5's VOICE_LINE table
+//      is consulted only when NOTATION_TRIGGER matches the sentence, so the
+//      idiom is promoted by the test below rather than by a list of slugs.
+//
+//      REVISED UNDER BL-123. The paragraph that used to stand here said the
+//      parser "cannot see them because a position phrase must carry a
+//      qualifier", and treated that as structural. It was a gap: the very next
+//      paragraph defines a test that three UNQUALIFIED sentences pass, and the
+//      qualifier requirement meant they were never resolved. Rule 5 resolves
+//      them now — three-limb-patterns#4's "notated on the hi-hat line",
+//      limb-substitution#1's "notated on the hat-foot line" and
+//      polyrhythms-3-2#3's "notated on the floor-tom line" — and checks each
+//      against its own exercise. All three are TRUE today, and the first is true
+//      only because BL-099 has not reached that exercise yet: when the ride
+//      moves to the top line, that sentence becomes false and rule 5 says so.
+//      "Snare and hat-foot LINE UP" is excluded by a lookahead, not by luck.
 //
 //      THE LINE BETWEEN IDIOM AND CLAIM, since it is not obvious: a sentence is
 //      a POSITION CLAIM when it pairs "line" or "space" with either a concrete
@@ -105,9 +153,13 @@
 //      four now name the space and are checked by rule 1. The remaining 53 are
 //      possessives with no key and no "notated", and they stay.
 //
-//      It does still mean a genuinely wrong BARE "notated on the snare line"
-//      would pass. Nothing in the corpus does that today, and check-tip-claims
-//      covers the same exercises beat-side.
+//      What rule 5 does NOT do is bind the phrase to a SUBJECT. Reading
+//      limb-substitution#1's "The hi-hat 8ths are now in the FOOT (notated on
+//      the hat-foot line)" as "hi-hat is on the hat-foot line" reports a
+//      contradiction in a sentence that is correct, so rule 1 skips any position
+//      phrase that names its own voice (note f). The cost is that "the snare is
+//      notated on the ride line", with a ride actually on the stave, passes rule
+//      5 and is invisible to rule 1.
 //   b. BARE "above the staff" / "below the staff" ARE NOT PARSED. On this site
 //      the phrase has two meanings: a staff POSITION (the crash, the hi-hat
 //      foot) and a CHART REGION (reading-complex-charts' "a rhythmic line
@@ -190,13 +242,24 @@ const SURVEY = process.argv.includes('--survey');
 //   hiphop-r-and-b-basic   1   after BL-087
 //   transcription-method   1   after BL-087
 //
+// Raised to 36 at iteration 77, when rule 5 added three more across three more
+// lessons: 38 claims across 10 lessons. The gap is now 2 rather than 3 on
+// purpose: rule 5 contributes exactly 3, so a floor of 35 let the whole rule be
+// deleted and still pass. Two claims is still enough to absorb a reworded
+// sentence, and the-drum-kit's drum key is 20 of the 38, so rewording THAT trips
+// the floor either way — which is the intended behaviour and why the gap stays
+// small rather than generous.
+//   three-limb-patterns    1   BL-123 rule 5
+//   limb-substitution      1   BL-123 rule 5
+//   polyrhythms-3-2        1   BL-123 rule 5
+//
 // A gate that quietly stops looking is worse than one that fails, so a drop
 // below this is a failure even when nothing contradicts. The 3-claim gap absorbs
 // a reworded sentence; a bigger drop is erosion and should be looked at, not
 // waved through. Note that the-drum-kit alone is 20 of the 35, so rewording its
 // drum key trips the floor even when the rewording is correct — that is the
 // intended behaviour, but it is why the gap is small rather than generous.
-const COVERAGE_FLOOR = 32;
+const COVERAGE_FLOOR = 36;
 
 function die(msg) { console.error(`[check-staff-positions] FAIL — ${msg}`); process.exit(1); }
 
@@ -375,12 +438,62 @@ const POSITIONS = [
   [/\b(?:second|2nd)\s+line\b/i, 2, 'the second line'],
   [/\b(?:first|1st)\s+line\b/i, 0, 'the first line'],
 ];
+// THE BARE "<voice> line" IDIOM, and the one shape of it that IS a claim.
+//
+// BL-123. Note (a) below is right that "the snare line", "a busy kick line" and
+// "no gap in the hat line" mean PART, the way "bass line" does, and that 43 of
+// them across the corpus name no line of any stave. It was wrong that the parser
+// therefore could not see any of them: note (a) itself sets the test — a
+// sentence is a POSITION CLAIM when it pairs "line" or "space" with a concrete
+// key or the verb "notated" — and three sentences meet that test with an
+// UNQUALIFIED voice name, so positionsIn() never resolved them at all:
+//
+//   three-limb-patterns#4  "Ride quarters (notated on the hi-hat line ...)"
+//   limb-substitution#1    "The hi-hat 8ths are now in the FOOT (notated on
+//                           the hat-foot line)"
+//   polyrhythms-3-2#3      "2-pulse on the floor tom (notated on the floor-tom
+//                           line, but played with your feet ...)"
+//
+// These entries give the phrase a position: the one the RENDERER draws that
+// voice on. They are consulted by rule 5 only, never by rule 1 — see the
+// `voiceNamed` guard there, and the reasoning under it.
+const VOICE_LINE = [
+  ['hi-hat foot', 'd/4/x2'], ['hat-foot', 'd/4/x2'], ['hat foot', 'd/4/x2'], ['hi-hat pedal', 'd/4/x2'],
+  ['floor tom', 'a/4'], ['floor-tom', 'a/4'],
+  ['high tom', 'e/5'], ['high-tom', 'e/5'], ['hi-tom', 'e/5'], ['rack tom', 'e/5'],
+  ['mid tom', 'd/5'], ['mid-tom', 'd/5'],
+  ['bass drum', 'f/4'], ['kick drum', 'f/4'], ['kick', 'f/4'],
+  ['hi-hat', 'g/5/x2'], ['hihat', 'g/5/x2'], ['hat', 'g/5/x2'],
+  ['cross-stick', 'c/5'], ['snare', 'c/5'],
+  ['ride', 'f/5/x2'], ['cowbell', 'e/5/x2'], ['bell', 'e/5/x2'],
+  ['crash', 'a/5/x2'], ['china', 'b/5/x2'],
+];
+// "Snare and hat-foot LINE UP" is a phrasal verb, not a staff position, and
+// four-way-foundation#1 says it twice.
+const voiceLineRe = word =>
+  new RegExp('\\bthe\\s+' + word.replace(/[-\s]/g, '[-\\s]') + '[-\\s]lines?\\b(?!\\s+up\\b)', 'i');
+
+// The BL-087 trigger, quoted from note (a): "line" is a claim when the sentence
+// pairs it with a concrete key or the verb "notated". Nothing else promotes the
+// idiom, which is why the other 43 stay invisible.
+const NOTATION_TRIGGER = /\bnotat\w+|\bwritten\b|\bwrites\b|\b[a-g]\/\d(?:\/x2)?\b/i;
+
 const FROM_TOP = /^\s*(?:down\s+)?from\s+the\s+top\b/i;
 const NTH = new Map([['first', 1], ['1st', 1], ['second', 2], ['2nd', 2], ['third', 3], ['3rd', 3],
   ['fourth', 4], ['4th', 4], ['fifth', 5], ['5th', 5]]);
 
-function positionsIn(clause) {
+function positionsIn(clause, sentence) {
   const out = [];
+  // Unqualified "the <voice> line", promoted only under the BL-087 trigger.
+  // Longest name first so "the hat-foot line" is not read as "the hat line".
+  if (sentence !== undefined && NOTATION_TRIGGER.test(sentence)) {
+    for (const [word, key] of VOICE_LINE) {
+      const m = voiceLineRe(word).exec(clause);
+      if (!m) continue;
+      if (out.some(p => p.at <= m.index && p.at + p.text.length >= m.index + m[0].length)) continue;
+      out.push({ index: INDEX[key], label: `the ${word} line`, at: m.index, text: m[0], voiceNamed: word, key });
+    }
+  }
   for (const [re, idx, label] of POSITIONS) {
     const m = re.exec(clause);
     if (!m) continue;
@@ -470,6 +583,9 @@ for (const [key, y] of Object.entries(CENTRE)) {
 for (const [, keys] of VOICES) {
   for (const k of keys) if (INDEX[k] === undefined) die(`voice vocabulary names ${k}, which player.js does not map`);
 }
+for (const [word, k] of VOICE_LINE) {
+  if (INDEX[k] === undefined) die(`the "<voice> line" table names ${k} for "${word}", which player.js does not map`);
+}
 const label = keys => keys.map(k => KEY_TO_DRUM[k]).join('/');
 
 // ===========================================================================
@@ -511,15 +627,85 @@ const survey = [];
 let claims = 0;
 const lessonsCovered = new Set();
 
+// The exercise is carried alongside each field so rule 5 can compare a tip
+// against its own stave. Lesson-level fields carry null and rule 5 skips them.
 function fieldsOf(lesson) {
-  const out = [['bodyHtml', lesson.bodyHtml], ['tagline', lesson.tagline]];
-  (lesson.graduationCriteria || []).forEach((g, i) => out.push([`grad[${i}]`, g]));
+  const out = [['bodyHtml', lesson.bodyHtml, null], ['tagline', lesson.tagline, null]];
+  (lesson.graduationCriteria || []).forEach((g, i) => out.push([`grad[${i}]`, g, null]));
   (lesson.exercises || []).forEach((ex, i) => {
-    out.push([`ex${i}.title`, ex.title], [`ex${i}.meta`, ex.meta], [`ex${i}.tip`, ex.tip]);
+    out.push([`ex${i}.title`, ex.title, ex], [`ex${i}.meta`, ex.meta, ex], [`ex${i}.tip`, ex.tip, ex]);
   });
-  (lesson.listening || []).forEach((li, i) => out.push([`listen[${i}]`, li && li.note]));
+  (lesson.listening || []).forEach((li, i) => out.push([`listen[${i}]`, li && li.note, null]));
   return out;
 }
+
+// Every staff position an exercise actually draws on, measured through the same
+// probe the rest of this file uses. Grace notes inherit their parent's keys and
+// are followed; rests are not positions anyone reads as a drum.
+const corpusIndex = {};
+function indexOfCorpusKey(key) {
+  if (corpusIndex[key] !== undefined) return corpusIndex[key];
+  if (INDEX[key] !== undefined) { corpusIndex[key] = INDEX[key]; return corpusIndex[key]; }
+  const p = probe(key, true);
+  if (!p) { corpusIndex[key] = null; return null; }
+  const i = idxOf(p.centre);
+  corpusIndex[key] = Math.abs(i - Math.round(i)) > 1e-6 ? null : Math.round(i);
+  return corpusIndex[key];
+}
+// Rule 5's whole assertion, in one named place so the self-test below runs the
+// SAME expression the corpus loop does. Inlined, it could be "simplified" to
+// `INDEX[p.key] === p.index` — a tautology, since that is where p.index came
+// from — and today's corpus would not notice, because all three of its
+// voice-line sentences are true.
+function voiceLineHolds(ex, p) { return drawnIndices(ex).has(p.index); }
+
+function drawnIndices(ex) {
+  const out = new Set();
+  for (const voice of ['hands', 'feet']) {
+    for (const n of ex[voice] || []) {
+      if (n.rest) continue;
+      const parts = [n, ...(n.grace ? (Array.isArray(n.grace) ? n.grace : [n.grace]) : [])];
+      for (const part of parts) {
+        for (const key of part.keys || n.keys || []) {
+          const i = indexOfCorpusKey(key);
+          if (i !== null) out.add(i);
+        }
+      }
+    }
+  }
+  return out;
+}
+
+// SELF-TEST FOR RULE 5, on synthetic input, every run. All three of the corpus's
+// voice-line sentences are TRUE, so a rule 5 that had stopped working would look
+// exactly like a rule 5 that works, and neither the corpus nor the coverage
+// floor would say a word. Two constructed defects and two controls, through the
+// same functions the corpus loop uses.
+(function selfTestRule5() {
+  const claim = 'Everything here is notated on the crash line.';
+  const parsed = positionsIn(claim, claim).filter(p => p.voiceNamed);
+  if (parsed.length !== 1 || parsed[0].key !== 'a/5/x2') {
+    die(`rule 5 self-test: "${claim}" should resolve to exactly one voice-line position on the crash, ` +
+      `it resolved ${parsed.length} (${parsed.map(p => p.label).join(', ')})`);
+  }
+  const p = parsed[0];
+  if (voiceLineHolds({ hands: [{ keys: ['c/5'], duration: 'q' }] }, p)) {
+    die('rule 5 self-test: a stave holding only a snare was accepted as satisfying "the crash line". ' +
+      'The assertion has been reduced to something that cannot fail.');
+  }
+  if (!voiceLineHolds({ hands: [{ keys: ['a/5/x2'], duration: 'q' }] }, p)) {
+    die('rule 5 self-test: a stave holding a crash was rejected for "the crash line".');
+  }
+  const idiom = 'Keep the crash line out of it.';
+  if (positionsIn(idiom, idiom).some(x => x.voiceNamed)) {
+    die(`rule 5 self-test: "${idiom}" has no key and no "notated", so it is the PART idiom and must not ` +
+      'resolve to a staff position. 43 sentences depend on that.');
+  }
+  const lineUp = 'As notated, snare and the hat-foot line up here.';
+  if (positionsIn(lineUp, lineUp).some(x => x.voiceNamed)) {
+    die('rule 5 self-test: "the hat-foot line up" is a phrasal verb, not a staff position.');
+  }
+})();
 
 // Voices mentioned in a stretch of text, longest name first, with the guard that
 // stops "hat" claiming the tail of "foot-hat" and "tom" the tail of "floor tom".
@@ -547,7 +733,7 @@ const GAP_BEFORE = 34, GAP_AFTER = 22;
 const GAP_POISON = /[.;:,()]|\b(?:that|this|it|which|there|the staff|the stave|but|and)\b/i;
 
 for (const [slug, lesson] of Object.entries(lessonContent)) {
-  for (const [field, raw] of fieldsOf(lesson)) {
+  for (const [field, raw, ex] of fieldsOf(lesson)) {
     const text = plain(raw);
     if (!text) continue;
 
@@ -560,8 +746,46 @@ for (const [slug, lesson] of Object.entries(lessonContent)) {
       // middle space", and splitting on it separates every voice from its own
       // position.
       for (const clause of sentence.split(/\s*[,;:]\s*/)) {
-        const pos = positionsIn(clause);
+        const pos = positionsIn(clause, sentence);
+
+        // ---- RULE 5: "notated on the <voice> line" must be true OF THIS
+        // STAVE. The phrase names a position by naming a voice, so the thing to
+        // check is not where that voice usually lives — it is whether this
+        // exercise draws anything there at all. three-limb-patterns#4 says the
+        // ride quarters are "notated on the hi-hat line" and they are, which is
+        // the BL-099 defect stated in writing and NOT a prose error; the same
+        // sentence with the notation fixed becomes false, and this rule is what
+        // will say so.
+        for (const p of pos) {
+          if (!p.voiceNamed || !ex) continue;
+          if (NEGATED.test(clause.slice(0, p.at + p.text.length))) continue;
+          claims++;
+          lessonsCovered.add(slug);
+          const drawn = drawnIndices(ex);
+          const ok = voiceLineHolds(ex, p);
+          if (SURVEY) {
+            survey.push(`${ok ? 'ok  ' : 'FAIL'} ${slug} :: ${field} [voice-line] says ${p.label} ` +
+              `(${nameIndex(p.index)}), stave draws ${[...drawn].sort((a, b) => b - a).map(nameIndex).join(' / ') || 'nothing'}`);
+          }
+          if (!ok) {
+            findings.push({
+              slug, field, kind: 'voice-line', voice: KEY_TO_DRUM[p.key],
+              said: `${p.label}, i.e. ${nameIndex(p.index)}`,
+              real: `this stave draws only ${[...drawn].sort((a, b) => b - a).map(nameIndex).join(' / ') || 'nothing'}`,
+              clause: clause.trim(),
+            });
+          }
+        }
+
         if (pos.length !== 1) continue;                      // note (f)
+        // "the hi-hat line" NAMES a voice, so a clause carrying it always holds
+        // at least two — the subject and the one inside the phrase — and note
+        // (f) refuses to guess between them. Reading the subject anyway fails a
+        // true sentence: limb-substitution#1's "The hi-hat 8ths are now in the
+        // FOOT (notated on the hat-foot line)" binds "hi-hat" to the hat-foot's
+        // position and reports a contradiction in prose that is correct. These
+        // phrases are checked by rule 5 instead, against the exercise itself.
+        if (pos[0].voiceNamed) continue;
         // Only voices named BEFORE the position can be its subject. Scoping this
         // to the whole clause was a hole the mutation harness found: "the hi-hat
         // foot sits in the bottom space and lives below the staff ... similar to
@@ -676,17 +900,19 @@ for (const [slug, lesson] of Object.entries(lessonContent)) {
 // — so a b/4 notehead planted in an exercise sailed through the one rule written
 // to notice it. A key that cannot be measured at all is left to
 // check-player-keys, which fails on exactly that.
+// indexOfCorpusKey() lives above, next to fieldsOf(), because rule 5 needs it
+// too. It falls back to INDEX for keys player.js maps and probes the renderer
+// for anything else, which is what keeps b/4 — a key with no player voice but a
+// perfectly drawable notehead — visible to this rule.
 const MIDDLE_LINE_INDEX = 4;
 const onMiddleLine = new Map();
-const corpusIndex = { ...INDEX };
-function indexOfCorpusKey(key) {
-  if (corpusIndex[key] !== undefined) return corpusIndex[key];
-  const p = probe(key, true);
-  if (!p) { corpusIndex[key] = null; return null; }
-  const i = idxOf(p.centre);
-  corpusIndex[key] = Math.abs(i - Math.round(i)) > 1e-6 ? null : Math.round(i);
-  return corpusIndex[key];
-}
+// Counted so the SCAN itself is asserted, not only its verdict. Nothing in the
+// corpus is on the middle line, so this rule's output is an empty map whether it
+// works or not, and the adversarial pass at iteration 77 removed it whole and
+// watched every gate stay green. 14244 noteheads carry a key today; a floor of
+// 13000 absorbs ordinary content churn and fails a scan that stopped scanning.
+let middleLineKeysScanned = 0;
+const MIDDLE_LINE_SCAN_FLOOR = 13000;
 for (const [slug, lesson] of Object.entries(lessonContent)) {
   for (const ex of lesson.exercises || []) {
     for (const voice of ['hands', 'feet']) {
@@ -695,6 +921,7 @@ for (const [slug, lesson] of Object.entries(lessonContent)) {
         const parts = [n, ...(n.grace ? (Array.isArray(n.grace) ? n.grace : [n.grace]) : [])];
         for (const part of parts) {
           for (const key of part.keys || n.keys || []) {
+            middleLineKeysScanned++;
             if (indexOfCorpusKey(key) !== MIDDLE_LINE_INDEX) continue;
             onMiddleLine.set(slug, (onMiddleLine.get(slug) || 0) + 1);
           }
@@ -711,6 +938,19 @@ if (SURVEY) {
     `${findings.length} contradictions; middle line carries ${mid} drum notes`);
   findings.forEach(f => console.log(`   -> ${f.slug} :: ${f.field}: ${f.said} | ${f.real}`));
   process.exit(0);
+}
+
+if (middleLineKeysScanned < MIDDLE_LINE_SCAN_FLOOR) {
+  console.error('[check-staff-positions] FAIL — the middle-line scan examined ' +
+    `${middleLineKeysScanned} noteheads, floor is ${MIDDLE_LINE_SCAN_FLOOR}.`);
+  console.error('  Nothing in the corpus sits on the middle line, so this rule reports an empty result');
+  console.error('  whether it ran or not. The count is the only witness that it ran at all.');
+  process.exit(1);
+}
+if (indexOfCorpusKey('b/4') !== MIDDLE_LINE_INDEX) {
+  die(`the middle-line rule believes b/4 renders on position ${indexOfCorpusKey('b/4')}, not ` +
+    `${MIDDLE_LINE_INDEX}. b/4 IS the middle line — that is the whole premise of the rule, and of ` +
+    'reading-101 teaching that the line stays empty.');
 }
 
 if (onMiddleLine.size) {
