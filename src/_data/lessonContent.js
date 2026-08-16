@@ -1770,12 +1770,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -1783,7 +1783,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "The snare on 'and of 4' is the natural pickup into beat 1 of the next bar. It's the entry point for jazz comping — once this is solid you can start placing the snare on different parts of the bar. Playback sits at ♩=90; work it from ♩=80 up to ♩=100 once it is clean."
+        tip: "The snare on 'and of 4' is the natural pickup into beat 1 of the next bar. It's the entry point for jazz comping — once this is solid you can start placing the snare on different parts of the bar. That pickup doubles the second note of the ride's <em>ding-a</em>, so both hands land together and the placement comes free. Playback sits at ♩=90; work it from ♩=80 up to ♩=100 once it is clean."
       }
     ],
     listening: [
@@ -5599,12 +5599,12 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5612,7 +5612,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Bar 1 of the melody. Snare hits: an accent on the <em>&amp; of 2</em>, a ghost on the first 8th of beat 4, an accent on the <em>&amp; of 4</em>. Two accents (loud, ~4× the ghost), one ghost (whisper-soft). Notice the contour: hit-rest-hit-hit, building toward the &amp;-of-4 anticipation. Loop bar 1 twenty times before adding bar 2 in the next exercise."
+        tip: "Bar 1 of the melody. The ride hand plays the <em>ding · ding-a</em> pattern underneath, and the hat foot lands on 2 and 4. Snare hits: an accent on the <em>&amp; of 2</em>, a ghost on the first 8th of beat 4, an accent on the <em>&amp; of 4</em>. Two accents (loud, ~4× the ghost), one ghost (whisper-soft). Notice the contour: hit-rest-hit-hit, building toward the &amp;-of-4 anticipation. Loop bar 1 twenty times before adding bar 2 in the next exercise."
       },
       {
         title: "2 — Two-Bar Snare Melody (Bars 1 + 2)",
@@ -5622,18 +5622,18 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
-          { keys: ['g/5/x2', 'c/5'], duration: 'q', accent: true },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2', 'c/5'], duration: 'q', accent: true },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5645,7 +5645,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Bar 1 (as before) → Bar 2: accent on beat 1, ghost on the <em>&amp; of 2</em>, then nothing until the next bar's beat 1. Bar 1 builds; bar 2 resolves. The snare melody draws an arc across two bars: question → answer. Listen for the shape, not the individual notes."
+        tip: "Bar 1 (as before) → Bar 2: accent on beat 1, ghost on the <em>&amp; of 2</em>, then nothing until the next bar's beat 1. Bar 1 builds; bar 2 resolves. The ride hand and the hat foot repeat bar for bar; only the snare line changes. The snare melody draws an arc across two bars: question → answer. Listen for the shape, not the individual notes."
       },
       {
         title: "3 — Three-Bar Phrase: Build, Peak, Release",
@@ -5656,26 +5656,26 @@ module.exports = {
         repeatEnd: true,
         hands: [
           // Bar 1 — build
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
           // Bar 2 — peak
-          { keys: ['g/5/x2', 'c/5'], duration: 'q', accent: true },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
-          { keys: ['g/5/x2', 'c/5'], duration: 'q', accent: true },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: 'q', accent: true },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2', 'c/5'], duration: 'q', accent: true },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
           // Bar 3 — release
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5691,7 +5691,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "Bar 1 builds (ghosts plus one closing accent), bar 2 peaks (three accents), bar 3 releases (a single soft snare on beat 3). The arc IS the melody; kick on 1 and hat-foot on 2 and 4 hold the form. If accents and ghosts blur together, the melody disappears and it's just rhythm."
+        tip: "Bar 1 builds (ghosts plus one closing accent), bar 2 peaks (three accents), bar 3 releases (a single soft snare on beat 3). The arc IS the melody; the ride pattern, kick on 1 and hat-foot on 2 and 4 hold the form. If accents and ghosts blur together, the melody disappears and it's just rhythm."
       },
       {
         title: "4 — Sparse Melody: Two Notes, Two Bars",
@@ -5702,19 +5702,19 @@ module.exports = {
         repeatEnd: true,
         hands: [
           // Bar 1 — one snare hit
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8', accent: true },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8', accent: true },
           // Bar 2 — one snare hit
-          { keys: ['g/5/x2', 'c/5'], duration: 'q', accent: true },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2', 'c/5'], duration: 'q', accent: true },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5726,7 +5726,7 @@ module.exports = {
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' }
         ],
-        tip: "TWO snare notes across two whole bars. <em>&amp; of 4</em> in bar 1, then beat 1 in bar 2 — the classic anticipation-and-resolution figure that's the cornerstone of jazz comping. Sparseness is its own kind of melody. The hardest part: NOT playing more. Resist the urge to fill. Two notes, well-placed, beat eight notes scattered."
+        tip: "TWO snare notes across two whole bars. The ride hand keeps its jazz pattern through both bars, and the hat foot stays on 2 and 4. <em>&amp; of 4</em> in bar 1, then beat 1 in bar 2 — the classic anticipation-and-resolution figure that's the cornerstone of jazz comping. Sparseness is its own kind of melody. The hardest part: NOT playing more. Resist the urge to fill. Two notes, well-placed, beat eight notes scattered."
       }
     ],
     listening: [

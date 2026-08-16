@@ -280,13 +280,17 @@
 //      alone still demands e/5/x2.
 //   e. GRADUATION CRITERIA ARE LESSON-SCOPED, so a criterion naming the ride is
 //      satisfied by ONE exercise in the lesson having a ride. That is what makes
-//      it usable, and it is also why independence-melodic-snare needs only one
-//      exemption rather than four.
+//      it usable, and it cuts both ways: while independence-melodic-snare was
+//      wrong it needed only one exemption for four broken exercises, and now that
+//      it is fixed one correct exercise would satisfy the criterion for four. The
+//      lesson is not held by rule 2 at all any more — each of its exercises names
+//      the ride in its own tip and is held by rule 1. See KNOWN_CLAIMED.
 //   f. NO PROSE OUTSIDE EXERCISE WORDS AND GRADUATION CRITERIA IS READ. bodyHtml
 //      names instruments constantly and is about the lesson, not a stave;
 //      fusion-coordination-foundation's body says "The ride plays a jazz
-//      pattern" and this file does not see it. Its graduation criterion says the
-//      same thing, which is why that lesson is still caught.
+//      pattern" and this file does not see it. Until iteration 80 its graduation
+//      criterion was the only reason that lesson was caught at all — its single
+//      exercise named the snare and never the ride. The exercise now says it.
 //   g. NOTATION-SHORTHAND SENTENCES ARE NOT EXEMPTED, ON PURPOSE. "the accent on
 //      slot 1 of each bar represents a crash + snare unison stab" is a legitimate
 //      shorthand and "Ride quarters (notated on the hi-hat line — read it as the
@@ -758,7 +762,9 @@ function walk(text, fn) {
 // move in the same diff as the list.
 //
 // ---------------------------------------------------------------------------
-// READ THIS BEFORE PLANNING BL-099 CHUNK 3.
+// BL-099 IS CLOSED. Chunk 3 landed at iteration 80 and this file no longer
+// carries a single BL-099 entry. The rule the campaign was run under, kept
+// because the next `ex: null` entry will need it:
 //
 // CONVERT EACH LESSON ATOMICALLY, IN ONE COMMIT. A `ex: null` entry is
 // LESSON-scoped: it exists only while the lesson has no ride ANYWHERE.
@@ -767,7 +773,7 @@ function walk(text, fn) {
 // not say "ride" in their own words, so there is no miss left to exempt and
 // nothing to re-add. Half a lesson is worse than none.
 //
-// The accounting, measured at iteration 77 and settled at iteration 78:
+// The final accounting, measured at iteration 77 and closed at iteration 80:
 //
 //   20 exercises across the five lessons BL-099 named
 //   18 drew a hand hi-hat and no ride
@@ -783,13 +789,37 @@ function walk(text, fn) {
 //      lesson. THREE of the 11 exercises, four-way #2/#3/#4, never had an entry
 //      of their own and stood behind their lesson's grad entry alone, which is
 //      why all three lessons had to move together.
-//    5 remain, in the two chunk-3 lessons below, and NONE of them says "ride" in
-//      its own title, meta or tip — which is why the sweep that filed BL-099
-//      missed them, and why one lesson-scoped grad entry is all that holds
-//      independence-melodic-snare #0-#3 and fusion-coordination-foundation #0.
+//    5 were converted at iteration 80 (chunk 3): independence-melodic-snare
+//      #0-#3 and fusion-coordination-foundation #0, 54 noteheads, two `ex: null`
+//      grad entries retired. Both lessons moved whole, for the reason above:
+//      independence-melodic-snare's four exercises stood behind ONE lesson-scoped
+//      entry, so the first fix in the lesson would have deleted the tripwire off
+//      the other three.
+//   16 of 16 converted. Not one of the five chunk-3 exercises named the ride in
+//      its own title, meta or tip — they named the snare, and #2 the hat-foot,
+//      but never the cymbal their right hand was playing. That is why the sweep
+//      that filed BL-099 missed them, and why converting them would have left
+//      them UNBOUND: nothing in their own words to contradict a stave that
+//      drifted back. Each tip therefore gained one true sentence naming the
+//      ride, so rule 1 now holds all five per exercise and not merely per
+//      lesson. Those five sentences are the whole binding, so they are listed in
+//      KNOWN_CLAIMED below as well.
 //
-// So independence-melodic-snare is the dangerous one: four exercises stand
-// behind a single lesson-scoped entry that the first fix in the lesson deletes.
+// WHAT THE WHOLE CAMPAIGN LEAVES BEHIND, measured at iteration 80 by reverting
+// each converted exercise on its own and asking this gate whether it notices.
+// 25 exercises over 7 lessons were converted across the three chunks — the
+// original nine (jazz-ride-pattern #0-#3, independence-chapin-method #0-#4),
+// chunk 2's eleven, chunk 3's five. 24 of the 25 are BOUND: revert the stave
+// alone and this file fails, naming the exercise. ONE is not:
+//
+//   jazz-ride-pattern#2 "Add the Hi-Hat Foot on 2 and 4" — six ride noteheads
+//   whose title, meta and tip name only the hi-hat foot. Its lesson criterion
+//   "Ride pattern + hi-hat foot on 2 and 4" is satisfied by its three siblings,
+//   so rule 2 stays quiet too. Move its ride to the hi-hat line today and every
+//   gate is green. That is note (e) and note (j) meeting on one page, and it is
+//   the BL-127 class rather than a BL-099 defect: the NOTATION is correct and
+//   nothing exempts it, so there is no entry to add here. It wants one true
+//   sentence in its tip, the fix chunk 3 applied five times.
 const EXEMPTIONS = [
   // --- BL-099 chunk 2 RETIRED at iteration 78. Eleven entries deleted in one
   //     diff — 8 per-exercise (three-limb-patterns 0/1/4, four-way-foundation
@@ -811,11 +841,16 @@ const EXEMPTIONS = [
   //     converted #0/#1, criterion [1] "Hi-hat hand + kick 1 and 3 + snare 2 and
   //     4 (rock-style three-limb)" by the untouched #2/#3. The entry was
   //     exempting a criterion that has become true, not covering a defect.
-  // --- BL-099 chunk 3. No exercise's own words say "ride" in either lesson,
-  //     which is why the sweep that filed BL-099 missed them; the graduation
-  //     criteria do say it, and that is what holds them here.
-  { slug: 'independence-melodic-snare', ex: null, voice: 'ride', why: 'BL-099 chunk 3 (graduation criterion; all 4 exercises)' },
-  { slug: 'fusion-coordination-foundation', ex: null, voice: 'ride', why: 'BL-099 chunk 3 (graduation criterion)' },
+  // --- BL-099 chunk 3 RETIRED at iteration 80. Two `ex: null` grad entries
+  //     deleted, independence-melodic-snare and fusion-coordination-foundation.
+  //     The tripwire argument that made chunk 2 safe does not transfer to these
+  //     two, because their exercises never named the ride at all, so it was
+  //     rebuilt rather than reused: every one of the five now says "ride" in its
+  //     own tip, which means each stave is held by rule 1 individually. Deleting
+  //     the lesson-scoped entries costs nothing that the per-exercise claims do
+  //     not now cover, and both lessons have a ride in every exercise they have.
+  //     Mutation-checked at iteration 80: reverting any ONE of the five back to
+  //     g/5/x2 fails this gate by name.
 
   // --- BL-089, already filed: "two tips naming a voice that is not on the
   //     stave". three-limb-patterns#4's tip says "then add the hat foot on 2 and
@@ -874,7 +909,7 @@ const EXEMPTIONS = [
 // five new ones. With equality you cannot add or remove a single entry without
 // editing this number in the same diff, which is the point — the number is the
 // reviewable artefact, not the array. Lower it with every retirement.
-const EXEMPTION_COUNT = 9;
+const EXEMPTION_COUNT = 7;
 
 // Rule 3's one known exception, and it already has an item of its own whose
 // acceptance ends "and no other exercise puts a kick in the hands voice" — so
@@ -929,6 +964,19 @@ const KNOWN_CLAIMED = [
   ['playing-to-a-song', 3, 'crash'],
   ['rock-open-hats', 0, 'hat'],
   ['fills-around-kit', 0, 'floor tom'],
+  // BL-099 chunk 3, iteration 80. These five are here for a different reason
+  // from every entry above: their "ride" sentences were WRITTEN in that
+  // iteration, and they are the only thing binding those staves. Chunk 3's
+  // lessons said "ride" in their graduation criteria and nowhere else, so
+  // deleting the two lesson-scoped exemptions would have left the exercises
+  // unbound — rule 2 is satisfied by one ride anywhere in the lesson. A tip
+  // sentence is content, and content gets reworded: if one of these is rewritten
+  // into a hedge, or a rule widens far enough to swallow it, that stave silently
+  // stops being checked and no miss appears, because the ride IS notated today.
+  // This list is what notices. Re-derive rather than delete.
+  ['independence-melodic-snare', 0, 'ride'], ['independence-melodic-snare', 1, 'ride'],
+  ['independence-melodic-snare', 2, 'ride'], ['independence-melodic-snare', 3, 'ride'],
+  ['fusion-coordination-foundation', 0, 'ride'],
 ];
 
 // ===========================================================================

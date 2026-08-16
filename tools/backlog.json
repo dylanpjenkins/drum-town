@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 79,
-    "next_dimension": "content",
+    "iteration": 80,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -2185,10 +2185,10 @@
         "Found while fixing BL-086 in the same lesson: distinct defect class (wrong instrument, not wrong beat) so it was filed rather than folded in, and the BL-086 fix stands on its own."
       ],
       "acceptance": "every exercise whose words name the ride notates the ride, or its words are corrected to say hi-hat — decided per exercise by reading the tip and the lesson body, not by sweeping; the change is visually verified because it moves noteheads to a different staff position and changes which voice plays",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
       "chunk": {
-        "done": 2,
+        "done": 3,
         "total": 3,
         "size": 10
       },
@@ -2252,6 +2252,41 @@
           "iteration": 78,
           "date": "2026-08-16",
           "note": "A TRAP THE BUILDER IDENTIFIED AND AVOIDED, WORTH RECORDING BECAUSE IT IS COUNTERINTUITIVE. The obvious honest fix for the un-notated hat foot on three-limb-patterns#4 — adding \"(not notated above; play them)\", exactly as independence-singing#0 does — WOULD HAVE RETIRED THE BL-089 EXEMPTION, because \"not notated\" is a DISPLACED marker inside the 45-character window and would have exempted the mention by rule. So the gate punishes that particular honest disclosure. The hat-foot sentence was left byte-identical instead, and BL-089 keeps its tripwire. Anyone fixing BL-089 or BL-125 needs to know this before reaching for the same wording."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "CHUNK 3 OF 3 — CAMPAIGN CLOSED. 54 noteheads across the last five exercises: independence-melodic-snare #0-#3 and fusion-coordination-foundation#0. Both lessons were the dangerous kind, held ENTIRELY by their lesson graduation criteria because no exercise own words say \"ride\" — which is exactly why the original sweep missed them — so both had to be converted atomically and both were. Orchestrator-verified against HEAD per slug: 217 slugs both sides, exactly 2 changed, 5 exercises. The builder pure-swap proof holds again: 54 lines differ by the key alone and are byte-identical after swapping it back, and a whole-file census moves only two counts, g/5/x2 4800 to 4746 and f/5/x2 1124 to 1178."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "NO PROSE WAS FALSIFIED — THE CHANGE MADE FALSE SENTENCES TRUE. independence-melodic-snare body already opened \"Once the ride, hi-hat foot, and kick are stable... the snare hand is free\" and its graduationCriteria[0] already said \"over the ride + hat-foot scaffold\"; fusion-coordination-foundation body already said \"The ride plays a jazz pattern\". The hand was a ride in every sentence either lesson wrote and a hi-hat in every notehead either lesson drew. Five tip clauses were ADDED, one per exercise, to close the BL-127 exposure the conversion creates: each is true of its own stave, hedge-free, and verified by the gate to read as a CLAIM rather than an exemption. Three of them also created new true position claims that check-tip-claims now enforces."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "THE BUILDER CLOSED A HOLE THE ORCHESTRATOR DID NOT BRIEF. It added all five exercises to KNOWN_CLAIMED, reasoning that the freshly written tip clauses are now the ONLY thing binding these staves — so if one is later reworded into a hedge, or a rule widens to swallow it, the exercise stops being checked with NO MISS TO SHOW FOR IT, because the ride genuinely is notated and nothing would look wrong. KNOWN_CLAIMED fails instead. That is the same failure mode iteration 77 built KNOWN_CLAIMED for, applied by the builder to its own new work without being asked."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "AUDIT METHOD, AND A CORRECTION TO IT THAT MATTERS FOR EVERY FUTURE AUDIO CHECK. The builder verified the change by instrumenting fetch, decodeAudioData and createBufferSource on the SHIPPED player.js, driven by the data-spec lifted from the BUILT page, and counting sample-file URLs: ride.wav x6/12/18/12/6 against a reverted control. The conclusion is right and the critic reproduced it — but THE METHOD AS STATED CANNOT ESTABLISH IT. footAcoustic plays the SAME hat_closed.wav as the hand voice, separated only by a 0.55 gain node (player.js:369-371), so a URL count cannot tell the hi-hat foot from a leaked hand voice; it worked only because the residual count happened to equal the foot count. The control figures also silently summed the two rather than being hat_closed x8/16/24/16/8. THE SOUND METHOD IS GAIN-RESOLVED INSTRUMENTATION: every residual carries gain 0.55 and hat_closed at gain 1.0 is EXACTLY ZERO in all five shipped exercises, which is decisive, and structurally so too since zero g/5/x2 remain in either lesson. Record that, not the URL count. Both remain better than spectra: iteration 79 found a metric with ride at 0.1555 and hat at 0.1858, overlapping and useless, and iteration 76 mis-read the acoustic ride as half the RMS of the hat when its peak is identical."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "FINAL CAMPAIGN TALLY, measured by reverting every converted exercise one at a time and putting it to the gate: 25 EXERCISES ACROSS 7 LESSONS over three chunks — jazz-ride-pattern #0-#3 and independence-chapin-method #0-#4 (chunk 1, iteration 76); three-limb-patterns #0/#1/#4, four-way-foundation #0-#4 and independence-clave-foot #1/#2/#4 (chunk 2, iteration 78); independence-melodic-snare #0-#3 and fusion-coordination-foundation#0 (chunk 3). Two exercises — three-limb-patterns #2 and #3 — keep their hand hi-hat DELIBERATELY, because that lesson graduation criteria carry two tracks, one jazz and one rock, and sweeping them would have destroyed a teaching structure. Exemptions went 20 to 7 across the campaign. 24 of the 25 are individually bound: reverting any one alone turns check-named-voices red."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "THREE NUMBERS CORRECTED AFTER THE ADVERSARIAL PASS, AND THE BUILDER THEN CORRECTED BOTH THE CRITIC AND THE ORCHESTRATOR. (1) The reported gate delta quoted the file own stale iteration-77 header; measured current-gate against pre-change content it is 3403 to 3412 mentions and 2045 to 2053 pairs, so +9 and +8 — not the +15/+11 first reported nor the +10/+9 the critic and orchestrator measured, because the fcf#0 rewrite below removed a \"hi-hat foot\" mention after they had both measured. (2) \"Byte length unchanged\" was true of the SWAP and stated as if it were the file: the 54 key-swap lines contribute zero bytes because g/5/x2 and f/5/x2 are the same width, while the file grows 417 bytes from the five prose lines, 1,980,339 to 1,980,756 LF-normalised. The builder earlier figures were UTF-16 code units from String.length rather than bytes, in a file full of em dashes, quarter-note glyphs and middots. (3) check-tip-claims coverage is 311/227 to 313/229, so TWO of the five now carry a second independent binding beyond check-named-voices, not three — the fcf#0 rewrite gave up its own."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "ONE CLAUSE WAS A MARKER AND WAS REWRITTEN. The critic judged fusion-coordination-foundation#0 added sentence near-verbatim the lesson own body (\"The ride plays a jazz pattern... The hi-hat foot lands on 2 and 4\") against a style guide that says a tip carries COACHING. The builder agreed and replaced it with something the body never explains — the body asserts the &-of-4 snare is \"the entry point\" and never says why it is the easy one to install first: \"That pickup doubles the second note of the ride ding-a, so both hands land together and the placement comes free.\" True note by note, since hands[5] is the chord f/5/x2 plus c/5 at the &-of-4, and it borrows phrasing this lesson prerequisite chain already teaches in independence-chapin-method#1. The other four clauses stood: ims#1 \"only the snare line changes\" names what is invariant, and ims#3 scaffold note is genuinely useful in a sparseness exercise. Recorded because the alternative offered was explicitly allowed — an honest marker beats invented coaching — and the builder chose neither."
         }
       ]
     },
@@ -3044,6 +3079,11 @@
           "iteration": 78,
           "date": "2026-08-16",
           "note": "Filed by the orchestrator. The builder flagged it against its own change rather than letting it pass silently, which is the only reason it is written down — and the critic then corrected the framing of both the builder and the orchestrator, which is why the evidence above leads with the wrong version rather than quietly discarding it."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "THE BL-099 CAMPAIGN CLOSED WITH EXACTLY ONE EXERCISE IN THIS CLASS, AND IT IS A FITTING ONE. jazz-ride-pattern#2 \"Add the Hi-Hat Foot on 2 and 4\" carries six ride noteheads whose title, meta and tip name only the hi-hat foot, and whose lesson criterion \"Ride pattern + hi-hat foot on 2 and 4\" is satisfied by its three siblings — so moving its ride back to the hi-hat line today passes every one of the 21 gates. It is not a BL-099 defect: the notation is correct and nothing exempts it, so there is no entry to add and nothing to retire. It is this item class exactly. The fitting part: it is the exercise the BUILDER ADDED IN CHUNK 1 by overruling the orchestrator scope, on the grounds that its own words say \"hi-hat foot\" rather than \"ride\" — and that same property is now the reason nothing binds it. It wants one true sentence in its tip, the fix chunk 3 applied five times. Recorded in the gate own header so the next reader finds it."
         }
       ]
     },
@@ -3069,6 +3109,11 @@
           "iteration": 79,
           "date": "2026-08-16",
           "note": "Filed in the iteration-79 discovery pass. Found independently by the playback lens and the curriculum lens, with matching numbers."
+        },
+        {
+          "iteration": 80,
+          "date": "2026-08-16",
+          "note": "PROSE SURFACE WIDENED BY BL-099 CHUNK 3, recorded here rather than reverted. The five tip clauses added in iteration 80 name a swung ride — \"the ding · ding-a pattern\", \"its jazz pattern\", \"the jazz pattern\" — over q,8,8,q,8,8 specs with no tuplets, which is exactly the shape this item evidence cites. The metas already said \"swing 8ths\", so no new defect class was created and the clauses are true of the NOTATION; but five more sentences now assert a feel the player does not produce, so whoever fixes this item has five more places to check. The swing wording in fusion-coordination-foundation body was deliberately left alone as belonging to this item."
         }
       ]
     },
