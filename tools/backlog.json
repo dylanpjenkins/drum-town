@@ -1,7 +1,7 @@
 {
   "meta": {
-    "iteration": 77,
-    "next_dimension": "content",
+    "iteration": 78,
+    "next_dimension": "quality",
     "dimensions": [
       "content",
       "ui",
@@ -9,7 +9,7 @@
       "quality"
     ],
     "dimensions_note": "Reweighted 2026-08-06: content now takes 2 of every 4 ticks. Dylan's standing mandate is that notation and prose correctness outrank chrome, and the old ['ui','quality','ui','content'] rotation gave content one tick in four, which is the opposite of that.",
-    "next_id": 127,
+    "next_id": 128,
     "epic": {
       "name": "communal-rebrand",
       "phase": "done",
@@ -2183,7 +2183,7 @@
       "status": "ready",
       "attempts": 0,
       "chunk": {
-        "done": 1,
+        "done": 2,
         "total": 3,
         "size": 10
       },
@@ -2227,6 +2227,26 @@
           "iteration": 77,
           "date": "2026-08-16",
           "note": "SEQUENCING CONSTRAINT FOR CHUNKS 2 AND 3, discovered by the adversarial pass on BL-123 and binding on whoever takes them. check-named-voices holds seven of the remaining exercises by their LESSON graduation criteria rather than per-exercise, because those exercises never say \"ride\" in their own words — which is exactly why the original BL-099 sweep missed them. The hazard: fixing ANY ONE exercise in such a lesson satisfies the lesson-scoped criterion, which retires the grad exemption, which takes the tripwire with it. Ten exercises are covered by nothing but a grad entry — three-limb-patterns#2 and #3, four-way-foundation#2/#3/#4, independence-melodic-snare#0-3, fusion-coordination-foundation#0 — and once that entry is deleted there is no miss left to exempt and nothing to re-add. THEREFORE: each of the five remaining lessons must be converted ATOMICALLY, in one commit, never exercise by exercise. Also note the critic could not reconcile the \"16 exercises\" figure: it counts the five lessons as holding 20 exercises, 18 of them hat-only-with-no-ride, and only 8 saying \"ride\" in their own words. Re-derive the number before planning the chunk rather than trusting either figure."
+        },
+        {
+          "iteration": 78,
+          "date": "2026-08-16",
+          "note": "Chunk 2 of 3 shipped: three lessons converted WHOLE, 11 exercises, 108 noteheads g/5/x2 to f/5/x2. three-limb-patterns #0/#1/#4, four-way-foundation all five, independence-clave-foot #1/#2/#4. Orchestrator-verified against HEAD per slug: 217 slugs both sides, exactly 3 changed, 11 exercises, and prose moved in one lesson only. 79 of 82 changed source lines are byte-identical after swapping the key back, so again nothing but the instrument moved."
+        },
+        {
+          "iteration": 78,
+          "date": "2026-08-16",
+          "note": "THE ATOMICITY RULE HELD, AND TWO EXERCISES WERE CORRECTLY LEFT ALONE. three-limb-patterns#2 and #3 are titled \"Pair: Hi-Hat Hand + Kick on 1 and 3\" and \"Combo B: Hi-Hat + Kick + Snare (Rock)\" and stay on the hi-hat, because the lesson graduationCriteria carries TWO TRACKS — \"Ride + hi-hat foot 2 and 4 + snare on 2 and 4\" and \"Hi-hat hand + kick 1 and 3 + snare 2 and 4 (rock-style three-limb)\" — so it deliberately teaches a jazz track and a rock track on one page. Sweeping them would have destroyed a teaching structure rather than fixed a defect. Verified untouched and still rendering at y 53 while the converted staves sit at y 58. independence-clave-foot #0 and #3 were likewise left, being foot-alone with no hand voice. And no graduation criterion needed rewording anywhere: three-limb [0], four-way [0] and clave-foot [1] all became TRUE for the first time rather than needing to be softened."
+        },
+        {
+          "iteration": 78,
+          "date": "2026-08-16",
+          "note": "THE RETITLE WAS FORCED BY THE GATE, NOT CHOSEN. three-limb-patterns#4 went from \"Hi-Hat + Kick + Ride\" to \"Ride + Kick + Hat Foot\", because after the swap the bare word \"Hi-Hat\" in the title matches neither g/5/x2 nor d/4/x2 anywhere in that exercise and becomes a NEW unexempted miss — and check-named-voices exemptions may only shrink. The builder named all three limbs rather than only the two drawn, because the exercise is \"Three-Limb Combo C\" and its sibling \"Combo B\" titles all three, and because the new title names the same un-notated voice the tip already names, so BL-089 defect count is unchanged at one. The tip parenthetical \"(notated on the hi-hat line — read it as the ride)\" was deleted as mandatory: check-staff-positions rule 5, widened last iteration, reads that sentence LITERALLY and its own comment predicted this exact moment."
+        },
+        {
+          "iteration": 78,
+          "date": "2026-08-16",
+          "note": "A TRAP THE BUILDER IDENTIFIED AND AVOIDED, WORTH RECORDING BECAUSE IT IS COUNTERINTUITIVE. The obvious honest fix for the un-notated hat foot on three-limb-patterns#4 — adding \"(not notated above; play them)\", exactly as independence-singing#0 does — WOULD HAVE RETIRED THE BL-089 EXEMPTION, because \"not notated\" is a DISPLACED marker inside the 45-character window and would have exempted the mention by rule. So the gate punishes that particular honest disclosure. The hat-foot sentence was left byte-identical instead, and BL-089 keeps its tripwire. Anyone fixing BL-089 or BL-125 needs to know this before reaching for the same wording."
         }
       ]
     },
@@ -2979,6 +2999,31 @@
           "iteration": 77,
           "date": "2026-08-16",
           "note": "Filed by the orchestrator. The gate shipped WITH this hole and prints it on every run, which is the right trade — it still catches the entire pre-BL-099 corpus, the snare-on-the-hi-hat-line class and a bell swapped for a high tom, all of which were invisible to all 20 previous gates. But 127 staves resting on nothing is an item, not a footnote."
+        }
+      ]
+    },
+    {
+      "id": "BL-127",
+      "dimension": "quality",
+      "priority": 3,
+      "title": "An exercise whose own words name no instrument is bound by nothing once its lesson is correct",
+      "evidence": [
+        "Reported by the builder against its own work in BL-099 chunk 2 (iteration 78), then RE-FRAMED by the adversarial pass, whose framing is the correct one and is recorded here because the builder original wording — and the orchestrator first draft of this item — both got it wrong.",
+        "THE WRONG FRAMING, recorded so it is not repeated: \"converting the lesson removed a tripwire\". Nothing was traded away and no protected state was lost. Before the change, four-way-foundation #2/#3/#4 were WRONG and bound by nothing; the lesson-scoped entry covering them was an EXEMPTION FOR A LIVE DEFECT, not a tripwire on correct notation. Unguarded-and-right strictly dominates guarded-and-wrong, so atomicity cost nothing.",
+        "THE REAL RESIDUE: check-named-voices binds an exercise either by its OWN words or, when its words name nothing, by its lesson graduationCriteria — and once the lesson is correct the criterion is satisfied by the notation, so the silent exercises are simply unbound. That is note (b)/(k), the default condition of most of the corpus, surfacing here rather than being created here.",
+        "Measured after the change: 8 of the 11 converted exercises are individually bound — reverting three-limb #0/#1/#4, four-way #0/#1 or clave-foot #1/#2/#4 alone each turns the gate red. Only four-way #2/#3/#4 are silent, and reverting all three (24 noteheads) leaves check-named-voices, check-staff-positions, check-tip-claims and check-notation-frame ALL GREEN.",
+        "A cheap partial fix was applied in the same commit at the critic suggestion: one true clause added to each of those three tips, which leaves every gate green today and makes reverting the notation produce three explicit misses. That closes the specific exposure but is prose written because a gate wants it, and it does NOT cover note (j).",
+        "Note (j) is the wider and durable problem this item is really about: a SINGLE moved notehead is invisible in any exercise, because presence is checked per exercise rather than per notehead. Sentences cannot fix that; a positional or per-notehead assertion can."
+      ],
+      "acceptance": "an exercise whose notation is established by its lesson goal or by its siblings is protected after the lesson is fixed, not only before — by a positional or per-notehead assertion rather than by a word match; four-way-foundation #2/#3/#4 reverted to a hi-hat must fail a gate",
+      "status": "ready",
+      "attempts": 0,
+      "chunk": null,
+      "log": [
+        {
+          "iteration": 78,
+          "date": "2026-08-16",
+          "note": "Filed by the orchestrator. The builder flagged it against its own change rather than letting it pass silently, which is the only reason it is written down — and the critic then corrected the framing of both the builder and the orchestrator, which is why the evidence above leads with the wrong version rather than quietly discarding it."
         }
       ]
     }

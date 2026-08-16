@@ -758,48 +758,59 @@ function walk(text, fn) {
 // move in the same diff as the list.
 //
 // ---------------------------------------------------------------------------
-// READ THIS BEFORE PLANNING BL-099 CHUNK 2 OR 3.
+// READ THIS BEFORE PLANNING BL-099 CHUNK 3.
 //
-// CONVERT EACH OF THE FIVE LESSONS ATOMICALLY, IN ONE COMMIT. A `ex: null` entry
-// is LESSON-scoped: it exists only while the lesson has no ride ANYWHERE.
+// CONVERT EACH LESSON ATOMICALLY, IN ONE COMMIT. A `ex: null` entry is
+// LESSON-scoped: it exists only while the lesson has no ride ANYWHERE.
 // Fixing one exercise in the lesson satisfies the criterion, retires the entry,
 // and takes the tripwire with it — and the exercises that entry was covering do
 // not say "ride" in their own words, so there is no miss left to exempt and
 // nothing to re-add. Half a lesson is worse than none.
 //
-// The accounting, measured rather than remembered (iteration 77):
+// The accounting, measured at iteration 77 and settled at iteration 78:
 //
-//   20 exercises across the five lessons
-//   18 draw a hand hi-hat and no ride
+//   20 exercises across the five lessons BL-099 named
+//   18 drew a hand hi-hat and no ride
 //    2 of those 18 are DELIBERATE and must not be swept — three-limb-patterns
 //      #2 and #3, "the rock starting pair", recorded in BL-099's own iteration-76
-//      note. So the defect set is 16, which is the number the item states.
-//    8 of the 16 say "ride" in their own title, meta or tip and carry an
-//      exercise-level entry below: three-limb #0/#1/#4, four-way #0/#1,
-//      clave-foot #1/#2/#4.
-//    8 of the 16 say nothing — their words never use the word, which is why the
-//      sweep that filed BL-099 missed them — and are held ONLY by their lesson's
-//      grad entry: four-way #2/#3/#4, independence-melodic-snare #0-#3,
-//      fusion-coordination-foundation #0.
+//      note. So the defect set was 16, which is the number the item states.
+//   11 of the 16 were converted at iteration 78 (chunk 2): three-limb #0/#1/#4,
+//      four-way #0-#4, clave-foot #1/#2/#4. Count the EXERCISES and the ENTRIES
+//      separately, because they are different numbers and an earlier draft of
+//      this paragraph ran them together in the direction that flattered the
+//      change. 11 exercises; 11 entries, but not one each — 8 per-exercise
+//      (three-limb 0/1/4, four-way 0/1, clave-foot 1/2/4) plus 3 grad, one per
+//      lesson. THREE of the 11 exercises, four-way #2/#3/#4, never had an entry
+//      of their own and stood behind their lesson's grad entry alone, which is
+//      why all three lessons had to move together.
+//    5 remain, in the two chunk-3 lessons below, and NONE of them says "ride" in
+//      its own title, meta or tip — which is why the sweep that filed BL-099
+//      missed them, and why one lesson-scoped grad entry is all that holds
+//      independence-melodic-snare #0-#3 and fusion-coordination-foundation #0.
 //
-// So four-way-foundation and independence-melodic-snare are the dangerous ones:
-// three and four exercises respectively stand behind a single lesson-scoped
-// entry that the first fix in the lesson deletes.
+// So independence-melodic-snare is the dangerous one: four exercises stand
+// behind a single lesson-scoped entry that the first fix in the lesson deletes.
 const EXEMPTIONS = [
-  // --- BL-099 chunk 2: the words name the ride, the stave draws a hi-hat.
-  //     `ex: null` is the lesson's graduationCriteria (rule 2), which is how the
-  //     lessons whose individual exercises never say the word are still held.
-  { slug: 'three-limb-patterns', ex: 0, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'three-limb-patterns', ex: 1, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'three-limb-patterns', ex: 4, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'three-limb-patterns', ex: null, voice: 'ride', why: 'BL-099 chunk 2 (graduation criterion)' },
-  { slug: 'four-way-foundation', ex: 0, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'four-way-foundation', ex: 1, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'four-way-foundation', ex: null, voice: 'ride', why: 'BL-099 chunk 2 (graduation criterion; #2-#4 continue the same hand voice and are held only by this)' },
-  { slug: 'independence-clave-foot', ex: 1, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'independence-clave-foot', ex: 2, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'independence-clave-foot', ex: 4, voice: 'ride', why: 'BL-099 chunk 2' },
-  { slug: 'independence-clave-foot', ex: null, voice: 'ride', why: 'BL-099 chunk 2 (graduation criterion)' },
+  // --- BL-099 chunk 2 RETIRED at iteration 78. Eleven entries deleted in one
+  //     diff — 8 per-exercise (three-limb-patterns 0/1/4, four-way-foundation
+  //     0/1, independence-clave-foot 1/2/4) and ALL THREE `ex: null` grad
+  //     entries, one per lesson — because all three lessons were converted
+  //     atomically as the note above demanded: 11 exercises, 108 noteheads,
+  //     g/5/x2 -> f/5/x2.
+  //
+  //     Losing three grad entries is exactly the tripwire loss described above,
+  //     so here is the safety argument per lesson rather than a blanket one.
+  //     four-way-foundation and independence-clave-foot are simple: every
+  //     exercise in them that has a hand voice at all now draws the ride, and
+  //     clave-foot #0/#3 have no hand voice to be wrong about.
+  //     three-limb-patterns is NOT that case and must not be described as one:
+  //     #2 and #3 keep their hi-hat hand on purpose and are still on the hi-hat
+  //     line. What makes deleting its grad entry safe is that its
+  //     graduationCriteria carry TWO tracks and both are now correctly notated —
+  //     criterion [0] "Ride + hi-hat foot 2 and 4 + snare on 2 and 4" by the
+  //     converted #0/#1, criterion [1] "Hi-hat hand + kick 1 and 3 + snare 2 and
+  //     4 (rock-style three-limb)" by the untouched #2/#3. The entry was
+  //     exempting a criterion that has become true, not covering a defect.
   // --- BL-099 chunk 3. No exercise's own words say "ride" in either lesson,
   //     which is why the sweep that filed BL-099 missed them; the graduation
   //     criteria do say it, and that is what holds them here.
@@ -807,9 +818,33 @@ const EXEMPTIONS = [
   { slug: 'fusion-coordination-foundation', ex: null, voice: 'ride', why: 'BL-099 chunk 3 (graduation criterion)' },
 
   // --- BL-089, already filed: "two tips naming a voice that is not on the
-  //     stave". three-limb-patterns#4 is titled "Hi-Hat + Kick + Ride" and its
-  //     tip says "then add the hat foot on 2 and 4", but only two voices are
-  //     notated. Its ride is BL-099's; its missing hat foot is this one.
+  //     stave". three-limb-patterns#4's tip says "then add the hat foot on 2 and
+  //     4" and no d/4/x2 is drawn, while its siblings #0 and #1 do notate one.
+  //     Its ride half was BL-099's and is fixed; the missing hat foot is this
+  //     one, and it is untouched.
+  //
+  //     Iteration 78 retitled the exercise from "Hi-Hat + Kick + Ride" to "Ride +
+  //     Kick + Hat Foot". Two halves of that, and only one was forced. REMOVING
+  //     the bare "Hi-Hat" was: it was satisfied only by the mis-notated hand, so
+  //     converting the hand to a ride turns it into an unexempted miss, and this
+  //     list may only shrink. NAMING a third, un-notated limb in its place was
+  //     DISCRETIONARY — "Ride Over a Syncopated Kick" and "Ride + Kick" both pass
+  //     too. It was chosen because "Three-Limb Combo C" already commits the page
+  //     to three limbs, so a two-limb tail relocates the overclaim rather than
+  //     removing it. The cost, stated rather than buried: BL-089's un-notated
+  //     claim now appears on the page's most prominent line as well as in the
+  //     tip. The gate count is unchanged at one pair; the READER now meets it
+  //     twice.
+  //
+  //     THE TITLE'S SPELLING IS COUPLED TO THIS ENTRY'S TOKEN. It falls under
+  //     this entry only while it says "Hat Foot": the vocabulary has separate
+  //     tokens for `hat foot` and `hi-hat foot`, and this entry is keyed to the
+  //     first. Normalising the title to "Hi-Hat Foot" — which is what its own
+  //     sibling #0 "Pair: Ride + Hi-Hat Foot" uses, so the lesson is internally
+  //     inconsistent about the voice's name — FAILS this gate with no content
+  //     defect at all. Whoever closes BL-089 should fix the spelling and the
+  //     notation together; whoever only tidies the spelling will get a red gate
+  //     and should add `hi-hat foot` here rather than reverting the wording.
   { slug: 'three-limb-patterns', ex: 4, voice: 'hat foot', why: 'BL-089' },
 
   // --- FOUND BY THIS GATE, iteration 77, not yet filed. Four exercises and one
@@ -839,7 +874,7 @@ const EXEMPTIONS = [
 // five new ones. With equality you cannot add or remove a single entry without
 // editing this number in the same diff, which is the point — the number is the
 // reviewable artefact, not the array. Lower it with every retirement.
-const EXEMPTION_COUNT = 20;
+const EXEMPTION_COUNT = 9;
 
 // Rule 3's one known exception, and it already has an item of its own whose
 // acceptance ends "and no other exercise puts a kick in the hands voice" — so

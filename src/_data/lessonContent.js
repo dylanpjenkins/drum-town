@@ -4734,9 +4734,9 @@ module.exports = {
       <p>A two-limb pattern is a conversation. A three-limb pattern is a small ensemble. Adding the third limb is the moment coordination stops being "the kick under the hi-hat" and starts being a texture — three independent voices, each holding their own line, none of them collapsing when another moves.</p>
       <p>Three combinations cover almost everything you'll meet on a kit:</p>
       <ul class="bulleted">
-        <li><strong>Ride + hi-hat foot + snare</strong> — the jazz/ECM texture. Both hands and one foot, plus a foot keeping time underneath.</li>
-        <li><strong>Hi-hat hand + kick + snare</strong> — the rock/funk texture. One hand, both feet engaged, snare on the backbeat.</li>
-        <li><strong>Hi-hat hand + kick + ride</strong> — the crossover/transition texture. Two hands occupied with cymbals, one foot driving underneath.</li>
+        <li><strong>Ride + hi-hat foot + snare</strong> — the jazz/ECM texture. Two hands and one foot, with that foot keeping time underneath.</li>
+        <li><strong>Hi-hat hand + kick + snare</strong> — the rock/funk texture. Two hands and one foot, snare on the backbeat.</li>
+        <li><strong>Ride + kick + hi-hat foot</strong> — the crossover/transition texture. One hand on the ride, both feet working underneath.</li>
       </ul>
       <p>Build them by isolating the pair first, then layering the third limb. If the pair you already own falls apart when the third limb enters, drop tempo by 10 BPM and try again. Don't add the fourth limb yet — that's the next lesson.</p>
     `,
@@ -4748,7 +4748,7 @@ module.exports = {
         timeSignature: "4/4",
         repeatBegin: true,
         repeatEnd: true,
-        hands: Array.from({ length: 8 }, () => ({ keys: ['g/5/x2'], duration: '8' })),
+        hands: Array.from({ length: 8 }, () => ({ keys: ['f/5/x2'], duration: '8' })),
         feet: [
           { rest: true, duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' },
@@ -4766,14 +4766,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { rest: true, duration: 'q' },
@@ -4828,17 +4828,17 @@ module.exports = {
         tip: "The basic rock backbeat, viewed as a coordination drill: hi-hat hand on 8ths, kick foot on 1 and 3, snare on 2 and 4. Three limbs, three different positions. The kick and snare alternate — kick, snare, kick, snare, one per beat — which is the easy version of the puzzle. Loop until none of the limbs hesitate when another moves."
       },
       {
-        title: "5 — Three-Limb Combo C: Hi-Hat + Kick + Ride",
+        title: "5 — Three-Limb Combo C: Ride + Kick + Hat Foot",
         meta: "4/4 · ♩ = 90",
         bpm: 90,
         timeSignature: "4/4",
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' },
-          { keys: ['g/5/x2'], duration: 'q' }
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' },
+          { keys: ['f/5/x2'], duration: 'q' }
         ],
         feet: [
           { keys: ['f/4'], duration: '8' },
@@ -4850,7 +4850,7 @@ module.exports = {
           { rest: true, duration: '8' },
           { keys: ['f/4'], duration: '8' }
         ],
-        tip: "Ride quarters (notated on the hi-hat line — read it as the ride) over a syncopated kick: <em>1</em>, <em>&amp; of 2</em>, <em>3</em>, <em>&amp; of 4</em>. Get the kick steady against the ride first, then add the hat foot on 2 and 4. Hardest combo of the three — nothing lines up except beat 1."
+        tip: "Ride quarters over a syncopated kick: <em>1</em>, <em>&amp; of 2</em>, <em>3</em>, <em>&amp; of 4</em>. Get the kick steady against the ride first, then add the hat foot on 2 and 4. Hardest combo of the three: with the hat foot in, the two kick offbeats are the only strokes that land alone."
       }
     ],
     listening: [
@@ -4896,7 +4896,7 @@ module.exports = {
         timeSignature: "4/4",
         repeatBegin: true,
         repeatEnd: true,
-        hands: Array.from({ length: 8 }, () => ({ keys: ['g/5/x2'], duration: '8' })),
+        hands: Array.from({ length: 8 }, () => ({ keys: ['f/5/x2'], duration: '8' })),
         feet: [
           { keys: ['f/4'], duration: 'q' },
           { keys: ['d/4/x2'], duration: 'q' },
@@ -4914,14 +4914,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -4940,14 +4940,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -4956,7 +4956,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Snare moves: still on <em>2</em>, but now on the <em>&amp; of 3</em> instead of beat 4. Half the free assist is gone — snare and hat-foot still meet on 2, but beat 4 is the hat-foot alone. This is where four-way independence really begins; the snare hand has to find its own time, not borrow from the hat-foot's. Drop 5 BPM if anything wobbles."
+        tip: "Snare moves: still on <em>2</em>, but now on the <em>&amp; of 3</em> instead of beat 4. Half the free assist is gone — snare and hat-foot still meet on 2, but beat 4 is the hat-foot alone. The ride hand keeps its straight 8ths through all of it. This is where four-way independence really begins; the snare hand has to find its own time, not borrow from the hat-foot's. Drop 5 BPM if anything wobbles."
       },
       {
         title: "4 — Variation: Snare Off Both Backbeats",
@@ -4966,14 +4966,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // & of 2
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }    // & of 4
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },   // & of 2
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' }    // & of 4
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -4982,7 +4982,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Snare on <em>&amp; of 2</em> and <em>&amp; of 4</em> — both off the backbeat now, both anticipating the next beat. The pattern is starting to feel like jazz comping: the snare floats around inside the bar instead of marking the same place every time. The hat-foot still anchors 2 and 4."
+        tip: "Snare on <em>&amp; of 2</em> and <em>&amp; of 4</em> — both off the backbeat now, both anticipating the next beat. The pattern is starting to feel like jazz comping: the snare floats around inside the bar instead of marking the same place every time. The hat-foot still anchors 2 and 4. The ride hand keeps its straight 8ths underneath while the snare floats."
       },
       {
         title: "5 — Walking the Snare Through the Bar",
@@ -4992,14 +4992,14 @@ module.exports = {
         repeatBegin: true,
         repeatEnd: true,
         hands: [
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // 1
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // & of 2
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },   // 3
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' }    // & of 4
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },   // 1
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },   // & of 2
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },   // 3
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' }    // & of 4
         ],
         feet: [
           { keys: ['f/4'], duration: 'q' },
@@ -5008,7 +5008,7 @@ module.exports = {
           { keys: ['d/4/x2'], duration: 'q' }
         ],
         beamGroups: [[2, 8], [2, 8], [2, 8], [2, 8]],
-        tip: "Snare on <em>1</em>, the <em>&amp; of 2</em>, <em>3</em> and the <em>&amp; of 4</em> — four hits walking the bar, landing with the kick on 1 and 3, alone on the &'s. Pass check: two minutes without slowing down means you have working four-way independence."
+        tip: "Snare on <em>1</em>, the <em>&amp; of 2</em>, <em>3</em> and the <em>&amp; of 4</em> — four hits walking the bar, landing with the kick on 1 and 3, alone on the &'s. The ride hand keeps its straight 8ths under all four snare hits. Pass check: two minutes without slowing down means you have working four-way independence."
       }
     ],
     listening: [
@@ -5794,7 +5794,7 @@ module.exports = {
         repeatEnd: true,
         hands: [
           // 16 straight 8ths on the ride across 2 bars
-          ...Array.from({ length: 16 }, () => ({ keys: ['g/5/x2'], duration: '8' }))
+          ...Array.from({ length: 16 }, () => ({ keys: ['f/5/x2'], duration: '8' }))
         ],
         feet: [
           // Bar 1 — 3-side
@@ -5821,23 +5821,23 @@ module.exports = {
         repeatEnd: true,
         hands: [
           // Bar 1 — ride 8ths with cross-stick on 2 and 4
-          { keys: ['g/5/x2'], duration: '8' },                    // 1
-          { keys: ['g/5/x2'], duration: '8' },                    // & of 1
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },             // 2  (cross-stick)
-          { keys: ['g/5/x2'], duration: '8' },                    // & of 2
-          { keys: ['g/5/x2'], duration: '8' },                    // 3
-          { keys: ['g/5/x2'], duration: '8' },                    // & of 3
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },             // 4  (cross-stick)
-          { keys: ['g/5/x2'], duration: '8' },                    // & of 4
+          { keys: ['f/5/x2'], duration: '8' },                    // 1
+          { keys: ['f/5/x2'], duration: '8' },                    // & of 1
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },             // 2  (cross-stick)
+          { keys: ['f/5/x2'], duration: '8' },                    // & of 2
+          { keys: ['f/5/x2'], duration: '8' },                    // 3
+          { keys: ['f/5/x2'], duration: '8' },                    // & of 3
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },             // 4  (cross-stick)
+          { keys: ['f/5/x2'], duration: '8' },                    // & of 4
           // Bar 2 — same pattern
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           // Bar 1 — 3-side
@@ -5888,23 +5888,23 @@ module.exports = {
         repeatEnd: true,
         hands: [
           // Bar 1
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
           // Bar 2
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' },
-          { keys: ['g/5/x2', 'c/5'], duration: '8' },
-          { keys: ['g/5/x2'], duration: '8' }
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' },
+          { keys: ['f/5/x2', 'c/5'], duration: '8' },
+          { keys: ['f/5/x2'], duration: '8' }
         ],
         feet: [
           // Bar 1 — 2-side

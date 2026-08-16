@@ -134,13 +134,18 @@
 //      qualifier", and treated that as structural. It was a gap: the very next
 //      paragraph defines a test that three UNQUALIFIED sentences pass, and the
 //      qualifier requirement meant they were never resolved. Rule 5 resolves
-//      them now — three-limb-patterns#4's "notated on the hi-hat line",
-//      limb-substitution#1's "notated on the hat-foot line" and
+//      them now — limb-substitution#1's "notated on the hat-foot line" and
 //      polyrhythms-3-2#3's "notated on the floor-tom line" — and checks each
-//      against its own exercise. All three are TRUE today, and the first is true
-//      only because BL-099 has not reached that exercise yet: when the ride
-//      moves to the top line, that sentence becomes false and rule 5 says so.
+//      against its own exercise. Both are TRUE today.
 //      "Snare and hat-foot LINE UP" is excluded by a lookahead, not by luck.
+//
+//      THERE WERE THREE. The third was three-limb-patterns#4's "Ride quarters
+//      (notated on the hi-hat line — read it as the ride)", true only because
+//      BL-099 had not reached that exercise; this note predicted that moving the
+//      ride to the top line would make the sentence false and rule 5 would say
+//      so. BL-099 chunk 2 reached it at iteration 78 and the sentence was deleted
+//      rather than left to fail, which is the correct outcome and not a test of
+//      the prediction. Rule 5 now contributes 2 claims, not 3.
 //
 //      THE LINE BETWEEN IDIOM AND CLAIM, since it is not obvious: a sentence is
 //      a POSITION CLAIM when it pairs "line" or "space" with either a concrete
@@ -243,22 +248,27 @@ const SURVEY = process.argv.includes('--survey');
 //   transcription-method   1   after BL-087
 //
 // Raised to 36 at iteration 77, when rule 5 added three more across three more
-// lessons: 38 claims across 10 lessons. The gap is now 2 rather than 3 on
-// purpose: rule 5 contributes exactly 3, so a floor of 35 let the whole rule be
-// deleted and still pass. Two claims is still enough to absorb a reworded
-// sentence, and the-drum-kit's drum key is 20 of the 38, so rewording THAT trips
-// the floor either way — which is the intended behaviour and why the gap stays
-// small rather than generous.
-//   three-limb-patterns    1   BL-123 rule 5
+// lessons: 38 claims across 10 lessons. The gap was 2 rather than 3 on purpose:
+// rule 5 contributed exactly 3, so a floor of 35 let the whole rule be deleted
+// and still pass.
+//   three-limb-patterns    1   BL-123 rule 5   <- deleted at iteration 78
 //   limb-substitution      1   BL-123 rule 5
 //   polyrhythms-3-2        1   BL-123 rule 5
 //
+// NOW 37 ACROSS 9 LESSONS, and the floor stays at 36 because a floor is a
+// ratchet and lowering it is how coverage erodes quietly. BL-099 chunk 2 fixed
+// three-limb-patterns#4's notation and deleted the sentence that described the
+// old one ("Ride quarters (notated on the hi-hat line — read it as the ride)"),
+// so rule 5 now contributes 2 and the whole rule is still not deletable in
+// silence: 37 − 2 = 35, below the floor.
+//
 // A gate that quietly stops looking is worse than one that fails, so a drop
-// below this is a failure even when nothing contradicts. The 3-claim gap absorbs
-// a reworded sentence; a bigger drop is erosion and should be looked at, not
-// waved through. Note that the-drum-kit alone is 20 of the 35, so rewording its
-// drum key trips the floor even when the rewording is correct — that is the
-// intended behaviour, but it is why the gap is small rather than generous.
+// below this is a failure even when nothing contradicts. State the cost plainly:
+// the gap is now ONE claim, not two, so the next reworded position sentence
+// anywhere in the corpus trips this floor and has to be looked at rather than
+// waved through. That is uncomfortable and it is the intended direction. Note
+// that the-drum-kit alone is 20 of the 37, so rewording its drum key trips the
+// floor even when the rewording is correct.
 const COVERAGE_FLOOR = 36;
 
 function die(msg) { console.error(`[check-staff-positions] FAIL — ${msg}`); process.exit(1); }
@@ -445,10 +455,12 @@ const POSITIONS = [
 // them across the corpus name no line of any stave. It was wrong that the parser
 // therefore could not see any of them: note (a) itself sets the test — a
 // sentence is a POSITION CLAIM when it pairs "line" or "space" with a concrete
-// key or the verb "notated" — and three sentences meet that test with an
-// UNQUALIFIED voice name, so positionsIn() never resolved them at all:
+// key or the verb "notated" — and three sentences met that test with an
+// UNQUALIFIED voice name, so positionsIn() never resolved them at all. Two are
+// left; the third, three-limb-patterns#4's "Ride quarters (notated on the hi-hat
+// line — read it as the ride)", was BL-099 admitting its bug in writing and went
+// with the fix at iteration 78:
 //
-//   three-limb-patterns#4  "Ride quarters (notated on the hi-hat line ...)"
 //   limb-substitution#1    "The hi-hat 8ths are now in the FOOT (notated on
 //                           the hat-foot line)"
 //   polyrhythms-3-2#3      "2-pulse on the floor tom (notated on the floor-tom
@@ -751,11 +763,12 @@ for (const [slug, lesson] of Object.entries(lessonContent)) {
         // ---- RULE 5: "notated on the <voice> line" must be true OF THIS
         // STAVE. The phrase names a position by naming a voice, so the thing to
         // check is not where that voice usually lives — it is whether this
-        // exercise draws anything there at all. three-limb-patterns#4 says the
-        // ride quarters are "notated on the hi-hat line" and they are, which is
-        // the BL-099 defect stated in writing and NOT a prose error; the same
-        // sentence with the notation fixed becomes false, and this rule is what
-        // will say so.
+        // exercise draws anything there at all. polyrhythms-3-2#3 says its
+        // 2-pulse is "notated on the floor-tom line" and the stave draws a/4, so
+        // it holds; move that voice and this rule says so. Its third instance,
+        // three-limb-patterns#4's "notated on the hi-hat line", was the BL-099
+        // defect stated in writing, and BL-099 chunk 2 removed both the notation
+        // and the sentence at iteration 78.
         for (const p of pos) {
           if (!p.voiceNamed || !ex) continue;
           if (NEGATED.test(clause.slice(0, p.at + p.text.length))) continue;
